@@ -31,10 +31,17 @@
     },
     "hazard": {
       "hasFloodRisk": true,
-      "hasLandslideRisk": false,
-      "note": "鴨川沿いに一部浸水想定",
-      "source": "サンプル",
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 2,
+      "preschools": 44,
+      "medicalFacilities": 84,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -68,11 +75,18 @@
       "isEstimated": true
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "大宮台地で水害リスク低い",
-      "source": "サンプル",
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 7,
+      "preschools": 76,
+      "medicalFacilities": 183,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -106,11 +120,18 @@
       "isEstimated": true
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "中心部は台地、駅周辺は高密度",
-      "source": "サンプル",
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 10,
+      "preschools": 79,
+      "medicalFacilities": 287,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -145,10 +166,17 @@
     },
     "hazard": {
       "hasFloodRisk": true,
-      "hasLandslideRisk": false,
-      "note": "芝川・見沼田圃沿いに浸水想定",
-      "source": "サンプル",
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 3,
+      "preschools": 65,
+      "medicalFacilities": 171,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -182,11 +210,18 @@
       "isEstimated": true
     },
     "hazard": {
-      "hasFloodRisk": false,
+      "hasFloodRisk": true,
       "hasLandslideRisk": false,
-      "note": "与野周辺は台地で安定",
-      "source": "サンプル",
+      "note": "浸水想定区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 4,
+      "preschools": 59,
+      "medicalFacilities": 161,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -222,9 +257,16 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": false,
-      "note": "荒川沿いに広い浸水想定",
-      "source": "サンプル",
+      "note": "浸水想定区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 1,
+      "preschools": 38,
+      "medicalFacilities": 81,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -258,11 +300,18 @@
       "isEstimated": true
     },
     "hazard": {
-      "hasFloodRisk": false,
+      "hasFloodRisk": true,
       "hasLandslideRisk": false,
-      "note": "中心部は台地で水害リスク低い",
-      "source": "サンプル",
+      "note": "浸水想定区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 4,
+      "preschools": 126,
+      "medicalFacilities": 317,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -298,9 +347,16 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": false,
-      "note": "荒川沿いに浸水想定",
-      "source": "サンプル",
+      "note": "浸水想定区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 5,
+      "preschools": 122,
+      "medicalFacilities": 201,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -335,10 +391,17 @@
     },
     "hazard": {
       "hasFloodRisk": true,
-      "hasLandslideRisk": false,
-      "note": "見沼田圃沿いに浸水想定",
-      "source": "サンプル",
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 2,
+      "preschools": 78,
+      "medicalFacilities": 123,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -373,10 +436,17 @@
     },
     "hazard": {
       "hasFloodRisk": true,
-      "hasLandslideRisk": false,
-      "note": "元荒川沿いに浸水想定",
-      "source": "サンプル",
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 2,
+      "preschools": 46,
+      "medicalFacilities": 108,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   }
 ]

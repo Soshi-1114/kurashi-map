@@ -152,11 +152,25 @@ export default async function AreaPage({ params }: { params: Params }) {
         <p className="detail-p">
           浸水想定区域: <strong>{m.hazard.hasFloodRisk ? "あり" : "なし"}</strong>
           {" / "}
-          土砂災害区域: <strong>{m.hazard.hasLandslideRisk ? "あり" : "なし"}</strong>
+          土砂災害警戒区域: <strong>{m.hazard.hasLandslideRisk ? "あり" : "なし"}</strong>
         </p>
         {m.hazard.note && <p className="detail-note">{m.hazard.note}</p>}
         <SourceLine source={m.hazard.source} asOf={m.hazard.asOf} />
       </section>
+
+      {m.amenities && (
+        <section className="detail-section">
+          <h2 className="detail-h2">生活インフラ</h2>
+          <ul className="hero-stats" style={{ marginTop: 6 }}>
+            <HeroStat label="駅数" value={`${m.amenities.stations}`} />
+            <HeroStat label="保育・幼稚園" value={`${m.amenities.preschools}`} />
+            <HeroStat label="医療機関" value={`${m.amenities.medicalFacilities}`} />
+          </ul>
+          <p className="detail-source-line" style={{ marginTop: 10 }}>
+            出典: {m.amenities.source}（{m.amenities.asOf}）
+          </p>
+        </section>
+      )}
 
       <section className="detail-section">
         <h2 className="detail-h2">家賃水準が近い自治体</h2>

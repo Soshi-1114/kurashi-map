@@ -30,4 +30,11 @@ export type Municipality = {
   landPrice: Metric;     // 住宅地地価
   waitlistChildren: Metric; // 待機児童（value=人数）
   hazard: HazardInfo;
+  amenities?: {
+    stations: number;            // 駅数
+    preschools: number;          // 保育園・幼稚園・認定こども園 合計
+    medicalFacilities: number;   // 医療機関（病院・診療所等）合計
+    source: string;
+    asOf: string;
+  };
 };
