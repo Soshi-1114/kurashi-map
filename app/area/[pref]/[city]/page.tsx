@@ -144,6 +144,7 @@ export default async function AreaPage({ params }: { params: Params }) {
           人口は <strong>{m.population.toLocaleString()}人</strong>（{m.populationTrend}傾向）。
         </p>
         <SourceLine source={m.waitlistChildren.source} asOf={m.waitlistChildren.asOf} estimated={m.waitlistChildren.isEstimated} />
+        <p className="detail-source-line" style={{ marginTop: 4 }}>人口は令和2年国勢調査</p>
       </section>
 
       <section className="detail-section">
