@@ -10,7 +10,8 @@ import MobileSheet from "./MobileSheet";
 
 type Props = { municipalities: Municipality[] };
 
-const GSI_PALE = "https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png";
+// 同一originプロキシ（GSIは CORS 不在のため WebGL テクスチャ化に必要）
+const TILE_URL = "/api/tile/{z}/{x}/{y}";
 const SAITAMA_BBOX: [number, number, number, number] = [138.71, 35.74, 139.91, 36.29];
 
 export default function MapView({ municipalities }: Props) {
@@ -48,24 +49,25 @@ export default function MapView({ municipalities }: Props) {
         sources: {
           gsi: {
             type: "raster",
-            tiles: [GSI_PALE],
+            tiles: [TILE_URL],
             tileSize: 256,
             maxzoom: 18,
             attribution: '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener noreferrer">国土地理院</a>',
           },
         },
         layers: [
-          { id: "bg", type: "background", paint: { "background-color": "#f2f5f8" } },
-          { id: "gsi-tiles", type: "raster", source: "gsi", paint: { "raster-opacity": 0.85 } },
+          { id: "bg", type: "background", paint: { "background-color": "#eef2f7" } },
+          { id: "gsi-tiles", type: "raster", source: "gsi", paint: { "raster-opacity": 0.95 } },
         ],
       },
-      bounds: SAITAMA_BBOX,
-      fitBoundsOptions: { padding: 40 },
+      center: [139.31, 36.015],
+      zoom: 8.5,
       attributionControl: { compact: true },
     });
     map.addControl(new maplibregl.NavigationControl({ showCompass: false, visualizePitch: false }), "bottom-right");
 
     map.on("load", async () => {
+      map.fitBounds(SAITAMA_BBOX, { padding: 40, duration: 0 });
       const res = await fetch("/saitama.geojson");
       const geo = (await res.json()) as GeoJSON.FeatureCollection;
       // 家賃・ハザード等を properties にマージ（コードでJOIN）
@@ -167,7 +169,15 @@ export default function MapView({ municipalities }: Props) {
     });
 
     mapRef.current = map;
+
+    // コンテナサイズ変化に追従（初期レイアウト未確定対策含む）
+    const ro = new ResizeObserver(() => map.resize());
+    ro.observe(containerRef.current);
+    // 初期化直後の追加リサイズ
+    requestAnimationFrame(() => map.resize());
+
     return () => {
+      ro.disconnect();
       map.remove();
       mapRef.current = null;
     };
