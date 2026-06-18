@@ -394,6 +394,24 @@ button { font-family: inherit; }
   grid-template-columns: 1fr 1fr;
   gap: 10px;
 }
+/* SPシート内では横スクロール（高さ抑制） */
+.sheet .metric-grid {
+  display: flex;
+  grid-template-columns: none;
+  gap: 10px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  margin: 0 -20px;
+  padding: 4px 20px 8px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.sheet .metric-grid::-webkit-scrollbar { display: none; }
+.sheet .metric-grid > .metric-card {
+  flex: 0 0 auto;
+  width: 158px;
+  scroll-snap-align: start;
+}
 .metric-card {
   background: #f8fafc;
   border: 1px solid var(--border);

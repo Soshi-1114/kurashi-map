@@ -148,7 +148,9 @@ export default function MapView({ municipalities }: Props) {
       map.on("click", "muni-fill", (e: MapMouseEvent & { features?: maplibregl.MapGeoJSONFeature[] }) => {
         const f = e.features?.[0];
         if (!f) return;
-        setSelectedCode(String(f.properties?.code ?? ""));
+        const code = String(f.properties?.code ?? "");
+        setSelectedCode(code);
+        flyToCode(code);
       });
 
       map.on("mousemove", "muni-fill", (e: MapMouseEvent & { features?: maplibregl.MapGeoJSONFeature[] }) => {
@@ -215,19 +217,27 @@ export default function MapView({ municipalities }: Props) {
     return municipalities.filter((m) => m.name.includes(q)).slice(0, 8);
   }, [searchQuery, municipalities]);
 
-  const flyToMuni = useCallback((m: Municipality) => {
+  // 自治体コードを画面内に収める。SP は下部シート分、PC は右パネル分の余白を確保。
+  const flyToCode = useCallback((code: string) => {
     const map = mapRef.current;
-    if (!map) return;
     const geo = geoCacheRef.current;
-    if (!geo) return;
-    const feat = geo.features.find((x) => String(x.properties?.code) === m.code);
+    if (!map || !geo) return;
+    const feat = geo.features.find((x) => String(x.properties?.code) === code);
     if (!feat) return;
     const bbox = computeBbox(feat.geometry);
     if (!bbox) return;
-    map.fitBounds(bbox, { padding: 80, maxZoom: 12, duration: 900 });
+    const sp = typeof window !== "undefined" && window.innerWidth < 768;
+    const padding = sp
+      ? { top: 100, bottom: 360, left: 24, right: 24 }
+      : { top: 80, bottom: 60, left: 60, right: 420 };
+    map.fitBounds(bbox, { padding, maxZoom: 12.5, duration: 800 });
+  }, []);
+
+  const flyToMuni = useCallback((m: Municipality) => {
     setSelectedCode(m.code);
     setSearchQuery("");
-  }, []);
+    flyToCode(m.code);
+  }, [flyToCode]);
 
   const selected = selectedCode ? byCode.get(selectedCode) ?? null : null;
 
