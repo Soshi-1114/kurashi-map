@@ -56,8 +56,19 @@ export default function MapView({ municipalities }: Props) {
           },
         },
         layers: [
-          { id: "bg", type: "background", paint: { "background-color": "#eef2f7" } },
-          { id: "gsi-tiles", type: "raster", source: "gsi", paint: { "raster-opacity": 0.95 } },
+          { id: "bg", type: "background", paint: { "background-color": "#f5f8fc" } },
+          {
+            id: "gsi-tiles",
+            type: "raster",
+            source: "gsi",
+            paint: {
+              "raster-opacity": 0.55,
+              "raster-saturation": -0.6,
+              "raster-brightness-min": 0.55,
+              "raster-brightness-max": 1.0,
+              "raster-contrast": -0.05,
+            },
+          },
         ],
       },
       center: [139.31, 36.015],
@@ -95,41 +106,50 @@ export default function MapView({ municipalities }: Props) {
           "fill-color": rentStepExpression() as maplibregl.DataDrivenPropertyValueSpecification<string>,
           "fill-opacity": [
             "case",
-            ["boolean", ["feature-state", "hover"], false], 0.95,
-            ["boolean", ["feature-state", "selected"], false], 0.95,
-            0.75,
+            ["boolean", ["feature-state", "selected"], false], 0.92,
+            ["boolean", ["feature-state", "hover"], false], 0.88,
+            0.72,
           ],
         },
       });
-      // 境界線
-      map.addLayer({
-        id: "muni-outline",
-        type: "line",
-        source: "muni",
-        paint: {
-          "line-color": [
-            "case",
-            ["boolean", ["feature-state", "selected"], false], "#0b2545",
-            "#ffffff",
-          ],
-          "line-width": [
-            "case",
-            ["boolean", ["feature-state", "selected"], false], 3,
-            ["boolean", ["feature-state", "hover"], false], 1.6,
-            0.7,
-          ],
-          "line-opacity": 0.85,
-        },
-      });
-      // 災害リスク オーバーレイ
+      // 災害リスク オーバーレイ（コロプレスより上で境界線より下）
       map.addLayer({
         id: "muni-hazard",
         type: "fill",
         source: "muni",
         filter: ["==", ["get", "hasFloodRisk"], 1],
         paint: {
-          "fill-color": "#1d4ed8",
-          "fill-opacity": 0.18,
+          "fill-color": "#2563eb",
+          "fill-opacity": 0.12,
+        },
+      });
+      // 境界線（ベース）
+      map.addLayer({
+        id: "muni-outline",
+        type: "line",
+        source: "muni",
+        paint: {
+          "line-color": "rgba(15, 23, 42, 0.22)",
+          "line-width": [
+            "case",
+            ["boolean", ["feature-state", "hover"], false], 1.6,
+            0.6,
+          ],
+        },
+      });
+      // 選択中ハイライト（明るいリング）
+      map.addLayer({
+        id: "muni-selected",
+        type: "line",
+        source: "muni",
+        paint: {
+          "line-color": "#1d4ed8",
+          "line-width": [
+            "case",
+            ["boolean", ["feature-state", "selected"], false], 3.2,
+            0,
+          ],
+          "line-blur": 0.4,
         },
       });
 

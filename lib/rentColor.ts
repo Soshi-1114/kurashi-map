@@ -1,11 +1,14 @@
-// 家賃→色の5段階コロプレス。しきい値・配色は固定。
+// 家賃→色の5段階コロプレス。しきい値は固定（型と同じく契約面）。
+// 配色は視認性とブランド性で随時更新可。
 export const RENT_THRESHOLDS = [50000, 55000, 60000, 65000] as const;
+
+// Tailwind blue 系の5段階。淡→濃でしっかり差が出る視認性重視。
 export const RENT_COLORS = [
-  "#dbe7f0",
-  "#a7c4dc",
-  "#6f9bc4",
-  "#3f72a6",
-  "#1f4d7a",
+  "#dbeafe", // blue-100
+  "#93c5fd", // blue-300
+  "#60a5fa", // blue-400
+  "#2563eb", // blue-600
+  "#1e3a8a", // blue-900
 ] as const;
 
 export function rentColor(value: number): string {
@@ -16,8 +19,7 @@ export function rentColor(value: number): string {
   return RENT_COLORS[4];
 }
 
-// MapLibre `step` expression として家賃→色を返す。
-// rent.value プロパティを参照することを前提とする。
+// MapLibre `step` 表現として家賃 → 色を返す。
 export function rentStepExpression(): unknown {
   return [
     "step",
