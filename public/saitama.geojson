@@ -1,0 +1,86 @@
+{
+  "type": "FeatureCollection",
+  "name": "saitama_dummy_polygons",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {"code": "11100", "name": "さいたま市"},
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[139.60,35.83],[139.71,35.83],[139.71,35.92],[139.60,35.92],[139.60,35.83]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {"code": "11201", "name": "川越市"},
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[139.43,35.89],[139.53,35.89],[139.53,35.97],[139.43,35.97],[139.43,35.89]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {"code": "11202", "name": "川口市"},
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[139.68,35.77],[139.77,35.77],[139.77,35.84],[139.68,35.84],[139.68,35.77]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {"code": "11203", "name": "熊谷市"},
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[139.33,36.10],[139.46,36.10],[139.46,36.20],[139.33,36.20],[139.33,36.10]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {"code": "11215", "name": "所沢市"},
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[139.42,35.76],[139.52,35.76],[139.52,35.84],[139.42,35.84],[139.42,35.76]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {"code": "11221", "name": "春日部市"},
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[139.71,35.94],[139.80,35.94],[139.80,36.02],[139.71,36.02],[139.71,35.94]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {"code": "11222", "name": "越谷市"},
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[139.75,35.84],[139.83,35.84],[139.83,35.92],[139.75,35.92],[139.75,35.84]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {"code": "11227", "name": "上尾市"},
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[139.55,35.94],[139.63,35.94],[139.63,36.01],[139.55,36.01],[139.55,35.94]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {"code": "11230", "name": "草加市"},
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[139.77,35.79],[139.84,35.79],[139.84,35.85],[139.77,35.85],[139.77,35.79]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {"code": "11245", "name": "ふじみ野市"},
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[139.49,35.85],[139.56,35.85],[139.56,35.91],[139.49,35.91],[139.49,35.85]]]
+      }
+    }
+  ]
+}
