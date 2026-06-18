@@ -518,9 +518,9 @@ button { font-family: inherit; }
   /* iOS のホームインジケータ領域分を確保し、コンテンツが隠れないように */
   padding-bottom: env(safe-area-inset-bottom);
 }
-.sheet-stage-compact {
-  /* compact 時は影を軽めに、地図と一体感 */
-  box-shadow: 0 -4px 18px rgba(15, 23, 42, 0.10);
+/* half は persistent（地図と並列）なので影をやや軽く、full は深く */
+.sheet-stage-half {
+  box-shadow: 0 -6px 22px rgba(15, 23, 42, 0.12);
 }
 .sheet-handle-btn {
   padding: 8px 0 4px;
@@ -538,68 +538,6 @@ button { font-family: inherit; }
 }
 .sheet-content { padding: 0 20px 20px; overflow-y: auto; flex: 1; }
 
-/* compact stage の 1 行レイアウト */
-.sheet-compact-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  width: 100%;
-  padding: 4px 16px 12px;
-  background: transparent;
-  border: none;
-  text-align: left;
-  cursor: pointer;
-  flex: 1;
-}
-.sheet-compact-name {
-  font-size: 15.5px;
-  font-weight: 800;
-  color: var(--text);
-  letter-spacing: -0.01em;
-  flex-shrink: 0;
-  max-width: 50%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.sheet-compact-rent {
-  font-size: 13px;
-  color: var(--text-muted);
-  font-variant-numeric: tabular-nums;
-  margin-left: 2px;
-  flex: 1;
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.sheet-compact-rent strong { color: var(--text); font-weight: 700; }
-.sheet-compact-chevron {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: var(--accent-soft);
-  color: var(--accent);
-  flex-shrink: 0;
-}
-.sheet-compact-close {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  color: var(--text-muted);
-  font-size: 22px;
-  cursor: pointer;
-  flex-shrink: 0;
-  user-select: none;
-  line-height: 1;
-}
-.sheet-compact-close:hover { background: rgba(15,23,42,0.06); color: var(--text); }
 
 /* ========== Area Detail Page ========== */
 .detail-root {
