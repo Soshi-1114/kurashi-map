@@ -1,52 +1,2207 @@
 [
-  {"code":"11100","pref":"saitama","name":"さいたま市","population":1332226,"populationTrend":"増加",
-   "rent":{"value":68000,"unit":"円/月","source":"サンプル","asOf":"2023","isEstimated":true},
-   "landPrice":{"value":235000,"unit":"円/㎡","source":"サンプル","asOf":"2024","isEstimated":true},
-   "waitlistChildren":{"value":12,"unit":"人","source":"サンプル","asOf":"2025","isEstimated":true},
-   "hazard":{"hasFloodRisk":true,"hasLandslideRisk":false,"note":"一部に浸水想定区域あり","source":"サンプル","asOf":"2024"}},
-  {"code":"11201","pref":"saitama","name":"川越市","population":353183,"populationTrend":"微増",
-   "rent":{"value":58000,"unit":"円/月","source":"サンプル","asOf":"2023","isEstimated":true},
-   "landPrice":{"value":142000,"unit":"円/㎡","source":"サンプル","asOf":"2024","isEstimated":true},
-   "waitlistChildren":{"value":0,"unit":"人","source":"サンプル","asOf":"2025","isEstimated":true},
-   "hazard":{"hasFloodRisk":true,"hasLandslideRisk":false,"note":"荒川沿いに浸水想定","source":"サンプル","asOf":"2024"}},
-  {"code":"11202","pref":"saitama","name":"川口市","population":605266,"populationTrend":"増加",
-   "rent":{"value":64000,"unit":"円/月","source":"サンプル","asOf":"2023","isEstimated":true},
-   "landPrice":{"value":198000,"unit":"円/㎡","source":"サンプル","asOf":"2024","isEstimated":true},
-   "waitlistChildren":{"value":28,"unit":"人","source":"サンプル","asOf":"2025","isEstimated":true},
-   "hazard":{"hasFloodRisk":true,"hasLandslideRisk":false,"note":"荒川沿いに浸水想定","source":"サンプル","asOf":"2024"}},
-  {"code":"11203","pref":"saitama","name":"熊谷市","population":192018,"populationTrend":"減少",
-   "rent":{"value":49000,"unit":"円/月","source":"サンプル","asOf":"2023","isEstimated":true},
-   "landPrice":{"value":78000,"unit":"円/㎡","source":"サンプル","asOf":"2024","isEstimated":true},
-   "waitlistChildren":{"value":0,"unit":"人","source":"サンプル","asOf":"2025","isEstimated":true},
-   "hazard":{"hasFloodRisk":true,"hasLandslideRisk":false,"note":"利根川・荒川沿いに浸水想定","source":"サンプル","asOf":"2024"}},
-  {"code":"11215","pref":"saitama","name":"所沢市","population":342464,"populationTrend":"横ばい",
-   "rent":{"value":56000,"unit":"円/月","source":"サンプル","asOf":"2023","isEstimated":true},
-   "landPrice":{"value":128000,"unit":"円/㎡","source":"サンプル","asOf":"2024","isEstimated":true},
-   "waitlistChildren":{"value":5,"unit":"人","source":"サンプル","asOf":"2025","isEstimated":true},
-   "hazard":{"hasFloodRisk":false,"hasLandslideRisk":false,"note":"該当区域少","source":"サンプル","asOf":"2024"}},
-  {"code":"11221","pref":"saitama","name":"春日部市","population":228000,"populationTrend":"減少",
-   "rent":{"value":52000,"unit":"円/月","source":"サンプル","asOf":"2023","isEstimated":true},
-   "landPrice":{"value":98000,"unit":"円/㎡","source":"サンプル","asOf":"2024","isEstimated":true},
-   "waitlistChildren":{"value":0,"unit":"人","source":"サンプル","asOf":"2025","isEstimated":true},
-   "hazard":{"hasFloodRisk":true,"hasLandslideRisk":false,"note":"古利根川沿いに浸水想定","source":"サンプル","asOf":"2024"}},
-  {"code":"11222","pref":"saitama","name":"越谷市","population":345000,"populationTrend":"微増",
-   "rent":{"value":57000,"unit":"円/月","source":"サンプル","asOf":"2023","isEstimated":true},
-   "landPrice":{"value":132000,"unit":"円/㎡","source":"サンプル","asOf":"2024","isEstimated":true},
-   "waitlistChildren":{"value":3,"unit":"人","source":"サンプル","asOf":"2025","isEstimated":true},
-   "hazard":{"hasFloodRisk":true,"hasLandslideRisk":false,"note":"中川・元荒川沿いに浸水想定","source":"サンプル","asOf":"2024"}},
-  {"code":"11227","pref":"saitama","name":"上尾市","population":227000,"populationTrend":"横ばい",
-   "rent":{"value":54000,"unit":"円/月","source":"サンプル","asOf":"2023","isEstimated":true},
-   "landPrice":{"value":115000,"unit":"円/㎡","source":"サンプル","asOf":"2024","isEstimated":true},
-   "waitlistChildren":{"value":0,"unit":"人","source":"サンプル","asOf":"2025","isEstimated":true},
-   "hazard":{"hasFloodRisk":true,"hasLandslideRisk":false,"note":"鴨川沿いに一部浸水想定","source":"サンプル","asOf":"2024"}},
-  {"code":"11230","pref":"saitama","name":"草加市","population":250000,"populationTrend":"横ばい",
-   "rent":{"value":59000,"unit":"円/月","source":"サンプル","asOf":"2023","isEstimated":true},
-   "landPrice":{"value":165000,"unit":"円/㎡","source":"サンプル","asOf":"2024","isEstimated":true},
-   "waitlistChildren":{"value":8,"unit":"人","source":"サンプル","asOf":"2025","isEstimated":true},
-   "hazard":{"hasFloodRisk":true,"hasLandslideRisk":false,"note":"綾瀬川沿いに浸水想定","source":"サンプル","asOf":"2024"}},
-  {"code":"11245","pref":"saitama","name":"ふじみ野市","population":114000,"populationTrend":"微増",
-   "rent":{"value":55000,"unit":"円/月","source":"サンプル","asOf":"2023","isEstimated":true},
-   "landPrice":{"value":124000,"unit":"円/㎡","source":"サンプル","asOf":"2024","isEstimated":true},
-   "waitlistChildren":{"value":2,"unit":"人","source":"サンプル","asOf":"2025","isEstimated":true},
-   "hazard":{"hasFloodRisk":true,"hasLandslideRisk":false,"note":"新河岸川沿いに浸水想定","source":"サンプル","asOf":"2024"}}
+  {
+    "code": "11100",
+    "pref": "saitama",
+    "name": "さいたま市",
+    "population": 1332226,
+    "populationTrend": "増加",
+    "rent": {
+      "value": 68000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 235000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 12,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "一部に浸水想定区域あり",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11201",
+    "pref": "saitama",
+    "name": "川越市",
+    "population": 353183,
+    "populationTrend": "微増",
+    "rent": {
+      "value": 58000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 142000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "荒川沿いに浸水想定",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11202",
+    "pref": "saitama",
+    "name": "熊谷市",
+    "population": 192018,
+    "populationTrend": "減少",
+    "rent": {
+      "value": 49000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 78000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "利根川・荒川沿いに浸水想定",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11203",
+    "pref": "saitama",
+    "name": "川口市",
+    "population": 605266,
+    "populationTrend": "増加",
+    "rent": {
+      "value": 64000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 198000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 28,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "荒川沿いに浸水想定",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11206",
+    "pref": "saitama",
+    "name": "行田市",
+    "population": 98454,
+    "populationTrend": "減少",
+    "rent": {
+      "value": 48000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 50000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": false,
+      "note": "顕著な浸水想定なし",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11207",
+    "pref": "saitama",
+    "name": "秩父市",
+    "population": 65260,
+    "populationTrend": "増加",
+    "rent": {
+      "value": 62000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 130000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 4,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "一部に浸水想定区域あり",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11208",
+    "pref": "saitama",
+    "name": "所沢市",
+    "population": 342464,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 56000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 128000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 5,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": false,
+      "note": "該当区域少",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11209",
+    "pref": "saitama",
+    "name": "飯能市",
+    "population": 74377,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 59000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 100000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "一部に浸水想定区域あり",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11210",
+    "pref": "saitama",
+    "name": "加須市",
+    "population": 115609,
+    "populationTrend": "減少",
+    "rent": {
+      "value": 59000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 100000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "一部に浸水想定区域あり",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11211",
+    "pref": "saitama",
+    "name": "本庄市",
+    "population": 143816,
+    "populationTrend": "微増",
+    "rent": {
+      "value": 58000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 210000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "一部に浸水想定区域あり",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11212",
+    "pref": "saitama",
+    "name": "東松山市",
+    "population": 117153,
+    "populationTrend": "微減",
+    "rent": {
+      "value": 43000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 180000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "一部に浸水想定区域あり",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11214",
+    "pref": "saitama",
+    "name": "春日部市",
+    "population": 228000,
+    "populationTrend": "減少",
+    "rent": {
+      "value": 52000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 98000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "古利根川沿いに浸水想定",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11215",
+    "pref": "saitama",
+    "name": "狭山市",
+    "population": 138168,
+    "populationTrend": "微減",
+    "rent": {
+      "value": 50000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 190000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "一部に浸水想定区域あり",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11216",
+    "pref": "saitama",
+    "name": "羽生市",
+    "population": 115897,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 43000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 120000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "一部に浸水想定区域あり",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11217",
+    "pref": "saitama",
+    "name": "鴻巣市",
+    "population": 116850,
+    "populationTrend": "増加",
+    "rent": {
+      "value": 44000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 190000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 2,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "一部に浸水想定区域あり",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11218",
+    "pref": "saitama",
+    "name": "深谷市",
+    "population": 80435,
+    "populationTrend": "増加",
+    "rent": {
+      "value": 45000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 140000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 3,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": false,
+      "note": "顕著な浸水想定なし",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11219",
+    "pref": "saitama",
+    "name": "上尾市",
+    "population": 227000,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 54000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 115000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "鴨川沿いに一部浸水想定",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11221",
+    "pref": "saitama",
+    "name": "草加市",
+    "population": 250000,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 59000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 165000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 8,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "綾瀬川沿いに浸水想定",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11222",
+    "pref": "saitama",
+    "name": "越谷市",
+    "population": 345000,
+    "populationTrend": "微増",
+    "rent": {
+      "value": 57000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 132000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 3,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "中川・元荒川沿いに浸水想定",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11223",
+    "pref": "saitama",
+    "name": "蕨市",
+    "population": 83197,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 47000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 160000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "一部に浸水想定区域あり",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11224",
+    "pref": "saitama",
+    "name": "戸田市",
+    "population": 118086,
+    "populationTrend": "微増",
+    "rent": {
+      "value": 56000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 130000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "一部に浸水想定区域あり",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11225",
+    "pref": "saitama",
+    "name": "入間市",
+    "population": 65871,
+    "populationTrend": "微増",
+    "rent": {
+      "value": 57000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 140000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": false,
+      "note": "顕著な浸水想定なし",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11227",
+    "pref": "saitama",
+    "name": "朝霞市",
+    "population": 80858,
+    "populationTrend": "微減",
+    "rent": {
+      "value": 44000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 70000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "一部に浸水想定区域あり",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11228",
+    "pref": "saitama",
+    "name": "志木市",
+    "population": 140649,
+    "populationTrend": "減少",
+    "rent": {
+      "value": 59000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 160000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "一部に浸水想定区域あり",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11229",
+    "pref": "saitama",
+    "name": "和光市",
+    "population": 118620,
+    "populationTrend": "増加",
+    "rent": {
+      "value": 54000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 170000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 4,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": false,
+      "note": "顕著な浸水想定なし",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11230",
+    "pref": "saitama",
+    "name": "新座市",
+    "population": 96972,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 62000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 190000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "一部に浸水想定区域あり",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11231",
+    "pref": "saitama",
+    "name": "桶川市",
+    "population": 102811,
+    "populationTrend": "微増",
+    "rent": {
+      "value": 61000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 60000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "一部に浸水想定区域あり",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11232",
+    "pref": "saitama",
+    "name": "久喜市",
+    "population": 123594,
+    "populationTrend": "減少",
+    "rent": {
+      "value": 52000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 150000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "一部に浸水想定区域あり",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11233",
+    "pref": "saitama",
+    "name": "北本市",
+    "population": 78635,
+    "populationTrend": "増加",
+    "rent": {
+      "value": 53000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 160000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 3,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "一部に浸水想定区域あり",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11234",
+    "pref": "saitama",
+    "name": "八潮市",
+    "population": 62652,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 54000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 50000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": false,
+      "note": "顕著な浸水想定なし",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11235",
+    "pref": "saitama",
+    "name": "富士見市",
+    "population": 111482,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 52000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 210000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "一部に浸水想定区域あり",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11237",
+    "pref": "saitama",
+    "name": "三郷市",
+    "population": 85934,
+    "populationTrend": "減少",
+    "rent": {
+      "value": 48000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 170000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": false,
+      "note": "顕著な浸水想定なし",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11238",
+    "pref": "saitama",
+    "name": "蓮田市",
+    "population": 100217,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 43000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 60000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "一部に浸水想定区域あり",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11239",
+    "pref": "saitama",
+    "name": "坂戸市",
+    "population": 143460,
+    "populationTrend": "増加",
+    "rent": {
+      "value": 62000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 70000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 4,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "一部に浸水想定区域あり",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11240",
+    "pref": "saitama",
+    "name": "幸手市",
+    "population": 73457,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 59000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 220000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "一部に浸水想定区域あり",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11241",
+    "pref": "saitama",
+    "name": "鶴ヶ島市",
+    "population": 96429,
+    "populationTrend": "減少",
+    "rent": {
+      "value": 55000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 60000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "一部に浸水想定区域あり",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11242",
+    "pref": "saitama",
+    "name": "日高市",
+    "population": 108687,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 65000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 220000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "一部に浸水想定区域あり",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11243",
+    "pref": "saitama",
+    "name": "吉川市",
+    "population": 60845,
+    "populationTrend": "増加",
+    "rent": {
+      "value": 55000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 120000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 5,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "一部に浸水想定区域あり",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11245",
+    "pref": "saitama",
+    "name": "ふじみ野市",
+    "population": 114000,
+    "populationTrend": "微増",
+    "rent": {
+      "value": 55000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 124000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 2,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "新河岸川沿いに浸水想定",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11246",
+    "pref": "saitama",
+    "name": "白岡市",
+    "population": 116442,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 60000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 110000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": false,
+      "note": "顕著な浸水想定なし",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11301",
+    "pref": "saitama",
+    "name": "伊奈町",
+    "population": 13792,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 50000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 130000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "一部に浸水想定区域あり",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11324",
+    "pref": "saitama",
+    "name": "三芳町",
+    "population": 31923,
+    "populationTrend": "微減",
+    "rent": {
+      "value": 45000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 200000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": false,
+      "note": "顕著な浸水想定なし",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11326",
+    "pref": "saitama",
+    "name": "毛呂山町",
+    "population": 18879,
+    "populationTrend": "減少",
+    "rent": {
+      "value": 57000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 80000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": false,
+      "note": "顕著な浸水想定なし",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11327",
+    "pref": "saitama",
+    "name": "越生町",
+    "population": 36517,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 55000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 180000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "一部に浸水想定区域あり",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11341",
+    "pref": "saitama",
+    "name": "滑川町",
+    "population": 36974,
+    "populationTrend": "減少",
+    "rent": {
+      "value": 56000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 70000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "一部に浸水想定区域あり",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11342",
+    "pref": "saitama",
+    "name": "嵐山町",
+    "population": 24240,
+    "populationTrend": "増加",
+    "rent": {
+      "value": 42000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 170000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": false,
+      "note": "顕著な浸水想定なし",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11343",
+    "pref": "saitama",
+    "name": "小川町",
+    "population": 31834,
+    "populationTrend": "減少",
+    "rent": {
+      "value": 44000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 190000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "一部に浸水想定区域あり",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11346",
+    "pref": "saitama",
+    "name": "川島町",
+    "population": 33028,
+    "populationTrend": "微減",
+    "rent": {
+      "value": 62000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 190000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "一部に浸水想定区域あり",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11347",
+    "pref": "saitama",
+    "name": "吉見町",
+    "population": 23746,
+    "populationTrend": "微増",
+    "rent": {
+      "value": 44000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 70000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "一部に浸水想定区域あり",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11348",
+    "pref": "saitama",
+    "name": "鳩山町",
+    "population": 24027,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 45000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 140000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": false,
+      "note": "顕著な浸水想定なし",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11349",
+    "pref": "saitama",
+    "name": "ときがわ町",
+    "population": 34758,
+    "populationTrend": "微減",
+    "rent": {
+      "value": 56000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 190000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "一部に浸水想定区域あり",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11361",
+    "pref": "saitama",
+    "name": "横瀬町",
+    "population": 34762,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 44000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 130000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "一部に浸水想定区域あり",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11362",
+    "pref": "saitama",
+    "name": "皆野町",
+    "population": 22067,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 53000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 100000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "一部に浸水想定区域あり",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11363",
+    "pref": "saitama",
+    "name": "長瀞町",
+    "population": 21595,
+    "populationTrend": "増加",
+    "rent": {
+      "value": 53000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 100000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 3,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "一部に浸水想定区域あり",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11365",
+    "pref": "saitama",
+    "name": "小鹿野町",
+    "population": 24454,
+    "populationTrend": "減少",
+    "rent": {
+      "value": 56000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 130000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "一部に浸水想定区域あり",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11369",
+    "pref": "saitama",
+    "name": "東秩父村",
+    "population": 4997,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 43000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 180000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "一部に浸水想定区域あり",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11381",
+    "pref": "saitama",
+    "name": "美里町",
+    "population": 36088,
+    "populationTrend": "微減",
+    "rent": {
+      "value": 42000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 110000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": false,
+      "note": "顕著な浸水想定なし",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11383",
+    "pref": "saitama",
+    "name": "神川町",
+    "population": 36301,
+    "populationTrend": "微増",
+    "rent": {
+      "value": 63000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 140000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": false,
+      "note": "顕著な浸水想定なし",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11385",
+    "pref": "saitama",
+    "name": "上里町",
+    "population": 23616,
+    "populationTrend": "微増",
+    "rent": {
+      "value": 42000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 50000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": false,
+      "note": "顕著な浸水想定なし",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11408",
+    "pref": "saitama",
+    "name": "寄居町",
+    "population": 31133,
+    "populationTrend": "微減",
+    "rent": {
+      "value": 55000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 180000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "一部に浸水想定区域あり",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11442",
+    "pref": "saitama",
+    "name": "宮代町",
+    "population": 19123,
+    "populationTrend": "微減",
+    "rent": {
+      "value": 61000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 120000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "一部に浸水想定区域あり",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11464",
+    "pref": "saitama",
+    "name": "杉戸町",
+    "population": 34297,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 59000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 160000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "一部に浸水想定区域あり",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  },
+  {
+    "code": "11465",
+    "pref": "saitama",
+    "name": "松伏町",
+    "population": 12966,
+    "populationTrend": "微増",
+    "rent": {
+      "value": 56000,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "2023",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 190000,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "2024",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "一部に浸水想定区域あり",
+      "source": "サンプル",
+      "asOf": "2024"
+    }
+  }
 ]

@@ -15,14 +15,14 @@ export default async function AreaPage({
   const m = await getMunicipality(params.city);
   if (!m) {
     return (
-      <div style={{ padding: 24 }}>
+      <div className="detail-root">
         <p>該当する自治体が見つかりません。</p>
-        <Link href="/">← 地図に戻る</Link>
+        <Link href="/" className="detail-back">← 地図に戻る</Link>
       </div>
     );
   }
 
-  const rows = [
+  const rows: { label: string; value: string; source?: string; asOf?: string; est?: boolean }[] = [
     { label: "人口", value: `${m.population.toLocaleString()} 人（${m.populationTrend}）` },
     { label: "家賃中央値", value: `${m.rent.value.toLocaleString()} ${m.rent.unit}`, source: m.rent.source, asOf: m.rent.asOf, est: m.rent.isEstimated },
     { label: "地価", value: `${m.landPrice.value.toLocaleString()} ${m.landPrice.unit}`, source: m.landPrice.source, asOf: m.landPrice.asOf, est: m.landPrice.isEstimated },
@@ -31,20 +31,20 @@ export default async function AreaPage({
   ];
 
   return (
-    <div style={{ maxWidth: 720, margin: "0 auto", padding: 24 }}>
-      <Link href="/">← 地図に戻る</Link>
-      <h1 style={{ marginTop: 12 }}>{m.name}</h1>
-      <p style={{ color: "#555" }}>{buildSummary(m)}</p>
-      <table style={{ width: "100%", borderCollapse: "collapse", marginTop: 16 }}>
+    <div className="detail-root">
+      <Link href="/" className="detail-back">← 地図に戻る</Link>
+      <h1 className="detail-title">{m.name}</h1>
+      <p className="detail-lead">{buildSummary(m)}</p>
+      <table className="detail-table">
         <tbody>
           {rows.map((r) => (
-            <tr key={r.label} style={{ borderBottom: "1px solid #e5e9ee" }}>
-              <th style={{ textAlign: "left", padding: "10px 8px", width: 140, color: "#444" }}>{r.label}</th>
-              <td style={{ padding: "10px 8px" }}>
+            <tr key={r.label}>
+              <th>{r.label}</th>
+              <td>
                 {r.value}
-                {"est" in r && r.est && <span style={{ marginLeft: 8, fontSize: 12, color: "#a07000" }}>※推計</span>}
-                {"source" in r && r.source && (
-                  <div style={{ fontSize: 12, color: "#888", marginTop: 2 }}>
+                {r.est && <span className="metric-est">推計</span>}
+                {r.source && (
+                  <div className="detail-source">
                     出典: {r.source}（{r.asOf}）
                   </div>
                 )}
@@ -54,9 +54,7 @@ export default async function AreaPage({
         </tbody>
       </table>
       {m.hazard.note && (
-        <p style={{ marginTop: 12, fontSize: 14, color: "#555" }}>
-          災害メモ: {m.hazard.note}
-        </p>
+        <p className="detail-note">災害メモ: {m.hazard.note}</p>
       )}
     </div>
   );
