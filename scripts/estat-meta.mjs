@@ -32,8 +32,8 @@ for (const c of classes) {
   const cname = c["@name"];
   const items = c.CLASS ? (Array.isArray(c.CLASS) ? c.CLASS : [c.CLASS]) : [];
   console.log(`\n軸 ${cid}: ${cname} (${items.length} items)`);
-  for (const it of items.slice(0, 8)) {
+  for (const it of items.slice(0, 20)) {
     console.log(`  ${it["@code"]}: ${it["@name"]}`);
   }
-  if (items.length > 8) console.log(`  ... +${items.length - 8} more`);
+  if (items.length > 20) console.log(`  ... +${items.length - 20} more`);
 }
