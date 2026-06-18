@@ -31,6 +31,7 @@ export default function MapView({ all }: Props) {
   const [searchQuery, setSearchQuery] = useState("");
   const [mapReady, setMapReady] = useState(false);
   const [tooltip, setTooltip] = useState<{ x: number; y: number; name: string; rent: number } | null>(null);
+  const [layersOpen, setLayersOpen] = useState(true);
 
   const { municipalities, wards } = useMemo(() => {
     const mu: Municipality[] = [];
@@ -330,10 +331,10 @@ export default function MapView({ all }: Props) {
     const bbox = computeBbox(feat.geometry);
     if (!bbox) return;
     const sp = typeof window !== "undefined" && window.innerWidth < 768;
-    // SP は half シート(~360px)が persistent で常時下部に居るため bottom を多めに確保。
+    // SP は header (~60px) + half シート (~200px) を避けて選択ポリゴンを画面内に収める。
     // full は modal で地図を覆うので fit は half 基準で OK。
     const padding = sp
-      ? { top: 100, bottom: 380, left: 24, right: 24 }
+      ? { top: 80, bottom: 220, left: 24, right: 24 }
       : { top: 80, bottom: 60, left: 60, right: 420 };
     // 区を選択した時は最低 z=11 まで寄せて区レイヤーが見える状態に
     const minZoom = wardFeat ? WARDS_MIN_ZOOM : 0;
@@ -354,9 +355,14 @@ export default function MapView({ all }: Props) {
   }, [flyToCode]);
 
   const selected = selectedCode ? byCode.get(selectedCode) ?? null : null;
+  const rootClass = [
+    "map-root",
+    selected && isMobile ? "is-sheet-open" : "",
+    selected && !isMobile ? "is-panel-open" : "",
+  ].filter(Boolean).join(" ");
 
   return (
-    <div className="map-root">
+    <div className={rootClass}>
       <div ref={containerRef} className="map-canvas" />
 
       {/* ホバーツールチップ */}
@@ -372,47 +378,54 @@ export default function MapView({ all }: Props) {
         </div>
       )}
 
-      {/* ヘッダーバッジ */}
-      <header className="brand">
-        <div className="brand-mark" />
-        <div>
-          <div className="brand-title">MachiMap</div>
-          <div className="brand-sub">埼玉県（β・サンプルデータ）</div>
+      {/* 統合ヘッダー（固定） */}
+      <header className="app-header">
+        <div className="app-header-brand">
+          <div className="brand-mark" />
+          <div className="brand-name">MachiMap</div>
         </div>
+        <div className="app-header-search">
+          <div className="search-input-wrap">
+            <SearchIcon />
+            <input
+              type="search"
+              placeholder="自治体名で検索"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              aria-label="自治体検索"
+            />
+          </div>
+          {filtered.length > 0 && (
+            <ul className="search-results">
+              {filtered.map((m) => (
+                <li key={m.code}>
+                  <button onClick={() => flyToMuni(m)}>
+                    <span>{m.name}</span>
+                    <span className="search-rent">{m.rent.value.toLocaleString()}円</span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+        <button
+          className={`app-header-layers-btn ${layersOpen ? "is-active" : ""}`}
+          aria-label="レイヤーを開閉"
+          aria-expanded={layersOpen}
+          onClick={() => setLayersOpen((v) => !v)}
+        >
+          <LayersIcon />
+        </button>
       </header>
 
-      {/* 検索 */}
-      <div className="search">
-        <div className="search-input-wrap">
-          <SearchIcon />
-          <input
-            type="search"
-            placeholder="自治体名で検索"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            aria-label="自治体検索"
-          />
+      {/* レイヤーパネル（デフォルト展開、ヘッダー右下） */}
+      {layersOpen && (
+        <div className="layers-panel">
+          <div className="layers-title">表示レイヤー</div>
+          <LayerToggle label="家賃コロプレス" checked disabled />
+          <LayerToggle label="災害リスク" checked={hazardOn} onChange={setHazardOn} />
         </div>
-        {filtered.length > 0 && (
-          <ul className="search-results">
-            {filtered.map((m) => (
-              <li key={m.code}>
-                <button onClick={() => flyToMuni(m)}>
-                  <span>{m.name}</span>
-                  <span className="search-rent">{m.rent.value.toLocaleString()}円</span>
-                </button>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-
-      {/* レイヤートグル */}
-      <div className={`layers ${selected && !isMobile ? "layers-with-panel" : ""}`}>
-        <div className="layers-title">表示レイヤー</div>
-        <LayerToggle label="家賃コロプレス" checked disabled />
-        <LayerToggle label="災害リスク" checked={hazardOn} onChange={setHazardOn} />
-      </div>
+      )}
 
       {/* 凡例 */}
       <div className="legend">
@@ -438,6 +451,16 @@ export default function MapView({ all }: Props) {
         <MobileSheet municipality={selected} onClose={() => setSelectedCode(null)} />
       )}
     </div>
+  );
+}
+
+function LayersIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <polygon points="12 2 2 7 12 12 22 7 12 2" />
+      <polyline points="2 17 12 22 22 17" />
+      <polyline points="2 12 12 17 22 12" />
+    </svg>
   );
 }
 

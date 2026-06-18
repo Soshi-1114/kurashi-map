@@ -59,31 +59,41 @@ a:hover { color: var(--accent-hover); }
 button { font-family: inherit; }
 
 /* ========== MapView ========== */
+:root {
+  --header-h: 60px;
+}
 .map-root { position: relative; width: 100%; height: 100%; background: var(--bg); }
 .map-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
-/* ブランドバッジ */
-.brand {
+/* 統合ヘッダー — 画面上部に固定。MachiMap + 検索 + レイヤー切替 */
+.app-header {
   position: absolute;
-  top: 18px;
-  left: 18px;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: calc(var(--header-h) + env(safe-area-inset-top));
+  padding: env(safe-area-inset-top) 14px 0;
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 10px 18px 10px 12px;
+  gap: 10px;
   background: var(--surface);
   backdrop-filter: saturate(180%) blur(16px);
   -webkit-backdrop-filter: saturate(180%) blur(16px);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-pill);
-  box-shadow: var(--shadow-md);
-  z-index: 6;
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  z-index: 12;
+}
+.app-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
   user-select: none;
 }
 .brand-mark {
-  width: 32px;
-  height: 32px;
-  border-radius: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
   background:
     radial-gradient(circle at 30% 30%, #60a5fa 0%, #2563eb 55%, #1e3a8a 100%);
   box-shadow:
@@ -91,35 +101,32 @@ button { font-family: inherit; }
     inset 0 1px 1px rgba(255,255,255,0.4),
     0 2px 5px rgba(37, 99, 235, 0.3);
   position: relative;
+  flex-shrink: 0;
 }
 .brand-mark::after {
   content: "";
   position: absolute;
-  inset: 7px;
+  inset: 6px;
   border-radius: 5px;
   background:
-    radial-gradient(circle at 30% 35%, rgba(255,255,255,0.7) 0 2.2px, transparent 3.5px),
-    radial-gradient(circle at 65% 55%, rgba(255,255,255,0.55) 0 1.8px, transparent 2.8px),
-    radial-gradient(circle at 45% 75%, rgba(255,255,255,0.45) 0 1.5px, transparent 2.5px);
+    radial-gradient(circle at 30% 35%, rgba(255,255,255,0.7) 0 2px, transparent 3.2px),
+    radial-gradient(circle at 65% 55%, rgba(255,255,255,0.55) 0 1.6px, transparent 2.6px),
+    radial-gradient(circle at 45% 75%, rgba(255,255,255,0.45) 0 1.4px, transparent 2.4px);
 }
-.brand-title { font-size: 15px; font-weight: 800; line-height: 1.1; color: var(--text); letter-spacing: -0.01em; }
-.brand-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; letter-spacing: 0.03em; }
+.brand-name {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+@media (max-width: 480px) {
+  .brand-name { display: none; }
+}
 
-/* 検索 */
-.search {
-  position: absolute;
-  top: 18px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(460px, calc(100% - 220px));
-  z-index: 6;
-}
-@media (max-width: 768px) {
-  .search { top: 78px; left: 16px; right: 16px; width: auto; transform: none; }
-  .brand { padding: 8px 14px 8px 10px; top: 16px; left: 16px; }
-  .brand-sub { display: none; }
-  .brand-mark { width: 28px; height: 28px; border-radius: 8px; }
-  .brand-mark::after { inset: 6px; }
+.app-header-search {
+  position: relative;
+  flex: 1;
+  min-width: 0;
 }
 .search-input-wrap {
   position: relative;
@@ -128,34 +135,59 @@ button { font-family: inherit; }
 }
 .search-input-wrap svg {
   position: absolute;
-  left: 16px;
+  left: 14px;
   color: var(--text-muted);
   pointer-events: none;
 }
-.search input {
+.app-header-search input {
   width: 100%;
-  padding: 13px 16px 13px 44px;
+  padding: 10px 14px 10px 40px;
   font-size: 14px;
   font-family: inherit;
   font-weight: 500;
   color: var(--text);
-  background: var(--surface);
-  backdrop-filter: saturate(180%) blur(16px);
-  -webkit-backdrop-filter: saturate(180%) blur(16px);
-  border: 1px solid var(--border);
+  background: #f1f5f9;
+  border: 1px solid transparent;
   border-radius: var(--radius-pill);
-  box-shadow: var(--shadow-md);
   outline: none;
-  transition: box-shadow .2s ease, border-color .2s ease;
+  transition: background .15s, border-color .2s, box-shadow .2s;
 }
-.search input:focus {
+.app-header-search input:focus {
+  background: #ffffff;
   border-color: var(--accent);
-  box-shadow: 0 0 0 4px var(--accent-soft), var(--shadow-md);
+  box-shadow: 0 0 0 4px var(--accent-soft);
 }
-.search input::placeholder { color: var(--text-faint); font-weight: 400; }
+.app-header-search input::placeholder { color: var(--text-faint); font-weight: 400; }
+
+.app-header-layers-btn {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f1f5f9;
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background .15s, color .15s, border-color .15s;
+}
+.app-header-layers-btn:hover { background: #e2e8f0; color: var(--text); }
+.app-header-layers-btn.is-active {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-color: rgba(37,99,235,0.15);
+}
+
+/* 検索ドロップダウン — ヘッダーの検索欄直下に */
 .search-results {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
   list-style: none;
-  margin: 8px 0 0;
+  margin: 0;
   padding: 6px;
   background: var(--surface-strong);
   border: 1px solid var(--border);
@@ -164,6 +196,7 @@ button { font-family: inherit; }
   overflow: hidden;
   max-height: 360px;
   overflow-y: auto;
+  z-index: 13;
 }
 .search-results button {
   display: flex;
@@ -184,12 +217,12 @@ button { font-family: inherit; }
 .search-results button:hover { background: var(--accent-soft); }
 .search-rent { font-size: 12px; color: var(--text-muted); font-variant-numeric: tabular-nums; }
 
-/* レイヤートグル */
-.layers {
+/* レイヤーパネル（ヘッダー直下、デフォルト展開） */
+.layers-panel {
   position: absolute;
-  top: 18px;
-  right: 18px;
-  padding: 14px 16px;
+  top: calc(var(--header-h) + env(safe-area-inset-top) + 10px);
+  right: 14px;
+  padding: 12px 14px;
   background: var(--surface);
   backdrop-filter: saturate(180%) blur(16px);
   -webkit-backdrop-filter: saturate(180%) blur(16px);
@@ -199,8 +232,13 @@ button { font-family: inherit; }
   z-index: 6;
   min-width: 196px;
   transition: right .3s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: layers-in .2s ease;
 }
-.layers-with-panel { right: 410px; }
+@keyframes layers-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.is-panel-open .layers-panel { right: calc(380px + 30px); }
 .layers-title {
   font-size: 11px;
   font-weight: 800;
@@ -244,11 +282,11 @@ button { font-family: inherit; }
 .layer-toggle input:checked + .layer-switch::after { left: 16px; }
 .layer-label { font-size: 13.5px; color: var(--text); font-weight: 500; }
 
-/* 凡例 */
+/* 凡例 — シートに隠れないよう sheet open 時は繰り上げる */
 .legend {
   position: absolute;
   left: 18px;
-  bottom: 18px;
+  bottom: calc(18px + env(safe-area-inset-bottom));
   padding: 12px 14px 10px;
   background: var(--surface);
   backdrop-filter: saturate(180%) blur(16px);
@@ -258,6 +296,16 @@ button { font-family: inherit; }
   box-shadow: var(--shadow-md);
   z-index: 5;
   min-width: 220px;
+  transition: bottom .25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+/* SP で sheet open 時、凡例と MapLibre 標準コントロールを sheet 上に繰り上げる */
+.is-sheet-open .legend {
+  bottom: calc(216px + env(safe-area-inset-bottom));
+}
+.is-sheet-open .maplibregl-ctrl-bottom-left,
+.is-sheet-open .maplibregl-ctrl-bottom-right {
+  bottom: calc(216px + env(safe-area-inset-bottom)) !important;
+  transition: bottom .25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .legend-title {
   font-size: 11px;
@@ -322,9 +370,9 @@ button { font-family: inherit; }
 /* ========== AreaPanel (PC) ========== */
 .area-panel {
   position: absolute;
-  top: 18px;
+  top: calc(var(--header-h) + env(safe-area-inset-top) + 14px);
   right: 18px;
-  bottom: 18px;
+  bottom: calc(18px + env(safe-area-inset-bottom));
   width: 380px;
   background: var(--surface-strong);
   border: 1px solid var(--border);
@@ -517,6 +565,10 @@ button { font-family: inherit; }
   transition: height .3s cubic-bezier(0.16, 1, 0.3, 1);
   /* iOS のホームインジケータ領域分を確保し、コンテンツが隠れないように */
   padding-bottom: env(safe-area-inset-bottom);
+  touch-action: pan-y;
+}
+.sheet.is-dragging {
+  transition: none;
 }
 /* half は persistent（地図と並列）なので影をやや軽く、full は深く */
 .sheet-stage-half {
