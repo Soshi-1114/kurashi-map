@@ -10,9 +10,8 @@ if (!APP_ID) {
 
 const url = new URL("https://api.e-stat.go.jp/rest/3.0/app/json/getStatsList");
 url.searchParams.set("appId", APP_ID);
-// 政府統計コード 00200522 = 住宅・土地統計調査
-url.searchParams.set("statsCode", "00200522");
-url.searchParams.set("searchWord", "令和5年 住宅の１か月当たり家賃 居住室");
+// statsCode を外して全分野横断検索
+url.searchParams.set("searchWord", "都道府県地価調査");
 url.searchParams.set("limit", "50");
 
 const res = await fetch(url);
