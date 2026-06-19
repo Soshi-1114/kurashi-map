@@ -144,7 +144,8 @@ button { font-family: inherit; }
 .app-header-search input {
   width: 100%;
   padding: 10px 14px 10px 40px;
-  font-size: 14px;
+  /* iOS Safari は font-size < 16px の入力にフォーカスすると自動ズームするため 16px 固定 */
+  font-size: 16px;
   font-family: inherit;
   font-weight: 500;
   color: var(--text);
