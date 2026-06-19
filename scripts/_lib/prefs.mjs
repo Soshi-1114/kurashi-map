@@ -128,6 +128,12 @@ export const PREFS = {
       "28100": ["28101","28102","28105","28106","28107","28108","28109","28110","28111"], // 神戸市9区
     },
   },
+  nara: {
+    code: "29", nameJa: "奈良県",
+    bbox: { west: 135.540, south: 33.859, east: 136.230, north: 34.781 },
+    hasWards: false,
+    parentToWards: {},
+  },
 };
 
 export function getPref(slug) {
