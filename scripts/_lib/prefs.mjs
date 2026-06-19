@@ -302,6 +302,12 @@ export const PREFS = {
       "15100": ["15101","15102","15103","15104","15105","15106","15107","15108"], // 新潟市8区
     },
   },
+  toyama: {
+    code: "16", nameJa: "富山県",
+    bbox: { west: 136.768, south: 36.274, east: 137.763, north: 36.983 },
+    hasWards: false,
+    parentToWards: {},
+  },
 };
 
 export function getPref(slug) {
