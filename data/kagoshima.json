@@ -22,9 +22,9 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": false,
@@ -37,8 +37,8 @@
       "stations": 0,
       "preschools": 0,
       "medicalFacilities": 0,
-      "source": "サンプル",
-      "asOf": "-"
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -64,9 +64,9 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": true,
@@ -76,11 +76,11 @@
       "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "サンプル",
-      "asOf": "-"
+      "stations": 61,
+      "preschools": 268,
+      "medicalFacilities": 1007,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -106,9 +106,9 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": true,
@@ -119,10 +119,10 @@
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "サンプル",
-      "asOf": "-"
+      "preschools": 73,
+      "medicalFacilities": 133,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -148,9 +148,9 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": true,
@@ -160,11 +160,11 @@
       "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "サンプル",
-      "asOf": "-"
+      "stations": 3,
+      "preschools": 11,
+      "medicalFacilities": 33,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -190,9 +190,9 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": false,
@@ -202,11 +202,11 @@
       "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "サンプル",
-      "asOf": "-"
+      "stations": 4,
+      "preschools": 10,
+      "medicalFacilities": 27,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -232,9 +232,9 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": true,
@@ -244,11 +244,11 @@
       "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "サンプル",
-      "asOf": "-"
+      "stations": 6,
+      "preschools": 34,
+      "medicalFacilities": 72,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -274,9 +274,9 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": false,
@@ -286,11 +286,11 @@
       "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "サンプル",
-      "asOf": "-"
+      "stations": 11,
+      "preschools": 28,
+      "medicalFacilities": 69,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -316,9 +316,9 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": false,
@@ -329,10 +329,10 @@
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "サンプル",
-      "asOf": "-"
+      "preschools": 12,
+      "medicalFacilities": 13,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -358,9 +358,9 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": true,
@@ -371,10 +371,10 @@
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "サンプル",
-      "asOf": "-"
+      "preschools": 12,
+      "medicalFacilities": 15,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -400,9 +400,9 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": true,
@@ -412,11 +412,11 @@
       "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "サンプル",
-      "asOf": "-"
+      "stations": 9,
+      "preschools": 65,
+      "medicalFacilities": 153,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -442,9 +442,9 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": true,
@@ -454,11 +454,11 @@
       "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "サンプル",
-      "asOf": "-"
+      "stations": 3,
+      "preschools": 30,
+      "medicalFacilities": 71,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -484,9 +484,9 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": false,
@@ -496,11 +496,11 @@
       "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "サンプル",
-      "asOf": "-"
+      "stations": 3,
+      "preschools": 28,
+      "medicalFacilities": 40,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -526,9 +526,9 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": true,
@@ -538,11 +538,11 @@
       "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "サンプル",
-      "asOf": "-"
+      "stations": 12,
+      "preschools": 88,
+      "medicalFacilities": 177,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -568,9 +568,9 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": false,
@@ -580,11 +580,11 @@
       "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "サンプル",
-      "asOf": "-"
+      "stations": 3,
+      "preschools": 13,
+      "medicalFacilities": 49,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -610,9 +610,9 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": true,
@@ -623,10 +623,10 @@
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "サンプル",
-      "asOf": "-"
+      "preschools": 18,
+      "medicalFacilities": 57,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -652,9 +652,9 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": false,
@@ -664,11 +664,11 @@
       "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "サンプル",
-      "asOf": "-"
+      "stations": 2,
+      "preschools": 29,
+      "medicalFacilities": 40,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -692,11 +692,11 @@
       "isEstimated": false
     },
     "waitlistChildren": {
-      "value": 0,
+      "value": 1,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": false,
@@ -736,9 +736,9 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": true,
@@ -748,11 +748,11 @@
       "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "サンプル",
-      "asOf": "-"
+      "stations": 8,
+      "preschools": 32,
+      "medicalFacilities": 55,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -778,9 +778,9 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": true,
@@ -791,10 +791,10 @@
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "サンプル",
-      "asOf": "-"
+      "preschools": 26,
+      "medicalFacilities": 37,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -818,11 +818,11 @@
       "isEstimated": false
     },
     "waitlistChildren": {
-      "value": 0,
+      "value": 11,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": false,
@@ -832,11 +832,11 @@
       "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "サンプル",
-      "asOf": "-"
+      "stations": 5,
+      "preschools": 48,
+      "medicalFacilities": 107,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -862,9 +862,9 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": false,
@@ -876,9 +876,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "サンプル",
-      "asOf": "-"
+      "medicalFacilities": 4,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -904,9 +904,9 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": false,
@@ -919,8 +919,8 @@
       "stations": 0,
       "preschools": 0,
       "medicalFacilities": 0,
-      "source": "サンプル",
-      "asOf": "-"
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -946,9 +946,9 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": true,
@@ -959,10 +959,10 @@
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "サンプル",
-      "asOf": "-"
+      "preschools": 19,
+      "medicalFacilities": 32,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -988,9 +988,9 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": false,
@@ -1001,10 +1001,10 @@
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "サンプル",
-      "asOf": "-"
+      "preschools": 10,
+      "medicalFacilities": 12,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -1030,9 +1030,9 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": true,
@@ -1042,11 +1042,11 @@
       "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "サンプル",
-      "asOf": "-"
+      "stations": 4,
+      "preschools": 7,
+      "medicalFacilities": 13,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -1072,9 +1072,9 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": false,
@@ -1085,10 +1085,10 @@
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "サンプル",
-      "asOf": "-"
+      "preschools": 12,
+      "medicalFacilities": 11,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -1114,9 +1114,9 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": true,
@@ -1127,10 +1127,10 @@
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "サンプル",
-      "asOf": "-"
+      "preschools": 4,
+      "medicalFacilities": 10,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -1156,9 +1156,9 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": false,
@@ -1169,10 +1169,10 @@
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "サンプル",
-      "asOf": "-"
+      "preschools": 7,
+      "medicalFacilities": 15,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -1198,9 +1198,9 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": true,
@@ -1211,10 +1211,10 @@
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "サンプル",
-      "asOf": "-"
+      "preschools": 3,
+      "medicalFacilities": 10,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -1240,9 +1240,9 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": true,
@@ -1253,10 +1253,10 @@
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "サンプル",
-      "asOf": "-"
+      "preschools": 11,
+      "medicalFacilities": 17,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -1282,9 +1282,9 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": false,
@@ -1295,10 +1295,10 @@
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "サンプル",
-      "asOf": "-"
+      "preschools": 2,
+      "medicalFacilities": 8,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -1324,9 +1324,9 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": false,
@@ -1337,10 +1337,10 @@
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "サンプル",
-      "asOf": "-"
+      "preschools": 3,
+      "medicalFacilities": 6,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -1366,9 +1366,9 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": false,
@@ -1379,10 +1379,10 @@
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "サンプル",
-      "asOf": "-"
+      "preschools": 11,
+      "medicalFacilities": 16,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -1408,9 +1408,9 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": false,
@@ -1450,9 +1450,9 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": false,
@@ -1492,9 +1492,9 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": false,
@@ -1534,9 +1534,9 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": false,
@@ -1576,9 +1576,9 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": false,
@@ -1618,9 +1618,9 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": false,
@@ -1660,9 +1660,9 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": false,
@@ -1702,9 +1702,9 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": false,
@@ -1744,9 +1744,9 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": false,
@@ -1786,9 +1786,9 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": false,
@@ -1828,9 +1828,9 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "サンプル",
-      "asOf": "-",
-      "isEstimated": true
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
     },
     "hazard": {
       "hasFloodRisk": false,
