@@ -228,6 +228,12 @@ export const PREFS = {
       "43100": ["43101","43102","43103","43104","43105"], // 熊本市5区（中央/東/西/南/北）
     },
   },
+  oita: {
+    code: "44", nameJa: "大分県",
+    bbox: { west: 130.825, south: 32.714, east: 132.177, north: 33.740 },
+    hasWards: false,
+    parentToWards: {},
+  },
 };
 
 export function getPref(slug) {
