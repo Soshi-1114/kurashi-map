@@ -68,6 +68,12 @@ export const PREFS = {
     hasWards: false,
     parentToWards: {},
   },
+  gifu: {
+    code: "21", nameJa: "岐阜県",
+    bbox: { west: 136.276, south: 35.134, east: 137.653, north: 36.465 },
+    hasWards: false,
+    parentToWards: {},
+  },
 };
 
 export function getPref(slug) {
