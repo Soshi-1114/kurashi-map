@@ -20,6 +20,12 @@ export const PREFS = {
       "12100": ["12101", "12102", "12103", "12104", "12105", "12106"],
     },
   },
+  gunma: {
+    code: "10", nameJa: "群馬県",
+    bbox: { west: 138.397, south: 35.985, east: 139.67, north: 37.059 },
+    hasWards: false,
+    parentToWards: {},
+  },
 };
 
 export function getPref(slug) {
