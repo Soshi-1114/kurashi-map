@@ -282,6 +282,12 @@ export const PREFS = {
     hasWards: false,
     parentToWards: {},
   },
+  yamagata: {
+    code: "06", nameJa: "山形県",
+    bbox: { west: 139.520, south: 37.734, east: 140.646, north: 39.216 },
+    hasWards: false,
+    parentToWards: {},
+  },
 };
 
 export function getPref(slug) {
