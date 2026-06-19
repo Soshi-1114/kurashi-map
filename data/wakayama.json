@@ -1,0 +1,1304 @@
+[
+  {
+    "code": "30000",
+    "pref": "wakayama",
+    "name": "所属未定地",
+    "population": 922584,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 45000,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 0,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": false,
+      "note": "顕著な災害想定区域なし",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "30201",
+    "pref": "wakayama",
+    "name": "和歌山市",
+    "population": 356729,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 50002,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 82859,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 22,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 37,
+      "preschools": 113,
+      "medicalFacilities": 692,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "30202",
+    "pref": "wakayama",
+    "name": "海南市",
+    "population": 48369,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 42914,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 47583,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 5,
+      "preschools": 17,
+      "medicalFacilities": 88,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "30203",
+    "pref": "wakayama",
+    "name": "橋本市",
+    "population": 60818,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 43886,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 31743,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 11,
+      "preschools": 21,
+      "medicalFacilities": 103,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "30204",
+    "pref": "wakayama",
+    "name": "有田市",
+    "population": 26538,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 36905,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 38860,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 3,
+      "preschools": 7,
+      "medicalFacilities": 46,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "30205",
+    "pref": "wakayama",
+    "name": "御坊市",
+    "population": 23481,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 39614,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 44150,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 7,
+      "preschools": 11,
+      "medicalFacilities": 53,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "30206",
+    "pref": "wakayama",
+    "name": "田辺市",
+    "population": 69870,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 41470,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 66500,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 3,
+      "preschools": 34,
+      "medicalFacilities": 128,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "30207",
+    "pref": "wakayama",
+    "name": "新宮市",
+    "population": 27171,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 38077,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 45620,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 4,
+      "preschools": 13,
+      "medicalFacilities": 67,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "30208",
+    "pref": "wakayama",
+    "name": "紀の川市",
+    "population": 58816,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 40964,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 25023,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 9,
+      "preschools": 20,
+      "medicalFacilities": 93,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "30209",
+    "pref": "wakayama",
+    "name": "岩出市",
+    "population": 53967,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 49951,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 54367,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 2,
+      "preschools": 12,
+      "medicalFacilities": 70,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "30304",
+    "pref": "wakayama",
+    "name": "紀美野町",
+    "population": 8256,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 0,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 0,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 2,
+      "medicalFacilities": 15,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "30341",
+    "pref": "wakayama",
+    "name": "かつらぎ町",
+    "population": 15967,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 30667,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 26000,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 5,
+      "preschools": 4,
+      "medicalFacilities": 29,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "30343",
+    "pref": "wakayama",
+    "name": "九度山町",
+    "population": 3856,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 0,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 21733,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 4,
+      "preschools": 3,
+      "medicalFacilities": 5,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "30344",
+    "pref": "wakayama",
+    "name": "高野町",
+    "population": 2970,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 0,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 20750,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 5,
+      "preschools": 1,
+      "medicalFacilities": 6,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "30361",
+    "pref": "wakayama",
+    "name": "湯浅町",
+    "population": 11122,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 0,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 29867,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 1,
+      "preschools": 5,
+      "medicalFacilities": 20,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "30362",
+    "pref": "wakayama",
+    "name": "広川町",
+    "population": 6781,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 0,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 0,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 1,
+      "preschools": 3,
+      "medicalFacilities": 6,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "30366",
+    "pref": "wakayama",
+    "name": "有田川町",
+    "population": 25258,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 43889,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 42600,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 1,
+      "preschools": 7,
+      "medicalFacilities": 44,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "30381",
+    "pref": "wakayama",
+    "name": "美浜町",
+    "population": 6867,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 0,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 24933,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 3,
+      "medicalFacilities": 10,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "30382",
+    "pref": "wakayama",
+    "name": "日高町",
+    "population": 7673,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 0,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 0,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 1,
+      "preschools": 2,
+      "medicalFacilities": 7,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "30383",
+    "pref": "wakayama",
+    "name": "由良町",
+    "population": 5364,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 0,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 20033,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": true,
+      "note": "土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 1,
+      "preschools": 1,
+      "medicalFacilities": 8,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "30390",
+    "pref": "wakayama",
+    "name": "印南町",
+    "population": 7720,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 0,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 0,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 3,
+      "preschools": 2,
+      "medicalFacilities": 7,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "30391",
+    "pref": "wakayama",
+    "name": "みなべ町",
+    "population": 11818,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 0,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 34533,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 2,
+      "preschools": 5,
+      "medicalFacilities": 13,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "30392",
+    "pref": "wakayama",
+    "name": "日高川町",
+    "population": 9219,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 0,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 0,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 1,
+      "preschools": 3,
+      "medicalFacilities": 12,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "30401",
+    "pref": "wakayama",
+    "name": "白浜町",
+    "population": 20262,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 41213,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 34220,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 4,
+      "preschools": 8,
+      "medicalFacilities": 26,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "30404",
+    "pref": "wakayama",
+    "name": "上富田町",
+    "population": 15236,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 44727,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 35600,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 1,
+      "preschools": 3,
+      "medicalFacilities": 20,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "30406",
+    "pref": "wakayama",
+    "name": "すさみ町",
+    "population": 3685,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 0,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 17367,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 3,
+      "preschools": 1,
+      "medicalFacilities": 10,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "30421",
+    "pref": "wakayama",
+    "name": "那智勝浦町",
+    "population": 14137,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 0,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 28633,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 7,
+      "preschools": 8,
+      "medicalFacilities": 26,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "30422",
+    "pref": "wakayama",
+    "name": "太地町",
+    "population": 2791,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 0,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 16300,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": true,
+      "note": "土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 1,
+      "preschools": 1,
+      "medicalFacilities": 5,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "30424",
+    "pref": "wakayama",
+    "name": "古座川町",
+    "population": 2480,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 0,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 0,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 2,
+      "medicalFacilities": 7,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "30427",
+    "pref": "wakayama",
+    "name": "北山村",
+    "population": 404,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 0,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 0,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 1,
+      "medicalFacilities": 1,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "30428",
+    "pref": "wakayama",
+    "name": "串本町",
+    "population": 14959,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 0,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 28700,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 8,
+      "preschools": 6,
+      "medicalFacilities": 24,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  }
+]

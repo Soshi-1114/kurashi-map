@@ -134,6 +134,12 @@ export const PREFS = {
     hasWards: false,
     parentToWards: {},
   },
+  wakayama: {
+    code: "30", nameJa: "和歌山県",
+    bbox: { west: 134.999, south: 33.433, east: 136.013, north: 34.384 },
+    hasWards: false,
+    parentToWards: {},
+  },
 };
 
 export function getPref(slug) {
