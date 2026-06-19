@@ -192,6 +192,12 @@ export const PREFS = {
     hasWards: false,
     parentToWards: {},
   },
+  kochi: {
+    code: "39", nameJa: "高知県",
+    bbox: { west: 132.480, south: 32.703, east: 134.315, north: 33.883 },
+    hasWards: false,
+    parentToWards: {},
+  },
 };
 
 export function getPref(slug) {
