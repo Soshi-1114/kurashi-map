@@ -314,6 +314,12 @@ export const PREFS = {
     hasWards: false,
     parentToWards: {},
   },
+  fukui: {
+    code: "18", nameJa: "福井県",
+    bbox: { west: 135.449, south: 35.344, east: 136.832, north: 36.297 },
+    hasWards: false,
+    parentToWards: {},
+  },
 };
 
 export function getPref(slug) {
