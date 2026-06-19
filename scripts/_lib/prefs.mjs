@@ -56,6 +56,12 @@ export const PREFS = {
       "14150": ["14151","14152","14153"],
     },
   },
+  yamanashi: {
+    code: "19", nameJa: "山梨県",
+    bbox: { west: 138.180, south: 35.168, east: 139.134, north: 35.972 },
+    hasWards: false,
+    parentToWards: {},
+  },
 };
 
 export function getPref(slug) {
