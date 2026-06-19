@@ -103,6 +103,14 @@ export const PREFS = {
     hasWards: false,
     parentToWards: {},
   },
+  kyoto: {
+    code: "26", nameJa: "京都府",
+    bbox: { west: 134.854, south: 34.706, east: 136.055, north: 35.779 },
+    hasWards: true,
+    parentToWards: {
+      "26100": ["26101","26102","26103","26104","26105","26106","26107","26108","26109","26110","26111"], // 京都市11区
+    },
+  },
 };
 
 export function getPref(slug) {
