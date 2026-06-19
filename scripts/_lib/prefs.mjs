@@ -174,6 +174,12 @@ export const PREFS = {
     hasWards: false,
     parentToWards: {},
   },
+  tokushima: {
+    code: "36", nameJa: "徳島県",
+    bbox: { west: 133.661, south: 33.539, east: 134.822, north: 34.252 },
+    hasWards: false,
+    parentToWards: {},
+  },
 };
 
 export function getPref(slug) {
