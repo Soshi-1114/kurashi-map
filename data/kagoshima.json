@@ -1,0 +1,1850 @@
+[
+  {
+    "code": "46000",
+    "pref": "kagoshima",
+    "name": "所属未定地",
+    "population": 1588256,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 42135,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 0,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": false,
+      "note": "顕著な災害想定区域なし",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46201",
+    "pref": "kagoshima",
+    "name": "鹿児島市",
+    "population": 593128,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 49183,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 152322,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46203",
+    "pref": "kagoshima",
+    "name": "鹿屋市",
+    "population": 101096,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 37791,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 20600,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46204",
+    "pref": "kagoshima",
+    "name": "枕崎市",
+    "population": 20033,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 33282,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 21000,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46206",
+    "pref": "kagoshima",
+    "name": "阿久根市",
+    "population": 19270,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 31655,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 14333,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": true,
+      "note": "土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46208",
+    "pref": "kagoshima",
+    "name": "出水市",
+    "population": 51994,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 35865,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 19160,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46210",
+    "pref": "kagoshima",
+    "name": "指宿市",
+    "population": 39011,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 33924,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 15047,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": true,
+      "note": "土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46213",
+    "pref": "kagoshima",
+    "name": "西之表市",
+    "population": 14708,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 35725,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 27600,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": true,
+      "note": "土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46214",
+    "pref": "kagoshima",
+    "name": "垂水市",
+    "population": 13819,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 35549,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 16617,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46215",
+    "pref": "kagoshima",
+    "name": "薩摩川内市",
+    "population": 92403,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 32657,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 28490,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46216",
+    "pref": "kagoshima",
+    "name": "日置市",
+    "population": 47153,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 39386,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 26326,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46217",
+    "pref": "kagoshima",
+    "name": "曽於市",
+    "population": 33310,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 33596,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 12494,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": true,
+      "note": "土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46218",
+    "pref": "kagoshima",
+    "name": "霧島市",
+    "population": 123135,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 34292,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 26988,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46219",
+    "pref": "kagoshima",
+    "name": "いちき串木野市",
+    "population": 27490,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 36913,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 21386,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": true,
+      "note": "土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46220",
+    "pref": "kagoshima",
+    "name": "南さつま市",
+    "population": 32887,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 41544,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 17993,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46221",
+    "pref": "kagoshima",
+    "name": "志布志市",
+    "population": 29329,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 35096,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 13160,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": true,
+      "note": "土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46222",
+    "pref": "kagoshima",
+    "name": "奄美市",
+    "population": 41390,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 36604,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 114980,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": false,
+      "note": "",
+      "source": "サンプル（離島のためhazard未評価）",
+      "asOf": "-"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46223",
+    "pref": "kagoshima",
+    "name": "南九州市",
+    "population": 33080,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 31201,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 15096,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46224",
+    "pref": "kagoshima",
+    "name": "伊佐市",
+    "population": 24453,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 31264,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 18300,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46225",
+    "pref": "kagoshima",
+    "name": "姶良市",
+    "population": 76348,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 42228,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 34167,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": true,
+      "note": "土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46303",
+    "pref": "kagoshima",
+    "name": "三島村",
+    "population": 405,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 0,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 0,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": true,
+      "note": "土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46304",
+    "pref": "kagoshima",
+    "name": "十島村",
+    "population": 740,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 0,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 0,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": true,
+      "note": "土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46392",
+    "pref": "kagoshima",
+    "name": "さつま町",
+    "population": 20243,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 27441,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 17567,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46404",
+    "pref": "kagoshima",
+    "name": "長島町",
+    "population": 9705,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 0,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 0,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": true,
+      "note": "土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46452",
+    "pref": "kagoshima",
+    "name": "湧水町",
+    "population": 9119,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 0,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 10876,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46468",
+    "pref": "kagoshima",
+    "name": "大崎町",
+    "population": 12385,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 0,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 5250,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": true,
+      "note": "土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46482",
+    "pref": "kagoshima",
+    "name": "東串良町",
+    "population": 6237,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 0,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 0,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46490",
+    "pref": "kagoshima",
+    "name": "錦江町",
+    "population": 6944,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 0,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 10747,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": true,
+      "note": "土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46491",
+    "pref": "kagoshima",
+    "name": "南大隅町",
+    "population": 6481,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 0,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 8900,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46492",
+    "pref": "kagoshima",
+    "name": "肝付町",
+    "population": 14227,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 0,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 9153,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46501",
+    "pref": "kagoshima",
+    "name": "中種子町",
+    "population": 7539,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 0,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 12387,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": true,
+      "note": "土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46502",
+    "pref": "kagoshima",
+    "name": "南種子町",
+    "population": 5445,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 0,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 11577,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": true,
+      "note": "土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46505",
+    "pref": "kagoshima",
+    "name": "屋久島町",
+    "population": 11858,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 0,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 11218,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": true,
+      "note": "土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46523",
+    "pref": "kagoshima",
+    "name": "大和村",
+    "population": 1364,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 0,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 0,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": false,
+      "note": "",
+      "source": "サンプル（離島のためhazard未評価）",
+      "asOf": "-"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46524",
+    "pref": "kagoshima",
+    "name": "宇検村",
+    "population": 1621,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 0,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 0,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": false,
+      "note": "",
+      "source": "サンプル（離島のためhazard未評価）",
+      "asOf": "-"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46525",
+    "pref": "kagoshima",
+    "name": "瀬戸内町",
+    "population": 8546,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 0,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 43567,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": false,
+      "note": "",
+      "source": "サンプル（離島のためhazard未評価）",
+      "asOf": "-"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46527",
+    "pref": "kagoshima",
+    "name": "龍郷町",
+    "population": 5817,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 0,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 14600,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": false,
+      "note": "",
+      "source": "サンプル（離島のためhazard未評価）",
+      "asOf": "-"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46529",
+    "pref": "kagoshima",
+    "name": "喜界町",
+    "population": 6629,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 0,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 7840,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": false,
+      "note": "",
+      "source": "サンプル（離島のためhazard未評価）",
+      "asOf": "-"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46530",
+    "pref": "kagoshima",
+    "name": "徳之島町",
+    "population": 10147,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 0,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 30000,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": false,
+      "note": "",
+      "source": "サンプル（離島のためhazard未評価）",
+      "asOf": "-"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46531",
+    "pref": "kagoshima",
+    "name": "天城町",
+    "population": 5517,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 0,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 9800,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": false,
+      "note": "",
+      "source": "サンプル（離島のためhazard未評価）",
+      "asOf": "-"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46532",
+    "pref": "kagoshima",
+    "name": "伊仙町",
+    "population": 6139,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 0,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 0,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": false,
+      "note": "",
+      "source": "サンプル（離島のためhazard未評価）",
+      "asOf": "-"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46533",
+    "pref": "kagoshima",
+    "name": "和泊町",
+    "population": 6246,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 0,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 12050,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": false,
+      "note": "",
+      "source": "サンプル（離島のためhazard未評価）",
+      "asOf": "-"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46534",
+    "pref": "kagoshima",
+    "name": "知名町",
+    "population": 5750,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 0,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 9045,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": false,
+      "note": "",
+      "source": "サンプル（離島のためhazard未評価）",
+      "asOf": "-"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "46535",
+    "pref": "kagoshima",
+    "name": "与論町",
+    "population": 5115,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 0,
+      "unit": "円/月",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "landPrice": {
+      "value": 0,
+      "unit": "円/㎡",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "-",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": false,
+      "note": "",
+      "source": "サンプル（離島のためhazard未評価）",
+      "asOf": "-"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "サンプル",
+      "asOf": "-"
+    }
+  }
+]

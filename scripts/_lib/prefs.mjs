@@ -240,6 +240,14 @@ export const PREFS = {
     hasWards: false,
     parentToWards: {},
   },
+  kagoshima: {
+    code: "46", nameJa: "鹿児島県",
+    // 本土+種子島・屋久島のみ（south=30.0）。全域は奄美群島(27N)まで及びタイル数が膨大になるため、
+    // 奄美群島・トカラ(十島村)の hazard はサンプル維持（人口/家賃/地価/施設/待機児童は全島とも実値）。
+    bbox: { west: 129.415, south: 30.000, east: 131.205, north: 32.311 },
+    hasWards: false,
+    parentToWards: {},
+  },
 };
 
 export function getPref(slug) {
