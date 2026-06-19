@@ -146,6 +146,12 @@ export const PREFS = {
     hasWards: false,
     parentToWards: {},
   },
+  shimane: {
+    code: "32", nameJa: "島根県",
+    bbox: { west: 131.668, south: 34.302, east: 133.391, north: 37.248 },
+    hasWards: false,
+    parentToWards: {},
+  },
 };
 
 export function getPref(slug) {
