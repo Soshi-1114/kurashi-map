@@ -180,6 +180,12 @@ export const PREFS = {
     hasWards: false,
     parentToWards: {},
   },
+  kagawa: {
+    code: "37", nameJa: "香川県",
+    bbox: { west: 133.447, south: 34.012, east: 134.447, north: 34.565 },
+    hasWards: false,
+    parentToWards: {},
+  },
 };
 
 export function getPref(slug) {
