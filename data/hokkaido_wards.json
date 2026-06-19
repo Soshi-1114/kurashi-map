@@ -1,0 +1,452 @@
+[
+  {
+    "code": "01101",
+    "pref": "hokkaido",
+    "name": "中央区",
+    "level": "ward",
+    "parentCode": "01100",
+    "displayName": "札幌市中央区",
+    "population": 248680,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 62707,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 793805,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": false,
+      "note": "",
+      "source": "未評価（広域のためhazardタイル未取得）",
+      "asOf": "-"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "未評価（広域のため未集計）",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "01102",
+    "pref": "hokkaido",
+    "name": "北区",
+    "level": "ward",
+    "parentCode": "01100",
+    "displayName": "札幌市北区",
+    "population": 289323,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 51183,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 211591,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": false,
+      "note": "",
+      "source": "未評価（広域のためhazardタイル未取得）",
+      "asOf": "-"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "未評価（広域のため未集計）",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "01103",
+    "pref": "hokkaido",
+    "name": "東区",
+    "level": "ward",
+    "parentCode": "01100",
+    "displayName": "札幌市東区",
+    "population": 265379,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 50110,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 143798,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": false,
+      "note": "",
+      "source": "未評価（広域のためhazardタイル未取得）",
+      "asOf": "-"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "未評価（広域のため未集計）",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "01104",
+    "pref": "hokkaido",
+    "name": "白石区",
+    "level": "ward",
+    "parentCode": "01100",
+    "displayName": "札幌市白石区",
+    "population": 211835,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 52745,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 140263,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": false,
+      "note": "",
+      "source": "未評価（広域のためhazardタイル未取得）",
+      "asOf": "-"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "未評価（広域のため未集計）",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "01105",
+    "pref": "hokkaido",
+    "name": "豊平区",
+    "level": "ward",
+    "parentCode": "01100",
+    "displayName": "札幌市豊平区",
+    "population": 225298,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 52938,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 175386,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": false,
+      "note": "",
+      "source": "未評価（広域のためhazardタイル未取得）",
+      "asOf": "-"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "未評価（広域のため未集計）",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "01106",
+    "pref": "hokkaido",
+    "name": "南区",
+    "level": "ward",
+    "parentCode": "01100",
+    "displayName": "札幌市南区",
+    "population": 135777,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 48884,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 64691,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": false,
+      "note": "",
+      "source": "未評価（広域のためhazardタイル未取得）",
+      "asOf": "-"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "未評価（広域のため未集計）",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "01107",
+    "pref": "hokkaido",
+    "name": "西区",
+    "level": "ward",
+    "parentCode": "01100",
+    "displayName": "札幌市西区",
+    "population": 217040,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 53518,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 150420,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": false,
+      "note": "",
+      "source": "未評価（広域のためhazardタイル未取得）",
+      "asOf": "-"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "未評価（広域のため未集計）",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "01108",
+    "pref": "hokkaido",
+    "name": "厚別区",
+    "level": "ward",
+    "parentCode": "01100",
+    "displayName": "札幌市厚別区",
+    "population": 125083,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 48436,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 137708,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": false,
+      "note": "",
+      "source": "未評価（広域のためhazardタイル未取得）",
+      "asOf": "-"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "未評価（広域のため未集計）",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "01109",
+    "pref": "hokkaido",
+    "name": "手稲区",
+    "level": "ward",
+    "parentCode": "01100",
+    "displayName": "札幌市手稲区",
+    "population": 142625,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 50267,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 78824,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": false,
+      "note": "",
+      "source": "未評価（広域のためhazardタイル未取得）",
+      "asOf": "-"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "未評価（広域のため未集計）",
+      "asOf": "-"
+    }
+  },
+  {
+    "code": "01110",
+    "pref": "hokkaido",
+    "name": "清田区",
+    "level": "ward",
+    "parentCode": "01100",
+    "displayName": "札幌市清田区",
+    "population": 112355,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 51200,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 83446,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": false,
+      "hasLandslideRisk": false,
+      "note": "",
+      "source": "未評価（広域のためhazardタイル未取得）",
+      "asOf": "-"
+    },
+    "amenities": {
+      "stations": 0,
+      "preschools": 0,
+      "medicalFacilities": 0,
+      "source": "未評価（広域のため未集計）",
+      "asOf": "-"
+    }
+  }
+]

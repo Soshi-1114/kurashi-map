@@ -320,6 +320,17 @@ export const PREFS = {
     hasWards: false,
     parentToWards: {},
   },
+  hokkaido: {
+    code: "01", nameJa: "北海道",
+    // 約40平方度。reinfolib XKTはz14のみ配信で全島hazard/amenitiesは
+    // 数十GB・数時間となり非現実的なため、hazard/amenitiesは未評価とする
+    // （人口/家賃/地価/待機児童は179市町村すべて実値）。
+    bbox: { west: 139.334, south: 41.352, east: 148.894, north: 45.557 },
+    hasWards: true,
+    parentToWards: {
+      "01100": ["01101","01102","01103","01104","01105","01106","01107","01108","01109","01110"], // 札幌市10区
+    },
+  },
 };
 
 export function getPref(slug) {

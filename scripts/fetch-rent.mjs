@@ -24,24 +24,28 @@ const RENT_BIN_MIDPOINT = {
 };
 
 async function fetchDistribution(codes) {
-  const url = new URL("https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData");
-  url.searchParams.set("appId", APP_ID);
-  url.searchParams.set("statsDataId", STATS_DATA_ID);
-  url.searchParams.set("cdArea", codes.join(","));
-  url.searchParams.set("cdCat02", "0");
-  url.searchParams.set("limit", "100000");
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  const data = await res.json();
-  const values = data.GET_STATS_DATA?.STATISTICAL_DATA?.DATA_INF?.VALUE ?? [];
-  const arr = Array.isArray(values) ? values : [values];
   const byArea = new Map();
-  for (const v of arr) {
-    const area = v["@area"]; const cat = v["@cat01"];
-    const n = parseInt(v["$"], 10);
-    if (Number.isNaN(n)) continue;
-    if (!byArea.has(area)) byArea.set(area, new Map());
-    byArea.get(area).set(cat, n);
+  // e-Stat の cdArea は 1 リクエスト 100 個までなので分割（北海道=195自治体など）
+  for (let i = 0; i < codes.length; i += 100) {
+    const chunk = codes.slice(i, i + 100);
+    const url = new URL("https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData");
+    url.searchParams.set("appId", APP_ID);
+    url.searchParams.set("statsDataId", STATS_DATA_ID);
+    url.searchParams.set("cdArea", chunk.join(","));
+    url.searchParams.set("cdCat02", "0");
+    url.searchParams.set("limit", "100000");
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    const values = data.GET_STATS_DATA?.STATISTICAL_DATA?.DATA_INF?.VALUE ?? [];
+    const arr = Array.isArray(values) ? values : [values];
+    for (const v of arr) {
+      const area = v["@area"]; const cat = v["@cat01"];
+      const n = parseInt(v["$"], 10);
+      if (Number.isNaN(n)) continue;
+      if (!byArea.has(area)) byArea.set(area, new Map());
+      byArea.get(area).set(cat, n);
+    }
   }
   return byArea;
 }
