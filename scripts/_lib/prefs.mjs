@@ -140,6 +140,12 @@ export const PREFS = {
     hasWards: false,
     parentToWards: {},
   },
+  tottori: {
+    code: "31", nameJa: "鳥取県",
+    bbox: { west: 133.136, south: 35.058, east: 134.515, north: 35.615 },
+    hasWards: false,
+    parentToWards: {},
+  },
 };
 
 export function getPref(slug) {
