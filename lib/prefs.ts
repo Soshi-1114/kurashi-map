@@ -125,6 +125,10 @@ async function loadHiroshima() {
   const wards = (await import("../data/hiroshima_wards.json")).default as Municipality[];
   return { muni, wards };
 }
+async function loadYamaguchi() {
+  const muni = (await import("../data/yamaguchi.json")).default as Municipality[];
+  return { muni, wards: [] };
+}
 
 export const PREFS: PrefEntry[] = [
   { slug: "saitama",  nameJa: "埼玉県",   codePrefix: "11", hasWards: true,  load: loadSaitama },
@@ -150,6 +154,7 @@ export const PREFS: PrefEntry[] = [
   { slug: "shimane",   nameJa: "島根県",  codePrefix: "32", hasWards: false, load: loadShimane },
   { slug: "okayama",   nameJa: "岡山県",  codePrefix: "33", hasWards: true,  load: loadOkayama },
   { slug: "hiroshima", nameJa: "広島県",  codePrefix: "34", hasWards: true,  load: loadHiroshima },
+  { slug: "yamaguchi", nameJa: "山口県",  codePrefix: "35", hasWards: false, load: loadYamaguchi },
 ];
 
 const BY_SLUG = new Map(PREFS.map((p) => [p.slug, p]));

@@ -168,6 +168,12 @@ export const PREFS = {
       "34100": ["34101","34102","34103","34104","34105","34106","34107","34108"], // 広島市8区
     },
   },
+  yamaguchi: {
+    code: "35", nameJa: "山口県",
+    bbox: { west: 130.775, south: 33.713, east: 132.492, north: 34.799 },
+    hasWards: false,
+    parentToWards: {},
+  },
 };
 
 export function getPref(slug) {
