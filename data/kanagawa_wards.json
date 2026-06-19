@@ -1,0 +1,1262 @@
+[
+  {
+    "code": "14101",
+    "pref": "kanagawa",
+    "name": "鶴見区",
+    "population": 297437,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 75808,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 379386,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "level": "ward",
+    "parentCode": "14100",
+    "displayName": "横浜市鶴見区",
+    "amenities": {
+      "stations": 14,
+      "preschools": 21,
+      "medicalFacilities": 310,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "14102",
+    "pref": "kanagawa",
+    "name": "神奈川区",
+    "population": 247267,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 75867,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 519912,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "level": "ward",
+    "parentCode": "14100",
+    "displayName": "横浜市神奈川区",
+    "amenities": {
+      "stations": 17,
+      "preschools": 15,
+      "medicalFacilities": 350,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "14103",
+    "pref": "kanagawa",
+    "name": "西区",
+    "population": 104935,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 82849,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 1808654,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "level": "ward",
+    "parentCode": "14100",
+    "displayName": "横浜市西区",
+    "amenities": {
+      "stations": 13,
+      "preschools": 7,
+      "medicalFacilities": 283,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "14104",
+    "pref": "kanagawa",
+    "name": "中区",
+    "population": 151388,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 90903,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 755476,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "level": "ward",
+    "parentCode": "14100",
+    "displayName": "横浜市中区",
+    "amenities": {
+      "stations": 13,
+      "preschools": 190,
+      "medicalFacilities": 420,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "14105",
+    "pref": "kanagawa",
+    "name": "南区",
+    "population": 198157,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 64088,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 308346,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "level": "ward",
+    "parentCode": "14100",
+    "displayName": "横浜市南区",
+    "amenities": {
+      "stations": 7,
+      "preschools": 16,
+      "medicalFacilities": 236,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "14106",
+    "pref": "kanagawa",
+    "name": "保土ケ谷区",
+    "population": 207811,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 68140,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 241906,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "level": "ward",
+    "parentCode": "14100",
+    "displayName": "横浜市保土ケ谷区",
+    "amenities": {
+      "stations": 7,
+      "preschools": 17,
+      "medicalFacilities": 248,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "14107",
+    "pref": "kanagawa",
+    "name": "磯子区",
+    "population": 166731,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 67014,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 229271,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "level": "ward",
+    "parentCode": "14100",
+    "displayName": "横浜市磯子区",
+    "amenities": {
+      "stations": 7,
+      "preschools": 12,
+      "medicalFacilities": 213,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "14108",
+    "pref": "kanagawa",
+    "name": "金沢区",
+    "population": 198939,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 68983,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 207889,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "level": "ward",
+    "parentCode": "14100",
+    "displayName": "横浜市金沢区",
+    "amenities": {
+      "stations": 19,
+      "preschools": 15,
+      "medicalFacilities": 285,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "14109",
+    "pref": "kanagawa",
+    "name": "港北区",
+    "population": 358530,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 88176,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 448050,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "level": "ward",
+    "parentCode": "14100",
+    "displayName": "横浜市港北区",
+    "amenities": {
+      "stations": 20,
+      "preschools": 29,
+      "medicalFacilities": 534,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "14110",
+    "pref": "kanagawa",
+    "name": "戸塚区",
+    "population": 283709,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 71143,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 269382,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "level": "ward",
+    "parentCode": "14100",
+    "displayName": "横浜市戸塚区",
+    "amenities": {
+      "stations": 4,
+      "preschools": 30,
+      "medicalFacilities": 328,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "14111",
+    "pref": "kanagawa",
+    "name": "港南区",
+    "population": 215248,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 69011,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 248051,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "level": "ward",
+    "parentCode": "14100",
+    "displayName": "横浜市港南区",
+    "amenities": {
+      "stations": 6,
+      "preschools": 24,
+      "medicalFacilities": 318,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "14112",
+    "pref": "kanagawa",
+    "name": "旭区",
+    "population": 245174,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 66531,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 227384,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "level": "ward",
+    "parentCode": "14100",
+    "displayName": "横浜市旭区",
+    "amenities": {
+      "stations": 5,
+      "preschools": 33,
+      "medicalFacilities": 299,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "14113",
+    "pref": "kanagawa",
+    "name": "緑区",
+    "population": 183082,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 71617,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 253727,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "level": "ward",
+    "parentCode": "14100",
+    "displayName": "横浜市緑区",
+    "amenities": {
+      "stations": 7,
+      "preschools": 16,
+      "medicalFacilities": 231,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "14114",
+    "pref": "kanagawa",
+    "name": "瀬谷区",
+    "population": 122623,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 61871,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 199400,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "level": "ward",
+    "parentCode": "14100",
+    "displayName": "横浜市瀬谷区",
+    "amenities": {
+      "stations": 2,
+      "preschools": 17,
+      "medicalFacilities": 148,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "14115",
+    "pref": "kanagawa",
+    "name": "栄区",
+    "population": 120194,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 71461,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 186035,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "level": "ward",
+    "parentCode": "14100",
+    "displayName": "横浜市栄区",
+    "amenities": {
+      "stations": 4,
+      "preschools": 13,
+      "medicalFacilities": 124,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "14116",
+    "pref": "kanagawa",
+    "name": "泉区",
+    "population": 152378,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 70885,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 227517,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "level": "ward",
+    "parentCode": "14100",
+    "displayName": "横浜市泉区",
+    "amenities": {
+      "stations": 9,
+      "preschools": 25,
+      "medicalFacilities": 187,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "14117",
+    "pref": "kanagawa",
+    "name": "青葉区",
+    "population": 310756,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 90357,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 347059,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "level": "ward",
+    "parentCode": "14100",
+    "displayName": "横浜市青葉区",
+    "amenities": {
+      "stations": 10,
+      "preschools": 30,
+      "medicalFacilities": 507,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "14118",
+    "pref": "kanagawa",
+    "name": "都筑区",
+    "population": 213132,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 105014,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 340882,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "level": "ward",
+    "parentCode": "14100",
+    "displayName": "横浜市都筑区",
+    "amenities": {
+      "stations": 10,
+      "preschools": 19,
+      "medicalFacilities": 312,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "14131",
+    "pref": "kanagawa",
+    "name": "川崎区",
+    "population": 232965,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 74961,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 634854,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": false,
+      "note": "浸水想定区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "level": "ward",
+    "parentCode": "14130",
+    "displayName": "川崎市川崎区",
+    "amenities": {
+      "stations": 18,
+      "preschools": 118,
+      "medicalFacilities": 299,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "14132",
+    "pref": "kanagawa",
+    "name": "幸区",
+    "population": 171119,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 78393,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 749833,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "level": "ward",
+    "parentCode": "14130",
+    "displayName": "川崎市幸区",
+    "amenities": {
+      "stations": 5,
+      "preschools": 98,
+      "medicalFacilities": 220,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "14133",
+    "pref": "kanagawa",
+    "name": "中原区",
+    "population": 263683,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 92011,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 685647,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "level": "ward",
+    "parentCode": "14130",
+    "displayName": "川崎市中原区",
+    "amenities": {
+      "stations": 9,
+      "preschools": 169,
+      "medicalFacilities": 394,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "14134",
+    "pref": "kanagawa",
+    "name": "高津区",
+    "population": 234328,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 84190,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 439500,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "level": "ward",
+    "parentCode": "14130",
+    "displayName": "川崎市高津区",
+    "amenities": {
+      "stations": 7,
+      "preschools": 115,
+      "medicalFacilities": 249,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "14135",
+    "pref": "kanagawa",
+    "name": "多摩区",
+    "population": 221734,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 77155,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 298103,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "level": "ward",
+    "parentCode": "14130",
+    "displayName": "川崎市多摩区",
+    "amenities": {
+      "stations": 9,
+      "preschools": 103,
+      "medicalFacilities": 240,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "14136",
+    "pref": "kanagawa",
+    "name": "宮前区",
+    "population": 233728,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 79520,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 300619,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "level": "ward",
+    "parentCode": "14130",
+    "displayName": "川崎市宮前区",
+    "amenities": {
+      "stations": 3,
+      "preschools": 102,
+      "medicalFacilities": 229,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "14137",
+    "pref": "kanagawa",
+    "name": "麻生区",
+    "population": 180705,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 80555,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 288744,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
+      "asOf": "2024-04-01",
+      "isEstimated": false
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "level": "ward",
+    "parentCode": "14130",
+    "displayName": "川崎市麻生区",
+    "amenities": {
+      "stations": 9,
+      "preschools": 74,
+      "medicalFacilities": 232,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "14151",
+    "pref": "kanagawa",
+    "name": "緑区",
+    "population": 170207,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 63944,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 182742,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "level": "ward",
+    "parentCode": "14150",
+    "displayName": "相模原市緑区",
+    "amenities": {
+      "stations": 5,
+      "preschools": 102,
+      "medicalFacilities": 185,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "14152",
+    "pref": "kanagawa",
+    "name": "中央区",
+    "population": 273875,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 58755,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 189341,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "level": "ward",
+    "parentCode": "14150",
+    "displayName": "相模原市中央区",
+    "amenities": {
+      "stations": 6,
+      "preschools": 151,
+      "medicalFacilities": 287,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  },
+  {
+    "code": "14153",
+    "pref": "kanagawa",
+    "name": "南区",
+    "population": 281411,
+    "populationTrend": "横ばい",
+    "rent": {
+      "value": 69042,
+      "unit": "円/月",
+      "source": "住宅・土地統計調査（加重平均）",
+      "asOf": "2023",
+      "isEstimated": false
+    },
+    "landPrice": {
+      "value": 258533,
+      "unit": "円/㎡",
+      "source": "地価公示（住宅地平均）",
+      "asOf": "2025",
+      "isEstimated": false
+    },
+    "waitlistChildren": {
+      "value": 0,
+      "unit": "人",
+      "source": "サンプル",
+      "asOf": "2025",
+      "isEstimated": true
+    },
+    "hazard": {
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
+    },
+    "level": "ward",
+    "parentCode": "14150",
+    "displayName": "相模原市南区",
+    "amenities": {
+      "stations": 8,
+      "preschools": 141,
+      "medicalFacilities": 371,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
+    }
+  }
+]
