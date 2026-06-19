@@ -145,6 +145,11 @@ async function loadKochi() {
   const muni = (await import("../data/kochi.json")).default as Municipality[];
   return { muni, wards: [] };
 }
+async function loadFukuoka() {
+  const muni = (await import("../data/fukuoka.json")).default as Municipality[];
+  const wards = (await import("../data/fukuoka_wards.json")).default as Municipality[];
+  return { muni, wards };
+}
 
 export const PREFS: PrefEntry[] = [
   { slug: "saitama",  nameJa: "埼玉県",   codePrefix: "11", hasWards: true,  load: loadSaitama },
@@ -175,6 +180,7 @@ export const PREFS: PrefEntry[] = [
   { slug: "kagawa",    nameJa: "香川県",  codePrefix: "37", hasWards: false, load: loadKagawa },
   { slug: "ehime",     nameJa: "愛媛県",  codePrefix: "38", hasWards: false, load: loadEhime },
   { slug: "kochi",     nameJa: "高知県",  codePrefix: "39", hasWards: false, load: loadKochi },
+  { slug: "fukuoka",   nameJa: "福岡県",  codePrefix: "40", hasWards: true,  load: loadFukuoka },
 ];
 
 const BY_SLUG = new Map(PREFS.map((p) => [p.slug, p]));

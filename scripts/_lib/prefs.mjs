@@ -198,6 +198,15 @@ export const PREFS = {
     hasWards: false,
     parentToWards: {},
   },
+  fukuoka: {
+    code: "40", nameJa: "福岡県",
+    bbox: { west: 129.981, south: 33.000, east: 131.191, north: 34.250 },
+    hasWards: true,
+    parentToWards: {
+      "40100": ["40101","40103","40105","40106","40107","40108","40109"], // 北九州市7区
+      "40130": ["40131","40132","40133","40134","40135","40136","40137"], // 福岡市7区
+    },
+  },
 };
 
 export function getPref(slug) {
