@@ -74,6 +74,15 @@ export const PREFS = {
     hasWards: false,
     parentToWards: {},
   },
+  shizuoka: {
+    code: "22", nameJa: "静岡県",
+    bbox: { west: 137.474, south: 34.572, east: 139.177, north: 35.646 },
+    hasWards: true,
+    parentToWards: {
+      "22100": ["22101", "22102", "22103"],            // 静岡市（葵/駿河/清水）
+      "22130": ["22138", "22139", "22140"],            // 浜松市（中央/浜名/天竜、R6再編後）
+    },
+  },
 };
 
 export function getPref(slug) {

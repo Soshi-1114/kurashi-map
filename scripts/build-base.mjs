@@ -101,15 +101,16 @@ async function main() {
   const raw = JSON.parse(await fs.readFile(N03_PATH, "utf8"));
   console.log(`N03 features: ${raw.features.length}`);
 
-  // code -> { name, parentName, geoms[] }
+  // code -> { name, wardName, geoms[] }
+  // N03_003=郡名 / N03_004=市区町村名（政令市の区では市名）/ N03_005=政令市の区名
   const byCode = new Map();
   for (const f of raw.features) {
     const p = f.properties;
     const code = String(p.N03_007 ?? "");
     if (!code || code.length !== 5) continue;       // 所属未定地など除外
-    const name = p.N03_004 || p.N03_003 || code;
-    const parentName = p.N03_003 || null;           // 政令市の区なら "横浜市"
-    if (!byCode.has(code)) byCode.set(code, { name, parentName, geoms: [] });
+    const name = p.N03_004 || p.N03_003 || code;    // 通常自治体名 / 政令市なら市名
+    const wardName = p.N03_005 || null;             // "葵区" など（政令市の区のみ）
+    if (!byCode.has(code)) byCode.set(code, { name, wardName, geoms: [] });
     if (f.geometry) byCode.get(code).geoms.push(f.geometry);
   }
   console.log(`unique codes: ${byCode.size}`);
@@ -140,24 +141,25 @@ async function main() {
   for (const parent of parentCodes) {
     const wards = parentToWards[parent];
     const geoms = [];
-    let parentName = null;
+    let cityName = null; // 政令市名（区の N03_004）
     for (const w of wards) {
       const info = byCode.get(w);
       if (!info) { console.warn(`  区コード ${w} が N03 に無い`); continue; }
       geoms.push(...info.geoms);
-      parentName = parentName || info.parentName;
+      cityName = cityName || info.name;             // "静岡市"
+      const wardName = info.wardName || info.name;  // "葵区"
       const mp = simplifyMultiPolygon(toMultiPolygonCoords(info.geoms));
-      wardFeatures.push({ type: "Feature", properties: { name: info.name, code: w }, geometry: { type: "MultiPolygon", coordinates: mp } });
-      wardsJson.push(skeleton(w, info.name, {
+      wardFeatures.push({ type: "Feature", properties: { name: wardName, code: w }, geometry: { type: "MultiPolygon", coordinates: mp } });
+      wardsJson.push(skeleton(w, wardName, {
         level: "ward",
         parentCode: parent,
-        displayName: (parentName || "") + info.name,
+        displayName: (info.name || "") + wardName,  // "静岡市葵区"
       }));
     }
-    parentName = parentName || `${parent}`;
+    cityName = cityName || `${parent}`;
     const parentMp = simplifyMultiPolygon(toMultiPolygonCoords(geoms));
-    muniFeatures.push({ type: "Feature", properties: { name: parentName, code: parent }, geometry: { type: "MultiPolygon", coordinates: parentMp } });
-    muniJson.push(skeleton(parent, parentName));
+    muniFeatures.push({ type: "Feature", properties: { name: cityName, code: parent }, geometry: { type: "MultiPolygon", coordinates: parentMp } });
+    muniJson.push(skeleton(parent, cityName));
   }
 
   // 並べ替え（コード順）
