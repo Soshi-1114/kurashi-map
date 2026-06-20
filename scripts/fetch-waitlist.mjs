@@ -1,7 +1,8 @@
-// こども家庭庁「保育所等関連状況取りまとめ（令和6年4月1日）」のExcelから、
+// こども家庭庁「保育所等関連状況取りまとめ（令和7年4月1日）」のExcelから、
 // 指定都道府県の市区町村別 待機児童数を抽出し、data/{pref}.json に反映する。
+// シート「資料６－１/６－２」を読むため「（参考）資料1～6」(_r7_02.xlsx)を使う。
 //
-// 事前: curl -L -o /tmp/cfa_waitlist.xlsx https://www.cfa.go.jp/.../20240829_policies_hoiku_torimatome_r6_03.xlsx
+// 事前: curl -L -o /tmp/cfa_waitlist.xlsx https://www.cfa.go.jp/.../20250828_policies_hoiku_torimatome_r7_02.xlsx
 // 実行: node scripts/fetch-waitlist.mjs --pref=saitama
 
 import path from "node:path";
@@ -71,7 +72,7 @@ async function main() {
   const META = {
     unit: "人",
     source: "こども家庭庁 保育所等関連状況取りまとめ",
-    asOf: "2024-04-01",
+    asOf: "2025-04-01",
     isEstimated: false,
   };
 
@@ -93,7 +94,7 @@ async function main() {
         if (w) w.waitlistChildren = {
           value: 0, unit: "人",
           source: "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-          asOf: "2024-04-01", isEstimated: false,
+          asOf: "2025-04-01", isEstimated: false,
         };
       }
       console.log(`  ${p.name} 総合=0 → ${children.length}区も0で実値化`);
