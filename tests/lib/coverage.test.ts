@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { isHazardEvaluated, isAmenitiesCounted } from "@/lib/coverage";
+import { isHazardEvaluated, isAmenitiesCounted, coverageReason } from "@/lib/coverage";
 import { isWaitlistDisclosed } from "@/lib/waitlist";
 import { hasLandPrice } from "@/lib/landPrice";
 import { metric } from "../_fixtures";
@@ -21,6 +21,16 @@ describe("isAmenitiesCounted", () => {
   });
   it("通常出典は true", () => {
     expect(isAmenitiesCounted("国土数値情報（reinfolib XKT015/007/010）")).toBe(true);
+  });
+});
+
+describe("coverageReason", () => {
+  it("対象外（理由）から理由を抜き出す", () => {
+    expect(coverageReason("対象外（北方領土）")).toBe("北方領土");
+    expect(coverageReason("対象外（地価公示の標準地なし）")).toBe("地価公示の標準地なし");
+  });
+  it("対象外表記でなければそのまま", () => {
+    expect(coverageReason("地価公示（住宅地平均）")).toBe("地価公示（住宅地平均）");
   });
 });
 

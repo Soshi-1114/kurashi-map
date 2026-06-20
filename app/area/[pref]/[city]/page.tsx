@@ -8,7 +8,7 @@ import { SITE, prefNameOf, absoluteUrl } from "@/lib/site";
 import { hasRent, rentBand } from "@/lib/rentColor";
 import { isWaitlistDisclosed } from "@/lib/waitlist";
 import { hasLandPrice } from "@/lib/landPrice";
-import { isHazardEvaluated, isAmenitiesCounted } from "@/lib/coverage";
+import { isHazardEvaluated, isAmenitiesCounted, coverageReason } from "@/lib/coverage";
 import type { Municipality } from "@/lib/types";
 
 type Params = { pref: string; city: string };
@@ -151,7 +151,7 @@ export default async function AreaPage({ params }: { params: Params }) {
           {hasLandPrice(m.landPrice.value) ? (
             <><strong>{m.landPrice.value.toLocaleString()}円/㎡</strong> です。</>
           ) : (
-            <><strong>データなし</strong>です（{m.landPrice.source.replace(/^対象外（/, "").replace(/）$/, "")}）。</>
+            <><strong>データなし</strong>です（{coverageReason(m.landPrice.source)}）。</>
           )}
         </p>
         {hasRent(m.rent.value) && (
@@ -185,7 +185,7 @@ export default async function AreaPage({ params }: { params: Params }) {
             土砂災害警戒区域: <strong>{m.hazard.hasLandslideRisk ? "あり" : "なし"}</strong>
           </p>
         ) : (
-          <p className="detail-p">ハザード評価は<strong>対象外</strong>です（{m.hazard.source.replace(/^対象外（/, "").replace(/）$/, "")}）。</p>
+          <p className="detail-p">ハザード評価は<strong>対象外</strong>です（{coverageReason(m.hazard.source)}）。</p>
         )}
         {m.hazard.note && <p className="detail-note">{m.hazard.note}</p>}
         <SourceLine source={m.hazard.source} asOf={m.hazard.asOf} />
@@ -201,7 +201,7 @@ export default async function AreaPage({ params }: { params: Params }) {
               <HeroStat label="医療機関" value={`${m.amenities.medicalFacilities}`} />
             </ul>
           ) : (
-            <p className="detail-p">集計<strong>対象外</strong>です（{m.amenities.source.replace(/^対象外（/, "").replace(/）$/, "")}）。</p>
+            <p className="detail-p">集計<strong>対象外</strong>です（{coverageReason(m.amenities.source)}）。</p>
           )}
           <p className="detail-source-line" style={{ marginTop: 10 }}>
             出典: {m.amenities.source}（{m.amenities.asOf}）
