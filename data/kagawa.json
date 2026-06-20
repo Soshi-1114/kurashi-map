@@ -344,9 +344,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 27400,
@@ -386,9 +386,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 22967,
@@ -470,9 +470,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 20200,
@@ -596,9 +596,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 31167,

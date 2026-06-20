@@ -1,5 +1,6 @@
 import type { Municipality } from "./types";
 import { isWaitlistDisclosed } from "./waitlist";
+import { isHazardEvaluated } from "./coverage";
 
 // 将来はLLM生成に差し替える前提。シグネチャを変えないこと。
 export function buildSummary(m: Municipality): string {
@@ -14,8 +15,10 @@ export function buildSummary(m: Municipality): string {
     : m.waitlistChildren.value > 0
       ? `待機児童${m.waitlistChildren.value}人`
       : "待機児童ゼロ";
-  const hazard = m.hazard.hasFloodRisk
-    ? `浸水想定あり（${m.hazard.note}）`
-    : "目立った浸水想定なし";
+  const hazard = !isHazardEvaluated(m.hazard.source)
+    ? "ハザード評価は対象外"
+    : m.hazard.hasFloodRisk
+      ? `浸水想定あり（${m.hazard.note}）`
+      : "目立った浸水想定なし";
   return `${name}は${rent}。${hazard}。${wait}。`;
 }

@@ -8,6 +8,7 @@ import { SITE, PREF_NAMES_JA, absoluteUrl } from "@/lib/site";
 import { hasRent } from "@/lib/rentColor";
 import { isWaitlistDisclosed } from "@/lib/waitlist";
 import { hasLandPrice } from "@/lib/landPrice";
+import { isHazardEvaluated, isAmenitiesCounted } from "@/lib/coverage";
 import type { Municipality } from "@/lib/types";
 
 type Params = { pref: string; city: string };
@@ -177,11 +178,15 @@ export default async function AreaPage({ params }: { params: Params }) {
 
       <section className="detail-section">
         <h2 className="detail-h2">災害リスク</h2>
-        <p className="detail-p">
-          浸水想定区域: <strong>{m.hazard.hasFloodRisk ? "あり" : "なし"}</strong>
-          {" / "}
-          土砂災害警戒区域: <strong>{m.hazard.hasLandslideRisk ? "あり" : "なし"}</strong>
-        </p>
+        {isHazardEvaluated(m.hazard.source) ? (
+          <p className="detail-p">
+            浸水想定区域: <strong>{m.hazard.hasFloodRisk ? "あり" : "なし"}</strong>
+            {" / "}
+            土砂災害警戒区域: <strong>{m.hazard.hasLandslideRisk ? "あり" : "なし"}</strong>
+          </p>
+        ) : (
+          <p className="detail-p">ハザード評価は<strong>対象外</strong>です（{m.hazard.source.replace(/^対象外（/, "").replace(/）$/, "")}）。</p>
+        )}
         {m.hazard.note && <p className="detail-note">{m.hazard.note}</p>}
         <SourceLine source={m.hazard.source} asOf={m.hazard.asOf} />
       </section>
@@ -189,11 +194,15 @@ export default async function AreaPage({ params }: { params: Params }) {
       {m.amenities && (
         <section className="detail-section">
           <h2 className="detail-h2">生活インフラ</h2>
-          <ul className="hero-stats" style={{ marginTop: 6 }}>
-            <HeroStat label="駅数" value={`${m.amenities.stations}`} />
-            <HeroStat label="保育・幼稚園" value={`${m.amenities.preschools}`} />
-            <HeroStat label="医療機関" value={`${m.amenities.medicalFacilities}`} />
-          </ul>
+          {isAmenitiesCounted(m.amenities.source) ? (
+            <ul className="hero-stats" style={{ marginTop: 6 }}>
+              <HeroStat label="駅数" value={`${m.amenities.stations}`} />
+              <HeroStat label="保育・幼稚園" value={`${m.amenities.preschools}`} />
+              <HeroStat label="医療機関" value={`${m.amenities.medicalFacilities}`} />
+            </ul>
+          ) : (
+            <p className="detail-p">集計<strong>対象外</strong>です（{m.amenities.source.replace(/^対象外（/, "").replace(/）$/, "")}）。</p>
+          )}
           <p className="detail-source-line" style={{ marginTop: 10 }}>
             出典: {m.amenities.source}（{m.amenities.asOf}）
           </p>

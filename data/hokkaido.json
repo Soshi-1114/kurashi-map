@@ -27,18 +27,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 105,
+      "preschools": 739,
+      "medicalFacilities": 2839,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -69,18 +69,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 33,
+      "preschools": 122,
+      "medicalFacilities": 363,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -111,18 +111,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 7,
+      "preschools": 14,
+      "medicalFacilities": 174,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -153,18 +153,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 21,
+      "preschools": 166,
+      "medicalFacilities": 444,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -195,18 +195,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 8,
+      "preschools": 11,
+      "medicalFacilities": 101,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -237,18 +237,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 10,
+      "preschools": 34,
+      "medicalFacilities": 184,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -279,18 +279,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 3,
+      "preschools": 13,
+      "medicalFacilities": 224,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -321,18 +321,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 11,
+      "preschools": 22,
+      "medicalFacilities": 132,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -363,18 +363,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 8,
+      "preschools": 1,
+      "medicalFacilities": 10,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -405,18 +405,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 7,
+      "preschools": 5,
+      "medicalFacilities": 118,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -447,18 +447,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 7,
+      "preschools": 6,
+      "medicalFacilities": 36,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -489,18 +489,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 7,
+      "preschools": 2,
+      "medicalFacilities": 32,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -531,18 +531,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 9,
+      "preschools": 22,
+      "medicalFacilities": 180,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -573,18 +573,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 4,
+      "preschools": 5,
+      "medicalFacilities": 31,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -615,18 +615,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 4,
+      "preschools": 2,
+      "medicalFacilities": 27,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -657,18 +657,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 3,
+      "preschools": 1,
+      "medicalFacilities": 14,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -699,18 +699,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 5,
+      "preschools": 15,
+      "medicalFacilities": 141,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -741,18 +741,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 3,
+      "preschools": 1,
+      "medicalFacilities": 10,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -783,18 +783,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "preschools": 3,
+      "medicalFacilities": 24,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -825,18 +825,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 4,
+      "preschools": 3,
+      "medicalFacilities": 23,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -867,18 +867,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 7,
+      "preschools": 5,
+      "medicalFacilities": 30,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -909,18 +909,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "preschools": 1,
+      "medicalFacilities": 9,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -951,18 +951,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 9,
+      "preschools": 3,
+      "medicalFacilities": 21,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -993,18 +993,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 6,
+      "preschools": 22,
+      "medicalFacilities": 110,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -1035,18 +1035,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 4,
+      "preschools": 2,
+      "medicalFacilities": 57,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -1077,18 +1077,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 2,
+      "preschools": 1,
+      "medicalFacilities": 17,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -1119,18 +1119,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "preschools": 1,
+      "medicalFacilities": 6,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -1161,18 +1161,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 4,
+      "preschools": 2,
+      "medicalFacilities": 33,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -1203,18 +1203,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 6,
+      "preschools": 4,
+      "medicalFacilities": 28,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -1245,18 +1245,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 3,
+      "preschools": 4,
+      "medicalFacilities": 46,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -1287,18 +1287,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 4,
+      "preschools": 11,
+      "medicalFacilities": 80,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -1329,18 +1329,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 6,
+      "preschools": 2,
+      "medicalFacilities": 47,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -1371,18 +1371,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 1,
+      "preschools": 10,
+      "medicalFacilities": 72,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -1413,18 +1413,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "preschools": 13,
+      "medicalFacilities": 55,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -1455,18 +1455,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 9,
+      "preschools": 6,
+      "medicalFacilities": 44,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -1497,18 +1497,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 7,
+      "preschools": 2,
+      "medicalFacilities": 20,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -1520,9 +1520,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 3850,
@@ -1539,18 +1539,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
+      "hasFloodRisk": true,
       "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "note": "浸水想定区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 4,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -1562,9 +1562,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 6600,
@@ -1581,18 +1581,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "preschools": 1,
+      "medicalFacilities": 8,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -1604,9 +1604,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 8583,
@@ -1623,18 +1623,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "preschools": 1,
+      "medicalFacilities": 5,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -1646,9 +1646,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 4500,
@@ -1665,18 +1665,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 1,
+      "preschools": 1,
+      "medicalFacilities": 5,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -1688,9 +1688,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 12667,
@@ -1707,18 +1707,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
+      "stations": 8,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 6,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -1749,18 +1749,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 8,
+      "preschools": 2,
+      "medicalFacilities": 31,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -1772,9 +1772,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 5267,
@@ -1792,17 +1792,17 @@
     },
     "hazard": {
       "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasLandslideRisk": true,
+      "note": "土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 1,
+      "preschools": 1,
+      "medicalFacilities": 4,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -1814,9 +1814,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 13000,
@@ -1834,17 +1834,17 @@
     },
     "hazard": {
       "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasLandslideRisk": true,
+      "note": "土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 14,
+      "preschools": 2,
+      "medicalFacilities": 19,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -1875,18 +1875,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 7,
+      "preschools": 2,
+      "medicalFacilities": 16,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -1898,9 +1898,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 8600,
@@ -1917,18 +1917,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 9,
+      "preschools": 1,
+      "medicalFacilities": 6,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -1940,9 +1940,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 14933,
@@ -1959,18 +1959,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 1,
+      "preschools": 1,
+      "medicalFacilities": 11,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -1982,9 +1982,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 5200,
@@ -2001,18 +2001,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
+      "stations": 6,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 5,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -2024,9 +2024,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 6200,
@@ -2043,18 +2043,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "preschools": 1,
+      "medicalFacilities": 3,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -2066,9 +2066,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 6217,
@@ -2085,18 +2085,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 3,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -2108,9 +2108,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 4625,
@@ -2128,17 +2128,17 @@
     },
     "hazard": {
       "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasLandslideRisk": true,
+      "note": "土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "preschools": 2,
+      "medicalFacilities": 5,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -2150,9 +2150,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 11000,
@@ -2169,18 +2169,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "preschools": 1,
+      "medicalFacilities": 8,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -2192,9 +2192,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 10900,
@@ -2211,18 +2211,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "preschools": 1,
+      "medicalFacilities": 11,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -2234,9 +2234,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 3525,
@@ -2253,18 +2253,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 1,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -2276,9 +2276,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 5150,
@@ -2295,18 +2295,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 5,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -2318,9 +2318,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 3375,
@@ -2337,18 +2337,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
+      "stations": 2,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 6,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -2360,9 +2360,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 8500,
@@ -2379,18 +2379,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 3,
+      "preschools": 1,
+      "medicalFacilities": 7,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -2402,9 +2402,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 19650,
@@ -2421,18 +2421,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 1,
+      "preschools": 1,
+      "medicalFacilities": 4,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -2444,9 +2444,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 7400,
@@ -2463,18 +2463,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 4,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -2486,9 +2486,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 5600,
@@ -2505,18 +2505,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 3,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -2528,9 +2528,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 5525,
@@ -2547,18 +2547,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 4,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -2570,9 +2570,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 8300,
@@ -2589,18 +2589,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 5,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -2631,18 +2631,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 2,
+      "preschools": 3,
+      "medicalFacilities": 20,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -2654,9 +2654,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 11350,
@@ -2673,18 +2673,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 1,
+      "preschools": 2,
+      "medicalFacilities": 7,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -2696,9 +2696,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 12933,
@@ -2715,18 +2715,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "preschools": 2,
+      "medicalFacilities": 19,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -2738,9 +2738,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 2950,
@@ -2757,18 +2757,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 4,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -2780,9 +2780,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 3000,
@@ -2799,18 +2799,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 2,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -2822,9 +2822,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 4425,
@@ -2841,18 +2841,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 3,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -2864,9 +2864,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 4367,
@@ -2883,18 +2883,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 3,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -2906,9 +2906,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 6240,
@@ -2925,18 +2925,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
+      "stations": 3,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 5,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -2967,18 +2967,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 1,
+      "preschools": 3,
+      "medicalFacilities": 30,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -2990,9 +2990,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 3050,
@@ -3009,18 +3009,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 1,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -3032,9 +3032,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 6867,
@@ -3051,18 +3051,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
+      "hasFloodRisk": true,
       "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "note": "浸水想定区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "preschools": 1,
+      "medicalFacilities": 8,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -3074,9 +3074,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 5083,
@@ -3093,18 +3093,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
+      "stations": 1,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 7,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -3116,9 +3116,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 1600,
@@ -3135,18 +3135,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 4,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -3158,9 +3158,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 4367,
@@ -3177,18 +3177,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 4,
+      "preschools": 1,
+      "medicalFacilities": 10,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -3200,9 +3200,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 10733,
@@ -3219,18 +3219,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "preschools": 1,
+      "medicalFacilities": 13,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -3242,9 +3242,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 10775,
@@ -3261,18 +3261,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 1,
+      "preschools": 1,
+      "medicalFacilities": 17,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -3284,9 +3284,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 3950,
@@ -3303,18 +3303,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
+      "stations": 5,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 6,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -3326,9 +3326,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 1825,
@@ -3345,18 +3345,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 5,
+      "preschools": 1,
+      "medicalFacilities": 4,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -3368,9 +3368,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 5250,
@@ -3387,18 +3387,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 3,
+      "preschools": 1,
+      "medicalFacilities": 6,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -3410,9 +3410,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 3950,
@@ -3429,18 +3429,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
+      "hasFloodRisk": true,
       "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "note": "浸水想定区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
+      "stations": 1,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 3,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -3452,9 +3452,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 3125,
@@ -3471,18 +3471,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
+      "hasFloodRisk": true,
       "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "note": "浸水想定区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
+      "stations": 2,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 3,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -3494,9 +3494,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 2600,
@@ -3513,18 +3513,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 3,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -3536,9 +3536,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 1805,
@@ -3555,18 +3555,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 3,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -3578,9 +3578,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 3455,
@@ -3597,18 +3597,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
+      "stations": 3,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 5,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -3620,9 +3620,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 10675,
@@ -3639,18 +3639,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "preschools": 1,
+      "medicalFacilities": 4,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -3662,9 +3662,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 13280,
@@ -3681,18 +3681,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "preschools": 3,
+      "medicalFacilities": 9,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -3704,9 +3704,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 6567,
@@ -3723,18 +3723,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 3,
+      "preschools": 1,
+      "medicalFacilities": 6,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -3746,9 +3746,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 4667,
@@ -3765,18 +3765,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
+      "stations": 4,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 5,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -3788,9 +3788,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 3825,
@@ -3807,18 +3807,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 4,
+      "preschools": 1,
+      "medicalFacilities": 3,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -3830,9 +3830,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 3450,
@@ -3849,18 +3849,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 2,
+      "preschools": 2,
+      "medicalFacilities": 6,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -3872,9 +3872,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 13067,
@@ -3891,18 +3891,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "preschools": 1,
+      "medicalFacilities": 6,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -3914,9 +3914,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 12667,
@@ -3933,18 +3933,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 3,
+      "preschools": 1,
+      "medicalFacilities": 8,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -3956,9 +3956,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 10867,
@@ -3975,18 +3975,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 1,
+      "preschools": 3,
+      "medicalFacilities": 11,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -3998,9 +3998,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 7367,
@@ -4017,18 +4017,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 3,
+      "preschools": 1,
+      "medicalFacilities": 5,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -4040,9 +4040,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 1810,
@@ -4059,18 +4059,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
+      "stations": 5,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 7,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -4082,9 +4082,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 2475,
@@ -4101,18 +4101,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
+      "stations": 2,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 5,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -4124,9 +4124,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 4550,
@@ -4143,18 +4143,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
+      "stations": 2,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 7,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -4166,9 +4166,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 2250,
@@ -4185,18 +4185,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
+      "stations": 3,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 5,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -4208,9 +4208,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 3050,
@@ -4227,18 +4227,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 4,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -4250,9 +4250,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 3183,
@@ -4269,18 +4269,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 6,
+      "preschools": 1,
+      "medicalFacilities": 6,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -4292,9 +4292,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 1390,
@@ -4311,18 +4311,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 4,
+      "preschools": 1,
+      "medicalFacilities": 1,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -4334,9 +4334,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 1925,
@@ -4353,18 +4353,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 3,
+      "preschools": 1,
+      "medicalFacilities": 3,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -4376,9 +4376,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 1600,
@@ -4395,18 +4395,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 6,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -4418,9 +4418,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 6500,
@@ -4437,18 +4437,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 6,
+      "preschools": 1,
+      "medicalFacilities": 6,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -4460,9 +4460,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 3375,
@@ -4479,18 +4479,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "preschools": 2,
+      "medicalFacilities": 5,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -4502,9 +4502,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 3100,
@@ -4521,18 +4521,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "preschools": 1,
+      "medicalFacilities": 5,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -4544,9 +4544,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 5600,
@@ -4563,18 +4563,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "preschools": 2,
+      "medicalFacilities": 9,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -4586,9 +4586,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 1850,
@@ -4605,18 +4605,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 5,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -4628,9 +4628,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 4225,
@@ -4647,18 +4647,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 4,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -4670,9 +4670,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 4425,
@@ -4689,18 +4689,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 5,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -4712,9 +4712,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 3600,
@@ -4731,18 +4731,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 5,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -4754,9 +4754,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 3575,
@@ -4773,18 +4773,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "preschools": 1,
+      "medicalFacilities": 6,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -4796,9 +4796,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 2400,
@@ -4815,18 +4815,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 5,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -4838,9 +4838,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 5850,
@@ -4857,18 +4857,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "preschools": 1,
+      "medicalFacilities": 9,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -4880,9 +4880,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 5283,
@@ -4899,18 +4899,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
+      "stations": 3,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 5,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -4922,9 +4922,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 7167,
@@ -4941,18 +4941,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 5,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -4964,9 +4964,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 2740,
@@ -4983,18 +4983,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 5,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -5006,9 +5006,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 4550,
@@ -5026,17 +5026,17 @@
     },
     "hazard": {
       "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasLandslideRisk": true,
+      "note": "土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 6,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -5048,9 +5048,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 4475,
@@ -5067,18 +5067,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
+      "stations": 8,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 5,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -5109,18 +5109,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 1,
+      "preschools": 2,
+      "medicalFacilities": 22,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -5132,9 +5132,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 4167,
@@ -5151,18 +5151,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "preschools": 1,
+      "medicalFacilities": 3,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -5174,9 +5174,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 11800,
@@ -5193,18 +5193,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 3,
+      "preschools": 1,
+      "medicalFacilities": 10,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -5216,9 +5216,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 3167,
@@ -5235,18 +5235,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 3,
+      "preschools": 1,
+      "medicalFacilities": 4,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -5258,9 +5258,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 4467,
@@ -5277,18 +5277,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 3,
+      "preschools": 1,
+      "medicalFacilities": 3,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -5300,9 +5300,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 4767,
@@ -5319,18 +5319,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "preschools": 1,
+      "medicalFacilities": 4,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -5342,9 +5342,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 3100,
@@ -5361,18 +5361,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 3,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -5384,9 +5384,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 4037,
@@ -5403,18 +5403,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 5,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -5445,18 +5445,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 10,
+      "preschools": 3,
+      "medicalFacilities": 28,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -5468,9 +5468,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 3150,
@@ -5487,18 +5487,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "preschools": 1,
+      "medicalFacilities": 7,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -5510,9 +5510,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 1700,
@@ -5529,18 +5529,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "preschools": 1,
+      "medicalFacilities": 4,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -5552,9 +5552,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 4050,
@@ -5571,18 +5571,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "preschools": 1,
+      "medicalFacilities": 3,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -5594,9 +5594,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 1410,
@@ -5613,18 +5613,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 3,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -5636,9 +5636,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 4967,
@@ -5655,18 +5655,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 4,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -5678,9 +5678,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 6550,
@@ -5697,18 +5697,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 2,
+      "preschools": 2,
+      "medicalFacilities": 8,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -5720,9 +5720,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 5250,
@@ -5739,18 +5739,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
+      "stations": 3,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 7,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -5762,9 +5762,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 9800,
@@ -5781,18 +5781,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 4,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -5823,18 +5823,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 6,
+      "preschools": 3,
+      "medicalFacilities": 15,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -5846,9 +5846,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 6053,
@@ -5865,18 +5865,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
+      "stations": 1,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 3,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -5888,9 +5888,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 10483,
@@ -5907,18 +5907,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 1,
+      "preschools": 1,
+      "medicalFacilities": 14,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -5930,9 +5930,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 6150,
@@ -5949,18 +5949,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 6,
+      "preschools": 2,
+      "medicalFacilities": 10,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -5972,9 +5972,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 9733,
@@ -5991,18 +5991,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 3,
+      "preschools": 1,
+      "medicalFacilities": 8,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -6014,9 +6014,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 8500,
@@ -6033,18 +6033,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 5,
+      "preschools": 2,
+      "medicalFacilities": 15,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -6056,9 +6056,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 2357,
@@ -6075,18 +6075,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 7,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -6098,9 +6098,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 6667,
@@ -6117,18 +6117,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 3,
+      "preschools": 1,
+      "medicalFacilities": 6,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -6140,9 +6140,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 10700,
@@ -6159,18 +6159,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 5,
+      "preschools": 2,
+      "medicalFacilities": 17,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -6182,9 +6182,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 5333,
@@ -6201,18 +6201,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 3,
+      "preschools": 1,
+      "medicalFacilities": 5,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -6224,9 +6224,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 6367,
@@ -6243,18 +6243,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "preschools": 1,
+      "medicalFacilities": 7,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -6285,18 +6285,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 7,
+      "preschools": 2,
+      "medicalFacilities": 30,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -6327,18 +6327,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "preschools": 7,
+      "medicalFacilities": 40,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -6350,9 +6350,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 7267,
@@ -6369,18 +6369,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "preschools": 1,
+      "medicalFacilities": 6,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -6392,9 +6392,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 4933,
@@ -6411,18 +6411,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "preschools": 1,
+      "medicalFacilities": 5,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -6434,9 +6434,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 4833,
@@ -6453,18 +6453,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "preschools": 1,
+      "medicalFacilities": 6,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -6476,9 +6476,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 8167,
@@ -6495,18 +6495,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 2,
+      "preschools": 1,
+      "medicalFacilities": 11,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -6518,9 +6518,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 7667,
@@ -6537,18 +6537,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 3,
+      "preschools": 1,
+      "medicalFacilities": 9,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -6579,18 +6579,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 2,
+      "preschools": 2,
+      "medicalFacilities": 14,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -6602,9 +6602,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 7450,
@@ -6621,18 +6621,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 5,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -6644,9 +6644,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 6700,
@@ -6663,18 +6663,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
+      "hasFloodRisk": true,
       "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "note": "浸水想定区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "preschools": 2,
+      "medicalFacilities": 3,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -6686,9 +6686,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 8033,
@@ -6705,18 +6705,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 6,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -6728,9 +6728,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 7033,
@@ -6747,18 +6747,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 10,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -6789,18 +6789,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 3,
+      "preschools": 2,
+      "medicalFacilities": 27,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -6812,9 +6812,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 6633,
@@ -6831,18 +6831,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 2,
+      "preschools": 1,
+      "medicalFacilities": 11,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -6854,9 +6854,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 2450,
@@ -6873,18 +6873,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
+      "stations": 2,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 5,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -6896,9 +6896,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 11433,
@@ -6915,18 +6915,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "preschools": 1,
+      "medicalFacilities": 9,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -6938,9 +6938,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 9800,
@@ -6957,18 +6957,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 7,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -6980,9 +6980,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 2950,
@@ -6999,18 +6999,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 5,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -7022,9 +7022,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 4450,
@@ -7041,18 +7041,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
+      "stations": 4,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 6,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -7083,18 +7083,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 4,
+      "preschools": 2,
+      "medicalFacilities": 17,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -7106,9 +7106,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 9700,
@@ -7125,18 +7125,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 5,
+      "preschools": 2,
+      "medicalFacilities": 8,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -7148,9 +7148,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 4067,
@@ -7168,17 +7168,17 @@
     },
     "hazard": {
       "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasLandslideRisk": true,
+      "note": "土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
+      "stations": 3,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 4,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -7190,9 +7190,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 4900,
@@ -7209,18 +7209,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 5,
+      "preschools": 1,
+      "medicalFacilities": 6,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -7232,9 +7232,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 6300,
@@ -7251,18 +7251,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 4,
+      "preschools": 1,
+      "medicalFacilities": 11,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -7274,9 +7274,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 8850,
@@ -7293,18 +7293,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "medicalFacilities": 3,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -7316,9 +7316,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 7600,
@@ -7335,18 +7335,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
-      "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "stations": 4,
+      "preschools": 2,
+      "medicalFacilities": 10,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -7358,9 +7358,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 5867,
@@ -7377,18 +7377,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "preschools": 5,
+      "medicalFacilities": 11,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -7419,18 +7419,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "preschools": 5,
+      "medicalFacilities": 20,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -7442,9 +7442,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 5150,
@@ -7461,18 +7461,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "preschools": 2,
+      "medicalFacilities": 5,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -7484,9 +7484,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 7633,
@@ -7503,18 +7503,18 @@
       "isEstimated": false
     },
     "hazard": {
-      "hasFloodRisk": false,
-      "hasLandslideRisk": false,
-      "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
-      "asOf": "-"
+      "hasFloodRisk": true,
+      "hasLandslideRisk": true,
+      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "source": "国土数値情報（reinfolib XKT026/029）",
+      "asOf": "2024"
     },
     "amenities": {
       "stations": 0,
-      "preschools": 0,
-      "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
-      "asOf": "-"
+      "preschools": 2,
+      "medicalFacilities": 3,
+      "source": "国土数値情報（reinfolib XKT015/007/010）",
+      "asOf": "令和5年度"
     }
   },
   {
@@ -7526,9 +7526,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 0,
@@ -7548,14 +7548,14 @@
       "hasFloodRisk": false,
       "hasLandslideRisk": false,
       "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
+      "source": "対象外（北方領土・ハザード評価対象外）",
       "asOf": "-"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
       "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
+      "source": "対象外（北方領土・未集計）",
       "asOf": "-"
     }
   },
@@ -7568,9 +7568,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 0,
@@ -7590,14 +7590,14 @@
       "hasFloodRisk": false,
       "hasLandslideRisk": false,
       "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
+      "source": "対象外（北方領土・ハザード評価対象外）",
       "asOf": "-"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
       "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
+      "source": "対象外（北方領土・未集計）",
       "asOf": "-"
     }
   },
@@ -7610,9 +7610,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 0,
@@ -7632,14 +7632,14 @@
       "hasFloodRisk": false,
       "hasLandslideRisk": false,
       "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
+      "source": "対象外（北方領土・ハザード評価対象外）",
       "asOf": "-"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
       "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
+      "source": "対象外（北方領土・未集計）",
       "asOf": "-"
     }
   },
@@ -7652,9 +7652,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 0,
@@ -7674,14 +7674,14 @@
       "hasFloodRisk": false,
       "hasLandslideRisk": false,
       "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
+      "source": "対象外（北方領土・ハザード評価対象外）",
       "asOf": "-"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
       "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
+      "source": "対象外（北方領土・未集計）",
       "asOf": "-"
     }
   },
@@ -7694,9 +7694,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 0,
@@ -7716,14 +7716,14 @@
       "hasFloodRisk": false,
       "hasLandslideRisk": false,
       "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
+      "source": "対象外（北方領土・ハザード評価対象外）",
       "asOf": "-"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
       "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
+      "source": "対象外（北方領土・未集計）",
       "asOf": "-"
     }
   },
@@ -7736,9 +7736,9 @@
     "rent": {
       "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
+      "source": "データなし（住宅統計の集計対象外）",
       "asOf": "-",
-      "isEstimated": true
+      "isEstimated": false
     },
     "landPrice": {
       "value": 0,
@@ -7758,14 +7758,14 @@
       "hasFloodRisk": false,
       "hasLandslideRisk": false,
       "note": "",
-      "source": "未評価（広域のためhazardタイル未取得）",
+      "source": "対象外（北方領土・ハザード評価対象外）",
       "asOf": "-"
     },
     "amenities": {
       "stations": 0,
       "preschools": 0,
       "medicalFacilities": 0,
-      "source": "未評価（広域のため未集計）",
+      "source": "対象外（北方領土・未集計）",
       "asOf": "-"
     }
   }

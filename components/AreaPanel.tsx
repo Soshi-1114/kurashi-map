@@ -6,6 +6,7 @@ import { buildSummary } from "@/lib/summary";
 import { hasRent } from "@/lib/rentColor";
 import { isWaitlistDisclosed } from "@/lib/waitlist";
 import { hasLandPrice } from "@/lib/landPrice";
+import { isHazardEvaluated } from "@/lib/coverage";
 
 type Props = {
   municipality: Municipality | null;
@@ -50,7 +51,9 @@ export function MetricCards({ m }: { m: Municipality }) {
     isWaitlistDisclosed(m.waitlistChildren)
       ? { label: "待機児童", value: `${m.waitlistChildren.value} ${m.waitlistChildren.unit}`, source: m.waitlistChildren.source, asOf: m.waitlistChildren.asOf, est: m.waitlistChildren.isEstimated }
       : { label: "待機児童", value: "データなし", source: m.waitlistChildren.source, asOf: m.waitlistChildren.asOf, est: false },
-    { label: "災害リスク", value: m.hazard.hasFloodRisk ? "浸水想定あり" : "目立った想定なし", source: m.hazard.source, asOf: m.hazard.asOf, est: false },
+    isHazardEvaluated(m.hazard.source)
+      ? { label: "災害リスク", value: m.hazard.hasFloodRisk ? "浸水想定あり" : "目立った想定なし", source: m.hazard.source, asOf: m.hazard.asOf, est: false }
+      : { label: "災害リスク", value: "対象外", source: m.hazard.source, asOf: m.hazard.asOf, est: false },
   ];
   return (
     <div className="metric-grid">

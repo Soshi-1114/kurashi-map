@@ -678,11 +678,11 @@
     "population": 10531,
     "populationTrend": "減少",
     "rent": {
-      "value": 63000,
+      "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
-      "asOf": "2023",
-      "isEstimated": true
+      "source": "データなし（住宅統計の集計対象外）",
+      "asOf": "-",
+      "isEstimated": false
     },
     "landPrice": {
       "value": 15967,
@@ -720,11 +720,11 @@
     "population": 10517,
     "populationTrend": "減少",
     "rent": {
-      "value": 53000,
+      "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
-      "asOf": "2023",
-      "isEstimated": true
+      "source": "データなし（住宅統計の集計対象外）",
+      "asOf": "-",
+      "isEstimated": false
     },
     "landPrice": {
       "value": 18233,
@@ -762,11 +762,11 @@
     "population": 14809,
     "populationTrend": "微減",
     "rent": {
-      "value": 56000,
+      "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
-      "asOf": "2023",
-      "isEstimated": true
+      "source": "データなし（住宅統計の集計対象外）",
+      "asOf": "-",
+      "isEstimated": false
     },
     "landPrice": {
       "value": 17950,
@@ -888,11 +888,11 @@
     "population": 9111,
     "populationTrend": "減少",
     "rent": {
-      "value": 60000,
+      "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
-      "asOf": "2023",
-      "isEstimated": true
+      "source": "データなし（住宅統計の集計対象外）",
+      "asOf": "-",
+      "isEstimated": false
     },
     "landPrice": {
       "value": 12000,

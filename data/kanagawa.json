@@ -972,11 +972,11 @@
     "population": 8693,
     "populationTrend": "減少",
     "rent": {
-      "value": 43000,
+      "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
-      "asOf": "2023",
-      "isEstimated": true
+      "source": "データなし（住宅統計の集計対象外）",
+      "asOf": "-",
+      "isEstimated": false
     },
     "landPrice": {
       "value": 46233,
@@ -1056,11 +1056,11 @@
     "population": 10058,
     "populationTrend": "減少",
     "rent": {
-      "value": 63000,
+      "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
-      "asOf": "2023",
-      "isEstimated": true
+      "source": "データなし（住宅統計の集計対象外）",
+      "asOf": "-",
+      "isEstimated": false
     },
     "landPrice": {
       "value": 100360,
@@ -1098,11 +1098,11 @@
     "population": 8844,
     "populationTrend": "減少",
     "rent": {
-      "value": 52000,
+      "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
-      "asOf": "2023",
-      "isEstimated": true
+      "source": "データなし（住宅統計の集計対象外）",
+      "asOf": "-",
+      "isEstimated": false
     },
     "landPrice": {
       "value": 35300,
@@ -1182,11 +1182,11 @@
     "population": 10274,
     "populationTrend": "減少",
     "rent": {
-      "value": 58000,
+      "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
-      "asOf": "2023",
-      "isEstimated": true
+      "source": "データなし（住宅統計の集計対象外）",
+      "asOf": "-",
+      "isEstimated": false
     },
     "landPrice": {
       "value": 64667,
@@ -1224,11 +1224,11 @@
     "population": 5971,
     "populationTrend": "減少",
     "rent": {
-      "value": 64000,
+      "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
-      "asOf": "2023",
-      "isEstimated": true
+      "source": "データなし（住宅統計の集計対象外）",
+      "asOf": "-",
+      "isEstimated": false
     },
     "landPrice": {
       "value": 52400,
@@ -1350,11 +1350,11 @@
     "population": 2819,
     "populationTrend": "減少",
     "rent": {
-      "value": 52000,
+      "value": 0,
       "unit": "円/月",
-      "source": "サンプル",
-      "asOf": "2023",
-      "isEstimated": true
+      "source": "データなし（住宅統計の集計対象外）",
+      "asOf": "-",
+      "isEstimated": false
     },
     "landPrice": {
       "value": 37000,

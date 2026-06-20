@@ -38,6 +38,39 @@ function tilesForBbox(bbox, z) {
   for (let x = xMin; x <= xMax; x++) for (let y = yMin; y <= yMax; y++) list.push({ x, y });
   return list;
 }
+function tileX2lng(x, z) { return (x / Math.pow(2, z)) * 360 - 180; }
+function tileY2lat(y, z) {
+  const n = Math.PI - (2 * Math.PI * y) / Math.pow(2, z);
+  return (180 / Math.PI) * Math.atan(0.5 * (Math.exp(n) - Math.exp(-n)));
+}
+function tileBbox(x, y, z) {
+  return [tileX2lng(x, z), tileY2lat(y + 1, z), tileX2lng(x + 1, z), tileY2lat(y, z)];
+}
+function bboxIntersects(a, b) { return !(a[2] < b[0] || a[0] > b[2] || a[3] < b[1] || a[1] > b[3]); }
+
+// 自治体ポリゴンの bbox に交差するタイルだけに絞る（海上タイルの取得を回避）。
+function tilesForPolys(polys, z) {
+  let W = Infinity, S = Infinity, E = -Infinity, N = -Infinity;
+  for (const p of polys) {
+    if (p.bbox[0] < W) W = p.bbox[0];
+    if (p.bbox[1] < S) S = p.bbox[1];
+    if (p.bbox[2] > E) E = p.bbox[2];
+    if (p.bbox[3] > N) N = p.bbox[3];
+  }
+  const xMin = lng2tileX(W, z), xMax = lng2tileX(E, z);
+  const yMin = lat2tileY(N, z), yMax = lat2tileY(S, z);
+  const list = [];
+  for (let x = xMin; x <= xMax; x++) for (let y = yMin; y <= yMax; y++) {
+    const tb = tileBbox(x, y, z); // [w,s,e,n]
+    const cand = polys.filter((p) => bboxIntersects(p.bbox, tb));
+    if (cand.length === 0) continue;
+    const sq = turf.polygon([[[tb[0], tb[1]], [tb[2], tb[1]], [tb[2], tb[3]], [tb[0], tb[3]], [tb[0], tb[1]]]]);
+    if (cand.some((p) => { try { return turf.booleanIntersects(sq, p.feat); } catch { return true; } })) {
+      list.push({ x, y });
+    }
+  }
+  return list;
+}
 
 async function ensureTile(api, x, y, z) {
   const cachePath = path.join(CACHE_DIR, `${api}_z${z}_x${x}_y${y}.json`);
@@ -45,20 +78,31 @@ async function ensureTile(api, x, y, z) {
   const url = new URL(`${BASE}/${api}`);
   url.searchParams.set("response_format", "geojson");
   url.searchParams.set("z", z); url.searchParams.set("x", x); url.searchParams.set("y", y);
-  const res = await fetch(url, { headers: { "Ocp-Apim-Subscription-Key": KEY } });
-  let text = res.ok ? await res.text() : "";
-  if (!text.trim()) text = '{"type":"FeatureCollection","features":[]}';
-  await fs.writeFile(cachePath, text);
-  return cachePath;
+  // 200 のみキャッシュ。429/5xx はリトライし、空集計の誤キャッシュを防ぐ。
+  for (let attempt = 0; attempt < 5; attempt++) {
+    let res;
+    try { res = await fetch(url, { headers: { "Ocp-Apim-Subscription-Key": KEY } }); }
+    catch { await sleep(500 * (attempt + 1)); continue; }
+    if (res.ok) {
+      let text = (await res.text()).trim();
+      if (!text) text = '{"type":"FeatureCollection","features":[]}';
+      await fs.writeFile(cachePath, text);
+      return cachePath;
+    }
+    if (res.status === 429 || res.status >= 500) { await sleep(800 * (attempt + 1)); continue; }
+    throw new Error(`${api} z${z}/${x}/${y} -> HTTP ${res.status}`);
+  }
+  throw new Error(`${api} z${z}/${x}/${y} -> リトライ上限`);
 }
+function sleep(ms) { return new Promise((r) => setTimeout(r, ms)); }
 async function pool(items, n, fn) {
   let i = 0;
   await Promise.all(Array.from({ length: n }, async () => {
     while (i < items.length) await fn(items[i++]);
   }));
 }
-async function downloadAllTiles(api) {
-  const tiles = tilesForBbox(pref.bbox, ZOOM);
+async function downloadAllTiles(api, polys) {
+  const tiles = tilesForPolys(polys, ZOOM);
   let done = 0;
   await pool(tiles, FETCH_CONCURRENCY, async (t) => {
     await ensureTile(api, t.x, t.y, ZOOM);
@@ -99,7 +143,7 @@ for (const [parent, children] of Object.entries(pref.parentToWards ?? {})) {
 }
 
 async function processApi(api, polys, fieldKey, getKey) {
-  const tiles = await downloadAllTiles(api);
+  const tiles = await downloadAllTiles(api, polys);
   console.log(`  Counting ${api} -> ${fieldKey}`);
   const codeToPoly = new Map(polys.map((p) => [p.code, p]));
   let processed = 0;
