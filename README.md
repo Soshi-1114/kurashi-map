@@ -79,6 +79,8 @@ kurashi-map/
 
 `fetch-hazard` / `fetch-amenities` は `tilesForPolys()` で**自治体ポリゴンに交差するタイルだけ**を取得するため、北海道や離島県のような広域bboxでも海上タイルを取得せずに済む。
 
+定期/手動でデータを更新する GitHub Actions（`data-update-annual` / `data-update-quarterly`）の更新頻度・手動更新箇所・実行手順・既知の注意点は **[`docs/data-update.md`](docs/data-update.md)** を参照。
+
 ## データの扱い（honesty 方針）
 
 欠損を推計値で埋めず、`source` 文字列のセンチネルで UI が「データなし／対象外／区別非公表」を表示する。
