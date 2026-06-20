@@ -48,3 +48,5 @@ npx vitest run tests/lib/rentColor.test.ts   # 単一テストファイルの実
 `scripts/` は1県ずつ実行します（例 `--pref=saitama`）。`build-base.mjs` が N03 から skeleton JSON + 簡略化 geojson を生成し（政令市は区を dissolve）、`fetch-*.mjs` 各スクリプトが e-Stat / reinfolib / 国土数値情報 / こども家庭庁 を出典に各指標を埋めます。`fetch-hazard.mjs` と `fetch-amenities.mjs` は `tilesForPolys()`（`scripts/_lib/reinfolib.mjs`、`tests/scripts/` でユニットテスト済）で自治体ポリゴンに交差するタイルだけを取得するため、広域bboxの県でも海上タイルを取得せずに済みます。スクリプト共通ヘルパーは `scripts/_lib/`（`data.mjs`・`estat.mjs`・`reinfolib.mjs`・`prefs.mjs`）にあります。
 
 `.github/workflows/` の GitHub Actions がスケジュールでデータを更新し（`data-update-annual.yml`・`data-update-quarterly.yml`）、`main` にコミットします。一部の出典 URL／バージョン（CFA 待機児童 Excel、L01 地価公示の年度）はワークフロー内の env 変数で、毎年手動更新が必要です。Vercel の自動デプロイは無効（`vercel.json` の `deploymentEnabled: false`）で、デプロイは `deploy-preview.yml` の手動実行です。
+
+ワークフローの仕様・更新頻度・手動更新箇所・手動実行手順・既知の注意点は **[`docs/data-update.md`](docs/data-update.md)** にまとめています。出典の年度更新やデータ更新 Action を触る時はまずこちらを参照。
