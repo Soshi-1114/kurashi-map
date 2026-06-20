@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { getMunicipality, listAll, listAllAcrossPrefs } from "@/lib/metrics";
 import { buildSummary } from "@/lib/summary";
 import { findRelatedByRent } from "@/lib/related";
-import { SITE, PREF_NAMES_JA, absoluteUrl } from "@/lib/site";
+import { SITE, prefNameOf, absoluteUrl } from "@/lib/site";
 import { hasRent, rentBand } from "@/lib/rentColor";
 import { isWaitlistDisclosed } from "@/lib/waitlist";
 import { hasLandPrice } from "@/lib/landPrice";
@@ -21,7 +21,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const m = await getMunicipality(params.city);
   if (!m) return { title: "見つかりません | MachiMap" };
-  const prefName = PREF_NAMES_JA[m.pref] ?? m.pref;
+  const prefName = prefNameOf(m.pref);
   const fullName = m.displayName ?? m.name;
   const pop = m.population.toLocaleString();
   const hasRentData = hasRent(m.rent.value);
@@ -64,7 +64,7 @@ export default async function AreaPage({ params }: { params: Params }) {
   // 同じ階層（市区町村なら市区町村、区なら区）の中から類似自治体を選ぶ
   const peers = all.filter((x) => (x.level ?? "muni") === (m.level ?? "muni"));
   const related = findRelatedByRent(peers, m, 6);
-  const prefName = PREF_NAMES_JA[m.pref] ?? m.pref;
+  const prefName = prefNameOf(m.pref);
   const parent = m.parentCode ? all.find((x) => x.code === m.parentCode) ?? null : null;
   const heading = m.displayName ?? m.name;
 

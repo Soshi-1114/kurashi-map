@@ -15,6 +15,11 @@ export const PREF_NAMES_JA: Record<string, string> = Object.fromEntries(
   PREFS.map((p) => [p.slug, p.nameJa]),
 );
 
+/** pref スラッグ → 和名。未知スラッグはそのまま返す。 */
+export function prefNameOf(slug: string): string {
+  return PREF_NAMES_JA[slug] ?? slug;
+}
+
 export function absoluteUrl(path: string): string {
   return `${SITE.baseUrl}${path.startsWith("/") ? path : `/${path}`}`;
 }
