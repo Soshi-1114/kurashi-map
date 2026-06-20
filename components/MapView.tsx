@@ -67,6 +67,12 @@ export default function MapView({ summary }: Props) {
     return () => window.removeEventListener("resize", detect);
   }, []);
 
+  // PC は塗り分け指標が核なのでレイヤーパネルを初期表示（発見性向上）。
+  // SP は画面が狭いため閉じたまま。マウント後に一度だけ設定し hydration 不一致を避ける。
+  useEffect(() => {
+    if (window.innerWidth >= 768) setLayersOpen(true);
+  }, []);
+
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
     const map = new maplibregl.Map({
@@ -622,6 +628,7 @@ export default function MapView({ summary }: Props) {
             onClick={() => setLayersOpen((v) => !v)}
           >
             <LayersIcon />
+            <span className="layers-btn-label">{getMapMetric(activeMetric).label}</span>
           </button>
         )}
       </header>
