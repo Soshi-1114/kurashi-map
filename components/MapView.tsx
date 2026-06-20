@@ -7,6 +7,10 @@ import type { Municipality, MuniSummary } from "@/lib/types";
 import { PREFS, getPrefByCode } from "@/lib/prefs";
 import { RENT_NODATA_COLOR, hasRent } from "@/lib/rentColor";
 import { MAP_METRICS, getMapMetric, DEFAULT_METRIC_KEY, TREND_PROPERTY, type MapMetricKey } from "@/lib/mapMetrics";
+import {
+  EMPTY_FILTERS, RENT_MAX_OPTIONS, LAND_MAX_OPTIONS,
+  isFilterActive, matchesFilter, buildMatchExpression, type MapFilters,
+} from "@/lib/mapFilters";
 import AreaPanel from "./AreaPanel";
 import MobileSheet from "./MobileSheet";
 
@@ -37,6 +41,7 @@ export default function MapView({ summary }: Props) {
   const [selectedCode, setSelectedCode] = useState<string | null>(null);
   const [hazardOn, setHazardOn] = useState(true);
   const [activeMetric, setActiveMetric] = useState<MapMetricKey>(DEFAULT_METRIC_KEY);
+  const [filters, setFilters] = useState<MapFilters>(EMPTY_FILTERS);
   const [isMobile, setIsMobile] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [mapReady, setMapReady] = useState(false);
@@ -197,6 +202,15 @@ export default function MapView({ summary }: Props) {
           "fill-opacity": 0.08,
         },
       }, firstSymbolId);
+      // 絞り込み減光：条件に該当しない自治体を白でマスク（既定は非表示）
+      map.addLayer({
+        id: "muni-dim",
+        type: "fill",
+        source: "muni",
+        minzoom: MUNI_MIN_ZOOM,
+        layout: { visibility: "none" },
+        paint: { "fill-color": "#f8fafc", "fill-opacity": 0.66 },
+      }, firstSymbolId);
       // 境界線
       map.addLayer({
         id: "muni-outline",
@@ -252,6 +266,14 @@ export default function MapView({ summary }: Props) {
         minzoom: WARDS_MIN_ZOOM,
         filter: ["==", ["get", "hasFloodRisk"], 1],
         paint: { "fill-color": "#1d4ed8", "fill-opacity": 0.08 },
+      }, firstSymbolId);
+      map.addLayer({
+        id: "wards-dim",
+        type: "fill",
+        source: "wards",
+        minzoom: WARDS_MIN_ZOOM,
+        layout: { visibility: "none" },
+        paint: { "fill-color": "#f8fafc", "fill-opacity": 0.66 },
       }, firstSymbolId);
       map.addLayer({
         id: "wards-outline",
@@ -464,6 +486,21 @@ export default function MapView({ summary }: Props) {
     map.setPaintProperty("wards-fill", "fill-color", expr);
   }, [activeMetric, mapReady]);
 
+  // 条件フィルタ：非該当を減光レイヤーで覆う（フィルタ式の否定を filter に設定）
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !mapReady) return;
+    const match = buildMatchExpression(filters);
+    for (const id of ["muni-dim", "wards-dim"]) {
+      if (!match) {
+        map.setLayoutProperty(id, "visibility", "none");
+      } else {
+        map.setFilter(id, ["!", match] as maplibregl.FilterSpecification);
+        map.setLayoutProperty(id, "visibility", "visible");
+      }
+    }
+  }, [filters, mapReady]);
+
   useEffect(() => {
     selectedCodeRef.current = selectedCode;
     const map = mapRef.current;
@@ -487,6 +524,12 @@ export default function MapView({ summary }: Props) {
       .catch(() => { if (!aborted) setSelectedDetail(null); });
     return () => { aborted = true; };
   }, [selectedCode]);
+
+  const filterActive = isFilterActive(filters);
+  const matchedCount = useMemo(
+    () => (filterActive ? summary.reduce((n, m) => n + (matchesFilter(m, filters) ? 1 : 0), 0) : 0),
+    [filterActive, filters, summary],
+  );
 
   const filtered = useMemo(() => {
     const q = searchQuery.trim();
@@ -622,6 +665,31 @@ export default function MapView({ summary }: Props) {
           </div>
           <div className="layers-title layers-title-sub">オーバーレイ</div>
           <LayerToggle label="災害リスク" checked={hazardOn} onChange={setHazardOn} />
+
+          <div className="layers-title layers-title-sub">絞り込み</div>
+          <SegmentedFilter
+            label="家賃上限"
+            options={RENT_MAX_OPTIONS}
+            value={filters.rentMax}
+            onChange={(v) => setFilters((f) => ({ ...f, rentMax: v }))}
+          />
+          <SegmentedFilter
+            label="地価上限"
+            options={LAND_MAX_OPTIONS}
+            value={filters.landMax}
+            onChange={(v) => setFilters((f) => ({ ...f, landMax: v }))}
+          />
+          <LayerToggle
+            label="浸水リスクなしに限定"
+            checked={filters.noFlood}
+            onChange={(v) => setFilters((f) => ({ ...f, noFlood: v }))}
+          />
+          {filterActive && (
+            <div className="filter-summary">
+              <span className="filter-count">全国該当 <strong>{matchedCount.toLocaleString()}</strong> 自治体</span>
+              <button className="filter-clear" onClick={() => setFilters(EMPTY_FILTERS)}>クリア</button>
+            </div>
+          )}
         </div>
       )}
 
@@ -707,6 +775,41 @@ function LayerToggle({
       <span className="layer-switch" />
       <span className="layer-label">{label}</span>
     </label>
+  );
+}
+
+function SegmentedFilter({
+  label,
+  options,
+  value,
+  onChange,
+}: {
+  label: string;
+  options: readonly { label: string; value: number }[];
+  value: number | null;
+  onChange: (v: number | null) => void;
+}) {
+  return (
+    <div className="filter-row">
+      <span className="filter-row-label">{label}</span>
+      <div className="filter-segments" role="group" aria-label={label}>
+        <button
+          className={`filter-seg ${value == null ? "is-active" : ""}`}
+          onClick={() => onChange(null)}
+        >
+          なし
+        </button>
+        {options.map((o) => (
+          <button
+            key={o.value}
+            className={`filter-seg ${value === o.value ? "is-active" : ""}`}
+            onClick={() => onChange(value === o.value ? null : o.value)}
+          >
+            {o.label}
+          </button>
+        ))}
+      </div>
+    </div>
   );
 }
 
