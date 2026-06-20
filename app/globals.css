@@ -958,7 +958,8 @@ button { font-family: inherit; }
 }
 .pref-rank-item:hover { border-color: var(--accent); background: var(--accent-soft); text-decoration: none; }
 .pref-rank-no { font-size: 13px; font-weight: 800; color: var(--accent); text-align: center; font-variant-numeric: tabular-nums; }
-.pref-rank-name { font-size: 14.5px; font-weight: 700; color: var(--text); }
+.pref-rank-name { font-size: 14.5px; font-weight: 700; color: var(--text); display: inline-flex; flex-direction: column; gap: 1px; min-width: 0; }
+.pref-rank-pref { font-size: 11px; font-weight: 600; color: var(--text-faint); }
 .pref-rank-value { font-size: 13px; font-weight: 700; color: var(--text-muted); display: inline-flex; align-items: center; gap: 8px; font-variant-numeric: tabular-nums; }
 .pref-rank-band { font-size: 11px; font-weight: 700; color: var(--accent); background: var(--accent-soft); padding: 2px 7px; border-radius: var(--radius-pill); }
 
