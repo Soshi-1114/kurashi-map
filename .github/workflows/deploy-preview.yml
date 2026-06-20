@@ -44,7 +44,9 @@ jobs:
       - name: Deploy preview
         id: deploy
         run: |
-          url=$(vercel deploy --prebuilt --token=$VERCEL_TOKEN)
+          # 自治体 geojson 等でファイル数が多く、無料プランのアップロード回数上限
+          # （24h で 5000 ファイル）に当たるため tgz でまとめてアップロードする。
+          url=$(vercel deploy --prebuilt --archive=tgz --token=$VERCEL_TOKEN)
           echo "url=$url" >> "$GITHUB_OUTPUT"
           echo "Preview URL: $url"
         env:
