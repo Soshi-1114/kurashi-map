@@ -4,11 +4,11 @@ import { notFound } from "next/navigation";
 import { getMunicipality, listAll, listAllAcrossPrefs } from "@/lib/metrics";
 import { buildSummary } from "@/lib/summary";
 import { findRelatedByRent } from "@/lib/related";
-import { SITE, PREF_NAMES_JA, absoluteUrl } from "@/lib/site";
-import { hasRent } from "@/lib/rentColor";
+import { SITE, prefNameOf, absoluteUrl } from "@/lib/site";
+import { hasRent, rentBand } from "@/lib/rentColor";
 import { isWaitlistDisclosed } from "@/lib/waitlist";
 import { hasLandPrice } from "@/lib/landPrice";
-import { isHazardEvaluated, isAmenitiesCounted } from "@/lib/coverage";
+import { isHazardEvaluated, isAmenitiesCounted, coverageReason } from "@/lib/coverage";
 import type { Municipality } from "@/lib/types";
 
 type Params = { pref: string; city: string };
@@ -21,7 +21,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const m = await getMunicipality(params.city);
   if (!m) return { title: "見つかりません | MachiMap" };
-  const prefName = PREF_NAMES_JA[m.pref] ?? m.pref;
+  const prefName = prefNameOf(m.pref);
   const fullName = m.displayName ?? m.name;
   const pop = m.population.toLocaleString();
   const hasRentData = hasRent(m.rent.value);
@@ -64,7 +64,7 @@ export default async function AreaPage({ params }: { params: Params }) {
   // 同じ階層（市区町村なら市区町村、区なら区）の中から類似自治体を選ぶ
   const peers = all.filter((x) => (x.level ?? "muni") === (m.level ?? "muni"));
   const related = findRelatedByRent(peers, m, 6);
-  const prefName = PREF_NAMES_JA[m.pref] ?? m.pref;
+  const prefName = prefNameOf(m.pref);
   const parent = m.parentCode ? all.find((x) => x.code === m.parentCode) ?? null : null;
   const heading = m.displayName ?? m.name;
 
@@ -151,7 +151,7 @@ export default async function AreaPage({ params }: { params: Params }) {
           {hasLandPrice(m.landPrice.value) ? (
             <><strong>{m.landPrice.value.toLocaleString()}円/㎡</strong> です。</>
           ) : (
-            <><strong>データなし</strong>です（{m.landPrice.source.replace(/^対象外（/, "").replace(/）$/, "")}）。</>
+            <><strong>データなし</strong>です（{coverageReason(m.landPrice.source)}）。</>
           )}
         </p>
         {hasRent(m.rent.value) && (
@@ -173,7 +173,7 @@ export default async function AreaPage({ params }: { params: Params }) {
           人口は <strong>{m.population.toLocaleString()}人</strong>（{m.populationTrend}傾向）。
         </p>
         <SourceLine source={m.waitlistChildren.source} asOf={m.waitlistChildren.asOf} estimated={m.waitlistChildren.isEstimated} />
-        <p className="detail-source-line" style={{ marginTop: 4 }}>人口は令和2年国勢調査</p>
+        <p className="detail-source-line" style={{ marginTop: 4 }}>人口は令和7年(2025)国勢調査 速報</p>
       </section>
 
       <section className="detail-section">
@@ -185,7 +185,7 @@ export default async function AreaPage({ params }: { params: Params }) {
             土砂災害警戒区域: <strong>{m.hazard.hasLandslideRisk ? "あり" : "なし"}</strong>
           </p>
         ) : (
-          <p className="detail-p">ハザード評価は<strong>対象外</strong>です（{m.hazard.source.replace(/^対象外（/, "").replace(/）$/, "")}）。</p>
+          <p className="detail-p">ハザード評価は<strong>対象外</strong>です（{coverageReason(m.hazard.source)}）。</p>
         )}
         {m.hazard.note && <p className="detail-note">{m.hazard.note}</p>}
         <SourceLine source={m.hazard.source} asOf={m.hazard.asOf} />
@@ -201,7 +201,7 @@ export default async function AreaPage({ params }: { params: Params }) {
               <HeroStat label="医療機関" value={`${m.amenities.medicalFacilities}`} />
             </ul>
           ) : (
-            <p className="detail-p">集計<strong>対象外</strong>です（{m.amenities.source.replace(/^対象外（/, "").replace(/）$/, "")}）。</p>
+            <p className="detail-p">集計<strong>対象外</strong>です（{coverageReason(m.amenities.source)}）。</p>
           )}
           <p className="detail-source-line" style={{ marginTop: 10 }}>
             出典: {m.amenities.source}（{m.amenities.asOf}）
@@ -229,7 +229,7 @@ export default async function AreaPage({ params }: { params: Params }) {
       <section className="detail-section">
         <h2 className="detail-h2">出典・データについて</h2>
         <p className="detail-p" style={{ fontSize: 13, color: "var(--text-muted)" }}>
-          本ページの数値は MVP 段階のサンプル値です（{m.rent.source}）。本番版では reinfolib（不動産情報ライブラリ）と e-Stat（政府統計）から取得した数値に置き換えます。
+          本ページの数値は政府統計・国土数値情報の実データです。家賃は住宅・土地統計調査、人口は国勢調査（ともに e-Stat 経由）、地価は地価公示・地価調査、ハザード・生活インフラは不動産情報ライブラリ（reinfolib）／国土数値情報、待機児童はこども家庭庁の公表値に基づきます。データのない項目は推計で埋めず「データなし／対象外」と明示しています。
         </p>
       </section>
 
@@ -267,13 +267,4 @@ function SourceLine({ source, asOf, estimated }: { source: string; asOf: string;
       {estimated && <span className="metric-est">推計</span>}
     </p>
   );
-}
-
-// 家賃水準のテキスト表記。コロプレスの色しきい値と同じ境界。
-function rentBand(value: number): string {
-  if (value < 50000) return "低め";
-  if (value < 55000) return "やや低め";
-  if (value < 60000) return "中位";
-  if (value < 65000) return "やや高め";
-  return "高め";
 }

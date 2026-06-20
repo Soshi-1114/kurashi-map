@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 import { getMunicipality } from "@/lib/metrics";
-import { PREF_NAMES_JA } from "@/lib/site";
+import { prefNameOf } from "@/lib/site";
 import { hasRent } from "@/lib/rentColor";
 import { hasLandPrice } from "@/lib/landPrice";
 
@@ -16,7 +16,7 @@ export async function GET(
   if (!m) {
     return new Response("not found", { status: 404 });
   }
-  const prefName = PREF_NAMES_JA[m.pref] ?? m.pref;
+  const prefName = prefNameOf(m.pref);
   // 区の場合はパンくず的に "埼玉県 / さいたま市" を上に出し、見出しは "浦和区" のみ
   const parent = m.parentCode ? await getMunicipality(m.parentCode) : null;
   const breadcrumbText = parent ? `${prefName} / ${parent.name}` : prefName;
