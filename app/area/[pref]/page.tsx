@@ -149,9 +149,12 @@ export default async function PrefPage({ params }: { params: Params }) {
           <HeroStat label="待機児童ゼロ" value={`${stats.waitlistZero}自治体`} />
           <HeroStat label="浸水想定あり" value={`${stats.floodCount}自治体`} />
         </ul>
-        <div style={{ marginTop: 16 }}>
+        <div style={{ marginTop: 16, display: "flex", gap: 10, flexWrap: "wrap" }}>
           <Link href={`/?pref=${pref.slug}`} className="related-card" style={{ display: "inline-flex", width: "auto", padding: "8px 14px" }}>
             <span className="related-name">🗺 地図で{prefName}を見る</span>
+          </Link>
+          <Link href="/ranking" className="related-card" style={{ display: "inline-flex", width: "auto", padding: "8px 14px" }}>
+            <span className="related-name">📊 全国ランキングを見る</span>
           </Link>
         </div>
       </header>
