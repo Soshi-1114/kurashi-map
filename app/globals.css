@@ -339,6 +339,15 @@ button { font-family: inherit; }
   min-width: 220px;
   transition: bottom .25s cubic-bezier(0.16, 1, 0.3, 1);
 }
+/* SP（シート未展開）では凡例をアトリビューション帯の上へ逃がし、横幅も縮める。
+   .is-sheet-open .legend はクラス2つで特異度が高く、シート展開時は 216px が優先される。 */
+@media (max-width: 768px) {
+  .legend {
+    bottom: calc(40px + env(safe-area-inset-bottom));
+    min-width: 168px;
+    padding: 10px 12px 8px;
+  }
+}
 /* SP で sheet open 時、凡例と MapLibre 標準コントロールを sheet 上に繰り上げる */
 .is-sheet-open .legend {
   bottom: calc(216px + env(safe-area-inset-bottom));
