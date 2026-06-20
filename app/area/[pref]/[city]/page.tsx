@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { getMunicipality, listAll, listAllAcrossPrefs } from "@/lib/metrics";
 import { buildSummary } from "@/lib/summary";
 import { findRelatedByRent } from "@/lib/related";
+import { RANKINGS } from "@/lib/rankings";
 import { SITE, prefNameOf, absoluteUrl } from "@/lib/site";
 import { hasRent, rentBand } from "@/lib/rentColor";
 import { isWaitlistDisclosed } from "@/lib/waitlist";
@@ -67,6 +68,18 @@ export default async function AreaPage({ params }: { params: Params }) {
   const prefName = prefNameOf(m.pref);
   const parent = m.parentCode ? all.find((x) => x.code === m.parentCode) ?? null : null;
   const heading = m.displayName ?? m.name;
+
+  // 同県の主要自治体（人口の多い順）。自身と「家賃が近い」既出分を除いて回遊先を広げる。
+  const excluded = new Set([m.code, ...related.map((r) => r.code)]);
+  const majorPeers = peers
+    .filter((x) => !excluded.has(x.code))
+    .sort((a, b) => b.population - a.population)
+    .slice(0, 6);
+  // 行政区ページなら同じ政令市の他の区（兄弟区）へのリンクを張る。
+  const siblings =
+    m.level === "ward" && m.parentCode
+      ? all.filter((x) => x.level === "ward" && x.parentCode === m.parentCode && x.code !== m.code)
+      : [];
 
   const breadcrumbItems: Array<{ name: string; item: string }> = [
     { name: SITE.name, item: absoluteUrl("/") },
@@ -226,6 +239,57 @@ export default async function AreaPage({ params }: { params: Params }) {
         </ul>
       </section>
 
+      {siblings.length > 0 && parent && (
+        <section className="detail-section">
+          <h2 className="detail-h2">{parent.name}のほかの区</h2>
+          <ul className="related-grid">
+            {siblings.map((s) => (
+              <li key={s.code}>
+                <Link href={`/area/${s.pref}/${s.code}`} className="related-card">
+                  <span className="related-name">{s.name}</span>
+                  <span className="related-rent">{hasRent(s.rent.value) ? `${s.rent.value.toLocaleString()} 円/月` : "データなし"}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {majorPeers.length > 0 && (
+        <section className="detail-section">
+          <h2 className="detail-h2">{prefName}の主要自治体</h2>
+          <p className="detail-p" style={{ color: "var(--text-muted)", fontSize: 13.5 }}>
+            {prefName}で人口の多い自治体です。
+            <Link href={`/area/${m.pref}`} className="breadcrumb-link" style={{ marginLeft: 6 }}>
+              全{prefName}の一覧を見る →
+            </Link>
+          </p>
+          <ul className="related-grid">
+            {majorPeers.map((p) => (
+              <li key={p.code}>
+                <Link href={`/area/${p.pref}/${p.code}`} className="related-card">
+                  <span className="related-name">{p.displayName ?? p.name}</span>
+                  <span className="related-rent">人口 {p.population.toLocaleString()}人</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      <section className="detail-section">
+        <h2 className="detail-h2">ランキングで比較</h2>
+        <ul className="related-grid">
+          {RANKINGS.map((r) => (
+            <li key={r.slug}>
+              <Link href={`/ranking/${r.slug}`} className="related-card">
+                <span className="related-name">{r.title}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
+
       <section className="detail-section">
         <h2 className="detail-h2">出典・データについて</h2>
         <p className="detail-p" style={{ fontSize: 13, color: "var(--text-muted)" }}>
@@ -233,8 +297,10 @@ export default async function AreaPage({ params }: { params: Params }) {
         </p>
       </section>
 
-      <div style={{ marginTop: 28, display: "flex", gap: 12 }}>
-        <Link href="/" className="detail-back">← 地図に戻る</Link>
+      <div style={{ marginTop: 28, display: "flex", gap: 16, flexWrap: "wrap" }}>
+        <Link href={`/area/${m.pref}`} className="detail-back">← {prefName}の一覧</Link>
+        <Link href="/ranking" className="detail-back">ランキング</Link>
+        <Link href="/" className="detail-back">地図に戻る</Link>
       </div>
     </div>
   );
