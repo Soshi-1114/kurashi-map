@@ -612,7 +612,12 @@ export default function MapView({ summary }: Props) {
               {filtered.map((m) => (
                 <li key={m.code}>
                   <button onClick={() => flyToMuni(m)}>
-                    <span>{m.name}</span>
+                    <span className="search-place">
+                      {searchContextLabel(m) && (
+                        <span className="search-pref">{searchContextLabel(m)}</span>
+                      )}
+                      <span className="search-name">{m.name}</span>
+                    </span>
                     <span className="search-rent">{hasRent(m.rent) ? `${m.rent.toLocaleString()}円` : "—"}</span>
                   </button>
                 </li>
@@ -666,6 +671,17 @@ export default function MapView({ summary }: Props) {
       )}
     </div>
   );
+}
+
+// 検索候補に添える所属コンテキスト（都道府県名。政令市の区は「県名 市名」）。
+// 同名自治体（府中市=東京/広島、北区=東京/大阪市/さいたま市…）の誤選択を防ぐ。
+function searchContextLabel(m: MuniSummary): string {
+  const prefName = getPrefByCode(m.code)?.nameJa ?? "";
+  if (m.level === "ward" && m.displayName) {
+    const city = m.displayName.replace(m.name, "").trim();
+    if (city) return `${prefName} ${city}`.trim();
+  }
+  return prefName;
 }
 
 function MetricLegend({ metricKey }: { metricKey: MapMetricKey }) {
