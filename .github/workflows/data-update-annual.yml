@@ -26,9 +26,11 @@ concurrency:
 
 env:
   # こども家庭庁 待機児童 Excel URL（年度更新時に手動で書き換え）
-  CFA_XLSX_URL: "https://www.cfa.go.jp/assets/contents/node/basic_page/field_ref_resources/4ddf7d00-3f9a-4435-93a4-8e6c204db16c/ccac221b/20240829_policies_hoiku_torimatome_r6_03.xlsx"
+  # 令和7年(2025-04-01)版「（参考）資料1～6」= _r7_02.xlsx（fetch-waitlist が読む
+  # シート「資料６－１/６－２」を含む。採番は年度で変わるためラベルで選ぶこと）
+  CFA_XLSX_URL: "https://www.cfa.go.jp/assets/contents/node/basic_page/field_ref_resources/b0a8057b-34bf-4c20-84fb-ae592708ca9b/1a728dcc/20250828_policies_hoiku_torimatome_r7_02.xlsx"
   # 国土数値情報 L01 地価公示の年度バージョン（年度ごとに書換）
-  L01_VERSION: "25"
+  L01_VERSION: "26"
 
 jobs:
   resolve-prefs:
