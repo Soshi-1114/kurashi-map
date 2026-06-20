@@ -1,4 +1,5 @@
 import type { Municipality } from "./types";
+import { isWaitlistDisclosed } from "./waitlist";
 
 // 将来はLLM生成に差し替える前提。シグネチャを変えないこと。
 export function buildSummary(m: Municipality): string {
@@ -8,8 +9,9 @@ export function buildSummary(m: Municipality): string {
     m.rent.value > 0
       ? `民営借家中央値${m.rent.value.toLocaleString()}${m.rent.unit}`
       : "家賃データなし";
-  const wait =
-    m.waitlistChildren.value > 0
+  const wait = !isWaitlistDisclosed(m.waitlistChildren)
+    ? "待機児童は区別非公表"
+    : m.waitlistChildren.value > 0
       ? `待機児童${m.waitlistChildren.value}人`
       : "待機児童ゼロ";
   const hazard = m.hazard.hasFloodRisk

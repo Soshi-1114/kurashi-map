@@ -6,6 +6,7 @@ import { buildSummary } from "@/lib/summary";
 import { findRelatedByRent } from "@/lib/related";
 import { SITE, PREF_NAMES_JA, absoluteUrl } from "@/lib/site";
 import { hasRent } from "@/lib/rentColor";
+import { isWaitlistDisclosed } from "@/lib/waitlist";
 import type { Municipality } from "@/lib/types";
 
 type Params = { pref: string; city: string };
@@ -127,7 +128,7 @@ export default async function AreaPage({ params }: { params: Params }) {
           <HeroStat label="家賃中央値" value={hasRent(m.rent.value) ? `${m.rent.value.toLocaleString()}円/月` : "データなし"} highlight />
           <HeroStat label="人口" value={`${m.population.toLocaleString()}人`} sub={m.populationTrend} />
           <HeroStat label="地価" value={`${m.landPrice.value.toLocaleString()}円/㎡`} />
-          <HeroStat label="待機児童" value={`${m.waitlistChildren.value}人`} />
+          <HeroStat label="待機児童" value={isWaitlistDisclosed(m.waitlistChildren) ? `${m.waitlistChildren.value}人` : "データなし"} />
         </ul>
       </header>
 
@@ -154,8 +155,14 @@ export default async function AreaPage({ params }: { params: Params }) {
       <section className="detail-section">
         <h2 className="detail-h2">子育て環境</h2>
         <p className="detail-p">
-          待機児童数は <strong>{m.waitlistChildren.value}人</strong>
-          {m.waitlistChildren.value === 0 ? "（待機児童ゼロ）" : ""}。
+          {isWaitlistDisclosed(m.waitlistChildren) ? (
+            <>
+              待機児童数は <strong>{m.waitlistChildren.value}人</strong>
+              {m.waitlistChildren.value === 0 ? "（待機児童ゼロ）" : ""}。
+            </>
+          ) : (
+            <>待機児童数は<strong>区別の公表なし</strong>（{m.waitlistChildren.source.replace("区別非公表（", "").replace(/）.*$/, "")}）。</>
+          )}
           人口は <strong>{m.population.toLocaleString()}人</strong>（{m.populationTrend}傾向）。
         </p>
         <SourceLine source={m.waitlistChildren.source} asOf={m.waitlistChildren.asOf} estimated={m.waitlistChildren.isEstimated} />
