@@ -317,7 +317,8 @@ button { font-family: inherit; }
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-lg);
   overflow: hidden;
-  max-height: 360px;
+  /* 低解像度端末で画面を占有しないよう viewport 比で上限を絞る */
+  max-height: clamp(220px, 50vh, 360px);
   overflow-y: auto;
   z-index: 13;
 }
@@ -326,8 +327,9 @@ button { font-family: inherit; }
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  min-height: 44px;
   text-align: left;
-  padding: 10px 14px;
+  padding: 12px 14px;
   border: none;
   background: transparent;
   font-size: 14px;
@@ -637,8 +639,8 @@ button { font-family: inherit; }
 }
 .panel-title { margin: 0; font-size: 22px; font-weight: 800; letter-spacing: -0.015em; }
 .panel-close {
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -835,12 +837,12 @@ button { font-family: inherit; }
 .sheet-stage-half {
   box-shadow: 0 -6px 22px rgba(15, 23, 42, 0.12);
 }
-/* スワイプ/タップ受付エリア — 親指で扱える 40px+ の hit エリアを確保 */
+/* スワイプ/タップ受付エリア — 親指で扱える 44px の hit エリアを確保（WCAG 2.5.5） */
 .sheet-handle-wrap {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 32px;
+  height: 44px;
   flex-shrink: 0;
   cursor: grab;
   touch-action: none; /* ブラウザにスクロールさせない */
