@@ -7,6 +7,8 @@ const HOME_TITLE = "市区町村の住みやすさを地図で比較｜家賃・
 const HOME_DESC =
   "全国1,918市区町村の家賃相場・地価・人口・待機児童・災害リスクを地図で横断比較できる無料サービス。政府統計の実データだけを使い、推計値は使いません。気になる街の住みやすさをまとめてチェック。";
 
+const HOME_OG = absoluteUrl("/api/og");
+
 export const metadata: Metadata = {
   title: HOME_TITLE,
   description: HOME_DESC,
@@ -17,8 +19,9 @@ export const metadata: Metadata = {
     siteName: SITE.name,
     title: HOME_TITLE,
     description: HOME_DESC,
+    images: [{ url: HOME_OG, width: 1200, height: 630, alt: SITE.name }],
   },
-  twitter: { card: "summary_large_image", title: HOME_TITLE, description: HOME_DESC },
+  twitter: { card: "summary_large_image", title: HOME_TITLE, description: HOME_DESC, images: [HOME_OG] },
 };
 
 export default async function HomePage() {

@@ -49,6 +49,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const title = `${pref.nameJa}の住みやすさ・家賃相場ランキング｜${count}市区町村を比較｜${SITE.name}`;
   const description = `${pref.nameJa}の全${count}市区町村の${medPhrase}地価・人口・待機児童・災害リスクを一覧で比較。家賃が安い自治体ランキングや子育て環境を、政府統計の実データでチェックできる${SITE.name}の都道府県ページ。`;
   const url = absoluteUrl(`/area/${pref.slug}`);
+  const ogImage = absoluteUrl(`/api/og/pref/${pref.slug}`);
   return {
     title,
     description,
@@ -61,8 +62,9 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
       title,
       description,
       siteName: SITE.name,
+      images: [{ url: ogImage, width: 1200, height: 630, alt: `${pref.nameJa}の住みやすさ` }],
     },
-    twitter: { card: "summary_large_image", title, description },
+    twitter: { card: "summary_large_image", title, description, images: [ogImage] },
   };
 }
 
