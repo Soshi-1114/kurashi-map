@@ -9,22 +9,8 @@
 
 import { useState } from "react";
 import type { ReactNode } from "react";
-import dynamic from "next/dynamic";
+import MapView from "@/components/MapView";
 import type { MuniSummary } from "@/lib/types";
-
-// MapLibre GL は ~209KB（初期バンドル最大のチャンク）。地図はクライアント専用で
-// SSR 不可のため、next/dynamic + ssr:false で初期描画クリティカルパスから切り離し、
-// JS の解析・実行を遅延させる（モバイルの LCP / TBT を改善）。ロード中は MapView
-// 内の初回オーバーレイと同じ見た目のプレースホルダを出す。
-const MapView = dynamic(() => import("@/components/MapView"), {
-  ssr: false,
-  loading: () => (
-    <div className="map-loading" aria-hidden="true">
-      <div className="map-loading-spinner" />
-      <div className="map-loading-text">地図を読み込み中…</div>
-    </div>
-  ),
-});
 
 export default function HomeShell({
   summary,
