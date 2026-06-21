@@ -643,7 +643,12 @@ export default function MapView({ summary, onMenuClick }: Props) {
 
   return (
     <div className={rootClass}>
-      <div ref={containerRef} className="map-canvas" />
+      <div
+        ref={containerRef}
+        className="map-canvas"
+        role="region"
+        aria-label="日本全国の市区町村を家賃・地価・人口で塗り分けた地図。地図にフォーカスすると矢印キーで移動、＋／−キーで拡大縮小できます。個別の自治体はヘッダーの検索からも選べます。"
+      />
 
       {/* 初期描画用スケルトン地図（LCP 要素）。常時マウントして SSR HTML に含め、
           MapLibre が描画完了したらフェードアウトする。地図は WebGL canvas で
@@ -697,7 +702,7 @@ export default function MapView({ summary, onMenuClick }: Props) {
             />
           </div>
           {filtered.length > 0 && (
-            <ul className="search-results">
+            <ul className="search-results" aria-label="自治体の検索候補">
               {filtered.map((m) => (
                 <li key={m.code}>
                   <button onClick={() => flyToMuni(m)}>
