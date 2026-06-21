@@ -53,4 +53,5 @@ export type MuniSummary = {
   landPrice: number;     // landPrice.value（円/㎡）。<=0 はデータなし
   populationTrend: Municipality["populationTrend"]; // 人口トレンド（地図の塗り分け用）
   hasFloodRisk: boolean;  // hazard.hasFloodRisk
+  hazardEvaluated: boolean;  // hazard が reinfolib で評価済みか（未評価=浸水フィルタから除外）
 };
