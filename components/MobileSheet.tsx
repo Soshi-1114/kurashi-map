@@ -25,9 +25,15 @@ const IS_MODAL: Record<Stage, boolean> = {
   full: true,
 };
 
-// half→full / full→half スナップしきい値
-const SNAP_UP_THRESHOLD = 70;   // half でこれ以上上にスワイプで full
-const SNAP_DOWN_THRESHOLD = 100; // full でこれ以上下にスワイプで half
+// half→full / full→half スナップしきい値。固定 px だと小型端末で誤発動し、
+// 大型端末では過敏になるため、画面高に対する比率（下限付き）で決める。
+function snapThresholds() {
+  const h = typeof window !== "undefined" ? window.innerHeight : 800;
+  return {
+    up: Math.max(56, h * 0.1), // half→full: これ以上上にスワイプ
+    down: Math.max(80, h * 0.14), // full→half: これ以上下にスワイプ
+  };
+}
 
 export default function MobileSheet({ municipality, onClose }: Props) {
   const [stage, setStage] = useState<Stage>("half");
@@ -62,9 +68,10 @@ export default function MobileSheet({ municipality, onClose }: Props) {
   };
   const onTouchEnd = () => {
     if (dragStartY.current === null) return;
-    if (stage === "half" && dragOffset < -SNAP_UP_THRESHOLD) {
+    const { up, down } = snapThresholds();
+    if (stage === "half" && dragOffset < -up) {
       setStage("full");
-    } else if (stage === "full" && dragOffset > SNAP_DOWN_THRESHOLD) {
+    } else if (stage === "full" && dragOffset > down) {
       setStage("half");
     }
     setDragOffset(0);
