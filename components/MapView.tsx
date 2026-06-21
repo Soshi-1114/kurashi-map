@@ -691,7 +691,7 @@ export default function MapView({ summary, onMenuClick }: Props) {
         <div className={`map-layers ${layersOpen ? "is-open" : ""}`}>
           <button
             className={`map-layers-btn ${layersOpen ? "is-active" : ""}`}
-            aria-label="塗り分け指標を切り替え"
+            aria-label={`塗り分け指標を切り替え（現在: ${getMapMetric(activeMetric).label}）`}
             aria-expanded={layersOpen}
             onClick={() => setLayersOpen((v) => !v)}
           >
