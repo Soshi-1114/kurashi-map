@@ -30,7 +30,9 @@ const PREF_CLICK_MAX_ZOOM = 8;   // この zoom 以下で pref クリックを f
 // OpenFreeMap の Positron スタイル（Mapbox Light 相当の軽量モノクロ基盤）
 // CORS 対応、トークン不要、Apache-2.0
 const BASEMAP_STYLE = "https://tiles.openfreemap.org/styles/positron";
-const SAITAMA_BBOX: [number, number, number, number] = [138.71, 35.74, 139.91, 36.29];
+// 初期表示は東京本土（23区＋多摩）を収める。島嶼部（大島〜小笠原, 緯度35.4以南）は
+// bbox が極端に縦長になり初期ズームが破綻するため、本土だけを枠に使う。
+const TOKYO_BBOX: [number, number, number, number] = [138.94, 35.5, 139.92, 35.9];
 
 export default function MapView({ summary, onMenuClick }: Props) {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -103,7 +105,7 @@ export default function MapView({ summary, onMenuClick }: Props) {
       const map = new maplibregl.Map({
         container: containerRef.current,
         style: BASEMAP_STYLE,
-        center: [139.31, 36.015],
+        center: [139.69, 35.69],
         zoom: 8.5,
         attributionControl: { compact: true },
       });
@@ -126,7 +128,7 @@ export default function MapView({ summary, onMenuClick }: Props) {
       };
 
       map.on("load", async () => {
-        map.fitBounds(SAITAMA_BBOX, { padding: 40, duration: 0 });
+        map.fitBounds(TOKYO_BBOX, { padding: 40, duration: 0 });
         // prefectures(47県の輪郭, 約580KB)だけ起動時にロード。各県の市区町村/区
         // ポリゴンは全件で22MB超あり SP 実機で破綻するため、ズームしてビューポートに
         // 入った県だけを遅延ロードする（下の ensurePrefs / checkViewport）。
@@ -474,7 +476,7 @@ export default function MapView({ summary, onMenuClick }: Props) {
 
         setMapReady(true);
 
-        // 初期ビュー(埼玉付近)の県ポリゴンを await し、描画が落ち着いてから
+        // 初期ビュー(東京付近)の県ポリゴンを await し、描画が落ち着いてから
         // ローディングオーバーレイを外す。idle が来ない環境向けに失敗保険も置く。
         if (map.getZoom() >= MUNI_MIN_ZOOM) {
           const b = map.getBounds();
