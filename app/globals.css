@@ -55,6 +55,84 @@ html, body {
   height: 100dvh;
   overflow: hidden;
 }
+
+/* ===== トップページ：マップ（ヒーロー）＋ 内部リンク帯 =====
+   PC: マップ 100dvh の下にリンク帯がスクロールで続く。
+   SP: ページはスクロールさせずマップを全画面のまま維持し、リンク帯はヘッダーの
+       メニューから右ドロワーとして重ねる（地図のパン操作と競合させない）。
+   リンク帯(HomeLinks)は常に DOM に存在＝クロール可能。SP の閉状態でも display:none
+   にはせず画面外へ退避させるだけにする。 */
+.home-main { position: relative; width: 100%; }
+.home-root { position: relative; width: 100%; }
+.home-map { position: relative; width: 100%; height: 100vh; height: 100dvh; }
+
+.home-links {
+  position: relative;
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 40px 24px 64px;
+}
+.home-nav-backdrop { display: none; }
+.home-nav-close { display: none; }
+.app-header-menu-btn { display: none; }
+
+.home-links-lead-title { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 6px; color: var(--text); }
+.home-links-lead { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin: 0 0 8px; max-width: 720px; }
+.home-links-block { margin-top: 28px; }
+.home-links-h { font-size: 15px; font-weight: 800; color: var(--text); margin: 0 0 12px; }
+.home-pref-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: 8px; }
+.home-pref-link {
+  display: block; text-align: center; font-size: 13.5px; font-weight: 600;
+  padding: 9px 6px; border: 1px solid var(--border); border-radius: var(--radius-sm);
+  color: var(--text); background: var(--surface-strong);
+}
+.home-pref-link:hover { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
+.home-chip-row { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.home-chip {
+  display: inline-flex; font-size: 13px; font-weight: 700;
+  padding: 8px 16px; border: 1px solid var(--border); border-radius: var(--radius-pill);
+  color: var(--text); background: var(--surface-strong);
+}
+.home-chip:hover { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
+.home-links-foot { margin-top: 36px; font-size: 11.5px; color: var(--text-faint); line-height: 1.7; }
+
+@media (max-width: 767px) {
+  .home-main { overflow: hidden; }
+  .app-header-menu-btn {
+    display: flex; align-items: center; justify-content: center;
+    width: 40px; height: 40px; flex-shrink: 0;
+    background: #f1f5f9; border: 1px solid transparent; border-radius: var(--radius-pill);
+    color: var(--text-muted); cursor: pointer;
+  }
+  .app-header-menu-btn:hover { background: #e2e8f0; color: var(--text); }
+
+  .home-nav-backdrop {
+    display: block; position: fixed; inset: 0; z-index: 30;
+    background: rgba(15, 23, 42, 0.4);
+    opacity: 0; pointer-events: none; transition: opacity .2s ease;
+  }
+  .is-nav-open .home-nav-backdrop { opacity: 1; pointer-events: auto; }
+
+  .home-links {
+    position: fixed; top: 0; right: 0; bottom: 0; z-index: 31;
+    width: min(86vw, 380px); max-width: none; margin: 0;
+    padding: calc(env(safe-area-inset-top) + 20px) 20px calc(env(safe-area-inset-bottom) + 24px);
+    background: var(--bg-elev);
+    overflow-y: auto;
+    transform: translateX(100%);
+    transition: transform .24s ease;
+    box-shadow: var(--shadow-xl);
+  }
+  .is-nav-open .home-links { transform: translateX(0); }
+
+  .home-nav-close {
+    display: flex; align-items: center; justify-content: center;
+    position: absolute; top: calc(env(safe-area-inset-top) + 12px); right: 14px;
+    width: 36px; height: 36px; border: none; background: transparent;
+    color: var(--text-muted); cursor: pointer; z-index: 1;
+  }
+  .home-links-lead-title { font-size: 18px; padding-right: 40px; }
+}
 body { letter-spacing: 0.005em; }
 a { color: var(--accent); text-decoration: none; transition: color .15s ease; }
 a:hover { color: var(--accent-hover); }

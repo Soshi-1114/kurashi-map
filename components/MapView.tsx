@@ -10,7 +10,7 @@ import { MAP_METRICS, getMapMetric, DEFAULT_METRIC_KEY, TREND_PROPERTY, type Map
 import AreaPanel from "./AreaPanel";
 import MobileSheet from "./MobileSheet";
 
-type Props = { summary: MuniSummary[] };
+type Props = { summary: MuniSummary[]; onMenuClick?: () => void };
 
 const WARDS_MIN_ZOOM = 11;
 const MUNI_MIN_ZOOM = 7.5;       // 市区町村レイヤーを出すズーム
@@ -22,7 +22,7 @@ const PREF_CLICK_MAX_ZOOM = 8;   // この zoom 以下で pref クリックを f
 const BASEMAP_STYLE = "https://tiles.openfreemap.org/styles/positron";
 const SAITAMA_BBOX: [number, number, number, number] = [138.71, 35.74, 139.91, 36.29];
 
-export default function MapView({ summary }: Props) {
+export default function MapView({ summary, onMenuClick }: Props) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<MapLibreMap | null>(null);
   const muniGeoRef = useRef<GeoJSON.FeatureCollection | null>(null);
@@ -637,6 +637,17 @@ export default function MapView({ summary }: Props) {
 
       {/* 統合ヘッダー（固定） */}
       <header className="app-header">
+        {onMenuClick && (
+          <button
+            className="app-header-menu-btn"
+            aria-label="エリア・ランキングのメニューを開く"
+            onClick={onMenuClick}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+              <path d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        )}
         <div className="app-header-brand">
           <div className="brand-mark" />
           <div className="brand-name">KurashiMap</div>
