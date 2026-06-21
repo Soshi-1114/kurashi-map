@@ -28,13 +28,22 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const title = `${def.title}【全国】｜${SITE.name}`;
   const description = def.description.replace("{top1}", top1);
   const url = absoluteUrl(`/ranking/${def.slug}`);
+  const ogImage = absoluteUrl(`/api/og/ranking/${def.slug}`);
   return {
     title,
     description,
     metadataBase: new URL(SITE.baseUrl),
     alternates: { canonical: url },
-    openGraph: { type: "website", locale: SITE.locale, url, title, description, siteName: SITE.name },
-    twitter: { card: "summary_large_image", title, description },
+    openGraph: {
+      type: "website",
+      locale: SITE.locale,
+      url,
+      title,
+      description,
+      siteName: SITE.name,
+      images: [{ url: ogImage, width: 1200, height: 630, alt: def.title }],
+    },
+    twitter: { card: "summary_large_image", title, description, images: [ogImage] },
   };
 }
 

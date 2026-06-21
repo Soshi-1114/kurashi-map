@@ -8,13 +8,22 @@ export function generateMetadata(): Metadata {
   const title = `住みやすさ・家賃ランキング一覧｜全国の市区町村を比較｜${SITE.name}`;
   const description = `家賃が安い／高い、地価が高い、待機児童ゼロなど、全国の市区町村を政府統計の実データで比較できるランキング一覧。${SITE.name}。`;
   const url = absoluteUrl("/ranking");
+  const ogImage = absoluteUrl("/api/og");
   return {
     title,
     description,
     metadataBase: new URL(SITE.baseUrl),
     alternates: { canonical: url },
-    openGraph: { type: "website", locale: SITE.locale, url, title, description, siteName: SITE.name },
-    twitter: { card: "summary_large_image", title, description },
+    openGraph: {
+      type: "website",
+      locale: SITE.locale,
+      url,
+      title,
+      description,
+      siteName: SITE.name,
+      images: [{ url: ogImage, width: 1200, height: 630, alt: SITE.name }],
+    },
+    twitter: { card: "summary_large_image", title, description, images: [ogImage] },
   };
 }
 
