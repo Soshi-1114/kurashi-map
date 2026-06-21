@@ -10,7 +10,7 @@ import { MAP_METRICS, getMapMetric, DEFAULT_METRIC_KEY, TREND_PROPERTY, type Map
 import AreaPanel from "./AreaPanel";
 import MobileSheet from "./MobileSheet";
 
-type Props = { summary: MuniSummary[] };
+type Props = { summary: MuniSummary[]; onMenuClick?: () => void };
 
 const WARDS_MIN_ZOOM = 11;
 const MUNI_MIN_ZOOM = 7.5;       // 市区町村レイヤーを出すズーム
@@ -22,7 +22,7 @@ const PREF_CLICK_MAX_ZOOM = 8;   // この zoom 以下で pref クリックを f
 const BASEMAP_STYLE = "https://tiles.openfreemap.org/styles/positron";
 const SAITAMA_BBOX: [number, number, number, number] = [138.71, 35.74, 139.91, 36.29];
 
-export default function MapView({ summary }: Props) {
+export default function MapView({ summary, onMenuClick }: Props) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<MapLibreMap | null>(null);
   const muniGeoRef = useRef<GeoJSON.FeatureCollection | null>(null);
@@ -670,38 +670,53 @@ export default function MapView({ summary }: Props) {
             </ul>
           )}
         </div>
-        {firstPaintReady && (
+        {onMenuClick && (
           <button
-            className={`app-header-layers-btn ${layersOpen ? "is-active" : ""}`}
-            aria-label="レイヤーを開閉"
-            aria-expanded={layersOpen}
-            onClick={() => setLayersOpen((v) => !v)}
+            className="app-header-menu-btn"
+            aria-label="エリア・ランキングのメニューを開く"
+            onClick={onMenuClick}
           >
-            <LayersIcon />
-            <span className="layers-btn-label">{getMapMetric(activeMetric).label}</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+              <path d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <span className="menu-btn-label">エリア・ランキング</span>
           </button>
         )}
       </header>
 
-      {/* レイヤーパネル（デフォルト展開、ヘッダー右下） */}
-      {layersOpen && (
-        <div className="layers-panel">
-          <div className="layers-title">塗り分け指標</div>
-          <div className="metric-radios" role="radiogroup" aria-label="塗り分け指標">
-            {MAP_METRICS.map((m) => (
-              <label key={m.key} className={`metric-radio ${activeMetric === m.key ? "is-active" : ""}`}>
-                <input
-                  type="radio"
-                  name="map-metric"
-                  checked={activeMetric === m.key}
-                  onChange={() => setActiveMetric(m.key)}
-                />
-                <span className="metric-radio-label">{m.label}</span>
-              </label>
-            ))}
-          </div>
-          <div className="layers-title layers-title-sub">オーバーレイ</div>
-          <LayerToggle label="災害リスク" checked={hazardOn} onChange={setHazardOn} />
+      {/* 塗り分け指標の切替（地図上のフローティング操作）。サイトナビ（ヘッダーの
+          メニュー）と地図コントロールを役割で分け、ヘッダーに混在させない。 */}
+      {firstPaintReady && (
+        <div className={`map-layers ${layersOpen ? "is-open" : ""}`}>
+          <button
+            className={`map-layers-btn ${layersOpen ? "is-active" : ""}`}
+            aria-label="塗り分け指標を切り替え"
+            aria-expanded={layersOpen}
+            onClick={() => setLayersOpen((v) => !v)}
+          >
+            <LayersIcon />
+            <span className="map-layers-btn-label">{getMapMetric(activeMetric).label}</span>
+          </button>
+          {layersOpen && (
+            <div className="layers-panel">
+              <div className="layers-title">塗り分け指標</div>
+              <div className="metric-radios" role="radiogroup" aria-label="塗り分け指標">
+                {MAP_METRICS.map((m) => (
+                  <label key={m.key} className={`metric-radio ${activeMetric === m.key ? "is-active" : ""}`}>
+                    <input
+                      type="radio"
+                      name="map-metric"
+                      checked={activeMetric === m.key}
+                      onChange={() => setActiveMetric(m.key)}
+                    />
+                    <span className="metric-radio-label">{m.label}</span>
+                  </label>
+                ))}
+              </div>
+              <div className="layers-title layers-title-sub">オーバーレイ</div>
+              <LayerToggle label="災害リスク" checked={hazardOn} onChange={setHazardOn} />
+            </div>
+          )}
         </div>
       )}
 

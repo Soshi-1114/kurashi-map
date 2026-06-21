@@ -55,6 +55,75 @@ html, body {
   height: 100dvh;
   overflow: hidden;
 }
+
+/* ===== トップページ：全画面マップ ＋ メニュー（ドロワー）=====
+   PC/SP 共通: マップを 100dvh の全画面で維持し、ページはスクロールさせない。
+   ヘッダーの「エリア・ランキング」メニューから右ドロワーでリンク帯を重ねる
+   （地図のパン操作とスクロールを競合させない）。リンク帯(HomeLinks)は閉状態でも
+   常に DOM に存在＝クロール可能（display:none にはせず画面外へ退避させるだけ）。 */
+.home-main { position: relative; width: 100%; overflow: hidden; }
+.home-root { position: relative; width: 100%; }
+.home-map { position: relative; width: 100%; height: 100vh; height: 100dvh; }
+
+.app-header-menu-btn {
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+  width: 40px; height: 40px; flex-shrink: 0;
+  background: #f1f5f9; border: 1px solid transparent; border-radius: var(--radius-pill);
+  color: var(--text-muted); cursor: pointer;
+}
+.app-header-menu-btn:hover { background: #e2e8f0; color: var(--text); }
+.menu-btn-label { display: none; }
+@media (min-width: 768px) {
+  .app-header-menu-btn { width: auto; padding: 0 14px; }
+  .menu-btn-label { display: inline; font-size: 13px; font-weight: 600; white-space: nowrap; }
+}
+
+.home-nav-backdrop {
+  position: fixed; inset: 0; z-index: 30;
+  background: rgba(15, 23, 42, 0.4);
+  opacity: 0; pointer-events: none; transition: opacity .2s ease;
+}
+.is-nav-open .home-nav-backdrop { opacity: 1; pointer-events: auto; }
+
+.home-links {
+  position: fixed; top: 0; right: 0; bottom: 0; z-index: 31;
+  width: min(90vw, 420px); margin: 0;
+  padding: calc(env(safe-area-inset-top) + 22px) 22px calc(env(safe-area-inset-bottom) + 24px);
+  background: var(--bg-elev);
+  overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform .24s ease;
+  box-shadow: var(--shadow-xl);
+}
+.is-nav-open .home-links { transform: translateX(0); }
+
+.home-nav-close {
+  display: flex; align-items: center; justify-content: center;
+  position: absolute; top: calc(env(safe-area-inset-top) + 14px); right: 16px;
+  width: 36px; height: 36px; border: none; background: transparent;
+  color: var(--text-muted); cursor: pointer; z-index: 1;
+}
+.home-nav-close:hover { color: var(--text); }
+
+.home-links-lead-title { font-size: 19px; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 6px; padding-right: 40px; color: var(--text); }
+.home-links-lead { font-size: 13px; color: var(--text-muted); line-height: 1.7; margin: 0 0 8px; }
+.home-links-block { margin-top: 24px; }
+.home-links-h { font-size: 14px; font-weight: 800; color: var(--text); margin: 0 0 10px; }
+.home-pref-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 7px; }
+.home-pref-link {
+  display: block; text-align: center; font-size: 13px; font-weight: 600;
+  padding: 9px 6px; border: 1px solid var(--border); border-radius: var(--radius-sm);
+  color: var(--text); background: var(--surface-strong);
+}
+.home-pref-link:hover { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
+.home-chip-row { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 7px; }
+.home-chip {
+  display: inline-flex; font-size: 12.5px; font-weight: 700;
+  padding: 8px 15px; border: 1px solid var(--border); border-radius: var(--radius-pill);
+  color: var(--text); background: var(--surface-strong);
+}
+.home-chip:hover { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
+.home-links-foot { margin-top: 32px; font-size: 11.5px; color: var(--text-faint); line-height: 1.7; }
 body { letter-spacing: 0.005em; }
 a { color: var(--accent); text-decoration: none; transition: color .15s ease; }
 a:hover { color: var(--accent-hover); }
@@ -197,33 +266,43 @@ button { font-family: inherit; }
 }
 .app-header-search input::placeholder { color: var(--text-faint); font-weight: 400; }
 
-.app-header-layers-btn {
-  flex-shrink: 0;
-  width: 40px;
-  height: 40px;
+/* 塗り分け指標の切替＝地図上のフローティング操作（ヘッダーのサイトナビとは分離）。
+   ボタン＋パネルを1つのコンテナにまとめ、地図右上に重ねる。 */
+.map-layers {
+  position: absolute;
+  top: calc(var(--header-h) + env(safe-area-inset-top) + 10px);
+  right: 14px;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  transition: right .3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.map-layers-btn {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 7px;
-  background: #f1f5f9;
-  border: 1px solid transparent;
+  height: 40px;
+  padding: 0 16px;
+  background: var(--surface-strong);
+  border: 1px solid var(--border);
   border-radius: var(--radius-pill);
   color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 600;
   cursor: pointer;
+  box-shadow: var(--shadow-sm);
   transition: background .15s, color .15s, border-color .15s;
 }
-/* 現在の塗り分け指標名はボタンに併記（PC のみ）。閉じていても切替可能と分かる */
-.layers-btn-label { display: none; }
-@media (min-width: 768px) {
-  .app-header-layers-btn { width: auto; padding: 0 14px; }
-  .layers-btn-label { display: inline; font-size: 13px; font-weight: 600; white-space: nowrap; }
-}
-.app-header-layers-btn:hover { background: #e2e8f0; color: var(--text); }
-.app-header-layers-btn.is-active {
+.map-layers-btn:hover { color: var(--text); border-color: var(--border-strong); }
+.map-layers-btn.is-active {
   background: var(--accent-soft);
   color: var(--accent);
-  border-color: rgba(37,99,235,0.15);
+  border-color: rgba(37, 99, 235, 0.2);
 }
+.map-layers-btn-label { white-space: nowrap; }
 
 /* 検索ドロップダウン — ヘッダーの検索欄直下に */
 .search-results {
@@ -268,9 +347,6 @@ button { font-family: inherit; }
 
 /* レイヤーパネル（ヘッダー直下、デフォルト展開） */
 .layers-panel {
-  position: absolute;
-  top: calc(var(--header-h) + env(safe-area-inset-top) + 10px);
-  right: 14px;
   padding: 12px 14px;
   background: var(--surface);
   backdrop-filter: saturate(180%) blur(16px);
@@ -278,16 +354,14 @@ button { font-family: inherit; }
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-md);
-  z-index: 6;
   min-width: 196px;
-  transition: right .3s cubic-bezier(0.16, 1, 0.3, 1);
   animation: layers-in .2s ease;
 }
 @keyframes layers-in {
   from { opacity: 0; transform: translateY(-6px); }
   to { opacity: 1; transform: translateY(0); }
 }
-.is-panel-open .layers-panel { right: calc(380px + 30px); }
+.is-panel-open .map-layers { right: calc(380px + 30px); }
 /* レイヤーパネル(右上)・凡例(左下)はカード体裁を共通化。タイトルも
    下の .legend-title と同一スペックに揃え、両者の視覚的な一貫性を出す。
    ※モバイルではレイヤーパネルが閉のため凡例は独立配置が必須。よって

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
-import MapView from "@/components/MapView";
-import { listSummaryAcrossPrefs } from "@/lib/metrics";
+import HomeShell from "@/components/HomeShell";
+import HomeLinks, { type PopularMuni } from "@/components/HomeLinks";
+import { listSummaryAcrossPrefs, listAllAcrossPrefs } from "@/lib/metrics";
+import { muniLevelOnly } from "@/lib/rankings";
 import { SITE, absoluteUrl } from "@/lib/site";
 
 const HOME_TITLE = "市区町村の住みやすさを地図で比較｜家賃・地価・子育て・災害リスク｜KurashiMap";
@@ -24,13 +26,28 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title: HOME_TITLE, description: HOME_DESC, images: [HOME_OG] },
 };
 
+// 「人気の自治体」= 人口上位（市区町村のみ、政令市の区は除外）。トップからの
+// 内部リンクを主要都市に集約する。ビルド時のみフルデータを使い、クライアントには
+// 軽量サマリと小さな popular 配列だけを渡す。
+async function getPopularMunis(limit = 12): Promise<PopularMuni[]> {
+  const munis = muniLevelOnly(await listAllAcrossPrefs());
+  return munis
+    .slice()
+    .sort((a, b) => b.population - a.population)
+    .slice(0, limit)
+    .map((m) => ({ pref: m.pref, code: m.code, name: m.name }));
+}
+
 export default async function HomePage() {
   // 初期配信は軽量サマリのみ（検索・地図色付け用）。各自治体の詳細は
   // 選択時に /api/muni/[code] で取得する。
   const summary = await listSummaryAcrossPrefs();
+  const popular = await getPopularMunis();
   return (
-    <main className="app-shell">
-      <MapView summary={summary} />
+    <main className="home-main">
+      <HomeShell summary={summary}>
+        <HomeLinks popular={popular} />
+      </HomeShell>
     </main>
   );
 }
