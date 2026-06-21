@@ -642,7 +642,19 @@ export default function MapView({ summary, onMenuClick }: Props) {
     <div className={rootClass}>
       <div ref={containerRef} className="map-canvas" />
 
-      {/* 初回描画までのローディングオーバーレイ（白地図・凡例先行の体感を解消） */}
+      {/* 初期描画用スケルトン地図（LCP 要素）。常時マウントして SSR HTML に含め、
+          MapLibre が描画完了したらフェードアウトする。地図は WebGL canvas で
+          描かれ canvas は LCP の候補外なので、この <img> が早期に LCP を確定させ、
+          LCP が地図初期化(TTI)に張り付くのを防ぐ。素材は scripts/build-initial-view-svg.mjs 生成。 */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/initial-view.svg"
+        alt=""
+        aria-hidden="true"
+        className={`map-skeleton ${firstPaintReady ? "is-hidden" : ""}`}
+      />
+
+      {/* 初回描画までのローディング表示（スケルトンの上に重ねる薄いスピナー） */}
       {!firstPaintReady && (
         <div className="map-loading" aria-hidden="true">
           <div className="map-loading-spinner" />

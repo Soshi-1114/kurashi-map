@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import ReactDOM from "react-dom";
 import HomeShell from "@/components/HomeShell";
 import HomeLinks, { type PopularMuni } from "@/components/HomeLinks";
 import { listSummaryAcrossPrefs, listAllAcrossPrefs } from "@/lib/metrics";
@@ -39,6 +40,12 @@ async function getPopularMunis(limit = 12): Promise<PopularMuni[]> {
 }
 
 export default async function HomePage() {
+  // リソースヒント（ホームのみ）。地図の基盤タイル(OpenFreeMap)へ早期に接続を張り、
+  // LCP 要素である初期スケルトン画像を最優先で取得させ、初期描画を前倒しする。
+  // 基盤タイルは CORS(fetch) 取得なので preconnect は crossOrigin 付き。
+  ReactDOM.preconnect("https://tiles.openfreemap.org", { crossOrigin: "anonymous" });
+  ReactDOM.preload("/initial-view.svg", { as: "image", type: "image/svg+xml" });
+
   // 初期配信は軽量サマリのみ（検索・地図色付け用）。各自治体の詳細は
   // 選択時に /api/muni/[code] で取得する。
   const summary = await listSummaryAcrossPrefs();
