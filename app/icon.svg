@@ -1,5 +1,7 @@
 <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="KurashiMap">
-  <rect width="64" height="64" rx="14" fill="#2563eb"/>
-  <path d="M32 14c-7.18 0-13 5.6-13 12.5 0 8.9 11.1 21.2 12.1 22.3a1.2 1.2 0 0 0 1.8 0C33.9 47.7 45 35.4 45 26.5 45 19.6 39.18 14 32 14Z" fill="#ffffff"/>
-  <circle cx="32" cy="26.5" r="5" fill="#2563eb"/>
+  <rect width="64" height="64" rx="14" fill="#ffffff"/>
+  <circle cx="22" cy="17" r="6" fill="none" stroke="#2563eb" stroke-width="4"/>
+  <path d="M22 22V48" stroke="#2563eb" stroke-width="7" stroke-linecap="round"/>
+  <path d="M24 33L44 16" stroke="#1e3a8a" stroke-width="7" stroke-linecap="round"/>
+  <path d="M24 33L44 50" stroke="#10b981" stroke-width="7" stroke-linecap="round"/>
 </svg>
