@@ -637,18 +637,6 @@ export default function MapView({ summary, onMenuClick }: Props) {
 
       {/* 統合ヘッダー（固定） */}
       <header className="app-header">
-        {onMenuClick && (
-          <button
-            className="app-header-menu-btn"
-            aria-label="エリア・ランキングのメニューを開く"
-            onClick={onMenuClick}
-          >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
-              <path d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-            <span className="menu-btn-label">エリア・ランキング</span>
-          </button>
-        )}
         <div className="app-header-brand">
           <div className="brand-mark" />
           <div className="brand-name">KurashiMap</div>
@@ -682,6 +670,18 @@ export default function MapView({ summary, onMenuClick }: Props) {
             </ul>
           )}
         </div>
+        {onMenuClick && (
+          <button
+            className="app-header-menu-btn"
+            aria-label="エリア・ランキングのメニューを開く"
+            onClick={onMenuClick}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+              <path d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <span className="menu-btn-label">エリア・ランキング</span>
+          </button>
+        )}
         {firstPaintReady && (
           <button
             className={`app-header-layers-btn ${layersOpen ? "is-active" : ""}`}
