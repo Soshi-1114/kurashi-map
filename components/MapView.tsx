@@ -682,38 +682,41 @@ export default function MapView({ summary, onMenuClick }: Props) {
             <span className="menu-btn-label">エリア・ランキング</span>
           </button>
         )}
-        {firstPaintReady && (
+      </header>
+
+      {/* 塗り分け指標の切替（地図上のフローティング操作）。サイトナビ（ヘッダーの
+          メニュー）と地図コントロールを役割で分け、ヘッダーに混在させない。 */}
+      {firstPaintReady && (
+        <div className={`map-layers ${layersOpen ? "is-open" : ""}`}>
           <button
-            className={`app-header-layers-btn ${layersOpen ? "is-active" : ""}`}
-            aria-label="レイヤーを開閉"
+            className={`map-layers-btn ${layersOpen ? "is-active" : ""}`}
+            aria-label="塗り分け指標を切り替え"
             aria-expanded={layersOpen}
             onClick={() => setLayersOpen((v) => !v)}
           >
             <LayersIcon />
-            <span className="layers-btn-label">{getMapMetric(activeMetric).label}</span>
+            <span className="map-layers-btn-label">{getMapMetric(activeMetric).label}</span>
           </button>
-        )}
-      </header>
-
-      {/* レイヤーパネル（デフォルト展開、ヘッダー右下） */}
-      {layersOpen && (
-        <div className="layers-panel">
-          <div className="layers-title">塗り分け指標</div>
-          <div className="metric-radios" role="radiogroup" aria-label="塗り分け指標">
-            {MAP_METRICS.map((m) => (
-              <label key={m.key} className={`metric-radio ${activeMetric === m.key ? "is-active" : ""}`}>
-                <input
-                  type="radio"
-                  name="map-metric"
-                  checked={activeMetric === m.key}
-                  onChange={() => setActiveMetric(m.key)}
-                />
-                <span className="metric-radio-label">{m.label}</span>
-              </label>
-            ))}
-          </div>
-          <div className="layers-title layers-title-sub">オーバーレイ</div>
-          <LayerToggle label="災害リスク" checked={hazardOn} onChange={setHazardOn} />
+          {layersOpen && (
+            <div className="layers-panel">
+              <div className="layers-title">塗り分け指標</div>
+              <div className="metric-radios" role="radiogroup" aria-label="塗り分け指標">
+                {MAP_METRICS.map((m) => (
+                  <label key={m.key} className={`metric-radio ${activeMetric === m.key ? "is-active" : ""}`}>
+                    <input
+                      type="radio"
+                      name="map-metric"
+                      checked={activeMetric === m.key}
+                      onChange={() => setActiveMetric(m.key)}
+                    />
+                    <span className="metric-radio-label">{m.label}</span>
+                  </label>
+                ))}
+              </div>
+              <div className="layers-title layers-title-sub">オーバーレイ</div>
+              <LayerToggle label="災害リスク" checked={hazardOn} onChange={setHazardOn} />
+            </div>
+          )}
         </div>
       )}
 
