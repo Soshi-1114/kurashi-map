@@ -19,6 +19,9 @@ import {
   landslideGraded,
   floodLevelLabel,
   landslideLevelLabel,
+  tsunamiLevelOf,
+  stormSurgeLevelOf,
+  coastalHazardLabel,
 } from "@/lib/hazardScale";
 import type { Municipality } from "@/lib/types";
 
@@ -314,6 +317,29 @@ export default async function AreaPage({ params }: { params: Params }) {
                   </div>
                 </div>
               </div>
+              {/* 津波・高潮は沿岸自治体のみ（評価済み level>=0）。内陸/未取得は非表示 */}
+              {tsunamiLevelOf(m.hazard) >= 0 && (
+                <div className={`hazard-cell ${tsunamiLevelOf(m.hazard) > 0 ? "is-risk" : ""}`}>
+                  <Icon name="waves" size={24} />
+                  <div>
+                    <div className="hazard-cell-label">津波浸水想定</div>
+                    <div className="hazard-cell-value">
+                      {coastalHazardLabel(tsunamiLevelOf(m.hazard), m.hazard.tsunamiDepth)}
+                    </div>
+                  </div>
+                </div>
+              )}
+              {stormSurgeLevelOf(m.hazard) >= 0 && (
+                <div className={`hazard-cell ${stormSurgeLevelOf(m.hazard) > 0 ? "is-risk" : ""}`}>
+                  <Icon name="wind" size={24} />
+                  <div>
+                    <div className="hazard-cell-label">高潮浸水想定</div>
+                    <div className="hazard-cell-value">
+                      {coastalHazardLabel(stormSurgeLevelOf(m.hazard), m.hazard.stormSurgeDepth)}
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
             {m.hazard.note && (
               <p className="detail-note">
@@ -546,7 +572,8 @@ function SourceLine({ source, asOf, estimated }: { source: string; asOf: string;
 type IconName =
   | "pin" | "home" | "users" | "yen" | "smile" | "info" | "trendUp" | "trendDown"
   | "alert" | "droplet" | "mountain" | "train" | "building" | "activity"
-  | "minusCircle" | "arrowRight" | "arrowLeft" | "trophy" | "map";
+  | "minusCircle" | "arrowRight" | "arrowLeft" | "trophy" | "map"
+  | "waves" | "wind";
 
 const ICON_PATHS: Record<IconName, ReactNode> = {
   pin: <><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" /></>,
@@ -568,6 +595,8 @@ const ICON_PATHS: Record<IconName, ReactNode> = {
   arrowLeft: <path d="M19 12H5M11 6l-6 6 6 6" />,
   trophy: <><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4Z" /><path d="M7 6H4v2a3 3 0 0 0 3 3M17 6h3v2a3 3 0 0 1-3 3" /></>,
   map: <><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2Z" /><path d="M9 4v14M15 6v14" /></>,
+  waves: <><path d="M2 7c2-2 4-2 6 0s4 2 6 0 4-2 6 0" /><path d="M2 12c2-2 4-2 6 0s4 2 6 0 4-2 6 0" /><path d="M2 17c2-2 4-2 6 0s4 2 6 0 4-2 6 0" /></>,
+  wind: <><path d="M3 8h11a3 3 0 1 0-3-3" /><path d="M3 12h16a3 3 0 1 1-3 3" /><path d="M3 16h7a2.5 2.5 0 1 1-2.5 2.5" /></>,
 };
 
 function Icon({ name, size = 20 }: { name: IconName; size?: number }) {

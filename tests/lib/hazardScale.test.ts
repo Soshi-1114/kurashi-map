@@ -10,6 +10,11 @@ import {
   HAZARD_NODATA_COLOR,
   FLOOD_COLORS,
   FLOOD_MAX_LEVEL,
+  bandLowerMeters,
+  depthRank,
+  tsunamiLevelOf,
+  stormSurgeLevelOf,
+  coastalHazardLabel,
 } from "@/lib/hazardScale";
 
 const base: HazardInfo = {
@@ -81,5 +86,44 @@ describe("floodColor", () => {
   });
   it("対象外は nodata 色", () => {
     expect(floodColor(-1)).toBe(HAZARD_NODATA_COLOR);
+  });
+});
+
+describe("bandLowerMeters（津波・高潮の深さバンド下限）", () => {
+  it("書式違いの両方から下限mを抽出", () => {
+    expect(bandLowerMeters("0.3m以上 ～ 1m未満")).toBe(0.3); // 津波書式
+    expect(bandLowerMeters("1m以上3m未満")).toBe(1);         // 高潮書式
+    expect(bandLowerMeters("5m以上 ～ 10m未満")).toBe(5);
+    expect(bandLowerMeters("20m以上")).toBe(20);
+  });
+  it("『〜未満』のみ（下限なし）は 0", () => {
+    expect(bandLowerMeters("0.3m未満")).toBe(0);
+    expect(bandLowerMeters("")).toBe(0);
+  });
+});
+
+describe("depthRank（下限m→ランク1..8）", () => {
+  it("深いほど大きいランク", () => {
+    expect(depthRank(0)).toBe(1);    // 〜0.3m
+    expect(depthRank(0.3)).toBe(2);
+    expect(depthRank(1)).toBe(3);
+    expect(depthRank(3)).toBe(5);
+    expect(depthRank(20)).toBe(8);
+  });
+});
+
+describe("津波・高潮アクセサと表示", () => {
+  const base = {
+    hasFloodRisk: false, hasLandslideRisk: false, note: "", source: "x", asOf: "2024",
+  };
+  it("level 未設定（旧データ）は -1（未評価）", () => {
+    expect(tsunamiLevelOf({ ...base })).toBe(-1);
+    expect(stormSurgeLevelOf({ ...base })).toBe(-1);
+  });
+  it("coastalHazardLabel: -1=対象外 / 0=想定なし / >=1=最大バンド", () => {
+    expect(coastalHazardLabel(-1)).toBe("対象外");
+    expect(coastalHazardLabel(0)).toBe("想定なし");
+    expect(coastalHazardLabel(7, "10m以上 ～ 15m未満")).toBe("最大 10m以上 ～ 15m未満");
+    expect(coastalHazardLabel(3)).toBe("想定あり"); // depth 欠落時
   });
 });
