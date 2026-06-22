@@ -339,7 +339,8 @@ button { font-family: inherit; }
   border-radius: var(--radius-sm);
   transition: background .12s ease;
 }
-.search-results button:hover { background: var(--accent-soft); }
+.search-results button:hover,
+.search-results button.is-active { background: var(--accent-soft); }
 /* 候補名：所属（都道府県/政令市、薄め・小さめ）＋自治体名（通常） */
 .search-place { display: flex; align-items: baseline; gap: 7px; min-width: 0; }
 .search-pref { font-size: 11.5px; font-weight: 500; color: var(--text-faint); flex-shrink: 0; }
