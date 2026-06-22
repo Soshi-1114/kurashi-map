@@ -7,7 +7,7 @@
 //   flood/tsunami/stormSurge: 大きいほど高リスク（0=なし, -1=対象外, >=1 を描画）
 //   liquefaction: 小さいほど高リスク（1=非常に〜5=しにくい, -1=未評価）。やや以上(1..3)のみ描画
 
-export type HazardOverlayKey = "none" | "flood" | "tsunami" | "stormSurge" | "liquefaction";
+export type HazardOverlayKey = "none" | "flood" | "landslide" | "tsunami" | "stormSurge" | "liquefaction";
 
 export type HazardOverlay = {
   key: Exclude<HazardOverlayKey, "none">;
@@ -16,7 +16,9 @@ export type HazardOverlay = {
   legend: string;      // 凡例の説明（出典の主旨）
   filter: unknown;     // 描画対象（presence）の MapLibre 式
   opacity: unknown;    // fill-opacity（リスクが高いほど濃い）の MapLibre 式
-  gsiLayerId: string;  // 国土地理院ハザードマップポータルのラスタタイル レイヤーID（実区域描画用）
+  // 国土地理院ハザードマップポータルのラスタタイル レイヤーID（実区域描画用）。
+  // 土砂災害は土石流/急傾斜/地すべりの3レイヤーを重ねるため配列。
+  gsiLayerIds: readonly string[];
 };
 
 // 自治体集計ハッチ（比較用）→ 実区域ラスタ（GSI公式タイル）に切り替えるズーム閾値。
@@ -52,7 +54,18 @@ export const HAZARD_OVERLAYS: readonly HazardOverlay[] = [
     legend: "洪水浸水想定（濃いほど深い）",
     filter: [">", ["get", "floodLevel"], 0],
     opacity: FLOOD_OPACITY,
-    gsiLayerId: "01_flood_l2_shinsuishin_data",
+    gsiLayerIds: ["01_flood_l2_shinsuishin_data"],
+  },
+  {
+    key: "landslide",
+    label: "土砂",
+    prop: "landslideLevel",
+    legend: "土砂災害警戒区域（濃い=特別警戒）",
+    filter: [">", ["get", "landslideLevel"], 0],
+    // 1=警戒(イエロー)=0.5 → 2=特別警戒(レッド)=0.82。
+    opacity: ["interpolate", ["linear"], ["get", "landslideLevel"], 1, 0.5, 2, 0.82],
+    // 土石流 / 急傾斜地の崩壊 / 地すべり の3レイヤーを重ねる。
+    gsiLayerIds: ["05_dosekiryukeikaikuiki", "05_kyukeishakeikaikuiki", "05_jisuberikeikaikuiki"],
   },
   {
     key: "tsunami",
@@ -61,7 +74,7 @@ export const HAZARD_OVERLAYS: readonly HazardOverlay[] = [
     legend: "津波浸水想定（濃いほど深い・沿岸のみ）",
     filter: [">", ["get", "tsunamiLevel"], 0],
     opacity: bandOpacity("tsunamiLevel"),
-    gsiLayerId: "04_tsunami_newlegend_data",
+    gsiLayerIds: ["04_tsunami_newlegend_data"],
   },
   {
     key: "stormSurge",
@@ -70,7 +83,7 @@ export const HAZARD_OVERLAYS: readonly HazardOverlay[] = [
     legend: "高潮浸水想定（濃いほど深い・沿岸のみ）",
     filter: [">", ["get", "stormSurgeLevel"], 0],
     opacity: bandOpacity("stormSurgeLevel"),
-    gsiLayerId: "03_hightide_l2_shinsuishin_data",
+    gsiLayerIds: ["03_hightide_l2_shinsuishin_data"],
   },
   {
     key: "liquefaction",
@@ -81,7 +94,7 @@ export const HAZARD_OVERLAYS: readonly HazardOverlay[] = [
     filter: ["all", [">=", ["get", "liquefactionLevel"], 1], ["<=", ["get", "liquefactionLevel"], 3]],
     // 1（非常に）=0.82 → 3（やや）=0.40 の逆順。
     opacity: ["interpolate", ["linear"], ["get", "liquefactionLevel"], 1, 0.82, 3, 0.40],
-    gsiLayerId: "ekijouka_zenkoku",
+    gsiLayerIds: ["ekijouka_zenkoku"],
   },
 ] as const;
 

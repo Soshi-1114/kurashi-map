@@ -139,6 +139,7 @@ export default function MapView({ summary, onMenuClick }: Props) {
             [TREND_PROPERTY]: m.populationTrend ?? "",
             name: m.name,
             floodLevel: m.floodLevel, // -1=対象外, 0=なし, 1..6
+            landslideLevel: m.landslideLevel,
             tsunamiLevel: m.tsunamiLevel,
             stormSurgeLevel: m.stormSurgeLevel,
             liquefactionLevel: m.liquefactionLevel,
@@ -348,23 +349,26 @@ export default function MapView({ summary, onMenuClick }: Props) {
         // 自治体集計ハッチに代わって実際の浸水想定区域ポリゴンを公式の深さ凡例で描く。
         // API キー不要・CORS 可。種別ごとに1ソース/レイヤーを用意し、選択中のみ可視化。
         for (const h of HAZARD_OVERLAYS) {
-          const sid = `gsi-${h.key}`;
-          map.addSource(sid, {
-            type: "raster",
-            tiles: [gsiTileUrl(h.gsiLayerId)],
-            tileSize: 256,
-            minzoom: 2,
-            maxzoom: 17,
-            attribution: GSI_HAZARD_ATTRIBUTION,
+          // 土砂は3レイヤー（土石流/急傾斜/地すべり）。種別ごとに layerId 分のソース/レイヤーを作る。
+          h.gsiLayerIds.forEach((layerId, i) => {
+            const sid = `gsi-${h.key}-${i}`;
+            map.addSource(sid, {
+              type: "raster",
+              tiles: [gsiTileUrl(layerId)],
+              tileSize: 256,
+              minzoom: 2,
+              maxzoom: 17,
+              attribution: GSI_HAZARD_ATTRIBUTION,
+            });
+            map.addLayer({
+              id: sid,
+              type: "raster",
+              source: sid,
+              minzoom: HAZARD_ZONE_ZOOM,
+              layout: { visibility: "none" },
+              paint: { "raster-opacity": 0.7 },
+            }, firstSymbolId);
           });
-          map.addLayer({
-            id: sid,
-            type: "raster",
-            source: sid,
-            minzoom: HAZARD_ZONE_ZOOM,
-            layout: { visibility: "none" },
-            paint: { "raster-opacity": 0.7 },
-          }, firstSymbolId);
         }
         map.addLayer({
           id: "wards-outline",
@@ -607,7 +611,8 @@ export default function MapView({ summary, onMenuClick }: Props) {
     }
     // 実区域ラスタは選択中の種別のみ可視（ズーム閾値はレイヤーの minzoom が制御）。
     for (const h of HAZARD_OVERLAYS) {
-      map.setLayoutProperty(`gsi-${h.key}`, "visibility", h.key === hazardKey ? "visible" : "none");
+      const vis = h.key === hazardKey ? "visible" : "none";
+      h.gsiLayerIds.forEach((_, i) => map.setLayoutProperty(`gsi-${h.key}-${i}`, "visibility", vis));
     }
   }, [hazardKey, mapReady]);
 
