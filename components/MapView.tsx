@@ -48,6 +48,9 @@ export default function MapView({ summary, onMenuClick }: Props) {
   const prefGeoRef = useRef<GeoJSON.FeatureCollection | null>(null);
   const ensurePrefsRef = useRef<((slugs: string[]) => Promise<void>) | null>(null);
   const selectedCodeRef = useRef<string | null>(null);
+  // 直前に selected=true にした自治体コード。選択変更時に「前回を false / 今回を true」
+  // の2回だけ setFeatureState すれば済むよう保持する（全件 forEach の O(n) を回避）。
+  const prevSelectedRef = useRef<string | null>(null);
   const hoveredCodeRef = useRef<string | null>(null);
   const hoveredSourceRef = useRef<"muni" | "wards" | null>(null);
   const activeMetricRef = useRef<MapMetricKey>(DEFAULT_METRIC_KEY);
@@ -65,6 +68,8 @@ export default function MapView({ summary, onMenuClick }: Props) {
   const [filters, setFilters] = useState<MapFilters>(EMPTY_FILTERS);
   const [isMobile, setIsMobile] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  // 検索候補のキーボード選択位置（-1 = 未選択）。コンボボックスの aria-activedescendant に対応。
+  const [activeIndex, setActiveIndex] = useState(-1);
   const [mapReady, setMapReady] = useState(false);
   // 初回ビューのポリゴンが描画され切るまで true にしない（凡例先行・白地図対策）
   const [firstPaintReady, setFirstPaintReady] = useState(false);
@@ -607,13 +612,19 @@ export default function MapView({ summary, onMenuClick }: Props) {
     selectedCodeRef.current = selectedCode;
     const map = mapRef.current;
     if (!map || !mapReady) return;
-    municipalities.forEach((m) => {
-      map.setFeatureState({ source: "muni", id: m.code }, { selected: m.code === selectedCode });
-    });
-    wards.forEach((m) => {
-      map.setFeatureState({ source: "wards", id: m.code }, { selected: m.code === selectedCode });
-    });
-  }, [selectedCode, mapReady, municipalities, wards]);
+    // 前回選択を解除し、今回選択のみ true にする（~1,900件の全件 forEach を回避）。
+    // code が muni / wards どちらの source にあるか不定なので両方に投げる（無い側は no-op）。
+    const prev = prevSelectedRef.current;
+    if (prev && prev !== selectedCode) {
+      map.setFeatureState({ source: "muni", id: prev }, { selected: false });
+      map.setFeatureState({ source: "wards", id: prev }, { selected: false });
+    }
+    if (selectedCode) {
+      map.setFeatureState({ source: "muni", id: selectedCode }, { selected: true });
+      map.setFeatureState({ source: "wards", id: selectedCode }, { selected: true });
+    }
+    prevSelectedRef.current = selectedCode;
+  }, [selectedCode, mapReady]);
 
   // 選択中自治体のフル詳細をオンデマンド取得（初期配信はサマリのみのため）
   useEffect(() => {
@@ -704,6 +715,27 @@ export default function MapView({ summary, onMenuClick }: Props) {
     flyToCode(m.code);
   }, [flyToCode]);
 
+  // 候補リストが変わるたびにキーボード選択位置をリセット
+  useEffect(() => { setActiveIndex(-1); }, [searchQuery]);
+
+  // コンボボックスのキーボード操作（↓↑で候補移動・Enterで確定・Escで閉じる）
+  const onSearchKeyDown = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Escape") { setSearchQuery(""); return; }
+    if (!filtered.length) return;
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setActiveIndex((i) => (i + 1) % filtered.length);
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setActiveIndex((i) => (i <= 0 ? filtered.length - 1 : i - 1));
+    } else if (e.key === "Enter") {
+      if (activeIndex >= 0 && activeIndex < filtered.length) {
+        e.preventDefault();
+        void flyToMuni(filtered[activeIndex]);
+      }
+    }
+  }, [filtered, activeIndex, flyToMuni]);
+
   // パネル開閉はフル詳細の取得完了で判定（取得中の一瞬は閉のまま）
   const rootClass = [
     "map-root",
@@ -768,14 +800,28 @@ export default function MapView({ summary, onMenuClick }: Props) {
               placeholder="自治体名で検索"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={onSearchKeyDown}
               aria-label="自治体検索"
+              role="combobox"
+              aria-expanded={filtered.length > 0}
+              aria-controls="muni-search-listbox"
+              aria-autocomplete="list"
+              aria-activedescendant={activeIndex >= 0 && filtered[activeIndex] ? `sopt-${filtered[activeIndex].code}` : undefined}
             />
           </div>
           {filtered.length > 0 && (
-            <ul className="search-results" aria-label="自治体の検索候補">
-              {filtered.map((m) => (
-                <li key={m.code}>
-                  <button onClick={() => flyToMuni(m)}>
+            <ul id="muni-search-listbox" className="search-results" role="listbox" aria-label="自治体の検索候補">
+              {filtered.map((m, i) => (
+                <li key={m.code} role="presentation">
+                  <button
+                    id={`sopt-${m.code}`}
+                    role="option"
+                    aria-selected={i === activeIndex}
+                    tabIndex={-1}
+                    className={i === activeIndex ? "is-active" : undefined}
+                    onClick={() => flyToMuni(m)}
+                    onMouseEnter={() => setActiveIndex(i)}
+                  >
                     <span className="search-place">
                       {searchContextLabel(m) && (
                         <span className="search-pref">{searchContextLabel(m)}</span>
