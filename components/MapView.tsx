@@ -11,13 +11,18 @@ import type {
   GeoJSONSource,
   MapGeoJSONFeature,
   DataDrivenPropertyValueSpecification,
+  FilterSpecification,
 } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import type { Municipality, MuniSummary } from "@/lib/types";
 import { PREFS, getPrefByCode } from "@/lib/prefs";
 import { RENT_NODATA_COLOR, hasRent } from "@/lib/rentColor";
 import { MAP_METRICS, getMapMetric, DEFAULT_METRIC_KEY, TREND_PROPERTY, type MapMetricKey } from "@/lib/mapMetrics";
-import { trackSelectMunicipality, trackChangeMetric } from "@/lib/analytics";
+import { trackSelectMunicipality, trackChangeMetric, trackApplyFilter } from "@/lib/analytics";
+import {
+  EMPTY_FILTERS, RENT_MAX_OPTIONS, LAND_MAX_OPTIONS,
+  isFilterActive, matchesFilter, buildMatchExpression, type MapFilters,
+} from "@/lib/mapFilters";
 import AreaPanel from "./AreaPanel";
 import MobileSheet from "./MobileSheet";
 
@@ -57,6 +62,7 @@ export default function MapView({ summary, onMenuClick }: Props) {
   const [selectedCode, setSelectedCode] = useState<string | null>(null);
   const [hazardOn, setHazardOn] = useState(true);
   const [activeMetric, setActiveMetric] = useState<MapMetricKey>(DEFAULT_METRIC_KEY);
+  const [filters, setFilters] = useState<MapFilters>(EMPTY_FILTERS);
   const [isMobile, setIsMobile] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [mapReady, setMapReady] = useState(false);
@@ -124,6 +130,7 @@ export default function MapView({ summary, onMenuClick }: Props) {
             [TREND_PROPERTY]: m.populationTrend ?? "",
             name: m.name,
             hasFloodRisk: m.hasFloodRisk ? 1 : 0,
+            hazardEvaluated: m.hazardEvaluated ? 1 : 0,
           };
         }
       };
@@ -236,6 +243,16 @@ export default function MapView({ summary, onMenuClick }: Props) {
             ],
           },
         }, firstSymbolId);
+        // 絞り込み減光：条件に該当しない自治体を白でマスク（既定は非表示。
+        // 塗り分け・災害オーバーレイには手を入れず、この層だけを被せる）
+        map.addLayer({
+          id: "muni-dim",
+          type: "fill",
+          source: "muni",
+          minzoom: MUNI_MIN_ZOOM,
+          layout: { visibility: "none" },
+          paint: { "fill-color": "#f8fafc", "fill-opacity": 0.66 },
+        }, firstSymbolId);
         // 災害リスク オーバーレイ（さらに弱く）
         map.addLayer({
           id: "muni-hazard",
@@ -295,6 +312,14 @@ export default function MapView({ summary, onMenuClick }: Props) {
               0.55,
             ],
           },
+        }, firstSymbolId);
+        map.addLayer({
+          id: "wards-dim",
+          type: "fill",
+          source: "wards",
+          minzoom: WARDS_MIN_ZOOM,
+          layout: { visibility: "none" },
+          paint: { "fill-color": "#f8fafc", "fill-opacity": 0.66 },
         }, firstSymbolId);
         map.addLayer({
           id: "wards-hazard",
@@ -547,6 +572,22 @@ export default function MapView({ summary, onMenuClick }: Props) {
     map.setPaintProperty("wards-fill", "fill-color", expr);
   }, [activeMetric, mapReady]);
 
+  // 条件フィルタ：非該当を減光レイヤーで覆う（フィルタ式の否定を filter に設定）。
+  // 描画と件数を一致させるため、ここの match は matchesFilter（JS版）と同一条件。
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !mapReady) return;
+    const match = buildMatchExpression(filters);
+    for (const id of ["muni-dim", "wards-dim"]) {
+      if (!match) {
+        map.setLayoutProperty(id, "visibility", "none");
+      } else {
+        map.setFilter(id, ["!", match] as FilterSpecification);
+        map.setLayoutProperty(id, "visibility", "visible");
+      }
+    }
+  }, [filters, mapReady]);
+
   // 自治体選択中はベース地図の道路名・水系名ラベルを減光し、選択ポリゴンと
   // パネルに視線を集める。地名(place)は残す。解除で元の opacity に復元。
   useEffect(() => {
@@ -585,6 +626,19 @@ export default function MapView({ summary, onMenuClick }: Props) {
       .catch(() => { if (!aborted) setSelectedDetail(null); });
     return () => { aborted = true; };
   }, [selectedCode]);
+
+  // 条件フィルタの全国該当件数（JS判定。地図の減光と必ず同一条件）。
+  const filterActive = isFilterActive(filters);
+  const matchedCount = useMemo(
+    () => (filterActive ? summary.reduce((n, m) => n + (matchesFilter(m, filters) ? 1 : 0), 0) : 0),
+    [filterActive, filters, summary],
+  );
+
+  // フィルタ条件を更新しつつ GA4 に適用イベントを送る共通ハンドラ。
+  const updateFilters = useCallback((next: MapFilters) => {
+    setFilters(next);
+    if (isFilterActive(next)) trackApplyFilter(next);
+  }, []);
 
   // サイドパネル余白用：選択中自治体と同県・同階層で家賃中央値が近い上位3件。
   const relatedNearby = useMemo(() => {
@@ -782,6 +836,34 @@ export default function MapView({ summary, onMenuClick }: Props) {
               <p className="layers-desc">{getMapMetric(activeMetric).description}</p>
               <div className="layers-title layers-title-sub">オーバーレイ</div>
               <LayerToggle label="災害リスク" checked={hazardOn} onChange={setHazardOn} />
+
+              <div className="layers-title layers-title-sub">絞り込み</div>
+              <SegmentedFilter
+                label="家賃上限"
+                options={RENT_MAX_OPTIONS}
+                value={filters.rentMax}
+                onChange={(v) => updateFilters({ ...filters, rentMax: v })}
+              />
+              <SegmentedFilter
+                label="地価上限"
+                options={LAND_MAX_OPTIONS}
+                value={filters.landMax}
+                onChange={(v) => updateFilters({ ...filters, landMax: v })}
+              />
+              <LayerToggle
+                label="浸水リスクなしに限定"
+                checked={filters.noFlood}
+                onChange={(v) => updateFilters({ ...filters, noFlood: v })}
+              />
+              {filterActive && (
+                <div className="filter-summary" aria-live="polite">
+                  <span className="filter-count">
+                    全国該当 <strong>{matchedCount.toLocaleString()}</strong> 自治体
+                    <span className="filter-count-note">（データなしの自治体は除外）</span>
+                  </span>
+                  <button className="filter-clear" onClick={() => setFilters(EMPTY_FILTERS)}>クリア</button>
+                </div>
+              )}
             </div>
           )}
         </div>
@@ -889,6 +971,43 @@ function LayerToggle({
       <span className="layer-switch" />
       <span className="layer-label">{label}</span>
     </label>
+  );
+}
+
+function SegmentedFilter({
+  label,
+  options,
+  value,
+  onChange,
+}: {
+  label: string;
+  options: readonly { label: string; value: number }[];
+  value: number | null;
+  onChange: (v: number | null) => void;
+}) {
+  return (
+    <div className="filter-row">
+      <span className="filter-row-label">{label}</span>
+      <div className="filter-segments" role="group" aria-label={label}>
+        <button
+          className={`filter-seg ${value == null ? "is-active" : ""}`}
+          aria-pressed={value == null}
+          onClick={() => onChange(null)}
+        >
+          なし
+        </button>
+        {options.map((o) => (
+          <button
+            key={o.value}
+            className={`filter-seg ${value === o.value ? "is-active" : ""}`}
+            aria-pressed={value === o.value}
+            onClick={() => onChange(value === o.value ? null : o.value)}
+          >
+            {o.label}
+          </button>
+        ))}
+      </div>
+    </div>
   );
 }
 

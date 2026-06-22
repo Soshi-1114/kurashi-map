@@ -27,3 +27,12 @@ export function trackSelectMunicipality(code: string, method: "map" | "search"):
 export function trackChangeMetric(metricKey: string): void {
   track("change_metric", { metric_key: metricKey });
 }
+
+/** 条件フィルタの適用。どの条件が有効かを送る。 */
+export function trackApplyFilter(params: { rentMax: number | null; landMax: number | null; noFlood: boolean }): void {
+  track("apply_filter", {
+    rent_max: params.rentMax ?? 0,
+    land_max: params.landMax ?? 0,
+    no_flood: params.noFlood,
+  });
+}
