@@ -22,22 +22,29 @@ const PEEK_PX = 96;   // ハンドル＋自治体名＋家賃の1行が収まる
 // half の高さは「自治体名＋指標カード」の実コンテンツ高に合わせて実測する（余白を出さない）。
 // これは計測前の初期値で、実測値（halfPx state）が入るまでのフォールバック。
 const HALF_PX_FALLBACK = 236;
+// half がコンテンツ実測で画面を占有しすぎないための上限（画面高に対する比）。
+// full=72% より十分小さく、地図の文脈を残す。
+const HALF_MAX_RATIO = 0.62;
 const SHEET_HEIGHT = "calc(72vh + env(safe-area-inset-bottom))"; // 固定高（=full）
 
-// full の実ピクセル高（translate 計算用）。CSS の 72vh とは厳密一致しないが、
-// full の translate は常に 0 になるため見た目の整合は保たれる。
-function fullPx(): number {
+// シート箱の実ピクセル高（translate 計算の基準）。CSS の 72vh は iOS で
+// window.innerHeight と一致しない（URLバー）。translate を innerHeight 基準で
+// 計算すると可視高が CSS箱高とズレてカードが見切れるため、実測 offsetHeight を
+// 基準にする。未計測時のみ innerHeight×0.72 にフォールバック。
+function fallbackSheetPx(): number {
   const h = typeof window !== "undefined" ? window.innerHeight : 800;
   return Math.round(h * 0.72);
 }
-function stageHeightPx(stage: Stage, halfPx: number): number {
+// 各段の「可視高（=シート上端から見える高さ）」。full は箱全体。
+function stageVisiblePx(stage: Stage, halfPx: number, sheetPx: number): number {
   if (stage === "peek") return PEEK_PX;
   if (stage === "half") return halfPx;
-  return fullPx();
+  return sheetPx;
 }
-// 段ごとの translateY（0=full 全表示, 値が大きいほど下に隠れる）
-function stageTranslate(stage: Stage, halfPx: number): number {
-  return fullPx() - stageHeightPx(stage, halfPx);
+// 段ごとの translateY（0=full 全表示, 値が大きいほど下に隠れる）。
+// 可視高 = sheetPx − translate なので translate = sheetPx − 目標可視高。
+function stageTranslate(stage: Stage, halfPx: number, sheetPx: number): number {
+  return sheetPx - stageVisiblePx(stage, halfPx, sheetPx);
 }
 export default function MobileSheet({ municipality, onClose }: Props) {
   const [stage, setStage] = useState<Stage>("half");
@@ -49,6 +56,9 @@ export default function MobileSheet({ municipality, onClose }: Props) {
   const halfContentRef = useRef<HTMLDivElement | null>(null);
   // half 段の高さ（実測）。「自治体名＋指標カード」がちょうど収まる高さに合わせる。
   const [halfPx, setHalfPx] = useState(HALF_PX_FALLBACK);
+  // シート箱の実高（72vh の解決値）。translate 計算の基準。未計測時は null。
+  const [sheetPx, setSheetPx] = useState<number | null>(null);
+  const sheetBasis = sheetPx ?? fallbackSheetPx();
 
   // 新規選択で half に戻す
   useEffect(() => {
@@ -56,14 +66,24 @@ export default function MobileSheet({ municipality, onClose }: Props) {
     setDragY(null);
   }, [municipality?.code]);
 
-  // half 段の高さを実コンテンツに合わせて計測する。指標カードの下端
-  // （ハンドル＋見出しを含むシート先頭からの距離）＋ sheet-content の下パディングを
-  // half 高とし、カード下に無駄な余白が出ないようにする（自治体や折返しで可変）。
+  // シート箱高（sheetPx）と half 段高（halfPx）を実測する。
+  // ・sheetPx: シートの offsetHeight（72vh の実解決値）。translate 基準を innerHeight でなく
+  //   これにすることで CSS箱高と可視高がズレず、カードの見切れを防ぐ。
+  // ・halfPx: 指標カード下端＋下パディング。「名称＋カード」がちょうど見える高さ。カードは
+  //   固定 px 高なので本質的にコンテンツ依存（画面比だけだと高い端末で余白・低い端末で見切れ）。
+  //   ただし極端に低い端末で地図が潰れないよう画面比の上限（HALF_MAX_RATIO）でクランプする。
   useEffect(() => {
-    if (!municipality || stage === "peek") return;
-    const el = halfContentRef.current;
-    if (!el) return;
-    const measure = () => setHalfPx(Math.round(el.offsetTop + el.offsetHeight + 20));
+    if (!municipality) return;
+    const measure = () => {
+      const sh = sheetRef.current?.offsetHeight;
+      if (sh) setSheetPx(sh);
+      const el = halfContentRef.current;
+      if (el && stage !== "peek") {
+        const content = el.offsetTop + el.offsetHeight + 20;
+        const cap = Math.round(window.innerHeight * HALF_MAX_RATIO);
+        setHalfPx(Math.min(Math.round(content), cap));
+      }
+    };
     measure();
     window.addEventListener("resize", measure);
     return () => window.removeEventListener("resize", measure);
@@ -82,8 +102,8 @@ export default function MobileSheet({ municipality, onClose }: Props) {
       return;
     }
     const apply = () => {
-      const full = sheetRef.current?.offsetHeight ?? fullPx();
-      const visible = Math.max(0, full - stageTranslate(stage, halfPx));
+      const sh = sheetRef.current?.offsetHeight ?? fallbackSheetPx();
+      const visible = Math.max(0, sh - stageTranslate(stage, halfPx, sh));
       root.style.setProperty("--sheet-h", `${Math.round(visible)}px`);
     };
     apply();
@@ -103,12 +123,12 @@ export default function MobileSheet({ municipality, onClose }: Props) {
     setStage((s) => (s === "full" ? "half" : s === "half" ? "full" : "half"));
   const collapse = () => setStage("half");
 
-  const maxTranslate = () => fullPx() - PEEK_PX; // peek が最も下
+  const maxTranslate = () => sheetBasis - PEEK_PX; // peek が最も下
 
   const onTouchStart = (e: React.TouchEvent) => {
     dragStartY.current = e.touches[0].clientY;
-    dragStartTranslate.current = stageTranslate(stage, halfPx);
-    setDragY(stageTranslate(stage, halfPx));
+    dragStartTranslate.current = stageTranslate(stage, halfPx, sheetBasis);
+    setDragY(stageTranslate(stage, halfPx, sheetBasis));
   };
   const onTouchMove = (e: React.TouchEvent) => {
     if (dragStartY.current === null) return;
@@ -119,17 +139,17 @@ export default function MobileSheet({ municipality, onClose }: Props) {
   };
   const onTouchEnd = () => {
     if (dragStartY.current === null) return;
-    const live = dragY ?? stageTranslate(stage, halfPx);
+    const live = dragY ?? stageTranslate(stage, halfPx, sheetBasis);
     // 最近傍の段へスナップ
     let target = STAGE_ORDER.reduce<Stage>(
       (best, s) =>
-        Math.abs(stageTranslate(s, halfPx) - live) < Math.abs(stageTranslate(best, halfPx) - live)
+        Math.abs(stageTranslate(s, halfPx, sheetBasis) - live) < Math.abs(stageTranslate(best, halfPx, sheetBasis) - live)
           ? s
           : best,
       STAGE_ORDER[0],
     );
     // フリック補正: 同段に戻る小スワイプでも明確な方向には1段送る
-    const moved = live - stageTranslate(stage, halfPx); // +下方向 / -上方向
+    const moved = live - stageTranslate(stage, halfPx, sheetBasis); // +下方向 / -上方向
     const FLICK = 56;
     if (target === stage) {
       const idx = STAGE_ORDER.indexOf(stage);
@@ -143,11 +163,11 @@ export default function MobileSheet({ municipality, onClose }: Props) {
 
   const heading = m.displayName ?? m.name;
 
-  const translate = dragY !== null ? dragY : stageTranslate(stage, halfPx);
+  const translate = dragY !== null ? dragY : stageTranslate(stage, halfPx, sheetBasis);
   const dragging = dragY !== null;
 
   // scrim は full 付近のみ。full(translate=0)→half へ離れるほど薄くなる。
-  const halfT = stageTranslate("half", halfPx);
+  const halfT = stageTranslate("half", halfPx, sheetBasis);
   const scrimIntensity = halfT > 0 ? Math.max(0, Math.min(1, 1 - translate / halfT)) : 0;
 
   return (
