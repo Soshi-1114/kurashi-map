@@ -43,6 +43,31 @@ const FLOOD_LABELS = ["浸水なし", "〜0.5m", "0.5〜3m", "3〜5m", "5〜10m"
 // 土砂の現象区分コード（A33_001）
 const SLIDE_KIND = { 1: "急傾斜地", 2: "土石流", 3: "地すべり" };
 
+// 内陸（海なし）県。津波・高潮は対象外（海に面さないため想定そのものが無い）。
+const LANDLOCKED = new Set(["tochigi", "gunma", "saitama", "yamanashi", "nagano", "gifu", "shiga", "nara"]);
+const isCoastal = !LANDLOCKED.has(pref.slug);
+
+// 津波/高潮の深さバンド文字列 → 下限メートル/ランク。lib/hazardScale.ts と同期。
+// "0.3m以上 ～ 1m未満"→0.3 / "0.3m未満"→0 / "5m以上10m未満"→5
+function bandLowerMeters(band) {
+  const m = String(band ?? "").match(/([\d.]+)\s*m\s*以上/);
+  return m ? parseFloat(m[1]) : 0;
+}
+function depthRank(meters) {
+  if (meters >= 20) return 8;
+  if (meters >= 10) return 7;
+  if (meters >= 5) return 6;
+  if (meters >= 3) return 5;
+  if (meters >= 2) return 4;
+  if (meters >= 1) return 3;
+  if (meters >= 0.3) return 2;
+  return 1;
+}
+// バンド文字列 → ランク 1..8。バンド無し（非浸水フィーチャ）は 0。
+function coastalLevel(band) {
+  return band ? depthRank(bandLowerMeters(band)) : 0;
+}
+
 // 浸水深ランク 1..6 を取り出す。範囲外/欠損は 0（なし扱い）。
 function floodLevel(props) {
   const v = Number(props?.A31a_205);
@@ -108,9 +133,12 @@ async function processHazardForApi(api, polys, field, getLevel, maxLevel, collec
 
 async function main() {
   const polys = await loadMuniPolys(ROOT, pref, {
-    decorate: (b) => ({ ...b, floodLevel: 0, landslideLevel: 0, rivers: new Set(), slideKinds: new Set() }),
+    decorate: (b) => ({
+      ...b, floodLevel: 0, landslideLevel: 0, rivers: new Set(), slideKinds: new Set(),
+      tsunamiRank: 0, surgeRank: 0, tsunamiBand: "", surgeBand: "",
+    }),
   });
-  console.log(`polys: ${polys.length}`);
+  console.log(`polys: ${polys.length}  (coastal=${isCoastal})`);
 
   console.log("\n[XKT026] 洪水");
   await processHazardForApi("XKT026", polys, "floodLevel", floodLevel, 6, (c, p) => {
@@ -121,6 +149,18 @@ async function main() {
     const k = SLIDE_KIND[p.A33_001];
     if (k) c.slideKinds.add(k);
   });
+  if (isCoastal) {
+    console.log("\n[XKT028] 津波");
+    await processHazardForApi("XKT028", polys, "tsunamiRank", (p) => coastalLevel(p.A40_003), 8, (c, p) => {
+      if (p.A40_003) c.tsunamiBand = String(p.A40_003);
+    });
+    console.log("\n[XKT027] 高潮");
+    await processHazardForApi("XKT027", polys, "surgeRank", (p) => coastalLevel(p.A49_003), 8, (c, p) => {
+      if (p.A49_003) c.surgeBand = String(p.A49_003);
+    });
+  } else {
+    console.log("\n[XKT028/027] 津波・高潮: 内陸県のため対象外（スキップ）");
+  }
 
   const { muni, wards, all, paths } = await loadMuni(ROOT, pref);
   const byCode = new Map(all.map((m) => [m.code, m]));
@@ -134,8 +174,15 @@ async function main() {
       hasLandslideRisk: p.landslideLevel > 0,
       floodLevel: p.floodLevel,
       landslideLevel: p.landslideLevel,
+      // 津波・高潮: 内陸県は -1（対象外）、沿岸県は 0=想定なし / 1..8=深さランク。
+      tsunamiLevel: isCoastal ? p.tsunamiRank : -1,
+      tsunamiDepth: isCoastal && p.tsunamiRank > 0 ? p.tsunamiBand : "",
+      stormSurgeLevel: isCoastal ? p.surgeRank : -1,
+      stormSurgeDepth: isCoastal && p.surgeRank > 0 ? p.surgeBand : "",
       note: buildNote(p),
-      source: "国土数値情報（reinfolib XKT026/029）",
+      source: isCoastal
+        ? "国土数値情報（reinfolib XKT026/027/028/029）"
+        : "国土数値情報（reinfolib XKT026/029）",
       asOf: HAZARD_AS_OF,
     };
   }
@@ -145,7 +192,9 @@ async function main() {
   const f = all.filter((m) => m.hazard.hasFloodRisk).length;
   const l = all.filter((m) => m.hazard.hasLandslideRisk).length;
   const fMax = Math.max(0, ...all.map((m) => m.hazard.floodLevel ?? 0));
-  console.log(`Total: flood=${f}/${all.length} (maxLevel=${fMax}), landslide=${l}/${all.length}`);
+  const ts = all.filter((m) => (m.hazard.tsunamiLevel ?? -1) > 0).length;
+  const ss = all.filter((m) => (m.hazard.stormSurgeLevel ?? -1) > 0).length;
+  console.log(`Total: flood=${f}/${all.length} (maxLevel=${fMax}), landslide=${l}/${all.length}, tsunami=${ts}, stormSurge=${ss}`);
 }
 
 // 段階値とメモ素材（河川名・現象種類）から note を組み立てる。
@@ -161,6 +210,8 @@ function buildNote(p) {
     const kinds = [...p.slideKinds].join("・");
     parts.push(kinds ? `土砂災害${zone}（${kinds}）` : `土砂災害${zone}`);
   }
+  if (p.tsunamiRank > 0) parts.push(`津波浸水想定 最大${p.tsunamiBand}`);
+  if (p.surgeRank > 0) parts.push(`高潮浸水想定 最大${p.surgeBand}`);
   return parts.length === 0 ? "顕著な災害想定区域なし" : parts.join(" / ");
 }
 

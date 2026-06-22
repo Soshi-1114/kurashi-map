@@ -84,3 +84,42 @@ export function floodColor(level: number): string {
   if (level < 0) return HAZARD_NODATA_COLOR;
   return FLOOD_COLORS[Math.min(level, FLOOD_MAX_LEVEL)] ?? FLOOD_COLORS[0];
 }
+
+// ---- 津波・高潮（沿岸のみ）----
+// 深さは reinfolib が文字列バンド（A40_003/A49_003）で返す（津波 "0.3m以上 ～ 1m未満",
+// 高潮 "1m以上3m未満" 等、書式も境界も種別で異なる）。バンドの「下限メートル」を取り出して
+// 大小比較し、市域内最大の深さバンドを採用する。表示はバンド文字列をそのまま使う。
+
+// バンド文字列の下限メートル。"0.3m以上 ～ 1m未満"→0.3 / "0.3m未満"→0 / "5m以上10m未満"→5。
+export function bandLowerMeters(band: string): number {
+  const m = String(band ?? "").match(/([\d.]+)\s*m\s*以上/);
+  return m ? parseFloat(m[1]) : 0;
+}
+
+// 下限メートル → 深さランク 1..8（津波・高潮共通。深いほど大）。0m帯（"〜0.3m未満"等）も
+// 浸水ありとして 1 を返す（presence を 0=なし と区別するため）。
+export function depthRank(meters: number): number {
+  if (meters >= 20) return 8;
+  if (meters >= 10) return 7;
+  if (meters >= 5) return 6;
+  if (meters >= 3) return 5;
+  if (meters >= 2) return 4;
+  if (meters >= 1) return 3;
+  if (meters >= 0.3) return 2;
+  return 1;
+}
+
+// 津波・高潮アクセサ。データを持たない（旧データ/未取得）は -1（未評価扱い）。
+export function tsunamiLevelOf(h: HazardInfo): number {
+  return typeof h.tsunamiLevel === "number" ? h.tsunamiLevel : -1;
+}
+export function stormSurgeLevelOf(h: HazardInfo): number {
+  return typeof h.stormSurgeLevel === "number" ? h.stormSurgeLevel : -1;
+}
+
+// 沿岸ハザードの表示値。level<0=対象外, 0=想定なし, >=1=深さバンド（depth）をそのまま。
+export function coastalHazardLabel(level: number, depth?: string): string {
+  if (level < 0) return "対象外";
+  if (level === 0) return "想定なし";
+  return depth && depth.length > 0 ? `最大 ${depth}` : "想定あり";
+}

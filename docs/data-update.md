@@ -104,10 +104,14 @@ curl -s -o /dev/null -w "%{http_code}\n" -I \
 1. `resolve-prefs`: 対象 slug 一覧（annual と同様）。
 2. `fetch`（県ごとの matrix, `max-parallel: 3` = reinfolib 過負荷防止）:
    - reinfolib タイルキャッシュを `actions/cache` で復元（`.cache/reinfolib-tiles/{pref}`）
-   - `fetch-hazard.mjs`（浸水想定/土砂災害, reinfolib XKT026/029）
+   - `fetch-hazard.mjs`（浸水/土砂/津波/高潮, reinfolib XKT026/029/028/027）
      - 浸水は浸水深ランク `floodLevel` 1..6（A31a_205 の市域内最大）、土砂は区域区分
        `landslideLevel` 1=警戒/2=特別警戒（A33_002 の最大）を段階値で保持。note に河川名
        （A31a_202）・現象種類（A33_001）を付す。段階の意味は `lib/hazardScale.ts` と同期。
+     - 津波 `tsunamiLevel`/`tsunamiDepth`（A40_003）・高潮 `stormSurgeLevel`/`stormSurgeDepth`
+       （A49_003）は沿岸県のみ。深さは文字列バンドなので下限mを抽出してランク化、最大バンドを
+       表示用に保持。**内陸8県（栃木/群馬/埼玉/山梨/長野/岐阜/滋賀/奈良）は対象外（level=-1）**で
+       XKT028/027 を取得しない。沿岸県の内陸自治体は `想定なし`(level=0)。
      - 評価対象外（北方領土など reinfolib 圏外）の `source` センチネルは上書きしない。
      - reinfolib のハザード属性名を実データで確認するには `scripts/probe-hazard-attrs.mjs`
        （`node --env-file=.env.local scripts/probe-hazard-attrs.mjs`）。

@@ -14,6 +14,12 @@ export type HazardInfo = {
   // フォールバックする（lib/hazardScale.ts のアクセサ参照）。
   floodLevel?: number;     // 浸水深ランク 0=なし,1..6（reinfolib XKT026）
   landslideLevel?: number; // 0=なし,1=警戒区域,2=特別警戒区域（reinfolib XKT029）
+  // 津波・高潮（沿岸のみ）。level: -1=対象外（内陸県等）, 0=想定なし, 1..8=深さランク。
+  // depth: 最大深バンドの表示ラベル（例 "3m以上 ～ 5m未満"）。あり(level>=1)のときのみ。
+  tsunamiLevel?: number;     // reinfolib XKT028（A40_003）
+  tsunamiDepth?: string;
+  stormSurgeLevel?: number;  // reinfolib XKT027（A49_003）
+  stormSurgeDepth?: string;
   note: string;          // "荒川沿いに浸水想定" など
   source: string;
   asOf: string;
