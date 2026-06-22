@@ -32,7 +32,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 5,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大10〜20m（荒川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -77,7 +79,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 4,
+      "landslideLevel": 1,
+      "note": "浸水想定 最大5〜10m（鴨川流域・荒川） / 土砂災害警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -122,14 +126,16 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 5,
+      "landslideLevel": 1,
+      "note": "浸水想定 最大10〜20m（鴨川流域・荒川） / 土砂災害警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
     "amenities": {
       "stations": 10,
       "preschools": 79,
-      "medicalFacilities": 287,
+      "medicalFacilities": 285,
       "source": "国土数値情報（reinfolib XKT015/007/010）",
       "asOf": "令和5年度"
     }
@@ -167,7 +173,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 5,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大10〜20m（芝川流域・荒川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -212,12 +220,14 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": false,
-      "note": "浸水想定区域あり",
+      "floodLevel": 4,
+      "landslideLevel": 0,
+      "note": "浸水想定 最大5〜10m（荒川・鴨川流域）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
     "amenities": {
-      "stations": 4,
+      "stations": 3,
       "preschools": 59,
       "medicalFacilities": 161,
       "source": "国土数値情報（reinfolib XKT015/007/010）",
@@ -257,14 +267,16 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": false,
-      "note": "浸水想定区域あり",
+      "floodLevel": 5,
+      "landslideLevel": 0,
+      "note": "浸水想定 最大10〜20m（鴨川流域・荒川）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
     "amenities": {
       "stations": 1,
       "preschools": 38,
-      "medicalFacilities": 81,
+      "medicalFacilities": 80,
       "source": "国土数値情報（reinfolib XKT015/007/010）",
       "asOf": "令和5年度"
     }
@@ -302,14 +314,16 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": false,
-      "note": "浸水想定区域あり",
+      "floodLevel": 5,
+      "landslideLevel": 0,
+      "note": "浸水想定 最大10〜20m（荒川・芝川流域）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
     "amenities": {
       "stations": 4,
       "preschools": 126,
-      "medicalFacilities": 317,
+      "medicalFacilities": 318,
       "source": "国土数値情報（reinfolib XKT015/007/010）",
       "asOf": "令和5年度"
     }
@@ -347,7 +361,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": false,
-      "note": "浸水想定区域あり",
+      "floodLevel": 5,
+      "landslideLevel": 0,
+      "note": "浸水想定 最大10〜20m（鴨川流域・荒川）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -392,7 +408,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 5,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大10〜20m（芝川流域・荒川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -437,7 +455,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 4,
+      "landslideLevel": 1,
+      "note": "浸水想定 最大5〜10m（利根川・赤堀川・野通川） / 土砂災害警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },

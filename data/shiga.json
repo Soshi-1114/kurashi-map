@@ -29,7 +29,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 5,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大10〜20m（白川・大戸川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -71,7 +73,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 4,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大5〜10m（琵琶湖・愛知川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -113,7 +117,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 5,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大10〜20m（琵琶湖・余呉川・姉川） / 土砂災害特別警戒区域（土石流）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -155,7 +161,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 4,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大5〜10m（琵琶湖） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -197,7 +205,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 4,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大5〜10m（琵琶湖・野洲川・草津川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -239,7 +249,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": false,
-      "note": "浸水想定区域あり",
+      "floodLevel": 5,
+      "landslideLevel": 0,
+      "note": "浸水想定 最大10〜20m（琵琶湖・野洲川）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -281,7 +293,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 5,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大10〜20m（野洲川・草津川） / 土砂災害特別警戒区域（土石流・急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -323,7 +337,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 4,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大5〜10m（大戸川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -365,7 +381,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 4,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大5〜10m（琵琶湖・野洲川） / 土砂災害特別警戒区域（土石流・急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -407,7 +425,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 6,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大20m〜（野洲川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -449,7 +469,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 6,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大20m〜（針畑川・安曇川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -491,7 +513,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 5,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大10〜20m（琵琶湖・日野川） / 土砂災害特別警戒区域（土石流・急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -533,7 +557,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 5,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大10〜20m（天野川・琵琶湖） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -575,7 +601,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 5,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大10〜20m（日野川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -617,7 +645,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 4,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大5〜10m（日野川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -659,7 +689,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 4,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大5〜10m（宇曽川・愛知川） / 土砂災害特別警戒区域（土石流）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -701,7 +733,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": false,
-      "note": "浸水想定区域あり",
+      "floodLevel": 4,
+      "landslideLevel": 0,
+      "note": "浸水想定 最大5〜10m（犬上川・宇曽川）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -743,7 +777,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 4,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大5〜10m（犬上川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -785,7 +821,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 5,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大10〜20m（芹川） / 土砂災害特別警戒区域（土石流・急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },

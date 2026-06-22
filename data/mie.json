@@ -29,7 +29,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 6,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大20m〜（名張川・穴倉川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -71,7 +73,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 5,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大10〜20m（内部川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -113,7 +117,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 5,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大10〜20m（笹笛川・宮川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -155,7 +161,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 5,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大10〜20m（櫛田川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -197,7 +205,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 5,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大10〜20m（肱江川・多度川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -239,7 +249,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 5,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大10〜20m（寺川・源明川・御幣川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -281,7 +293,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 5,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大10〜20m（阿清水川・宇陀川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -323,7 +337,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 3,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大3〜5m（古和谷川・又口川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -365,7 +381,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 5,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大10〜20m（加太川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -407,7 +425,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 5,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大10〜20m（堀通川・鳥羽河内川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -449,7 +469,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 6,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大20m〜（北山川・熊野川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -491,7 +513,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 4,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大5〜10m（赤尾川・員弁川） / 土砂災害特別警戒区域（急傾斜地・土石流）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -533,7 +557,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 4,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大5〜10m（南張川・地蔵川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -575,7 +601,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 6,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大20m〜（小山川・大谷川・木津川） / 土砂災害特別警戒区域（土石流・急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -617,7 +645,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": false,
-      "note": "浸水想定区域あり",
+      "floodLevel": 2,
+      "landslideLevel": 0,
+      "note": "浸水想定 最大0.5〜3m（鍋田川）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -659,7 +689,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 4,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大5〜10m（戸上川・員弁川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -701,7 +733,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 4,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大5〜10m（三滝川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -743,7 +777,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 4,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大5〜10m（朝明川・員弁川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -785,7 +821,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": false,
-      "note": "浸水想定区域あり",
+      "floodLevel": 4,
+      "landslideLevel": 0,
+      "note": "浸水想定 最大5〜10m（員弁川・朝明川）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -827,7 +865,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 5,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大10〜20m（蓮川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -869,7 +909,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 4,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大5〜10m（中川・櫛田川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -911,7 +953,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 6,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大20m〜（桧原谷川・栗谷川・寺谷川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -953,7 +997,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 4,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大5〜10m（汁谷川・宮川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -995,7 +1041,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 5,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大10〜20m（注連指川・宮川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -1037,7 +1085,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 6,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大20m〜（大内山川・鈴又谷川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -1079,7 +1129,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 4,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大5〜10m（古和川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -1121,7 +1173,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 5,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大10〜20m（銚子川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -1163,7 +1217,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 5,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大10〜20m（入谷川・尾呂志川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -1205,7 +1261,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 6,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大20m〜（熊野川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },

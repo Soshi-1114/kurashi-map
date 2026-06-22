@@ -29,7 +29,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 4,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大5〜10m（鶴見川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -39,7 +41,7 @@
     "amenities": {
       "stations": 14,
       "preschools": 21,
-      "medicalFacilities": 310,
+      "medicalFacilities": 311,
       "source": "国土数値情報（reinfolib XKT015/007/010）",
       "asOf": "令和5年度"
     }
@@ -74,7 +76,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 3,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大3〜5m（鶴見川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -119,7 +123,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 4,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大5〜10m（帷子川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -164,7 +170,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 2,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大0.5〜3m（帷子川・大岡川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -172,7 +180,7 @@
     "parentCode": "14100",
     "displayName": "横浜市中区",
     "amenities": {
-      "stations": 13,
+      "stations": 12,
       "preschools": 190,
       "medicalFacilities": 420,
       "source": "国土数値情報（reinfolib XKT015/007/010）",
@@ -209,7 +217,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 2,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大0.5〜3m（大岡川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -217,9 +227,9 @@
     "parentCode": "14100",
     "displayName": "横浜市南区",
     "amenities": {
-      "stations": 7,
+      "stations": 8,
       "preschools": 16,
-      "medicalFacilities": 236,
+      "medicalFacilities": 237,
       "source": "国土数値情報（reinfolib XKT015/007/010）",
       "asOf": "令和5年度"
     }
@@ -254,7 +264,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 4,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大5〜10m（帷子川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -264,7 +276,7 @@
     "amenities": {
       "stations": 7,
       "preschools": 17,
-      "medicalFacilities": 248,
+      "medicalFacilities": 245,
       "source": "国土数値情報（reinfolib XKT015/007/010）",
       "asOf": "令和5年度"
     }
@@ -299,7 +311,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 3,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大3〜5m（大岡川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -308,7 +322,7 @@
     "displayName": "横浜市磯子区",
     "amenities": {
       "stations": 7,
-      "preschools": 12,
+      "preschools": 13,
       "medicalFacilities": 213,
       "source": "国土数値情報（reinfolib XKT015/007/010）",
       "asOf": "令和5年度"
@@ -344,7 +358,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 3,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大3〜5m（宮川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -352,7 +368,7 @@
     "parentCode": "14100",
     "displayName": "横浜市金沢区",
     "amenities": {
-      "stations": 19,
+      "stations": 18,
       "preschools": 15,
       "medicalFacilities": 285,
       "source": "国土数値情報（reinfolib XKT015/007/010）",
@@ -389,7 +405,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 5,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大10〜20m（鶴見川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -434,7 +452,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 4,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大5〜10m（境川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -444,7 +464,7 @@
     "amenities": {
       "stations": 4,
       "preschools": 30,
-      "medicalFacilities": 328,
+      "medicalFacilities": 327,
       "source": "国土数値情報（reinfolib XKT015/007/010）",
       "asOf": "令和5年度"
     }
@@ -479,7 +499,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 4,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大5〜10m（境川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -488,7 +510,7 @@
     "displayName": "横浜市港南区",
     "amenities": {
       "stations": 6,
-      "preschools": 24,
+      "preschools": 23,
       "medicalFacilities": 318,
       "source": "国土数値情報（reinfolib XKT015/007/010）",
       "asOf": "令和5年度"
@@ -524,7 +546,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 4,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大5〜10m（帷子川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -534,7 +558,7 @@
     "amenities": {
       "stations": 5,
       "preschools": 33,
-      "medicalFacilities": 299,
+      "medicalFacilities": 303,
       "source": "国土数値情報（reinfolib XKT015/007/010）",
       "asOf": "令和5年度"
     }
@@ -569,7 +593,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 4,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大5〜10m（鶴見川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -577,9 +603,9 @@
     "parentCode": "14100",
     "displayName": "横浜市緑区",
     "amenities": {
-      "stations": 7,
+      "stations": 8,
       "preschools": 16,
-      "medicalFacilities": 231,
+      "medicalFacilities": 233,
       "source": "国土数値情報（reinfolib XKT015/007/010）",
       "asOf": "令和5年度"
     }
@@ -614,7 +640,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 4,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大5〜10m（境川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -624,7 +652,7 @@
     "amenities": {
       "stations": 2,
       "preschools": 17,
-      "medicalFacilities": 148,
+      "medicalFacilities": 146,
       "source": "国土数値情報（reinfolib XKT015/007/010）",
       "asOf": "令和5年度"
     }
@@ -659,7 +687,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 4,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大5〜10m（境川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -667,9 +697,9 @@
     "parentCode": "14100",
     "displayName": "横浜市栄区",
     "amenities": {
-      "stations": 4,
+      "stations": 2,
       "preschools": 13,
-      "medicalFacilities": 124,
+      "medicalFacilities": 127,
       "source": "国土数値情報（reinfolib XKT015/007/010）",
       "asOf": "令和5年度"
     }
@@ -704,7 +734,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 4,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大5〜10m（境川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -749,7 +781,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 4,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大5〜10m（鶴見川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -759,7 +793,7 @@
     "amenities": {
       "stations": 10,
       "preschools": 30,
-      "medicalFacilities": 507,
+      "medicalFacilities": 505,
       "source": "国土数値情報（reinfolib XKT015/007/010）",
       "asOf": "令和5年度"
     }
@@ -794,7 +828,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 4,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大5〜10m（鶴見川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -839,7 +875,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": false,
-      "note": "浸水想定区域あり",
+      "floodLevel": 5,
+      "landslideLevel": 0,
+      "note": "浸水想定 最大10〜20m（鶴見川・多摩川）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -849,7 +887,7 @@
     "amenities": {
       "stations": 18,
       "preschools": 118,
-      "medicalFacilities": 299,
+      "medicalFacilities": 298,
       "source": "国土数値情報（reinfolib XKT015/007/010）",
       "asOf": "令和5年度"
     }
@@ -884,7 +922,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 5,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大10〜20m（鶴見川・多摩川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -893,7 +933,7 @@
     "displayName": "川崎市幸区",
     "amenities": {
       "stations": 5,
-      "preschools": 98,
+      "preschools": 99,
       "medicalFacilities": 220,
       "source": "国土数値情報（reinfolib XKT015/007/010）",
       "asOf": "令和5年度"
@@ -929,7 +969,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 5,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大10〜20m（平瀬川・多摩川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -938,8 +980,8 @@
     "displayName": "川崎市中原区",
     "amenities": {
       "stations": 9,
-      "preschools": 169,
-      "medicalFacilities": 394,
+      "preschools": 167,
+      "medicalFacilities": 392,
       "source": "国土数値情報（reinfolib XKT015/007/010）",
       "asOf": "令和5年度"
     }
@@ -974,7 +1016,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 4,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大5〜10m（平瀬川・多摩川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -984,7 +1028,7 @@
     "amenities": {
       "stations": 7,
       "preschools": 115,
-      "medicalFacilities": 249,
+      "medicalFacilities": 250,
       "source": "国土数値情報（reinfolib XKT015/007/010）",
       "asOf": "令和5年度"
     }
@@ -1019,7 +1063,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 4,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大5〜10m（多摩川・三沢川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -1064,7 +1110,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 4,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大5〜10m（平瀬川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -1074,7 +1122,7 @@
     "amenities": {
       "stations": 3,
       "preschools": 102,
-      "medicalFacilities": 229,
+      "medicalFacilities": 230,
       "source": "国土数値情報（reinfolib XKT015/007/010）",
       "asOf": "令和5年度"
     }
@@ -1109,7 +1157,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 4,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大5〜10m（三沢川・鶴見川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -1119,7 +1169,7 @@
     "amenities": {
       "stations": 9,
       "preschools": 74,
-      "medicalFacilities": 232,
+      "medicalFacilities": 233,
       "source": "国土数値情報（reinfolib XKT015/007/010）",
       "asOf": "令和5年度"
     }
@@ -1154,7 +1204,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 4,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大5〜10m（道志川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -1163,8 +1215,8 @@
     "displayName": "相模原市緑区",
     "amenities": {
       "stations": 5,
-      "preschools": 102,
-      "medicalFacilities": 185,
+      "preschools": 101,
+      "medicalFacilities": 186,
       "source": "国土数値情報（reinfolib XKT015/007/010）",
       "asOf": "令和5年度"
     }
@@ -1199,7 +1251,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 6,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大20m〜（相模川・境川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -1244,7 +1298,9 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "note": "浸水想定区域あり / 土砂災害警戒区域あり",
+      "floodLevel": 4,
+      "landslideLevel": 2,
+      "note": "浸水想定 最大5〜10m（鳩川・相模川） / 土砂災害特別警戒区域（急傾斜地）",
       "source": "国土数値情報（reinfolib XKT026/029）",
       "asOf": "2024"
     },
@@ -1253,7 +1309,7 @@
     "displayName": "相模原市南区",
     "amenities": {
       "stations": 8,
-      "preschools": 141,
+      "preschools": 142,
       "medicalFacilities": 371,
       "source": "国土数値情報（reinfolib XKT015/007/010）",
       "asOf": "令和5年度"
