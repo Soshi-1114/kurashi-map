@@ -28,6 +28,7 @@ export function muniLastModified(m: Municipality): Date | null {
     m.rent?.asOf,
     m.landPrice?.asOf,
     m.waitlistChildren?.asOf,
+    m.foreignResidents?.asOf,
     m.hazard?.asOf,
     m.amenities?.asOf,
   ];

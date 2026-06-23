@@ -40,6 +40,7 @@ npx vitest run tests/lib/rentColor.test.ts   # 単一テストファイルの実
 - `lib/landPrice.ts` `hasLandPrice` — 地価（標準地がない自治体 → 対象外）
 - `lib/waitlist.ts` `isWaitlistDisclosed` — 待機児童（政令市は市単位集計。区別公表市と非公表市がある）
 - `lib/coverage.ts` `isHazardEvaluated` / `isAmenitiesCounted` — ハザード・生活インフラ（reinfolib 圏外 → 対象外）
+- `lib/foreignResidents.ts` `hasForeignData` / `foreignRatioPct` — 在留外国人（北方領土6村は調査対象外 → 対象外）。総数のみ収録し人口比は実行時算出（保存しない）。国籍内訳は出典の Power Pivot 制約で未収録（経緯は `docs/data-update.md` §7）
 
 その他の固定制約: `lib/types.ts`・データスキーマ・家賃の色しきい値は安易に変えない。API キーはサーバー／スクリプト専用でクライアントに露出させない。**治安・犯罪データは扱わない**（法務方針）。
 

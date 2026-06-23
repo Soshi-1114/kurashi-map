@@ -509,6 +509,8 @@ button { font-family: inherit; }
   font-size: var(--text-xs);
   line-height: 1.55;
   color: var(--text-muted);
+  /* description 中の \n を改行として描画（出典を別行に）。通常の空白は折り返し維持。 */
+  white-space: pre-line;
 }
 .layers-title-sub { margin-top: 14px; }
 
@@ -1076,6 +1078,7 @@ button { font-family: inherit; }
 .tone-kids   { --tone-bg: #e1f5ee; --tone-fg: #0f6e56; }
 .tone-hazard { --tone-bg: #faeeda; --tone-fg: #854f0b; }
 .tone-infra  { --tone-bg: #eeedfe; --tone-fg: #534ab7; }
+.tone-foreign { --tone-bg: #e2f4f1; --tone-fg: #0d6e63; }
 
 .detail-hero {
   padding: 26px 26px 22px;
@@ -1337,6 +1340,20 @@ button { font-family: inherit; }
 .mini-card-flag.flag-muted { color: var(--text-muted); background: var(--border); }
 .mini-card-sub { font-size: var(--text-xs); color: var(--text-faint); margin: 8px 0 0; }
 .mini-card.center { text-align: center; }
+
+/* 国籍内訳（上位5件）。内訳データを収録した時に点灯する一覧表示。 */
+.nationality-list { list-style: none; margin: 6px 0 0; padding: 0; }
+.nationality-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: var(--text-sm);
+  padding: 3px 0;
+  border-bottom: 1px solid var(--border);
+}
+.nationality-item:last-child { border-bottom: 0; }
+.nationality-name { color: var(--text); }
+.nationality-count { color: var(--text-muted); font-variant-numeric: tabular-nums; }
 .infra-card { background: var(--bg); border: none; }
 .infra-card svg { color: var(--tone-fg, var(--accent)); }
 .infra-card .mini-card-value { margin-top: 5px; }

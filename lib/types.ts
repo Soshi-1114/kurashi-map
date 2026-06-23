@@ -43,6 +43,13 @@ export type Municipality = {
   rent: Metric;          // 民営借家中央値
   landPrice: Metric;     // 住宅地地価
   waitlistChildren: Metric; // 待機児童（value=人数）
+  // 在留外国人総数（value=人数）。出入国在留管理庁 在留外国人統計。北方領土等は
+  // source に「対象外」を持つ（lib/foreignResidents.ts hasForeignData 参照）。
+  // 人口比（%）は保存せず population と突き合わせて実行時に算出する。
+  foreignResidents: Metric;
+  // 国籍上位（多様性表示用）。現状の整形では未収録のため任意。総数10人以下は
+  // 国籍が秘匿（注2）＝「データ非開示」扱い（isNationalityDisclosed 参照）。
+  foreignNationalities?: { nationality: string; count: number }[];
   hazard: HazardInfo;
   amenities?: {
     stations: number;            // 駅数
@@ -66,6 +73,9 @@ export type MuniSummary = {
   rent: number;          // rent.value（円/月）
   landPrice: number;     // landPrice.value（円/㎡）。<=0 はデータなし
   populationTrend: Municipality["populationTrend"]; // 人口トレンド（地図の塗り分け用）
+  // 在留外国人の人口比（%）。地図の塗り分け用。-1=データなし（北方領土等の対象外／
+  // 人口不明）。0% は実データ（lib/foreignResidents.ts foreignRatioPct で算出）。
+  foreignRatio: number;
   // 浸水深ランク。-1=評価対象外（reinfolib圏外）, 0=なし, 1..6（lib/hazardScale.ts）。
   // 旧 hasFloodRisk(>0)・hazardEvaluated(>=0) を1フィールドに集約。地図の濃淡と
   // 「浸水深◯m以下」フィルタの単一ソース。

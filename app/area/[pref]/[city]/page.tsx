@@ -12,6 +12,7 @@ import { hasRent, rentBand, RENT_BAND_LABELS } from "@/lib/rentColor";
 import { isWaitlistDisclosed } from "@/lib/waitlist";
 import { hasLandPrice } from "@/lib/landPrice";
 import { isHazardEvaluated, isAmenitiesCounted, coverageReason } from "@/lib/coverage";
+import { hasForeignData, foreignRatioPct, isNationalityDisclosed } from "@/lib/foreignResidents";
 import {
   floodLevelOf,
   landslideLevelOf,
@@ -388,6 +389,49 @@ export default async function AreaPage({ params }: { params: Params }) {
       )}
 
       <section className="detail-section">
+        <SectionHead icon="users" tone="tone-foreign" title="外国人住民（多様性・国際性）" />
+        {hasForeignData(m.foreignResidents.source) ? (
+          <ul className="mini-cards cols-2">
+            <li className="mini-card">
+              <div className="mini-card-label">外国人住民数</div>
+              <div className="mini-card-value">
+                {m.foreignResidents.value.toLocaleString()}
+                <span className="unit"> 人</span>
+                <span className="mini-card-flag flag-muted">人口比 {foreignRatioPct(m).toFixed(2)}%</span>
+              </div>
+              <p className="mini-card-sub">出典: {m.foreignResidents.source}（{m.foreignResidents.asOf}）</p>
+            </li>
+            <li className="mini-card">
+              <div className="mini-card-label">主な国籍（上位5）</div>
+              {m.foreignNationalities && m.foreignNationalities.length > 0 ? (
+                <ul className="nationality-list">
+                  {m.foreignNationalities.slice(0, 5).map((n) => (
+                    <li key={n.nationality} className="nationality-item">
+                      <span className="nationality-name">{n.nationality}</span>
+                      <span className="nationality-count">{n.count.toLocaleString()}人</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <>
+                  <div className="mini-card-value is-nodata">
+                    {isNationalityDisclosed(m.foreignResidents.value) ? "準備中" : "データ非開示"}
+                  </div>
+                  <p className="mini-card-sub">
+                    {isNationalityDisclosed(m.foreignResidents.value)
+                      ? "国籍別内訳は今後追加予定です。"
+                      : "総数10人以下のため国籍・地域は非開示（在留外国人統計の秘匿処理）。"}
+                  </p>
+                </>
+              )}
+            </li>
+          </ul>
+        ) : (
+          <NoDataCard text="在留外国人統計の対象外です。" reason={coverageReason(m.foreignResidents.source)} />
+        )}
+      </section>
+
+      <section className="detail-section">
         <SectionHead title="家賃水準が近い自治体" />
         <p className="detail-sublead">{m.name}と家賃中央値が近い{prefName}の自治体です。</p>
         <ul className="related-grid">
@@ -467,7 +511,7 @@ export default async function AreaPage({ params }: { params: Params }) {
       <section className="detail-section">
         <SectionHead title="出典・データについて" />
         <p className="detail-p detail-p-muted">
-          本ページの数値は政府統計・国土数値情報の実データです。家賃は住宅・土地統計調査、人口は国勢調査（ともに e-Stat 経由）、地価は地価公示・地価調査、ハザード・生活インフラは不動産情報ライブラリ（reinfolib）／国土数値情報、待機児童はこども家庭庁の公表値に基づきます。データのない項目は推計で埋めず「データなし／対象外」と明示しています。
+          本ページの数値は政府統計・国土数値情報の実データです。家賃は住宅・土地統計調査、人口は国勢調査（ともに e-Stat 経由）、地価は地価公示・地価調査、ハザード・生活インフラは不動産情報ライブラリ（reinfolib）／国土数値情報、待機児童はこども家庭庁、外国人住民は出入国在留管理庁「在留外国人統計」（e-Stat）の公表値に基づきます。データのない項目は推計で埋めず「データなし／対象外」と明示しています。
         </p>
       </section>
 

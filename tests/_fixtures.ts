@@ -32,6 +32,7 @@ export function muni(partial: Partial<Municipality> = {}): Municipality {
     rent: metric({ value: 60000 }),
     landPrice: metric({ value: 200000, unit: "円/㎡" }),
     waitlistChildren: metric({ value: 0, unit: "人" }),
+    foreignResidents: metric({ value: 12000, unit: "人", source: "出入国在留管理庁 在留外国人統計" }),
     hazard: hazard(),
     ...partial,
   };
