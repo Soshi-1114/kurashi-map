@@ -1,0 +1,33 @@
+version: 2
+updates:
+  # npm 依存。セキュリティ修正・メジャー更新（next 15 / vitest 3 等）の提案を受ける。
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "04:00"
+      timezone: Asia/Tokyo
+    open-pull-requests-limit: 5
+    groups:
+      # パッチ/マイナーはまとめて1 PR にし、レビュー負荷を下げる。
+      minor-and-patch:
+        update-types:
+          - minor
+          - patch
+    labels:
+      - dependencies
+      - security
+
+  # GitHub Actions の参照（SHA ピン留め後の更新追従にも必要）。
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "04:00"
+      timezone: Asia/Tokyo
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+      - github-actions

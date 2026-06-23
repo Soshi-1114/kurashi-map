@@ -1,0 +1,36 @@
+name: Security Audit
+
+# 依存関係の脆弱性ゲート。high 以上の未トリアージ脆弱性で CI を落とす
+# （トリアージ済み除外は scripts/audit-gate.mjs の ALLOW を参照）。
+on:
+  pull_request:
+    paths:
+      - "package.json"
+      - "package-lock.json"
+      - "scripts/audit-gate.mjs"
+      - ".github/workflows/audit.yml"
+  push:
+    branches: [main]
+  schedule:
+    # 毎週月曜 04:00 JST（= 日曜 19:00 UTC）。新規 advisory を定期検知。
+    - cron: "0 19 * * 0"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: npm audit gate (high+)
+        run: node scripts/audit-gate.mjs
