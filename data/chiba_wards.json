@@ -50,6 +50,13 @@
       "medicalFacilities": 377,
       "source": "国土数値情報（reinfolib XKT015/007/010）",
       "asOf": "令和5年度"
+    },
+    "foreignResidents": {
+      "value": 8926,
+      "unit": "人",
+      "source": "出入国在留管理庁 在留外国人統計",
+      "asOf": "2024-12",
+      "isEstimated": false
     }
   },
   {
@@ -103,6 +110,13 @@
       "medicalFacilities": 200,
       "source": "国土数値情報（reinfolib XKT015/007/010）",
       "asOf": "令和5年度"
+    },
+    "foreignResidents": {
+      "value": 7351,
+      "unit": "人",
+      "source": "出入国在留管理庁 在留外国人統計",
+      "asOf": "2024-12",
+      "isEstimated": false
     }
   },
   {
@@ -156,6 +170,13 @@
       "medicalFacilities": 207,
       "source": "国土数値情報（reinfolib XKT015/007/010）",
       "asOf": "令和5年度"
+    },
+    "foreignResidents": {
+      "value": 5556,
+      "unit": "人",
+      "source": "出入国在留管理庁 在留外国人統計",
+      "asOf": "2024-12",
+      "isEstimated": false
     }
   },
   {
@@ -209,6 +230,13 @@
       "medicalFacilities": 155,
       "source": "国土数値情報（reinfolib XKT015/007/010）",
       "asOf": "令和5年度"
+    },
+    "foreignResidents": {
+      "value": 5661,
+      "unit": "人",
+      "source": "出入国在留管理庁 在留外国人統計",
+      "asOf": "2024-12",
+      "isEstimated": false
     }
   },
   {
@@ -262,6 +290,13 @@
       "medicalFacilities": 172,
       "source": "国土数値情報（reinfolib XKT015/007/010）",
       "asOf": "令和5年度"
+    },
+    "foreignResidents": {
+      "value": 2179,
+      "unit": "人",
+      "source": "出入国在留管理庁 在留外国人統計",
+      "asOf": "2024-12",
+      "isEstimated": false
     }
   },
   {
@@ -315,6 +350,13 @@
       "medicalFacilities": 192,
       "source": "国土数値情報（reinfolib XKT015/007/010）",
       "asOf": "令和5年度"
+    },
+    "foreignResidents": {
+      "value": 10398,
+      "unit": "人",
+      "source": "出入国在留管理庁 在留外国人統計",
+      "asOf": "2024-12",
+      "isEstimated": false
     }
   }
 ]

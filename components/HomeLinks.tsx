@@ -12,7 +12,7 @@ export default function HomeLinks({ popular }: { popular: PopularMuni[] }) {
     <div className="home-links-inner">
       <p className="home-links-lead-title">市区町村の住みやすさを、地図とデータで比較</p>
       <p className="home-links-lead">
-        全国1,918市区町村の家賃・地価・人口・待機児童・災害リスクを、政府統計の実データで横断比較できます（推計値は使いません）。
+        全国1,918市区町村の家賃・地価・人口・待機児童・災害リスク・外国人住民比率を、政府統計の実データで横断比較できます（推計値は使いません）。
       </p>
 
       <section className="home-links-block">
@@ -51,7 +51,7 @@ export default function HomeLinks({ popular }: { popular: PopularMuni[] }) {
       )}
 
       <p className="home-links-foot">
-        © KurashiMap — 出典: e-Stat（住宅・土地統計調査／国勢調査）・地価公示／地価調査・不動産情報ライブラリ・こども家庭庁
+        © KurashiMap — 出典: e-Stat（住宅・土地統計調査／国勢調査）・地価公示／地価調査・不動産情報ライブラリ・こども家庭庁・出入国在留管理庁 在留外国人統計（e-Stat）
       </p>
     </div>
   );

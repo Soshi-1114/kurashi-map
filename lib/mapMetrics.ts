@@ -3,11 +3,12 @@
 // ツールチップ整形をデータ駆動で参照する。しきい値/配色は契約面として固定。
 
 import { RENT_THRESHOLDS, RENT_COLORS, RENT_NODATA_COLOR } from "./rentColor";
+import { FOREIGN_RATIO_THRESHOLDS, FOREIGN_COLORS, FOREIGN_NODATA_RATIO } from "./foreignResidents";
 import type { Municipality } from "./types";
 
 const NODATA_COLOR = RENT_NODATA_COLOR; // gray-300 を欠損色として全指標で共通化
 
-export type MapMetricKey = "rent" | "landPrice" | "populationTrend";
+export type MapMetricKey = "rent" | "landPrice" | "populationTrend" | "foreignRatio";
 
 type NumericLegend = {
   kind: "numeric";
@@ -32,11 +33,14 @@ export type MapMetric = {
   formatValue: (raw: unknown) => string;
 };
 
-// 数値指標 → MapLibre step 式。<=0（センチネル）はデータなし色。
+// 数値指標 → MapLibre step 式。値 <= nodataMax（センチネル）はデータなし色。
+// 既定 nodataMax=0（家賃・地価は実値が常に正なので 0以下＝欠損）。在留外国人比率は
+// 0% が実データのため nodataMax=-1 を渡し、欠損(-1)だけをデータなしに分岐する。
 function numericStepExpression(
   property: string,
   thresholds: readonly number[],
   colors: readonly string[],
+  nodataMax = 0,
 ): unknown {
   const step: unknown[] = ["step", ["get", property], colors[0]];
   for (let i = 0; i < thresholds.length; i++) {
@@ -44,7 +48,7 @@ function numericStepExpression(
   }
   return [
     "case",
-    ["<=", ["to-number", ["get", property], 0], 0], NODATA_COLOR,
+    ["<=", ["to-number", ["get", property], nodataMax], nodataMax], NODATA_COLOR,
     step,
   ];
 }
@@ -122,6 +126,26 @@ export const MAP_METRICS: readonly MapMetric[] = [
     formatValue: (raw) => {
       const s = String(raw ?? "");
       return s || "データなし";
+    },
+  },
+  {
+    key: "foreignRatio",
+    label: "外国人比率",
+    legendTitle: "外国人住民の割合（%）",
+    description: "住民に占める外国人住民の割合（多様性・国際性の目安）。出典: 在留外国人統計（e-Stat）。",
+    nodataLabel: "データなし（北方領土など対象外）",
+    legend: {
+      kind: "numeric",
+      colors: FOREIGN_COLORS,
+      // 1% / 2% / 3% / 5%（5セルの境界4つ）
+      scaleLabels: FOREIGN_RATIO_THRESHOLDS.map((t) => `${t}%`),
+    },
+    colorExpression: () =>
+      numericStepExpression("foreignRatio", FOREIGN_RATIO_THRESHOLDS, FOREIGN_COLORS, FOREIGN_NODATA_RATIO),
+    formatValue: (raw) => {
+      const v = Number(raw);
+      if (!Number.isFinite(v) || v < 0) return "データなし";
+      return `${v.toFixed(1)}%`;
     },
   },
 ];

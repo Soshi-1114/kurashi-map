@@ -6,6 +6,7 @@
 import { Municipality, MuniSummary } from "./types";
 import { PREFS, getPrefBySlug, getPrefByCode, loadPrefData } from "./prefs";
 import { floodLevelOf, landslideLevelOf, tsunamiLevelOf, stormSurgeLevelOf, liquefactionLevelOf } from "./hazardScale";
+import { foreignRatioPct } from "./foreignResidents";
 
 // pref データのキャッシュ（同一 build/request 内で同じ pref を複数回呼んでも 1 度しかロードしない）
 const cache = new Map<string, Promise<{ muni: Municipality[]; wards: Municipality[] }>>();
@@ -52,6 +53,11 @@ export async function listAllAcrossPrefs(): Promise<Municipality[]> {
   return all;
 }
 
+// 人口比（%）を小数2桁に丸める。データなしセンチネル（負値）はそのまま通す。
+function roundRatio(r: number): number {
+  return r < 0 ? r : Math.round(r * 100) / 100;
+}
+
 /**
  * 全 pref 横断の軽量サマリ。トップ地図の初期配信用（検索・色付け・分割に必要な
  * 最小フィールドのみ）。フル Municipality（約1.8MB）を積まずに済む。
@@ -71,6 +77,8 @@ export async function listSummaryAcrossPrefs(): Promise<MuniSummary[]> {
         rent: m.rent.value,
         landPrice: m.landPrice.value,
         populationTrend: m.populationTrend,
+        // 人口比は小数2桁に丸めてサマリ配信を軽量化（-1=データなしはそのまま）。
+        foreignRatio: roundRatio(foreignRatioPct(m)),
         floodLevel: floodLevelOf(m.hazard),
         landslideLevel: landslideLevelOf(m.hazard),
         tsunamiLevel: tsunamiLevelOf(m.hazard),

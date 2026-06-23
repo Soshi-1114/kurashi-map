@@ -141,6 +141,7 @@ export default function MapView({ summary, onMenuClick }: Props) {
             rent: m.rent,
             landPrice: m.landPrice,
             [TREND_PROPERTY]: m.populationTrend ?? "",
+            foreignRatio: m.foreignRatio,
             name: m.name,
             floodLevel: m.floodLevel, // -1=対象外, 0=なし, 1..6
             landslideLevel: m.landslideLevel,

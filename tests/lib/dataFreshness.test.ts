@@ -38,6 +38,7 @@ describe("muniLastModified", () => {
       rent: metric({ asOf: "-" }),
       landPrice: metric({ asOf: "-", unit: "円/㎡" }),
       waitlistChildren: metric({ asOf: "-", unit: "人" }),
+      foreignResidents: metric({ asOf: "-", unit: "人" }),
       hazard: hazard({ asOf: "-" }),
     });
     expect(muniLastModified(m)).toBeNull();

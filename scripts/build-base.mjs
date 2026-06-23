@@ -77,6 +77,7 @@ const META = {
   rent:      { value: 0, unit: "円/月", source: "サンプル", asOf: "-", isEstimated: true },
   landPrice: { value: 0, unit: "円/㎡", source: "サンプル", asOf: "-", isEstimated: true },
   waitlistChildren: { value: 0, unit: "人", source: "サンプル", asOf: "-", isEstimated: true },
+  foreignResidents: { value: 0, unit: "人", source: "サンプル", asOf: "-", isEstimated: true },
   hazard:    { hasFloodRisk: false, hasLandslideRisk: false, note: "", source: "サンプル", asOf: "-" },
   amenities: { stations: 0, preschools: 0, medicalFacilities: 0, source: "サンプル", asOf: "-" },
 };
@@ -92,6 +93,7 @@ function skeleton(code, name, extra = {}) {
     rent: { ...META.rent },
     landPrice: { ...META.landPrice },
     waitlistChildren: { ...META.waitlistChildren },
+    foreignResidents: { ...META.foreignResidents },
     hazard: { ...META.hazard },
     amenities: { ...META.amenities },
   };
