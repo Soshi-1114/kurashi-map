@@ -117,7 +117,7 @@ export default function MapView({ summary, onMenuClick }: Props) {
     let disposed = false;
     let cleanup: (() => void) | null = null;
 
-    void (async () => {
+    const startInit = () => void (async () => {
       const { default: maplibregl } = await import("maplibre-gl");
       // 動的 import 中にアンマウントされた / 既にマップが立っていれば中断
       if (disposed || !containerRef.current || mapRef.current) return;
@@ -583,8 +583,26 @@ export default function MapView({ summary, onMenuClick }: Props) {
       if (disposed) cleanup();
     })();
 
+    // スケルトン(LCP 要素)の描画を先にコミットさせてから MapLibre(~209KB)の
+    // import + 初期化に入る。低速端末では初期ペイント/LCP がマップ初期化(TTI)の
+    // 裏に並んで待たされやすいので、メインスレッドの混雑窓を 1 サイクルずらす。
+    // idle 非対応(Safari 等)は次フレーム相当(1ms)で起動する。
+    const w = window as Window & {
+      requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number;
+      cancelIdleCallback?: (id: number) => void;
+    };
+    let cancelStart: () => void;
+    if (w.requestIdleCallback) {
+      const id = w.requestIdleCallback(startInit, { timeout: 1500 });
+      cancelStart = () => w.cancelIdleCallback?.(id);
+    } else {
+      const id = window.setTimeout(startInit, 1);
+      cancelStart = () => window.clearTimeout(id);
+    }
+
     return () => {
       disposed = true;
+      cancelStart();
       cleanup?.();
     };
   }, [byCode]);

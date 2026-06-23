@@ -70,10 +70,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ja">
       <body>
-        {/* Google tag (gtag.js) — GA4 閲覧トラッキング */}
+        {/* Google tag (gtag.js) — GA4 閲覧トラッキング。
+            重いライブラリ本体(~167KB)は lazyOnload にし、初期表示のクリティカル窓
+            （低速回線の帯域・メインスレッド）から外す。下の gtag-init は afterInteractive
+            のまま window.gtag/dataLayer を早期に定義するので、ライブラリ到着前に発火する
+            計測（web-vitals 等）も dataLayer にキューされ、ロード後にまとめて送信される。 */}
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
         <Script id="gtag-init" strategy="afterInteractive">
           {`
