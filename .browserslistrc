@@ -1,0 +1,6 @@
+# ビルドのトランスパイル/ポリフィル対象ブラウザ。
+# 地図(MapLibre GL v4)が WebGL2・モダン JS を要求し、旧ブラウザでは元々動かないため、
+# ビルドターゲットも近年のブラウザに揃える。これにより Next/SWC が古い構文向けに注入する
+# 不要なレガシーコード・ポリフィルを削減する（Lighthouse: legacy-javascript 対策）。
+last 2 years
+not dead
