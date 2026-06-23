@@ -1,7 +1,10 @@
 // public/*.geojson のサイズ最適化（パフォーマンス用）。
 //  - turf.simplify で頂点を間引く（関東7県＋prefecturesは未簡略化なので効果大）
-//  - 座標を5桁(≈1m)に丸め、連続重複点を除去
-// data には触れない。表示は最大 z13.5 なのでこの精度で見た目はほぼ不変。
+//  - 座標を4桁(≈10m)に丸め、連続重複点を除去
+// data には触れない。表示は最大 z13.5（≈11m/px @ lat35）で、4桁の丸め誤差は
+// 最大ズーム時でも約1px・それ以下のズームでは1px未満のため見た目はほぼ不変。
+// 丸め桁を下げると隣接頂点が重複に潰れて dedup で更に間引かれ、低速回線での
+// 初期 geojson 転送量（prefectures + ビューポート内の県）を削減できる。
 //
 // 実行: node --max-old-space-size=4096 scripts/optimize-geojson.mjs
 
@@ -13,7 +16,7 @@ import * as turf from "@turf/turf";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PUB = path.resolve(__dirname, "../public");
 
-const P = 1e5; // 5桁
+const P = 1e4; // 4桁(≈10m)
 const r1 = (n) => Math.round(n * P) / P;
 
 function roundDedupRing(ring) {
