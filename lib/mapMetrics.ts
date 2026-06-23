@@ -132,7 +132,9 @@ export const MAP_METRICS: readonly MapMetric[] = [
     key: "foreignRatio",
     label: "外国人比率",
     legendTitle: "外国人住民の割合（%）",
-    description: "住民に占める外国人住民の割合（多様性・国際性の目安）。出典: 在留外国人統計（e-Stat）。",
+    // 出典は改行して別行に（レイヤーパネルの横幅が広がりすぎないように。.layers-desc は
+    // white-space: pre-line で \n を改行として描画する）。
+    description: "住民に占める外国人住民の割合（多様性・国際性の目安）。\n出典: 在留外国人統計（e-Stat）。",
     nodataLabel: "データなし（北方領土など対象外）",
     legend: {
       kind: "numeric",

@@ -509,6 +509,8 @@ button { font-family: inherit; }
   font-size: var(--text-xs);
   line-height: 1.55;
   color: var(--text-muted);
+  /* description 中の \n を改行として描画（出典を別行に）。通常の空白は折り返し維持。 */
+  white-space: pre-line;
 }
 .layers-title-sub { margin-top: 14px; }
 
