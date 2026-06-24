@@ -8,6 +8,8 @@ import type { Municipality } from "./types";
 import { hasRent } from "./rentColor";
 import { hasLandPrice } from "./landPrice";
 import { isWaitlistDisclosed } from "./waitlist";
+import { hasForeignData, foreignRatioPct } from "./foreignResidents";
+import { prefNameOf } from "./site";
 
 export type RankingDef = {
   slug: string;
@@ -17,8 +19,15 @@ export type RankingDef = {
   shortLabel: string;
   /** meta description のひな型（{top1} を1位自治体名に置換） */
   description: string;
+  /**
+   * description で表現しきれない動的な meta description を、1位自治体（null=該当なし）
+   * から実データで組み立てる任意フック。指定時は description より優先する。
+   */
+  metaDescription?: (top1: Municipality | null) => string;
   /** 本文リード */
   lead: string;
+  /** リード直後に添える中立的な注記（データの位置づけなど。任意） */
+  note?: string;
   /** テーブルの値カラム見出し */
   columnLabel: string;
   order: "asc" | "desc";
@@ -29,6 +38,21 @@ export type RankingDef = {
   /** 値カラムの表示テキスト */
   display: (m: Municipality) => string;
 };
+
+// 外国人住民比率ランキングの中立フレーミング注記（データの位置づけ）。
+const FOREIGN_NOTE =
+  "外国人住民比率は多様性・国際性の目安です（出典: 出入国在留管理庁「在留外国人統計」）。比率の高い／低いという事実を示すもので、住みやすさ等の価値判断とは無関係です。";
+
+// 1位自治体（実データ）から「名前・比率・基準年」を含む meta description を組み立てる。
+function foreignMetaDescription(highLow: "高い" | "低い") {
+  return (top1: Municipality | null): string => {
+    const head = `全国の市区町村を外国人住民比率が${highLow}順にランキング。`;
+    if (!top1) return `${head}多様性・国際性の目安として、出入国在留管理庁「在留外国人統計」の実データで比較できます。`;
+    const name = `${prefNameOf(top1.pref)}${top1.displayName ?? top1.name}`;
+    const ratio = foreignRatioPct(top1).toFixed(2);
+    return `${head}${highLow === "高い" ? "最も比率が高い" : "最も比率が低い"}のは${name}（${ratio}%、${top1.foreignResidents.asOf}時点）。多様性・国際性の目安として、出入国在留管理庁「在留外国人統計」の実データで比較できます。`;
+  };
+}
 
 export const RANKINGS: RankingDef[] = [
   {
@@ -82,6 +106,37 @@ export const RANKINGS: RankingDef[] = [
     qualifies: (m) => isWaitlistDisclosed(m.waitlistChildren) && m.waitlistChildren.value === 0,
     sortValue: (m) => m.population,
     display: (m) => `${m.population.toLocaleString()}人`,
+  },
+  {
+    slug: "foreign-ratio-high",
+    title: "外国人住民比率が高い市区町村ランキング",
+    shortLabel: "外国人比率が高い",
+    description:
+      "全国の市区町村を外国人住民比率が高い順にランキング。多様性・国際性の目安として、出入国在留管理庁「在留外国人統計」の実データで比較できます。",
+    metaDescription: foreignMetaDescription("高い"),
+    lead: "全国の市区町村を、人口に占める外国人住民の割合が高い順に並べたランキングです。",
+    note: FOREIGN_NOTE,
+    columnLabel: "外国人住民比率",
+    order: "desc",
+    // 在留外国人統計の対象かつ人口が有効（比率を算出できる）自治体のみ。
+    qualifies: (m) => hasForeignData(m.foreignResidents.source) && m.population > 0,
+    sortValue: (m) => foreignRatioPct(m),
+    display: (m) => `${foreignRatioPct(m).toFixed(2)}%`,
+  },
+  {
+    slug: "foreign-ratio-low",
+    title: "外国人住民比率が低い市区町村ランキング",
+    shortLabel: "外国人比率が低い",
+    description:
+      "全国の市区町村を外国人住民比率が低い順にランキング。多様性・国際性の目安として、出入国在留管理庁「在留外国人統計」の実データで比較できます。",
+    metaDescription: foreignMetaDescription("低い"),
+    lead: "全国の市区町村を、人口に占める外国人住民の割合が低い順に並べたランキングです。",
+    note: FOREIGN_NOTE,
+    columnLabel: "外国人住民比率",
+    order: "asc",
+    qualifies: (m) => hasForeignData(m.foreignResidents.source) && m.population > 0,
+    sortValue: (m) => foreignRatioPct(m),
+    display: (m) => `${foreignRatioPct(m).toFixed(2)}%`,
   },
 ];
 

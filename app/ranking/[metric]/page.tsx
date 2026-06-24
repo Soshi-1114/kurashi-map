@@ -27,7 +27,9 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const top = await rankedFor(def, 1);
   const top1 = top[0] ? `${prefNameOf(top[0].pref)}${top[0].displayName ?? top[0].name}` : "—";
   const title = `${def.title}【全国】｜${SITE.name}`;
-  const description = def.description.replace("{top1}", top1);
+  const description = def.metaDescription
+    ? def.metaDescription(top[0] ?? null)
+    : def.description.replace("{top1}", top1);
   const url = absoluteUrl(`/ranking/${def.slug}`);
   const ogImage = absoluteUrl(`/api/og/ranking/${def.slug}`);
   return {
@@ -106,6 +108,7 @@ export default async function RankingPage({ params }: { params: Params }) {
         <p className="detail-lead">
           {def.lead}データのある自治体のみを対象に、政府統計の実データで集計しています（推計値は含みません）。
         </p>
+        {def.note && <p className="detail-note">{def.note}</p>}
       </header>
 
       <section className="detail-section">
@@ -194,7 +197,7 @@ export default async function RankingPage({ params }: { params: Params }) {
       <section className="detail-section">
         <h2 className="detail-h2">出典・データについて</h2>
         <p className="detail-p" style={{ fontSize: 13, color: "var(--text-muted)" }}>
-          家賃は住宅・土地統計調査、地価は地価公示・地価調査、待機児童はこども家庭庁の公表値、人口は国勢調査に基づきます（e-Stat ほか）。政令指定都市の行政区は親市との重複を避けるため集計から除外しています。データのない自治体はランキングの対象外です。
+          家賃は住宅・土地統計調査、地価は地価公示・地価調査、待機児童はこども家庭庁の公表値、人口は国勢調査、外国人住民比率は出入国在留管理庁「在留外国人統計」に基づきます（e-Stat ほか）。政令指定都市の行政区は親市との重複を避けるため集計から除外しています。データのない自治体はランキングの対象外です。
         </p>
       </section>
 
