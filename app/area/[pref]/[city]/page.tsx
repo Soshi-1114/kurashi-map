@@ -13,6 +13,7 @@ import { isWaitlistDisclosed } from "@/lib/waitlist";
 import { hasLandPrice } from "@/lib/landPrice";
 import { isHazardEvaluated, isAmenitiesCounted, coverageReason } from "@/lib/coverage";
 import { hasForeignData, foreignRatioPct, isNationalityDisclosed } from "@/lib/foreignResidents";
+import { getForeignStats, avgBand, type ForeignComparison } from "@/lib/foreignStats";
 import {
   floodLevelOf,
   landslideLevelOf,
@@ -178,6 +179,14 @@ export default async function AreaPage({ params }: { params: Params }) {
   // 人口トレンドのバッジ表現
   const trend = m.populationTrend;
   const trendTone = trend === "増加" || trend === "微増" ? "up" : trend === "減少" || trend === "微減" ? "down" : null;
+
+  // 外国人住民比率の解釈補助線（全国平均・県平均・順位）。実データから集計（推計なし）。
+  // 対象外・人口不明で算出できない場合は null（UI 側で「比較データなし」に分岐）。
+  const foreignStats = await getForeignStats();
+  const fc: ForeignComparison | null = foreignStats.get(m.code) ?? null;
+  // 県内ポジションのバー位置（比率の高い順位を 0=低い〜100=高い にマップ。家賃バーと同じ意匠）。
+  const foreignPos =
+    fc && fc.prefTotal > 1 ? ((fc.prefTotal - fc.prefRank) / (fc.prefTotal - 1)) * 100 : 50;
 
   return (
     <div className="detail-root">
@@ -421,6 +430,7 @@ export default async function AreaPage({ params }: { params: Params }) {
       <section className="detail-section">
         <SectionHead icon="users" tone="tone-foreign" title="外国人住民（多様性・国際性）" />
         {hasForeignData(m.foreignResidents.source) ? (
+          <>
           <ul className="mini-cards cols-2">
             <li className="mini-card">
               <div className="mini-card-label">外国人住民数</div>
@@ -456,6 +466,41 @@ export default async function AreaPage({ params }: { params: Params }) {
               )}
             </li>
           </ul>
+          {fc ? (
+            <div className="detail-card" style={{ marginTop: 12 }}>
+              {/* 解釈の補助線: 全国平均・県平均・順位はすべて実データから算出（lib/foreignStats.ts）。
+                  中立フレーミング（多様性・国際性の目安／比率の高い順）を踏襲。 */}
+              <p className="detail-p">
+                {m.name}の外国人住民比率は <strong>{fc.ratio.toFixed(2)}%</strong> で、
+                全国平均（{fc.nationalAvg.toFixed(2)}%）{avgBand(fc.ratio, fc.nationalAvg) === "similar" ? "と同程度" : `より${avgBand(fc.ratio, fc.nationalAvg) === "higher" ? "高め" : "低め"}`}、
+                {prefName}平均（{fc.prefAvg.toFixed(2)}%）{avgBand(fc.ratio, fc.prefAvg) === "similar" ? "と同程度" : `より${avgBand(fc.ratio, fc.prefAvg) === "higher" ? "高め" : "低め"}`}です。
+                多様性・国際性の目安としてご覧ください。
+              </p>
+              <div className="rent-bar">
+                <div className="rent-bar-scale">
+                  <span>{prefName}内で低い</span>
+                  <span>{prefName}内で高い</span>
+                </div>
+                <div className="rent-bar-track">
+                  <span className="rent-bar-marker" style={{ left: `${foreignPos}%` }} />
+                </div>
+              </div>
+              <p className="mini-card-sub">
+                比率の高い順での順位: 全国 {fc.nationalRank.toLocaleString()}位 / {fc.nationalTotal.toLocaleString()}自治体・
+                {prefName}内 {fc.prefRank}位 / {fc.prefTotal}自治体（{fc.asOf}時点）
+              </p>
+              <p className="mini-card-sub" style={{ marginTop: 6 }}>
+                <Link href="/ranking/foreign-ratio-high" className="pref-table-link">
+                  外国人住民比率が高い市区町村ランキングを見る →
+                </Link>
+              </p>
+            </div>
+          ) : (
+            <p className="mini-card-sub" style={{ marginTop: 12 }}>
+              全国・県平均との比較や順位は、比較データがないため表示していません（推計は行いません）。
+            </p>
+          )}
+          </>
         ) : (
           <NoDataCard text="在留外国人統計の対象外です。" reason={coverageReason(m.foreignResidents.source)} />
         )}

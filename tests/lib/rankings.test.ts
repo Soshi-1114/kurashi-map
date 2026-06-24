@@ -55,6 +55,53 @@ describe("waitlist-zero ランキング", () => {
   });
 });
 
+describe("外国人住民比率ランキング", () => {
+  const high = getRankingBySlug("foreign-ratio-high")!;
+  const low = getRankingBySlug("foreign-ratio-low")!;
+
+  // population=10000 固定で比率 r(%) を作る。
+  const at = (code: string, ratioPct: number, partial = {}) =>
+    muni({
+      code,
+      population: 10000,
+      foreignResidents: metric({
+        value: Math.round((ratioPct / 100) * 10000),
+        unit: "人",
+        source: "出入国在留管理庁 在留外国人統計",
+      }),
+      ...partial,
+    });
+
+  const list = [
+    at("A", 5),
+    at("B", 1),
+    at("C", 3),
+    at("X", 9, {
+      foreignResidents: metric({ value: 100, source: "対象外（北方領土）" }),
+    }), // 対象外→除外
+  ];
+
+  it("high は比率降順、対象外は除外", () => {
+    expect(rankBy(high, list).map((m) => m.code)).toEqual(["A", "C", "B"]);
+  });
+
+  it("low は比率昇順、対象外は除外", () => {
+    expect(rankBy(low, list).map((m) => m.code)).toEqual(["B", "C", "A"]);
+  });
+
+  it("display は人口比を小数2桁の%で出す", () => {
+    expect(high.display(at("A", 5))).toBe("5.00%");
+  });
+
+  it("metaDescription は1位の名前・比率・基準年を含む（実データ算出）", () => {
+    const desc = high.metaDescription!(at("A", 5));
+    expect(desc).toContain("5.00%");
+    expect(desc).toContain("在留外国人統計");
+    const none = high.metaDescription!(null);
+    expect(none).toContain("外国人住民比率");
+  });
+});
+
 describe("RANKINGS レジストリ", () => {
   it("slug は一意", () => {
     const slugs = RANKINGS.map((r) => r.slug);
