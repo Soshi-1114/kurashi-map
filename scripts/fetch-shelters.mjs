@@ -2,13 +2,14 @@
 // （政令市は区にも）割り当て、地図プロット用の data/{slug}_shelters.json と、詳細パネル用の
 // 件数サマリ（data/{slug}.json の shelters フィールド）を書き出す。
 //
-// CSV は全国1ファイル（緯度経度＋災害種別フラグ8種）。L01 と同様にワークフロー側で
-// curl + unzip して /tmp に展開し、本スクリプトはローカルCSVを読む（zip 依存を持たない）。
+// CSV は全国1ファイル（緯度経度＋災害種別フラグ8種、UTF-8 BOM付き）。GSI ダウンロード
+// サイトの「全国データ（指定緊急避難場所）」= mergeFromCity_2.csv（災害フラグ8列あり。
+// mergeFromCity_1.csv は指定避難所でフラグ無し）。zip で配布される場合はワークフロー側で
+// 展開し、本スクリプトはローカルCSVを読む（zip 依存を持たない）。
 //
 // 事前（ワークフロー or 手動）:
-//   curl -L -o /tmp/hinanbasho.zip "$GSI_SHELTER_URL"
-//   unzip -o /tmp/hinanbasho.zip -d /tmp/hinanbasho
-//   GSI_SHELTER_CSV=/tmp/hinanbasho/全国データ.csv node scripts/fetch-shelters.mjs --all
+//   curl -L -o /tmp/mergeFromCity_2.csv "$GSI_SHELTER_URL"   # 直CSV。zip 配布なら unzip
+//   GSI_SHELTER_CSV=/tmp/mergeFromCity_2.csv node scripts/fetch-shelters.mjs --all
 //
 // 実行: node --max-old-space-size=4096 scripts/fetch-shelters.mjs --all
 //       （単一県のみ: --pref=saitama。全国CSVを県ポリゴンの範囲で絞り込む）
@@ -64,17 +65,20 @@ const FLAG_COLUMNS = [
   ["火山", BIT.volcano], // 火山現象
 ];
 
-// Shift_JIS 優先でデコード（GSI CSV は SJIS が一般的）。失敗時 UTF-8 にフォールバック。
+// GSI 全国版CSVは UTF-8（BOM付き）。ただし配布形態が変わり SJIS になる可能性に備える。
+// UTF-8 を SJIS で誤復号しても U+FFFD はほぼ出ず「別の漢字に化けたまま通過」してしまうため、
+// 置換文字の数では判定しない。BOM → UTF-8、それ以外は UTF-8 を厳格判定し、無効なら SJIS。
 function decodeCsv(buf) {
-  for (const enc of ["shift_jis", "utf-8"]) {
-    try {
-      const text = new TextDecoder(enc, { fatal: false }).decode(buf);
-      // 文字化け検知の簡易判定（置換文字が多すぎないこと）。
-      const bad = (text.match(/�/g) || []).length;
-      if (bad < text.length * 0.002) return text;
-    } catch {}
+  // UTF-8 BOM
+  if (buf.length >= 3 && buf[0] === 0xef && buf[1] === 0xbb && buf[2] === 0xbf) {
+    return new TextDecoder("utf-8").decode(buf).replace(/^﻿/, "");
   }
-  return new TextDecoder("utf-8").decode(buf);
+  try {
+    // 厳格 UTF-8: 妥当な UTF-8 ならそのまま。SJIS バイト列はここで例外になる。
+    return new TextDecoder("utf-8", { fatal: true }).decode(buf).replace(/^﻿/, "");
+  } catch {
+    return new TextDecoder("shift_jis", { fatal: false }).decode(buf).replace(/^﻿/, "");
+  }
 }
 
 // ダブルクォート対応の最小 CSV パーサ（1行 → セル配列）。

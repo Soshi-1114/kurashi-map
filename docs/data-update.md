@@ -284,25 +284,37 @@ npm run indexnow -- --url=https://kurashimap.jp/area/saitama/11203   # 個別URL
 | 高潮(stormSurge) | 高潮 |
 | 液状化(liquefaction) | 地震（避難場所に液状化種別が無いため起因の地震で代替） |
 
+### 取得元（確定）
+配布サイト「指定緊急避難場所・指定避難所データダウンロードサイト」（`https://hinanmap.gsi.go.jp/`）の
+**全国データ**。ダウンロード一覧 `https://hinanmap.gsi.go.jp/hinanjocp/hinanbasho/koukaidate.html` の
+「全国データ」ボタンが叩く直リンク（`dlFile()` 経由）:
+- **指定緊急避難場所**（災害フラグ8列あり = 本機能で使う方）:
+  `https://hinanmap.gsi.go.jp/hinanjocp/defaultFtpData/csv/mergeFromCity_2.csv`
+- 指定避難所（受入対象者列・フラグ無し。使わない）: `.../csv/mergeFromCity_1.csv`
+- GeoJSON 版もあり（`.../geoJSON/mergeFromCity_2.geojson`。本機能は CSV を使用）
+
+実ファイルの性質（2026-06-19 時点で確認）: **直CSV・無圧縮 約16.9MB・約11.5万件**、**文字コードは UTF-8（BOM付き）**。
+列ヘッダ: `NO, 共通ID, 都道府県名及び市町村名, 施設・場所名, 住所, 洪水, 崖崩れ、土石流及び地滑り, 高潮,
+地震, 津波, 大規模な火事, 内水氾濫, 火山現象, 指定避難所との住所同一, 緯度, 経度, 備考`（フラグは該当時 `1`／非該当は空）。
+ブラウザの「ダウンロード」ボタンは CSV+GeoJSON+注意書きを束ねた **zip** を返すが、上記**直CSV URL も並存**する。
+
 ### annual ワークフローでの取得（手動 env）
-`data-update-annual.yml` に取得ステップがある。以下の env を**公開更新時に手動で書き換える**:
-- `GSI_SHELTER_URL` … 国土地理院の全国版 zip の直リンク。**空のままだとステップはスキップ**
-  （警告のみ）。配布ページ（`https://www.gsi.go.jp/bousaichiri/hinanbasho.html` ／ ダウンロード
-  サイト `hinanmap.gsi.go.jp`）で全国版CSVの zip URL を確認して設定する。
-- `GSI_SHELTER_ASOF` … 出典表示の基準時点（例 `2025`）。CSV の公開・更新時期に合わせる。
+`data-update-annual.yml` に取得ステップがある。以下の env を**公開更新時に手動で確認・書き換える**:
+- `GSI_SHELTER_URL` … 上記 `mergeFromCity_2.csv` の直リンク（既定で設定済み）。**空にするとステップはスキップ**
+  （警告のみ）。取得ステップは直CSV/zip どちらでも処理する（zip なら展開して `mergeFromCity_2.csv` を拾う）。
+- `GSI_SHELTER_ASOF` … 出典表示の基準時点（一覧ページの「全国データ <日付>」。現状 `2026-06-19`）。
 
 > 注意: 配布URL・ファイル名は更新で変わりうる（L01_VERSION / CFA_XLSX_URL と同様に毎回確認）。
-> 現状リポジトリには各県の `data/{slug}_shelters.json` は未生成（`data/saitama_shelters.json` の
-> 空 `{}` のみ。dynamic import の解決用プレースホルダ）。ワークフロー実行で全県ぶんが生成される。
+> `mergeFromCity_2` が指定緊急避難場所、`_1` が指定避難所。間違えるとフラグ列が無く全件 h=0 になる。
+> 各県の `data/{slug}_shelters.json` は本データ（全国版CSV 2026-06-19）で生成済み。
 
 ### 手動実行
 ```bash
-# 1. 全国版 zip を取得・展開（URLは配布ページで確認）
-curl -L -o /tmp/hinanbasho.zip "<全国版zipのURL>"
-unzip -o /tmp/hinanbasho.zip -d /tmp/hinanbasho
+# 1. 全国版CSV（指定緊急避難場所）を取得（直CSV。zip 配布なら unzip して mergeFromCity_2.csv を使う）
+curl -L -o /tmp/mergeFromCity_2.csv "https://hinanmap.gsi.go.jp/hinanjocp/defaultFtpData/csv/mergeFromCity_2.csv"
 # 2. CSV を指定して実行（全県 or 単一県）
-GSI_SHELTER_CSV=/tmp/hinanbasho/<全国データ>.csv node --max-old-space-size=4096 scripts/fetch-shelters.mjs --all
-GSI_SHELTER_CSV=/tmp/hinanbasho/<全国データ>.csv node scripts/fetch-shelters.mjs --pref=saitama
+GSI_SHELTER_ASOF=2026-06-19 GSI_SHELTER_CSV=/tmp/mergeFromCity_2.csv node --max-old-space-size=4096 scripts/fetch-shelters.mjs --all
+GSI_SHELTER_ASOF=2026-06-19 GSI_SHELTER_CSV=/tmp/mergeFromCity_2.csv node scripts/fetch-shelters.mjs --pref=saitama
 ```
-- CSV は Shift_JIS 想定（スクリプトが自動判定で UTF-8 にフォールバック）。
+- CSV は UTF-8（BOM付き）想定。スクリプトは BOM→UTF-8、それ以外は厳格UTF-8判定で、無効なら Shift_JIS にフォールバック。
 - ヘッダ名で列を解決する（施設・場所名 / 住所 / 緯度 / 経度 / 各災害種別）。表記ゆれに部分一致で対応。
