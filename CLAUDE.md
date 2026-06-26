@@ -41,7 +41,7 @@ npx vitest run tests/lib/rentColor.test.ts   # 単一テストファイルの実
 - `lib/waitlist.ts` `isWaitlistDisclosed` — 待機児童（政令市は市単位集計。区別公表市と非公表市がある）
 - `lib/coverage.ts` `isHazardEvaluated` / `isAmenitiesCounted` — ハザード・生活インフラ（reinfolib 圏外 → 対象外）
 - `lib/foreignResidents.ts` `hasForeignData` / `foreignRatioPct` — 在留外国人（北方領土6村は調査対象外 → 対象外）。総数のみ収録し人口比は実行時算出（保存しない）。国籍内訳は出典の Power Pivot 制約で未収録（経緯は `docs/data-update.md` §7）
-- `lib/shelters.ts` `hasShelterData` — 指定緊急避難場所（CSV対象外の自治体 → `未収録`センチネル。「0件」と「未収録」を区別）。地図は「災害オーバーレイON」のとき、選択中の自治体＋一定ズーム以上（`SHELTER_ZOOM`）なら視界内の市区町村の、災害種別に有効な避難場所を点でプロット（コロプレスにしない）。点は `data/{slug}_shelters.json`、`/api/shelters/[code]` で自治体単位に配信。経緯は `docs/data-update.md` §9
+- `lib/shelters.ts` `hasShelterData` — 指定緊急避難場所（CSV対象外の自治体 → `未収録`センチネル。「0件」と「未収録」を区別）。地図の災害オーバーレイは複数選択可で、その中の「避難所」を選択したときのみ、選択中の自治体＋一定ズーム以上（`SHELTER_ZOOM`）なら視界内の市区町村の避難場所を点でプロット（コロプレスにしない）。同時に災害種別も選択していればそのいずれかに有効な場所に絞り、未選択なら全件。点は `data/{slug}_shelters.json`、`/api/shelters/[code]` で自治体単位に配信。経緯は `docs/data-update.md` §9
 
 その他の固定制約: `lib/types.ts`・データスキーマ・家賃の色しきい値は安易に変えない。API キーはサーバー／スクリプト専用でクライアントに露出させない。**治安・犯罪データは扱わない**（法務方針）。
 
