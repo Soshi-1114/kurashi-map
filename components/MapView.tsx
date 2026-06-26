@@ -37,6 +37,7 @@ type Props = { summary: MuniSummary[]; onMenuClick?: () => void };
 
 const WARDS_MIN_ZOOM = 11;
 const MUNI_MIN_ZOOM = 7.5;       // 市区町村レイヤーを出すズーム
+const SHELTER_ZOOM = 12;         // このズーム以上で視界内自治体の避難場所を出す（災害ON時）
 const PREF_FADE_END_ZOOM = 9;    // 都道府県レイヤーの fill が完全に消えるズーム
 const PREF_CLICK_MAX_ZOOM = 8;   // この zoom 以下で pref クリックを fly-in 扱い
 
@@ -70,6 +71,11 @@ export default function MapView({ summary, onMenuClick }: Props) {
   const shelterCacheRef = useRef<Map<string, GeoJSON.FeatureCollection | null>>(new Map());
   // 避難場所の点クリックが直後の muni 選択クリックへ伝播し再センタリングするのを防ぐフラグ。
   const shelterClickRef = useRef(false);
+  // 最新の hazardKey と避難場所更新関数を地図のイベント（moveend）から参照するための ref。
+  const hazardKeyRef = useRef<HazardOverlayKey>(DEFAULT_HAZARD_KEY);
+  const shelterRefreshRef = useRef<(() => void) | null>(null);
+  // 避難場所取得の世代トークン（パン連打時に古い結果で上書きしないため）。
+  const shelterReqRef = useRef(0);
   const activeMetricRef = useRef<MapMetricKey | "none">(DEFAULT_MAP_METRIC);
   // 選択時に減光するベース地図ラベル（道路名・水系名等。place=地名は残す）。
   // 元の opacity を保存し、選択解除で復元する。
@@ -106,6 +112,14 @@ export default function MapView({ summary, onMenuClick }: Props) {
     for (const x of summary) (x.level === "ward" ? wa : mu).push(x);
     return { municipalities: mu, wards: wa };
   }, [summary]);
+
+  // 政令市の区→親市コード。視界内に親市と区が同時に入る時、親市エントリ（全区の点を
+  // 合算済み）を優先して区を落とし、避難場所の点の二重描画を防ぐ。
+  const childToParent = useMemo(() => {
+    const m = new Map<string, string>();
+    for (const w of wards) if (w.parentCode) m.set(w.code, w.parentCode);
+    return m;
+  }, [wards]);
 
   const byCode = useMemo(() => {
     const m = new Map<string, MuniSummary>();
@@ -618,6 +632,8 @@ export default function MapView({ summary, onMenuClick }: Props) {
           if (slugs.length) void ensurePrefs(slugs);
         }
         map.on("moveend", checkViewport);
+        // ズーム/パンで視界が変わったら避難場所プロットを再評価（高ズーム時の視界内表示）。
+        map.on("moveend", () => shelterRefreshRef.current?.());
 
         setMapReady(true);
 
@@ -704,53 +720,71 @@ export default function MapView({ summary, onMenuClick }: Props) {
     }
   }, [hazardKey, mapReady]);
 
-  // 指定緊急避難場所のプロット：災害オーバーレイON かつ 自治体選択中のときだけ、選択中の
-  // 自治体の避難場所を取得し、その災害種別に有効な点だけを地図に出す。種別の切替は
-  // キャッシュ済みFCの再フィルタで賄い再取得しない。条件を外れたら点を消す。
+  // 指定緊急避難場所のプロット。災害オーバーレイON のとき、対象自治体（選択中＋
+  // SHELTER_ZOOM 以上なら視界内の市区町村）の避難場所を取得し、その災害種別に有効な点だけを
+  // 地図に出す。災害=なし／対象自治体なしのときは点を消す。視界変化（moveend）でも再評価する。
   useEffect(() => {
+    hazardKeyRef.current = hazardKey;
     const map = mapRef.current;
     if (!map || !mapReady) return;
+
     const setVisible = (v: boolean) => {
       for (const id of ["shelter-points", "shelter-labels"]) {
         if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", v ? "visible" : "none");
       }
     };
     const src = () => map.getSource("shelters") as GeoJSONSource | undefined;
-    const active = !!selectedCode && hazardKey !== "none";
-    if (!active) {
-      src()?.setData(EMPTY_FC);
-      setVisible(false);
-      return;
-    }
-    let aborted = false;
-    const key = hazardKey as Exclude<HazardOverlayKey, "none">;
-    const apply = (fc: GeoJSON.FeatureCollection | null) => {
-      if (aborted) return;
+
+    const refresh = async () => {
+      const hk = hazardKeyRef.current;
+      if (hk === "none") { src()?.setData(EMPTY_FC); setVisible(false); return; }
+      const key = hk as Exclude<HazardOverlayKey, "none">;
+
+      // 対象コード = 選択中 ＋（高ズーム時のみ）視界内の市区町村/区。
+      const codes = new Set<string>();
+      const sel = selectedCodeRef.current;
+      if (sel) codes.add(sel);
+      if (map.getZoom() >= SHELTER_ZOOM) {
+        const layers = ["muni-fill", "wards-fill"].filter((id) => map.getLayer(id));
+        try {
+          for (const f of map.queryRenderedFeatures({ layers })) {
+            const c = String(f.properties?.code ?? "");
+            if (c) codes.add(c);
+          }
+        } catch { /* スタイル未確定時などは無視 */ }
+      }
+      // 政令市は親市が全区の点を合算済み。親と区が両方入る時は区を落として二重描画を防ぐ。
+      for (const c of [...codes]) {
+        const parent = childToParent.get(c);
+        if (parent && codes.has(parent)) codes.delete(c);
+      }
+      if (codes.size === 0) { src()?.setData(EMPTY_FC); setVisible(false); return; }
+
+      const token = ++shelterReqRef.current;
+      await Promise.all([...codes].map(async (c) => {
+        if (shelterCacheRef.current.has(c)) return;
+        try {
+          const r = await fetch(`/api/shelters/${c}`);
+          const d = r.ok ? ((await r.json()) as { features?: GeoJSON.Feature[] }) : null;
+          shelterCacheRef.current.set(c, d ? { type: "FeatureCollection", features: d.features ?? [] } : null);
+        } catch { shelterCacheRef.current.set(c, null); }
+      }));
+      if (token !== shelterReqRef.current) return; // より新しい要求が来ていれば破棄
+
+      const feats: GeoJSON.Feature[] = [];
+      for (const c of codes) {
+        const fc = shelterCacheRef.current.get(c);
+        if (fc) for (const f of fc.features) if (f.properties?.[key] === true) feats.push(f);
+      }
       const s = src();
       if (!s) return;
-      if (!fc || fc.features.length === 0) { s.setData(EMPTY_FC); setVisible(false); return; }
-      const feats = fc.features.filter((f) => f.properties?.[key] === true);
       s.setData({ type: "FeatureCollection", features: feats });
       setVisible(feats.length > 0);
     };
-    const code = selectedCode!;
-    const cached = shelterCacheRef.current.get(code);
-    if (cached !== undefined) {
-      apply(cached);
-    } else {
-      fetch(`/api/shelters/${code}`)
-        .then((r) => (r.ok ? r.json() : null))
-        .then((d: { features?: GeoJSON.Feature[] } | null) => {
-          const fc: GeoJSON.FeatureCollection | null = d
-            ? { type: "FeatureCollection", features: (d.features ?? []) as GeoJSON.Feature[] }
-            : null;
-          shelterCacheRef.current.set(code, fc);
-          apply(fc);
-        })
-        .catch(() => { shelterCacheRef.current.set(code, null); apply(null); });
-    }
-    return () => { aborted = true; };
-  }, [selectedCode, hazardKey, mapReady]);
+
+    shelterRefreshRef.current = refresh;
+    void refresh();
+  }, [selectedCode, hazardKey, mapReady, childToParent]);
 
   // 指標切替：muni/wards の fill-color を選択中メトリックの式に差し替える。
   // 「なし」は塗りの不透明度を 0 にして非表示（クリック判定は残す）。
