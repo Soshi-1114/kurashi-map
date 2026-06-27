@@ -2,9 +2,11 @@ import { ImageResponse } from "next/og";
 import { getRankingBySlug } from "@/lib/rankings";
 import { OgFrame, OgHeading, Pill, OG_SIZE } from "@/lib/og";
 
-export const runtime = "edge";
+// next/og の Edge ランタイムは本体だけで Edge Function サイズ上限(4.02MB)に肉薄するため、
+// lib インポートを足す本ルートは超過する。他の OG ルートと揃えて Node ランタイムにする。
+export const runtime = "nodejs";
 
-// ランキングOG。全国集計はデータ全量ロードになり edge では重いため、画像は
+// ランキングOG。全国集計はデータ全量ロードになり重いため、画像は
 // タイトル中心の意匠とし、1位などの動的値は載せない。
 export function GET(_req: Request, { params }: { params: { metric: string } }) {
   const def = getRankingBySlug(params.metric);

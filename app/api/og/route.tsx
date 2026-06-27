@@ -1,7 +1,9 @@
 import { ImageResponse } from "next/og";
 import { OgFrame, OgHeading, Pill, OG_SIZE } from "@/lib/og";
 
-export const runtime = "edge";
+// 他の OG ルートと揃えて Node ランタイムに統一（next/og 本体が Edge サイズ上限に近く、
+// 上限ぎりぎりで将来 flaky になるのを避ける）。
+export const runtime = "nodejs";
 
 // トップ／既定の OG 画像。データ取得なしの固定意匠。
 export function GET() {
