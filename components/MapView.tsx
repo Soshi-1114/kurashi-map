@@ -27,6 +27,7 @@ import {
 import {
   HAZARD_OVERLAYS, type HazardOverlayKey,
   HAZARD_ZONE_ZOOM, GSI_HAZARD_ATTRIBUTION, gsiTileUrl,
+  INUNDATION_KEYS, isInundationKey,
 } from "@/lib/mapHazards";
 import { SHELTER_ATTRIBUTION } from "@/lib/shelters";
 import { BASEMAPS, DEFAULT_BASEMAP, getBasemap, type BasemapKey } from "@/lib/mapBasemaps";
@@ -101,8 +102,13 @@ export default function MapView({ summary, onMenuClick }: Props) {
   const toggleOverlay = useCallback((key: OverlayKey) => {
     setOverlays((prev) => {
       const next = new Set(prev);
-      if (next.has(key)) next.delete(key);
-      else next.add(key);
+      if (next.has(key)) { next.delete(key); return next; }
+      // 浸水・津波・高潮は同一「浸水深」配色で重ねても区別できないため排他選択にする
+      // （新たに浸水系を選んだら他の浸水系を外す）。土砂・避難所は併用可のまま。
+      if (isInundationKey(key)) {
+        for (const k of INUNDATION_KEYS) next.delete(k);
+      }
+      next.add(key);
       return next;
     });
   }, []);
@@ -1109,13 +1115,12 @@ export default function MapView({ summary, onMenuClick }: Props) {
       {firstPaintReady && (
         <div className={`map-layers ${layersOpen ? "is-open" : ""}`}>
           <button
-            className={`map-layers-btn ${layersOpen ? "is-active" : ""}`}
-            aria-label={`塗り分け指標を切り替え（現在: ${activeMetric === "none" ? "なし" : getMapMetric(activeMetric).label}）`}
+            className={`map-layers-btn map-layers-btn-icon ${layersOpen ? "is-active" : ""}`}
+            aria-label="地図の表示設定（塗り分け・ハザードマップ・絞り込み）を開閉"
             aria-expanded={layersOpen}
             onClick={() => setLayersOpen((v) => !v)}
           >
             <LayersIcon />
-            <span className="map-layers-btn-label">{activeMetric === "none" ? "なし" : getMapMetric(activeMetric).label}</span>
           </button>
           {layersOpen && (
             <div className="layers-panel">
@@ -1245,13 +1250,25 @@ function searchContextLabel(m: MuniSummary): string {
   return prefName;
 }
 
+// 国（国交省）「浸水深（想定最大規模）」の段彩。浸水・津波・高潮の公式ラスタはこの
+// 共通スケールで描かれる。セル境界は 0.5/3/5/10/20m（DEPTH_BOUNDARIES）。
+const DEPTH_COLORS = ["#F7F5A9", "#FFD8C0", "#FFB7B7", "#FF9191", "#F285C9", "#B186E0"];
+const DEPTH_BOUNDARIES = ["0.5", "3", "5", "10", "20"]; // m（6セルの内側境界）
+// 土砂災害警戒区域: 警戒（イエローゾーン）/ 特別警戒（レッドゾーン）。
+const LANDSLIDE_WARN = "#f2d11b";
+const LANDSLIDE_SPECIAL = "#e8331f";
+const SHELTER_LEGEND_COLOR = "#0f9d58";
+
 function MetricLegend({ metricKey, overlays, belowHazardZoom }: { metricKey: MapMetricKey | "none"; overlays: Set<OverlayKey>; belowHazardZoom: boolean }) {
   const activeHazards = HAZARD_OVERLAYS.filter((h) => overlays.has(h.key));
   const showShelter = overlays.has(SHELTER_KEY);
   const hasOverlay = activeHazards.length > 0 || showShelter;
-  // 選択中の災害種別（複数可）と避難所の凡例行。塗り分けの有無に関わらず共通で末尾に付ける。
+  // 浸水系は排他選択なので最大1種。土砂は別配色で併用可、避難所は緑の点。
+  const inundation = activeHazards.find((h) => isInundationKey(h.key));
+  const showLandslide = overlays.has("landslide");
   // 災害種別は実区域ラスタが出る閾値（HAZARD_ZONE_ZOOM）以上でのみ地図に描かれるので、
-  // 閾値未満では凡例の代わりにズーム誘導を出す（低ズームの斜線ハッチは廃止した）。
+  // 閾値未満では凡例の代わりにズーム誘導を出す。凡例は地図の実際の配色に合わせる:
+  // 浸水/津波/高潮=国の「浸水深」段彩、土砂=警戒/特別警戒の2色、避難所=緑点。
   const overlayLegend = hasOverlay ? (
     <>
       {activeHazards.length > 0 && (
@@ -1260,17 +1277,40 @@ function MetricLegend({ metricKey, overlays, belowHazardZoom }: { metricKey: Map
             ズームすると災害リスク区域（{activeHazards.map((h) => h.label).join("・")}）を表示します
           </div>
         ) : (
-          activeHazards.map((h) => (
-            <div key={h.key} className="legend-overlay">
-              <span className="legend-cell legend-hazard-cell" />
-              {h.legend}
-            </div>
-          ))
+          <>
+            {inundation && (
+              <div className="legend-overlay-group">
+                <div className="legend-overlay-title">{inundation.legend}</div>
+                <div className="legend-bar">
+                  {DEPTH_COLORS.map((c) => (
+                    <div key={c} className="legend-cell" style={{ background: c }} />
+                  ))}
+                </div>
+                <div className="legend-scale">
+                  {DEPTH_BOUNDARIES.map((s, i) => (
+                    <span key={s} style={{ left: `${((i + 1) * 100) / DEPTH_COLORS.length}%` }}>{s}</span>
+                  ))}
+                </div>
+                <div className="legend-overlay-note">単位 m ／ 浸水・津波・高潮は国の同一スケール</div>
+              </div>
+            )}
+            {showLandslide && (
+              <div className="legend-overlay-group">
+                <div className="legend-overlay-title">土砂災害警戒区域</div>
+                <div className="legend-overlay">
+                  <span className="legend-cell" style={{ background: LANDSLIDE_WARN }} />警戒区域
+                </div>
+                <div className="legend-overlay">
+                  <span className="legend-cell" style={{ background: LANDSLIDE_SPECIAL }} />特別警戒区域
+                </div>
+              </div>
+            )}
+          </>
         )
       )}
       {showShelter && (
         <div className="legend-overlay">
-          <span className="legend-cell" style={{ background: "#0f9d58" }} />
+          <span className="legend-cell" style={{ background: SHELTER_LEGEND_COLOR }} />
           指定緊急避難場所{activeHazards.length > 0 ? "（選択中の災害に有効な場所）" : ""}
         </div>
       )}

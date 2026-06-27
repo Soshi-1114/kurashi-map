@@ -3,6 +3,8 @@ import {
   HAZARD_OVERLAYS,
   DEFAULT_HAZARD_KEY,
   getHazardOverlay,
+  INUNDATION_KEYS,
+  isInundationKey,
 } from "@/lib/mapHazards";
 
 describe("mapHazards", () => {
@@ -37,5 +39,15 @@ describe("mapHazards", () => {
     expect(getHazardOverlay("landslide")?.gsiLayerIds).toEqual([
       "05_dosekiryukeikaikuiki", "05_kyukeishakeikaikuiki", "05_jisuberikeikaikuiki",
     ]);
+  });
+
+  it("浸水深の共通スケール種別（浸水/津波/高潮）を排他判定できる", () => {
+    // 国の同一「浸水深」配色のため、この3種だけが排他選択の対象。
+    expect([...INUNDATION_KEYS]).toEqual(["flood", "tsunami", "stormSurge"]);
+    expect(isInundationKey("flood")).toBe(true);
+    expect(isInundationKey("tsunami")).toBe(true);
+    expect(isInundationKey("stormSurge")).toBe(true);
+    expect(isInundationKey("landslide")).toBe(false);
+    expect(isInundationKey("shelter")).toBe(false);
   });
 });

@@ -92,6 +92,15 @@ export const HAZARD_OVERLAYS: readonly HazardOverlay[] = [
 
 export const DEFAULT_HAZARD_KEY: HazardOverlayKey = "none";
 
+// 浸水・津波・高潮は国（国交省）の同一「浸水深」カラースケールで描かれる公式ラスタの
+// ため、地図上で重ねると色で区別できない。UI ではこの3種を排他選択にする（土砂・避難所は
+// 併用可）。凡例も「浸水深」共通スケールを1つだけ表示する。
+export const INUNDATION_KEYS = ["flood", "tsunami", "stormSurge"] as const;
+
+export function isInundationKey(key: string): boolean {
+  return (INUNDATION_KEYS as readonly string[]).includes(key);
+}
+
 export function getHazardOverlay(key: HazardOverlayKey): HazardOverlay | null {
   return HAZARD_OVERLAYS.find((h) => h.key === key) ?? null;
 }
