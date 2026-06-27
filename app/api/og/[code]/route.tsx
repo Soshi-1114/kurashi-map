@@ -4,7 +4,10 @@ import { prefNameOf } from "@/lib/site";
 import { hasRent } from "@/lib/rentColor";
 import { hasLandPrice } from "@/lib/landPrice";
 
-export const runtime = "edge";
+// getMunicipality はテンプレートリテラル動的 import で全県の data/*.json をバンドルするため、
+// edge だと Edge Function サイズ上限(4.02MB)を超える。Node ランタイムなら制限が桁違いに大きく、
+// next/og(ImageResponse) も Node で動作する。OG 画像は Cache-Control で長期キャッシュ済み。
+export const runtime = "nodejs";
 
 const OG_SIZE = { width: 1200, height: 630 };
 

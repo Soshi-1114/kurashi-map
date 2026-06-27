@@ -3,7 +3,9 @@ import { listMunicipalities } from "@/lib/metrics";
 import { getPrefBySlug } from "@/lib/prefs";
 import { OgFrame, OgHeading, Pill, OG_SIZE } from "@/lib/og";
 
-export const runtime = "edge";
+// listMunicipalities が全県の data/*.json をバンドルするため edge だとサイズ上限超過。
+// og/[code] と同じく Node ランタイムにして Edge Function サイズ制限から外す。
+export const runtime = "nodejs";
 
 export async function GET(_req: Request, { params }: { params: { slug: string } }) {
   const pref = getPrefBySlug(params.slug);

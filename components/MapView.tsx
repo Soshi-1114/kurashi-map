@@ -25,9 +25,10 @@ import {
   isFilterActive, matchesFilter, buildMatchExpression, type MapFilters,
 } from "@/lib/mapFilters";
 import {
-  HAZARD_OVERLAYS, DEFAULT_HAZARD_KEY, getHazardOverlay, type HazardOverlayKey,
+  HAZARD_OVERLAYS, type HazardOverlayKey,
   HAZARD_ZONE_ZOOM, GSI_HAZARD_ATTRIBUTION, gsiTileUrl,
 } from "@/lib/mapHazards";
+import { SHELTER_ATTRIBUTION } from "@/lib/shelters";
 import { BASEMAPS, DEFAULT_BASEMAP, getBasemap, type BasemapKey } from "@/lib/mapBasemaps";
 import AreaPanel from "./AreaPanel";
 import MobileSheet from "./MobileSheet";
@@ -36,6 +37,7 @@ type Props = { summary: MuniSummary[]; onMenuClick?: () => void };
 
 const WARDS_MIN_ZOOM = 11;
 const MUNI_MIN_ZOOM = 7.5;       // 市区町村レイヤーを出すズーム
+const SHELTER_ZOOM = 12;         // このズーム以上で視界内自治体の避難場所を出す（災害ON時）
 const PREF_FADE_END_ZOOM = 9;    // 都道府県レイヤーの fill が完全に消えるズーム
 const PREF_CLICK_MAX_ZOOM = 8;   // この zoom 以下で pref クリックを fly-in 扱い
 
@@ -45,9 +47,16 @@ const PREF_CLICK_MAX_ZOOM = 8;   // この zoom 以下で pref クリックを f
 const TOKYO_BAY_BBOX: [number, number, number, number] = [139.45, 35.1, 140.2, 35.78];
 
 // 地図の初期既定: 塗り分けは「なし」（地図＋災害オーバーレイだけ見える素の状態）。
-// 災害=なし は DEFAULT_HAZARD_KEY、地図=シンプル は DEFAULT_BASEMAP、絞り込み=なしは
+// 災害オーバーレイ=なし（空集合）、地図=シンプル は DEFAULT_BASEMAP、絞り込み=なしは
 // EMPTY_FILTERS、レイヤーパネルは初期で開く（layersOpen 初期 true）。
 const DEFAULT_MAP_METRIC: MapMetricKey | "none" = "none";
+
+const EMPTY_FC: GeoJSON.FeatureCollection = { type: "FeatureCollection", features: [] };
+
+// 災害オーバーレイは複数選択可。5つの災害種別（HAZARD_OVERLAYS）＋避難所(shelter)を
+// 集合で保持する。避難所は「選択時のみ」点をプロットするトグル。
+type OverlayKey = Exclude<HazardOverlayKey, "none"> | "shelter";
+const SHELTER_KEY: OverlayKey = "shelter";
 
 export default function MapView({ summary, onMenuClick }: Props) {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -62,6 +71,16 @@ export default function MapView({ summary, onMenuClick }: Props) {
   const prevSelectedRef = useRef<string | null>(null);
   const hoveredCodeRef = useRef<string | null>(null);
   const hoveredSourceRef = useRef<"muni" | "wards" | null>(null);
+  // 避難場所の取得結果キャッシュ（code → 全点FC、未収録は null）。ハザード種別の切替で
+  // 再取得せず同じFCを種別フィルタし直すために全点を保持する。
+  const shelterCacheRef = useRef<Map<string, GeoJSON.FeatureCollection | null>>(new Map());
+  // 避難場所の点クリックが直後の muni 選択クリックへ伝播し再センタリングするのを防ぐフラグ。
+  const shelterClickRef = useRef(false);
+  // 最新の選択中オーバーレイ集合と避難場所更新関数を地図のイベント（moveend）から参照する ref。
+  const overlaysRef = useRef<Set<OverlayKey>>(new Set());
+  const shelterRefreshRef = useRef<(() => void) | null>(null);
+  // 避難場所取得の世代トークン（パン連打時に古い結果で上書きしないため）。
+  const shelterReqRef = useRef(0);
   const activeMetricRef = useRef<MapMetricKey | "none">(DEFAULT_MAP_METRIC);
   // 選択時に減光するベース地図ラベル（道路名・水系名等。place=地名は残す）。
   // 元の opacity を保存し、選択解除で復元する。
@@ -77,7 +96,16 @@ export default function MapView({ summary, onMenuClick }: Props) {
   const basemapRef = useRef<BasemapKey>(DEFAULT_BASEMAP);
 
   const [selectedCode, setSelectedCode] = useState<string | null>(null);
-  const [hazardKey, setHazardKey] = useState<HazardOverlayKey>(DEFAULT_HAZARD_KEY);
+  // 災害オーバーレイ（複数選択）。空集合＝何も重ねない。
+  const [overlays, setOverlays] = useState<Set<OverlayKey>>(() => new Set());
+  const toggleOverlay = useCallback((key: OverlayKey) => {
+    setOverlays((prev) => {
+      const next = new Set(prev);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
+      return next;
+    });
+  }, []);
   const [activeMetric, setActiveMetric] = useState<MapMetricKey | "none">(DEFAULT_MAP_METRIC);
   const [filters, setFilters] = useState<MapFilters>(EMPTY_FILTERS);
   const [isMobile, setIsMobile] = useState(false);
@@ -98,6 +126,14 @@ export default function MapView({ summary, onMenuClick }: Props) {
     for (const x of summary) (x.level === "ward" ? wa : mu).push(x);
     return { municipalities: mu, wards: wa };
   }, [summary]);
+
+  // 政令市の区→親市コード。視界内に親市と区が同時に入る時、親市エントリ（全区の点を
+  // 合算済み）を優先して区を落とし、避難場所の点の二重描画を防ぐ。
+  const childToParent = useMemo(() => {
+    const m = new Map<string, string>();
+    for (const w of wards) if (w.parentCode) m.set(w.code, w.parentCode);
+    return m;
+  }, [wards]);
 
   const byCode = useMemo(() => {
     const m = new Map<string, MuniSummary>();
@@ -258,23 +294,25 @@ export default function MapView({ summary, onMenuClick }: Props) {
           layout: { visibility: "none" },
           paint: { "fill-color": "#f8fafc", "fill-opacity": 0.66 },
         }, firstSymbolId);
-        // 災害リスク オーバーレイ（さらに弱く）
-        map.addLayer({
-          id: "muni-hazard",
-          type: "fill",
-          source: "muni",
-          minzoom: MUNI_MIN_ZOOM,
-          // 自治体集計ハッチは比較用。拡大（HAZARD_ZONE_ZOOM 以上）では実区域ラスタに譲る。
-          maxzoom: HAZARD_ZONE_ZOOM,
-          // 初期既定が「なし」なら非表示で開始（選択で hazardKey effect が可視化）。
-          layout: { visibility: DEFAULT_HAZARD_KEY === "none" ? "none" : "visible" },
-          // 浸水深ランク>0 に重ね、深いほど不透明に（下のコロプレスは透ける範囲で）。
-          filter: [">", ["get", "floodLevel"], 0],
-          paint: {
-            "fill-pattern": "hazard-hatch",
-            "fill-opacity": HAZARD_DEPTH_OPACITY,
-          },
-        }, firstSymbolId);
+        // 災害リスク オーバーレイ（さらに弱く）。複数選択に対応するため種別ごとに1層作り、
+        // それぞれ自前の filter（presence）と opacity（リスク濃淡）を焼き込み、可視性だけを
+        // hazard effect でトグルする。自治体集計ハッチは比較用で、拡大（HAZARD_ZONE_ZOOM
+        // 以上）では実区域ラスタに譲る。初期は全種別 非表示。
+        for (const h of HAZARD_OVERLAYS) {
+          map.addLayer({
+            id: `muni-hazard-${h.key}`,
+            type: "fill",
+            source: "muni",
+            minzoom: MUNI_MIN_ZOOM,
+            maxzoom: HAZARD_ZONE_ZOOM,
+            layout: { visibility: "none" },
+            filter: h.filter as FilterSpecification,
+            paint: {
+              "fill-pattern": "hazard-hatch",
+              "fill-opacity": h.opacity as DataDrivenPropertyValueSpecification<number>,
+            },
+          }, firstSymbolId);
+        }
         // 境界線
         map.addLayer({
           id: "muni-outline",
@@ -326,16 +364,18 @@ export default function MapView({ summary, onMenuClick }: Props) {
           layout: { visibility: "none" },
           paint: { "fill-color": "#f8fafc", "fill-opacity": 0.66 },
         }, firstSymbolId);
-        map.addLayer({
-          id: "wards-hazard",
-          type: "fill",
-          source: "wards",
-          minzoom: WARDS_MIN_ZOOM,
-          maxzoom: HAZARD_ZONE_ZOOM,
-          layout: { visibility: DEFAULT_HAZARD_KEY === "none" ? "none" : "visible" },
-          filter: [">", ["get", "floodLevel"], 0],
-          paint: { "fill-pattern": "hazard-hatch", "fill-opacity": HAZARD_DEPTH_OPACITY },
-        }, firstSymbolId);
+        for (const h of HAZARD_OVERLAYS) {
+          map.addLayer({
+            id: `wards-hazard-${h.key}`,
+            type: "fill",
+            source: "wards",
+            minzoom: WARDS_MIN_ZOOM,
+            maxzoom: HAZARD_ZONE_ZOOM,
+            layout: { visibility: "none" },
+            filter: h.filter as FilterSpecification,
+            paint: { "fill-pattern": "hazard-hatch", "fill-opacity": h.opacity as DataDrivenPropertyValueSpecification<number> },
+          }, firstSymbolId);
+        }
         // 実区域ラスタ（国土地理院ハザードマップポータルの公開タイル）。拡大時のみ表示し、
         // 自治体集計ハッチに代わって実際の浸水想定区域ポリゴンを公式の深さ凡例で描く。
         // API キー不要・CORS 可。種別ごとに1ソース/レイヤーを用意し、選択中のみ可視化。
@@ -391,7 +431,76 @@ export default function MapView({ summary, onMenuClick }: Props) {
           },
         }, firstSymbolId);
 
+        // ===== 指定緊急避難場所のポイント層 =====
+        // 「災害オーバーレイON かつ 市区町村選択中」のときだけ、その災害に有効な避難場所を
+        // /api/shelters/[code] から取得して点を描く（下の shelters effect が setData する）。
+        // 初期は空。symbol ラベルより前面に出すため beforeId を付けず最前面へ積む。
+        map.addSource("shelters", {
+          type: "geojson",
+          data: { type: "FeatureCollection", features: [] },
+          attribution: SHELTER_ATTRIBUTION,
+        });
+        map.addLayer({
+          id: "shelter-points",
+          type: "circle",
+          source: "shelters",
+          minzoom: MUNI_MIN_ZOOM,
+          layout: { visibility: "none" },
+          paint: {
+            // 避難場所の慣用色（緑）。家賃/ハザード(amber)と色相を分け点だと分かるように。
+            "circle-color": "#0f9d58",
+            "circle-stroke-color": "#ffffff",
+            "circle-stroke-width": 1.4,
+            "circle-radius": [
+              "interpolate", ["linear"], ["zoom"],
+              10, 3.5,
+              13, 5.5,
+              16, 8,
+            ],
+            "circle-opacity": 0.92,
+          },
+        });
+        map.addLayer({
+          id: "shelter-labels",
+          type: "symbol",
+          source: "shelters",
+          minzoom: 14, // 名称は十分拡大してから（密集時の被り防止）
+          layout: {
+            visibility: "none",
+            "text-field": ["get", "name"],
+            "text-size": 11,
+            "text-offset": [0, 1.1],
+            "text-anchor": "top",
+            "text-optional": true,
+            "text-allow-overlap": false,
+          },
+          paint: {
+            "text-color": "#065f3a",
+            "text-halo-color": "#ffffff",
+            "text-halo-width": 1.4,
+          },
+        });
+        // 避難場所クリックで名称をツールチップ表示（指標ツールチップを流用）。
+        map.on("click", "shelter-points", (e) => {
+          const f = e.features?.[0];
+          if (!f) return;
+          // 同クリックで下の muni-fill ハンドラが走り再センタリングするのを抑止。
+          shelterClickRef.current = true;
+          const canvasW = map.getCanvas().clientWidth;
+          setTooltip({
+            x: e.point.x,
+            y: e.point.y,
+            name: String(f.properties?.name ?? "避難場所"),
+            label: "指定緊急避難場所",
+            value: String(f.properties?.address ?? ""),
+            flip: e.point.x > canvasW - 200,
+          });
+        });
+        map.on("mouseenter", "shelter-points", () => { map.getCanvas().style.cursor = "pointer"; });
+        map.on("mouseleave", "shelter-points", () => { map.getCanvas().style.cursor = ""; });
+
         const onPolyClick = (e: MapMouseEvent & { features?: MapGeoJSONFeature[] }) => {
+          if (shelterClickRef.current) { shelterClickRef.current = false; return; }
           const f = e.features?.[0];
           if (!f) return;
           const code = String(f.properties?.code ?? "");
@@ -541,6 +650,8 @@ export default function MapView({ summary, onMenuClick }: Props) {
           if (slugs.length) void ensurePrefs(slugs);
         }
         map.on("moveend", checkViewport);
+        // ズーム/パンで視界が変わったら避難場所プロットを再評価（高ズーム時の視界内表示）。
+        map.on("moveend", () => shelterRefreshRef.current?.());
 
         setMapReady(true);
 
@@ -607,25 +718,92 @@ export default function MapView({ summary, onMenuClick }: Props) {
     };
   }, [byCode]);
 
-  // 選択中のハザード種別に応じてオーバーレイ2層（市/区）の表示・対象・濃淡を切り替える。
+  // 選択中の災害種別（複数可）に応じて、種別ごとのハッチ層と実区域ラスタの可視性を切り替える。
   useEffect(() => {
     const map = mapRef.current;
     if (!map || !mapReady) return;
-    const overlay = getHazardOverlay(hazardKey);
-    const visible = overlay ? "visible" : "none";
-    for (const id of ["muni-hazard", "wards-hazard"]) {
-      map.setLayoutProperty(id, "visibility", visible);
-      if (overlay) {
-        map.setFilter(id, overlay.filter as FilterSpecification);
-        map.setPaintProperty(id, "fill-opacity", overlay.opacity as DataDrivenPropertyValueSpecification<number>);
-      }
-    }
-    // 実区域ラスタは選択中の種別のみ可視（ズーム閾値はレイヤーの minzoom が制御）。
     for (const h of HAZARD_OVERLAYS) {
-      const vis = h.key === hazardKey ? "visible" : "none";
-      h.gsiLayerIds.forEach((_, i) => map.setLayoutProperty(`gsi-${h.key}-${i}`, "visibility", vis));
+      const vis = overlays.has(h.key) ? "visible" : "none";
+      for (const id of [`muni-hazard-${h.key}`, `wards-hazard-${h.key}`]) {
+        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
+      }
+      // 実区域ラスタ（ズーム閾値はレイヤーの minzoom が制御）。
+      h.gsiLayerIds.forEach((_, i) => {
+        const id = `gsi-${h.key}-${i}`;
+        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
+      });
     }
-  }, [hazardKey, mapReady]);
+  }, [overlays, mapReady]);
+
+  // 指定緊急避難場所のプロット。災害オーバーレイで「避難所」を選択中のときだけ、対象自治体
+  // （選択中＋SHELTER_ZOOM 以上なら視界内の市区町村）の避難場所を取得して点を出す。同時に
+  // 災害種別も選択していれば、そのいずれかに有効な避難場所だけに絞る（複数選択は和）。
+  // 災害種別を1つも選んでいなければ全件出す。条件を外れたら点を消す。moveend でも再評価。
+  useEffect(() => {
+    overlaysRef.current = overlays;
+    const map = mapRef.current;
+    if (!map || !mapReady) return;
+
+    const setVisible = (v: boolean) => {
+      for (const id of ["shelter-points", "shelter-labels"]) {
+        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", v ? "visible" : "none");
+      }
+    };
+    const src = () => map.getSource("shelters") as GeoJSONSource | undefined;
+
+    const refresh = async () => {
+      const ov = overlaysRef.current;
+      if (!ov.has(SHELTER_KEY)) { src()?.setData(EMPTY_FC); setVisible(false); return; }
+      // 同時選択中の災害種別（避難所を除く）。空なら種別で絞らず全件。
+      const hazardKeys = HAZARD_OVERLAYS.map((h) => h.key).filter((k) => ov.has(k));
+
+      // 対象コード = 選択中 ＋（高ズーム時のみ）視界内の市区町村/区。
+      const codes = new Set<string>();
+      const sel = selectedCodeRef.current;
+      if (sel) codes.add(sel);
+      if (map.getZoom() >= SHELTER_ZOOM) {
+        const layers = ["muni-fill", "wards-fill"].filter((id) => map.getLayer(id));
+        try {
+          for (const f of map.queryRenderedFeatures({ layers })) {
+            const c = String(f.properties?.code ?? "");
+            if (c) codes.add(c);
+          }
+        } catch { /* スタイル未確定時などは無視 */ }
+      }
+      // 政令市は親市が全区の点を合算済み。親と区が両方入る時は区を落として二重描画を防ぐ。
+      for (const c of [...codes]) {
+        const parent = childToParent.get(c);
+        if (parent && codes.has(parent)) codes.delete(c);
+      }
+      if (codes.size === 0) { src()?.setData(EMPTY_FC); setVisible(false); return; }
+
+      const token = ++shelterReqRef.current;
+      await Promise.all([...codes].map(async (c) => {
+        if (shelterCacheRef.current.has(c)) return;
+        try {
+          const r = await fetch(`/api/shelters/${c}`);
+          const d = r.ok ? ((await r.json()) as { features?: GeoJSON.Feature[] }) : null;
+          shelterCacheRef.current.set(c, d ? { type: "FeatureCollection", features: d.features ?? [] } : null);
+        } catch { shelterCacheRef.current.set(c, null); }
+      }));
+      if (token !== shelterReqRef.current) return; // より新しい要求が来ていれば破棄
+
+      const matches = (f: GeoJSON.Feature) =>
+        hazardKeys.length === 0 || hazardKeys.some((k) => f.properties?.[k] === true);
+      const feats: GeoJSON.Feature[] = [];
+      for (const c of codes) {
+        const fc = shelterCacheRef.current.get(c);
+        if (fc) for (const f of fc.features) if (matches(f)) feats.push(f);
+      }
+      const s = src();
+      if (!s) return;
+      s.setData({ type: "FeatureCollection", features: feats });
+      setVisible(feats.length > 0);
+    };
+
+    shelterRefreshRef.current = refresh;
+    void refresh();
+  }, [overlays, selectedCode, mapReady, childToParent]);
 
   // 指標切替：muni/wards の fill-color を選択中メトリックの式に差し替える。
   // 「なし」は塗りの不透明度を 0 にして非表示（クリック判定は残す）。
@@ -1013,26 +1191,36 @@ export default function MapView({ summary, onMenuClick }: Props) {
                 </div>
               </div>
 
-              <div className="layers-title layers-title-sub">災害オーバーレイ</div>
+              <div className="layers-title layers-title-sub">災害オーバーレイ（複数選択可）</div>
               <div className="filter-row">
-                <div className="filter-segments" role="radiogroup" aria-label="災害オーバーレイ">
+                <div className="filter-segments" role="group" aria-label="災害オーバーレイ（複数選択可）">
                   <button
-                    className={`filter-seg ${hazardKey === "none" ? "is-active" : ""}`}
-                    aria-pressed={hazardKey === "none"}
-                    onClick={() => setHazardKey("none")}
+                    className={`filter-seg ${overlays.size === 0 ? "is-active" : ""}`}
+                    aria-pressed={overlays.size === 0}
+                    onClick={() => setOverlays(new Set())}
                   >なし</button>
                   {HAZARD_OVERLAYS.map((h) => (
                     <button
                       key={h.key}
-                      className={`filter-seg ${hazardKey === h.key ? "is-active" : ""}`}
-                      aria-pressed={hazardKey === h.key}
-                      onClick={() => setHazardKey(h.key)}
+                      className={`filter-seg ${overlays.has(h.key) ? "is-active" : ""}`}
+                      aria-pressed={overlays.has(h.key)}
+                      onClick={() => toggleOverlay(h.key)}
                     >{h.label}</button>
                   ))}
+                  <button
+                    className={`filter-seg ${overlays.has(SHELTER_KEY) ? "is-active" : ""}`}
+                    aria-pressed={overlays.has(SHELTER_KEY)}
+                    onClick={() => toggleOverlay(SHELTER_KEY)}
+                  >避難所</button>
                 </div>
               </div>
-              {getHazardOverlay(hazardKey) && (
-                <p className="layers-desc">{getHazardOverlay(hazardKey)!.legend}</p>
+              {overlays.size > 0 && (
+                <p className="layers-desc">
+                  {[
+                    ...HAZARD_OVERLAYS.filter((h) => overlays.has(h.key)).map((h) => h.legend),
+                    overlays.has(SHELTER_KEY) ? "指定緊急避難場所を点で表示（拡大時または自治体選択時）" : null,
+                  ].filter(Boolean).join(" / ")}
+                </p>
               )}
 
               <div className="layers-title layers-title-sub">絞り込み</div>
@@ -1069,7 +1257,7 @@ export default function MapView({ summary, onMenuClick }: Props) {
       )}
 
       {/* 凡例（選択中の指標に追従）。初回描画完了まで出さず「凡例だけ先行」を防ぐ */}
-      {firstPaintReady && <MetricLegend metricKey={activeMetric} hazardKey={hazardKey} />}
+      {firstPaintReady && <MetricLegend metricKey={activeMetric} overlays={overlays} />}
 
       {/* パネル / シート */}
       {!isMobile ? (
@@ -1092,22 +1280,37 @@ function searchContextLabel(m: MuniSummary): string {
   return prefName;
 }
 
-function MetricLegend({ metricKey, hazardKey }: { metricKey: MapMetricKey | "none"; hazardKey: HazardOverlayKey }) {
-  const hazardOverlay = getHazardOverlay(hazardKey);
-  // 塗り分け「なし」: コロプレス凡例は出さず、ハザードを選んでいればその凡例だけ出す。
-  if (metricKey === "none") {
-    if (!hazardOverlay) return null;
-    return (
-      <div className="legend">
-        <div className="legend-overlay">
+function MetricLegend({ metricKey, overlays }: { metricKey: MapMetricKey | "none"; overlays: Set<OverlayKey> }) {
+  const activeHazards = HAZARD_OVERLAYS.filter((h) => overlays.has(h.key));
+  const showShelter = overlays.has(SHELTER_KEY);
+  const hasOverlay = activeHazards.length > 0 || showShelter;
+  // 選択中の災害種別（複数可）と避難所の凡例行。塗り分けの有無に関わらず共通で末尾に付ける。
+  const overlayLegend = hasOverlay ? (
+    <>
+      {activeHazards.map((h) => (
+        <div key={h.key} className="legend-overlay">
           <span className="legend-cell legend-hazard-cell" />
-          {hazardOverlay.legend}
+          {h.legend}
         </div>
+      ))}
+      {showShelter && (
+        <div className="legend-overlay">
+          <span className="legend-cell" style={{ background: "#0f9d58" }} />
+          指定緊急避難場所{activeHazards.length > 0 ? "（選択中の災害に有効な場所）" : ""}
+        </div>
+      )}
+      {activeHazards.length > 0 && (
         <div className="legend-overlay-note">
           拡大すると実際の区域を表示（出典: ハザードマップポータル）
         </div>
-      </div>
-    );
+      )}
+    </>
+  ) : null;
+
+  // 塗り分け「なし」: コロプレス凡例は出さず、オーバーレイを選んでいればその凡例だけ出す。
+  if (metricKey === "none") {
+    if (!hasOverlay) return null;
+    return <div className="legend">{overlayLegend}</div>;
   }
   const metric = getMapMetric(metricKey);
   const { legend } = metric;
@@ -1144,17 +1347,7 @@ function MetricLegend({ metricKey, hazardKey }: { metricKey: MapMetricKey | "non
         <span className="legend-cell" style={{ background: RENT_NODATA_COLOR }} />
         {metric.nodataLabel}
       </div>
-      {hazardOverlay && (
-        <>
-          <div className="legend-overlay">
-            <span className="legend-cell legend-hazard-cell" />
-            {hazardOverlay.legend}
-          </div>
-          <div className="legend-overlay-note">
-            拡大すると実際の区域を表示（出典: ハザードマップポータル）
-          </div>
-        </>
-      )}
+      {overlayLegend}
     </div>
   );
 }
@@ -1218,14 +1411,6 @@ function SearchIcon() {
 // 災害リスク オーバーレイの色（amber-800）。寒色の家賃コロプレスや紫⇔緑の
 // 人口トレンド上でも沈まない警告色。凡例のハッチ見本とも共有する。
 const HAZARD_HATCH_COLOR = "#b45309";
-
-// 浸水深ランク（floodLevel 1..6）に応じてハッチの不透明度を段階化（深いほど濃い）。
-// 下のコロプレスが透ける上限（0.82）に抑える。filter で floodLevel>0 のみ描画。
-const HAZARD_DEPTH_OPACITY = [
-  "step", ["get", "floodLevel"],
-  0,
-  1, 0.34, 2, 0.44, 3, 0.54, 4, 0.64, 5, 0.74, 6, 0.82,
-] as unknown as DataDrivenPropertyValueSpecification<number>;
 
 // コロプレス塗りの不透明度（選択0.85 / ホバー0.7 / 既定0.55）。塗り分け「なし」では
 // 0 に差し替えて非表示にする（visibility:none と違いクリック判定は残すため opacity で制御）。
