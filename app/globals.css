@@ -1460,6 +1460,11 @@ button { font-family: inherit; }
 .related-card:hover svg { color: var(--accent); }
 .related-name { font-size: var(--text-base); font-weight: 700; color: var(--text); letter-spacing: -0.005em; }
 .related-rent { font-size: var(--text-xs); color: var(--text-muted); font-variant-numeric: tabular-nums; flex-shrink: 0; }
+/* 見出しと補足が両方長い場合（ランキング一覧など）に横並びだと見出しが
+   1文字幅まで潰れて縦書きのように崩れるため、縦積みにするモディファイア。 */
+.related-card.is-stack { flex-direction: column; align-items: flex-start; gap: 6px; }
+.related-card.is-stack .related-name { min-width: 0; }
+.related-card.is-stack .related-rent { flex-shrink: 1; }
 .detail-footnav { margin-top: 28px; display: flex; gap: 18px; flex-wrap: wrap; }
 .detail-back { font-size: var(--text-sm); color: var(--text-muted); display: inline-flex; align-items: center; gap: 5px; font-weight: 600; }
 .detail-back:hover { color: var(--accent); }
