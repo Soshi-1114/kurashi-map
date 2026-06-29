@@ -83,7 +83,7 @@ export default async function RankingIndexPage() {
         <ul className="related-grid">
           {cards.map(({ def, top1 }) => (
             <li key={def.slug}>
-              <Link href={`/ranking/${def.slug}`} className="related-card">
+              <Link href={`/ranking/${def.slug}`} className="related-card is-stack">
                 <span className="related-name">{def.title}</span>
                 {top1 && (
                   <span className="related-rent">
