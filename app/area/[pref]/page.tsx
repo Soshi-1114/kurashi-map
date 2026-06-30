@@ -1,6 +1,8 @@
+import "../../league.css";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Wallet, MapIcon, BarChart3, Database, ArrowLeft, ArrowUpRight, Building2 } from "lucide-react";
 import { listMunicipalities, listAll } from "@/lib/metrics";
 import { PREFS, getPrefBySlug } from "@/lib/prefs";
 import { SITE, absoluteUrl } from "@/lib/site";
@@ -82,6 +84,8 @@ export default async function PrefPage({ params }: { params: Params }) {
     .filter((m) => hasRent(m.rent.value))
     .sort((a, b) => a.rent.value - b.rent.value)
     .slice(0, 10);
+  const cheapPodium = cheapest.slice(0, 3);
+  const cheapLadder = cheapest.slice(3, 10);
 
   // 全自治体一覧（行政コード順 = 行政の標準的な並び）。displayName で区はフルネーム表示。
   const listed = [...all].sort((a, b) => a.code.localeCompare(b.code));
@@ -118,11 +122,8 @@ export default async function PrefPage({ params }: { params: Params }) {
   };
 
   return (
-    <div className="detail-root">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }}
-      />
+    <div className="rk-root">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }} />
 
       <nav aria-label="パンくず" className="breadcrumb">
         <Link href="/" className="breadcrumb-link">{SITE.name}</Link>
@@ -130,112 +131,150 @@ export default async function PrefPage({ params }: { params: Params }) {
         <span className="breadcrumb-current">{prefName}</span>
       </nav>
 
-      <header className="detail-hero">
-        <h1 className="detail-title">
+      <header className="rk-hero rk-reveal">
+        <span className="rk-eyebrow"><MapIcon size={14} aria-hidden="true" />都道府県データ</span>
+        <h1 className="rk-title">
           {prefName}
-          <span className="detail-title-sub">の住みやすさ・市区町村比較</span>
+          <span className="rk-title-sub">の住みやすさ・市区町村比較</span>
         </h1>
-        <p className="detail-lead">
-          {prefName}の全{stats.count}市区町村を、家賃中央値・地価・人口・待機児童・災害リスクで横断比較。
+        <p className="rk-lead">
+          {prefName}の全<strong>{stats.count}</strong>市区町村を、家賃中央値・地価・人口・待機児童・災害リスクで横断比較。
           {stats.rentMedian > 0 && (
-            <>家賃中央値は{stats.rentMedian.toLocaleString()}円/月（{stats.rentMin.toLocaleString()}〜{stats.rentMax.toLocaleString()}円/月）、</>
+            <>家賃中央値は<strong>{stats.rentMedian.toLocaleString()}</strong>円/月（{stats.rentMin.toLocaleString()}〜{stats.rentMax.toLocaleString()}円/月）、</>
           )}
-          待機児童ゼロは{stats.waitlistZero}自治体です。
+          待機児童ゼロは<strong>{stats.waitlistZero}</strong>自治体です。
         </p>
-        <ul className="hero-stats">
-          <HeroStat label="市区町村数" value={`${stats.count}`} highlight />
-          <HeroStat
-            label="家賃中央値"
-            value={stats.rentMedian > 0 ? `${stats.rentMedian.toLocaleString()}円/月` : "データなし"}
-          />
-          <HeroStat label="待機児童ゼロ" value={`${stats.waitlistZero}自治体`} />
-          <HeroStat label="浸水想定あり" value={`${stats.floodCount}自治体`} />
+
+        <ul className="rk-kpis">
+          <li className="rk-kpi is-highlight">
+            <span className="rk-kpi-label">市区町村数</span>
+            <span className="rk-kpi-value">{stats.count}<span className="rk-kpi-unit">市区町村</span></span>
+          </li>
+          <li className="rk-kpi">
+            <span className="rk-kpi-label">家賃中央値</span>
+            {stats.rentMedian > 0 ? (
+              <span className="rk-kpi-value">{stats.rentMedian.toLocaleString()}<span className="rk-kpi-unit">円/月</span></span>
+            ) : (
+              <span className="rk-kpi-value is-nodata">データなし</span>
+            )}
+          </li>
+          <li className="rk-kpi">
+            <span className="rk-kpi-label">待機児童ゼロ</span>
+            <span className="rk-kpi-value">{stats.waitlistZero}<span className="rk-kpi-unit">自治体</span></span>
+          </li>
+          <li className="rk-kpi">
+            <span className="rk-kpi-label">浸水想定あり</span>
+            <span className="rk-kpi-value">{stats.floodCount}<span className="rk-kpi-unit">自治体</span></span>
+          </li>
         </ul>
-        <div style={{ marginTop: 16, display: "flex", gap: 10, flexWrap: "wrap" }}>
-          <Link href={`/?pref=${pref.slug}`} className="related-card" style={{ display: "inline-flex", width: "auto", padding: "8px 14px" }}>
-            <span className="related-name">🗺 地図で{prefName}を見る</span>
+
+        <div className="rk-hero-actions">
+          <Link href={`/?pref=${pref.slug}`} className="rk-action rk-action-primary">
+            <MapIcon size={15} aria-hidden="true" />地図で{prefName}を見る
           </Link>
-          <Link href="/ranking" className="related-card" style={{ display: "inline-flex", width: "auto", padding: "8px 14px" }}>
-            <span className="related-name">📊 全国ランキングを見る</span>
+          <Link href="/ranking" className="rk-action rk-action-ghost">
+            <BarChart3 size={15} aria-hidden="true" />全国ランキングを見る
           </Link>
         </div>
       </header>
 
-      {cheapest.length > 0 && (
-        <section className="detail-section">
-          <h2 className="detail-h2">家賃が安い市区町村ランキング</h2>
-          <p className="detail-p" style={{ color: "var(--text-muted)", fontSize: 13.5 }}>
-            {prefName}内で民営借家中央値が低い順 上位{cheapest.length}自治体です。
-          </p>
-          <ol className="pref-rank">
-            {cheapest.map((m, i) => (
-              <li key={m.code}>
-                <Link href={`/area/${m.pref}/${m.code}`} className="pref-rank-item">
-                  <span className="pref-rank-no">{i + 1}</span>
-                  <span className="pref-rank-name">{m.displayName ?? m.name}</span>
-                  <span className="pref-rank-value">
-                    {m.rent.value.toLocaleString()}円/月
-                    <span className="pref-rank-band">{rentBand(m.rent.value)}</span>
+      {cheapPodium.length > 0 && (
+        <section className="rk-section">
+          <div className="rk-section-head">
+            <span className="rk-section-icon rk-tone-rent"><Wallet size={20} aria-hidden="true" /></span>
+            <div className="rk-section-heading">
+              <h2 className="rk-h2">家賃が安い市区町村ランキング</h2>
+              <p className="rk-section-sub">{prefName}内で民営借家の家賃中央値が低い順 上位{cheapest.length}自治体。</p>
+            </div>
+          </div>
+
+          <ol className="rk-podium" aria-label="家賃が安いトップ3">
+            {cheapPodium.map((m, i) => (
+              <li key={m.code} style={{ display: "contents" }}>
+                <Link href={`/area/${m.pref}/${m.code}`} className={`rk-podium-card is-${i + 1}`}>
+                  <span className="rk-medal" aria-label={`${i + 1}位`}>{i + 1}</span>
+                  <span className="rk-podium-body">
+                    <span className="rk-podium-name">{m.displayName ?? m.name}</span>
+                    <span className="rk-podium-pref">{rentBand(m.rent.value)}</span>
+                    <span className="rk-podium-value">{m.rent.value.toLocaleString()}円/月</span>
                   </span>
                 </Link>
               </li>
             ))}
           </ol>
+
+          {cheapLadder.length > 0 && (
+            <ol className="rk-ladder" start={4}>
+              {cheapLadder.map((m, i) => (
+                <li key={m.code}>
+                  <Link href={`/area/${m.pref}/${m.code}`} className="rk-ladder-row">
+                    <span className="rk-ladder-rank">{i + 4}</span>
+                    <span className="rk-ladder-name">{m.displayName ?? m.name}</span>
+                    <span className="rk-ladder-value">
+                      {m.rent.value.toLocaleString()}円/月
+                      <span className="rk-ladder-band">{rentBand(m.rent.value)}</span>
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ol>
+          )}
         </section>
       )}
 
-      <section className="detail-section">
-        <h2 className="detail-h2">{prefName}の全市区町村一覧</h2>
-        <p className="detail-p" style={{ color: "var(--text-muted)", fontSize: 13.5 }}>
-          各自治体名をタップすると、家賃・地価・子育て・災害リスクの詳細ページに移動します。
-        </p>
-        <div className="pref-table-wrap">
-          <table className="pref-table">
-            <thead>
-              <tr>
-                <th scope="col">自治体</th>
-                <th scope="col" className="num">家賃中央値</th>
-                <th scope="col" className="num">地価（住宅地）</th>
-                <th scope="col" className="num">人口</th>
-              </tr>
-            </thead>
-            <tbody>
-              {listed.map((m) => (
-                <tr key={m.code}>
-                  <th scope="row">
-                    <Link href={`/area/${m.pref}/${m.code}`} className="pref-table-link">
-                      {m.displayName ?? m.name}
-                    </Link>
-                  </th>
-                  <td className="num">{hasRent(m.rent.value) ? `${m.rent.value.toLocaleString()}円` : "—"}</td>
-                  <td className="num">{hasLandPrice(m.landPrice.value) ? `${m.landPrice.value.toLocaleString()}円/㎡` : "—"}</td>
-                  <td className="num">{m.population.toLocaleString()}人</td>
+      <section className="rk-section">
+        <div className="rk-section-head">
+          <span className="rk-section-icon"><Building2 size={20} aria-hidden="true" /></span>
+          <div className="rk-section-heading">
+            <h2 className="rk-h2">{prefName}の全市区町村一覧</h2>
+            <p className="rk-section-sub">自治体名から、家賃・地価・子育て・災害リスクの詳細ページへ。</p>
+          </div>
+        </div>
+        <div className="rk-table-wrap">
+          <div className="pref-table-wrap">
+            <table className="pref-table">
+              <thead>
+                <tr>
+                  <th scope="col">自治体</th>
+                  <th scope="col" className="num">家賃中央値</th>
+                  <th scope="col" className="num">地価（住宅地）</th>
+                  <th scope="col" className="num">人口</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {listed.map((m) => (
+                  <tr key={m.code}>
+                    <th scope="row">
+                      <Link href={`/area/${m.pref}/${m.code}`} className="pref-table-link">
+                        {m.displayName ?? m.name}
+                      </Link>
+                    </th>
+                    <td className="num">{hasRent(m.rent.value) ? `${m.rent.value.toLocaleString()}円` : "—"}</td>
+                    <td className="num">{hasLandPrice(m.landPrice.value) ? `${m.landPrice.value.toLocaleString()}円/㎡` : "—"}</td>
+                    <td className="num">{m.population.toLocaleString()}人</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
 
-      <section className="detail-section">
-        <h2 className="detail-h2">出典・データについて</h2>
-        <p className="detail-p" style={{ fontSize: 13, color: "var(--text-muted)" }}>
-          本ページの数値は政府統計・国土数値情報の実データです。家賃は住宅・土地統計調査、人口は国勢調査（ともに e-Stat 経由）、地価は地価公示・地価調査、ハザードは不動産情報ライブラリ（reinfolib）／国土数値情報、待機児童はこども家庭庁の公表値に基づきます。データのない項目は推計で埋めず「—／データなし」と明示しています。
-        </p>
+      <section className="rk-section">
+        <details className="rk-sources">
+          <summary className="rk-sources-summary">
+            <Database size={15} aria-hidden="true" />出典・データについて
+          </summary>
+          <p className="rk-sources-body">
+            本ページの数値は政府統計・国土数値情報の実データです。家賃は住宅・土地統計調査、人口は国勢調査（ともに e-Stat 経由）、地価は地価公示・地価調査、ハザードは不動産情報ライブラリ（reinfolib）／国土数値情報、待機児童はこども家庭庁の公表値に基づきます。データのない項目は推計で埋めず「—／データなし」と明示しています。
+          </p>
+        </details>
       </section>
 
-      <div style={{ marginTop: 28, display: "flex", gap: 12 }}>
-        <Link href="/" className="detail-back">← 地図に戻る</Link>
-      </div>
+      <nav className="rk-footnav" aria-label="関連リンク">
+        <Link href="/" className="rk-back"><ArrowLeft size={15} aria-hidden="true" />地図に戻る</Link>
+        <Link href="/ranking" className="rk-back"><ArrowUpRight size={15} aria-hidden="true" />全国ランキング</Link>
+      </nav>
     </div>
-  );
-}
-
-function HeroStat({ label, value, highlight }: { label: string; value: string; highlight?: boolean }) {
-  return (
-    <li className={`hero-stat ${highlight ? "is-highlight" : ""}`}>
-      <span className="hero-stat-label">{label}</span>
-      <span className="hero-stat-value">{value}</span>
-    </li>
   );
 }
