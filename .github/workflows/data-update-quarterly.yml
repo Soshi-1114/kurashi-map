@@ -13,7 +13,7 @@ on:
   workflow_dispatch:
     inputs:
       pref:
-        description: "対象都道府県の slug (省略時は全 pref)"
+        description: "対象都道府県の slug。カンマ区切りで複数可 (例: fukushima,tokyo)。省略時は全 pref"
         required: false
         default: ""
 
@@ -36,7 +36,19 @@ jobs:
         run: |
           input="${{ inputs.pref }}"
           if [[ -n "$input" ]]; then
-            echo "prefs=[\"$input\"]" >> "$GITHUB_OUTPUT"
+            # カンマ区切りで複数 slug を受け付け、既知の slug か検証して JSON 配列にする
+            # （失敗県のリカバリ時に複数県をまとめて再実行できるように）。
+            # shellcheck disable=SC2016 # ${} は JS のテンプレートリテラル。シェル展開させない
+            list=$(node -e '
+              const input = process.argv[1];
+              import("./scripts/_lib/prefs.mjs").then((m) => {
+                const slugs = [...new Set(input.split(",").map((s) => s.trim()).filter(Boolean))];
+                const unknown = slugs.filter((s) => !m.PREFS[s]);
+                if (unknown.length) { console.error(`未知の pref slug: ${unknown.join(", ")}`); process.exit(1); }
+                console.log(JSON.stringify(slugs));
+              });
+            ' "$input")
+            echo "prefs=$list" >> "$GITHUB_OUTPUT"
           else
             # scripts/_lib/prefs.mjs から slug を抽出（key 名）
             list=$(node -e 'import("./scripts/_lib/prefs.mjs").then(m=>console.log(JSON.stringify(Object.keys(m.PREFS))))')
@@ -61,11 +73,17 @@ jobs:
 
       - run: npm ci
 
+      # restore/save を分離し、fetch が失敗しても取得済みタイルを保存する
+      # （actions/cache 一体型はジョブ失敗時に保存せず、再実行のたびに全量取得になり
+      # reinfolib の一時エラーを引きやすかった）。key は run ごとに一意にして常に保存し、
+      # restore-keys の前方一致で最新キャッシュを復元する。
       - name: Restore reinfolib tile cache (${{ matrix.pref }})
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         with:
           path: .cache/reinfolib-tiles/${{ matrix.pref }}
-          key: reinfolib-tiles-${{ matrix.pref }}-v1
+          key: reinfolib-tiles-${{ matrix.pref }}-v1-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            reinfolib-tiles-${{ matrix.pref }}-v1
 
       - name: Fetch hazard (XKT026/029)
         run: node --max-old-space-size=4096 scripts/fetch-hazard.mjs --pref=${{ matrix.pref }}
@@ -88,9 +106,17 @@ jobs:
           if-no-files-found: ignore
           retention-days: 1
 
+      # fetch が失敗しても、そこまでに取得済みのタイルは保存して再実行を軽くする。
+      - name: Save reinfolib tile cache (${{ matrix.pref }})
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .cache/reinfolib-tiles/${{ matrix.pref }}
+          key: reinfolib-tiles-${{ matrix.pref }}-v1-${{ github.run_id }}-${{ github.run_attempt }}
+
   # 全 fetch ジョブのアーティファクトを回収し、全県分の差分を1コミットにまとめて単一 PR を作成。
   open-pr:
-    needs: fetch
+    needs: [resolve-prefs, fetch]
     if: always()
     runs-on: ubuntu-latest
     steps:
@@ -109,9 +135,25 @@ jobs:
           find /tmp/incoming -name '*.json' -exec cp {} data/ \; 2>/dev/null || true
           echo "変更ファイル:"; git status --porcelain data/ || true
 
+      # fetch に失敗した県（=アーティファクト無し）を検出し、PR 本文で明示する。
+      # 従来は失敗県が古いデータのまま黙って PR に載っていた。
+      - name: Detect failed prefs
+        id: failed
+        run: |
+          missing=""
+          for p in $(echo '${{ needs.resolve-prefs.outputs.prefs }}' | jq -r '.[]'); do
+            [[ -f "/tmp/incoming/${p}.json" ]] || missing="$missing $p"
+          done
+          missing="${missing# }"
+          echo "missing=$missing" >> "$GITHUB_OUTPUT"
+          if [[ -n "$missing" ]]; then
+            echo "::warning::fetch 失敗県（今回の PR では未更新）: $missing"
+          fi
+
       - name: Create PR if data changed
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MISSING: ${{ steps.failed.outputs.missing }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -119,11 +161,17 @@ jobs:
             echo "全県で差分なし。PR は作成しない。"
             exit 0
           fi
-          BRANCH="data/quarterly-${{ github.run_id }}"
+          # run_attempt を含め、失敗ジョブの再実行（同一 run_id）でもブランチが衝突しないようにする。
+          BRANCH="data/quarterly-${{ github.run_id }}-${{ github.run_attempt }}"
           git switch -c "$BRANCH"
           git add data/
           git commit -m "chore(data): quarterly reinfolib update (run ${{ github.run_id }})"
           git push origin "$BRANCH"
+          BODY="quarterly ワークフロー (run ${{ github.run_id }}) による更新。各県の fetch 結果を集約した単一 PR です。マージ後、必要なら Deploy Preview を手動実行してください。"
+          if [[ -n "$MISSING" ]]; then
+            # shellcheck disable=SC2016 # バッククォートを Markdown として literal に埋めるため単引用符
+            printf -v BODY '%s\n\n> [!WARNING]\n> fetch に失敗し**この PR に含まれていない**県: `%s`\n> workflow_dispatch の `pref` 入力（カンマ区切りで複数可）で再実行するか、失敗ジョブを Re-run してください。' "$BODY" "$MISSING"
+          fi
           gh pr create --base main --head "$BRANCH" \
             --title "chore(data): 四半期データ更新 (reinfolib 災害/生活インフラ)" \
-            --body "quarterly ワークフロー (run ${{ github.run_id }}) による更新。各県の fetch 結果を集約した単一 PR です。マージ後、必要なら Deploy Preview を手動実行してください。"
+            --body "$BODY"
