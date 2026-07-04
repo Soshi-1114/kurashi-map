@@ -98,7 +98,7 @@ export async function loadMuniPolys(rootDir, pref, { wardsFirst = false, decorat
 }
 
 // reinfolib タイル取得器。cacheDir / apiKey / zoom / concurrency を束ねる。
-// 200 のみキャッシュし、429/5xx はリトライ、空データを誤ってキャッシュしない
+// 200 のみキャッシュし、429/5xx/接続エラーはリトライ、空データを誤ってキャッシュしない
 // （false negative 防止）。最終的に失敗したら throw して中断。
 export function createTileFetcher({ cacheDir, apiKey, zoom, concurrency = 4 }) {
   mkdirSync(cacheDir, { recursive: true });
@@ -106,26 +106,45 @@ export function createTileFetcher({ cacheDir, apiKey, zoom, concurrency = 4 }) {
   const tilePath = (api, x, y, z = zoom) =>
     path.join(cacheDir, `${api}_z${z}_x${x}_y${y}.json`);
 
+  // 指数バックオフ（1s,2s,4s,...上限60s）。数分規模の一時障害・レート制限を乗り切る
+  // （旧: 5回・合計約8秒で、CI 実績上 reinfolib の一時エラーに足りず失敗していた）。
+  const MAX_ATTEMPTS = 8;
+  const backoffMs = (attempt) => Math.min(60_000, 1000 * 2 ** attempt);
+
   async function ensureTile(api, x, y, z = zoom) {
     const cachePath = tilePath(api, x, y, z);
     if (existsSync(cachePath)) return cachePath;
     const url = new URL(`${REINFOLIB_BASE}/${api}`);
     url.searchParams.set("response_format", "geojson");
     url.searchParams.set("z", z); url.searchParams.set("x", x); url.searchParams.set("y", y);
-    for (let attempt = 0; attempt < 5; attempt++) {
+    let lastErr = "";
+    for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
       let res;
-      try { res = await fetch(url, { headers: { "Ocp-Apim-Subscription-Key": apiKey } }); }
-      catch { await sleep(500 * (attempt + 1)); continue; }
+      try {
+        res = await fetch(url, {
+          headers: { "Ocp-Apim-Subscription-Key": apiKey },
+          signal: AbortSignal.timeout(60_000),
+        });
+      } catch (e) {
+        lastErr = `fetch失敗: ${e?.name ?? e}`;
+        await sleep(backoffMs(attempt));
+        continue;
+      }
       if (res.ok) {
         let text = (await res.text()).trim();
         if (!text) text = '{"type":"FeatureCollection","features":[]}';
         await fs.writeFile(cachePath, text);
         return cachePath;
       }
-      if (res.status === 429 || res.status >= 500) { await sleep(800 * (attempt + 1)); continue; }
+      if (res.status === 429 || res.status >= 500) {
+        lastErr = `HTTP ${res.status}`;
+        const retryAfter = Number(res.headers.get("retry-after"));
+        await sleep(retryAfter > 0 ? Math.min(120_000, retryAfter * 1000) : backoffMs(attempt));
+        continue;
+      }
       throw new Error(`${api} z${z}/${x}/${y} -> HTTP ${res.status}`);
     }
-    throw new Error(`${api} z${z}/${x}/${y} -> リトライ上限`);
+    throw new Error(`${api} z${z}/${x}/${y} -> リトライ上限 (${MAX_ATTEMPTS}回, 最終: ${lastErr})`);
   }
 
   async function downloadAllTiles(api, polys, { progressEvery = 100 } = {}) {
