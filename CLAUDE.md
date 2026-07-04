@@ -10,10 +10,14 @@ KurashiMap は、市区町村別の住みやすさ関連データ（家賃・地
 npm run dev          # next dev → http://localhost:3000
 npm run build        # next build — 全自治体の詳細ページを静的生成
 npm run lint         # next lint
+npm run typecheck    # tsc --noEmit
 npm run test         # vitest run（全テストを1回実行）
 npm run test:watch   # vitest ウォッチモード
 npx vitest run tests/lib/rentColor.test.ts   # 単一テストファイルの実行
+node scripts/validate-data.mjs               # data/*.json のスキーマ検証（CI でも実行）
 ```
+
+push / PR ごとに CI（`.github/workflows/test.yml`）が typecheck・test・lint・データ検証を実行します。
 
 テストは `node` 環境で実行され（vitest.config.ts）、Next と同様に `@/...` をリポジトリルートに解決します。なお `tsconfig.json` は `tests/` を Next の型対象から *除外* しているため、テストファイルは vitest 実行時のみ型付けされます。
 

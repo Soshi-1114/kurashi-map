@@ -21,11 +21,19 @@ export async function loadPrefData(
   slug: string,
   hasWards: boolean,
 ): Promise<{ muni: Municipality[]; wards: Municipality[] }> {
-  const muni = (await import(`../data/${slug}.json`)).default as Municipality[];
-  const wards = hasWards
-    ? ((await import(`../data/${slug}_wards.json`)).default as Municipality[])
-    : [];
-  return { muni, wards };
+  try {
+    const muni = (await import(`../data/${slug}.json`)).default as Municipality[];
+    const wards = hasWards
+      ? ((await import(`../data/${slug}_wards.json`)).default as Municipality[])
+      : [];
+    return { muni, wards };
+  } catch (e) {
+    // データファイル欠落はここで文脈を付けて大声で失敗させる（黙って空配列を返すと
+    // SSG が該当県のページを静かに生成しなくなり、欠損に気づけない）。
+    throw new Error(
+      `pref データの読み込みに失敗: ${slug} (hasWards=${hasWards}) — data/${slug}.json を確認してください: ${String(e)}`,
+    );
+  }
 }
 
 export const PREFS: PrefEntry[] = [

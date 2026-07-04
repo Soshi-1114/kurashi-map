@@ -18,8 +18,9 @@ on:
         default: ""
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: write        # data ブランチの push
+  pull-requests: write   # 更新 PR の作成
+  issues: write          # 失敗通知 issue の作成
 
 concurrency:
   group: data-update-annual
@@ -43,6 +44,9 @@ env:
 jobs:
   update:
     runs-on: ubuntu-latest
+    # e-Stat / nlftp のネットワーク障害で GitHub 既定の 6h まで hang しないよう上限を切る。
+    # 実績は全県で 1h 前後だが、地価の県別逐次 DL が遅い時のマージンを持たせる。
+    timeout-minutes: 240
     steps:
       - uses: actions/checkout@v4
 
@@ -81,6 +85,7 @@ jobs:
         run: WAITLIST_XLSX=/tmp/cfa_waitlist.xlsx node scripts/fetch-waitlist.mjs ${{ steps.scope.outputs.estat }}
 
       - name: 地価（L01 県別 zip・逐次, DL リトライ＋県別失敗は警告で継続）
+        timeout-minutes: 180
         run: |
           for pref in ${{ steps.scope.outputs.prefs }}; do
             code=$(node -e "import('./scripts/_lib/prefs.mjs').then(m=>console.log(m.getPref('$pref').code))")
@@ -97,6 +102,7 @@ jobs:
           done
 
       - name: 指定緊急避難場所（国土地理院 全国版CSV・全国一括）
+        timeout-minutes: 60
         run: |
           if [[ -z "${GSI_SHELTER_URL}" ]]; then
             echo "::warning::GSI_SHELTER_URL 未設定のため避難場所更新をスキップ（docs/data-update.md §9）"
@@ -121,6 +127,10 @@ jobs:
           GSI_SHELTER_CSV="$CSV" node --max-old-space-size=4096 scripts/fetch-shelters.mjs ${{ steps.scope.outputs.estat }} \
             || echo "::warning::fetch-shelters failed"
 
+      # 破損 JSON（フィールド欠落・型崩れ・コード重複）を PR 前に堰き止める。
+      - name: Validate data JSONs
+        run: node scripts/validate-data.mjs
+
       - name: 差分があれば単一 PR を作成
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -139,3 +149,15 @@ jobs:
           gh pr create --base main --head "$BRANCH" \
             --title "chore(data): 年次データ更新 (e-Stat / NLNI L01 / CFA)" \
             --body "annual ワークフロー (run ${{ github.run_id }}) による年次データ更新。人口/家賃/待機児童を全国一括取得、地価を県別取得して集約した単一 PR です。マージ後、必要なら Deploy Preview を手動実行してください。"
+
+      # 年1回のスケジュール実行なので、失敗に気づかないと翌年まで古いデータのままになる。
+      # issue を立てて通知する（Watch していれば通知が届く）。
+      - name: 失敗時に通知 issue を作成
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          gh issue create --repo "${{ github.repository }}" \
+            --title "🚨 annual データ更新が失敗 (run ${{ github.run_id }})" \
+            --body "[実行ログ]($url) を確認してください。年度 env（CFA_XLSX_URL / L01_VERSION / L01_ASOF / GSI_SHELTER_URL）の期限切れの可能性があります（docs/data-update.md 参照）。"

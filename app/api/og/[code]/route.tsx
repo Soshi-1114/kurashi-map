@@ -15,6 +15,10 @@ export async function GET(
   _req: Request,
   { params }: { params: { code: string } },
 ) {
+  // 全国地方公共団体コードは5桁数字。形式不正はデータ探索に入る前に弾く。
+  if (!/^\d{5}$/.test(params.code)) {
+    return new Response("invalid code", { status: 400 });
+  }
   const m = await getMunicipality(params.code);
   if (!m) {
     return new Response("not found", { status: 404 });
