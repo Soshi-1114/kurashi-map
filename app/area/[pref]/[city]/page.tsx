@@ -19,6 +19,7 @@ import {
   Map as MapIcon,
   ArrowLeft,
   Search,
+  BarChart3,
 } from "lucide-react";
 import { getMunicipality, listAll, listAllAcrossPrefs } from "@/lib/metrics";
 import { buildSummary } from "@/lib/summary";
@@ -34,6 +35,7 @@ import { isAmenitiesCounted, coverageReason } from "@/lib/coverage";
 import { hasForeignData, foreignRatioPct } from "@/lib/foreignResidents";
 import { getForeignStats, avgBand, type ForeignComparison } from "@/lib/foreignStats";
 import { getAreaStats } from "@/lib/areaStats";
+import { buildInsights } from "@/lib/insights";
 import { computeLivability } from "@/lib/livabilityScore";
 import { Reveal } from "@/components/area/Reveal";
 import { Section } from "@/components/area/Section";
@@ -148,6 +150,10 @@ export default async function AreaPage({ params }: { params: Params }) {
 
   // 住みやすさ総合スコア・5軸（実データのみ。治安は法務方針で対象外）。
   const liv = computeLivability(m);
+
+  // 「データで見る」= 他自治体との相対比較文（県平均との乖離・全国順位・全国平均対比）。
+  // 自治体ごとに内容が変わるページ固有テキストで、量産テンプレ感を下げる（SEO）。
+  const insights = buildInsights(m, { prefName, areaStats, rankPositions, fc });
 
   const breadcrumbItems: Array<{ name: string; item: string }> = [
     { name: SITE.name, item: absoluteUrl("/") },
@@ -295,6 +301,24 @@ export default async function AreaPage({ params }: { params: Params }) {
       <Reveal>
         <OverviewCard m={m} liv={liv} />
       </Reveal>
+
+      {/* データで見る（他自治体との相対比較。ページ固有の可視テキストを増やす） */}
+      {insights.length > 0 && (
+        <Reveal>
+          <Section
+            icon={BarChart3}
+            tone="ad-tone-pop"
+            title={`データで見る${m.name}`}
+            sub={`${prefName}平均・全国と比べた${m.name}の位置づけ`}
+          >
+            <ul className="ad-insights">
+              {insights.map((s, i) => (
+                <li key={i} className="ad-insight">{s}</li>
+              ))}
+            </ul>
+          </Section>
+        </Reveal>
+      )}
 
       {/* ② KPIカード */}
       <Reveal>
