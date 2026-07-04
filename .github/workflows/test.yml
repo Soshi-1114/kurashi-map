@@ -1,0 +1,41 @@
+name: Test
+
+# push / PR ごとの品質ゲート（型チェック・テスト・lint・データ検証）。
+# データ更新 PR（data/ のみの変更）でも validate-data が破損 JSON の混入を防ぐ。
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: test-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Type check
+        run: npm run typecheck
+
+      - name: Unit tests
+        run: npm run test
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Validate data JSONs
+        run: node scripts/validate-data.mjs

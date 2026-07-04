@@ -18,8 +18,9 @@ on:
         default: ""
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: write        # data ブランチの push
+  pull-requests: write   # 更新 PR の作成
+  issues: write          # 失敗通知 issue の作成
 
 concurrency:
   group: data-update-quarterly
@@ -28,6 +29,7 @@ concurrency:
 jobs:
   resolve-prefs:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     outputs:
       prefs: ${{ steps.set.outputs.prefs }}
     steps:
@@ -58,6 +60,9 @@ jobs:
   fetch:
     needs: resolve-prefs
     runs-on: ubuntu-latest
+    # reinfolib のネットワーク障害でジョブが GitHub 既定の 6h まで hang しないように
+    # 上限を切る。step 側の上限が先に効き、タイルキャッシュ保存(always)の時間を残す。
+    timeout-minutes: 150
     strategy:
       fail-fast: false
       max-parallel: 3       # reinfolib API 過負荷防止
@@ -86,11 +91,13 @@ jobs:
             reinfolib-tiles-${{ matrix.pref }}-v1
 
       - name: Fetch hazard (XKT026/029)
+        timeout-minutes: 60
         run: node --max-old-space-size=4096 scripts/fetch-hazard.mjs --pref=${{ matrix.pref }}
         env:
           REINFOLIB_API_KEY: ${{ secrets.REINFOLIB_API_KEY }}
 
       - name: Fetch amenities (XKT015/007/010)
+        timeout-minutes: 60
         run: node --max-old-space-size=4096 scripts/fetch-amenities.mjs --pref=${{ matrix.pref }}
         env:
           REINFOLIB_API_KEY: ${{ secrets.REINFOLIB_API_KEY }}
@@ -119,8 +126,13 @@ jobs:
     needs: [resolve-prefs, fetch]
     if: always()
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
       - name: Download all pref data artifacts
         uses: actions/download-artifact@v4
@@ -134,6 +146,11 @@ jobs:
           mkdir -p data
           find /tmp/incoming -name '*.json' -exec cp {} data/ \; 2>/dev/null || true
           echo "変更ファイル:"; git status --porcelain data/ || true
+
+      # 破損 JSON（フィールド欠落・型崩れ・コード重複）を PR 前に堰き止める。
+      # 依存パッケージ不要のため npm ci はしない。
+      - name: Validate data JSONs
+        run: node scripts/validate-data.mjs
 
       # fetch に失敗した県（=アーティファクト無し）を検出し、PR 本文で明示する。
       # 従来は失敗県が古いデータのまま黙って PR に載っていた。
@@ -175,3 +192,21 @@ jobs:
           gh pr create --base main --head "$BRANCH" \
             --title "chore(data): 四半期データ更新 (reinfolib 災害/生活インフラ)" \
             --body "$BODY"
+
+  # スケジュール実行の失敗は誰も画面を見ていないため、issue を立てて通知する
+  # （issue 作成は Watch していれば通知が届く）。PR 本文の失敗県警告は
+  # 「PR が作られた場合」しか目に入らないので、その補完。
+  notify-failure:
+    needs: [resolve-prefs, fetch, open-pr]
+    if: failure()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Create failure issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          gh issue create --repo "${{ github.repository }}" \
+            --title "🚨 quarterly データ更新が失敗 (run ${{ github.run_id }})" \
+            --body "[実行ログ]($url) を確認してください。失敗県は workflow_dispatch の \`pref\` 入力（カンマ区切り）で再実行できます（docs/data-update.md 参照）。"

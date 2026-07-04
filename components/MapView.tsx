@@ -54,6 +54,23 @@ const DEFAULT_MAP_METRIC: MapMetricKey | "none" = "none";
 
 const EMPTY_FC: GeoJSON.FeatureCollection = { type: "FeatureCollection", features: [] };
 
+// 起動時 geojson の取得。失敗（オフライン・CDN障害）で map.on("load") ハンドラごと
+// 落ちると地図全体が死ぬため、1回リトライした上で空コレクションに縮退する
+// （ベース地図・検索は生きるので、真っ白な画面よりよい）。
+async function fetchGeoJsonOrEmpty(url: string): Promise<GeoJSON.FeatureCollection> {
+  for (let attempt = 0; attempt < 2; attempt++) {
+    try {
+      const r = await fetch(url);
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      return (await r.json()) as GeoJSON.FeatureCollection;
+    } catch (e) {
+      if (attempt === 0) continue;
+      console.error("geojson 取得失敗（空データで続行）:", url, e);
+    }
+  }
+  return EMPTY_FC;
+}
+
 // 災害オーバーレイは複数選択可。5つの災害種別（HAZARD_OVERLAYS）＋避難所(shelter)を
 // 集合で保持する。避難所は「選択時のみ」点をプロットするトグル。
 type OverlayKey = Exclude<HazardOverlayKey, "none"> | "shelter";
@@ -202,9 +219,7 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
         // prefectures(47県の輪郭, 約580KB)だけ起動時にロード。各県の市区町村/区
         // ポリゴンは全件で22MB超あり SP 実機で破綻するため、ズームしてビューポートに
         // 入った県だけを遅延ロードする（下の ensurePrefs / checkViewport）。
-        const prefGeo = await fetch("/prefectures.geojson").then(
-          (r) => r.json() as Promise<GeoJSON.FeatureCollection>,
-        );
+        const prefGeo = await fetchGeoJsonOrEmpty("/prefectures.geojson");
         prefGeoRef.current = prefGeo;
         // muni / wards は空で開始し、遅延ロードのたびに features を足して setData する
         const muniGeo: GeoJSON.FeatureCollection = { type: "FeatureCollection", features: [] };
@@ -585,12 +600,20 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
         const bboxHit = (a: number[], b: number[]) =>
           !(a[2] < b[0] || a[0] > b[2] || a[3] < b[1] || a[1] > b[3]);
 
+        // 失敗時はここでは握らず throw する（ensurePrefs 側の catch が loadedPrefs の
+        // 印を外し、次の moveend で自然に再試行される）。r.ok チェックは 404 の HTML を
+        // JSON parse エラーとして報告しないための明示。
         async function loadPrefGeo(p: (typeof PREFS)[number]) {
-          const muni = await fetch(`/${p.slug}.geojson`).then((r) => r.json() as Promise<GeoJSON.FeatureCollection>);
+          const getJson = async (url: string) => {
+            const r = await fetch(url);
+            if (!r.ok) throw new Error(`HTTP ${r.status}: ${url}`);
+            return (await r.json()) as GeoJSON.FeatureCollection;
+          };
+          const muni = await getJson(`/${p.slug}.geojson`);
           mergeFeatureData(muni);
           muniGeoRef.current!.features.push(...muni.features);
           if (p.hasWards) {
-            const wd = await fetch(`/${p.slug}_wards.geojson`).then((r) => r.json() as Promise<GeoJSON.FeatureCollection>);
+            const wd = await getJson(`/${p.slug}_wards.geojson`);
             mergeFeatureData(wd);
             wardsGeoRef.current!.features.push(...wd.features);
           }
