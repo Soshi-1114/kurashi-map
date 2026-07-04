@@ -13,7 +13,10 @@ export async function GET(
   }
   const m = await getMunicipality(params.code);
   if (!m) return NextResponse.json({ error: "not found" }, { status: 404 });
+  // 自治体データはビルド時に data/*.json へ固定され、更新は四半期/年次のデータ更新
+  // → 再デプロイ時のみ（その時に CDN は自動パージされる）。OG 画像と同方針で長めに
+  // キャッシュする（ブラウザ1日／CDN7日）。stale-while-revalidate で切替時の待ちも隠す。
   return NextResponse.json(m, {
-    headers: { "Cache-Control": "public, max-age=3600, s-maxage=86400" },
+    headers: { "Cache-Control": "public, max-age=86400, s-maxage=604800, stale-while-revalidate=86400" },
   });
 }
