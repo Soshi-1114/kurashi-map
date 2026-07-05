@@ -1,4 +1,4 @@
-import type { Municipality, Metric, HazardInfo } from "@/lib/types";
+import type { Municipality, MuniSummary, Metric, HazardInfo } from "@/lib/types";
 
 export function metric(partial: Partial<Metric> = {}): Metric {
   return {
@@ -18,6 +18,26 @@ export function hazard(partial: Partial<HazardInfo> = {}): HazardInfo {
     note: "",
     source: "国土数値情報（reinfolib XKT026/029）",
     asOf: "2024",
+    ...partial,
+  };
+}
+
+// トップ地図の軽量サマリ（MuniSummary）。検索・地図色付け系コンポーネントの
+// テスト入力に使う。既定は「川口市（埼玉）」相当。
+export function muniSummary(partial: Partial<MuniSummary> = {}): MuniSummary {
+  return {
+    code: "11203",
+    pref: "saitama",
+    name: "川口市",
+    rent: 60000,
+    landPrice: 200000,
+    populationTrend: "横ばい",
+    foreignRatio: 2,
+    floodLevel: 0,
+    landslideLevel: 0,
+    tsunamiLevel: -1,
+    stormSurgeLevel: -1,
+    liquefactionLevel: -1,
     ...partial,
   };
 }
