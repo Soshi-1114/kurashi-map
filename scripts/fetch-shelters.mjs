@@ -22,10 +22,9 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { existsSync, readFileSync } from "node:fs";
-import * as turf from "@turf/turf";
 import { resolvePrefs } from "./_lib/prefs.mjs";
 import { loadMuni, saveMuni } from "./_lib/data.mjs";
-import { loadMuniPolys } from "./_lib/reinfolib.mjs";
+import { loadMuniPolys, findPolyForPoint } from "./_lib/reinfolib.mjs";
 import { version } from "./_lib/versions.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -159,16 +158,6 @@ function unionBbox(polys) {
   return [W, S, E, N];
 }
 
-function pointPoly(coords, polys) {
-  const pt = turf.point(coords);
-  for (const p of polys) {
-    const b = p.bbox;
-    if (coords[0] < b[0] || coords[0] > b[2] || coords[1] < b[1] || coords[1] > b[3]) continue;
-    try { if (turf.booleanPointInPolygon(pt, p.feat)) return p; } catch {}
-  }
-  return null;
-}
-
 async function processPref(pref, allPoints) {
   // ward を先に並べ、政令市内の点はまず区へ割り当てる（親市には別途合算）。
   const polys = await loadMuniPolys(ROOT, pref, { wardsFirst: true });
@@ -191,7 +180,7 @@ async function processPref(pref, allPoints) {
 
   let matched = 0;
   for (const p of inBbox) {
-    const hit = pointPoly([p.lng, p.lat], polys);
+    const hit = findPolyForPoint([p.lng, p.lat], polys);
     if (!hit) continue;
     matched++;
     const site = { name: p.name, address: p.address, lng: p.lng, lat: p.lat, h: p.h };

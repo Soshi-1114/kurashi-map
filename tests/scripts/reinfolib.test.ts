@@ -8,8 +8,15 @@ import {
   tileBbox,
   bboxIntersects,
   tilesForPolys,
+  findPolyForPoint,
   pool,
 } from "../../scripts/_lib/reinfolib.mjs";
+
+// loadMuniPolys 由来の { code, feat, bbox } を作るヘルパー（四角形ポリゴン）。
+function squarePoly(code: string, [w, s, e, n]: [number, number, number, number]) {
+  const feat = turf.polygon([[[w, s], [e, s], [e, n], [w, n], [w, s]]]);
+  return { code, feat, bbox: [w, s, e, n] as [number, number, number, number] };
+}
 
 describe("Slippy タイル座標", () => {
   it("経度→タイルX→経度 でタイルが経度を内包する", () => {
@@ -72,5 +79,33 @@ describe("pool", () => {
     const seen: number[] = [];
     await pool(items, 4, async (x) => { seen.push(x); });
     expect(seen.sort((a, b) => a - b)).toEqual(items);
+  });
+});
+
+describe("findPolyForPoint", () => {
+  // 西 [0,0]-[1,1] と 東 [1,0]-[2,1] が隣接（境界 x=1 を共有）。
+  const west = squarePoly("W", [0, 0, 1, 1]);
+  const east = squarePoly("E", [1, 0, 2, 1]);
+  const polys = [west, east];
+
+  it("点を含むポリゴンを返す", () => {
+    expect(findPolyForPoint([0.5, 0.5], polys)?.code).toBe("W");
+    expect(findPolyForPoint([1.5, 0.5], polys)?.code).toBe("E");
+  });
+
+  it("どのポリゴンにも入らない点は null", () => {
+    expect(findPolyForPoint([5, 5], polys)).toBeNull();
+  });
+
+  it("bbox 外の点は booleanPointInPolygon を呼ばず早期に弾く（null）", () => {
+    expect(findPolyForPoint([-1, -1], polys)).toBeNull();
+  });
+
+  it("配列の先頭一致を返す（wardsFirst で区を優先する用途）", () => {
+    // 重なる2ポリゴンで先に並べた方が勝つ（政令市の区→親市の割当順に対応）。
+    const ward = squarePoly("WARD", [0, 0, 2, 2]);
+    const city = squarePoly("CITY", [0, 0, 2, 2]);
+    expect(findPolyForPoint([1, 1], [ward, city])?.code).toBe("WARD");
+    expect(findPolyForPoint([1, 1], [city, ward])?.code).toBe("CITY");
   });
 });

@@ -99,6 +99,8 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
   const [belowHazardZoom, setBelowHazardZoom] = useState(true);
   // 選択中自治体のフル詳細（/api/muni/[code] で取得）。サマリには無い人口/地価等を含む
   const [selectedDetail, setSelectedDetail] = useState<Municipality | null>(null);
+  // スクリーンリーダー向けの選択アナウンス（視覚的には非表示のライブリージョンで読み上げる）。
+  const [announcement, setAnnouncement] = useState("");
 
   const { municipalities, wards } = useMemo(() => {
     const mu: MuniSummary[] = [];
@@ -574,6 +576,17 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
     return () => { aborted = true; };
   }, [selectedCode]);
 
+  // 選択の変化をスクリーンリーダーに読み上げる（地図はマウス/視覚前提のため、
+  // 選択結果が非視覚利用者に伝わらないのを補う）。サマリから即時にアナウンスできる
+  // よう byCode を使う（詳細 fetch の完了を待たない）。都道府県名も添えて文脈を明確にする。
+  useEffect(() => {
+    if (!selectedCode) { setAnnouncement(""); return; }
+    const m = byCode.get(selectedCode);
+    if (!m) return;
+    const prefName = getPrefByCode(selectedCode)?.nameJa ?? "";
+    setAnnouncement(`${prefName}${m.displayName ?? m.name} を選択しました`);
+  }, [selectedCode, byCode]);
+
   // 条件フィルタの全国該当件数（JS判定。地図の減光と必ず同一条件）。
   const filterActive = isFilterActive(filters);
   const matchedCount = useMemo(
@@ -658,6 +671,9 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
 
   return (
     <div className={rootClass}>
+      {/* 選択変化のスクリーンリーダー通知（視覚的には非表示）。地図クリック/検索の
+          どちらで選んでも、選んだ自治体名が読み上げられる。 */}
+      <div className="sr-only" role="status" aria-live="polite">{announcement}</div>
       <div
         ref={containerRef}
         className="map-canvas"
