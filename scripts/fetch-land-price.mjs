@@ -15,6 +15,7 @@ import { fileURLToPath } from "node:url";
 import { existsSync } from "node:fs";
 import { resolvePref } from "./_lib/prefs.mjs";
 import { loadMuni, saveMuni } from "./_lib/data.mjs";
+import { version } from "./_lib/versions.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
@@ -23,8 +24,9 @@ const pref = resolvePref(process.argv.slice(2));
 console.log(`pref: ${pref.slug} (${pref.nameJa}, code=${pref.code})`);
 
 // 年度: L01_VERSION（zip バージョン, 例 26）/ L01_ASOF（出典表示の年, 例 2026）。
-const L01_VERSION = process.env.L01_VERSION || "26";
-const L01_ASOF = process.env.L01_ASOF || "2026";
+// 既定は scripts/_lib/versions.mjs の単一ソース（CI は env で上書き）。
+const L01_VERSION = version("L01_VERSION");
+const L01_ASOF = version("L01_ASOF");
 
 const L01_PATH =
   process.env.L01_GEOJSON ||

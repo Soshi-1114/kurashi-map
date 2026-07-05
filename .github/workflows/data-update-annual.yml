@@ -26,20 +26,11 @@ concurrency:
   group: data-update-annual
   cancel-in-progress: false
 
-env:
-  # こども家庭庁 待機児童 Excel URL（年度更新時に手動で書き換え）
-  # 令和7年(2025-04-01)版「（参考）資料1～6」= _r7_02.xlsx（fetch-waitlist が読む
-  # シート「資料６－１/６－２」を含む。採番は年度で変わるためラベルで選ぶこと）
-  CFA_XLSX_URL: "https://www.cfa.go.jp/assets/contents/node/basic_page/field_ref_resources/b0a8057b-34bf-4c20-84fb-ae592708ca9b/1a728dcc/20250828_policies_hoiku_torimatome_r7_02.xlsx"
-  # 国土数値情報 L01 地価公示の年度（年度ごとに書換。VERSION=zip 版、ASOF=出典表示の年。必ず同期）
-  L01_VERSION: "26"
-  L01_ASOF: "2026"
-  # 国土地理院「指定緊急避難場所データ」全国版（指定緊急避難場所 = 災害フラグ8列あり）の
-  # 直リンクと基準時点（公開更新時に手動で書換）。mergeFromCity_2 が指定緊急避難場所、
-  # _1 は指定避難所（フラグ無し）なので _2 を使う。直CSV/zip どちらでも取得ステップが処理する。
-  # 空にすると避難場所ステップはスキップ（警告のみ）。取得元・更新手順は docs/data-update.md §9 参照。
-  GSI_SHELTER_URL: "https://hinanmap.gsi.go.jp/hinanjocp/defaultFtpData/csv/mergeFromCity_2.csv"
-  GSI_SHELTER_ASOF: "2026-06-19"
+# 年度依存の出典バージョン（CFA_XLSX_URL / L01_VERSION / L01_ASOF / GSI_SHELTER_URL /
+# GSI_SHELTER_ASOF / CFA_ASOF / FOREIGN_ASOF）は scripts/_lib/versions.mjs に集約した。
+# 下の「バージョン設定を読み込み」ステップが $GITHUB_ENV に展開するので、
+# 以降の bash ステップ（curl URL 等）は従来どおり $VAR / ${{ env.VAR }} で参照できる。
+# 年度更新は versions.mjs だけを直す（scripts と workflow の二重管理を解消）。
 
 jobs:
   update:
@@ -56,6 +47,13 @@ jobs:
           cache: npm
 
       - run: npm ci
+
+      # scripts/_lib/versions.mjs を単一ソースとして各キーを環境変数へ展開する。
+      # 以降のステップとスクリプトが同じ値を参照し、同期ずれを構造的に防ぐ。
+      - name: バージョン設定を読み込み
+        run: |
+          node -e 'import("./scripts/_lib/versions.mjs").then(m=>{for(const[k,v]of Object.entries(m.VERSIONS))console.log(`${k}=${v}`)})' >> "$GITHUB_ENV"
+          echo "読み込んだ年度設定:"; grep -E '^(CFA_|L01_|GSI_|FOREIGN_)' "$GITHUB_ENV" || true
 
       - name: スコープ決定（pref 入力 or 全県）
         id: scope

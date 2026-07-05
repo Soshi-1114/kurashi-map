@@ -11,9 +11,14 @@ import { existsSync } from "node:fs";
 import XLSX from "xlsx";
 import { resolvePrefs } from "./_lib/prefs.mjs";
 import { loadMuni, saveMuni } from "./_lib/data.mjs";
+import { version } from "./_lib/versions.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
+
+// 出典の基準時点（令和7年=2025-04-01）。CFA_XLSX_URL とセットで
+// scripts/_lib/versions.mjs に集約（URL の年度と asOf が必ず一致するように）。
+const CFA_ASOF = version("CFA_ASOF");
 
 const prefs = resolvePrefs(process.argv.slice(2));
 
@@ -51,7 +56,7 @@ function extractFromR6(ws) {
 const META = {
   unit: "人",
   source: "こども家庭庁 保育所等関連状況取りまとめ",
-  asOf: "2025-04-01",
+  asOf: CFA_ASOF,
   isEstimated: false,
 };
 
@@ -81,7 +86,7 @@ async function applyPref(pref, all) {
         if (w) w.waitlistChildren = {
           value: 0, unit: "人",
           source: "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-          asOf: "2025-04-01", isEstimated: false,
+          asOf: CFA_ASOF, isEstimated: false,
         };
       }
     }

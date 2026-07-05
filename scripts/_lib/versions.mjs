@@ -1,0 +1,42 @@
+// 年度依存のデータ出典バージョンの「単一ソース」。
+//
+// 従来これらの値は annual ワークフローの env ブロックと各 fetch スクリプトの
+// ハードコード既定（例: `process.env.L01_VERSION || "26"`）に二重定義されており、
+// 片方だけ更新して同期がずれる事故が起きやすかった（実際 fetch-shelters.mjs の
+// 既定 ASOF は "2025" のままワークフローが "2026-06-19" を渡す状態になっていた）。
+//
+// ここを唯一の真実として:
+//   - 各スクリプトは env 未設定時の既定として VERSIONS を読む。
+//   - annual ワークフローは「バージョン設定を読み込み」ステップでこのファイルを
+//     $GITHUB_ENV に展開し、bash ステップ（curl URL 等）でも同じ値を使う。
+//
+// 年度更新の手順は docs/data-update.md を参照。URL と ASOF は必ずセットで更新すること。
+export const VERSIONS = {
+  // 国土数値情報 L01 地価公示。VERSION=zip 版番号（例 26=令和8年公示）、
+  // ASOF=出典表示の年。必ず同期させる（VERSION=26 なら ASOF=2026）。
+  L01_VERSION: "26",
+  L01_ASOF: "2026",
+
+  // こども家庭庁「保育所等関連状況取りまとめ」待機児童 Excel。
+  // URL 末尾の採番（_r7_02）は年度で変わり自動推測できないため、公表ページで確認して
+  // 手動更新する（docs/data-update.md §待機児童）。CFA_ASOF（令和7年=2025-04-01）と必ず同期。
+  CFA_XLSX_URL:
+    "https://www.cfa.go.jp/assets/contents/node/basic_page/field_ref_resources/b0a8057b-34bf-4c20-84fb-ae592708ca9b/1a728dcc/20250828_policies_hoiku_torimatome_r7_02.xlsx",
+  CFA_ASOF: "2025-04-01",
+
+  // 国土地理院「指定緊急避難場所データ」全国版 CSV（mergeFromCity_2 = 指定緊急避難場所）。
+  // 空文字にすると annual ワークフローの避難場所ステップはスキップ（警告のみ）。
+  // GSI_SHELTER_ASOF は公開更新時の基準時点。URL と必ず同期（docs/data-update.md §避難場所）。
+  GSI_SHELTER_URL: "https://hinanmap.gsi.go.jp/hinanjocp/defaultFtpData/csv/mergeFromCity_2.csv",
+  GSI_SHELTER_ASOF: "2026-06-19",
+
+  // 出入国在留管理庁「在留外国人統計」の基準時点（半期公表・手動更新）。
+  // 期を更新したら statInfId とセットで合わせる（docs/data-update.md §在留外国人）。
+  FOREIGN_ASOF: "2024-12",
+};
+
+// env 未設定なら VERSIONS の既定を返すヘルパー。スクリプトからの読み出しを1行にする。
+export function version(key) {
+  const v = process.env[key];
+  return v !== undefined && v !== "" ? v : VERSIONS[key];
+}

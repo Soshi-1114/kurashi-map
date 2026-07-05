@@ -16,7 +16,7 @@
 //
 // 出典URL・年度は変わりうるため env で渡す（docs/data-update.md 参照）:
 //   GSI_SHELTER_CSV  展開済みCSVのパス（必須）
-//   GSI_SHELTER_ASOF 出典表示の基準時点（既定 "2025"）
+//   GSI_SHELTER_ASOF 出典表示の基準時点（既定 scripts/_lib/versions.mjs）
 
 import fs from "node:fs/promises";
 import path from "node:path";
@@ -26,13 +26,15 @@ import * as turf from "@turf/turf";
 import { resolvePrefs } from "./_lib/prefs.mjs";
 import { loadMuni, saveMuni } from "./_lib/data.mjs";
 import { loadMuniPolys } from "./_lib/reinfolib.mjs";
+import { version } from "./_lib/versions.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
 
 const SHELTER_SOURCE = "国土地理院「指定緊急避難場所データ」";
 const SHELTER_NODATA = "未収録";
-const ASOF = process.env.GSI_SHELTER_ASOF || "2025";
+// 既定は scripts/_lib/versions.mjs の単一ソース（CI は env で上書き）。
+const ASOF = version("GSI_SHELTER_ASOF");
 
 const CSV_PATH = process.env.GSI_SHELTER_CSV || process.argv.find((a) => a.endsWith(".csv"));
 if (!CSV_PATH || !existsSync(CSV_PATH)) {
