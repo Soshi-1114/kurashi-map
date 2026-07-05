@@ -20,6 +20,7 @@ import { existsSync } from "node:fs";
 import XLSX from "xlsx";
 import { resolvePrefs, PREFS } from "./_lib/prefs.mjs";
 import { loadMuni, saveMuni } from "./_lib/data.mjs";
+import { version } from "./_lib/versions.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
@@ -36,7 +37,8 @@ if (!existsSync(XLSX_PATH)) {
 }
 
 // 基準時点と出典（表示・鮮度判定に使用）。期を更新したら asOf を合わせる。
-const ASOF = process.env.FOREIGN_ASOF || "2024-12";
+// 既定は scripts/_lib/versions.mjs の単一ソース（env で上書き可）。
+const ASOF = version("FOREIGN_ASOF");
 const META = {
   unit: "人",
   source: "出入国在留管理庁 在留外国人統計",

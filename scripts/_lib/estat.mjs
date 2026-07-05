@@ -10,29 +10,39 @@ export function requireEstatAppId() {
   return id;
 }
 
-// e-Stat への一過性の接続失敗（UND_ERR_CONNECT_TIMEOUT 等）を吸収するため、
+// e-Stat への一過性の接続失敗（UND_ERR_CONNECT_TIMEOUT 等）やレート制限を吸収するため、
 // リクエスト全体のタイムアウト＋指数バックオフのリトライで包む。
-async function fetchJsonWithRetry(url, { attempts = 5, timeoutMs = 30000 } = {}) {
-  let lastErr;
-  for (let i = 1; i <= attempts; i++) {
-    const ac = new AbortController();
-    const timer = setTimeout(() => ac.abort(), timeoutMs);
+// リトライ方針は reinfolib.mjs と統一（8回・上限60s・Retry-After 尊重）。
+// 旧: 5回・上限8秒は数分規模の一時障害に足りず annual で失敗することがあった。
+// 429/5xx とネットワークエラーはリトライ、その他の 4xx は即 throw（無駄な再試行をしない）。
+export const ESTAT_MAX_ATTEMPTS = 8;
+const estatBackoffMs = (attempt) => Math.min(60_000, 1000 * 2 ** attempt);
+
+async function fetchJsonWithRetry(url, { attempts = ESTAT_MAX_ATTEMPTS, timeoutMs = 60_000 } = {}) {
+  let lastErr = "";
+  for (let attempt = 0; attempt < attempts; attempt++) {
+    let res;
     try {
-      const res = await fetch(url, { signal: ac.signal });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      return await res.json();
+      res = await fetch(url, { signal: AbortSignal.timeout(timeoutMs) });
     } catch (e) {
-      lastErr = e;
-      if (i < attempts) {
-        const backoff = Math.min(1000 * 2 ** (i - 1), 8000);
-        console.warn(`e-Stat fetch 失敗 (${i}/${attempts}): ${e.message} — ${backoff}ms 後に再試行`);
-        await new Promise((r) => setTimeout(r, backoff));
-      }
-    } finally {
-      clearTimeout(timer);
+      lastErr = `fetch失敗: ${e?.name ?? e}`;
+      console.warn(`e-Stat fetch 失敗 (${attempt + 1}/${attempts}): ${lastErr}`);
+      await new Promise((r) => setTimeout(r, estatBackoffMs(attempt)));
+      continue;
     }
+    if (res.ok) return await res.json();
+    if (res.status === 429 || res.status >= 500) {
+      lastErr = `HTTP ${res.status}`;
+      const retryAfter = Number(res.headers.get("retry-after"));
+      const wait = retryAfter > 0 ? Math.min(120_000, retryAfter * 1000) : estatBackoffMs(attempt);
+      console.warn(`e-Stat fetch 失敗 (${attempt + 1}/${attempts}): ${lastErr} — ${wait}ms 後に再試行`);
+      await new Promise((r) => setTimeout(r, wait));
+      continue;
+    }
+    // 400/401/403/404 等は再試行しても直らないので即座に中断。
+    throw new Error(`e-Stat fetch -> HTTP ${res.status}`);
   }
-  throw new Error(`e-Stat fetch failed after ${attempts} attempts: ${lastErr?.message ?? lastErr}`);
+  throw new Error(`e-Stat fetch failed after ${attempts} attempts (最終: ${lastErr})`);
 }
 
 // getStatsData を 100 area/リクエストで分割取得し、VALUE 行を素のまま
