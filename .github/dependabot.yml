@@ -1,0 +1,35 @@
+# 依存とワークフローの脆弱性・陳腐化を自動追従する。
+# GitHub のセキュリティ勧告に該当する更新は、下の schedule と別に随時 PR が来る。
+version: 2
+updates:
+  # npm 依存（next / react / maplibre / dev ツール等）。
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    labels: ["dependencies"]
+    # フレームワークの major は破壊的変更が大きく、まとめて上げると壊れやすいので
+    # 自動 PR から除外し、必要時に手動で計画的に上げる（セキュリティ勧告 PR は別途届く）。
+    ignore:
+      - dependency-name: "next"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "react-dom"
+        update-types: ["version-update:semver-major"]
+    groups:
+      # 細かなパッチ更新は1 PR にまとめてノイズを減らす。
+      dev-minor-patch:
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
+
+  # GitHub Actions のバージョン追従（Node ランタイム陳腐化・脆弱性対応）。
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    labels: ["dependencies", "github-actions"]

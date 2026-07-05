@@ -32,6 +32,12 @@ const csp = [
 
 const nextConfig = {
   reactStrictMode: true,
+  poweredByHeader: false, // "X-Powered-By: Next.js"（バージョン露出）を返さない
+  // 本サイトは next/image を使わない（地図・OG画像はいずれも別経路）。
+  // 既定では /_next/image 最適化エンドポイントが有効なままで、外部URLの最適化を
+  // 悪用した DoS の攻撃面になりうる（Next.js Image Optimization DoS 系の勧告）。
+  // unoptimized: true で当該エンドポイントを実質無効化し、面を閉じる。
+  images: { unoptimized: true },
   async headers() {
     return [
       {

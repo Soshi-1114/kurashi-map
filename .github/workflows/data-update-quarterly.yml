@@ -33,7 +33,7 @@ jobs:
     outputs:
       prefs: ${{ steps.set.outputs.prefs }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - id: set
         run: |
           input="${{ inputs.pref }}"
@@ -69,11 +69,11 @@ jobs:
       matrix:
         pref: ${{ fromJson(needs.resolve-prefs.outputs.prefs) }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       - run: npm ci
@@ -83,7 +83,7 @@ jobs:
       # reinfolib の一時エラーを引きやすかった）。key は run ごとに一意にして常に保存し、
       # restore-keys の前方一致で最新キャッシュを復元する。
       - name: Restore reinfolib tile cache (${{ matrix.pref }})
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v6
         with:
           path: .cache/reinfolib-tiles/${{ matrix.pref }}
           key: reinfolib-tiles-${{ matrix.pref }}-v1-${{ github.run_id }}-${{ github.run_attempt }}
@@ -104,7 +104,7 @@ jobs:
 
       # main へは push せず、変更後データをアーティファクトに退避（集約ジョブが回収）。
       - name: Upload fetched data
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: data-${{ matrix.pref }}
           path: |
@@ -116,7 +116,7 @@ jobs:
       # fetch が失敗しても、そこまでに取得済みのタイルは保存して再実行を軽くする。
       - name: Save reinfolib tile cache (${{ matrix.pref }})
         if: always()
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v6
         with:
           path: .cache/reinfolib-tiles/${{ matrix.pref }}
           key: reinfolib-tiles-${{ matrix.pref }}-v1-${{ github.run_id }}-${{ github.run_attempt }}
@@ -128,14 +128,14 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Download all pref data artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           path: /tmp/incoming
           pattern: data-*
