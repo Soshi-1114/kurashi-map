@@ -8,7 +8,7 @@ import { fileURLToPath } from "node:url";
 import * as turf from "@turf/turf";
 import { resolvePref } from "./_lib/prefs.mjs";
 import { loadMuni, saveMuni } from "./_lib/data.mjs";
-import { createTileFetcher, loadMuniPolys, requireReinfolibKey } from "./_lib/reinfolib.mjs";
+import { createTileFetcher, loadMuniPolys, requireReinfolibKey, findPolyForPoint } from "./_lib/reinfolib.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
@@ -24,16 +24,6 @@ const tiles = createTileFetcher({
   apiKey: KEY,
   zoom: ZOOM,
 });
-
-function pointMuniCode(coords, polys) {
-  const pt = turf.point(coords);
-  for (const p of polys) {
-    const b = p.bbox;
-    if (coords[0] < b[0] || coords[0] > b[2] || coords[1] < b[1] || coords[1] > b[3]) continue;
-    try { if (turf.booleanPointInPolygon(pt, p.feat)) return p; } catch {}
-  }
-  return null;
-}
 
 // pref.parentToWards から child→parent map を作る
 const CHILD_TO_PARENT = new Map();
@@ -59,7 +49,7 @@ async function processApi(api, polys, fieldKey, getKey) {
         try { coords = turf.centroid(f).geometry.coordinates; } catch { continue; }
       } else continue;
       if (!coords) continue;
-      const p = pointMuniCode(coords, polys);
+      const p = findPolyForPoint(coords, polys);
       if (!p) continue;
       const key = getKey ? getKey(f) : null;
       if (key) { if (p.stationKeys.has(key)) continue; p.stationKeys.add(key); }

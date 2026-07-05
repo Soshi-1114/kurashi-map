@@ -67,6 +67,20 @@ export function tilesForPolys(polys, z) {
   return list;
 }
 
+// 点 [lng,lat] を含む自治体ポリゴンを返す（無ければ null）。polys は loadMuniPolys 由来の
+// { bbox:[w,s,e,n], feat } 配列。bbox で粗く弾いてから booleanPointInPolygon で判定する。
+// fetch-amenities（施設→自治体割当）と fetch-shelters（避難場所→自治体割当）で共用。
+// wardsFirst で区を先に並べれば、政令市内の点はまず区へ割り当たる。
+export function findPolyForPoint(coords, polys) {
+  const pt = turf.point(coords);
+  for (const p of polys) {
+    const b = p.bbox;
+    if (coords[0] < b[0] || coords[0] > b[2] || coords[1] < b[1] || coords[1] > b[3]) continue;
+    try { if (turf.booleanPointInPolygon(pt, p.feat)) return p; } catch { /* 不正ジオメトリは次へ */ }
+  }
+  return null;
+}
+
 export function sleep(ms) {
   return new Promise((r) => setTimeout(r, ms));
 }
