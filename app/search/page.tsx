@@ -11,7 +11,8 @@ const MAX_RESULTS = 60;
 
 // 内部検索結果は薄い／重複ページになりやすいため noindex（クロール対象外）。
 // ただし WebSite の SearchAction のターゲットとして機能する実URLは必要。
-export function generateMetadata({ searchParams }: { searchParams: SearchParams }): Metadata {
+export async function generateMetadata(props: { searchParams: Promise<SearchParams> }): Promise<Metadata> {
+  const searchParams = await props.searchParams;
   const q = (searchParams.q ?? "").trim();
   const title = q ? `「${q}」の検索結果｜${SITE.name}` : `自治体を検索｜${SITE.name}`;
   return {
@@ -39,7 +40,8 @@ function matchMuni(all: MuniSummary[], q: string): MuniSummary[] {
     .slice(0, MAX_RESULTS);
 }
 
-export default async function SearchPage({ searchParams }: { searchParams: SearchParams }) {
+export default async function SearchPage(props: { searchParams: Promise<SearchParams> }) {
+  const searchParams = await props.searchParams;
   const q = (searchParams.q ?? "").trim();
   const all = await listSummaryAcrossPrefs();
   const results = matchMuni(all, q);

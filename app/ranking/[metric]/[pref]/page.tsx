@@ -32,7 +32,8 @@ async function rankedFor(def: RankingDef, prefSlug: string): Promise<Municipalit
   return rankBy(def, await listMunicipalities(prefSlug));
 }
 
-export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+export async function generateMetadata(props: { params: Promise<Params> }): Promise<Metadata> {
+  const params = await props.params;
   const def = getRankingBySlug(params.metric);
   const pref = getPrefBySlug(params.pref);
   if (!def || !pref) return { title: "見つかりません | KurashiMap" };
@@ -62,7 +63,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   };
 }
 
-export default async function PrefRankingPage({ params }: { params: Params }) {
+export default async function PrefRankingPage(props: { params: Promise<Params> }) {
+  const params = await props.params;
   const def = getRankingBySlug(params.metric);
   const pref = getPrefBySlug(params.pref);
   if (!def || !pref) notFound();

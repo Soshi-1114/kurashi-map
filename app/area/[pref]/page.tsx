@@ -42,7 +42,8 @@ function prefStats(muni: Municipality[]) {
   };
 }
 
-export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+export async function generateMetadata(props: { params: Promise<Params> }): Promise<Metadata> {
+  const params = await props.params;
   const pref = getPrefBySlug(params.pref);
   if (!pref) return { title: "見つかりません | KurashiMap" };
   const muni = await listMunicipalities(params.pref);
@@ -70,7 +71,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   };
 }
 
-export default async function PrefPage({ params }: { params: Params }) {
+export default async function PrefPage(props: { params: Promise<Params> }) {
+  const params = await props.params;
   const pref = getPrefBySlug(params.pref);
   if (!pref) notFound();
 

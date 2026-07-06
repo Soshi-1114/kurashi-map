@@ -7,7 +7,8 @@ import { OgFrame, OgHeading, Pill, OG_SIZE } from "@/lib/og";
 // og/[code] と同じく Node ランタイムにして Edge Function サイズ制限から外す。
 export const runtime = "nodejs";
 
-export async function GET(_req: Request, { params }: { params: { slug: string } }) {
+export async function GET(_req: Request, props: { params: Promise<{ slug: string }> }) {
+  const params = await props.params;
   const pref = getPrefBySlug(params.slug);
   if (!pref) return new Response("not found", { status: 404 });
   const count = (await listMunicipalities(params.slug)).length;

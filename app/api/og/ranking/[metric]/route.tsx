@@ -8,7 +8,8 @@ export const runtime = "nodejs";
 
 // ランキングOG。全国集計はデータ全量ロードになり重いため、画像は
 // タイトル中心の意匠とし、1位などの動的値は載せない。
-export function GET(_req: Request, { params }: { params: { metric: string } }) {
+export async function GET(_req: Request, props: { params: Promise<{ metric: string }> }) {
+  const params = await props.params;
   const def = getRankingBySlug(params.metric);
   if (!def) return new Response("not found", { status: 404 });
 

@@ -61,7 +61,8 @@ export async function generateStaticParams() {
   return all.map((m) => ({ pref: m.pref, city: m.code }));
 }
 
-export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+export async function generateMetadata(props: { params: Promise<Params> }): Promise<Metadata> {
+  const params = await props.params;
   const m = await getMunicipality(params.city);
   if (!m) return { title: "見つかりません | KurashiMap" };
   const prefName = prefNameOf(m.pref);
@@ -115,7 +116,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   };
 }
 
-export default async function AreaPage({ params }: { params: Params }) {
+export default async function AreaPage(props: { params: Promise<Params> }) {
+  const params = await props.params;
   const m = await getMunicipality(params.city);
   if (!m) notFound();
 
@@ -258,7 +260,6 @@ export default async function AreaPage({ params }: { params: Params }) {
   return (
     <div className="ad-root">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }} />
-
       <nav aria-label="パンくず" className="breadcrumb">
         <Link href="/" className="breadcrumb-link">{SITE.name}</Link>
         <span aria-hidden="true">/</span>
@@ -272,7 +273,6 @@ export default async function AreaPage({ params }: { params: Params }) {
         <span aria-hidden="true">/</span>
         <span className="breadcrumb-current">{m.name}</span>
       </nav>
-
       {/* ① Hero */}
       <header className="ad-hero">
         <div className="ad-hero-main">
@@ -296,12 +296,10 @@ export default async function AreaPage({ params }: { params: Params }) {
 
         <ScorePanel liv={liv} />
       </header>
-
       {/* AI総評 + こんな人におすすめ */}
       <Reveal>
         <OverviewCard m={m} liv={liv} />
       </Reveal>
-
       {/* データで見る（他自治体との相対比較。ページ固有の可視テキストを増やす） */}
       {insights.length > 0 && (
         <Reveal>
@@ -319,7 +317,6 @@ export default async function AreaPage({ params }: { params: Params }) {
           </Section>
         </Reveal>
       )}
-
       {/* ② KPIカード */}
       <Reveal>
         <div className="ad-kpis">
@@ -362,12 +359,10 @@ export default async function AreaPage({ params }: { params: Params }) {
           />
         </div>
       </Reveal>
-
       <p className="ad-honesty">
         <Info size={16} aria-hidden="true" />
         数値は政府統計・国土数値情報の実データです。データのない項目は推計で埋めず「データなし／対象外」と明示しています。
       </p>
-
       {/* ③ 詳細情報グリッド */}
       <Section icon={Wallet} tone="ad-tone-rent" title="詳細データ">
         <div className="ad-metric-grid">
@@ -484,7 +479,6 @@ export default async function AreaPage({ params }: { params: Params }) {
           </MetricCard>
         </div>
       </Section>
-
       {/* 家賃が近い自治体 */}
       {related.length > 0 && (
         <Section icon={Home} tone="ad-tone-rent" title="家賃水準が近い自治体" sub={`${m.name}と家賃中央値が近い${prefName}の自治体`}>
@@ -501,7 +495,6 @@ export default async function AreaPage({ params }: { params: Params }) {
           </ul>
         </Section>
       )}
-
       {/* 似ているエリア */}
       {similar.length > 0 && (
         <Section icon={Search} tone="ad-tone-pop" title="似ているエリアを探す" sub={`${m.name}と特徴が似ているエリア`}>
@@ -520,7 +513,6 @@ export default async function AreaPage({ params }: { params: Params }) {
           </ul>
         </Section>
       )}
-
       {/* 兄弟区 */}
       {siblings.length > 0 && parent && (
         <Section icon={MapIcon} tone="ad-tone-infra" title={`${parent.name}のほかの区`}>
@@ -537,7 +529,6 @@ export default async function AreaPage({ params }: { params: Params }) {
           </ul>
         </Section>
       )}
-
       {/* 主要自治体 */}
       {majorPeers.length > 0 && (
         <Section
@@ -560,7 +551,6 @@ export default async function AreaPage({ params }: { params: Params }) {
           </ul>
         </Section>
       )}
-
       {/* ランキング */}
       <Section icon={Trophy} tone="ad-tone-hazard" title="ランキングで比較">
         <ul className="ad-rank-grid">
@@ -579,7 +569,6 @@ export default async function AreaPage({ params }: { params: Params }) {
           })}
         </ul>
       </Section>
-
       {/* FAQ（Accordion・デフォルト閉じる） */}
       <Section icon={Info} tone="ad-tone-infra" title={`${m.name}のよくある質問`}>
         <div className="ad-faq">
@@ -591,7 +580,6 @@ export default async function AreaPage({ params }: { params: Params }) {
           ))}
         </div>
       </Section>
-
       {/* 出典（折りたたみ） */}
       <Reveal>
         <details className="ad-sources" style={{ marginTop: 32 }}>
@@ -604,7 +592,6 @@ export default async function AreaPage({ params }: { params: Params }) {
           </p>
         </details>
       </Reveal>
-
       {/* ページ下部 CTA */}
       <Reveal>
         <section className="ad-cta">
@@ -626,7 +613,6 @@ export default async function AreaPage({ params }: { params: Params }) {
           </ul>
         </section>
       </Reveal>
-
       <div className="ad-footnav">
         <Link href={`/area/${m.pref}`} className="ad-back"><ArrowLeft size={14} aria-hidden="true" />{prefName}の一覧</Link>
         <Link href="/ranking" className="ad-back"><Trophy size={14} aria-hidden="true" />ランキング</Link>
