@@ -17,7 +17,7 @@
     "indexnow": "node scripts/indexnow-submit.mjs"
   },
   "dependencies": {
-    "lucide-react": "^1.22.0",
+    "lucide-react": "^1.23.0",
     "maplibre-gl": "^4.7.1",
     "next": "14.2.35",
     "react": "^18.3.1",
