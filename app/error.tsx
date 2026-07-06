@@ -54,6 +54,10 @@ export default function Error({
         >
           もう一度試す
         </button>
+        {/* エラーバウンダリでは <Link> のクライアント遷移ではなく、素の <a> で
+            ハードリロードして壊れたクライアント状態ごとリセットする（意図的）。
+            no-html-link-for-pages は通常ページ向けの規則なのでここは無効化する。 */}
+        {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
         <a
           href="/"
           style={{
