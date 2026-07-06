@@ -9,8 +9,9 @@ const STYLE = "pale"; // 国土地理院 淡色地図
 
 export async function GET(
   _req: Request,
-  { params }: { params: { z: string; x: string; y: string } },
+  props: { params: Promise<{ z: string; x: string; y: string }> }
 ) {
+  const params = await props.params;
   const { z, x, y } = params;
   if (!/^\d{1,2}$/.test(z) || !/^\d{1,7}$/.test(x) || !/^\d{1,7}$/.test(y)) {
     return new NextResponse("invalid params", { status: 400 });

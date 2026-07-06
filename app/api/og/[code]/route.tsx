@@ -11,10 +11,8 @@ export const runtime = "nodejs";
 
 const OG_SIZE = { width: 1200, height: 630 };
 
-export async function GET(
-  _req: Request,
-  { params }: { params: { code: string } },
-) {
+export async function GET(_req: Request, props: { params: Promise<{ code: string }> }) {
+  const params = await props.params;
   // 全国地方公共団体コードは5桁数字。形式不正はデータ探索に入る前に弾く。
   if (!/^\d{5}$/.test(params.code)) {
     return new Response("invalid code", { status: 400 });

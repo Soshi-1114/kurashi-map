@@ -3,10 +3,8 @@
 import { NextResponse } from "next/server";
 import { getMunicipality } from "@/lib/metrics";
 
-export async function GET(
-  _req: Request,
-  { params }: { params: { code: string } },
-) {
+export async function GET(_req: Request, props: { params: Promise<{ code: string }> }) {
+  const params = await props.params;
   // 全国地方公共団体コードは5桁数字。形式不正はデータ探索に入る前に弾く。
   if (!/^\d{5}$/.test(params.code)) {
     return NextResponse.json({ error: "invalid code" }, { status: 400 });

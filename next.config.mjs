@@ -1,3 +1,6 @@
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
 /** @type {import('next').NextConfig} */
 
 // Content-Security-Policy。全ページに付与する。
@@ -33,6 +36,9 @@ const csp = [
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false, // "X-Powered-By: Next.js"（バージョン露出）を返さない
+  // Next 15 は複数 lockfile 環境でワークスペースルートを推定し警告を出す。
+  // ファイルトレースの基準をこのプロジェクトroot に固定する（このリポジトリ = 単一パッケージ）。
+  outputFileTracingRoot: path.dirname(fileURLToPath(import.meta.url)),
   // 本サイトは next/image を使わない（地図・OG画像はいずれも別経路）。
   // 既定では /_next/image 最適化エンドポイントが有効なままで、外部URLの最適化を
   // 悪用した DoS の攻撃面になりうる（Next.js Image Optimization DoS 系の勧告）。
