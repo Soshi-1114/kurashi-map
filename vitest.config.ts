@@ -10,10 +10,10 @@ export default defineConfig({
   esbuild: { jsx: "automatic" },
   test: {
     // lib のロジックテストは node 環境（既定）。tests/components/ の React
-    // コンポーネントテストのみ jsdom に切り替える（environmentMatchGlobs）。
+    // コンポーネントテストは各ファイル冒頭の `// @vitest-environment jsdom`
+    // プラグマで jsdom に切り替える（vitest 3 で environmentMatchGlobs は削除されたため）。
     environment: "node",
     include: ["tests/**/*.test.ts", "tests/**/*.test.tsx"],
-    environmentMatchGlobs: [["tests/components/**", "jsdom"]],
     // jest-dom のマッチャ拡張（toBeInTheDocument 等）。node テストにも読み込まれるが
     // マッチャを足すだけで DOM 依存はないため無害。
     setupFiles: ["tests/setup.ts"],
