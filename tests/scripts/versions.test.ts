@@ -10,6 +10,8 @@ describe("VERSIONS 単一ソース", () => {
       "CFA_XLSX_URL", "CFA_ASOF",
       "GSI_SHELTER_URL", "GSI_SHELTER_ASOF",
       "FOREIGN_ASOF",
+      "MEDICAL_HOSP_STATSDATAID", "MEDICAL_CLINIC_STATSDATAID", "MEDICAL_ASOF",
+      "AMENITIES_SOURCE", "AMENITIES_ASOF",
     ];
     for (const k of required) {
       expect(VERSIONS[k], `${k} が未定義`).toBeTypeOf("string");
@@ -26,6 +28,11 @@ describe("VERSIONS 単一ソース", () => {
   it("L01_VERSION と L01_ASOF が同期している（例 26 ⇔ 2026）", () => {
     // zip 版番号 NN は令和(NN-8)年＝西暦 20NN。ASOF 末尾2桁が VERSION と一致する。
     expect(VERSIONS.L01_ASOF).toBe(`20${VERSIONS.L01_VERSION}`);
+  });
+
+  it("AMENITIES_ASOF の医療機関部分が MEDICAL_ASOF と同期している", () => {
+    // 医療施設調査の年度を上げたら amenities の表示ラベルも合わせる運用（片方だけの更新を検知）。
+    expect(VERSIONS.AMENITIES_ASOF).toContain(VERSIONS.MEDICAL_ASOF);
   });
 
   it("CFA_XLSX_URL の年度採番と CFA_ASOF が整合する（r7 ⇔ 2025）", () => {

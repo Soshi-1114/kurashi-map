@@ -79,6 +79,11 @@ jobs:
         env:
           ESTAT_APP_ID: ${{ secrets.ESTAT_APP_ID }}
 
+      - name: 医療機関（医療施設調査, e-Stat 全国一括）
+        run: node scripts/fetch-medical.mjs ${{ steps.scope.outputs.estat }}
+        env:
+          ESTAT_APP_ID: ${{ secrets.ESTAT_APP_ID }}
+
       - name: 待機児童（CFA 全国一括）
         run: WAITLIST_XLSX=/tmp/cfa_waitlist.xlsx node scripts/fetch-waitlist.mjs ${{ steps.scope.outputs.estat }}
 

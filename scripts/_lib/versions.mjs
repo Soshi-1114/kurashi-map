@@ -32,7 +32,22 @@ export const VERSIONS = {
 
   // 出入国在留管理庁「在留外国人統計」の基準時点（半期公表・手動更新）。
   // 期を更新したら statInfId とセットで合わせる（docs/data-update.md §在留外国人）。
-  FOREIGN_ASOF: "2024-12",
+  FOREIGN_ASOF: "2025-06",
+
+  // 厚生労働省「医療施設調査」（e-Stat）市区町村別の statsDataId。年度ごとに**新しい表**が
+  // 追加される（同一IDの更新ではない）ため、毎年 e-Stat で最新年の表IDを確認して差し替える。
+  // 第1表=病院数（二次医療圏・市区町村別）/ 第2表=一般診療所数・歯科診療所数（同）。
+  // MEDICAL_ASOF は調査基準時点（毎年10月1日）。表IDと必ず同期させる。
+  MEDICAL_HOSP_STATSDATAID: "0004048437",
+  MEDICAL_CLINIC_STATSDATAID: "0004048438",
+  MEDICAL_ASOF: "2024年10月",
+
+  // 生活インフラ（amenities）の共通表示ラベル。駅・保育=reinfolib（quarterly）と
+  // 医療機関=医療施設調査（annual, fetch-medical.mjs）で出典・年度が異なるため両方を明示。
+  // fetch-amenities.mjs / fetch-medical.mjs の両方がこのラベルを書く（表示の同期）。
+  // MEDICAL_ASOF を更新したら AMENITIES_ASOF の医療機関部分も合わせる（テストで検査）。
+  AMENITIES_SOURCE: "国土数値情報（reinfolib XKT015/007）・厚生労働省 医療施設調査",
+  AMENITIES_ASOF: "駅・保育 令和5年度／医療機関 2024年10月",
 };
 
 // env 未設定なら VERSIONS の既定を返すヘルパー。スクリプトからの読み出しを1行にする。

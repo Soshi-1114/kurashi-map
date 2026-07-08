@@ -17,8 +17,12 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { existsSync } from "node:fs";
+import * as fs from "node:fs";
 import XLSX from "xlsx";
 import { resolvePrefs, PREFS } from "./_lib/prefs.mjs";
+
+// xlsx の ESM ビルド（xlsx.mjs）は fs を自動注入しないため、readFile 前に明示的に渡す。
+XLSX.set_fs?.(fs);
 import { loadMuni, saveMuni } from "./_lib/data.mjs";
 import { version } from "./_lib/versions.mjs";
 
@@ -53,6 +57,8 @@ const NORTHERN_TERRITORIES = new Set([
 
 // Excel(PVTシート) → Map<市区町村コード, 総数>。ヘッダ行（"市区町村コード"始まり）を
 // 検出し、以降の5桁コード行のみ採用（"99999 未定・不詳" や "総計" 行は5桁でない／除外）。
+// 合計列は期によって位置が変わる（24-12 は4列目、25-06 で「政令指定都市」列が挿入され
+// 5列目に移動）ため、ヘッダ行の「合計」で始まる列を動的に解決する。
 function parseExcel(xlsxPath) {
   const wb = XLSX.readFile(xlsxPath);
   const ws = wb.Sheets["PVT"];
@@ -60,11 +66,13 @@ function parseExcel(xlsxPath) {
   const rows = XLSX.utils.sheet_to_json(ws, { header: 1, blankrows: false, raw: true });
   const hi = rows.findIndex((r) => r[0] === "市区町村コード");
   if (hi < 0) throw new Error("ヘッダ行（市区町村コード）が見つかりません");
+  const ti = rows[hi].findIndex((c) => typeof c === "string" && c.startsWith("合計"));
+  if (ti < 0) throw new Error("合計列（合計 / 在留外国人数）が見つかりません");
   const byCode = new Map();
   for (let i = hi + 1; i < rows.length; i++) {
     const r = rows[i];
     const code = r[0] == null ? "" : String(r[0]).trim();
-    const total = r[3];
+    const total = r[ti];
     if (!/^\d{5}$/.test(code)) continue; // 5桁コードのみ（集計擬似行を除外）
     if (typeof total !== "number") continue;
     byCode.set(code, total);
@@ -132,6 +140,11 @@ async function applyPref(pref, excel, p2w) {
 async function main() {
   const excel = parseExcel(XLSX_PATH);
   console.log(`Excel 市区町村コード: ${excel.size} 件 / 全国総数 ${[...excel.values()].reduce((a, b) => a + b, 0).toLocaleString()} 人`);
+  // 「Excel 不掲載 = 0人」で全県を上書きするため、パース失敗（レイアウト変更等）で
+  // 全自治体 0 人になる事故を防ぐ。市区町村別は例年 ~1,700-1,900 件掲載される。
+  if (excel.size < 1000) {
+    throw new Error(`パース件数が異常に少ない（${excel.size} 件）。Excel のレイアウト変更を確認してください`);
+  }
   const p2w = parentToWardsAll();
   for (const pref of prefs) await applyPref(pref, excel, p2w);
   console.log("data files 保存完了");
