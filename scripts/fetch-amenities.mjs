@@ -1,8 +1,11 @@
-// reinfolib XKT015 (駅)、XKT007 (保育園・幼稚園等) のポイントを取得し、
-// 各市区町村ポリゴン内に含まれる数をカウントして amenities フィールドに反映。
-// 医療機関（medicalFacilities）は本スクリプトでは更新しない: 原典の国土数値情報 P04 が
-// 令和2年度以降更新されないため、毎年公表される厚労省「医療施設調査」（e-Stat）から
-// fetch-medical.mjs（annual）が更新する。ここでは既存値を保持する。
+// reinfolib XKT007 (保育園・幼稚園等) のポイントを取得し、各市区町村ポリゴン内に
+// 含まれる数をカウントして amenities フィールドに反映。
+// 駅（stations）と医療機関（medicalFacilities）は本スクリプトでは更新しない:
+// - 駅: reinfolib XKT015 の反映が原典（国土数値情報 S12）より約1年遅れるため、
+//   S12 を直接取り込む fetch-stations.mjs（annual）が更新する。
+// - 医療機関: 原典の国土数値情報 P04 が令和2年度以降更新されないため、毎年公表される
+//   厚労省「医療施設調査」（e-Stat）から fetch-medical.mjs（annual）が更新する。
+// ここではどちらも既存値を保持する。
 //
 // 実行: node --env-file=.env.local --max-old-space-size=4096 scripts/fetch-amenities.mjs --pref=saitama
 
@@ -78,17 +81,9 @@ async function main() {
     wardsFirst: true,
     decorate: (b) => ({
       ...b,
-      counts: { stations: 0, preschools: 0 },
+      counts: { preschools: 0 },
       stationKeys: new Set(),
     }),
-  });
-
-  console.log("\n[XKT015] 駅");
-  await processApi("XKT015", polys, "stations", (f) => {
-    const code = f.properties?.S12_001c;
-    if (code) return `code:${code}`;
-    const name = f.properties?.S12_001_ja, op = f.properties?.S12_002_ja;
-    return name && op ? `n:${name}|${op}` : null;
   });
 
   console.log("\n[XKT007] 保育園・幼稚園等");
@@ -105,11 +100,12 @@ async function main() {
   for (const p of polys) {
     const t = byCode.get(p.code); if (!t) continue;
     t.amenities = {
-      stations: p.counts.stations,
+      // 駅は fetch-stations.mjs（S12 直接, annual）由来の値を保持する。
+      stations: t.amenities?.stations ?? 0,
       preschools: p.counts.preschools,
       // 医療機関は fetch-medical.mjs（医療施設調査, annual）由来の値を保持する。
       medicalFacilities: t.amenities?.medicalFacilities ?? 0,
-      // 表示ラベルは versions.mjs に集約（fetch-medical.mjs と同期）。
+      // 表示ラベルは versions.mjs に集約（fetch-stations/medical と同期）。
       source: version("AMENITIES_SOURCE"),
       asOf: version("AMENITIES_ASOF"),
     };

@@ -11,6 +11,7 @@ describe("VERSIONS 単一ソース", () => {
       "GSI_SHELTER_URL", "GSI_SHELTER_ASOF",
       "FOREIGN_ASOF",
       "MEDICAL_HOSP_STATSDATAID", "MEDICAL_CLINIC_STATSDATAID", "MEDICAL_ASOF",
+      "S12_URL", "S12_ASOF",
       "AMENITIES_SOURCE", "AMENITIES_ASOF",
     ];
     for (const k of required) {
@@ -33,6 +34,16 @@ describe("VERSIONS 単一ソース", () => {
   it("AMENITIES_ASOF の医療機関部分が MEDICAL_ASOF と同期している", () => {
     // 医療施設調査の年度を上げたら amenities の表示ラベルも合わせる運用（片方だけの更新を検知）。
     expect(VERSIONS.AMENITIES_ASOF).toContain(VERSIONS.MEDICAL_ASOF);
+  });
+
+  it("AMENITIES_ASOF の駅部分が S12_ASOF と同期している", () => {
+    expect(VERSIONS.AMENITIES_ASOF).toContain(VERSIONS.S12_ASOF);
+  });
+
+  it("S12_URL の年度採番と S12_ASOF が同期している（S12-24 ⇔ 2024年度）", () => {
+    const m = VERSIONS.S12_URL.match(/S12-(\d{2})_GML\.zip$/);
+    expect(m, "URL に S12-NN 採番が見つからない").not.toBeNull();
+    expect(VERSIONS.S12_ASOF).toBe(`20${m![1]}年度`);
   });
 
   it("CFA_XLSX_URL の年度採番と CFA_ASOF が整合する（r7 ⇔ 2025）", () => {
