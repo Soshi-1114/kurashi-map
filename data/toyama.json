@@ -44,22 +44,23 @@
     "amenities": {
       "stations": 85,
       "preschools": 193,
-      "medicalFacilities": 580,
-      "source": "国土数値情報（reinfolib XKT015/007/010）",
-      "asOf": "令和5年度"
+      "medicalFacilities": 562,
+      "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
+      "asOf": "駅 2024年度／保育 令和5年度／医療機関 2024年10月"
     },
     "foreignResidents": {
-      "value": 9514,
+      "value": 10017,
       "unit": "人",
       "source": "出入国在留管理庁 在留外国人統計",
-      "asOf": "2024-12",
+      "asOf": "2025-06",
       "isEstimated": false
     },
     "shelters": {
       "count": 318,
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
-    }
+    },
+    "populationChangeRate": -2.85188
   },
   {
     "code": "16202",
@@ -106,22 +107,23 @@
     "amenities": {
       "stations": 33,
       "preschools": 75,
-      "medicalFacilities": 235,
-      "source": "国土数値情報（reinfolib XKT015/007/010）",
-      "asOf": "令和5年度"
+      "medicalFacilities": 229,
+      "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
+      "asOf": "駅 2024年度／保育 令和5年度／医療機関 2024年10月"
     },
     "foreignResidents": {
-      "value": 4454,
+      "value": 4604,
       "unit": "人",
       "source": "出入国在留管理庁 在留外国人統計",
-      "asOf": "2024-12",
+      "asOf": "2025-06",
       "isEstimated": false
     },
     "shelters": {
       "count": 166,
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
-    }
+    },
+    "populationChangeRate": -4.70573
   },
   {
     "code": "16204",
@@ -168,22 +170,23 @@
     "amenities": {
       "stations": 5,
       "preschools": 19,
-      "medicalFacilities": 60,
-      "source": "国土数値情報（reinfolib XKT015/007/010）",
-      "asOf": "令和5年度"
+      "medicalFacilities": 57,
+      "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
+      "asOf": "駅 2024年度／保育 令和5年度／医療機関 2024年10月"
     },
     "foreignResidents": {
-      "value": 608,
+      "value": 639,
       "unit": "人",
       "source": "出入国在留管理庁 在留外国人統計",
-      "asOf": "2024-12",
+      "asOf": "2025-06",
       "isEstimated": false
     },
     "shelters": {
       "count": 57,
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
-    }
+    },
+    "populationChangeRate": -7.48489
   },
   {
     "code": "16205",
@@ -230,22 +233,23 @@
     "amenities": {
       "stations": 2,
       "preschools": 16,
-      "medicalFacilities": 50,
-      "source": "国土数値情報（reinfolib XKT015/007/010）",
-      "asOf": "令和5年度"
+      "medicalFacilities": 44,
+      "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
+      "asOf": "駅 2024年度／保育 令和5年度／医療機関 2024年10月"
     },
     "foreignResidents": {
-      "value": 635,
+      "value": 660,
       "unit": "人",
       "source": "出入国在留管理庁 在留外国人統計",
-      "asOf": "2024-12",
+      "asOf": "2025-06",
       "isEstimated": false
     },
     "shelters": {
       "count": 227,
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
-    }
+    },
+    "populationChangeRate": -10.92378
   },
   {
     "code": "16206",
@@ -292,22 +296,23 @@
     "amenities": {
       "stations": 10,
       "preschools": 19,
-      "medicalFacilities": 31,
-      "source": "国土数値情報（reinfolib XKT015/007/010）",
-      "asOf": "令和5年度"
+      "medicalFacilities": 27,
+      "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
+      "asOf": "駅 2024年度／保育 令和5年度／医療機関 2024年10月"
     },
     "foreignResidents": {
-      "value": 601,
+      "value": 613,
       "unit": "人",
       "source": "出入国在留管理庁 在留外国人統計",
-      "asOf": "2024-12",
+      "asOf": "2025-06",
       "isEstimated": false
     },
     "shelters": {
       "count": 54,
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
-    }
+    },
+    "populationChangeRate": -3.14693
   },
   {
     "code": "16207",
@@ -354,22 +359,23 @@
     "amenities": {
       "stations": 29,
       "preschools": 18,
-      "medicalFacilities": 49,
-      "source": "国土数値情報（reinfolib XKT015/007/010）",
-      "asOf": "令和5年度"
+      "medicalFacilities": 45,
+      "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
+      "asOf": "駅 2024年度／保育 令和5年度／医療機関 2024年10月"
     },
     "foreignResidents": {
-      "value": 566,
+      "value": 610,
       "unit": "人",
       "source": "出入国在留管理庁 在留外国人統計",
-      "asOf": "2024-12",
+      "asOf": "2025-06",
       "isEstimated": false
     },
     "shelters": {
       "count": 78,
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
-    }
+    },
+    "populationChangeRate": -5.0608
   },
   {
     "code": "16208",
@@ -416,22 +422,23 @@
     "amenities": {
       "stations": 3,
       "preschools": 23,
-      "medicalFacilities": 60,
-      "source": "国土数値情報（reinfolib XKT015/007/010）",
-      "asOf": "令和5年度"
+      "medicalFacilities": 58,
+      "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
+      "asOf": "駅 2024年度／保育 令和5年度／医療機関 2024年10月"
     },
     "foreignResidents": {
-      "value": 840,
+      "value": 859,
       "unit": "人",
       "source": "出入国在留管理庁 在留外国人統計",
-      "asOf": "2024-12",
+      "asOf": "2025-06",
       "isEstimated": false
     },
     "shelters": {
       "count": 36,
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
-    }
+    },
+    "populationChangeRate": -4.84072
   },
   {
     "code": "16209",
@@ -478,22 +485,23 @@
     "amenities": {
       "stations": 1,
       "preschools": 14,
-      "medicalFacilities": 33,
-      "source": "国土数値情報（reinfolib XKT015/007/010）",
-      "asOf": "令和5年度"
+      "medicalFacilities": 34,
+      "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
+      "asOf": "駅 2024年度／保育 令和5年度／医療機関 2024年10月"
     },
     "foreignResidents": {
-      "value": 880,
+      "value": 927,
       "unit": "人",
       "source": "出入国在留管理庁 在留外国人統計",
-      "asOf": "2024-12",
+      "asOf": "2025-06",
       "isEstimated": false
     },
     "shelters": {
       "count": 72,
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
-    }
+    },
+    "populationChangeRate": -7.90808
   },
   {
     "code": "16210",
@@ -540,22 +548,23 @@
     "amenities": {
       "stations": 6,
       "preschools": 17,
-      "medicalFacilities": 53,
-      "source": "国土数値情報（reinfolib XKT015/007/010）",
-      "asOf": "令和5年度"
+      "medicalFacilities": 51,
+      "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
+      "asOf": "駅 2024年度／保育 令和5年度／医療機関 2024年10月"
     },
     "foreignResidents": {
-      "value": 1109,
+      "value": 1101,
       "unit": "人",
       "source": "出入国在留管理庁 在留外国人統計",
-      "asOf": "2024-12",
+      "asOf": "2025-06",
       "isEstimated": false
     },
     "shelters": {
       "count": 80,
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
-    }
+    },
+    "populationChangeRate": -8.3276
   },
   {
     "code": "16211",
@@ -602,22 +611,23 @@
     "amenities": {
       "stations": 11,
       "preschools": 39,
-      "medicalFacilities": 90,
-      "source": "国土数値情報（reinfolib XKT015/007/010）",
-      "asOf": "令和5年度"
+      "medicalFacilities": 88,
+      "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
+      "asOf": "駅 2024年度／保育 令和5年度／医療機関 2024年10月"
     },
     "foreignResidents": {
-      "value": 3667,
+      "value": 3790,
       "unit": "人",
       "source": "出入国在留管理庁 在留外国人統計",
-      "asOf": "2024-12",
+      "asOf": "2025-06",
       "isEstimated": false
     },
     "shelters": {
       "count": 99,
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
-    }
+    },
+    "populationChangeRate": -3.35126
   },
   {
     "code": "16321",
@@ -665,21 +675,22 @@
       "stations": 1,
       "preschools": 3,
       "medicalFacilities": 3,
-      "source": "国土数値情報（reinfolib XKT015/007/010）",
-      "asOf": "令和5年度"
+      "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
+      "asOf": "駅 2024年度／保育 令和5年度／医療機関 2024年10月"
     },
     "foreignResidents": {
-      "value": 61,
+      "value": 58,
       "unit": "人",
       "source": "出入国在留管理庁 在留外国人統計",
-      "asOf": "2024-12",
+      "asOf": "2025-06",
       "isEstimated": false
     },
     "shelters": {
       "count": 0,
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
-    }
+    },
+    "populationChangeRate": 4.62963
   },
   {
     "code": "16322",
@@ -726,22 +737,23 @@
     "amenities": {
       "stations": 4,
       "preschools": 12,
-      "medicalFacilities": 18,
-      "source": "国土数値情報（reinfolib XKT015/007/010）",
-      "asOf": "令和5年度"
+      "medicalFacilities": 16,
+      "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
+      "asOf": "駅 2024年度／保育 令和5年度／医療機関 2024年10月"
     },
     "foreignResidents": {
-      "value": 311,
+      "value": 303,
       "unit": "人",
       "source": "出入国在留管理庁 在留外国人統計",
-      "asOf": "2024-12",
+      "asOf": "2025-06",
       "isEstimated": false
     },
     "shelters": {
       "count": 34,
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
-    }
+    },
+    "populationChangeRate": -8.47501
   },
   {
     "code": "16323",
@@ -788,22 +800,23 @@
     "amenities": {
       "stations": 22,
       "preschools": 9,
-      "medicalFacilities": 26,
-      "source": "国土数値情報（reinfolib XKT015/007/010）",
-      "asOf": "令和5年度"
+      "medicalFacilities": 20,
+      "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
+      "asOf": "駅 2024年度／保育 令和5年度／医療機関 2024年10月"
     },
     "foreignResidents": {
-      "value": 365,
+      "value": 408,
       "unit": "人",
       "source": "出入国在留管理庁 在留外国人統計",
-      "asOf": "2024-12",
+      "asOf": "2025-06",
       "isEstimated": false
     },
     "shelters": {
       "count": 34,
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
-    }
+    },
+    "populationChangeRate": -6.28429
   },
   {
     "code": "16342",
@@ -850,22 +863,23 @@
     "amenities": {
       "stations": 2,
       "preschools": 7,
-      "medicalFacilities": 24,
-      "source": "国土数値情報（reinfolib XKT015/007/010）",
-      "asOf": "令和5年度"
+      "medicalFacilities": 22,
+      "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
+      "asOf": "駅 2024年度／保育 令和5年度／医療機関 2024年10月"
     },
     "foreignResidents": {
-      "value": 544,
+      "value": 566,
       "unit": "人",
       "source": "出入国在留管理庁 在留外国人統計",
-      "asOf": "2024-12",
+      "asOf": "2025-06",
       "isEstimated": false
     },
     "shelters": {
       "count": 65,
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
-    }
+    },
+    "populationChangeRate": -10.24791
   },
   {
     "code": "16343",
@@ -912,21 +926,22 @@
     "amenities": {
       "stations": 2,
       "preschools": 3,
-      "medicalFacilities": 11,
-      "source": "国土数値情報（reinfolib XKT015/007/010）",
-      "asOf": "令和5年度"
+      "medicalFacilities": 10,
+      "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
+      "asOf": "駅 2024年度／保育 令和5年度／医療機関 2024年10月"
     },
     "foreignResidents": {
-      "value": 159,
+      "value": 156,
       "unit": "人",
       "source": "出入国在留管理庁 在留外国人統計",
-      "asOf": "2024-12",
+      "asOf": "2025-06",
       "isEstimated": false
     },
     "shelters": {
       "count": 112,
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
-    }
+    },
+    "populationChangeRate": -13.47351
   }
 ]

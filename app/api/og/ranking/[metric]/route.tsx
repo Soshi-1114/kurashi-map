@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import { getRankingBySlug } from "@/lib/rankings";
+import { getMunicipality } from "@/lib/metrics";
 import { OgFrame, OgHeading, Pill, OG_SIZE } from "@/lib/og";
 
 // next/og の Edge ランタイムは本体だけで Edge Function サイズ上限(4.02MB)に肉薄するため、
@@ -13,6 +14,11 @@ export async function GET(_req: Request, props: { params: Promise<{ metric: stri
   const def = getRankingBySlug(params.metric);
   if (!def) return new Response("not found", { status: 404 });
 
+  // 鮮度ラベル（例「2025年6月最新」）。asOf は全自治体で同一期なので、全量ロードせず
+  // サンプル1自治体（さいたま市=1県ぶんのロード）から導出する。
+  const sample = await getMunicipality("11100");
+  const freshness = def.freshnessLabel?.(sample ?? null) ?? null;
+
   return new ImageResponse(
     (
       <OgFrame>
@@ -23,6 +29,7 @@ export async function GET(_req: Request, props: { params: Promise<{ metric: stri
           titleSize={64}
         />
         <div style={{ marginTop: "auto", display: "flex", gap: 16 }}>
+          {freshness && <Pill>{freshness}</Pill>}
           <Pill>{def.columnLabel}で比較</Pill>
           <Pill>全国の市区町村</Pill>
         </div>

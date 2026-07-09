@@ -47,8 +47,14 @@ async function main() {
   for (const [code, m] of byCode) {
     const p = pop2025.get(code);
     if (p != null) { m.population = p; popUpd++; } else miss++;
-    const t = trendOf(rate.get(code));
-    if (t) { m.populationTrend = t; trendUpd++; dist[t] = (dist[t] || 0) + 1; }
+    const r = rate.get(code);
+    const t = trendOf(r);
+    if (t) {
+      m.populationTrend = t;
+      // 率そのものも保存（人口増加率ランキング用。trend はこの率の5区分）。
+      m.populationChangeRate = r;
+      trendUpd++; dist[t] = (dist[t] || 0) + 1;
+    }
   }
   for (const { paths, muni, wards } of entries) await saveMuni(paths, muni, wards);
   console.log(`pop更新${popUpd}/${byCode.size}(欠${miss}) trend${trendUpd} | ${JSON.stringify(dist)}`);

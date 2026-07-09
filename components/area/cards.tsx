@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
 import { ArrowRight, ChevronRight, MinusCircle, MapPin } from "lucide-react";
+import { formatAsOfJa } from "@/lib/rankings";
 
 // ---- KPI カード（家賃・人口・地価・待機児童などの横長タイル）----
 export function KpiCard({
@@ -206,7 +207,7 @@ export function SourceLine({
 }) {
   return (
     <p className="ad-source">
-      出典: {source}（{asOf}）{estimated && <span className="ad-est">推計</span>}
+      出典: {source}（{formatAsOfJa(asOf)}）{estimated && <span className="ad-est">推計</span>}
     </p>
   );
 }

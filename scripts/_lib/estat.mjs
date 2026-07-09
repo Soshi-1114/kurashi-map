@@ -64,6 +64,18 @@ export async function fetchStatsValues(appId, statsDataId, codes, extraParams = 
   return rows;
 }
 
+// 地域軸が標準 cdArea でない表（例: 医療施設調査の cat02「二次医療圏・市区町村別」）向け:
+// 絞り込みパラメータのみ指定して全行を1回で取得し、STATISTICAL_DATA（CLASS_INF 含む）を返す。
+export async function fetchStatsData(appId, statsDataId, extraParams = {}) {
+  const url = new URL(ESTAT_ENDPOINT);
+  url.searchParams.set("appId", appId);
+  url.searchParams.set("statsDataId", statsDataId);
+  for (const [k, v] of Object.entries(extraParams)) url.searchParams.set(k, v);
+  url.searchParams.set("limit", "100000");
+  const data = await fetchJsonWithRetry(url);
+  return data.GET_STATS_DATA?.STATISTICAL_DATA ?? null;
+}
+
 // 単一値メトリクス向け: area コード -> 数値 の Map を返す。数値化できない行は除外。
 export async function fetchValueByArea(appId, statsDataId, codes, extraParams = {}) {
   const byCode = new Map();

@@ -44,6 +44,12 @@ export type RankingDef = {
    * 例: 「2024年12月最新」。指定が無い／null の場合は既定の「全国」を使う。
    */
   freshnessLabel?: (top1: Municipality | null) => string | null;
+  /**
+   * 出典の次回更新予定（判明しているもののみ）。「次回更新予定: 」に続く文として
+   * H1 直下に表示し、データ鮮度への不安に応える。出典の公表→データ反映のたびに
+   * この文言も次の期へ手動更新する（docs/data-update.md 参照）。
+   */
+  nextUpdate?: string;
   /** テーブルの値カラム見出し */
   columnLabel: string;
   order: "asc" | "desc";
@@ -59,20 +65,26 @@ export type RankingDef = {
 const FOREIGN_NOTE =
   "外国人住民比率は多様性・国際性の目安です（出典: 出入国在留管理庁「在留外国人統計」）。比率の高い／低いという事実を示すもので、住みやすさ等の価値判断とは無関係です。";
 
-// "2024-12" → "2024年12月"。データ asOf を見出しの鮮度ラベルへ整形する。
+// "2024-12"・"2025-04-01" → "2024年12月"・"2025年4月"。データ asOf を見出し・出典表示の
+// 鮮度ラベルへ整形する（日付は月に丸める）。整形できない形式（和暦・複合ラベル等）はそのまま返す。
 export function formatAsOfJa(asOf: string): string {
-  const m = /^(\d{4})-(\d{1,2})$/.exec(asOf ?? "");
+  const m = /^(\d{4})-(\d{1,2})(?:-\d{1,2})?$/.exec(asOf ?? "");
   if (m) return `${m[1]}年${Number(m[2])}月`;
   const y = /^(\d{4})$/.exec(asOf ?? "");
   if (y) return `${y[1]}年`;
   return asOf ?? "";
 }
 
-// 外国人住民比率ランキングの鮮度ラベル（1位自治体の asOf 由来）。例「2024年12月最新」。
-function foreignFreshnessLabel(top1: Municipality | null): string | null {
-  if (!top1) return null;
-  return `${formatAsOfJa(top1.foreignResidents.asOf)}最新`;
+// 指標の asOf から H1 用の鮮度ラベル（例「2025年6月最新」）を導出する汎用フック。
+function freshnessFromAsOf(getAsOf: (m: Municipality) => string) {
+  return (top1: Municipality | null): string | null =>
+    top1 ? `${formatAsOfJa(getAsOf(top1))}最新` : null;
 }
+const foreignFreshnessLabel = freshnessFromAsOf((m) => m.foreignResidents.asOf);
+
+// 人口の鮮度ラベル。Municipality に人口の asOf フィールドが無いため固定文字列とし、
+// 確定値公表・次回調査での更新時に NEXT_UPDATE.population と合わせて書き換える。
+const POPULATION_FRESHNESS = "2025年国勢調査";
 
 // 外国人住民比率ランキングの導入文（薄ページ対策・中立フレーミング）。high/low で傾向解説を分岐。
 function foreignIntro(highLow: "高い" | "低い"): string[] {
@@ -109,7 +121,7 @@ const FOREIGN_FAQ: { q: string; a: string }[] = [
   },
   {
     q: "データの出典と基準時点は？",
-    a: "在留外国人数は出入国在留管理庁「在留外国人統計」（e-Stat 経由）、人口は国勢調査の公表値です。いずれも政府統計の実データで、推計値や補完値は使用していません。",
+    a: "在留外国人数は出入国在留管理庁「在留外国人統計」（e-Stat 経由）、人口は国勢調査の公表値です。いずれも政府統計の実データで、推計値や補完値は使用していません。在留外国人統計は年2回（6月末・12月末時点）公表され、本サイトは公表のたびに最新データへ更新しています。",
   },
   {
     q: "外国人住民比率が高い・低いことに良し悪しはありますか？",
@@ -121,6 +133,16 @@ const FOREIGN_FAQ: { q: string; a: string }[] = [
   },
 ];
 
+// 各出典の次回更新予定（公表サイクルは docs/data-update.md §5 参照）。
+// 出典の公表→データ反映のたびに次の期へ書き換える。地図ハブ等でも参照するため export。
+export const NEXT_UPDATE = {
+  rent: "出典（住宅・土地統計調査）は5年周期のため、現在の2023年調査が最新の公表データです。次回は2028年調査（結果公表は2029年以降）の見込みです。",
+  landPrice: "地価公示は毎年3月公表です。次回（2027年地価公示）の公表後に更新予定です。",
+  waitlist: "こども家庭庁の次回取りまとめ（2026年4月1日時点）は例年8月末〜9月に公表され、公表後に更新予定です。",
+  population: "令和7年（2025年）国勢調査の確定値（人口等基本集計）が2026年9月までに公表予定で、公表後に更新予定です。",
+  foreign: "在留外国人統計は年2回公表です。次回は2025年12月末時点の市区町村別データが2026年7月下旬に公表見込みで、公表後すみやかに更新予定です。",
+} as const;
+
 // 1位自治体（実データ）から「名前・比率・基準年」を含む meta description を組み立てる。
 function foreignMetaDescription(highLow: "高い" | "低い") {
   return (top1: Municipality | null): string => {
@@ -128,7 +150,8 @@ function foreignMetaDescription(highLow: "高い" | "低い") {
     if (!top1) return `${head}多様性・国際性の目安として、出入国在留管理庁「在留外国人統計」の実データで比較できます。`;
     const name = `${prefNameOf(top1.pref)}${top1.displayName ?? top1.name}`;
     const ratio = foreignRatioPct(top1).toFixed(2);
-    return `${head}${highLow === "高い" ? "最も比率が高い" : "最も比率が低い"}のは${name}（${ratio}%、${top1.foreignResidents.asOf}時点）。多様性・国際性の目安として、出入国在留管理庁「在留外国人統計」の実データで比較できます。`;
+    // asOf は "2025-06" 形式なので、検索結果に出る文言として自然な「2025年6月」へ整形する。
+    return `${head}${highLow === "高い" ? "最も比率が高い" : "最も比率が低い"}のは${name}（${ratio}%、${formatAsOfJa(top1.foreignResidents.asOf)}時点）。多様性・国際性の目安として、出入国在留管理庁「在留外国人統計」の実データで比較できます。`;
   };
 }
 
@@ -142,6 +165,7 @@ export const RANKINGS: RankingDef[] = [
     lead: "全国の市区町村を民営借家中央値が安い順に並べたランキングです。",
     columnLabel: "家賃中央値",
     order: "asc",
+    nextUpdate: NEXT_UPDATE.rent,
     qualifies: (m) => hasRent(m.rent.value),
     sortValue: (m) => m.rent.value,
     display: (m) => `${m.rent.value.toLocaleString()}円/月`,
@@ -155,6 +179,7 @@ export const RANKINGS: RankingDef[] = [
     lead: "全国の市区町村を民営借家中央値が高い順に並べたランキングです。",
     columnLabel: "家賃中央値",
     order: "desc",
+    nextUpdate: NEXT_UPDATE.rent,
     qualifies: (m) => hasRent(m.rent.value),
     sortValue: (m) => m.rent.value,
     display: (m) => `${m.rent.value.toLocaleString()}円/月`,
@@ -168,6 +193,23 @@ export const RANKINGS: RankingDef[] = [
     lead: "全国の市区町村を住宅地の地価（円/㎡）が高い順に並べたランキングです。",
     columnLabel: "地価（住宅地）",
     order: "desc",
+    freshnessLabel: freshnessFromAsOf((m) => m.landPrice.asOf),
+    nextUpdate: NEXT_UPDATE.landPrice,
+    qualifies: (m) => hasLandPrice(m.landPrice.value),
+    sortValue: (m) => m.landPrice.value,
+    display: (m) => `${m.landPrice.value.toLocaleString()}円/㎡`,
+  },
+  {
+    slug: "land-price-low",
+    title: "地価が安い市区町村ランキング",
+    shortLabel: "地価が安い",
+    description:
+      "全国の市区町村を住宅地の地価が安い順にランキング。最も地価が安いのは{top1}。地価公示・地価調査の実データで、土地が手頃な自治体を比較できます。",
+    lead: "全国の市区町村を住宅地の地価（円/㎡）が安い順に並べたランキングです。",
+    columnLabel: "地価（住宅地）",
+    order: "asc",
+    freshnessLabel: freshnessFromAsOf((m) => m.landPrice.asOf),
+    nextUpdate: NEXT_UPDATE.landPrice,
     qualifies: (m) => hasLandPrice(m.landPrice.value),
     sortValue: (m) => m.landPrice.value,
     display: (m) => `${m.landPrice.value.toLocaleString()}円/㎡`,
@@ -181,6 +223,8 @@ export const RANKINGS: RankingDef[] = [
     lead: "待機児童数が0人の市区町村を、人口が多い順に掲載しています（こども家庭庁の公表値）。",
     columnLabel: "人口",
     order: "desc",
+    freshnessLabel: freshnessFromAsOf((m) => m.waitlistChildren.asOf),
+    nextUpdate: NEXT_UPDATE.waitlist,
     qualifies: (m) => isWaitlistDisclosed(m.waitlistChildren) && m.waitlistChildren.value === 0,
     sortValue: (m) => m.population,
     display: (m) => `${m.population.toLocaleString()}人`,
@@ -194,9 +238,30 @@ export const RANKINGS: RankingDef[] = [
     lead: "全国の市区町村を、人口が多い順に並べたランキングです（国勢調査）。",
     columnLabel: "人口",
     order: "desc",
+    freshnessLabel: () => POPULATION_FRESHNESS,
+    nextUpdate: NEXT_UPDATE.population,
     qualifies: (m) => m.population > 0,
     sortValue: (m) => m.population,
     display: (m) => `${m.population.toLocaleString()}人`,
+  },
+  {
+    slug: "population-growth",
+    title: "人口増加率が高い市区町村ランキング",
+    shortLabel: "人口増加率",
+    description:
+      "全国の市区町村を5年間（2020→2025年国勢調査）の人口増減率が高い順にランキング。最も人口増加率が高いのは{top1}。国勢調査の実データで人口が増えている自治体を比較できます。",
+    lead: "全国の市区町村を、5年間（2020→2025年国勢調査）の人口増減率が高い順に並べたランキングです。",
+    note: "人口増減率は2020年と2025年の国勢調査人口の比較（%）で、転入・出生などの内訳は含みません。人口規模が小さい自治体や、震災からの帰還が進む自治体（福島県大熊町など）では率が大きく出ることがあります。",
+    columnLabel: "人口増減率（2020→2025）",
+    order: "desc",
+    freshnessLabel: () => POPULATION_FRESHNESS,
+    nextUpdate: NEXT_UPDATE.population,
+    qualifies: (m) => typeof m.populationChangeRate === "number" && m.population > 0,
+    sortValue: (m) => m.populationChangeRate ?? 0,
+    display: (m) => {
+      const r = m.populationChangeRate ?? 0;
+      return `${r > 0 ? "+" : ""}${r.toFixed(1)}%`;
+    },
   },
   {
     slug: "foreign-ratio-high",
@@ -212,6 +277,7 @@ export const RANKINGS: RankingDef[] = [
     prefIntro: foreignPrefIntro("高い"),
     compareForeignAvg: true,
     freshnessLabel: foreignFreshnessLabel,
+    nextUpdate: NEXT_UPDATE.foreign,
     columnLabel: "外国人住民比率",
     order: "desc",
     // 在留外国人統計の対象かつ人口が有効（比率を算出できる）自治体のみ。
@@ -233,6 +299,7 @@ export const RANKINGS: RankingDef[] = [
     prefIntro: foreignPrefIntro("低い"),
     compareForeignAvg: true,
     freshnessLabel: foreignFreshnessLabel,
+    nextUpdate: NEXT_UPDATE.foreign,
     columnLabel: "外国人住民比率",
     order: "asc",
     qualifies: (m) => hasForeignData(m.foreignResidents.source) && m.population > 0,

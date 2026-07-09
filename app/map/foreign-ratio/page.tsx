@@ -120,6 +120,7 @@ function ForeignRatioHub({
       <p className="home-links-lead">
         外国人住民の割合は、地域の多様性・国際性を読み解く客観的な指標のひとつです。比率の高い・低いという事実を示すもので、住みやすさや治安などの価値判断とは無関係です。数値は出入国在留管理庁「在留外国人統計」{asOfJa && `（${asOfJa}）`}と国勢調査人口の実データから算出しており、推計値は含みません。
       </p>
+      <p className="home-links-lead">📅 次回更新予定: {HIGH.nextUpdate}</p>
 
       <section className="home-links-block">
         <h2 className="home-links-h">ランキングで比較</h2>
