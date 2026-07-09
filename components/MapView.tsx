@@ -398,6 +398,10 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
             map.setFeatureState({ source: "muni", id: sel }, { selected: true });
             map.setFeatureState({ source: "wards", id: sel }, { selected: true });
           }
+          // moveend 時点ではこの県のポリゴンが未描画で、避難場所の視界内評価
+          // （queryRenderedFeatures）が空振りしている。描画が落ち着いてから再評価する
+          // （避難所ONのまま未ロード県へ移動すると点が出ないままになるレースの解消）。
+          map.once("idle", () => shelterRefreshRef.current?.());
         }
         ensurePrefsRef.current = ensurePrefs;
 
