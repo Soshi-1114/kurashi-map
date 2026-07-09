@@ -46,9 +46,13 @@ function numericStepExpression(
   for (let i = 0; i < thresholds.length; i++) {
     step.push(thresholds[i], colors[i + 1]);
   }
+  // 注意: ["to-number", x, fallback] の fallback は「変換不能」時のみで、null→0 は
+  // 正常変換になる。プロパティ欠損は ["has"] で明示的に検出しないと、nodataMax=-1 の
+  // 指標（外国人比率）で step が null 入力になり既定色（黒）で塗られてしまう。
   return [
     "case",
-    ["<=", ["to-number", ["get", property], nodataMax], nodataMax], NODATA_COLOR,
+    ["!", ["has", property]], NODATA_COLOR,
+    ["<=", ["to-number", ["get", property]], nodataMax], NODATA_COLOR,
     step,
   ];
 }
@@ -118,10 +122,15 @@ export const MAP_METRICS: readonly MapMetric[] = [
       items: TREND_ITEMS.map((t) => ({ color: t.color, label: t.value })),
     },
     colorExpression: () => [
-      "match",
-      ["get", "popTrend"],
-      ...TREND_ITEMS.flatMap((t) => [t.value, t.color]),
-      NODATA_COLOR,
+      "case",
+      // 欠損 feature は match が null 入力で評価エラー→黒になるため先にガードする。
+      ["!", ["has", "popTrend"]], NODATA_COLOR,
+      [
+        "match",
+        ["get", "popTrend"],
+        ...TREND_ITEMS.flatMap((t) => [t.value, t.color]),
+        NODATA_COLOR,
+      ],
     ],
     formatValue: (raw) => {
       const s = String(raw ?? "");

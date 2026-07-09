@@ -88,7 +88,9 @@ export function buildMatchExpression(f: MapFilters): unknown | null {
     const max = f[spec.max];
     if (max == null) continue;
     // 未評価/欠損は missingDefault（下限を満たさない値）に落とし、非該当として減光側へ。
-    const v = ["to-number", ["get", spec.prop], spec.missingDefault];
+    // ["to-number", x, fallback] は null→0 を「正常変換」するため欠損検出に使えない。
+    // ["has"] でプロパティ欠損を明示的に missingDefault へ落とす。
+    const v = ["case", ["has", spec.prop], ["to-number", ["get", spec.prop]], spec.missingDefault];
     clauses.push(["all", [spec.floorOp, v, spec.floor], ["<=", v, max]]);
   }
   return ["all", ...clauses];
