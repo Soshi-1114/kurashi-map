@@ -1,0 +1,32 @@
+# IndexNow 送信（Bing / Yandex 等への早期インデックス通知）。
+# 本番デプロイの後に手動実行する（キーファイルが本番に配信済みであることが前提。
+# 未配信だと 403 になる。詳細は docs/data-update.md §8）。
+# 送信対象は本番の sitemap.xml から収集するため、Secret は不要。
+name: IndexNow Submit
+
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: "特定URLのみ送信する場合に指定（空欄で sitemap.xml の全URL）"
+        required: false
+        default: ""
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: IndexNow 送信
+        run: |
+          if [[ -n "${{ inputs.url }}" ]]; then
+            npm run indexnow -- --url="${{ inputs.url }}"
+          else
+            npm run indexnow
+          fi

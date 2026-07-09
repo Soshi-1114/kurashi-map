@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import type { Municipality, MuniSummary } from "@/lib/types";
+import { formatAsOfJa } from "@/lib/rankings";
 import { buildSummary } from "@/lib/summary";
 import { hasRent } from "@/lib/rentColor";
 import { isWaitlistDisclosed } from "@/lib/waitlist";
@@ -129,7 +130,7 @@ export function MetricCards({ m }: { m: Municipality }) {
             {c.est && <span className="metric-est">推計</span>}
           </div>
           <div className="metric-meta">
-            {c.source}（{c.asOf}）
+            {c.source}（{formatAsOfJa(c.asOf)}）
           </div>
         </div>
       ))}

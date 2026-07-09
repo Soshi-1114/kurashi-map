@@ -27,6 +27,9 @@ export default function HomeLinks({ popular }: { popular: PopularMuni[] }) {
       <section className="home-links-block">
         <h2 className="home-links-h">地図で見る</h2>
         <ul className="home-chip-row">
+          <li><Link href="/map/rent" className="home-chip">家賃相場マップ</Link></li>
+          <li><Link href="/map/land-price" className="home-chip">地価マップ</Link></li>
+          <li><Link href="/map/population-trend" className="home-chip">人口増減マップ</Link></li>
           <li><Link href="/map/foreign-ratio" className="home-chip">外国人住民の割合マップ</Link></li>
         </ul>
       </section>
@@ -57,6 +60,7 @@ export default function HomeLinks({ popular }: { popular: PopularMuni[] }) {
 
       <p className="home-links-foot">
         © KurashiMap — 出典: e-Stat（住宅・土地統計調査／国勢調査）・地価公示／地価調査・不動産情報ライブラリ・こども家庭庁・出入国在留管理庁 在留外国人統計（e-Stat）
+        ／ <Link href="/about">このサイトについて（データの出典と更新方針）</Link>
       </p>
     </div>
   );

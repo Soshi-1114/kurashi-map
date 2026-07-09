@@ -58,6 +58,9 @@ function checkMuni(file, slug, m, level) {
   if (!isStr(m.name)) err(file, code, "name が空");
   if (!isNum(m.population) || m.population < 0) err(file, code, "population が非負数値でない");
   if (!TRENDS.has(m.populationTrend)) err(file, code, `populationTrend が不正 (${m.populationTrend})`);
+  if (m.populationChangeRate !== undefined && !isNum(m.populationChangeRate)) {
+    err(file, code, "populationChangeRate が数値でない");
+  }
   for (const key of ["rent", "landPrice", "waitlistChildren", "foreignResidents"]) {
     checkMetric(file, code, key, m[key]);
   }

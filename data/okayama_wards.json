@@ -62,7 +62,8 @@
       "count": 120,
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
-    }
+    },
+    "populationChangeRate": -1.05906
   },
   {
     "code": "33102",
@@ -127,7 +128,8 @@
       "count": 50,
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
-    }
+    },
+    "populationChangeRate": -2.6174
   },
   {
     "code": "33103",
@@ -192,7 +194,8 @@
       "count": 67,
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
-    }
+    },
+    "populationChangeRate": -4.78691
   },
   {
     "code": "33104",
@@ -257,6 +260,7 @@
       "count": 82,
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
-    }
+    },
+    "populationChangeRate": -3.0275
   }
 ]

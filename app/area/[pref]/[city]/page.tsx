@@ -24,7 +24,8 @@ import {
 import { getMunicipality, listAll, listAllAcrossPrefs } from "@/lib/metrics";
 import { buildSummary } from "@/lib/summary";
 import { findRelatedByRent, findSimilar } from "@/lib/related";
-import { RANKINGS } from "@/lib/rankings";
+import { RANKINGS, formatAsOfJa } from "@/lib/rankings";
+import { muniLastModified } from "@/lib/dataFreshness";
 import { getRankPositions } from "@/lib/rankingStats";
 import { buildFaq } from "@/lib/faq";
 import { SITE, prefNameOf, absoluteUrl } from "@/lib/site";
@@ -179,6 +180,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
     hasForeignData(m.foreignResidents.source) && { "@type": "PropertyValue", name: "外国人住民比率", unitText: "%", value: Number(foreignRatioPct(m).toFixed(2)) },
   ].filter(Boolean);
 
+  const lastModified = muniLastModified(m);
   const dataset = {
     "@type": "Dataset",
     name: `${prefName}${heading}の生活統計データ（家賃・地価・人口・災害リスク・外国人比率）`,
@@ -194,6 +196,8 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
       name: `${prefName}${heading}`,
       containedInPlace: { "@type": "AdministrativeArea", name: prefName },
     },
+    // 収録指標のうち最も新しい asOf を更新日として明示（鮮度シグナル）。
+    ...(lastModified ? { dateModified: lastModified.toISOString().slice(0, 10) } : {}),
     variableMeasured,
   };
 
@@ -404,7 +408,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
             {isWaitlistDisclosed(m.waitlistChildren) ? (
               <>
                 <MetricPrimary value={`${m.waitlistChildren.value}`} unit="人" />
-                <p className="ad-note">待機児童数（{m.waitlistChildren.asOf}）</p>
+                <p className="ad-note">待機児童数（{formatAsOfJa(m.waitlistChildren.asOf)}）</p>
                 <SourceLine source={m.waitlistChildren.source} asOf={m.waitlistChildren.asOf} />
               </>
             ) : (
