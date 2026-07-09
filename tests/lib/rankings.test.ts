@@ -102,6 +102,38 @@ describe("外国人住民比率ランキング", () => {
   });
 });
 
+describe("population-growth ランキング", () => {
+  const def = getRankingBySlug("population-growth")!;
+
+  it("増減率の降順、率なし・人口0は除外", () => {
+    const list = [
+      muni({ code: "A", population: 10000, populationChangeRate: 2.5 }),
+      muni({ code: "B", population: 10000, populationChangeRate: -3.1 }),
+      muni({ code: "C", population: 10000, populationChangeRate: 7.2 }),
+      muni({ code: "N", population: 10000 }), // 率なし（北方領土等）→除外
+    ];
+    expect(rankBy(def, list).map((m) => m.code)).toEqual(["C", "A", "B"]);
+  });
+
+  it("display は符号付き小数1桁の%", () => {
+    expect(def.display(muni({ populationChangeRate: 7.25 }))).toBe("+7.3%");
+    expect(def.display(muni({ populationChangeRate: -3.14 }))).toBe("-3.1%");
+  });
+});
+
+describe("land-price-low ランキング", () => {
+  const def = getRankingBySlug("land-price-low")!;
+
+  it("地価の昇順、対象外は除外", () => {
+    const list = [
+      muni({ code: "A", landPrice: metric({ value: 50000 }) }),
+      muni({ code: "B", landPrice: metric({ value: 12000 }) }),
+      muni({ code: "X", landPrice: metric({ value: 0 }) }), // 標準地なし→除外
+    ];
+    expect(rankBy(def, list).map((m) => m.code)).toEqual(["B", "A"]);
+  });
+});
+
 describe("RANKINGS レジストリ", () => {
   it("slug は一意", () => {
     const slugs = RANKINGS.map((r) => r.slug);

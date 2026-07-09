@@ -200,6 +200,21 @@ export const RANKINGS: RankingDef[] = [
     display: (m) => `${m.landPrice.value.toLocaleString()}円/㎡`,
   },
   {
+    slug: "land-price-low",
+    title: "地価が安い市区町村ランキング",
+    shortLabel: "地価が安い",
+    description:
+      "全国の市区町村を住宅地の地価が安い順にランキング。最も地価が安いのは{top1}。地価公示・地価調査の実データで、土地が手頃な自治体を比較できます。",
+    lead: "全国の市区町村を住宅地の地価（円/㎡）が安い順に並べたランキングです。",
+    columnLabel: "地価（住宅地）",
+    order: "asc",
+    freshnessLabel: freshnessFromAsOf((m) => m.landPrice.asOf),
+    nextUpdate: NEXT_UPDATE.landPrice,
+    qualifies: (m) => hasLandPrice(m.landPrice.value),
+    sortValue: (m) => m.landPrice.value,
+    display: (m) => `${m.landPrice.value.toLocaleString()}円/㎡`,
+  },
+  {
     slug: "waitlist-zero",
     title: "待機児童ゼロの市区町村",
     shortLabel: "待機児童ゼロ",
@@ -228,6 +243,25 @@ export const RANKINGS: RankingDef[] = [
     qualifies: (m) => m.population > 0,
     sortValue: (m) => m.population,
     display: (m) => `${m.population.toLocaleString()}人`,
+  },
+  {
+    slug: "population-growth",
+    title: "人口増加率が高い市区町村ランキング",
+    shortLabel: "人口増加率",
+    description:
+      "全国の市区町村を5年間（2020→2025年国勢調査）の人口増減率が高い順にランキング。最も人口増加率が高いのは{top1}。国勢調査の実データで人口が増えている自治体を比較できます。",
+    lead: "全国の市区町村を、5年間（2020→2025年国勢調査）の人口増減率が高い順に並べたランキングです。",
+    note: "人口増減率は2020年と2025年の国勢調査人口の比較（%）で、転入・出生などの内訳は含みません。人口規模が小さい自治体や、震災からの帰還が進む自治体（福島県大熊町など）では率が大きく出ることがあります。",
+    columnLabel: "人口増減率（2020→2025）",
+    order: "desc",
+    freshnessLabel: () => POPULATION_FRESHNESS,
+    nextUpdate: NEXT_UPDATE.population,
+    qualifies: (m) => typeof m.populationChangeRate === "number" && m.population > 0,
+    sortValue: (m) => m.populationChangeRate ?? 0,
+    display: (m) => {
+      const r = m.populationChangeRate ?? 0;
+      return `${r > 0 ? "+" : ""}${r.toFixed(1)}%`;
+    },
   },
   {
     slug: "foreign-ratio-high",

@@ -35,7 +35,7 @@ push / PR ごとに CI（`.github/workflows/test.yml`）が typecheck・test・l
 
 **ジオメトリ。** `public/prefectures.geojson`（全国の輪郭）は起動時にロード。`MapView.tsx` がビューポートに応じて県別ポリゴン geojson（`public/{slug}.geojson`、`{slug}_wards.geojson`）を遅延ロードします。
 
-**UI 面。** `components/MapView.tsx`（MapLibre ラッパ）、`AreaPanel.tsx`（PC サイドパネル + MetricCards）、`MobileSheet.tsx`（モバイルの3段階ボトムシート）。詳細ページ: `app/area/[pref]/[city]/page.tsx`（SEO + 構造化データ）。OG画像の動的生成: `app/api/og/[code]/route.tsx`。
+**UI 面。** `components/MapView.tsx`（MapLibre ラッパ）、`AreaPanel.tsx`（PC サイドパネル + MetricCards）、`MobileSheet.tsx`（モバイルの3段階ボトムシート）。詳細ページ: `app/area/[pref]/[city]/page.tsx`（SEO + 構造化データ）。OG画像の動的生成: `app/api/og/[code]/route.tsx`。指標別の地図ハブ（ピラーページ）: `/map/{rent,land-price,population-trend,foreign-ratio}`（共通テンプレは `components/MetricMapHub.tsx`）。サイト・データ方針の説明は `/about`。
 
 ## データの扱い（honesty 方針・厳守）
 

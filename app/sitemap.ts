@@ -41,6 +41,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.9,
     },
+    // 指標別 地図ハブ（家賃・地価・人口増減。/map/foreign-ratio と同構成のピラー群）。
+    ...["/map/rent", "/map/land-price", "/map/population-trend"].map((path) => ({
+      url: absoluteUrl(path),
+      lastModified: siteLatest,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })),
+    // サイトについて（データの出典・更新方針。E-E-A-T ページ）。
+    {
+      url: absoluteUrl("/about"),
+      lastModified: siteLatest,
+      changeFrequency: "monthly",
+      priority: 0.5,
+    },
     // ランキング一覧 + 各ランキング（比較系クエリの入口）。中身は全データ由来なのでサイト最新。
     {
       url: absoluteUrl("/ranking"),

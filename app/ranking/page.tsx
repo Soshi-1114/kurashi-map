@@ -1,7 +1,7 @@
 import "../league.css";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { Trophy, ArrowUpRight, Wallet, Home, JapaneseYen, Baby, Users, Globe2, ShieldCheck } from "lucide-react";
+import { Trophy, ArrowUpRight, Wallet, Home, JapaneseYen, Baby, Users, Globe2, ShieldCheck, TrendingUp } from "lucide-react";
 import { listAllAcrossPrefs } from "@/lib/metrics";
 import { RANKINGS, muniLevelOnly, rankBy, type RankingDef } from "@/lib/rankings";
 import { SITE, prefNameOf, absoluteUrl } from "@/lib/site";
@@ -34,8 +34,10 @@ const RANK_VISUAL: Record<string, { Icon: typeof Wallet; tone: string }> = {
   "rent-cheap": { Icon: Wallet, tone: "rk-tone-rent" },
   "rent-high": { Icon: Home, tone: "rk-tone-rent" },
   "land-price-high": { Icon: JapaneseYen, tone: "rk-tone-land" },
+  "land-price-low": { Icon: JapaneseYen, tone: "rk-tone-land" },
   "waitlist-zero": { Icon: Baby, tone: "rk-tone-kids" },
   "population-most": { Icon: Users, tone: "rk-tone-pop" },
+  "population-growth": { Icon: TrendingUp, tone: "rk-tone-pop" },
   "foreign-ratio-high": { Icon: Globe2, tone: "rk-tone-foreign" },
   "foreign-ratio-low": { Icon: Globe2, tone: "rk-tone-foreign" },
 };
