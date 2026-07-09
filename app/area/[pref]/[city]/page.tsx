@@ -24,7 +24,7 @@ import {
 import { getMunicipality, listAll, listAllAcrossPrefs } from "@/lib/metrics";
 import { buildSummary } from "@/lib/summary";
 import { findRelatedByRent, findSimilar } from "@/lib/related";
-import { RANKINGS } from "@/lib/rankings";
+import { RANKINGS, formatAsOfJa } from "@/lib/rankings";
 import { getRankPositions } from "@/lib/rankingStats";
 import { buildFaq } from "@/lib/faq";
 import { SITE, prefNameOf, absoluteUrl } from "@/lib/site";
@@ -404,7 +404,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
             {isWaitlistDisclosed(m.waitlistChildren) ? (
               <>
                 <MetricPrimary value={`${m.waitlistChildren.value}`} unit="人" />
-                <p className="ad-note">待機児童数（{m.waitlistChildren.asOf}）</p>
+                <p className="ad-note">待機児童数（{formatAsOfJa(m.waitlistChildren.asOf)}）</p>
                 <SourceLine source={m.waitlistChildren.source} asOf={m.waitlistChildren.asOf} />
               </>
             ) : (

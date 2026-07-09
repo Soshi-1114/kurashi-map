@@ -65,20 +65,26 @@ export type RankingDef = {
 const FOREIGN_NOTE =
   "外国人住民比率は多様性・国際性の目安です（出典: 出入国在留管理庁「在留外国人統計」）。比率の高い／低いという事実を示すもので、住みやすさ等の価値判断とは無関係です。";
 
-// "2024-12" → "2024年12月"。データ asOf を見出しの鮮度ラベルへ整形する。
+// "2024-12"・"2025-04-01" → "2024年12月"・"2025年4月"。データ asOf を見出し・出典表示の
+// 鮮度ラベルへ整形する（日付は月に丸める）。整形できない形式（和暦・複合ラベル等）はそのまま返す。
 export function formatAsOfJa(asOf: string): string {
-  const m = /^(\d{4})-(\d{1,2})$/.exec(asOf ?? "");
+  const m = /^(\d{4})-(\d{1,2})(?:-\d{1,2})?$/.exec(asOf ?? "");
   if (m) return `${m[1]}年${Number(m[2])}月`;
   const y = /^(\d{4})$/.exec(asOf ?? "");
   if (y) return `${y[1]}年`;
   return asOf ?? "";
 }
 
-// 外国人住民比率ランキングの鮮度ラベル（1位自治体の asOf 由来）。例「2024年12月最新」。
-function foreignFreshnessLabel(top1: Municipality | null): string | null {
-  if (!top1) return null;
-  return `${formatAsOfJa(top1.foreignResidents.asOf)}最新`;
+// 指標の asOf から H1 用の鮮度ラベル（例「2025年6月最新」）を導出する汎用フック。
+function freshnessFromAsOf(getAsOf: (m: Municipality) => string) {
+  return (top1: Municipality | null): string | null =>
+    top1 ? `${formatAsOfJa(getAsOf(top1))}最新` : null;
 }
+const foreignFreshnessLabel = freshnessFromAsOf((m) => m.foreignResidents.asOf);
+
+// 人口の鮮度ラベル。Municipality に人口の asOf フィールドが無いため固定文字列とし、
+// 確定値公表・次回調査での更新時に NEXT_UPDATE.population と合わせて書き換える。
+const POPULATION_FRESHNESS = "2025年国勢調査";
 
 // 外国人住民比率ランキングの導入文（薄ページ対策・中立フレーミング）。high/low で傾向解説を分岐。
 function foreignIntro(highLow: "高い" | "低い"): string[] {
@@ -144,7 +150,8 @@ function foreignMetaDescription(highLow: "高い" | "低い") {
     if (!top1) return `${head}多様性・国際性の目安として、出入国在留管理庁「在留外国人統計」の実データで比較できます。`;
     const name = `${prefNameOf(top1.pref)}${top1.displayName ?? top1.name}`;
     const ratio = foreignRatioPct(top1).toFixed(2);
-    return `${head}${highLow === "高い" ? "最も比率が高い" : "最も比率が低い"}のは${name}（${ratio}%、${top1.foreignResidents.asOf}時点）。多様性・国際性の目安として、出入国在留管理庁「在留外国人統計」の実データで比較できます。`;
+    // asOf は "2025-06" 形式なので、検索結果に出る文言として自然な「2025年6月」へ整形する。
+    return `${head}${highLow === "高い" ? "最も比率が高い" : "最も比率が低い"}のは${name}（${ratio}%、${formatAsOfJa(top1.foreignResidents.asOf)}時点）。多様性・国際性の目安として、出入国在留管理庁「在留外国人統計」の実データで比較できます。`;
   };
 }
 
@@ -186,6 +193,7 @@ export const RANKINGS: RankingDef[] = [
     lead: "全国の市区町村を住宅地の地価（円/㎡）が高い順に並べたランキングです。",
     columnLabel: "地価（住宅地）",
     order: "desc",
+    freshnessLabel: freshnessFromAsOf((m) => m.landPrice.asOf),
     nextUpdate: NEXT_UPDATE.landPrice,
     qualifies: (m) => hasLandPrice(m.landPrice.value),
     sortValue: (m) => m.landPrice.value,
@@ -200,6 +208,7 @@ export const RANKINGS: RankingDef[] = [
     lead: "待機児童数が0人の市区町村を、人口が多い順に掲載しています（こども家庭庁の公表値）。",
     columnLabel: "人口",
     order: "desc",
+    freshnessLabel: freshnessFromAsOf((m) => m.waitlistChildren.asOf),
     nextUpdate: NEXT_UPDATE.waitlist,
     qualifies: (m) => isWaitlistDisclosed(m.waitlistChildren) && m.waitlistChildren.value === 0,
     sortValue: (m) => m.population,
@@ -214,6 +223,7 @@ export const RANKINGS: RankingDef[] = [
     lead: "全国の市区町村を、人口が多い順に並べたランキングです（国勢調査）。",
     columnLabel: "人口",
     order: "desc",
+    freshnessLabel: () => POPULATION_FRESHNESS,
     nextUpdate: NEXT_UPDATE.population,
     qualifies: (m) => m.population > 0,
     sortValue: (m) => m.population,
