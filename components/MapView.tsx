@@ -58,12 +58,12 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
   const prevSelectedRef = useRef<string | null>(null);
   const hoveredCodeRef = useRef<string | null>(null);
   const hoveredSourceRef = useRef<"muni" | "wards" | null>(null);
-  // 避難場所の点クリックが直後の muni 選択クリックへ伝播し再センタリングするのを防ぐフラグ。
-  const shelterClickRef = useRef(false);
   const activeMetricRef = useRef<MapMetricKey | "none">(initialMetric);
   // 選択時に減光するベース地図ラベル（道路名・水系名等。place=地名は残す）。
   // 元の opacity を保存し、選択解除で復元する。
   const labelDimRef = useRef<LabelDimState>({ ids: [], text: new Map(), icon: new Map() });
+  // 地図初期化完了前に検索確定された自治体コード（初期化後に flyTo を実行する）。
+  const pendingFlyRef = useRef<string | null>(null);
 
   // ベース地図スタイル。state は UI 表示用、ref は地図初期化 effect が再実行されない
   // よう現在値を保持する用。
@@ -133,7 +133,7 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
   // 指定緊急避難場所のプロット（詳細は useShelterOverlay）。moveend の再評価用に
   // 最新の refresh 関数を ref で受け取り、地図初期化時にイベントへ紐付ける。
   const shelterRefreshRef = useShelterOverlay({
-    mapRef, mapReady, overlays, selectedCode, selectedCodeRef, childToParent,
+    mapRef, mapReady, overlays, selectedCode, childToParent,
   });
 
   // 自治体コードを画面内に収める。SP は下部シート分、PC は右パネル分の余白を確保。
@@ -232,36 +232,36 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
         // コロプレス・ハザードラスタ・避難場所のソース/レイヤーを一括追加。
         addKurashiLayers(map, { prefGeo, muniGeo, wardsGeo });
 
-        // 避難場所クリックで名称をツールチップ表示（指標ツールチップを流用）。
-        map.on("click", "shelter-points", (e) => {
-          const f = e.features?.[0];
-          if (!f) return;
-          // 同クリックで下の muni-fill ハンドラが走り再センタリングするのを抑止。
-          shelterClickRef.current = true;
-          const canvasW = map.getCanvas().clientWidth;
-          setTooltip({
-            x: e.point.x,
-            y: e.point.y,
-            name: String(f.properties?.name ?? "避難場所"),
-            label: "指定緊急避難場所",
-            value: String(f.properties?.address ?? ""),
-            flip: e.point.x > canvasW - 200,
-          });
-        });
+        // クリック処理は最前面の1フィーチャだけに適用する（レイヤー別の delegated
+        // ハンドラだと、政令市（z>=11）で親市 muni-fill と区 wards-fill が両方発火し
+        // 選択・計測・fly が二重実行される。避難所の点クリック抑止フラグも不要になる）。
         map.on("mouseenter", "shelter-points", () => { map.getCanvas().style.cursor = "pointer"; });
         map.on("mouseleave", "shelter-points", () => { map.getCanvas().style.cursor = ""; });
-
-        const onPolyClick = (e: MapMouseEvent & { features?: MapGeoJSONFeature[] }) => {
-          if (shelterClickRef.current) { shelterClickRef.current = false; return; }
-          const f = e.features?.[0];
+        map.on("click", (e) => {
+          const layers = ["shelter-points", "wards-fill", "muni-fill"].filter((id) => map.getLayer(id));
+          if (!layers.length) return;
+          // queryRenderedFeatures は描画順の最前面から返る（点 > 区 > 親市）。
+          const f = map.queryRenderedFeatures(e.point, { layers })[0];
           if (!f) return;
+          if (f.layer.id === "shelter-points") {
+            // 避難場所クリックで名称をツールチップ表示（指標ツールチップを流用）。
+            const canvasW = map.getCanvas().clientWidth;
+            setTooltip({
+              x: e.point.x,
+              y: e.point.y,
+              name: String(f.properties?.name ?? "避難場所"),
+              label: "指定緊急避難場所",
+              value: String(f.properties?.address ?? ""),
+              flip: e.point.x > canvasW - 200,
+            });
+            return;
+          }
           const code = String(f.properties?.code ?? "");
+          if (!code) return;
           setSelectedCode(code);
           trackSelectMunicipality(code, "map");
           flyToCode(code);
-        };
-        map.on("click", "muni-fill", onPolyClick);
-        map.on("click", "wards-fill", onPolyClick);
+        });
 
         // 都道府県クリック → その県内まで fly-in（pref outline がまだ見える低〜中ズーム時のみ）
         let hoveredPrefRef = "";
@@ -369,11 +369,13 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
             if (!r.ok) throw new Error(`HTTP ${r.status}: ${url}`);
             return (await r.json()) as GeoJSON.FeatureCollection;
           };
+          // 取得と反映を分離: wards だけ失敗した際の再試行で muni が二重 push
+          // される（境界線の二重描画）のを防ぐため、全取得成功後に一括で反映する。
           const muni = await getJson(`/${p.slug}.geojson`);
+          const wd = p.hasWards ? await getJson(`/${p.slug}_wards.geojson`) : null;
           mergeFeatureData(muni);
           muniGeoRef.current!.features.push(...muni.features);
-          if (p.hasWards) {
-            const wd = await getJson(`/${p.slug}_wards.geojson`);
+          if (wd) {
             mergeFeatureData(wd);
             wardsGeoRef.current!.features.push(...wd.features);
           }
@@ -404,6 +406,16 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
           map.once("idle", () => shelterRefreshRef.current?.());
         }
         ensurePrefsRef.current = ensurePrefs;
+        // 初期化前に検索確定されていた自治体があればここで fly（保留の解消）。
+        if (pendingFlyRef.current) {
+          const code = pendingFlyRef.current;
+          pendingFlyRef.current = null;
+          const pp = getPrefByCode(code);
+          void (async () => {
+            if (pp) await ensurePrefs([pp.slug]);
+            flyToCode(code);
+          })();
+        }
 
         function checkViewport() {
           if (map.getZoom() < MUNI_MIN_ZOOM) return; // 県レベル表示中は muni 不要
@@ -510,6 +522,7 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
     const map = mapRef.current;
     if (!map || !mapReady) return;
     for (const id of ["muni-fill", "wards-fill"]) {
+      if (!map.getLayer(id)) continue; // スタイル再読込中はレイヤー不在があり得る
       if (activeMetric === "none") {
         map.setPaintProperty(id, "fill-opacity", 0);
       } else {
@@ -619,8 +632,8 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
     basemapRef.current = key;
     setBasemap(key);
     const sourceIsOurs = (id: string) =>
-      id === "prefectures" || id === "muni" || id === "wards" || id.startsWith("gsi-");
-    const layerIsOurs = (id: string) => /^(pref-|muni-|wards-|gsi-)/.test(id);
+      id === "prefectures" || id === "muni" || id === "wards" || id === "shelters" || id.startsWith("gsi-");
+    const layerIsOurs = (id: string) => /^(pref-|muni-|wards-|gsi-|shelter-)/.test(id);
     map.setStyle(getBasemap(key).style, {
       transformStyle: (prev, next) => {
         if (!prev) return next;
@@ -636,11 +649,20 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
       },
     });
     map.once("styledata", () => {
+      // 新ベースのラベルを日本語優先に差し替えてから、減光対象として収集し直す
+      //（淡色→標準の戻しで latin 表記に戻るのを防ぐ）。
+      applyJapaneseLabels(map);
       collectBaseLabels(map, labelDimRef.current);
       const sel = selectedCodeRef.current;
       if (sel) {
         map.setFeatureState({ source: "muni", id: sel }, { selected: true });
         map.setFeatureState({ source: "wards", id: sel }, { selected: true });
+        // 選択中のラベル減光も新スタイルへ再適用（selectedCode は変化しないため
+        // 減光 effect は発火しない）。
+        for (const id of labelDimRef.current.ids) {
+          map.setPaintProperty(id, "text-opacity", 0.35);
+          map.setPaintProperty(id, "icon-opacity", 0.3);
+        }
       }
     });
   }, []);
@@ -660,9 +682,11 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
   const flyToMuni = useCallback(async (m: MuniSummary) => {
     setSelectedCode(m.code);
     trackSelectMunicipality(m.code, "search");
+    // 地図初期化前（ヘッダー検索は SSR で先に操作できる）は保留し、初期化完了時に実行。
+    if (!ensurePrefsRef.current) { pendingFlyRef.current = m.code; return; }
     // 検索で他県を選んだ場合、その県がまだ遅延ロードされていなければ先に取得
     const pref = getPrefByCode(m.code);
-    if (pref) await ensurePrefsRef.current?.([pref.slug]);
+    if (pref) await ensurePrefsRef.current([pref.slug]);
     flyToCode(m.code);
   }, [flyToCode]);
 

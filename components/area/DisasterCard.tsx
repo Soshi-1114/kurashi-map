@@ -80,10 +80,12 @@ function buildRows(m: Municipality): Row[] {
   const liq = liquefactionLevelOf(h);
   if (liq >= 1) {
     // liq は小さいほど高リスク（1=非常にしやすい）。risk = 6 - liq を 0..5 にクランプ。
+    // 低リスク帯（4=やや液状化しにくい・5=しにくい）は risk 0（他種別の「なし」と同じ
+    // 非強調表示）。従来は 1 を返し「しにくい」にリスク強調が付いていた。
     rows.push({
       icon: Layers,
       label: "液状化の傾向",
-      risk: liquefactionIsRisk(liq) ? Math.min(6 - liq, 5) : 1,
+      risk: liquefactionIsRisk(liq) ? Math.min(6 - liq, 5) : 0,
       text: liquefactionLabel(liq, h.liquefactionLabel),
     });
   }

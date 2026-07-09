@@ -17,13 +17,12 @@ type Params = {
   mapReady: boolean;
   overlays: Set<OverlayKey>;
   selectedCode: string | null;
-  selectedCodeRef: MutableRefObject<string | null>;
   /** 政令市の区→親市コード。親市（全区合算済み）を優先して点の二重描画を防ぐ。 */
   childToParent: Map<string, string>;
 };
 
 export function useShelterOverlay({
-  mapRef, mapReady, overlays, selectedCode, selectedCodeRef, childToParent,
+  mapRef, mapReady, overlays, selectedCode, childToParent,
 }: Params): MutableRefObject<(() => void) | null> {
   // 避難場所の取得結果キャッシュ（code → 全点FC、未収録は null）。ハザード種別の切替で
   // 再取得せず同じFCを種別フィルタし直すために全点を保持する。
@@ -47,15 +46,20 @@ export function useShelterOverlay({
     const src = () => map.getSource("shelters") as GeoJSONSource | undefined;
 
     const refresh = async () => {
+      // 世代トークンは refresh 先頭で進める。OFF切替・選択解除の早期 return パスでも
+      // 進行中の古い fetch を無効化し、「消した点が通信完了後に復活する」のを防ぐ。
+      const token = ++reqRef.current;
       const ov = overlaysRef.current;
       if (!ov.has(SHELTER_KEY)) { src()?.setData(EMPTY_FC); setVisible(false); return; }
       // 同時選択中の災害種別（避難所を除く）。空なら種別で絞らず全件。
       const hazardKeys = HAZARD_OVERLAYS.map((h) => h.key).filter((k) => ov.has(k));
 
       // 対象コード = 選択中 ＋（高ズーム時のみ）視界内の市区町村/区。
+      // 選択コードは effect のクロージャ値を使う（外部 ref だと effect の実行順により
+      // 「解除前の旧選択」を読んでしまい、パネルを閉じても点が残るバグになる。
+      // refresh は effect ごとに再生成され refreshRef 経由の moveend 呼び出しも常に最新）。
       const codes = new Set<string>();
-      const sel = selectedCodeRef.current;
-      if (sel) codes.add(sel);
+      if (selectedCode) codes.add(selectedCode);
       if (map.getZoom() >= SHELTER_ZOOM) {
         const layers = ["muni-fill", "wards-fill"].filter((id) => map.getLayer(id));
         try {
@@ -72,14 +76,18 @@ export function useShelterOverlay({
       }
       if (codes.size === 0) { src()?.setData(EMPTY_FC); setVisible(false); return; }
 
-      const token = ++reqRef.current;
       await Promise.all([...codes].map(async (c) => {
         if (cacheRef.current.has(c)) return;
         try {
           const r = await fetch(`/api/shelters/${c}`);
-          const d = r.ok ? ((await r.json()) as { features?: GeoJSON.Feature[] }) : null;
-          cacheRef.current.set(c, d ? { type: "FeatureCollection", features: d.features ?? [] } : null);
-        } catch { cacheRef.current.set(c, null); }
+          if (r.ok) {
+            const d = (await r.json()) as { features?: GeoJSON.Feature[] };
+            cacheRef.current.set(c, { type: "FeatureCollection", features: d.features ?? [] });
+          } else if (r.status === 404) {
+            cacheRef.current.set(c, null); // 未収録（恒久）: 再試行しない
+          }
+          // 5xx 等はキャッシュせず次回 refresh で再試行（一時エラーの恒久化を防ぐ）
+        } catch { /* ネットワーク一時エラー: キャッシュせず次回再試行 */ }
       }));
       if (token !== reqRef.current) return; // より新しい要求が来ていれば破棄
 
@@ -106,7 +114,7 @@ export function useShelterOverlay({
 
     refreshRef.current = refresh;
     void refresh();
-  }, [overlays, selectedCode, mapReady, childToParent, mapRef, selectedCodeRef]);
+  }, [overlays, selectedCode, mapReady, childToParent, mapRef]);
 
   return refreshRef;
 }

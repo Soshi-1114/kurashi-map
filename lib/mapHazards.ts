@@ -41,9 +41,16 @@ const FLOOD_OPACITY = [
   1, 0.34, 2, 0.44, 3, 0.54, 4, 0.64, 5, 0.74, 6, 0.82,
 ];
 
-// 津波・高潮の深さランク 1..8 → 0.30..0.82 の線形。
+// 津波・高潮の深さランク 1..8 → 0.30..0.82 の線形相当。
+// interpolate は範囲外（0/-1=なし・対象外）を端値 0.30 にクランプしてしまい、
+// filter とペアで使わない文脈では「リスクなしが半透明で塗られる」罠になるため、
+// 0 以下 → 0 を明示できる step で表現する。
 function bandOpacity(prop: string): unknown {
-  return ["interpolate", ["linear"], ["get", prop], 1, 0.30, 8, 0.82];
+  return [
+    "step", ["get", prop],
+    0,
+    1, 0.30, 2, 0.37, 3, 0.45, 4, 0.52, 5, 0.60, 6, 0.67, 7, 0.75, 8, 0.82,
+  ];
 }
 
 export const HAZARD_OVERLAYS: readonly HazardOverlay[] = [
@@ -62,8 +69,8 @@ export const HAZARD_OVERLAYS: readonly HazardOverlay[] = [
     prop: "landslideLevel",
     legend: "土砂災害警戒区域（濃い=特別警戒）",
     filter: [">", ["get", "landslideLevel"], 0],
-    // 1=警戒(イエロー)=0.5 → 2=特別警戒(レッド)=0.82。
-    opacity: ["interpolate", ["linear"], ["get", "landslideLevel"], 1, 0.5, 2, 0.82],
+    // 1=警戒(イエロー)=0.5 → 2=特別警戒(レッド)=0.82。0以下（なし・対象外）は 0。
+    opacity: ["step", ["get", "landslideLevel"], 0, 1, 0.5, 2, 0.82],
     // 土石流 / 急傾斜地の崩壊 / 地すべり の3レイヤーを重ねる。
     gsiLayerIds: ["05_dosekiryukeikaikuiki", "05_kyukeishakeikaikuiki", "05_jisuberikeikaikuiki"],
   },
