@@ -143,6 +143,11 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
         {def.note && (
           <p className="rk-lead" style={{ fontSize: "var(--text-sm)", marginTop: 12 }}>{def.note}</p>
         )}
+        {def.nextUpdate && (
+          <p className="rk-lead" style={{ fontSize: "var(--text-sm)", marginTop: def.note ? 6 : 12 }}>
+            📅 次回更新予定: {def.nextUpdate}
+          </p>
+        )}
       </header>
 
       {intro.length > 0 && (

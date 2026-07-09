@@ -8,8 +8,12 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { existsSync } from "node:fs";
+import * as fs from "node:fs";
 import XLSX from "xlsx";
 import { resolvePrefs } from "./_lib/prefs.mjs";
+
+// xlsx の ESM ビルド（xlsx.mjs）は fs を自動注入しないため、readFile 前に明示的に渡す。
+XLSX.set_fs?.(fs);
 import { loadMuni, saveMuni } from "./_lib/data.mjs";
 import { version } from "./_lib/versions.mjs";
 

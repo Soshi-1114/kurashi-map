@@ -53,7 +53,7 @@ jobs:
       - name: バージョン設定を読み込み
         run: |
           node -e 'import("./scripts/_lib/versions.mjs").then(m=>{for(const[k,v]of Object.entries(m.VERSIONS))console.log(`${k}=${v}`)})' >> "$GITHUB_ENV"
-          echo "読み込んだ年度設定:"; grep -E '^(CFA_|L01_|GSI_|FOREIGN_)' "$GITHUB_ENV" || true
+          echo "読み込んだ年度設定:"; grep -E '^(CFA_|L01_|GSI_|FOREIGN_|MEDICAL_|S12_)' "$GITHUB_ENV" || true
 
       - name: スコープ決定（pref 入力 or 全県）
         id: scope
@@ -78,6 +78,32 @@ jobs:
         run: node scripts/fetch-rent.mjs ${{ steps.scope.outputs.estat }}
         env:
           ESTAT_APP_ID: ${{ secrets.ESTAT_APP_ID }}
+
+      - name: 医療機関（医療施設調査, e-Stat 全国一括）
+        run: node scripts/fetch-medical.mjs ${{ steps.scope.outputs.estat }}
+        env:
+          ESTAT_APP_ID: ${{ secrets.ESTAT_APP_ID }}
+
+      - name: 駅数（国土数値情報 S12 全国 GeoJSON・全国一括）
+        timeout-minutes: 30
+        run: |
+          if [[ -z "${S12_URL}" ]]; then
+            echo "::warning::S12_URL 未設定のため駅数更新をスキップ（docs/data-update.md 参照）"
+            exit 0
+          fi
+          ok=""
+          for i in 1 2 3; do
+            if curl -fsSL -o /tmp/s12.zip "${S12_URL}"; then ok=1; break; fi
+            echo "S12 DL retry $i"; sleep 3
+          done
+          if [[ -z "$ok" ]]; then echo "::warning::S12 download failed"; exit 0; fi
+          rm -rf /tmp/s12 && unzip -oq /tmp/s12.zip -d /tmp/s12
+          # UTF-8 版の GeoJSON を優先（Shift-JIS 版も同梱されるため）。
+          GJ=$(find /tmp/s12 -path '*UTF-8*' -name '*.geojson' | head -1)
+          [[ -z "$GJ" ]] && GJ=$(find /tmp/s12 -name '*.geojson' | head -1)
+          if [[ -z "$GJ" || ! -s "$GJ" ]]; then echo "::warning::S12 geojson not found"; exit 0; fi
+          S12_GEOJSON="$GJ" node --max-old-space-size=4096 scripts/fetch-stations.mjs ${{ steps.scope.outputs.estat }} \
+            || echo "::warning::fetch-stations failed"
 
       - name: 待機児童（CFA 全国一括）
         run: WAITLIST_XLSX=/tmp/cfa_waitlist.xlsx node scripts/fetch-waitlist.mjs ${{ steps.scope.outputs.estat }}

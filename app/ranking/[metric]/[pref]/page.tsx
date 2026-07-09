@@ -155,6 +155,7 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
           {def.lead.replace("全国の", `${prefName}の`)}データのある{ranked.length}市区町村を、政府統計の実データで集計しています（推計値は含みません）。
         </p>
         {def.note && <p className="detail-note">{def.note}</p>}
+        {def.nextUpdate && <p className="detail-note">📅 次回更新予定: {def.nextUpdate}</p>}
         <div style={{ marginTop: 14, display: "flex", gap: 10, flexWrap: "wrap" }}>
           <Link href={`/ranking/${def.slug}`} className="related-card" style={{ display: "inline-flex", width: "auto", padding: "8px 14px" }}>
             <span className="related-name">📊 全国版を見る</span>

@@ -51,7 +51,7 @@ push / PR ごとに CI（`.github/workflows/test.yml`）が typecheck・test・l
 
 ## データパイプライン
 
-`scripts/` は1県ずつ実行します（例 `--pref=saitama`）。`build-base.mjs` が N03 から skeleton JSON + 簡略化 geojson を生成し（政令市は区を dissolve）、`fetch-*.mjs` 各スクリプトが e-Stat / reinfolib / 国土数値情報 / こども家庭庁 を出典に各指標を埋めます。`fetch-hazard.mjs` と `fetch-amenities.mjs` は `tilesForPolys()`（`scripts/_lib/reinfolib.mjs`、`tests/scripts/` でユニットテスト済）で自治体ポリゴンに交差するタイルだけを取得するため、広域bboxの県でも海上タイルを取得せずに済みます。スクリプト共通ヘルパーは `scripts/_lib/`（`data.mjs`・`estat.mjs`・`reinfolib.mjs`・`prefs.mjs`）にあります。
+`scripts/` は1県ずつ実行します（例 `--pref=saitama`。e-Stat 系の全国一括スクリプトは `--all` 可）。`build-base.mjs` が N03 から skeleton JSON + 簡略化 geojson を生成し（政令市は区を dissolve）、`fetch-*.mjs` 各スクリプトが e-Stat / reinfolib / 国土数値情報 / こども家庭庁 / 厚労省 を出典に各指標を埋めます。同じ指標が複数ソースにある場合は基準時点が新しいソースを優先します（例: 医療機関は国土数値情報 P04 が令和2年度で更新停止のため医療施設調査 e-Stat 表を `fetch-medical.mjs` で、駅数は reinfolib の反映遅れを避け S12 全国 GeoJSON を `fetch-stations.mjs` で直接取得）。`fetch-hazard.mjs` と `fetch-amenities.mjs` は `tilesForPolys()`（`scripts/_lib/reinfolib.mjs`、`tests/scripts/` でユニットテスト済）で自治体ポリゴンに交差するタイルだけを取得するため、広域bboxの県でも海上タイルを取得せずに済みます。スクリプト共通ヘルパーは `scripts/_lib/`（`data.mjs`・`estat.mjs`・`reinfolib.mjs`・`prefs.mjs`）にあります。
 
 `.github/workflows/` の GitHub Actions がスケジュールでデータを更新し（`data-update-annual.yml`・`data-update-quarterly.yml`）、`main` にコミットします。一部の出典 URL／バージョン（CFA 待機児童 Excel、L01 地価公示の年度）はワークフロー内の env 変数で、毎年手動更新が必要です。Vercel の自動デプロイは無効（`vercel.json` の `deploymentEnabled: false`）で、デプロイは `deploy-preview.yml` の手動実行です。
 
