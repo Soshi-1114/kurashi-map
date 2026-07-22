@@ -202,6 +202,7 @@ export default async function AboutPage() {
       <div style={{ marginTop: 28, display: "flex", gap: 16, flexWrap: "wrap" }}>
         <Link href="/" className="detail-back">地図で見る</Link>
         <Link href="/ranking" className="detail-back">ランキング一覧</Link>
+        <Link href="/privacy" className="detail-back">プライバシーポリシー</Link>
       </div>
     </div>
   );

@@ -55,6 +55,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.5,
     },
+    // プライバシーポリシー（GA4 開示。更新頻度は低い）。
+    {
+      url: absoluteUrl("/privacy"),
+      lastModified: siteLatest,
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
     // ランキング一覧 + 各ランキング（比較系クエリの入口）。中身は全データ由来なのでサイト最新。
     {
       url: absoluteUrl("/ranking"),

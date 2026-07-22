@@ -54,6 +54,9 @@ import {
   NoData,
   SourceLine,
 } from "@/components/area/cards";
+import { SupportBanner } from "@/components/area/SupportBanner";
+import { FurusatoLink } from "@/components/area/FurusatoLink";
+import { supportUrl } from "@/lib/monetization";
 
 type Params = { pref: string; city: string };
 
@@ -595,6 +598,20 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
             本ページの数値は政府統計・国土数値情報の実データです。家賃は住宅・土地統計調査、人口は国勢調査（ともに e-Stat 経由）、地価は地価公示・地価調査、ハザード・生活インフラは不動産情報ライブラリ（reinfolib）／国土数値情報、待機児童はこども家庭庁、外国人住民は出入国在留管理庁「在留外国人統計」（e-Stat）の公表値に基づきます。総合スコアは公表値のみから算出した目安で、データのない指標は除外しています。データのない項目は推計で埋めず「データなし／対象外」と明示しています。
           </p>
         </details>
+      </Reveal>
+      {/* 支援・ふるさと納税導線（データ可視化エリアとは視覚的に分離） */}
+      <Reveal>
+        <section className="ad-support-section" aria-label="このサイトについて・関連リンク">
+          {supportUrl() && (
+            <SupportBanner url={supportUrl()!} municipalityCode={m.code} municipalityName={m.name} />
+          )}
+          {/* 政令市の行政区は寄付先が親の政令市になるため、寄付先名は親市名を使う */}
+          <FurusatoLink
+            targetName={m.level === "ward" && parent ? parent.name : m.name}
+            prefName={prefName}
+            municipalityCode={m.code}
+          />
+        </section>
       </Reveal>
       {/* ページ下部 CTA */}
       <Reveal>

@@ -61,6 +61,7 @@ export default function HomeLinks({ popular }: { popular: PopularMuni[] }) {
       <p className="home-links-foot">
         © KurashiMap — 出典: e-Stat（住宅・土地統計調査／国勢調査）・地価公示／地価調査・不動産情報ライブラリ・こども家庭庁・出入国在留管理庁 在留外国人統計（e-Stat）
         ／ <Link href="/about">このサイトについて（データの出典と更新方針）</Link>
+        ／ <Link href="/privacy">プライバシーポリシー</Link>
       </p>
     </div>
   );
