@@ -18,6 +18,7 @@
   --accent-hover: #a84a2d;
   --accent-soft: rgba(199, 91, 57, 0.10);
   --accent-glow: rgba(199, 91, 57, 0.25);
+  --accent-grad-start: #e08a6b; /* CTAグラデ上端（--accent の明色。accent を上書きするテーマは必ずセットで上書き） */
   --warn: #d97706;
   --warn-soft: rgba(217, 119, 6, 0.12);
   --radius-xs: 6px;
@@ -111,6 +112,7 @@ html, body {
   --accent-hover: #1d4ed8;
   --accent-soft: rgba(37, 99, 235, 0.10);
   --accent-glow: rgba(37, 99, 235, 0.25);
+  --accent-grad-start: #5b8bf0;
   background: var(--bg);
 }
 .home-root { position: relative; width: 100%; }
@@ -766,10 +768,6 @@ button { font-family: inherit; }
   position: absolute;
   pointer-events: none;
   transform: translate(14px, -50%);
-}
-/* 右端付近ではカーソルの左側に出す（画面外への見切れ防止） */
-.map-tooltip.is-flipped {
-  transform: translate(calc(-100% - 14px), -50%);
   padding: 10px 14px;
   background: rgba(15, 23, 42, 0.94);
   color: #fff;
@@ -779,6 +777,10 @@ button { font-family: inherit; }
   white-space: nowrap;
   z-index: 4;
   backdrop-filter: blur(6px);
+}
+/* 右端付近ではカーソルの左側に出す（画面外への見切れ防止） */
+.map-tooltip.is-flipped {
+  transform: translate(calc(-100% - 14px), -50%);
 }
 .map-tooltip-name { font-weight: 700; font-size: var(--text-base); margin-bottom: 3px; letter-spacing: -0.005em; }
 .map-tooltip-rent { color: rgba(255,255,255,0.82); font-variant-numeric: tabular-nums; }
@@ -956,7 +958,7 @@ button { font-family: inherit; }
   gap: 8px;
   margin-top: 18px;
   padding: 13px 22px;
-  background: linear-gradient(180deg, #e08a6b, var(--accent));
+  background: linear-gradient(180deg, var(--accent-grad-start), var(--accent));
   color: white;
   border-radius: var(--radius-pill);
   font-size: var(--text-base);
