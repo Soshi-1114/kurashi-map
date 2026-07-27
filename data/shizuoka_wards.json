@@ -63,7 +63,14 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.43367
+    "populationChangeRate": -4.43367,
+    "vacancy": {
+      "rate": 16.4,
+      "vacant": 20150,
+      "total": 123230,
+      "source": "住宅・土地統計調査（居住世帯の有無別住宅数）",
+      "asOf": "2023"
+    }
   },
   {
     "code": "22102",
@@ -129,7 +136,14 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.69908
+    "populationChangeRate": -3.69908,
+    "vacancy": {
+      "rate": 14.2,
+      "vacant": 15940,
+      "total": 112010,
+      "source": "住宅・土地統計調査（居住世帯の有無別住宅数）",
+      "asOf": "2023"
+    }
   },
   {
     "code": "22103",
@@ -195,7 +209,14 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.42068
+    "populationChangeRate": -6.42068,
+    "vacancy": {
+      "rate": 14.9,
+      "vacant": 16580,
+      "total": 110910,
+      "source": "住宅・土地統計調査（居住世帯の有無別住宅数）",
+      "asOf": "2023"
+    }
   },
   {
     "code": "22138",
@@ -261,7 +282,14 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.72331
+    "populationChangeRate": -2.72331,
+    "vacancy": {
+      "rate": -1,
+      "vacant": 0,
+      "total": 0,
+      "source": "データなし（住宅統計の集計対象外）",
+      "asOf": "-"
+    }
   },
   {
     "code": "22139",
@@ -327,7 +355,14 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.427
+    "populationChangeRate": -3.427,
+    "vacancy": {
+      "rate": -1,
+      "vacant": 0,
+      "total": 0,
+      "source": "データなし（住宅統計の集計対象外）",
+      "asOf": "-"
+    }
   },
   {
     "code": "22140",
@@ -393,6 +428,13 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.46449
+    "populationChangeRate": -11.46449,
+    "vacancy": {
+      "rate": -1,
+      "vacant": 0,
+      "total": 0,
+      "source": "データなし（住宅統計の集計対象外）",
+      "asOf": "-"
+    }
   }
 ]

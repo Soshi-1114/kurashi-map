@@ -81,6 +81,17 @@ function checkMuni(file, slug, m, level) {
     if (!isStr(m.shelters.source)) err(file, code, "shelters.source が空");
     if (!isStr(m.shelters.asOf)) err(file, code, "shelters.asOf が空");
   }
+  if (m.vacancy !== undefined) {
+    // rate=-1 は対象外センチネル（人口1.5万人未満の町村）。実データは 0〜100 の率。
+    if (!isNum(m.vacancy.rate) || (m.vacancy.rate !== -1 && (m.vacancy.rate < 0 || m.vacancy.rate > 100))) {
+      err(file, code, `vacancy.rate が不正 (${m.vacancy.rate})`);
+    }
+    if (!isNum(m.vacancy.vacant) || m.vacancy.vacant < 0) err(file, code, "vacancy.vacant が非負数値でない");
+    if (!isNum(m.vacancy.total) || m.vacancy.total < 0) err(file, code, "vacancy.total が非負数値でない");
+    if (m.vacancy.rate >= 0 && m.vacancy.total <= 0) err(file, code, "vacancy が実データなのに total が 0");
+    if (!isStr(m.vacancy.source)) err(file, code, "vacancy.source が空");
+    if (!isStr(m.vacancy.asOf)) err(file, code, "vacancy.asOf が空");
+  }
 }
 
 function readJson(file) {

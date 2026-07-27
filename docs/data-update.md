@@ -184,6 +184,7 @@ GitHub の **Actions** タブ → 対象ワークフロー → **Run workflow**�
 | 生活インフラ（保育） | reinfolib XKT007 | 年度更新 | `fetch-amenities.mjs` |
 | 医療機関 | 厚労省 医療施設調査（e-Stat） | 年1回（10/1時点・翌年公表。市区町村別は statsDataId が毎年変わる） | `fetch-medical.mjs` |
 | 外国人住民比率 | 出入国在留管理庁 在留外国人統計（e-Stat） | 年2回（6月末・12月末時点。各7月頃/翌年公表） | `fetch-foreign-residents.mjs`（**手動**, §7） |
+| 空き家率 | 総務省 住宅・土地統計調査「居住世帯の有無(8区分)別住宅数」（e-Stat statsDataId 0004021421） | 5年ごと（次回2028年調査） | `fetch-vacancy.mjs`（`--all` 全国一括。家賃と同じ調査のため対象制約も同じ＝人口1.5万人未満の町村は rate=-1 センチネル） |
 
 > annual は家賃・人口を毎年再取得するが、出典が5年周期なので新調査公表までは差分なし
 > （no-op）。実質の更新は出典の公表に従う。

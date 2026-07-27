@@ -32,6 +32,7 @@ import { SITE, prefNameOf, absoluteUrl } from "@/lib/site";
 import { hasRent, rentBand } from "@/lib/rentColor";
 import { isWaitlistDisclosed } from "@/lib/waitlist";
 import { hasLandPrice } from "@/lib/landPrice";
+import { hasVacancy, vacancyRateText } from "@/lib/vacancy";
 import { isAmenitiesCounted, coverageReason } from "@/lib/coverage";
 import { hasForeignData, foreignRatioPct } from "@/lib/foreignResidents";
 import { getForeignStats, avgBand, type ForeignComparison } from "@/lib/foreignStats";
@@ -403,6 +404,12 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
               {hasLandPrice(m.landPrice.value)
                 ? `${m.landPrice.value.toLocaleString()}円/㎡`
                 : `データなし（${coverageReason(m.landPrice.source)}）`}
+            </p>
+            <p className="ad-note">
+              空き家率:{" "}
+              {hasVacancy(m.vacancy)
+                ? `${vacancyRateText(m.vacancy)}（空き家${m.vacancy.vacant.toLocaleString()}戸 / 住宅${m.vacancy.total.toLocaleString()}戸・2023年）`
+                : "データなし（住宅統計の集計対象外）"}
             </p>
             {hasRent(m.rent.value) && <SourceLine source={m.rent.source} asOf={m.rent.asOf} estimated={m.rent.isEstimated} />}
           </MetricCard>
