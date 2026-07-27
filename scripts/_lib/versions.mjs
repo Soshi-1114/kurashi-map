@@ -30,6 +30,12 @@ export const VERSIONS = {
   GSI_SHELTER_URL: "https://hinanmap.gsi.go.jp/hinanjocp/defaultFtpData/csv/mergeFromCity_2.csv",
   GSI_SHELTER_ASOF: "2026-06-19",
 
+  // 国土地理院「全国都道府県市区町村別面積調」CSV。年数回更新（4半期ごとの時点列が
+  // 同一ファイルに追記される）。ファイル名は年度改まりで変わる（例 R8_04_mencho.csv）。
+  // MENCHO_ASOF は取り込む最新時点列のラベルと同期させる（fetch-area.mjs）。
+  MENCHO_URL: "https://www.gsi.go.jp/KOKUJYOHO/MENCHO/backnumber/R8_04_mencho.csv",
+  MENCHO_ASOF: "2026-04-01",
+
   // 出入国在留管理庁「在留外国人統計」の基準時点（半期公表・手動更新）。
   // 期を更新したら statInfId とセットで合わせる（docs/data-update.md §在留外国人）。
   FOREIGN_ASOF: "2025-12",

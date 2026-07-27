@@ -43,6 +43,10 @@ export type Municipality = {
   // 5年間（2020→2025 国勢調査）の人口増減率（%）。ランキング用。
   // populationTrend はこの率の5区分（fetch-population-2025.mjs trendOf）。
   populationChangeRate?: number;
+  // 面積（km²）。国土地理院「全国都道府県市区町村別面積調」（fetch-area.mjs）。
+  // 人口密度（人/km²）は保存せず population と突き合わせて実行時に算出する
+  // （在留外国人の人口比と同じ「派生値は保存しない」方針）。
+  areaKm2?: number;
   rent: Metric;          // 民営借家中央値
   landPrice: Metric;     // 住宅地地価
   waitlistChildren: Metric; // 待機児童（value=人数）

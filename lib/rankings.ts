@@ -10,6 +10,7 @@ import { hasLandPrice } from "./landPrice";
 import { isWaitlistDisclosed } from "./waitlist";
 import { hasForeignData, foreignRatioPct } from "./foreignResidents";
 import { hasVacancy, vacancyRateText } from "./vacancy";
+import { populationDensity, densityText } from "./populationDensity";
 import { prefNameOf } from "./site";
 
 export type RankingDef = {
@@ -326,6 +327,44 @@ export const RANKINGS: RankingDef[] = [
     qualifies: (m) => m.population > 0,
     sortValue: (m) => m.population,
     display: (m) => `${m.population.toLocaleString()}人`,
+  },
+  {
+    slug: "population-density",
+    title: "人口密度が高い市区町村ランキング",
+    shortLabel: "人口密度が高い",
+    description:
+      "全国の市区町村を人口密度（人/km²）が高い順にランキング。最も人口密度が高いのは{top1}。国勢調査人口と国土地理院の面積データで比較できます。",
+    lead: "全国の市区町村を、人口密度（人口 ÷ 面積、人/km²）が高い順に並べたランキングです。",
+    note: "人口は2025年国勢調査（速報）、面積は国土地理院「全国都道府県市区町村別面積調」に基づきます。境界未定部を持つ自治体の面積は国土地理院公表の参考値です。",
+    columnLabel: "人口密度",
+    order: "desc",
+    freshnessLabel: () => POPULATION_FRESHNESS,
+    nextUpdate: NEXT_UPDATE.population,
+    qualifies: (m) => populationDensity(m) != null,
+    sortValue: (m) => populationDensity(m) ?? 0,
+    display: (m) => {
+      const d = populationDensity(m);
+      return d == null ? "—" : densityText(d);
+    },
+  },
+  {
+    slug: "population-density-low",
+    title: "人口密度が低い市区町村ランキング",
+    shortLabel: "人口密度が低い",
+    description:
+      "全国の市区町村を人口密度（人/km²）が低い順にランキング。最も人口密度が低いのは{top1}。国勢調査人口と国土地理院の面積データで比較できます。",
+    lead: "全国の市区町村を、人口密度（人口 ÷ 面積、人/km²）が低い順に並べたランキングです。",
+    note: "人口は2025年国勢調査（速報）、面積は国土地理院「全国都道府県市区町村別面積調」に基づきます。境界未定部を持つ自治体の面積は国土地理院公表の参考値です。",
+    columnLabel: "人口密度",
+    order: "asc",
+    freshnessLabel: () => POPULATION_FRESHNESS,
+    nextUpdate: NEXT_UPDATE.population,
+    qualifies: (m) => populationDensity(m) != null,
+    sortValue: (m) => populationDensity(m) ?? 0,
+    display: (m) => {
+      const d = populationDensity(m);
+      return d == null ? "—" : densityText(d);
+    },
   },
   {
     slug: "population-growth",

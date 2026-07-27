@@ -61,6 +61,9 @@ function checkMuni(file, slug, m, level) {
   if (m.populationChangeRate !== undefined && !isNum(m.populationChangeRate)) {
     err(file, code, "populationChangeRate が数値でない");
   }
+  if (m.areaKm2 !== undefined && (!isNum(m.areaKm2) || m.areaKm2 <= 0)) {
+    err(file, code, `areaKm2 が正の数値でない (${m.areaKm2})`);
+  }
   for (const key of ["rent", "landPrice", "waitlistChildren", "foreignResidents"]) {
     checkMetric(file, code, key, m[key]);
   }
