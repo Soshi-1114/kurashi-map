@@ -56,6 +56,12 @@ export type RankingDef = {
    * この文言も次の期へ手動更新する（docs/data-update.md 参照）。
    */
   nextUpdate?: string;
+  /**
+   * 「該当自治体の一覧」型ランキング（例: 待機児童ゼロ）。値の分布ではないため、
+   * 県別ページの中央値サマリー（データ概況）を持たない。ページ側は slug を直接
+   * 比較せず、このフラグで分岐する（compareForeignAvg と同じ capability 方式）。
+   */
+  membershipList?: boolean;
   /** テーブルの値カラム見出し */
   columnLabel: string;
   order: "asc" | "desc";
@@ -229,6 +235,7 @@ export const RANKINGS: RankingDef[] = [
     description:
       "待機児童ゼロの市区町村を人口が多い順に掲載。{top1}など、子育て世帯が注目する待機児童ゼロの自治体をこども家庭庁の公表値で確認できます。",
     lead: "待機児童数が0人の市区町村を、人口が多い順に掲載しています（こども家庭庁の公表値）。",
+    membershipList: true,
     columnLabel: "人口",
     order: "desc",
     freshnessLabel: freshnessFromAsOf((m) => m.waitlistChildren.asOf),
@@ -325,6 +332,11 @@ export function getRankingBySlug(slug: string): RankingDef | null {
 /** 市区町村のみ（政令市の行政区を除外）。ランキングは market-level の1自治体1エントリ。 */
 export function muniLevelOnly(all: Municipality[]): Municipality[] {
   return all.filter((m) => (m.level ?? "muni") !== "ward");
+}
+
+/** 整列済みランキングの中央値に当たる自治体を返す（値の整形に def.display を使い回すため、値でなく自治体を返す）。 */
+export function medianOf(ranked: Municipality[]): Municipality {
+  return ranked[Math.floor((ranked.length - 1) / 2)];
 }
 
 /** 定義に従って候補を抽出・整列して返す（limit 指定時は上位 limit 件）。 */

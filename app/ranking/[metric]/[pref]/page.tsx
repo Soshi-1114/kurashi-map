@@ -1,12 +1,13 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { listMunicipalities, listAllAcrossPrefs } from "@/lib/metrics";
-import { RANKINGS, getRankingBySlug, rankBy, muniLevelOnly, type RankingDef } from "@/lib/rankings";
+import { listMunicipalities } from "@/lib/metrics";
+import { RANKINGS, getRankingBySlug, rankBy, medianOf, type RankingDef } from "@/lib/rankings";
+import { getRankPositions, getNationalMedians } from "@/lib/rankingStats";
 import { PREFS, getPrefBySlug } from "@/lib/prefs";
 import { SITE, absoluteUrl } from "@/lib/site";
 import { getForeignStats } from "@/lib/foreignStats";
-import { isWaitlistDisclosed } from "@/lib/waitlist";
+import { countWaitlistDisclosed } from "@/lib/waitlist";
 import type { Municipality } from "@/lib/types";
 
 type Params = { metric: string; pref: string };
@@ -38,34 +39,37 @@ async function rankedFor(def: RankingDef, prefSlug: string): Promise<Municipalit
 // 背景: GSC 分析（2026-07）で県別ランキングの一部が「クロール済み - インデックス未登録」
 // に落ちており、テンプレ類似（薄ページ）判定の解消が狙い。値の整形は def.display を
 // 「中央値に当たる自治体」に適用して使い回す（指標ごとの整形関数を二重定義しない）。
+// 全国順位・全国中央値はキャッシュ済みの集計レイヤー（lib/rankingStats）から引く。
 type PrefSummary = {
   prefMedian: Municipality;
   nationalMedian: Municipality;
   top1NationalRank: number;
   nationalCount: number;
-  /** 中央値の全国対比: 1=同水準（sortValue 比較） */
-  vsNational: "higher" | "lower" | "same";
+  /** 県内中央値の全国対比（表示文言。sortValue 比較で導出） */
+  vsNational: "同水準" | "高い水準" | "低い水準";
+  /** 県内の値域（表示順: 小さい値 → 大きい値） */
+  rangeLow: Municipality;
+  rangeHigh: Municipality;
 };
 
-function medianOf(ranked: Municipality[]): Municipality {
-  return ranked[Math.floor((ranked.length - 1) / 2)];
-}
-
 async function prefSummaryFor(def: RankingDef, ranked: Municipality[]): Promise<PrefSummary | null> {
-  // 待機児童ゼロは「該当自治体の一覧」（値の分布ではない）ため中央値サマリーは対象外。
-  if (ranked.length === 0 || def.slug === "waitlist-zero") return null;
-  const rankedAll = rankBy(def, muniLevelOnly(await listAllAcrossPrefs()));
-  const top1NationalRank = rankedAll.findIndex((m) => m.code === ranked[0].code) + 1;
-  if (top1NationalRank === 0) return null;
+  // membershipList 型（待機児童ゼロ等の「該当自治体の一覧」）は値の分布ではないため対象外。
+  if (ranked.length === 0 || def.membershipList) return null;
+  const top1 = (await getRankPositions()).get(def.slug)?.get(ranked[0].code);
+  const nationalMedian = (await getNationalMedians()).get(def.slug);
+  if (!top1 || !nationalMedian) return null;
   const prefMedian = medianOf(ranked);
-  const nationalMedian = medianOf(rankedAll);
   const d = def.sortValue(prefMedian) - def.sortValue(nationalMedian);
+  const [rangeLow, rangeHigh] =
+    def.order === "asc" ? [ranked[0], ranked[ranked.length - 1]] : [ranked[ranked.length - 1], ranked[0]];
   return {
     prefMedian,
     nationalMedian,
-    top1NationalRank,
-    nationalCount: rankedAll.length,
-    vsNational: d === 0 ? "same" : d > 0 ? "higher" : "lower",
+    top1NationalRank: top1.rank,
+    nationalCount: top1.total,
+    vsNational: d === 0 ? "同水準" : d > 0 ? "高い水準" : "低い水準",
+    rangeLow,
+    rangeHigh,
   };
 }
 
@@ -80,7 +84,7 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
   const fresh = freshness ? `【${freshness}】` : "";
   const title = `${pref.nameJa}の${def.seoTitle ?? def.title}${fresh}｜市区町村を比較｜${SITE.name}`;
   // description にも県固有の実数値（県内中央値）を含め、検索結果スニペットで即答する。
-  const medianText = ranked.length > 0 && def.slug !== "waitlist-zero" ? `県内中央値は${def.display(medianOf(ranked))}。` : "";
+  const medianText = ranked.length > 0 && !def.membershipList ? `県内中央値は${def.display(medianOf(ranked))}。` : "";
   const description = `${pref.nameJa}の${def.title}。1位は${top1}。${medianText}${pref.nameJa}内の${ranked.length}市区町村を政府統計の実データで比較できる${SITE.name}。`;
   const url = absoluteUrl(`/ranking/${def.slug}/${pref.slug}`);
   const ogImage = absoluteUrl(`/api/og/ranking/${def.slug}`);
@@ -120,10 +124,10 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
   const intro = def.prefIntro?.(prefName) ?? [];
   const faq = def.faq ?? [];
 
-  // 県内サマリー（県内中央値・全国対比・県内1位の全国順位）。待機児童ゼロは一覧型のため対象外。
+  // 県内サマリー（県内中央値・全国対比・県内1位の全国順位）。membershipList 型は
+  // 値の分布を持たないため、「公表対象のうち該当n自治体」の要約に切り替える。
   const summary = await prefSummaryFor(def, ranked);
-  const waitlistDisclosed =
-    def.slug === "waitlist-zero" ? munis.filter((m) => isWaitlistDisclosed(m.waitlistChildren)).length : null;
+  const waitlistDisclosed = def.membershipList ? countWaitlistDisclosed(munis) : null;
 
   // 外国人住民比率ランキングのベンチマーク（県平均・全国平均）。すべて実データ由来。
   // fc は県平均・全国平均が定数なので、ランキング先頭自治体の集計値から1件取得すれば足りる。
@@ -210,43 +214,40 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
         </div>
       </header>
 
-      {summary && (
+      {(summary || waitlistDisclosed !== null) && (
         <section className="detail-section">
           <h2 className="detail-h2">{prefName}のデータ概況</h2>
-          <p className="detail-p">
-            {prefName}内で集計対象となる{ranked.length}市区町村のうち、県内中央値は
-            {def.display(summary.prefMedian)}（{summary.prefMedian.displayName ?? summary.prefMedian.name}）で、
-            全国中央値{def.display(summary.nationalMedian)}と比べて
-            {summary.vsNational === "same" ? "同水準" : summary.vsNational === "higher" ? "高い水準" : "低い水準"}です。
-            県内1位の{cards[0].displayName ?? cards[0].name}（{def.display(cards[0])}）は、
-            全国{summary.nationalCount.toLocaleString()}自治体中{summary.top1NationalRank.toLocaleString()}位に相当します。
-            県内の値の幅は{def.display(def.order === "asc" ? ranked[0] : ranked[ranked.length - 1])}〜
-            {def.display(def.order === "asc" ? ranked[ranked.length - 1] : ranked[0])}です。
-          </p>
-          <ul className="mini-cards cols-2">
-            <li className="mini-card">
-              <div className="mini-card-label">県内中央値</div>
-              <div className="mini-card-value" style={{ fontSize: 20 }}>{def.display(summary.prefMedian)}</div>
-              <p className="mini-card-sub">全国中央値: {def.display(summary.nationalMedian)}</p>
-            </li>
-            <li className="mini-card">
-              <div className="mini-card-label">県内1位の全国順位</div>
-              <div className="mini-card-value" style={{ fontSize: 20 }}>
-                {summary.top1NationalRank.toLocaleString()}<span className="unit"> 位</span>
-              </div>
-              <p className="mini-card-sub">全国{summary.nationalCount.toLocaleString()}自治体中（{cards[0].displayName ?? cards[0].name}）</p>
-            </li>
-          </ul>
-        </section>
-      )}
-
-      {waitlistDisclosed !== null && (
-        <section className="detail-section">
-          <h2 className="detail-h2">{prefName}のデータ概況</h2>
-          <p className="detail-p">
-            {prefName}では、待機児童数が公表されている{waitlistDisclosed}自治体のうち
-            {ranked.length}自治体が待機児童ゼロです（人口が多い順に掲載）。
-          </p>
+          {summary ? (
+            <>
+              <p className="detail-p">
+                {prefName}内で集計対象となる{ranked.length}市区町村のうち、県内中央値は
+                {def.display(summary.prefMedian)}（{summary.prefMedian.displayName ?? summary.prefMedian.name}）で、
+                全国中央値{def.display(summary.nationalMedian)}と比べて{summary.vsNational}です。
+                県内1位の{cards[0].displayName ?? cards[0].name}（{def.display(cards[0])}）は、
+                全国{summary.nationalCount.toLocaleString()}自治体中{summary.top1NationalRank.toLocaleString()}位に相当します。
+                県内の値の幅は{def.display(summary.rangeLow)}〜{def.display(summary.rangeHigh)}です。
+              </p>
+              <ul className="mini-cards cols-2">
+                <li className="mini-card">
+                  <div className="mini-card-label">県内中央値</div>
+                  <div className="mini-card-value" style={{ fontSize: 20 }}>{def.display(summary.prefMedian)}</div>
+                  <p className="mini-card-sub">全国中央値: {def.display(summary.nationalMedian)}</p>
+                </li>
+                <li className="mini-card">
+                  <div className="mini-card-label">県内1位の全国順位</div>
+                  <div className="mini-card-value" style={{ fontSize: 20 }}>
+                    {summary.top1NationalRank.toLocaleString()}<span className="unit"> 位</span>
+                  </div>
+                  <p className="mini-card-sub">全国{summary.nationalCount.toLocaleString()}自治体中（{cards[0].displayName ?? cards[0].name}）</p>
+                </li>
+              </ul>
+            </>
+          ) : (
+            <p className="detail-p">
+              {prefName}では、待機児童数が公表されている{waitlistDisclosed}自治体のうち
+              {ranked.length}自治体が待機児童ゼロです（人口が多い順に掲載）。
+            </p>
+          )}
         </section>
       )}
 
