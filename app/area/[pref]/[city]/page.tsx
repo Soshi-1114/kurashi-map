@@ -151,6 +151,13 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
     m.level === "ward" && m.parentCode
       ? all.filter((x) => x.level === "ward" && x.parentCode === m.parentCode && x.code !== m.code)
       : [];
+  // 政令市の親ページなら区一覧への「下り」リンクを張る。従来は兄弟区（区→区）と
+  // パンくず（区→親）しかなく、親→区へ辿れる内部リンクがサイト内に存在しなかった
+  // （GSC 分析 2026-07: 名古屋市の区ページ群が「検出 - インデックス未登録」でクロール未到達）。
+  const childWards =
+    (m.level ?? "muni") === "muni"
+      ? all.filter((x) => x.level === "ward" && x.parentCode === m.code)
+      : [];
 
   // 解釈の補助線・比較バーの平均値（すべて実データから集計。推計なし）。
   const foreignStats = await getForeignStats();
@@ -518,6 +525,22 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
                   comment="家賃・人口規模が近い"
                   rent={hasRent(s.rent.value) ? `${s.rent.value.toLocaleString()}円` : null}
                   population={`${s.population.toLocaleString()}人`}
+                />
+              </li>
+            ))}
+          </ul>
+        </Section>
+      )}
+      {/* 政令市の親ページ → 区一覧（下りリンク） */}
+      {childWards.length > 0 && (
+        <Section icon={MapIcon} tone="ad-tone-infra" title={`${m.name}の行政区（${childWards.length}区）`} sub="区ごとの家賃・人口・住環境データを見る">
+          <ul className="ad-arealink-grid">
+            {childWards.map((w) => (
+              <li key={w.code}>
+                <AreaLinkCard
+                  href={`/area/${w.pref}/${w.code}`}
+                  name={w.name}
+                  meta={hasRent(w.rent.value) ? `${w.rent.value.toLocaleString()}円/月` : "データなし"}
                 />
               </li>
             ))}
