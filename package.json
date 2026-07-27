@@ -17,11 +17,11 @@
     "indexnow": "node scripts/indexnow-submit.mjs"
   },
   "dependencies": {
-    "lucide-react": "^1.24.0",
+    "lucide-react": "^1.27.0",
     "maplibre-gl": "^5.24.0",
-    "next": "^15.5.20",
-    "react": "^19.2.7",
-    "react-dom": "^19.2.7"
+    "next": "^15.5.22",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
   },
   "overrides": {
     "postcss": "^8.5.10"
