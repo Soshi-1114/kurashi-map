@@ -82,23 +82,25 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
 
   // title に実数値（比率・全国順位）を含める: GSC 分析（2026-07）で「{自治体} 外国人」が
   // 多数表示・低CTR（例: 足立区 80表示/0クリック）だったため、スニペットで数値が即答する形にする。
+  // 「住みやすさ」を先頭に置くのはキーワード調査（2026-07）で「{自治体} 住みやすさ」が
+  // 約300表示/title不一致だったための対応（ページには住みやすさスコア・総評を表示済み）。
   const title = foreignAvailable
     ? fc
-      ? `${fullName}の在留外国人割合は${fc.ratio.toFixed(2)}%（全国${fc.nationalRank.toLocaleString()}位）｜人口・住環境 - ${SITE.name}`
-      : `${fullName}の在留外国人割合・人口データ｜地図で見る住環境 - ${SITE.name}`
-    : `${fullName}の人口・住環境データ｜地図で見る - ${SITE.name}`;
+      ? `${fullName}の住みやすさ・在留外国人割合${fc.ratio.toFixed(2)}%（全国${fc.nationalRank.toLocaleString()}位） - ${SITE.name}`
+      : `${fullName}の住みやすさ・在留外国人割合｜人口・住環境データ - ${SITE.name}`
+    : `${fullName}の住みやすさ・人口・住環境データ｜地図で見る - ${SITE.name}`;
 
   // description には実数値を2〜3個含める。比較統計（全国平均・順位）が取れる場合は
   // それを優先し、取れない場合は段階的にフォールバックする（数値はビルド時データ由来）。
   let description: string;
   if (foreignAvailable && fc) {
-    description = `${fullName}（${prefName}）の在留外国人割合は${fc.ratio.toFixed(2)}%（全国平均${fc.nationalAvg.toFixed(2)}%、全国${fc.nationalRank.toLocaleString()}位）。人口${pop}人などの住環境データを地図とランキングで確認できます。出典: 出入国在留管理庁「在留外国人統計」。`;
+    description = `${fullName}（${prefName}）の在留外国人割合は${fc.ratio.toFixed(2)}%（全国平均${fc.nationalAvg.toFixed(2)}%、全国${fc.nationalRank.toLocaleString()}位）。人口${pop}人などの住環境データと住みやすさスコアを地図とランキングで確認できます。出典: 出入国在留管理庁「在留外国人統計」。`;
   } else if (foreignAvailable) {
-    description = `${fullName}（${prefName}）の在留外国人割合は${foreignRatioPct(m).toFixed(2)}%、人口${pop}人。家賃・地価・災害リスクなどの住環境データを地図とランキングで確認できます。出典: 出入国在留管理庁「在留外国人統計」。`;
+    description = `${fullName}（${prefName}）の在留外国人割合は${foreignRatioPct(m).toFixed(2)}%、人口${pop}人。家賃・地価・災害リスクなどの住環境データと住みやすさスコアを地図とランキングで確認できます。出典: 出入国在留管理庁「在留外国人統計」。`;
   } else {
     const rentPhrase = hasRent(m.rent.value) ? `家賃中央値${m.rent.value.toLocaleString()}円/月、` : "";
     const popPhrase = m.population > 0 ? `人口${pop}人、` : "";
-    description = `${fullName}（${prefName}）の住環境データ。${popPhrase}${rentPhrase}地価・待機児童・災害リスクなどをまとめて地図とランキングで比較できる${SITE.name}の自治体ページ。`;
+    description = `${fullName}（${prefName}）の住みやすさ・住環境データ。${popPhrase}${rentPhrase}地価・待機児童・災害リスクなどをまとめて地図とランキングで比較できる${SITE.name}の自治体ページ。`;
   }
   const url = absoluteUrl(`/area/${m.pref}/${m.code}`);
   const ogImage = absoluteUrl(`/api/og/${m.code}`);
