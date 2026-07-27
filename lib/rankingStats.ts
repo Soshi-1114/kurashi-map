@@ -5,7 +5,7 @@
 // ランキングは market-level（政令市の行政区を除外）。よって行政区(level:"ward")の
 // 詳細ページは順位を持たない＝lookup は undefined になり、UI 側でリンクのみ表示する。
 
-import { RANKINGS, rankBy, muniLevelOnly } from "./rankings";
+import { RANKINGS, rankBy, muniLevelOnly, medianOf } from "./rankings";
 import type { Municipality } from "./types";
 
 export type RankPos = { rank: number; total: number };
@@ -31,4 +31,24 @@ export async function getRankPositions(): Promise<Map<string, Map<string, RankPo
     cache = buildRankPositions(await listAllAcrossPrefs());
   }
   return cache;
+}
+
+let medianCache: Map<string, Municipality> | null = null;
+
+/**
+ * 各ランキングの全国中央値に当たる自治体を返す（slug → Municipality。初回のみ構築してキャッシュ）。
+ * 県別ランキングの「データ概況」で全国中央値との対比を出すためのもの。順位表と同じく
+ * membershipList 型（待機児童ゼロ等）も slug は含まれるが、消費側で使わない。
+ */
+export async function getNationalMedians(): Promise<Map<string, Municipality>> {
+  if (!medianCache) {
+    const { listAllAcrossPrefs } = await import("./metrics");
+    const munis = muniLevelOnly(await listAllAcrossPrefs());
+    medianCache = new Map();
+    for (const def of RANKINGS) {
+      const ranked = rankBy(def, munis);
+      if (ranked.length > 0) medianCache.set(def.slug, medianOf(ranked));
+    }
+  }
+  return medianCache;
 }
