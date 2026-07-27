@@ -32,7 +32,7 @@ export const VERSIONS = {
 
   // 出入国在留管理庁「在留外国人統計」の基準時点（半期公表・手動更新）。
   // 期を更新したら statInfId とセットで合わせる（docs/data-update.md §在留外国人）。
-  FOREIGN_ASOF: "2025-06",
+  FOREIGN_ASOF: "2025-12",
 
   // 厚生労働省「医療施設調査」（e-Stat）市区町村別の statsDataId。年度ごとに**新しい表**が
   // 追加される（同一IDの更新ではない）ため、毎年 e-Stat で最新年の表IDを確認して差し替える。
@@ -45,8 +45,8 @@ export const VERSIONS = {
   // 国土数値情報「駅別乗降客数 S12」全国 GML zip（GeoJSON 同梱）。年度版は例年4月公開で、
   // URL の S12-{NN} を新年度に差し替える（fetch-stations.mjs, annual）。
   // S12_ASOF は駅セットの整備年度。URL と必ず同期（AMENITIES_ASOF の駅部分も更新）。
-  S12_URL: "https://nlftp.mlit.go.jp/ksj/gml/data/S12/S12-24/S12-24_GML.zip",
-  S12_ASOF: "2024年度",
+  S12_URL: "https://nlftp.mlit.go.jp/ksj/gml/data/S12/S12-25/S12-25_GML.zip",
+  S12_ASOF: "2025年度",
 
   // 生活インフラ（amenities）の共通表示ラベル。駅=S12 直接（annual, fetch-stations.mjs）、
   // 保育=reinfolib XKT007（quarterly, fetch-amenities.mjs）、医療機関=医療施設調査
@@ -54,7 +54,7 @@ export const VERSIONS = {
   // このラベルを書く（表示の同期）。S12_ASOF / MEDICAL_ASOF を更新したら
   // AMENITIES_ASOF の該当部分も合わせる（テストで検査）。
   AMENITIES_SOURCE: "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-  AMENITIES_ASOF: "駅 2024年度／保育 令和5年度／医療機関 2024年10月",
+  AMENITIES_ASOF: "駅 2025年度／保育 令和5年度／医療機関 2024年10月",
 };
 
 // env 未設定なら VERSIONS の既定を返すヘルパー。スクリプトからの読み出しを1行にする。

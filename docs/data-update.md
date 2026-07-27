@@ -273,7 +273,8 @@ PR を作る運用**とする（理由は下記の Excel の制約と、statInfI
    curl -L -A "Mozilla/5.0" -o /tmp/zairyu_muni.xlsx \
      "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040379766&fileKind=0"
    ```
-   （参考: 2024年12月末＝24-12-t2 は statInfId=000040292373）
+   （参考: 2025年12月末＝25-12-t2 は statInfId=000040472266、
+   2024年12月末＝24-12-t2 は statInfId=000040292373）
 3. 基準時点を `FOREIGN_ASOF`（既定 `2025-06`）に合わせて全県へ反映:
    ```bash
    FOREIGN_ASOF=2025-06 node scripts/fetch-foreign-residents.mjs --all
