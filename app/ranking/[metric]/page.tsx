@@ -33,7 +33,7 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
   const top = await rankedFor(def, 1);
   const top1 = top[0] ? `${prefNameOf(top[0].pref)}${top[0].displayName ?? top[0].name}` : "—";
   const freshness = def.freshnessLabel?.(top[0] ?? null) ?? null;
-  const title = `${def.title}${freshness ? `【${freshness}】` : "【全国】"}｜${SITE.name}`;
+  const title = `${def.seoTitle ?? def.title}${freshness ? `【${freshness}】` : "【全国】"}｜${SITE.name}`;
   const description = def.metaDescription
     ? def.metaDescription(top[0] ?? null)
     : def.description.replace("{top1}", top1);

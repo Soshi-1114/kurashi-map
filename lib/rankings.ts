@@ -15,6 +15,12 @@ export type RankingDef = {
   slug: string;
   /** ページ H1 / 見出し用のフレーズ */
   title: string;
+  /**
+   * meta title 専用の言い換え（任意）。検索クエリの語彙（例:「家賃相場」）に合わせる。
+   * H1・リンクラベル・構造化データは title のままにし、title タグだけ差し替える。
+   * 背景: GSC で「埼玉 相場」「家賃相場 岡山市」等が多数表示・0クリック（2026-07 分析）。
+   */
+  seoTitle?: string;
   /** ランキング一覧・パンくず用の短いラベル */
   shortLabel: string;
   /** meta description のひな型（{top1} を1位自治体名に置換） */
@@ -159,6 +165,7 @@ export const RANKINGS: RankingDef[] = [
   {
     slug: "rent-cheap",
     title: "家賃が安い市区町村ランキング",
+    seoTitle: "家賃相場が安い市区町村ランキング",
     shortLabel: "家賃が安い",
     description:
       "全国の市区町村を民営借家中央値が安い順にランキング。最も家賃が安いのは{top1}。家賃相場の低い自治体を政府統計（住宅・土地統計調査）の実データで比較できます。",
@@ -173,6 +180,7 @@ export const RANKINGS: RankingDef[] = [
   {
     slug: "rent-high",
     title: "家賃が高い市区町村ランキング",
+    seoTitle: "家賃相場が高い市区町村ランキング",
     shortLabel: "家賃が高い",
     description:
       "全国の市区町村を民営借家中央値が高い順にランキング。最も家賃が高いのは{top1}。家賃相場の高い自治体を政府統計（住宅・土地統計調査）の実データで比較できます。",

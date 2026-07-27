@@ -79,8 +79,12 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
   const foreignAvailable = hasForeignData(m.foreignResidents.source) && m.population > 0;
   const fc = foreignAvailable ? (await getForeignStats()).get(m.code) ?? null : null;
 
+  // title に実数値（比率・全国順位）を含める: GSC 分析（2026-07）で「{自治体} 外国人」が
+  // 多数表示・低CTR（例: 足立区 80表示/0クリック）だったため、スニペットで数値が即答する形にする。
   const title = foreignAvailable
-    ? `${fullName}の在留外国人割合・人口データ｜地図で見る住環境 - ${SITE.name}`
+    ? fc
+      ? `${fullName}の在留外国人割合は${fc.ratio.toFixed(2)}%（全国${fc.nationalRank.toLocaleString()}位）｜人口・住環境 - ${SITE.name}`
+      : `${fullName}の在留外国人割合・人口データ｜地図で見る住環境 - ${SITE.name}`
     : `${fullName}の人口・住環境データ｜地図で見る - ${SITE.name}`;
 
   // description には実数値を2〜3個含める。比較統計（全国平均・順位）が取れる場合は

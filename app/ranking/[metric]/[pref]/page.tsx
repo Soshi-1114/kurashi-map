@@ -41,7 +41,7 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
   const top1 = ranked[0] ? (ranked[0].displayName ?? ranked[0].name) : "—";
   const freshness = def.freshnessLabel?.(ranked[0] ?? null) ?? null;
   const fresh = freshness ? `【${freshness}】` : "";
-  const title = `${pref.nameJa}の${def.title}${fresh}｜市区町村を比較｜${SITE.name}`;
+  const title = `${pref.nameJa}の${def.seoTitle ?? def.title}${fresh}｜市区町村を比較｜${SITE.name}`;
   const description = `${pref.nameJa}の${def.title}。1位は${top1}。${pref.nameJa}内の${ranked.length}市区町村を政府統計の実データで比較できる${SITE.name}。`;
   const url = absoluteUrl(`/ranking/${def.slug}/${pref.slug}`);
   const ogImage = absoluteUrl(`/api/og/ranking/${def.slug}`);
