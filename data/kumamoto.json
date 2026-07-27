@@ -60,7 +60,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.08423
+    "populationChangeRate": -1.08423,
+    "vacancy": {
+      "rate": 13.2,
+      "vacant": 51000,
+      "total": 385100,
+      "source": "住宅・土地統計調査（居住世帯の有無別住宅数）",
+      "asOf": "2023"
+    },
+    "areaKm2": 390.44
   },
   {
     "code": "43202",
@@ -123,7 +131,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.18687
+    "populationChangeRate": -6.18687,
+    "vacancy": {
+      "rate": 16.2,
+      "vacant": 9450,
+      "total": 58400,
+      "source": "住宅・土地統計調査（居住世帯の有無別住宅数）",
+      "asOf": "2023"
+    },
+    "areaKm2": 681.3
   },
   {
     "code": "43203",
@@ -186,7 +202,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.40967
+    "populationChangeRate": -7.40967,
+    "vacancy": {
+      "rate": 18.7,
+      "vacant": 3000,
+      "total": 16010,
+      "source": "住宅・土地統計調査（居住世帯の有無別住宅数）",
+      "asOf": "2023"
+    },
+    "areaKm2": 210.55
   },
   {
     "code": "43204",
@@ -249,7 +273,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.85592
+    "populationChangeRate": -6.85592,
+    "vacancy": {
+      "rate": 17.8,
+      "vacant": 4460,
+      "total": 24990,
+      "source": "住宅・土地統計調査（居住世帯の有無別住宅数）",
+      "asOf": "2023"
+    },
+    "areaKm2": 57.37
   },
   {
     "code": "43205",
@@ -312,7 +344,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.67806
+    "populationChangeRate": -11.67806,
+    "vacancy": {
+      "rate": 25.3,
+      "vacant": 3180,
+      "total": 12560,
+      "source": "住宅・土地統計調査（居住世帯の有無別住宅数）",
+      "asOf": "2023"
+    },
+    "areaKm2": 163.29
   },
   {
     "code": "43206",
@@ -375,7 +415,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.80165
+    "populationChangeRate": -5.80165,
+    "vacancy": {
+      "rate": 17.2,
+      "vacant": 5310,
+      "total": 30920,
+      "source": "住宅・土地統計調査（居住世帯の有無別住宅数）",
+      "asOf": "2023"
+    },
+    "areaKm2": 152.33
   },
   {
     "code": "43208",
@@ -438,7 +486,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.06578
+    "populationChangeRate": -7.06578,
+    "vacancy": {
+      "rate": 19.4,
+      "vacant": 4640,
+      "total": 23900,
+      "source": "住宅・土地統計調査（居住世帯の有無別住宅数）",
+      "asOf": "2023"
+    },
+    "areaKm2": 299.69
   },
   {
     "code": "43210",
@@ -501,7 +557,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.55912
+    "populationChangeRate": -3.55912,
+    "vacancy": {
+      "rate": 13.5,
+      "vacant": 2920,
+      "total": 21640,
+      "source": "住宅・土地統計調査（居住世帯の有無別住宅数）",
+      "asOf": "2023"
+    },
+    "areaKm2": 276.85
   },
   {
     "code": "43211",
@@ -564,7 +628,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.41836
+    "populationChangeRate": -4.41836,
+    "vacancy": {
+      "rate": 13.5,
+      "vacant": 2150,
+      "total": 15950,
+      "source": "住宅・土地統計調査（居住世帯の有無別住宅数）",
+      "asOf": "2023"
+    },
+    "areaKm2": 74.3
   },
   {
     "code": "43212",
@@ -627,7 +699,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -12.86081
+    "populationChangeRate": -12.86081,
+    "vacancy": {
+      "rate": 26.4,
+      "vacant": 3450,
+      "total": 13080,
+      "source": "住宅・土地統計調査（居住世帯の有無別住宅数）",
+      "asOf": "2023"
+    },
+    "areaKm2": 126.67
   },
   {
     "code": "43213",
@@ -690,7 +770,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.34142
+    "populationChangeRate": -4.34142,
+    "vacancy": {
+      "rate": 14,
+      "vacant": 3550,
+      "total": 25350,
+      "source": "住宅・土地統計調査（居住世帯の有無別住宅数）",
+      "asOf": "2023"
+    },
+    "areaKm2": 188.55
   },
   {
     "code": "43214",
@@ -753,7 +841,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.90614
+    "populationChangeRate": -7.90614,
+    "vacancy": {
+      "rate": 18.9,
+      "vacant": 2360,
+      "total": 12460,
+      "source": "住宅・土地統計調査（居住世帯の有無別住宅数）",
+      "asOf": "2023"
+    },
+    "areaKm2": 376.3
   },
   {
     "code": "43215",
@@ -816,7 +912,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.13156
+    "populationChangeRate": -10.13156,
+    "vacancy": {
+      "rate": 24.4,
+      "vacant": 9790,
+      "total": 40120,
+      "source": "住宅・土地統計調査（居住世帯の有無別住宅数）",
+      "asOf": "2023"
+    },
+    "areaKm2": 683.82
   },
   {
     "code": "43216",
@@ -879,7 +983,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 4.1637
+    "populationChangeRate": 4.1637,
+    "vacancy": {
+      "rate": 7.6,
+      "vacant": 1900,
+      "total": 25040,
+      "source": "住宅・土地統計調査（居住世帯の有無別住宅数）",
+      "asOf": "2023"
+    },
+    "areaKm2": 53.19
   },
   {
     "code": "43348",
@@ -942,7 +1054,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -14.44847
+    "populationChangeRate": -14.44847,
+    "vacancy": {
+      "rate": -1,
+      "vacant": 0,
+      "total": 0,
+      "source": "データなし（住宅統計の集計対象外）",
+      "asOf": "-"
+    },
+    "areaKm2": 144
   },
   {
     "code": "43364",
@@ -1005,7 +1125,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.62735
+    "populationChangeRate": -3.62735,
+    "vacancy": {
+      "rate": -1,
+      "vacant": 0,
+      "total": 0,
+      "source": "データなし（住宅統計の集計対象外）",
+      "asOf": "-"
+    },
+    "areaKm2": 24.33
   },
   {
     "code": "43367",
@@ -1068,7 +1196,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.40205
+    "populationChangeRate": -10.40205,
+    "vacancy": {
+      "rate": -1,
+      "vacant": 0,
+      "total": 0,
+      "source": "データなし（住宅統計の集計対象外）",
+      "asOf": "-"
+    },
+    "areaKm2": 69.18
   },
   {
     "code": "43368",
@@ -1131,7 +1267,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.47099
+    "populationChangeRate": -5.47099,
+    "vacancy": {
+      "rate": 14.5,
+      "vacant": 1030,
+      "total": 7090,
+      "source": "住宅・土地統計調査（居住世帯の有無別住宅数）",
+      "asOf": "2023"
+    },
+    "areaKm2": 19.44
   },
   {
     "code": "43369",
@@ -1194,7 +1338,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.25926
+    "populationChangeRate": -9.25926,
+    "vacancy": {
+      "rate": -1,
+      "vacant": 0,
+      "total": 0,
+      "source": "データなし（住宅統計の集計対象外）",
+      "asOf": "-"
+    },
+    "areaKm2": 98.78
   },
   {
     "code": "43403",
@@ -1257,7 +1409,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 4.9848
+    "populationChangeRate": 4.9848,
+    "vacancy": {
+      "rate": 8,
+      "vacant": 1280,
+      "total": 16000,
+      "source": "住宅・土地統計調査（居住世帯の有無別住宅数）",
+      "asOf": "2023"
+    },
+    "areaKm2": 99.1
   },
   {
     "code": "43404",
@@ -1320,7 +1480,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 2.79438
+    "populationChangeRate": 2.79438,
+    "vacancy": {
+      "rate": 6.7,
+      "vacant": 1370,
+      "total": 20460,
+      "source": "住宅・土地統計調査（居住世帯の有無別住宅数）",
+      "asOf": "2023"
+    },
+    "areaKm2": 37.46
   },
   {
     "code": "43423",
@@ -1383,7 +1551,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.16
+    "populationChangeRate": -8.16,
+    "vacancy": {
+      "rate": -1,
+      "vacant": 0,
+      "total": 0,
+      "source": "データなし（住宅統計の集計対象外）",
+      "asOf": "-"
+    },
+    "areaKm2": 115.9
   },
   {
     "code": "43424",
@@ -1446,7 +1622,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.7739
+    "populationChangeRate": -10.7739,
+    "vacancy": {
+      "rate": -1,
+      "vacant": 0,
+      "total": 0,
+      "source": "データなし（住宅統計の集計対象外）",
+      "asOf": "-"
+    },
+    "areaKm2": 136.94
   },
   {
     "code": "43425",
@@ -1509,7 +1693,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -13.53111
+    "populationChangeRate": -13.53111,
+    "vacancy": {
+      "rate": -1,
+      "vacant": 0,
+      "total": 0,
+      "source": "データなし（住宅統計の集計対象外）",
+      "asOf": "-"
+    },
+    "areaKm2": 60.81
   },
   {
     "code": "43428",
@@ -1572,7 +1764,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.28969
+    "populationChangeRate": -7.28969,
+    "vacancy": {
+      "rate": -1,
+      "vacant": 0,
+      "total": 0,
+      "source": "データなし（住宅統計の集計対象外）",
+      "asOf": "-"
+    },
+    "areaKm2": 175.06
   },
   {
     "code": "43432",
@@ -1635,7 +1835,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 6.62932
+    "populationChangeRate": 6.62932,
+    "vacancy": {
+      "rate": -1,
+      "vacant": 0,
+      "total": 0,
+      "source": "データなし（住宅統計の集計対象外）",
+      "asOf": "-"
+    },
+    "areaKm2": 77.22
   },
   {
     "code": "43433",
@@ -1698,7 +1906,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.75071
+    "populationChangeRate": -6.75071,
+    "vacancy": {
+      "rate": -1,
+      "vacant": 0,
+      "total": 0,
+      "source": "データなし（住宅統計の集計対象外）",
+      "asOf": "-"
+    },
+    "areaKm2": 137.32
   },
   {
     "code": "43441",
@@ -1761,7 +1977,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 1.66227
+    "populationChangeRate": 1.66227,
+    "vacancy": {
+      "rate": 10.6,
+      "vacant": 770,
+      "total": 7260,
+      "source": "住宅・土地統計調査（居住世帯の有無別住宅数）",
+      "asOf": "2023"
+    },
+    "areaKm2": 99.03
   },
   {
     "code": "43442",
@@ -1824,7 +2048,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 5.83429
+    "populationChangeRate": 5.83429,
+    "vacancy": {
+      "rate": -1,
+      "vacant": 0,
+      "total": 0,
+      "source": "データなし（住宅統計の集計対象外）",
+      "asOf": "-"
+    },
+    "areaKm2": 16.65
   },
   {
     "code": "43443",
@@ -1887,7 +2119,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 3.17441
+    "populationChangeRate": 3.17441,
+    "vacancy": {
+      "rate": 7.3,
+      "vacant": 950,
+      "total": 13000,
+      "source": "住宅・土地統計調査（居住世帯の有無別住宅数）",
+      "asOf": "2023"
+    },
+    "areaKm2": 65.68
   },
   {
     "code": "43444",
@@ -1950,7 +2190,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.73115
+    "populationChangeRate": -6.73115,
+    "vacancy": {
+      "rate": -1,
+      "vacant": 0,
+      "total": 0,
+      "source": "データなし（住宅統計の集計対象外）",
+      "asOf": "-"
+    },
+    "areaKm2": 57.93
   },
   {
     "code": "43447",
@@ -2013,7 +2261,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -13.57476
+    "populationChangeRate": -13.57476,
+    "vacancy": {
+      "rate": -1,
+      "vacant": 0,
+      "total": 0,
+      "source": "データなし（住宅統計の集計対象外）",
+      "asOf": "-"
+    },
+    "areaKm2": 544.67
   },
   {
     "code": "43468",
@@ -2076,7 +2332,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.00541
+    "populationChangeRate": -10.00541,
+    "vacancy": {
+      "rate": -1,
+      "vacant": 0,
+      "total": 0,
+      "source": "データなし（住宅統計の集計対象外）",
+      "asOf": "-"
+    },
+    "areaKm2": 33.31
   },
   {
     "code": "43482",
@@ -2139,7 +2403,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.48524
+    "populationChangeRate": -11.48524,
+    "vacancy": {
+      "rate": 17.9,
+      "vacant": 1250,
+      "total": 6980,
+      "source": "住宅・土地統計調査（居住世帯の有無別住宅数）",
+      "asOf": "2023"
+    },
+    "areaKm2": 234.01
   },
   {
     "code": "43484",
@@ -2202,7 +2474,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.03761
+    "populationChangeRate": -10.03761,
+    "vacancy": {
+      "rate": -1,
+      "vacant": 0,
+      "total": 0,
+      "source": "データなし（住宅統計の集計対象外）",
+      "asOf": "-"
+    },
+    "areaKm2": 34.08
   },
   {
     "code": "43501",
@@ -2265,7 +2545,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.52216
+    "populationChangeRate": -6.52216,
+    "vacancy": {
+      "rate": -1,
+      "vacant": 0,
+      "total": 0,
+      "source": "データなし（住宅統計の集計対象外）",
+      "asOf": "-"
+    },
+    "areaKm2": 85.04
   },
   {
     "code": "43505",
@@ -2328,7 +2616,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -13.22168
+    "populationChangeRate": -13.22168,
+    "vacancy": {
+      "rate": -1,
+      "vacant": 0,
+      "total": 0,
+      "source": "データなし（住宅統計の集計対象外）",
+      "asOf": "-"
+    },
+    "areaKm2": 165.86
   },
   {
     "code": "43506",
@@ -2391,7 +2687,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.28398
+    "populationChangeRate": -10.28398,
+    "vacancy": {
+      "rate": -1,
+      "vacant": 0,
+      "total": 0,
+      "source": "データなし（住宅統計の集計対象外）",
+      "asOf": "-"
+    },
+    "areaKm2": 48.37
   },
   {
     "code": "43507",
@@ -2454,7 +2758,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -12.34629
+    "populationChangeRate": -12.34629,
+    "vacancy": {
+      "rate": -1,
+      "vacant": 0,
+      "total": 0,
+      "source": "データなし（住宅統計の集計対象外）",
+      "asOf": "-"
+    },
+    "areaKm2": 190.96
   },
   {
     "code": "43510",
@@ -2517,7 +2829,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.27273
+    "populationChangeRate": -7.27273,
+    "vacancy": {
+      "rate": -1,
+      "vacant": 0,
+      "total": 0,
+      "source": "データなし（住宅統計の集計対象外）",
+      "asOf": "-"
+    },
+    "areaKm2": 94.54
   },
   {
     "code": "43511",
@@ -2580,7 +2900,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -12.99678
+    "populationChangeRate": -12.99678,
+    "vacancy": {
+      "rate": -1,
+      "vacant": 0,
+      "total": 0,
+      "source": "データなし（住宅統計の集計対象外）",
+      "asOf": "-"
+    },
+    "areaKm2": 252.92
   },
   {
     "code": "43512",
@@ -2643,7 +2971,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.75911
+    "populationChangeRate": -9.75911,
+    "vacancy": {
+      "rate": -1,
+      "vacant": 0,
+      "total": 0,
+      "source": "データなし（住宅統計の集計対象外）",
+      "asOf": "-"
+    },
+    "areaKm2": 121.19
   },
   {
     "code": "43513",
@@ -2706,7 +3042,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.86395
+    "populationChangeRate": -6.86395,
+    "vacancy": {
+      "rate": -1,
+      "vacant": 0,
+      "total": 0,
+      "source": "データなし（住宅統計の集計対象外）",
+      "asOf": "-"
+    },
+    "areaKm2": 207.58
   },
   {
     "code": "43514",
@@ -2769,7 +3113,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.05042
+    "populationChangeRate": -10.05042,
+    "vacancy": {
+      "rate": -1,
+      "vacant": 0,
+      "total": 0,
+      "source": "データなし（住宅統計の集計対象外）",
+      "asOf": "-"
+    },
+    "areaKm2": 159.56
   },
   {
     "code": "43531",
@@ -2832,6 +3184,14 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -13.35395
+    "populationChangeRate": -13.35395,
+    "vacancy": {
+      "rate": -1,
+      "vacant": 0,
+      "total": 0,
+      "source": "データなし（住宅統計の集計対象外）",
+      "asOf": "-"
+    },
+    "areaKm2": 67.58
   }
 ]

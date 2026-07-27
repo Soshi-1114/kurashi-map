@@ -63,7 +63,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 7.02951
+    "populationChangeRate": 7.02951,
+    "vacancy": {
+      "rate": 11.9,
+      "vacant": 15860,
+      "total": 133760,
+      "source": "住宅・土地統計調査（居住世帯の有無別住宅数）",
+      "asOf": "2023"
+    },
+    "areaKm2": 44.71
   },
   {
     "code": "12102",
@@ -129,7 +137,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 0.19907
+    "populationChangeRate": 0.19907,
+    "vacancy": {
+      "rate": 11.7,
+      "vacant": 10950,
+      "total": 93280,
+      "source": "住宅・土地統計調査（居住世帯の有無別住宅数）",
+      "asOf": "2023"
+    },
+    "areaKm2": 34.19
   },
   {
     "code": "12103",
@@ -195,7 +211,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 0.03799
+    "populationChangeRate": 0.03799,
+    "vacancy": {
+      "rate": 10.6,
+      "vacant": 8910,
+      "total": 83710,
+      "source": "住宅・土地統計調査（居住世帯の有無別住宅数）",
+      "asOf": "2023"
+    },
+    "areaKm2": 21.22
   },
   {
     "code": "12104",
@@ -261,7 +285,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.01742
+    "populationChangeRate": -1.01742,
+    "vacancy": {
+      "rate": 11.6,
+      "vacant": 8490,
+      "total": 73020,
+      "source": "住宅・土地統計調査（居住世帯の有無別住宅数）",
+      "asOf": "2023"
+    },
+    "areaKm2": 84.19
   },
   {
     "code": "12105",
@@ -327,7 +359,15 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -0.90634
+    "populationChangeRate": -0.90634,
+    "vacancy": {
+      "rate": 7.3,
+      "vacant": 3900,
+      "total": 53190,
+      "source": "住宅・土地統計調査（居住世帯の有無別住宅数）",
+      "asOf": "2023"
+    },
+    "areaKm2": 66.25
   },
   {
     "code": "12106",
@@ -393,6 +433,14 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 4.96092
+    "populationChangeRate": 4.96092,
+    "vacancy": {
+      "rate": 6.2,
+      "vacant": 4570,
+      "total": 73720,
+      "source": "住宅・土地統計調査（居住世帯の有無別住宅数）",
+      "asOf": "2023"
+    },
+    "areaKm2": 21.2
   }
 ]

@@ -43,6 +43,10 @@ export type Municipality = {
   // 5年間（2020→2025 国勢調査）の人口増減率（%）。ランキング用。
   // populationTrend はこの率の5区分（fetch-population-2025.mjs trendOf）。
   populationChangeRate?: number;
+  // 面積（km²）。国土地理院「全国都道府県市区町村別面積調」（fetch-area.mjs）。
+  // 人口密度（人/km²）は保存せず population と突き合わせて実行時に算出する
+  // （在留外国人の人口比と同じ「派生値は保存しない」方針）。
+  areaKm2?: number;
   rent: Metric;          // 民営借家中央値
   landPrice: Metric;     // 住宅地地価
   waitlistChildren: Metric; // 待機児童（value=人数）
@@ -53,6 +57,16 @@ export type Municipality = {
   // 国籍上位（多様性表示用）。現状の整形では未収録のため任意。総数10人以下は
   // 国籍が秘匿（注2）＝「データ非開示」扱い（isNationalityDisclosed 参照）。
   foreignNationalities?: { nationality: string; count: number }[];
+  // 空き家率（住宅・土地統計調査 表「居住世帯の有無(8区分)別住宅数」）。
+  // rate = 空き家数 ÷ 住宅総数（%）。調査の市区町村集計は人口1.5万人未満の町村を
+  // 含まないため、対象外は rate=-1 + source センチネル（lib/vacancy.ts hasVacancy 参照）。
+  vacancy?: {
+    rate: number;   // 空き家率%（小数1桁）。-1=対象外
+    vacant: number; // 空き家数（戸）
+    total: number;  // 住宅総数（戸）
+    source: string;
+    asOf: string;
+  };
   hazard: HazardInfo;
   amenities?: {
     stations: number;            // 駅数

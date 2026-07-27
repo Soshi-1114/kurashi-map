@@ -9,6 +9,8 @@ import { hasRent } from "./rentColor";
 import { hasLandPrice } from "./landPrice";
 import { isWaitlistDisclosed } from "./waitlist";
 import { hasForeignData, foreignRatioPct } from "./foreignResidents";
+import { hasVacancy, vacancyRateText } from "./vacancy";
+import { populationDensity, densityText } from "./populationDensity";
 import { prefNameOf } from "./site";
 
 export type RankingDef = {
@@ -153,7 +155,40 @@ export const NEXT_UPDATE = {
   waitlist: "こども家庭庁の次回取りまとめ（2026年4月1日時点）は例年8月末〜9月に公表され、公表後に更新予定です。",
   population: "令和7年（2025年）国勢調査の確定値（人口等基本集計）が2026年9月までに公表予定で、公表後に更新予定です。",
   foreign: "在留外国人統計は年2回公表です。次回は2026年6月末時点の市区町村別データが2026年12月中旬に公表見込みで、公表後すみやかに更新予定です。",
+  vacancy:
+    "出典（住宅・土地統計調査）は5年周期のため、現在の2023年調査が最新の公表データです。次回は2028年調査（結果公表は2029年以降）の見込みです。",
 } as const;
+
+// 空き家率の鮮度ラベル。asOf 由来の「2023年最新」は誤解を招くため、調査名を明示する固定文字列。
+const VACANCY_FRESHNESS = "2023年住宅・土地統計調査";
+
+// 空き家率ランキングの導入文（薄ページ対策）。high/low で傾向解説を分岐。
+function vacancyIntro(highLow: "高い" | "低い"): string[] {
+  const trend =
+    highLow === "高い"
+      ? "上位には、別荘など二次的住宅が多いリゾート地（軽井沢町・熱海市など）と、人口減少により利用されない住宅が増えている地方の自治体が並ぶ傾向があります。空き家率が高いことは、裏を返せば住宅ストックに余裕があり、安価な物件や空き家バンクの選択肢が見つかりやすい可能性も意味します。"
+      : "下位（空き家率が低い側）には、人口流入が続く都市部やその近郊が並ぶ傾向があります。住宅需要が強く、賃貸・売買市場の回転が速い地域と読むことができます。";
+  return [
+    `このページは、全国の市区町村を空き家率（空き家数 ÷ 住宅総数）が${highLow}順に並べたランキングです。総務省「住宅・土地統計調査」（2023年）の実データのみで集計しており、2023年の全国の空き家率は13.8%と過去最高を更新しています。`,
+    `${trend}各順位の自治体名から、その地域の家賃・地価・人口推移・災害リスクなどの住環境データを地図とあわせて確認できます。`,
+    "空き家率は住宅ストックの状態を示す客観的な指標のひとつで、住みやすさ等の価値判断とは切り離して中立的にご覧ください。調査の市区町村集計は人口1.5万人未満の町村を含まないため、該当する町村はランキングの対象外です（推計値は使いません）。",
+  ];
+}
+
+const VACANCY_FAQ: { q: string; a: string }[] = [
+  {
+    q: "空き家率はどうやって計算していますか？",
+    a: "総務省「住宅・土地統計調査」（2023年）の市区町村別の空き家数を住宅総数で割った割合（%）です。総務省が公表する全国の空き家率（2023年 13.8%）と同じ定義で、賃貸用・売却用・二次的住宅を含む空き家全体を対象としています。",
+  },
+  {
+    q: "掲載されていない町村があるのはなぜですか？",
+    a: "住宅・土地統計調査の市区町村集計は、人口1.5万人未満の町村を対象としていないためです。本サイトは推計値を使わない方針のため、対象外の自治体は「データなし」として扱い、ランキングにも含めていません。",
+  },
+  {
+    q: "データはいつ更新されますか？",
+    a: "住宅・土地統計調査は5年周期で、現在の2023年調査が最新です。次回は2028年調査（公表は2029年以降）の見込みで、公表後すみやかに反映します。",
+  },
+];
 
 // 1位自治体（実データ）から「名前・比率・基準年」を含む meta description を組み立てる。
 function foreignMetaDescription(highLow: "高い" | "低い") {
@@ -197,6 +232,40 @@ export const RANKINGS: RankingDef[] = [
     qualifies: (m) => hasRent(m.rent.value),
     sortValue: (m) => m.rent.value,
     display: (m) => `${m.rent.value.toLocaleString()}円/月`,
+  },
+  {
+    slug: "vacancy-high",
+    title: "空き家率が高い市区町村ランキング",
+    shortLabel: "空き家率が高い",
+    description:
+      "全国の市区町村を空き家率が高い順にランキング。最も空き家率が高いのは{top1}。住宅・土地統計調査（2023年）の実データで空き家の多い自治体を比較できます。",
+    lead: "全国の市区町村を、空き家率（空き家数 ÷ 住宅総数）が高い順に並べたランキングです（住宅・土地統計調査 2023年）。",
+    intro: vacancyIntro("高い"),
+    faq: VACANCY_FAQ,
+    columnLabel: "空き家率",
+    order: "desc",
+    freshnessLabel: () => VACANCY_FRESHNESS,
+    nextUpdate: NEXT_UPDATE.vacancy,
+    qualifies: (m) => hasVacancy(m.vacancy),
+    sortValue: (m) => m.vacancy?.rate ?? 0,
+    display: (m) => (hasVacancy(m.vacancy) ? vacancyRateText(m.vacancy) : "—"),
+  },
+  {
+    slug: "vacancy-low",
+    title: "空き家率が低い市区町村ランキング",
+    shortLabel: "空き家率が低い",
+    description:
+      "全国の市区町村を空き家率が低い順にランキング。最も空き家率が低いのは{top1}。住宅需要が強い自治体を住宅・土地統計調査（2023年）の実データで比較できます。",
+    lead: "全国の市区町村を、空き家率（空き家数 ÷ 住宅総数）が低い順に並べたランキングです（住宅・土地統計調査 2023年）。",
+    intro: vacancyIntro("低い"),
+    faq: VACANCY_FAQ,
+    columnLabel: "空き家率",
+    order: "asc",
+    freshnessLabel: () => VACANCY_FRESHNESS,
+    nextUpdate: NEXT_UPDATE.vacancy,
+    qualifies: (m) => hasVacancy(m.vacancy),
+    sortValue: (m) => m.vacancy?.rate ?? 0,
+    display: (m) => (hasVacancy(m.vacancy) ? vacancyRateText(m.vacancy) : "—"),
   },
   {
     slug: "land-price-high",
@@ -258,6 +327,44 @@ export const RANKINGS: RankingDef[] = [
     qualifies: (m) => m.population > 0,
     sortValue: (m) => m.population,
     display: (m) => `${m.population.toLocaleString()}人`,
+  },
+  {
+    slug: "population-density",
+    title: "人口密度が高い市区町村ランキング",
+    shortLabel: "人口密度が高い",
+    description:
+      "全国の市区町村を人口密度（人/km²）が高い順にランキング。最も人口密度が高いのは{top1}。国勢調査人口と国土地理院の面積データで比較できます。",
+    lead: "全国の市区町村を、人口密度（人口 ÷ 面積、人/km²）が高い順に並べたランキングです。",
+    note: "人口は2025年国勢調査（速報）、面積は国土地理院「全国都道府県市区町村別面積調」に基づきます。境界未定部を持つ自治体の面積は国土地理院公表の参考値です。",
+    columnLabel: "人口密度",
+    order: "desc",
+    freshnessLabel: () => POPULATION_FRESHNESS,
+    nextUpdate: NEXT_UPDATE.population,
+    qualifies: (m) => populationDensity(m) != null,
+    sortValue: (m) => populationDensity(m) ?? 0,
+    display: (m) => {
+      const d = populationDensity(m);
+      return d == null ? "—" : densityText(d);
+    },
+  },
+  {
+    slug: "population-density-low",
+    title: "人口密度が低い市区町村ランキング",
+    shortLabel: "人口密度が低い",
+    description:
+      "全国の市区町村を人口密度（人/km²）が低い順にランキング。最も人口密度が低いのは{top1}。国勢調査人口と国土地理院の面積データで比較できます。",
+    lead: "全国の市区町村を、人口密度（人口 ÷ 面積、人/km²）が低い順に並べたランキングです。",
+    note: "人口は2025年国勢調査（速報）、面積は国土地理院「全国都道府県市区町村別面積調」に基づきます。境界未定部を持つ自治体の面積は国土地理院公表の参考値です。",
+    columnLabel: "人口密度",
+    order: "asc",
+    freshnessLabel: () => POPULATION_FRESHNESS,
+    nextUpdate: NEXT_UPDATE.population,
+    qualifies: (m) => populationDensity(m) != null,
+    sortValue: (m) => populationDensity(m) ?? 0,
+    display: (m) => {
+      const d = populationDensity(m);
+      return d == null ? "—" : densityText(d);
+    },
   },
   {
     slug: "population-growth",
