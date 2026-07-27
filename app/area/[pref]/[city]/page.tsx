@@ -57,7 +57,7 @@ import {
 } from "@/components/area/cards";
 import { SupportBanner } from "@/components/area/SupportBanner";
 import { FurusatoLink } from "@/components/area/FurusatoLink";
-import { supportUrl } from "@/lib/monetization";
+import { supportUrl, furusatoUrlTemplate } from "@/lib/monetization";
 
 type Params = { pref: string; city: string };
 
@@ -635,20 +635,25 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
           </p>
         </details>
       </Reveal>
-      {/* 支援・ふるさと納税導線（データ可視化エリアとは視覚的に分離） */}
-      <Reveal>
-        <section className="ad-support-section" aria-label="このサイトについて・関連リンク">
-          {supportUrl() && (
-            <SupportBanner url={supportUrl()!} municipalityCode={m.code} municipalityName={m.name} />
-          )}
-          {/* 政令市の行政区は寄付先が親の政令市になるため、寄付先名は親市名を使う */}
-          <FurusatoLink
-            targetName={m.level === "ward" && parent ? parent.name : m.name}
-            prefName={prefName}
-            municipalityCode={m.code}
-          />
-        </section>
-      </Reveal>
+      {/* 支援・ふるさと納税導線（データ可視化エリアとは視覚的に分離）。
+          ふるさと納税は提携ASP確定（env設定）まで非表示 */}
+      {(supportUrl() || furusatoUrlTemplate()) && (
+        <Reveal>
+          <section className="ad-support-section" aria-label="このサイトについて・関連リンク">
+            {supportUrl() && (
+              <SupportBanner url={supportUrl()!} municipalityCode={m.code} municipalityName={m.name} />
+            )}
+            {/* 政令市の行政区は寄付先が親の政令市になるため、寄付先名は親市名を使う */}
+            {furusatoUrlTemplate() && (
+              <FurusatoLink
+                targetName={m.level === "ward" && parent ? parent.name : m.name}
+                prefName={prefName}
+                municipalityCode={m.code}
+              />
+            )}
+          </section>
+        </Reveal>
+      )}
       {/* ページ下部 CTA */}
       <Reveal>
         <section className="ad-cta">

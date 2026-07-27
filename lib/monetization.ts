@@ -19,11 +19,22 @@ export function supportUrl(): string | null {
 }
 
 /**
+ * ふるさと納税リンクの URL テンプレート。未設定・不正なら null（導線は表示しない）。
+ *
+ * 提携先ASP（さとふる／ふるなび等）の審査完了までは env を空にして導線ごと非表示にする
+ * （さとふる検索URLへの素リンクは 404 になるため。2026-07 確認）。
+ */
+export function furusatoUrlTemplate(): string | null {
+  const t = process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE?.trim();
+  return t && t.includes("{keyword}") ? t : null;
+}
+
+/**
  * ふるさと納税の検索リンク生成。
  *
- * 提携先ASP（さとふる／ふるなび等）は契約後に確定するため、URL テンプレートを
- * 環境変数 NEXT_PUBLIC_FURUSATO_URL_TEMPLATE で受け取り、`{keyword}` を自治体名で
- * 置換する。未設定時はさとふるの検索URLをデフォルトとして使う（アフィリエイトIDなし）。
+ * 環境変数 NEXT_PUBLIC_FURUSATO_URL_TEMPLATE の `{keyword}` を自治体名で置換する。
+ * 表示の可否は呼び出し側が furusatoUrlTemplate() で判定する前提（未設定時の
+ * さとふる検索URLフォールバックは後方互換のために残している）。
  *
  * @param cityName 寄付先自治体名（政令市の行政区の場合は親の政令市名を渡すこと）
  * @param prefName 都道府県名（同名自治体の曖昧さ回避のため keyword に前置する）
@@ -33,9 +44,9 @@ export function generateFurusatoUrl(cityName: string, prefName?: string): string
   const keyword = prefName ? `${prefName}${cityName}` : cityName;
   const encoded = encodeURIComponent(keyword);
 
-  const template = process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE?.trim();
+  const template = furusatoUrlTemplate();
   let base: string;
-  if (template && template.includes("{keyword}")) {
+  if (template) {
     base = template.replaceAll("{keyword}", encoded);
   } else {
     // デフォルト: さとふるのキーワード検索（提携確定まではアフィリエイトIDなしの素のURL）。
