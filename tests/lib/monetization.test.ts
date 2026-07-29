@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach } from "vitest";
-import { generateFurusatoUrl, supportUrl } from "@/lib/monetization";
+import { generateFurusatoUrl, supportUrl, isFurusatoAffiliate } from "@/lib/monetization";
 
 // process.env を書き換えるテストは毎回クリーンアップする。
 const KEYS = ["NEXT_PUBLIC_SUPPORT_URL", "NEXT_PUBLIC_FURUSATO_URL_TEMPLATE"] as const;
@@ -59,5 +59,24 @@ describe("generateFurusatoUrl", () => {
     process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "https://broken.example/";
     const url = generateFurusatoUrl("札幌市", "北海道");
     expect(url).toContain("https://www.satofull.jp/search/?keyword=");
+  });
+});
+
+describe("isFurusatoAffiliate", () => {
+  it("テンプレート未設定なら false（素の検索URL＝広告ではない）", () => {
+    expect(isFurusatoAffiliate()).toBe(false);
+  });
+  it("空白のみも false", () => {
+    process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "   ";
+    expect(isFurusatoAffiliate()).toBe(false);
+  });
+  it("{keyword} を含む有効なテンプレートなら true（成果報酬型リンク）", () => {
+    process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE =
+      "https://h.accesstrade.net/...&url=https://furunavi.example/search?q={keyword}";
+    expect(isFurusatoAffiliate()).toBe(true);
+  });
+  it("{keyword} を含まない不正テンプレートは false（フォールバック中は広告表示しない）", () => {
+    process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "https://broken.example/";
+    expect(isFurusatoAffiliate()).toBe(false);
   });
 });

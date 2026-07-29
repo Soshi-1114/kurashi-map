@@ -963,6 +963,7 @@
 }
 .ad-support,
 .ad-furusato {
+  position: relative; /* 「広告」バッジの絶対配置基準 */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -972,6 +973,21 @@
   background: var(--ad-subtle);
   border: 1px solid var(--ad-border);
   border-radius: var(--ad-radius);
+}
+/* 成果報酬型リンクである旨の開示ラベル（ステマ規制対応）。控えめだが視認可能に。 */
+.ad-furusato-pr {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  padding: 1px 6px;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+  color: var(--text-muted);
+  background: var(--ad-border);
+  border-radius: 4px;
+  pointer-events: none;
 }
 .ad-support-text,
 .ad-furusato-text {

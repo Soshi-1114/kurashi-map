@@ -6,7 +6,7 @@
 // 2025年10月以降、ふるさと納税でのポイント還元は禁止のため、還元・ポイント訴求はしない。
 import { Gift, ExternalLink } from "lucide-react";
 import { track } from "@/lib/analytics";
-import { generateFurusatoUrl } from "@/lib/monetization";
+import { generateFurusatoUrl, isFurusatoAffiliate } from "@/lib/monetization";
 
 export function FurusatoLink({
   targetName,
@@ -19,8 +19,15 @@ export function FurusatoLink({
   municipalityCode: string;
 }) {
   const url = generateFurusatoUrl(targetName, prefName);
+  // 成果報酬型リンクとして構成されている時だけ「広告」表示を出す（ステマ規制対応・誠実性方針）。
+  const isAd = isFurusatoAffiliate();
   return (
     <div className="ad-furusato">
+      {isAd && (
+        <span className="ad-furusato-pr" aria-label="広告">
+          広告
+        </span>
+      )}
       <div className="ad-furusato-text">
         <Gift size={18} aria-hidden="true" className="ad-furusato-icon" />
         <p className="ad-furusato-copy">

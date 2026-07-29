@@ -12,6 +12,19 @@ const UTM = {
   medium: "referral",
 } as const;
 
+/**
+ * ふるさと納税リンクが成果報酬型（アフィリエイト）として構成されているか。
+ *
+ * NEXT_PUBLIC_FURUSATO_URL_TEMPLATE に提携ASPのトラッキングURLテンプレートが
+ * 設定されている場合のみ true。未設定（＝さとふるの素の検索URLにフォールバック中）
+ * は false。景表法のステマ規制対応として、実際にアフィリエイトリンクである時だけ
+ * 導線に「広告」表示を出すための判定に使う（誠実性方針: 実態と表示を一致させる）。
+ */
+export function isFurusatoAffiliate(): boolean {
+  const t = process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE?.trim();
+  return Boolean(t && t.includes("{keyword}"));
+}
+
 /** 投げ銭・サポーターの支援先 URL。未設定なら支援導線は表示しない。 */
 export function supportUrl(): string | null {
   const u = process.env.NEXT_PUBLIC_SUPPORT_URL?.trim();

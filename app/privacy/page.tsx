@@ -10,10 +10,10 @@ import { SITE, absoluteUrl } from "@/lib/site";
 const PATH = "/privacy";
 const TITLE = `プライバシーポリシー｜${SITE.name}`;
 const DESC =
-  "KurashiMapのプライバシーポリシー。Google アナリティクス（GA4）によるアクセス解析、Cookie の利用、収集する情報の範囲と利用目的、外部サイトへのリンクの扱いを開示しています。";
+  "KurashiMapのプライバシーポリシー。Google アナリティクス（GA4）によるアクセス解析、Cookie の利用、収集する情報の範囲と利用目的、外部サイトへのリンクおよびアフィリエイトプログラム（成果報酬型広告）の扱いを開示しています。";
 
 // 最終更新日（ポリシー改定時に手動更新）。
-const LAST_UPDATED = "2026年7月21日";
+const LAST_UPDATED = "2026年7月29日";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -115,6 +115,18 @@ export default function PrivacyPage() {
         <h2 className="detail-h2">外部サイトへのリンクについて</h2>
         <p className="detail-p">
           当サイトには、ふるさと納税ポータルや支援（寄付）サービスなど、外部の事業者が運営するサイトへのリンクを掲載する場合があります。リンク先を識別するために、遷移元が当サイトであることを示すパラメータ（UTM）を付与することがありますが、これに個人情報は含まれません。リンク先で収集される情報の取り扱いは各サイトのプライバシーポリシーに従います。当サイトはリンク先サイトの内容・サービスについて責任を負いません。
+        </p>
+      </section>
+
+      <section className="detail-section">
+        <h2 className="detail-h2">アフィリエイトプログラム（成果報酬型広告）について</h2>
+        <p className="detail-p">
+          当サイトは、第三者が運営するアフィリエイト・サービス・プロバイダ（ASP）を通じて、成果報酬型広告（アフィリエイトプログラム）を利用しています。利用者が当サイトの広告リンクを経由して外部サイトにアクセスした場合、成果（寄付・申込など）の計測のために、ASP や広告主によって<strong>Cookie</strong>が利用されることがあります。
+        </p>
+        <p className="detail-p">
+          この Cookie は、当サイト経由での成果を広告主が確認し、当サイトに正しく報酬を割り当てるために用いられるもので、氏名・住所・電話番号などの個人を直接特定する情報を当サイトが取得することはありません。Cookie の受け入れは、ブラウザの設定でいつでも拒否・削除できます。広告リンクの掲載方針については
+          <Link href="/about">このサイトについて</Link>
+          のページで開示しています。
         </p>
       </section>
 
