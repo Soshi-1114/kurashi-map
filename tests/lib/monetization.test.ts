@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach } from "vitest";
-import { generateFurusatoUrl, supportUrl } from "@/lib/monetization";
+import { generateFurusatoUrl, supportUrl, furusatoUrlTemplate } from "@/lib/monetization";
 
 // process.env を書き換えるテストは毎回クリーンアップする。
 const KEYS = ["NEXT_PUBLIC_SUPPORT_URL", "NEXT_PUBLIC_FURUSATO_URL_TEMPLATE"] as const;
@@ -18,6 +18,24 @@ describe("supportUrl", () => {
   it("設定値をそのまま返す", () => {
     process.env.NEXT_PUBLIC_SUPPORT_URL = "https://ofuse.me/kurashimap";
     expect(supportUrl()).toBe("https://ofuse.me/kurashimap");
+  });
+});
+
+describe("furusatoUrlTemplate", () => {
+  it("未設定なら null（導線非表示）", () => {
+    expect(furusatoUrlTemplate()).toBeNull();
+  });
+  it("空白のみも null", () => {
+    process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "  ";
+    expect(furusatoUrlTemplate()).toBeNull();
+  });
+  it("{keyword} を含まない不正テンプレートは null", () => {
+    process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "https://broken.example/";
+    expect(furusatoUrlTemplate()).toBeNull();
+  });
+  it("{keyword} を含むテンプレートはそのまま返す", () => {
+    process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "https://furunavi.example/search?q={keyword}";
+    expect(furusatoUrlTemplate()).toBe("https://furunavi.example/search?q={keyword}");
   });
 });
 
