@@ -121,6 +121,25 @@ describe("population-growth ランキング", () => {
   });
 });
 
+describe("population-decline ランキング", () => {
+  const def = getRankingBySlug("population-decline")!;
+
+  it("増減率の昇順（減少が大きい順）、率なし・人口0は除外", () => {
+    const list = [
+      muni({ code: "A", population: 10000, populationChangeRate: 2.5 }),
+      muni({ code: "B", population: 10000, populationChangeRate: -3.1 }),
+      muni({ code: "C", population: 10000, populationChangeRate: -7.2 }),
+      muni({ code: "N", population: 10000 }), // 率なし（北方領土等）→除外
+    ];
+    expect(rankBy(def, list).map((m) => m.code)).toEqual(["C", "B", "A"]);
+  });
+
+  it("display は符号付き小数1桁の%（population-growth と同一整形）", () => {
+    expect(def.display(muni({ populationChangeRate: -7.25 }))).toBe("-7.3%");
+    expect(def.display(muni({ populationChangeRate: 3.14 }))).toBe("+3.1%");
+  });
+});
+
 describe("land-price-low ランキング", () => {
   const def = getRankingBySlug("land-price-low")!;
 
