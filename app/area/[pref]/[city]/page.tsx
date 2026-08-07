@@ -164,8 +164,8 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
   const parent = m.parentCode ? all.find((x) => x.code === m.parentCode) ?? null : null;
   const heading = m.displayName ?? m.name;
 
-  // 人口規模が近い同県内の自治体（回遊導線）。「似ているエリア」との重複を除外。
-  const closePop = findClosePopulationInPref(peers, m, 4, new Set(similar.map((s) => s.code)));
+  // 人口規模が近い同県内の自治体（回遊導線）。「家賃が近い」「似ているエリア」との重複を除外。
+  const closePop = findClosePopulationInPref(peers, m, 4, new Set([...relatedCodes, ...similar.map((s) => s.code)]));
   // 同県の主要自治体（人口の多い順）。自身と既出カード（家賃が近い・似ている・人口規模が近い）を除く。
   const excluded = new Set([m.code, ...relatedCodes, ...similar.map((s) => s.code), ...closePop.map((p) => p.code)]);
   const majorPeers = peers
@@ -301,10 +301,13 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
   const pct = (v: number) => `${v.toFixed(2)}%`;
 
   // KPI カードの比較文脈（全国順位・県内順位・全国平均）。取れない部分は省略する。
-  const rentRankPos = rankPositions.get("rent-cheap")?.get(m.code);
+  // 家賃は全国平均との高低で「安い順」「高い順」のどちらのランキングを見せるか切り替える
+  // （lib/highlights.ts の rankSuffix と同じ方向判定。高い自治体に「安い順で1,900位」は出さない）。
+  const rentAboveAvg = areaStats.rent.national != null && m.rent.value > areaStats.rent.national;
+  const rentRankPos = rankPositions.get(rentAboveAvg ? "rent-high" : "rent-cheap")?.get(m.code);
   const rentCompare = hasRent(m.rent.value)
     ? [
-        rentRankPos ? `安い順で全国${rentRankPos.rank.toLocaleString()}位` : null,
+        rentRankPos ? `${rentAboveAvg ? "高い" : "安い"}順で全国${rentRankPos.rank.toLocaleString()}位` : null,
         areaStats.rent.national != null ? `全国平均${areaStats.rent.national.toLocaleString()}円` : null,
       ].filter(Boolean).join("・") || undefined
     : undefined;
