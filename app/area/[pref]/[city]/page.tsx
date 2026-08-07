@@ -24,7 +24,7 @@ import {
 } from "lucide-react";
 import { getMunicipality, listAll, listAllAcrossPrefs } from "@/lib/metrics";
 import { buildSummary } from "@/lib/summary";
-import { findRelatedByRent, findSimilar } from "@/lib/related";
+import { findRelatedByRent, findSimilar, findClosePopulationInPref } from "@/lib/related";
 import { RANKINGS, formatAsOfJa } from "@/lib/rankings";
 import { muniLastModified } from "@/lib/dataFreshness";
 import { getRankPositions } from "@/lib/rankingStats";
@@ -147,8 +147,10 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
   const parent = m.parentCode ? all.find((x) => x.code === m.parentCode) ?? null : null;
   const heading = m.displayName ?? m.name;
 
-  // 同県の主要自治体（人口の多い順）。自身と「家賃が近い」「似ている」既出分を除く。
-  const excluded = new Set([m.code, ...relatedCodes, ...similar.map((s) => s.code)]);
+  // 人口規模が近い同県内の自治体（回遊導線）。「似ているエリア」との重複を除外。
+  const closePop = findClosePopulationInPref(peers, m, 4, new Set(similar.map((s) => s.code)));
+  // 同県の主要自治体（人口の多い順）。自身と既出カード（家賃が近い・似ている・人口規模が近い）を除く。
+  const excluded = new Set([m.code, ...relatedCodes, ...similar.map((s) => s.code), ...closePop.map((p) => p.code)]);
   const majorPeers = peers
     .filter((x) => !excluded.has(x.code))
     .sort((a, b) => b.population - a.population)
@@ -561,6 +563,27 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
                   comment="家賃・人口規模が近い"
                   rent={hasRent(s.rent.value) ? `${s.rent.value.toLocaleString()}円` : null}
                   population={`${s.population.toLocaleString()}人`}
+                />
+              </li>
+            ))}
+          </ul>
+        </Section>
+      )}
+      {/* 人口規模が近い同県内の自治体 */}
+      {closePop.length > 0 && (
+        <Section
+          icon={Users}
+          tone="ad-tone-pop"
+          title={`人口規模が近い${prefName}の自治体`}
+          sub={`${m.name}（人口${m.population.toLocaleString()}人）と規模が近い自治体`}
+        >
+          <ul className="ad-arealink-grid">
+            {closePop.map((p) => (
+              <li key={p.code}>
+                <AreaLinkCard
+                  href={`/area/${p.pref}/${p.code}`}
+                  name={p.displayName ?? p.name}
+                  meta={`人口 ${p.population.toLocaleString()}人`}
                 />
               </li>
             ))}
