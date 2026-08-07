@@ -624,3 +624,32 @@
   .rk-ladder-row,
   .rk-action-primary { transition: none; }
 }
+
+/* ============================================================
+   2列コンパクトランキング（都道府県ページの人口・人口増減）
+   ============================================================ */
+.rk-duo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 28px;
+}
+@media (max-width: 768px) {
+  .rk-duo { grid-template-columns: 1fr; }
+}
+.rk-duo-h {
+  margin: 0 0 10px;
+  font-size: var(--text-sm);
+  font-weight: 800;
+  color: var(--text-muted);
+}
+.rk-duo-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 10px;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+}
+.rk-duo-more:hover { text-decoration: underline; }
