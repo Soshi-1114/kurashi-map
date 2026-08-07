@@ -746,6 +746,27 @@
   margin: 0;
   padding: 0;
 }
+/* 「＋比較する」導線。カード全体が既にリンクのため二重<a>を避け、カードの下に
+   小さなテキストリンクとして並べる（ボタン化・新規セクション化はしない）。 */
+.ad-compare-add {
+  display: block;
+  margin-top: 6px;
+  padding-left: 2px;
+  font-size: var(--text-2xs);
+  font-weight: 600;
+  color: var(--text-muted);
+}
+.ad-compare-add:hover { color: var(--accent); }
+.ad-compare-add-hero {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin: 10px 0 0;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--accent);
+}
+.ad-compare-add-hero:hover { text-decoration: underline; }
 .ad-arealink {
   display: grid;
   grid-template-columns: 1fr auto auto;

@@ -18,6 +18,7 @@ import {
   Trophy,
   Map as MapIcon,
   ArrowLeft,
+  ArrowUpRight,
   Search,
   BarChart3,
   Sparkles,
@@ -338,6 +339,9 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
             <span className="ad-title-sub">の住みやすさ</span>
           </h1>
           <p className="ad-lead">{buildSummary(m)}</p>
+          <Link href={`/compare?codes=${m.code}`} className="ad-compare-add ad-compare-add-hero">
+            この自治体を比較ページで見る<ArrowUpRight size={13} aria-hidden="true" />
+          </Link>
         </div>
 
         <ScorePanel liv={liv} />
@@ -556,6 +560,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
                   name={r.displayName ?? r.name}
                   meta={hasRent(r.rent.value) ? `${r.rent.value.toLocaleString()}円/月` : "データなし"}
                 />
+                <Link href={`/compare?codes=${m.code},${r.code}`} className="ad-compare-add">＋比較する</Link>
               </li>
             ))}
           </ul>
@@ -574,6 +579,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
                   rent={hasRent(s.rent.value) ? `${s.rent.value.toLocaleString()}円` : null}
                   population={`${s.population.toLocaleString()}人`}
                 />
+                <Link href={`/compare?codes=${m.code},${s.code}`} className="ad-compare-add">＋比較する</Link>
               </li>
             ))}
           </ul>
@@ -595,6 +601,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
                   name={p.displayName ?? p.name}
                   meta={`人口 ${p.population.toLocaleString()}人`}
                 />
+                <Link href={`/compare?codes=${m.code},${p.code}`} className="ad-compare-add">＋比較する</Link>
               </li>
             ))}
           </ul>
