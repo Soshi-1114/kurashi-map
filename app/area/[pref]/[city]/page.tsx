@@ -115,7 +115,15 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
     ]);
     const highlights = buildHighlights(m, { areaStats, foreign: null, rankPositions, prefRanks, prefName });
     const highlightPhrase = highlights.length > 0 ? `${highlights[0].text}。` : "";
-    description = `${fullName}（${prefName}）の住みやすさ・住環境データ。${popPhrase}${rentPhrase}${highlightPhrase}地価・待機児童・災害リスクなどをまとめて地図とランキングで比較できる${SITE.name}の自治体ページ。`;
+    // 末尾の指標列挙は、直前のハイライト文とテーマが重複しないものだけに絞る
+    // （例: 待機児童ゼロが特徴文で既に出ていれば「待機児童」を列挙し直さない）。
+    const topicWords: Record<string, string> = {
+      rent: "家賃", rentPref: "家賃", landPrice: "地価", populationChangeRate: "人口",
+      vacancy: "空き家率", foreignRatio: "外国人比率", density: "人口密度", population: "人口", waitlistZero: "待機児童",
+    };
+    const mentioned = highlights.length > 0 ? topicWords[highlights[0].key] : undefined;
+    const topics = ["地価", "待機児童", "災害リスク"].filter((t) => t !== mentioned).join("・");
+    description = `${fullName}（${prefName}）の住みやすさ・住環境データ。${popPhrase}${rentPhrase}${highlightPhrase}${topics}などをまとめて地図とランキングで比較できる${SITE.name}の自治体ページ。`;
   }
   const url = absoluteUrl(`/area/${m.pref}/${m.code}`);
   const ogImage = absoluteUrl(`/api/og/${m.code}`);
