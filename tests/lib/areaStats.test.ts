@@ -58,4 +58,32 @@ describe("buildAreaStats", () => {
     expect(stats.rent.national).toBe(60000);
     expect(stats.landPrice.national).toBe(200000);
   });
+
+  it("人口増減率は小数1桁の平均。未収録（undefined）は母数に入れない", () => {
+    const stats = buildAreaStats([
+      muni({ code: "11201", populationChangeRate: -4.05 }),
+      muni({ code: "11202", populationChangeRate: 2.0 }),
+      muni({ code: "11203" }), // populationChangeRate 未収録
+    ]);
+    expect(stats.populationChangeRate.national).toBe(-1.0); // (-4.05+2.0)/2 = -1.025 → -1.0
+  });
+
+  it("空き家率は rate=-1（対象外）を母数に入れない", () => {
+    const stats = buildAreaStats([
+      muni({ code: "11201", vacancy: { rate: 10.5, vacant: 10, total: 95, source: "住宅・土地統計調査", asOf: "2023" } }),
+      muni({ code: "11202", vacancy: { rate: 15.6, vacant: 20, total: 128, source: "住宅・土地統計調査", asOf: "2023" } }),
+      muni({ code: "11203", vacancy: { rate: -1, vacant: 0, total: 0, source: "データなし（住宅統計の集計対象外）", asOf: "-" } }),
+    ]);
+    expect(stats.vacancyRate.national).toBe(13.1); // (10.5+15.6)/2 = 13.05 → 13.1
+  });
+
+  it("人口密度は面積未収録・人口0の自治体を母数に入れない", () => {
+    const stats = buildAreaStats([
+      muni({ code: "11201", population: 100000, areaKm2: 50 }), // 2000人/km²
+      muni({ code: "11202", population: 30000, areaKm2: 30 }), // 1000人/km²
+      muni({ code: "11203", population: 100000 }), // 面積なし
+      muni({ code: "11204", population: 0, areaKm2: 100 }), // 人口0
+    ]);
+    expect(stats.density.national).toBe(1500);
+  });
 });
