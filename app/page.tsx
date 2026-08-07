@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import ReactDOM from "react-dom";
-import HomeShell from "@/components/HomeShell";
+import MapView from "@/components/MapView";
 import HomeLinks, { type PopularMuni } from "@/components/HomeLinks";
+import HeroSearch from "@/components/home/HeroSearch";
 import { listSummaryAcrossPrefs, listAllAcrossPrefs } from "@/lib/metrics";
 import { muniLevelOnly } from "@/lib/rankings";
 import { SITE, absoluteUrl } from "@/lib/site";
@@ -52,9 +54,32 @@ export default async function HomePage() {
   const popular = await getPopularMunis();
   return (
     <main className="home-main">
-      <HomeShell summary={summary}>
+      {/* ファーストビュー: 何のサービスかを5秒で伝えるコピー＋詳細ページへ遷移する検索。
+          地図（プロダクトの中核）はその直下に据える。 */}
+      <section className="home-hero">
+        <div className="home-hero-inner">
+          <h1 className="home-hero-title">データで、暮らす場所を考える。</h1>
+          <p className="home-hero-sub">
+            全国1,918市区町村を、家賃相場・地価・人口増減・待機児童・災害リスク・空き家率・外国人住民比率の公的データで調べて比較できます。推計値は使いません。
+          </p>
+          <HeroSearch munis={summary} />
+          <p className="home-hero-actions">
+            <a href="#home-explore" className="home-hero-action">都道府県から探す</a>
+            <Link href="/ranking" className="home-hero-action">ランキングから探す</Link>
+          </p>
+        </div>
+      </section>
+
+      {/* 地図。スクロールするページへの埋め込みなので協調ジェスチャを有効化
+          （SP: 2本指パン / PC: Ctrl+ホイールでズーム）。 */}
+      <div className="home-map home-map--embedded">
+        <MapView summary={summary} cooperativeGestures />
+      </div>
+
+      {/* できること・回遊リンク帯（サーバーレンダリング＝クロール可能） */}
+      <div className="home-content" id="home-explore">
         <HomeLinks popular={popular} />
-      </HomeShell>
+      </div>
     </main>
   );
 }

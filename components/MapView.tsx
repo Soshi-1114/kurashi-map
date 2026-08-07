@@ -43,9 +43,15 @@ import MuniSearch from "./map/MuniSearch";
 import AreaPanel from "./AreaPanel";
 import MobileSheet from "./MobileSheet";
 
-type Props = { summary: MuniSummary[]; onMenuClick?: () => void; initialMetric?: MapMetricKey | "none" };
+type Props = {
+  summary: MuniSummary[];
+  onMenuClick?: () => void;
+  initialMetric?: MapMetricKey | "none";
+  /** スクロールするページに埋め込む場合 true（1本指パン/ホイールを奪わない協調ジェスチャ）。 */
+  cooperativeGestures?: boolean;
+};
 
-export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_MAP_METRIC }: Props) {
+export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_MAP_METRIC, cooperativeGestures = false }: Props) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<MapLibreMap | null>(null);
   const muniGeoRef = useRef<GeoJSON.FeatureCollection | null>(null);
@@ -64,6 +70,8 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
   const labelDimRef = useRef<LabelDimState>({ ids: [], text: new Map(), icon: new Map() });
   // 地図初期化完了前に検索確定された自治体コード（初期化後に flyTo を実行する）。
   const pendingFlyRef = useRef<string | null>(null);
+  // 協調ジェスチャ設定（マウント後は不変。初期化 effect を再実行させないため ref に保持）。
+  const cooperativeRef = useRef(cooperativeGestures);
 
   // ベース地図スタイル。state は UI 表示用、ref は地図初期化 effect が再実行されない
   // よう現在値を保持する用。
@@ -186,6 +194,15 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
         center: [139.825, 35.44],
         zoom: 9,
         attributionControl: { compact: true },
+        // 埋め込み時はページスクロールを奪わない（モバイル2本指パン・PC Ctrl+ホイール）。
+        cooperativeGestures: cooperativeRef.current,
+        locale: cooperativeRef.current
+          ? {
+              "CooperativeGesturesHandler.WindowsHelpText": "Ctrl キーを押しながらスクロールすると地図を拡大縮小できます",
+              "CooperativeGesturesHandler.MacHelpText": "⌘ キーを押しながらスクロールすると地図を拡大縮小できます",
+              "CooperativeGesturesHandler.MobileHelpText": "2本の指で地図を操作できます",
+            }
+          : undefined,
       });
       map.addControl(new maplibregl.NavigationControl({ showCompass: false, visualizePitch: false }), "bottom-right");
 
