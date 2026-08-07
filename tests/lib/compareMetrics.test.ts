@@ -18,6 +18,18 @@ function nationalAvgOf(key: string, n: NationalAverages): string | undefined {
   return row.nationalAvgText?.(n);
 }
 
+function numericOf(key: string, m: Municipality): number | null | undefined {
+  const row = COMPARE_ROWS.find((r) => r.key === key);
+  if (!row) throw new Error(`row not found: ${key}`);
+  return row.numericValue?.(m);
+}
+
+function nationalAvgValueOf(key: string, n: NationalAverages): number | null | undefined {
+  const row = COMPARE_ROWS.find((r) => r.key === key);
+  if (!row) throw new Error(`row not found: ${key}`);
+  return row.nationalAvgValue?.(n);
+}
+
 describe("COMPARE_ROWS", () => {
   const full = muni({
     population: 100000,
@@ -154,5 +166,76 @@ describe("nationalAvgText", () => {
     for (const key of ["population", "area", "waitlist", "stations", "preschools", "medical", "shelters", "flood", "landslide", "tsunami", "stormSurge", "liquefaction"]) {
       expect(nationalAvgOf(key, avgs)).toBeUndefined();
     }
+  });
+});
+
+describe("numericValue（簡易バー用の生値）", () => {
+  const full = muni({
+    population: 100000,
+    populationChangeRate: -4.83,
+    areaKm2: 50,
+    rent: metric({ value: 45276 }),
+    landPrice: metric({ value: 44513, unit: "円/㎡" }),
+    vacancy: { rate: 13.8, vacant: 12610, total: 91180, source: "住宅・土地統計調査", asOf: "2023" },
+    waitlistChildren: metric({ value: 3, unit: "人" }),
+    foreignResidents: metric({ value: 2021, unit: "人", source: "出入国在留管理庁 在留外国人統計" }),
+    amenities: {
+      stations: 14, preschools: 98, medicalFacilities: 253,
+      source: "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
+      asOf: "2024",
+    },
+    shelters: { count: 472, source: "国土地理院「指定緊急避難場所データ」", asOf: "2026-06-19" },
+  });
+  const missing = muni({
+    population: 0,
+    rent: metric({ value: 0, source: "データなし（住宅統計の集計対象外）", asOf: "-" }),
+    landPrice: metric({ value: 0, unit: "円/㎡", source: "対象外", asOf: "-" }),
+    vacancy: { rate: -1, vacant: 0, total: 0, source: "データなし（住宅統計の集計対象外）", asOf: "-" },
+    foreignResidents: metric({ value: 0, unit: "人", source: "対象外（北方領土）" }),
+  });
+
+  it("完全データ: バー対象12行が正しい数値を返す", () => {
+    expect(numericOf("population", full)).toBe(100000);
+    expect(numericOf("density", full)).toBe(2000);
+    expect(numericOf("area", full)).toBe(50);
+    expect(numericOf("foreignRatio", full)).toBeCloseTo(2.02, 2);
+    expect(numericOf("rent", full)).toBe(45276);
+    expect(numericOf("landPrice", full)).toBe(44513);
+    expect(numericOf("vacancy", full)).toBe(13.8);
+    expect(numericOf("waitlist", full)).toBe(3);
+    expect(numericOf("stations", full)).toBe(14);
+    expect(numericOf("preschools", full)).toBe(98);
+    expect(numericOf("medical", full)).toBe(253);
+    expect(numericOf("shelters", full)).toBe(472);
+  });
+
+  it("欠損センチネルは null（value() の対象外判定と一致する）", () => {
+    expect(numericOf("population", missing)).toBeNull();
+    expect(numericOf("rent", missing)).toBeNull();
+    expect(numericOf("landPrice", missing)).toBeNull();
+    expect(numericOf("vacancy", missing)).toBeNull();
+    expect(numericOf("foreignRatio", missing)).toBeNull();
+    expect(numericOf("stations", missing)).toBeNull(); // amenities 未設定
+    expect(numericOf("shelters", missing)).toBeNull(); // shelters 未設定
+  });
+
+  it("人口増減率（負値を取りうる）と災害リスク5行は numericValue を持たない", () => {
+    for (const key of ["populationChangeRate", "flood", "landslide", "tsunami", "stormSurge", "liquefaction"]) {
+      expect(numericOf(key, full)).toBeUndefined();
+    }
+  });
+
+  it("nationalAvgValue は nationalAvgText と対になる指標のみ定義され、null 許容", () => {
+    const avgs: NationalAverages = {
+      rent: 55000, landPrice: 88000, populationChangeRate: -1.5, vacancyRate: 13.1, density: 1800, foreignRatio: 2.34,
+    };
+    expect(nationalAvgValueOf("rent", avgs)).toBe(55000);
+    expect(nationalAvgValueOf("density", avgs)).toBe(1800);
+    expect(nationalAvgValueOf("foreignRatio", avgs)).toBe(2.34);
+    expect(nationalAvgValueOf("population", avgs)).toBeUndefined();
+    const empty: NationalAverages = {
+      rent: null, landPrice: null, populationChangeRate: null, vacancyRate: null, density: null, foreignRatio: null,
+    };
+    expect(nationalAvgValueOf("rent", empty)).toBeNull();
   });
 });

@@ -116,7 +116,7 @@
   padding: 10px 14px;
   border-top: 1px solid var(--border);
   text-align: left;
-  vertical-align: baseline;
+  vertical-align: top;
   font-variant-numeric: tabular-nums;
 }
 .cmp-table thead th {
@@ -168,6 +168,33 @@
 }
 .cmp-loading {
   color: var(--text-faint);
+}
+
+/* 簡易バー（数値指標のみ。負値を取りうる指標・順序尺度の災害リスクには付けない） */
+.cmp-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.cmp-cell-text {
+  white-space: nowrap;
+}
+.cmp-bar-track {
+  position: relative;
+  height: 5px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-muted);
+  overflow: hidden;
+}
+.cmp-bar-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+}
+/* 全国平均（参考）列のバーは控えめな色にし、選択自治体と視覚的に区別する */
+.cmp-bar-track.is-avg .cmp-bar-fill {
+  background: var(--text-faint);
 }
 
 /* プリセット・説明 */

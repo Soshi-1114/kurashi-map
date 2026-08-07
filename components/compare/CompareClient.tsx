@@ -194,27 +194,59 @@ function GroupRows({
           {group}
         </th>
       </tr>
-      {rows.map((row) => (
-        <tr key={row.key}>
-          <th scope="row" className="cmp-rowlabel">
-            {row.label}
-          </th>
-          {selected.map(({ code, state }) => (
-            <td key={code}>
-              {state === "loading" || state === undefined ? (
-                <span className="cmp-loading" aria-label="読み込み中">
-                  …
-                </span>
-              ) : state === "error" ? (
-                "取得エラー"
-              ) : (
-                row.value(state)
-              )}
+      {rows.map((row) => {
+        // 簡易バー用の行内最大値（読み込み済みの自治体＋全国平均の中から算出）。
+        // numericValue を持たない行（人口増減率・災害リスク等）はバーなしのまま。
+        const rowValues = row.numericValue
+          ? selected
+              .map(({ state }) => (state && state !== "loading" && state !== "error" ? row.numericValue!(state) : null))
+              .filter((v): v is number => v != null)
+          : [];
+        const avgValue = row.nationalAvgValue?.(nationalAverages) ?? null;
+        const rowMax = row.numericValue ? Math.max(...rowValues, avgValue ?? 0, 1) : 1;
+
+        return (
+          <tr key={row.key}>
+            <th scope="row" className="cmp-rowlabel">
+              {row.label}
+            </th>
+            {selected.map(({ code, state }) => {
+              const resolved = state && state !== "loading" && state !== "error" ? state : null;
+              const numeric = resolved && row.numericValue ? row.numericValue(resolved) : null;
+              return (
+                <td key={code}>
+                  {state === "loading" || state === undefined ? (
+                    <span className="cmp-loading" aria-label="読み込み中">
+                      …
+                    </span>
+                  ) : state === "error" ? (
+                    "取得エラー"
+                  ) : (
+                    <CompareCell text={row.value(state)} value={numeric} max={rowMax} />
+                  )}
+                </td>
+              );
+            })}
+            <td className="cmp-avg-col">
+              <CompareCell text={row.nationalAvgText?.(nationalAverages) ?? "—"} value={avgValue} max={rowMax} tone="avg" />
             </td>
-          ))}
-          <td className="cmp-avg-col">{row.nationalAvgText?.(nationalAverages) ?? "—"}</td>
-        </tr>
-      ))}
+          </tr>
+        );
+      })}
     </>
+  );
+}
+
+// 簡易バー＋テキスト。value が null（対象外・欠損・バー非対応の指標）ならテキストのみ。
+function CompareCell({ text, value, max, tone }: { text: string; value: number | null; max: number; tone?: "avg" }) {
+  if (value == null) return <>{text}</>;
+  const pct = Math.max(4, (value / max) * 100);
+  return (
+    <span className="cmp-cell">
+      <span className="cmp-cell-text">{text}</span>
+      <span className={`cmp-bar-track ${tone === "avg" ? "is-avg" : ""}`} aria-hidden="true">
+        <span className="cmp-bar-fill" style={{ width: `${pct}%` }} />
+      </span>
+    </span>
   );
 }

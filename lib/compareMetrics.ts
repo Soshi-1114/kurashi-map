@@ -50,6 +50,13 @@ export type CompareRowDef = {
   value: (m: Municipality) => string;
   /** 全国平均（参考）列の表示文字列。母集団の意味が異なる/存在しない指標は省略する */
   nationalAvgText?: (n: NationalAverages) => string;
+  /**
+   * 簡易バー表示用の生値。非負の数値指標のみ定義する（負値を取りうる人口増減率・
+   * 順序尺度の災害リスクは対象外）。value() と同じセンチネル判定で欠損は null を返す。
+   */
+  numericValue?: (m: Municipality) => number | null;
+  /** 全国平均（参考）列のバー用の生値。numericValue と対になる指標のみ定義する。 */
+  nationalAvgValue?: (n: NationalAverages) => number | null;
 };
 
 const NO_VALUE = "—";
@@ -72,6 +79,7 @@ export const COMPARE_ROWS: CompareRowDef[] = [
     label: "人口",
     group: "基本",
     value: (m) => (m.population > 0 ? `${m.population.toLocaleString()}人` : NO_VALUE),
+    numericValue: (m) => (m.population > 0 ? m.population : null),
   },
   {
     key: "populationChangeRate",
@@ -79,6 +87,7 @@ export const COMPARE_ROWS: CompareRowDef[] = [
     group: "基本",
     value: changeRateText,
     nationalAvgText: (n) => (n.populationChangeRate != null ? `${signedPct(n.populationChangeRate)}%` : NO_VALUE),
+    // 負値を取りうるためバー表示の対象外（テキスト＝符号付き%のみで表現する）。
   },
   {
     key: "density",
@@ -89,12 +98,15 @@ export const COMPARE_ROWS: CompareRowDef[] = [
       return d != null ? densityText(d) : NO_VALUE;
     },
     nationalAvgText: (n) => (n.density != null ? densityText(n.density) : NO_VALUE),
+    numericValue: (m) => populationDensity(m),
+    nationalAvgValue: (n) => n.density,
   },
   {
     key: "area",
     label: "面積",
     group: "基本",
     value: (m) => (m.areaKm2 != null && m.areaKm2 > 0 ? `${m.areaKm2.toLocaleString()}km²` : NO_VALUE),
+    numericValue: (m) => (m.areaKm2 != null && m.areaKm2 > 0 ? m.areaKm2 : null),
   },
   {
     key: "foreignRatio",
@@ -105,6 +117,8 @@ export const COMPARE_ROWS: CompareRowDef[] = [
         ? `${foreignRatioPct(m).toFixed(2)}%`
         : "対象外",
     nationalAvgText: (n) => (n.foreignRatio != null ? `${n.foreignRatio.toFixed(2)}%` : NO_VALUE),
+    numericValue: (m) => (hasForeignData(m.foreignResidents.source) && m.population > 0 ? foreignRatioPct(m) : null),
+    nationalAvgValue: (n) => n.foreignRatio,
   },
   // ---- 住まい ----
   {
@@ -113,6 +127,8 @@ export const COMPARE_ROWS: CompareRowDef[] = [
     group: "住まい",
     value: (m) => (hasRent(m.rent.value) ? `${m.rent.value.toLocaleString()}円/月` : "データなし"),
     nationalAvgText: (n) => (n.rent != null ? `${n.rent.toLocaleString()}円/月` : NO_VALUE),
+    numericValue: (m) => (hasRent(m.rent.value) ? m.rent.value : null),
+    nationalAvgValue: (n) => n.rent,
   },
   {
     key: "landPrice",
@@ -120,6 +136,8 @@ export const COMPARE_ROWS: CompareRowDef[] = [
     group: "住まい",
     value: (m) => (hasLandPrice(m.landPrice.value) ? `${m.landPrice.value.toLocaleString()}円/㎡` : "対象外"),
     nationalAvgText: (n) => (n.landPrice != null ? `${n.landPrice.toLocaleString()}円/㎡` : NO_VALUE),
+    numericValue: (m) => (hasLandPrice(m.landPrice.value) ? m.landPrice.value : null),
+    nationalAvgValue: (n) => n.landPrice,
   },
   {
     key: "vacancy",
@@ -127,6 +145,8 @@ export const COMPARE_ROWS: CompareRowDef[] = [
     group: "住まい",
     value: (m) => (hasVacancy(m.vacancy) ? vacancyRateText(m.vacancy) : "対象外"),
     nationalAvgText: (n) => (n.vacancyRate != null ? `${n.vacancyRate.toFixed(1)}%` : NO_VALUE),
+    numericValue: (m) => (hasVacancy(m.vacancy) ? m.vacancy.rate : null),
+    nationalAvgValue: (n) => n.vacancyRate,
   },
   // ---- 子育て・生活 ----
   {
@@ -134,6 +154,7 @@ export const COMPARE_ROWS: CompareRowDef[] = [
     label: "待機児童数",
     group: "子育て・生活",
     value: (m) => (isWaitlistDisclosed(m.waitlistChildren) ? `${m.waitlistChildren.value}人` : "非公表"),
+    numericValue: (m) => (isWaitlistDisclosed(m.waitlistChildren) ? m.waitlistChildren.value : null),
   },
   {
     key: "stations",
@@ -141,6 +162,7 @@ export const COMPARE_ROWS: CompareRowDef[] = [
     group: "子育て・生活",
     value: (m) =>
       m.amenities && isAmenitiesCounted(m.amenities.source) ? `${m.amenities.stations.toLocaleString()}駅` : "対象外",
+    numericValue: (m) => (m.amenities && isAmenitiesCounted(m.amenities.source) ? m.amenities.stations : null),
   },
   {
     key: "preschools",
@@ -150,6 +172,7 @@ export const COMPARE_ROWS: CompareRowDef[] = [
       m.amenities && isAmenitiesCounted(m.amenities.source)
         ? `${m.amenities.preschools.toLocaleString()}施設`
         : "対象外",
+    numericValue: (m) => (m.amenities && isAmenitiesCounted(m.amenities.source) ? m.amenities.preschools : null),
   },
   {
     key: "medical",
@@ -159,6 +182,8 @@ export const COMPARE_ROWS: CompareRowDef[] = [
       m.amenities && isAmenitiesCounted(m.amenities.source)
         ? `${m.amenities.medicalFacilities.toLocaleString()}施設`
         : "対象外",
+    numericValue: (m) =>
+      m.amenities && isAmenitiesCounted(m.amenities.source) ? m.amenities.medicalFacilities : null,
   },
   {
     key: "shelters",
@@ -166,6 +191,7 @@ export const COMPARE_ROWS: CompareRowDef[] = [
     group: "子育て・生活",
     value: (m) =>
       m.shelters && hasShelterData(m.shelters.source) ? `${m.shelters.count.toLocaleString()}か所` : "未収録",
+    numericValue: (m) => (m.shelters && hasShelterData(m.shelters.source) ? m.shelters.count : null),
   },
   // ---- 災害リスク ----
   {
