@@ -107,6 +107,13 @@ export function avgBand(ratio: number, avg: number): AvgBand {
   return "similar";
 }
 
+// 全国平均のみを取り出す（Map の値はどのエントリも同じ nationalAvg を持つ）。
+// 比較ページの「全国平均（参考）」列など、順位や県平均が不要な場面向け。
+export function nationalForeignAvg(stats: Map<string, ForeignComparison>): number | null {
+  const first = stats.values().next();
+  return first.done ? null : first.value.nationalAvg;
+}
+
 // ビルド／リクエスト内で集計を1度だけ行うためのキャッシュ。
 let statsCache: Map<string, ForeignComparison> | null = null;
 

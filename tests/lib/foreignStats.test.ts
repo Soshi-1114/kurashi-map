@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest";
 import {
   buildForeignStats,
   avgBand,
+  nationalForeignAvg,
   FOREIGN_RATIO_SAME_BAND_PT,
 } from "@/lib/foreignStats";
 import { muni, metric } from "../_fixtures";
@@ -85,6 +86,17 @@ describe("buildForeignStats", () => {
     expect(stats.has("X")).toBe(false);
     expect(stats.has("Y")).toBe(false);
     expect(stats.get("A")!.nationalTotal).toBe(1);
+  });
+});
+
+describe("nationalForeignAvg", () => {
+  it("Map の任意のエントリから全国平均を取り出す", () => {
+    const stats = buildForeignStats([withRatio("A", "tokyo", 5), withRatio("B", "kanagawa", 1)]);
+    expect(nationalForeignAvg(stats)).toBeCloseTo(3.0, 5);
+  });
+
+  it("空のMapなら null", () => {
+    expect(nationalForeignAvg(new Map())).toBeNull();
   });
 });
 

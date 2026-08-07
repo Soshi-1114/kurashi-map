@@ -5,6 +5,9 @@ import { Suspense } from "react";
 import { listSummaryAcrossPrefs, listAllAcrossPrefs } from "@/lib/metrics";
 import { muniLevelOnly } from "@/lib/rankings";
 import { SITE, absoluteUrl } from "@/lib/site";
+import { getAreaStats } from "@/lib/areaStats";
+import { getForeignStats, nationalForeignAvg } from "@/lib/foreignStats";
+import type { NationalAverages } from "@/lib/compareMetrics";
 import CompareClient, { MAX_COMPARE } from "@/components/compare/CompareClient";
 
 // 自治体比較ページ。骨格（説明・プリセット・パンくず）は SSG の静的HTML、
@@ -48,6 +51,20 @@ export default async function ComparePage() {
   const summary = await listSummaryAcrossPrefs();
   const presets = await getPresetPairs();
 
+  // 全国平均（参考）列。areaStats/foreignStats はサーバー専用の集計レイヤーなので
+  // ここで値だけを取り出し、静的な props としてクライアントコンポーネントへ渡す
+  // （集計ロジックそのものはクライアントに持ち込まない）。
+  const areaStats = await getAreaStats();
+  const foreignStats = await getForeignStats();
+  const nationalAverages: NationalAverages = {
+    rent: areaStats.rent.national,
+    landPrice: areaStats.landPrice.national,
+    populationChangeRate: areaStats.populationChangeRate.national,
+    vacancyRate: areaStats.vacancyRate.national,
+    density: areaStats.density.national,
+    foreignRatio: nationalForeignAvg(foreignStats),
+  };
+
   const ldJson = {
     "@context": "https://schema.org",
     "@graph": [
@@ -78,7 +95,7 @@ export default async function ComparePage() {
       </header>
 
       <Suspense fallback={<p className="cmp-empty">読み込み中…</p>}>
-        <CompareClient munis={summary} />
+        <CompareClient munis={summary} nationalAverages={nationalAverages} />
       </Suspense>
 
       <section>
@@ -95,7 +112,7 @@ export default async function ComparePage() {
       <p className="cmp-note">
         出典: e-Stat（住宅・土地統計調査／国勢調査）・地価公示／地価調査・こども家庭庁・出入国在留管理庁・国土数値情報・国土地理院。指標の基準時点と更新方針は
         <Link href="/about">「このサイトについて」</Link>
-        を参照してください。各自治体の詳しいデータは表の自治体名から個別ページで確認できます。
+        を参照してください。各自治体の詳しいデータは表の自治体名から個別ページで確認できます。「全国平均（参考）」は自治体を1票とする単純平均です（外国人住民比率のみ人口加重平均）。
       </p>
     </div>
   );

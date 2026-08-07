@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { COMPARE_ROWS, COMPARE_GROUPS } from "@/lib/compareMetrics";
+import { COMPARE_ROWS, COMPARE_GROUPS, type NationalAverages } from "@/lib/compareMetrics";
 import { muni, metric, hazard } from "../_fixtures";
 import type { Municipality } from "@/lib/types";
 
@@ -10,6 +10,12 @@ function valueOf(key: string, m: Municipality): string {
   const row = COMPARE_ROWS.find((r) => r.key === key);
   if (!row) throw new Error(`row not found: ${key}`);
   return row.value(m);
+}
+
+function nationalAvgOf(key: string, n: NationalAverages): string | undefined {
+  const row = COMPARE_ROWS.find((r) => r.key === key);
+  if (!row) throw new Error(`row not found: ${key}`);
+  return row.nationalAvgText?.(n);
 }
 
 describe("COMPARE_ROWS", () => {
@@ -108,6 +114,45 @@ describe("COMPARE_ROWS", () => {
   it("全行のグループが COMPARE_GROUPS に含まれる", () => {
     for (const row of COMPARE_ROWS) {
       expect(COMPARE_GROUPS).toContain(row.group);
+    }
+  });
+});
+
+describe("nationalAvgText", () => {
+  const avgs: NationalAverages = {
+    rent: 55000,
+    landPrice: 88000,
+    populationChangeRate: -1.5,
+    vacancyRate: 13.1,
+    density: 1800,
+    foreignRatio: 2.34,
+  };
+  const empty: NationalAverages = {
+    rent: null, landPrice: null, populationChangeRate: null, vacancyRate: null, density: null, foreignRatio: null,
+  };
+
+  it("対象6指標は areaStats/foreignStats と同じ書式で表示する", () => {
+    expect(nationalAvgOf("rent", avgs)).toBe("55,000円/月");
+    expect(nationalAvgOf("landPrice", avgs)).toBe("88,000円/㎡");
+    expect(nationalAvgOf("populationChangeRate", avgs)).toBe("-1.5%");
+    expect(nationalAvgOf("vacancy", avgs)).toBe("13.1%");
+    expect(nationalAvgOf("density", avgs)).toBe("1,800人/km²");
+    expect(nationalAvgOf("foreignRatio", avgs)).toBe("2.34%");
+  });
+
+  it("増加率は + を付ける", () => {
+    expect(nationalAvgOf("populationChangeRate", { ...avgs, populationChangeRate: 2.4 })).toBe("+2.4%");
+  });
+
+  it("値が null（未算出）なら「—」", () => {
+    for (const key of ["rent", "landPrice", "populationChangeRate", "vacancy", "density", "foreignRatio"]) {
+      expect(nationalAvgOf(key, empty)).toBe("—");
+    }
+  });
+
+  it("母集団の意味が異なる指標（人口・面積・待機児童・災害リスク等）は nationalAvgText を持たない", () => {
+    for (const key of ["population", "area", "waitlist", "stations", "preschools", "medical", "shelters", "flood", "landslide", "tsunami", "stormSurge", "liquefaction"]) {
+      expect(nationalAvgOf(key, avgs)).toBeUndefined();
     }
   });
 });

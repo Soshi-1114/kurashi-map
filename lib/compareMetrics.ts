@@ -29,12 +29,26 @@ import {
 
 export type CompareGroup = "基本" | "住まい" | "子育て・生活" | "災害リスク";
 
+// 全国平均（参考）列に使う値。areaStats/foreignStats から呼び出し側（サーバー）が
+// 組み立てて渡す（このモジュールは areaStats/foreignStats を直接 import しない —
+// クライアントに渡すのは集計済みの数値のみで、集計ロジック自体は持ち込まない）。
+export type NationalAverages = {
+  rent: number | null;
+  landPrice: number | null;
+  populationChangeRate: number | null;
+  vacancyRate: number | null;
+  density: number | null;
+  foreignRatio: number | null;
+};
+
 export type CompareRowDef = {
   key: string;
   label: string;
   group: CompareGroup;
   /** 表示文字列（欠損は「データなし／対象外／非公表／未収録」等を返す） */
   value: (m: Municipality) => string;
+  /** 全国平均（参考）列の表示文字列。母集団の意味が異なる/存在しない指標は省略する */
+  nationalAvgText?: (n: NationalAverages) => string;
 };
 
 const NO_VALUE = "—";
@@ -64,6 +78,7 @@ export const COMPARE_ROWS: CompareRowDef[] = [
     label: "人口増減率（2020→2025）",
     group: "基本",
     value: changeRateText,
+    nationalAvgText: (n) => (n.populationChangeRate != null ? `${n.populationChangeRate > 0 ? "+" : ""}${n.populationChangeRate.toFixed(1)}%` : NO_VALUE),
   },
   {
     key: "density",
@@ -73,6 +88,7 @@ export const COMPARE_ROWS: CompareRowDef[] = [
       const d = populationDensity(m);
       return d != null ? densityText(d) : NO_VALUE;
     },
+    nationalAvgText: (n) => (n.density != null ? densityText(n.density) : NO_VALUE),
   },
   {
     key: "area",
@@ -88,6 +104,7 @@ export const COMPARE_ROWS: CompareRowDef[] = [
       hasForeignData(m.foreignResidents.source) && m.population > 0
         ? `${foreignRatioPct(m).toFixed(2)}%`
         : "対象外",
+    nationalAvgText: (n) => (n.foreignRatio != null ? `${n.foreignRatio.toFixed(2)}%` : NO_VALUE),
   },
   // ---- 住まい ----
   {
@@ -95,18 +112,21 @@ export const COMPARE_ROWS: CompareRowDef[] = [
     label: "家賃中央値（民営借家）",
     group: "住まい",
     value: (m) => (hasRent(m.rent.value) ? `${m.rent.value.toLocaleString()}円/月` : "データなし"),
+    nationalAvgText: (n) => (n.rent != null ? `${n.rent.toLocaleString()}円/月` : NO_VALUE),
   },
   {
     key: "landPrice",
     label: "地価（住宅地）",
     group: "住まい",
     value: (m) => (hasLandPrice(m.landPrice.value) ? `${m.landPrice.value.toLocaleString()}円/㎡` : "対象外"),
+    nationalAvgText: (n) => (n.landPrice != null ? `${n.landPrice.toLocaleString()}円/㎡` : NO_VALUE),
   },
   {
     key: "vacancy",
     label: "空き家率",
     group: "住まい",
     value: (m) => (hasVacancy(m.vacancy) ? vacancyRateText(m.vacancy) : "対象外"),
+    nationalAvgText: (n) => (n.vacancyRate != null ? `${n.vacancyRate.toFixed(1)}%` : NO_VALUE),
   },
   // ---- 子育て・生活 ----
   {

@@ -8,7 +8,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import type { Municipality, MuniSummary } from "@/lib/types";
-import { COMPARE_ROWS, COMPARE_GROUPS } from "@/lib/compareMetrics";
+import { COMPARE_ROWS, COMPARE_GROUPS, type NationalAverages } from "@/lib/compareMetrics";
 import { getPrefByCode } from "@/lib/prefs";
 
 export const MAX_COMPARE = 3;
@@ -28,7 +28,7 @@ function parseCodes(raw: string | null, known: Set<string>): string[] {
 
 type DetailState = Municipality | "loading" | "error";
 
-export default function CompareClient({ munis }: { munis: MuniSummary[] }) {
+export default function CompareClient({ munis, nationalAverages }: { munis: MuniSummary[]; nationalAverages: NationalAverages }) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -196,11 +196,12 @@ export default function CompareClient({ munis }: { munis: MuniSummary[] }) {
                     )}
                   </th>
                 ))}
+                <th scope="col" className="cmp-avg-col">全国平均（参考）</th>
               </tr>
             </thead>
             <tbody>
               {COMPARE_GROUPS.map((group) => (
-                <GroupRows key={group} group={group} selected={selected} />
+                <GroupRows key={group} group={group} selected={selected} nationalAverages={nationalAverages} />
               ))}
             </tbody>
           </table>
@@ -213,15 +214,18 @@ export default function CompareClient({ munis }: { munis: MuniSummary[] }) {
 function GroupRows({
   group,
   selected,
+  nationalAverages,
 }: {
   group: (typeof COMPARE_GROUPS)[number];
   selected: Array<{ code: string; state: DetailState | undefined }>;
+  nationalAverages: NationalAverages;
 }) {
   const rows = COMPARE_ROWS.filter((r) => r.group === group);
   return (
     <>
       <tr className="cmp-group">
-        <th colSpan={selected.length + 1} scope="colgroup">
+        {/* +1=指標ラベル列、+1=全国平均（参考）列。選択自治体列数とずれないよう常にセットで揃える */}
+        <th colSpan={selected.length + 2} scope="colgroup">
           {group}
         </th>
       </tr>
@@ -243,6 +247,7 @@ function GroupRows({
               )}
             </td>
           ))}
+          <td className="cmp-avg-col">{row.nationalAvgText?.(nationalAverages) ?? "—"}</td>
         </tr>
       ))}
     </>
