@@ -14,6 +14,7 @@ export function KpiCard({
   value,
   unit,
   sub,
+  compare,
   nodataLabel = "データなし",
 }: {
   icon: LucideIcon;
@@ -22,6 +23,8 @@ export function KpiCard({
   value: string | null;
   unit?: string;
   sub?: ReactNode;
+  /** 比較文脈の小行（例: 全国◯位・全国平均◯円）。欠損時は渡さない */
+  compare?: string;
   nodataLabel?: string;
 }) {
   const isNoData = value === null;
@@ -40,6 +43,7 @@ export function KpiCard({
         </span>
       )}
       {sub && <span className="ad-kpi-sub">{sub}</span>}
+      {compare && <span className="ad-kpi-compare">{compare}</span>}
     </div>
   );
 }

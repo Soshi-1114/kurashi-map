@@ -147,21 +147,52 @@
   line-height: 1.75;
   font-weight: 500;
 }
-.ad-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+/* 「この自治体の特徴」— ラベルチップ＋客観1文を罫線区切りで密に並べる */
+.ad-highlights {
   list-style: none;
+  margin: 0;
   padding: 0;
-  margin: 4px 0 0;
 }
-.ad-tag {
-  padding: 5px 12px;
-  border-radius: var(--radius-pill);
+.ad-highlight {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  padding: 10px 0;
+  border-bottom: 1px solid var(--ad-border);
+}
+.ad-highlight:first-child {
+  padding-top: 2px;
+}
+.ad-highlight:last-child {
+  border-bottom: none;
+  padding-bottom: 2px;
+}
+.ad-highlight-k {
+  flex-shrink: 0;
+  min-width: 5.5em;
+  padding: 3px 10px;
+  border-radius: var(--radius-xs);
   background: var(--surface-muted);
   color: var(--text-muted);
-  font-size: var(--text-xs);
-  font-weight: 600;
+  font-size: var(--text-2xs);
+  font-weight: 700;
+  text-align: center;
+}
+.ad-highlight-text {
+  font-size: var(--text-md);
+  line-height: 1.75;
+  font-weight: 500;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 640px) {
+  .ad-highlight {
+    flex-direction: column;
+    gap: 4px;
+  }
+  .ad-highlight-k {
+    align-self: flex-start;
+  }
 }
 
 
@@ -383,7 +414,8 @@
   grid-template-areas:
     "icon label"
     "icon value"
-    "icon sub";
+    "icon sub"
+    "icon compare";
   column-gap: var(--space-4);
   row-gap: 2px;
   align-content: center;
@@ -437,6 +469,15 @@
   font-size: var(--text-2xs);
   color: var(--text-faint);
   font-weight: 600;
+}
+/* 比較文脈の小行（全国順位・全国平均など）。数値は等幅で揃える */
+.ad-kpi-compare {
+  grid-area: compare;
+  margin-top: 2px;
+  font-size: var(--text-2xs);
+  color: var(--text-muted);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
 }
 
 /* ============================================================================
