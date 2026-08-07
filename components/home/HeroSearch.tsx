@@ -4,58 +4,17 @@
 // 地図ヘッダーの MuniSearch（確定で地図をフライトさせる）と違い、こちらは確定で
 // 自治体詳細ページ /area/{pref}/{code} へ遷移する（「調べる」動線のメインアクション）。
 // ドロップダウンの見た目は既存の .search-results 系クラスを再利用する。
-import { useCallback, useEffect, useMemo, useState } from "react";
+// コンボボックスの状態機械（絞り込み・キーボード操作）は useMuniCombobox を共有する。
+import { useCallback } from "react";
 import { useRouter } from "next/navigation";
 import type { MuniSummary } from "@/lib/types";
-import { getPrefByCode } from "@/lib/prefs";
+import { useMuniCombobox } from "@/lib/useMuniCombobox";
+import { muniContextLabel } from "@/lib/muniLabel";
 
 export default function HeroSearch({ munis }: { munis: MuniSummary[] }) {
   const router = useRouter();
-  const [query, setQuery] = useState("");
-  const [activeIndex, setActiveIndex] = useState(-1);
-
-  const filtered = useMemo(() => {
-    const q = query.trim();
-    if (!q) return [];
-    return munis
-      .filter((m) => (m.displayName ?? m.name).includes(q) || m.name.includes(q))
-      .slice(0, 8);
-  }, [query, munis]);
-
-  useEffect(() => {
-    setActiveIndex(-1);
-  }, [query]);
-
-  const pick = useCallback(
-    (m: MuniSummary) => {
-      setQuery("");
-      router.push(`/area/${m.pref}/${m.code}`);
-    },
-    [router],
-  );
-
-  const onKeyDown = useCallback(
-    (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (e.key === "Escape") {
-        setQuery("");
-        return;
-      }
-      if (!filtered.length) return;
-      if (e.key === "ArrowDown") {
-        e.preventDefault();
-        setActiveIndex((i) => (i + 1) % filtered.length);
-      } else if (e.key === "ArrowUp") {
-        e.preventDefault();
-        setActiveIndex((i) => (i <= 0 ? filtered.length - 1 : i - 1));
-      } else if (e.key === "Enter") {
-        if (activeIndex >= 0 && activeIndex < filtered.length) {
-          e.preventDefault();
-          pick(filtered[activeIndex]);
-        }
-      }
-    },
-    [filtered, activeIndex, pick],
-  );
+  const onPick = useCallback((m: MuniSummary) => router.push(`/area/${m.pref}/${m.code}`), [router]);
+  const { query, setQuery, filtered, activeIndex, setActiveIndex, pick, onKeyDown } = useMuniCombobox(munis, onPick);
 
   return (
     <div className="home-search">
@@ -94,7 +53,7 @@ export default function HeroSearch({ munis }: { munis: MuniSummary[] }) {
                 onMouseEnter={() => setActiveIndex(i)}
               >
                 <span className="search-place">
-                  {contextLabel(m) && <span className="search-pref">{contextLabel(m)}</span>}
+                  {muniContextLabel(m) && <span className="search-pref">{muniContextLabel(m)}</span>}
                   <span className="search-name">{m.name}</span>
                 </span>
               </button>
@@ -104,15 +63,4 @@ export default function HeroSearch({ munis }: { munis: MuniSummary[] }) {
       )}
     </div>
   );
-}
-
-// 検索候補に添える所属コンテキスト（都道府県名。政令市の区は「県名 市名」）。
-// 同名自治体（府中市=東京/広島、北区=東京/大阪市/さいたま市…）の誤選択を防ぐ。
-function contextLabel(m: MuniSummary): string {
-  const prefName = getPrefByCode(m.code)?.nameJa ?? "";
-  if (m.level === "ward" && m.displayName) {
-    const city = m.displayName.replace(m.name, "").trim();
-    if (city) return `${prefName} ${city}`.trim();
-  }
-  return prefName;
 }

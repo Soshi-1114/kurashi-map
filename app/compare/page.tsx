@@ -48,14 +48,14 @@ async function getPresetPairs() {
 }
 
 export default async function ComparePage() {
-  const summary = await listSummaryAcrossPrefs();
-  const presets = await getPresetPairs();
-
-  // 全国平均（参考）列。areaStats/foreignStats はサーバー専用の集計レイヤーなので
-  // ここで値だけを取り出し、静的な props としてクライアントコンポーネントへ渡す
-  // （集計ロジックそのものはクライアントに持ち込まない）。
-  const areaStats = await getAreaStats();
-  const foreignStats = await getForeignStats();
+  // 互いに独立な取得・集計なので並列に行う（全国平均（参考）列の areaStats/foreignStats
+  // はサーバー専用の集計レイヤーなので、ここで値だけ取り出し静的な props として渡す）。
+  const [summary, presets, areaStats, foreignStats] = await Promise.all([
+    listSummaryAcrossPrefs(),
+    getPresetPairs(),
+    getAreaStats(),
+    getForeignStats(),
+  ]);
   const nationalAverages: NationalAverages = {
     rent: areaStats.rent.national,
     landPrice: areaStats.landPrice.national,

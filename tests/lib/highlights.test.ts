@@ -116,7 +116,7 @@ describe("buildHighlights", () => {
         "population-most": { [m.code]: { rank: 500, total: 1741 } },
       }),
       prefRanks: prefRankMap({
-        population: { [m.code]: { rank: 12, total: 63 } },
+        "population-most": { [m.code]: { rank: 12, total: 63 } },
       }),
     });
     const hl = buildHighlights(m, c);

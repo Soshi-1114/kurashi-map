@@ -1,25 +1,15 @@
-// 県内順位の集計レイヤー（詳細ページの「県内◯位」表示用）。全国順位は
+// 県内順位の集計レイヤー（詳細ページ・都道府県ページの「県内◯位」表示用）。全国順位は
 // lib/rankingStats.ts が持つため、ここは同一都道府県内に限定した順位だけを扱う。
-// rankingStats と同方針: ランキング定義（lib/rankings.ts）の qualifies / sortValue を
-// 流用し、市区町村レベルのみ（政令市の行政区は順位を持たない）。
+// rankingStats.buildRankPositions と同じ形（RANKINGS を全件イテレートし slug をキーにする）
+// にすることで、ランキング定義の追加・slug変更に自動追従する（個別指標をハードコードしない）。
 
-import { getRankingBySlug, muniLevelOnly, rankBy } from "./rankings";
+import { RANKINGS, muniLevelOnly, rankBy } from "./rankings";
 import type { Municipality } from "./types";
-
-/** 県内順位を持つ指標。値は流用するランキング定義の slug（population のみ population-most）。 */
-export type PrefRankMetric = "population" | "rent-cheap" | "land-price-high" | "population-growth";
-
-const METRIC_TO_SLUG: Record<PrefRankMetric, string> = {
-  population: "population-most",
-  "rent-cheap": "rent-cheap",
-  "land-price-high": "land-price-high",
-  "population-growth": "population-growth",
-};
 
 export type PrefRankPos = { rank: number; total: number };
 
-/** 全自治体から、指標 → (code → 県内順位) の対応表を構築する。 */
-export function buildPrefRanks(all: Municipality[]): Map<PrefRankMetric, Map<string, PrefRankPos>> {
+/** 全自治体から、ランキング slug → (code → 県内順位) の対応表を構築する。 */
+export function buildPrefRanks(all: Municipality[]): Map<string, Map<string, PrefRankPos>> {
   const munis = muniLevelOnly(all);
   const byPref = new Map<string, Municipality[]>();
   for (const m of munis) {
@@ -28,22 +18,19 @@ export function buildPrefRanks(all: Municipality[]): Map<PrefRankMetric, Map<str
     else byPref.set(m.pref, [m]);
   }
 
-  const out = new Map<PrefRankMetric, Map<string, PrefRankPos>>();
-  for (const metric of Object.keys(METRIC_TO_SLUG) as PrefRankMetric[]) {
-    const def = getRankingBySlug(METRIC_TO_SLUG[metric]);
+  const out = new Map<string, Map<string, PrefRankPos>>();
+  for (const def of RANKINGS) {
     const byCode = new Map<string, PrefRankPos>();
-    if (def) {
-      for (const [, list] of byPref) {
-        const ranked = rankBy(def, list);
-        ranked.forEach((m, i) => byCode.set(m.code, { rank: i + 1, total: ranked.length }));
-      }
+    for (const [, list] of byPref) {
+      const ranked = rankBy(def, list);
+      ranked.forEach((m, i) => byCode.set(m.code, { rank: i + 1, total: ranked.length }));
     }
-    out.set(metric, byCode);
+    out.set(def.slug, byCode);
   }
   return out;
 }
 
-export type PrefRanks = Map<PrefRankMetric, Map<string, PrefRankPos>>;
+export type PrefRanks = Map<string, Map<string, PrefRankPos>>;
 
 // ビルド／リクエスト内で1度だけ集計するキャッシュ（rankingStats と同方針）。
 let cache: PrefRanks | null = null;

@@ -19,6 +19,7 @@ import { hasVacancy } from "./vacancy";
 import { isWaitlistDisclosed } from "./waitlist";
 import { formatAsOfJa } from "./rankings";
 import { populationDensity, densityText } from "./populationDensity";
+import { signedPct } from "./format";
 
 export type HighlightKind = "deviation" | "rank" | "membership";
 
@@ -80,7 +81,6 @@ const PRIORITY: string[] = [
 ];
 
 const yen = (v: number) => v.toLocaleString();
-const signedPct = (v: number) => `${v > 0 ? "+" : ""}${v.toFixed(1)}`;
 
 /** 全国順位の補足句。順位表に code が無い（行政区等）場合は空文字。 */
 function rankSuffix(
@@ -285,7 +285,7 @@ export function buildHighlights(m: Municipality, ctx: HighlightsCtx): Highlight[
     const has = (key: string) => picked.some((h) => h.key === key);
 
     // ① 人口の全国順位＋県内順位（行政区は順位表に無いためスキップされる）
-    const prefPop = ctx.prefRanks.get("population")?.get(m.code);
+    const prefPop = ctx.prefRanks.get("population-most")?.get(m.code);
     if (!has("population") && popPos && m.population > 0) {
       const prefPart = prefPop ? `・${ctx.prefName}内${prefPop.rank.toLocaleString()}位` : "";
       picked.push({

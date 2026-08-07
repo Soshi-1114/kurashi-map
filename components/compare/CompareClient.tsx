@@ -9,7 +9,8 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import type { Municipality, MuniSummary } from "@/lib/types";
 import { COMPARE_ROWS, COMPARE_GROUPS, type NationalAverages } from "@/lib/compareMetrics";
-import { getPrefByCode } from "@/lib/prefs";
+import { useMuniCombobox } from "@/lib/useMuniCombobox";
+import { muniContextLabel } from "@/lib/muniLabel";
 
 export const MAX_COMPARE = 3;
 
@@ -67,49 +68,13 @@ export default function CompareClient({ munis, nationalAverages }: { munis: Muni
     [codes, setCodes],
   );
 
-  // ---- ピッカー（コンボボックス） ----
-  const [query, setQuery] = useState("");
-  const [activeIndex, setActiveIndex] = useState(-1);
-  const filtered = useMemo(() => {
-    const q = query.trim();
-    if (!q || codes.length >= MAX_COMPARE) return [];
-    return munis
-      .filter((m) => !codes.includes(m.code) && ((m.displayName ?? m.name).includes(q) || m.name.includes(q)))
-      .slice(0, 8);
-  }, [query, munis, codes]);
-  useEffect(() => {
-    setActiveIndex(-1);
-  }, [query]);
-
-  const pick = useCallback(
-    (m: MuniSummary) => {
-      setQuery("");
-      addCode(m.code);
-    },
-    [addCode],
+  // ---- ピッカー（コンボボックス。状態機械は useMuniCombobox を共有） ----
+  const pickable = useMemo(
+    () => (codes.length >= MAX_COMPARE ? [] : munis.filter((m) => !codes.includes(m.code))),
+    [munis, codes],
   );
-  const onKeyDown = useCallback(
-    (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (e.key === "Escape") {
-        setQuery("");
-        return;
-      }
-      if (!filtered.length) return;
-      if (e.key === "ArrowDown") {
-        e.preventDefault();
-        setActiveIndex((i) => (i + 1) % filtered.length);
-      } else if (e.key === "ArrowUp") {
-        e.preventDefault();
-        setActiveIndex((i) => (i <= 0 ? filtered.length - 1 : i - 1));
-      } else if (e.key === "Enter") {
-        if (activeIndex >= 0 && activeIndex < filtered.length) {
-          e.preventDefault();
-          pick(filtered[activeIndex]);
-        }
-      }
-    },
-    [filtered, activeIndex, pick],
-  );
+  const onPick = useCallback((m: MuniSummary) => addCode(m.code), [addCode]);
+  const { query, setQuery, filtered, activeIndex, setActiveIndex, pick, onKeyDown } = useMuniCombobox(pickable, onPick);
 
   const selected = codes.map((code) => ({ code, summary: byCode.get(code), state: detail[code] }));
 
@@ -147,7 +112,7 @@ export default function CompareClient({ munis, nationalAverages }: { munis: Muni
                     onMouseEnter={() => setActiveIndex(i)}
                   >
                     <span className="search-place">
-                      <span className="search-pref">{getPrefByCode(m.code)?.nameJa ?? ""}</span>
+                      {muniContextLabel(m) && <span className="search-pref">{muniContextLabel(m)}</span>}
                       <span className="search-name">{m.displayName ?? m.name}</span>
                     </span>
                   </button>

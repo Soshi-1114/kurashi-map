@@ -243,7 +243,7 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
           </div>
           <div className="rk-duo">
             {popTop.length > 0 && (
-              <div className="rk-duo-col">
+              <div>
                 <h3 className="rk-duo-h">人口が多い 上位{popTop.length}</h3>
                 <ol className="rk-ladder">
                   {popTop.map((m, i) => (
@@ -262,7 +262,7 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
               </div>
             )}
             {growthTop.length > 0 && (
-              <div className="rk-duo-col">
+              <div>
                 <h3 className="rk-duo-h">人口増減率が高い 上位{growthTop.length}</h3>
                 <ol className="rk-ladder">
                   {growthTop.map((m, i) => (

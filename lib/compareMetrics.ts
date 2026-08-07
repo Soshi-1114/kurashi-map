@@ -14,6 +14,7 @@ import { hasForeignData, foreignRatioPct } from "./foreignResidents";
 import { isAmenitiesCounted, isHazardEvaluated } from "./coverage";
 import { hasShelterData } from "./shelters";
 import { populationDensity, densityText } from "./populationDensity";
+import { signedPct } from "./format";
 import {
   floodGraded,
   floodLevelLabel,
@@ -55,8 +56,7 @@ const NO_VALUE = "—";
 
 function changeRateText(m: Municipality): string {
   if (typeof m.populationChangeRate !== "number" || !(m.population > 0)) return NO_VALUE;
-  const v = m.populationChangeRate;
-  return `${v > 0 ? "+" : ""}${v.toFixed(1)}%`;
+  return `${signedPct(m.populationChangeRate)}%`;
 }
 
 function floodText(m: Municipality): string {
@@ -78,7 +78,7 @@ export const COMPARE_ROWS: CompareRowDef[] = [
     label: "人口増減率（2020→2025）",
     group: "基本",
     value: changeRateText,
-    nationalAvgText: (n) => (n.populationChangeRate != null ? `${n.populationChangeRate > 0 ? "+" : ""}${n.populationChangeRate.toFixed(1)}%` : NO_VALUE),
+    nationalAvgText: (n) => (n.populationChangeRate != null ? `${signedPct(n.populationChangeRate)}%` : NO_VALUE),
   },
   {
     key: "density",

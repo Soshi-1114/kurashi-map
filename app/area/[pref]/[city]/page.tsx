@@ -114,15 +114,13 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
       getPrefRanks(),
     ]);
     const highlights = buildHighlights(m, { areaStats, foreign: null, rankPositions, prefRanks, prefName });
+    const topHighlightKey = highlights[0]?.key;
     const highlightPhrase = highlights.length > 0 ? `${highlights[0].text}。` : "";
-    // 末尾の指標列挙は、直前のハイライト文とテーマが重複しないものだけに絞る
+    // 末尾の指標列挙は、直前のハイライト文とテーマが重複するものだけを外す
     // （例: 待機児童ゼロが特徴文で既に出ていれば「待機児童」を列挙し直さない）。
-    const topicWords: Record<string, string> = {
-      rent: "家賃", rentPref: "家賃", landPrice: "地価", populationChangeRate: "人口",
-      vacancy: "空き家率", foreignRatio: "外国人比率", density: "人口密度", population: "人口", waitlistZero: "待機児童",
-    };
-    const mentioned = highlights.length > 0 ? topicWords[highlights[0].key] : undefined;
-    const topics = ["地価", "待機児童", "災害リスク"].filter((t) => t !== mentioned).join("・");
+    const topics = ["地価", "待機児童", "災害リスク"]
+      .filter((t) => !(t === "地価" && topHighlightKey === "landPrice") && !(t === "待機児童" && topHighlightKey === "waitlistZero"))
+      .join("・");
     description = `${fullName}（${prefName}）の住みやすさ・住環境データ。${popPhrase}${rentPhrase}${highlightPhrase}${topics}などをまとめて地図とランキングで比較できる${SITE.name}の自治体ページ。`;
   }
   const url = absoluteUrl(`/area/${m.pref}/${m.code}`);
@@ -187,12 +185,15 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
       ? all.filter((x) => x.level === "ward" && x.parentCode === m.code)
       : [];
 
-  // 解釈の補助線・比較バーの平均値（すべて実データから集計。推計なし）。
-  const foreignStats = await getForeignStats();
+  // 解釈の補助線・比較バーの平均値（すべて実データから集計。推計なし）。互いに独立
+  // な集計なので並列に取得する（各モジュールとも初回のみ全自治体を走査しキャッシュする）。
+  const [foreignStats, areaStats, rankPositions, prefRanks] = await Promise.all([
+    getForeignStats(),
+    getAreaStats(),
+    getRankPositions(),
+    getPrefRanks(),
+  ]);
   const fc: ForeignComparison | null = foreignStats.get(m.code) ?? null;
-  const areaStats = await getAreaStats();
-  const rankPositions = await getRankPositions();
-  const prefRanks = await getPrefRanks();
 
   // 「この自治体の特徴」= 全国・県平均との偏差や順位から決定論的に抽出（lib/highlights.ts）。
   const highlights = buildHighlights(m, { areaStats, foreign: fc, rankPositions, prefRanks, prefName });
@@ -308,7 +309,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
       ].filter(Boolean).join("・") || undefined
     : undefined;
   const popNatPos = rankPositions.get("population-most")?.get(m.code);
-  const popPrefPos = prefRanks.get("population")?.get(m.code);
+  const popPrefPos = prefRanks.get("population-most")?.get(m.code);
   const popCompare =
     [
       popPrefPos ? `${prefName}内${popPrefPos.rank.toLocaleString()}位/${popPrefPos.total.toLocaleString()}` : null,

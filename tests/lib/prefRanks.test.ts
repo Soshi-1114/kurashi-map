@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { buildPrefRanks } from "@/lib/prefRanks";
+import { RANKINGS } from "@/lib/rankings";
 import { muni, metric } from "../_fixtures";
 
 // 県内順位（詳細ページの「県内◯位」）。ランキング定義の qualifies/sortValue を
@@ -13,9 +14,9 @@ describe("buildPrefRanks", () => {
     muni({ code: "11107", pref: "saitama", level: "ward" as const, parentCode: "11100", population: 999999 }),
   ];
 
-  it("人口順位は県ごとに独立して振られる", () => {
+  it("人口順位（population-most）は県ごとに独立して振られる", () => {
     const ranks = buildPrefRanks(all);
-    const pop = ranks.get("population")!;
+    const pop = ranks.get("population-most")!;
     expect(pop.get("11201")).toEqual({ rank: 1, total: 3 });
     expect(pop.get("11202")).toEqual({ rank: 2, total: 3 });
     expect(pop.get("12201")).toEqual({ rank: 1, total: 1 });
@@ -23,7 +24,15 @@ describe("buildPrefRanks", () => {
 
   it("行政区は順位を持たない（lookup undefined）", () => {
     const ranks = buildPrefRanks(all);
-    expect(ranks.get("population")!.get("11107")).toBeUndefined();
+    expect(ranks.get("population-most")!.get("11107")).toBeUndefined();
+  });
+
+  it("RANKINGS の全 slug をキーに持つ（個別指標をハードコードせず自動追従する）", () => {
+    const ranks = buildPrefRanks(all);
+    expect(ranks.size).toBe(RANKINGS.length);
+    for (const def of RANKINGS) {
+      expect(ranks.has(def.slug)).toBe(true);
+    }
   });
 
   it("欠損値（rent=0）の自治体は家賃順位の母数に入らない", () => {
