@@ -17,6 +17,7 @@ import { hasRent } from "./rentColor";
 import { hasLandPrice } from "./landPrice";
 import { hasVacancy } from "./vacancy";
 import { isWaitlistDisclosed } from "./waitlist";
+import { formatAsOfJa } from "./rankings";
 import { populationDensity, densityText } from "./populationDensity";
 
 export type HighlightKind = "deviation" | "rank" | "membership";
@@ -265,7 +266,7 @@ export function buildHighlights(m: Municipality, ctx: HighlightsCtx): Highlight[
       label: "待機児童",
       kind: "membership",
       score: 0.5,
-      text: `待機児童は0人（${m.waitlistChildren.asOf}時点、こども家庭庁公表値）`,
+      text: `待機児童は0人（${formatAsOfJa(m.waitlistChildren.asOf)}時点、こども家庭庁公表値）`,
     });
   }
 
