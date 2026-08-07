@@ -1,0 +1,176 @@
+/* 自治体比較ページ（/compare）。cmp-* 名前空間。
+   トークンは globals.css の :root を使用（アイボリー＋テラコッタのコンテンツ面）。 */
+
+.cmp-root {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 20px 56px;
+}
+.cmp-hero {
+  padding: 26px 0 6px;
+}
+.cmp-title {
+  margin: 0 0 8px;
+  font-size: var(--text-2xl);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+.cmp-lead {
+  margin: 0;
+  max-width: 640px;
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  color: var(--text-muted);
+}
+
+/* ピッカー */
+.cmp-picker {
+  margin: 18px 0 6px;
+}
+.cmp-search {
+  position: relative;
+  max-width: 480px;
+}
+.cmp-search input {
+  width: 100%;
+  padding: 12px 16px;
+  /* iOS Safari の自動ズーム回避のため 16px 固定 */
+  font-size: 16px;
+  font-family: inherit;
+  color: var(--text);
+  background: var(--surface-strong);
+  border: 1.5px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.cmp-search input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.cmp-search input:disabled {
+  color: var(--text-faint);
+  background: var(--surface-muted);
+}
+.cmp-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+}
+.cmp-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px 6px 14px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  background: var(--bg-elev);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+.cmp-chip-remove {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border: none;
+  border-radius: 50%;
+  background: var(--surface-muted);
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+  line-height: 1;
+  cursor: pointer;
+}
+.cmp-chip-remove:hover {
+  background: var(--surface-muted-hover);
+  color: var(--text);
+}
+.cmp-empty {
+  margin: 22px 0;
+  padding: 18px;
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}
+
+/* 比較テーブル（SP は横スクロール・1列目は sticky） */
+.cmp-scroll {
+  margin-top: 20px;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-elev);
+}
+.cmp-table {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+.cmp-table th,
+.cmp-table td {
+  padding: 10px 14px;
+  border-top: 1px solid var(--border);
+  text-align: left;
+  vertical-align: baseline;
+  font-variant-numeric: tabular-nums;
+}
+.cmp-table thead th {
+  border-top: none;
+  background: var(--surface-subtle);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.cmp-table thead th a {
+  color: var(--accent);
+  font-size: var(--text-sm);
+  text-decoration: none;
+}
+.cmp-table thead th a:hover {
+  text-decoration: underline;
+}
+.cmp-rowlabel {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  min-width: 11em;
+  background: var(--bg-elev);
+  font-weight: 600;
+  color: var(--text-muted);
+  box-shadow: 1px 0 0 var(--border);
+}
+.cmp-table thead .cmp-rowlabel {
+  background: var(--surface-subtle);
+}
+.cmp-group th {
+  background: var(--surface-muted);
+  font-size: var(--text-xs);
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+.cmp-loading {
+  color: var(--text-faint);
+}
+
+/* プリセット・説明 */
+.cmp-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+}
+.cmp-note {
+  margin: 26px 0 0;
+  font-size: var(--text-xs);
+  line-height: var(--leading-normal);
+  color: var(--text-faint);
+}

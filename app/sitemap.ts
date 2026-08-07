@@ -48,6 +48,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly" as const,
       priority: 0.8,
     })),
+    // 自治体比較ページ（選択状態はクエリなので URL はベースの1件のみ）。
+    {
+      url: absoluteUrl("/compare"),
+      lastModified: siteLatest,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
     // サイトについて（データの出典・更新方針。E-E-A-T ページ）。
     {
       url: absoluteUrl("/about"),

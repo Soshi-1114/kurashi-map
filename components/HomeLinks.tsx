@@ -20,7 +20,9 @@ export default function HomeLinks({ popular }: { popular: PopularMuni[] }) {
           </div>
           <div className="home-cando-item">
             <dt>自治体を比べる</dt>
-            <dd>地図の色分けやランキングで、複数の自治体のデータを並べて違いを確認できます。</dd>
+            <dd>
+              <Link href="/compare">比較ページ</Link>やランキング・地図の色分けで、複数の自治体のデータを並べて違いを確認できます。
+            </dd>
           </div>
           <div className="home-cando-item">
             <dt>暮らしを考える</dt>

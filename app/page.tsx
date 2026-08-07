@@ -66,6 +66,7 @@ export default async function HomePage() {
           <p className="home-hero-actions">
             <a href="#home-explore" className="home-hero-action">都道府県から探す</a>
             <Link href="/ranking" className="home-hero-action">ランキングから探す</Link>
+            <Link href="/compare" className="home-hero-action">自治体を比較する</Link>
           </p>
         </div>
       </section>
