@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { signedPct } from "@/lib/format";
+import { signedPct, barWidthPct } from "@/lib/format";
 
 describe("signedPct", () => {
   it("正の値には + を付ける", () => {
@@ -24,5 +24,20 @@ describe("signedPct", () => {
 
   it("桁数指定を尊重する", () => {
     expect(signedPct(3.14159, 2)).toBe("+3.14");
+  });
+});
+
+describe("barWidthPct", () => {
+  it("最大値のときは100%", () => {
+    expect(barWidthPct(100, 100)).toBe(100);
+  });
+
+  it("極小値でも最小4%を保証する（視認性のため）", () => {
+    expect(barWidthPct(0, 100)).toBe(4);
+    expect(barWidthPct(1, 10000)).toBe(4);
+  });
+
+  it("比率どおりの幅を返す", () => {
+    expect(barWidthPct(50, 100)).toBe(50);
   });
 });

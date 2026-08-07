@@ -8,7 +8,7 @@
 import type { Municipality } from "./types";
 import { hasRent } from "./rentColor";
 import { hasLandPrice } from "./landPrice";
-import { hasVacancy, vacancyRateText } from "./vacancy";
+import { hasVacancy } from "./vacancy";
 import { isWaitlistDisclosed } from "./waitlist";
 import { hasForeignData, foreignRatioPct } from "./foreignResidents";
 import { isAmenitiesCounted, isHazardEvaluated } from "./coverage";
@@ -72,15 +72,54 @@ function floodText(m: Municipality): string {
   return m.hazard.hasFloodRisk ? "想定あり" : "想定なし";
 }
 
+/**
+ * 数値指標行のビルダー。value()（表示文字列）と numericValue()（バー用の生値）が
+ * 同じ欠損判定からズレないよう、raw() 1箇所だけに判定を書けば両方が導出される
+ * （どちらかだけセンチネル対応を直して片方を直し忘れる、という事故を防ぐ）。
+ * nationalAvg も同様に raw 1つから text/value を両方導出し、
+ * 「テキストはあるのにバー値がない／その逆」という不整合が起きない形にする。
+ */
+function numericRow(opts: {
+  key: string;
+  label: string;
+  group: CompareGroup;
+  raw: (m: Municipality) => number | null;
+  format: (v: number) => string;
+  fallback?: string;
+  nationalAvg?: { raw: (n: NationalAverages) => number | null; format?: (v: number) => string };
+}): CompareRowDef {
+  const fallback = opts.fallback ?? NO_VALUE;
+  const avgFormat = opts.nationalAvg?.format ?? opts.format;
+  return {
+    key: opts.key,
+    label: opts.label,
+    group: opts.group,
+    value: (m) => {
+      const v = opts.raw(m);
+      return v != null ? opts.format(v) : fallback;
+    },
+    numericValue: opts.raw,
+    ...(opts.nationalAvg
+      ? {
+          nationalAvgText: (n: NationalAverages) => {
+            const v = opts.nationalAvg!.raw(n);
+            return v != null ? avgFormat(v) : NO_VALUE;
+          },
+          nationalAvgValue: opts.nationalAvg.raw,
+        }
+      : {}),
+  };
+}
+
 export const COMPARE_ROWS: CompareRowDef[] = [
   // ---- 基本 ----
-  {
+  numericRow({
     key: "population",
     label: "人口",
     group: "基本",
-    value: (m) => (m.population > 0 ? `${m.population.toLocaleString()}人` : NO_VALUE),
-    numericValue: (m) => (m.population > 0 ? m.population : null),
-  },
+    raw: (m) => (m.population > 0 ? m.population : null),
+    format: (v) => `${v.toLocaleString()}人`,
+  }),
   {
     key: "populationChangeRate",
     label: "人口増減率（2020→2025）",
@@ -89,110 +128,99 @@ export const COMPARE_ROWS: CompareRowDef[] = [
     nationalAvgText: (n) => (n.populationChangeRate != null ? `${signedPct(n.populationChangeRate)}%` : NO_VALUE),
     // 負値を取りうるためバー表示の対象外（テキスト＝符号付き%のみで表現する）。
   },
-  {
+  numericRow({
     key: "density",
     label: "人口密度",
     group: "基本",
-    value: (m) => {
-      const d = populationDensity(m);
-      return d != null ? densityText(d) : NO_VALUE;
-    },
-    nationalAvgText: (n) => (n.density != null ? densityText(n.density) : NO_VALUE),
-    numericValue: (m) => populationDensity(m),
-    nationalAvgValue: (n) => n.density,
-  },
-  {
+    raw: (m) => populationDensity(m),
+    format: densityText,
+    nationalAvg: { raw: (n) => n.density },
+  }),
+  numericRow({
     key: "area",
     label: "面積",
     group: "基本",
-    value: (m) => (m.areaKm2 != null && m.areaKm2 > 0 ? `${m.areaKm2.toLocaleString()}km²` : NO_VALUE),
-    numericValue: (m) => (m.areaKm2 != null && m.areaKm2 > 0 ? m.areaKm2 : null),
-  },
-  {
+    raw: (m) => (m.areaKm2 != null && m.areaKm2 > 0 ? m.areaKm2 : null),
+    format: (v) => `${v.toLocaleString()}km²`,
+  }),
+  numericRow({
     key: "foreignRatio",
     label: "外国人住民比率",
     group: "基本",
-    value: (m) =>
-      hasForeignData(m.foreignResidents.source) && m.population > 0
-        ? `${foreignRatioPct(m).toFixed(2)}%`
-        : "対象外",
-    nationalAvgText: (n) => (n.foreignRatio != null ? `${n.foreignRatio.toFixed(2)}%` : NO_VALUE),
-    numericValue: (m) => (hasForeignData(m.foreignResidents.source) && m.population > 0 ? foreignRatioPct(m) : null),
-    nationalAvgValue: (n) => n.foreignRatio,
-  },
+    raw: (m) => (hasForeignData(m.foreignResidents.source) && m.population > 0 ? foreignRatioPct(m) : null),
+    format: (v) => `${v.toFixed(2)}%`,
+    fallback: "対象外",
+    nationalAvg: { raw: (n) => n.foreignRatio },
+  }),
   // ---- 住まい ----
-  {
+  numericRow({
     key: "rent",
     label: "家賃中央値（民営借家）",
     group: "住まい",
-    value: (m) => (hasRent(m.rent.value) ? `${m.rent.value.toLocaleString()}円/月` : "データなし"),
-    nationalAvgText: (n) => (n.rent != null ? `${n.rent.toLocaleString()}円/月` : NO_VALUE),
-    numericValue: (m) => (hasRent(m.rent.value) ? m.rent.value : null),
-    nationalAvgValue: (n) => n.rent,
-  },
-  {
+    raw: (m) => (hasRent(m.rent.value) ? m.rent.value : null),
+    format: (v) => `${v.toLocaleString()}円/月`,
+    fallback: "データなし",
+    nationalAvg: { raw: (n) => n.rent },
+  }),
+  numericRow({
     key: "landPrice",
     label: "地価（住宅地）",
     group: "住まい",
-    value: (m) => (hasLandPrice(m.landPrice.value) ? `${m.landPrice.value.toLocaleString()}円/㎡` : "対象外"),
-    nationalAvgText: (n) => (n.landPrice != null ? `${n.landPrice.toLocaleString()}円/㎡` : NO_VALUE),
-    numericValue: (m) => (hasLandPrice(m.landPrice.value) ? m.landPrice.value : null),
-    nationalAvgValue: (n) => n.landPrice,
-  },
-  {
+    raw: (m) => (hasLandPrice(m.landPrice.value) ? m.landPrice.value : null),
+    format: (v) => `${v.toLocaleString()}円/㎡`,
+    fallback: "対象外",
+    nationalAvg: { raw: (n) => n.landPrice },
+  }),
+  numericRow({
     key: "vacancy",
     label: "空き家率",
     group: "住まい",
-    value: (m) => (hasVacancy(m.vacancy) ? vacancyRateText(m.vacancy) : "対象外"),
-    nationalAvgText: (n) => (n.vacancyRate != null ? `${n.vacancyRate.toFixed(1)}%` : NO_VALUE),
-    numericValue: (m) => (hasVacancy(m.vacancy) ? m.vacancy.rate : null),
-    nationalAvgValue: (n) => n.vacancyRate,
-  },
+    raw: (m) => (hasVacancy(m.vacancy) ? m.vacancy.rate : null),
+    format: (v) => `${v.toFixed(1)}%`,
+    fallback: "対象外",
+    nationalAvg: { raw: (n) => n.vacancyRate },
+  }),
   // ---- 子育て・生活 ----
-  {
+  numericRow({
     key: "waitlist",
     label: "待機児童数",
     group: "子育て・生活",
-    value: (m) => (isWaitlistDisclosed(m.waitlistChildren) ? `${m.waitlistChildren.value}人` : "非公表"),
-    numericValue: (m) => (isWaitlistDisclosed(m.waitlistChildren) ? m.waitlistChildren.value : null),
-  },
-  {
+    raw: (m) => (isWaitlistDisclosed(m.waitlistChildren) ? m.waitlistChildren.value : null),
+    format: (v) => `${v}人`,
+    fallback: "非公表",
+  }),
+  numericRow({
     key: "stations",
     label: "鉄道駅数",
     group: "子育て・生活",
-    value: (m) =>
-      m.amenities && isAmenitiesCounted(m.amenities.source) ? `${m.amenities.stations.toLocaleString()}駅` : "対象外",
-    numericValue: (m) => (m.amenities && isAmenitiesCounted(m.amenities.source) ? m.amenities.stations : null),
-  },
-  {
+    raw: (m) => (m.amenities && isAmenitiesCounted(m.amenities.source) ? m.amenities.stations : null),
+    format: (v) => `${v.toLocaleString()}駅`,
+    fallback: "対象外",
+  }),
+  numericRow({
     key: "preschools",
     label: "保育園・幼稚園等",
     group: "子育て・生活",
-    value: (m) =>
-      m.amenities && isAmenitiesCounted(m.amenities.source)
-        ? `${m.amenities.preschools.toLocaleString()}施設`
-        : "対象外",
-    numericValue: (m) => (m.amenities && isAmenitiesCounted(m.amenities.source) ? m.amenities.preschools : null),
-  },
-  {
+    raw: (m) => (m.amenities && isAmenitiesCounted(m.amenities.source) ? m.amenities.preschools : null),
+    format: (v) => `${v.toLocaleString()}施設`,
+    fallback: "対象外",
+  }),
+  numericRow({
     key: "medical",
     label: "医療機関数",
     group: "子育て・生活",
-    value: (m) =>
-      m.amenities && isAmenitiesCounted(m.amenities.source)
-        ? `${m.amenities.medicalFacilities.toLocaleString()}施設`
-        : "対象外",
-    numericValue: (m) =>
-      m.amenities && isAmenitiesCounted(m.amenities.source) ? m.amenities.medicalFacilities : null,
-  },
-  {
+    raw: (m) => (m.amenities && isAmenitiesCounted(m.amenities.source) ? m.amenities.medicalFacilities : null),
+    format: (v) => `${v.toLocaleString()}施設`,
+    fallback: "対象外",
+  }),
+  numericRow({
     key: "shelters",
     label: "指定緊急避難場所",
     group: "子育て・生活",
-    value: (m) =>
-      m.shelters && hasShelterData(m.shelters.source) ? `${m.shelters.count.toLocaleString()}か所` : "未収録",
-    numericValue: (m) => (m.shelters && hasShelterData(m.shelters.source) ? m.shelters.count : null),
-  },
+    raw: (m) => (m.shelters && hasShelterData(m.shelters.source) ? m.shelters.count : null),
+    format: (v) => `${v.toLocaleString()}か所`,
+    fallback: "未収録",
+  }),
   // ---- 災害リスク ----
   {
     key: "flood",

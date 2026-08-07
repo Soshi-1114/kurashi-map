@@ -11,3 +11,12 @@ export function signedPct(value: number, decimals = 1): string {
   if (rounded === 0) return (0).toFixed(decimals);
   return `${rounded > 0 ? "+" : ""}${rounded.toFixed(decimals)}`;
 }
+
+/**
+ * 簡易バーの幅(%)。極小値でも視認できるよう最小4%を保証する
+ * （components/area/CompareBar.tsx・比較ページのバーが共有する）。
+ * max は呼び出し側で 0除算を避ける床（通常1）を設けておくこと。
+ */
+export function barWidthPct(value: number, max: number): number {
+  return Math.max(4, (value / max) * 100);
+}

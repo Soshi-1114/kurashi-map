@@ -11,6 +11,7 @@ import type { Municipality, MuniSummary } from "@/lib/types";
 import { COMPARE_ROWS, COMPARE_GROUPS, type NationalAverages } from "@/lib/compareMetrics";
 import { useMuniCombobox } from "@/lib/useMuniCombobox";
 import { muniContextLabel } from "@/lib/muniLabel";
+import { barWidthPct } from "@/lib/format";
 
 export const MAX_COMPARE = 3;
 
@@ -186,6 +187,10 @@ function GroupRows({
   nationalAverages: NationalAverages;
 }) {
   const rows = COMPARE_ROWS.filter((r) => r.group === group);
+  // 選択自治体の解決済み Municipality（loading/error は null）を1度だけ求め、行の
+  // 最大値算出とセル描画の両方でインデックス揃いの配列として使い回す（二重計算を避ける）。
+  const resolved = selected.map(({ state }) => (state && state !== "loading" && state !== "error" ? state : null));
+
   return (
     <>
       <tr className="cmp-group">
@@ -195,40 +200,34 @@ function GroupRows({
         </th>
       </tr>
       {rows.map((row) => {
-        // 簡易バー用の行内最大値（読み込み済みの自治体＋全国平均の中から算出）。
-        // numericValue を持たない行（人口増減率・災害リスク等）はバーなしのまま。
-        const rowValues = row.numericValue
-          ? selected
-              .map(({ state }) => (state && state !== "loading" && state !== "error" ? row.numericValue!(state) : null))
-              .filter((v): v is number => v != null)
-          : [];
+        // 簡易バー用の値（読み込み済みの自治体＋全国平均）。numericValue を持たない行
+        // （人口増減率・災害リスク等）はバーなしのまま（cellValues は全て null）。
+        const cellValues = row.numericValue ? resolved.map((m) => (m ? row.numericValue!(m) : null)) : resolved.map(() => null);
         const avgValue = row.nationalAvgValue?.(nationalAverages) ?? null;
-        const rowMax = row.numericValue ? Math.max(...rowValues, avgValue ?? 0, 1) : 1;
+        const rowMax = row.numericValue
+          ? Math.max(...cellValues.filter((v): v is number => v != null), avgValue ?? 0, 1)
+          : 1;
 
         return (
           <tr key={row.key}>
             <th scope="row" className="cmp-rowlabel">
               {row.label}
             </th>
-            {selected.map(({ code, state }) => {
-              const resolved = state && state !== "loading" && state !== "error" ? state : null;
-              const numeric = resolved && row.numericValue ? row.numericValue(resolved) : null;
-              return (
-                <td key={code}>
-                  {state === "loading" || state === undefined ? (
-                    <span className="cmp-loading" aria-label="読み込み中">
-                      …
-                    </span>
-                  ) : state === "error" ? (
-                    "取得エラー"
-                  ) : (
-                    <CompareCell text={row.value(state)} value={numeric} max={rowMax} />
-                  )}
-                </td>
-              );
-            })}
+            {selected.map(({ code, state }, i) => (
+              <td key={code}>
+                {state === "loading" || state === undefined ? (
+                  <span className="cmp-loading" aria-label="読み込み中">
+                    …
+                  </span>
+                ) : state === "error" ? (
+                  "取得エラー"
+                ) : (
+                  <CompareCell text={row.value(state)} value={cellValues[i]} max={rowMax} />
+                )}
+              </td>
+            ))}
             <td className="cmp-avg-col">
-              <CompareCell text={row.nationalAvgText?.(nationalAverages) ?? "—"} value={avgValue} max={rowMax} tone="avg" />
+              <CompareCell text={row.nationalAvgText?.(nationalAverages) ?? "—"} value={avgValue} max={rowMax} isAvg />
             </td>
           </tr>
         );
@@ -238,13 +237,13 @@ function GroupRows({
 }
 
 // 簡易バー＋テキスト。value が null（対象外・欠損・バー非対応の指標）ならテキストのみ。
-function CompareCell({ text, value, max, tone }: { text: string; value: number | null; max: number; tone?: "avg" }) {
+function CompareCell({ text, value, max, isAvg }: { text: string; value: number | null; max: number; isAvg?: boolean }) {
   if (value == null) return <>{text}</>;
-  const pct = Math.max(4, (value / max) * 100);
+  const pct = barWidthPct(value, max);
   return (
     <span className="cmp-cell">
       <span className="cmp-cell-text">{text}</span>
-      <span className={`cmp-bar-track ${tone === "avg" ? "is-avg" : ""}`} aria-hidden="true">
+      <span className={`cmp-bar-track ${isAvg ? "is-avg" : ""}`} aria-hidden="true">
         <span className="cmp-bar-fill" style={{ width: `${pct}%` }} />
       </span>
     </span>
