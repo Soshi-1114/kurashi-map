@@ -102,9 +102,19 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
   } else if (foreignAvailable) {
     description = `${fullName}（${prefName}）の在留外国人割合は${foreignRatioPct(m).toFixed(2)}%、人口${pop}人。家賃・地価・災害リスクなどの住環境データと住みやすさスコアを地図とランキングで確認できます。出典: 出入国在留管理庁「在留外国人統計」。`;
   } else {
+    // このフォールバックは北方領土6村相当（在留外国人統計・人口ともに対象外）のみが
+    // 到達する。他の2分岐（GSC分析に基づき調整済み）と違い実質的な閲覧数が小さいため、
+    // 「特徴」の先頭1件があれば1文だけ添えて差異化する（0件ならそのまま）。
     const rentPhrase = hasRent(m.rent.value) ? `家賃中央値${m.rent.value.toLocaleString()}円/月、` : "";
     const popPhrase = m.population > 0 ? `人口${pop}人、` : "";
-    description = `${fullName}（${prefName}）の住みやすさ・住環境データ。${popPhrase}${rentPhrase}地価・待機児童・災害リスクなどをまとめて地図とランキングで比較できる${SITE.name}の自治体ページ。`;
+    const [areaStats, rankPositions, prefRanks] = await Promise.all([
+      getAreaStats(),
+      getRankPositions(),
+      getPrefRanks(),
+    ]);
+    const highlights = buildHighlights(m, { areaStats, foreign: null, rankPositions, prefRanks, prefName });
+    const highlightPhrase = highlights.length > 0 ? `${highlights[0].text}。` : "";
+    description = `${fullName}（${prefName}）の住みやすさ・住環境データ。${popPhrase}${rentPhrase}${highlightPhrase}地価・待機児童・災害リスクなどをまとめて地図とランキングで比較できる${SITE.name}の自治体ページ。`;
   }
   const url = absoluteUrl(`/area/${m.pref}/${m.code}`);
   const ogImage = absoluteUrl(`/api/og/${m.code}`);
