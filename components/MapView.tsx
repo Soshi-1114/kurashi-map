@@ -20,6 +20,7 @@ import { PREFS, getPrefByCode } from "@/lib/prefs";
 import { hasRent } from "@/lib/rentColor";
 import { getMapMetric, TREND_PROPERTY, type MapMetricKey } from "@/lib/mapMetrics";
 import { trackSelectMunicipality, trackChangeMetric, trackApplyFilter } from "@/lib/analytics";
+import { MAP_FLY_EVENT } from "@/lib/mapFly";
 import {
   EMPTY_FILTERS, isFilterActive, matchesFilter, buildMatchExpression, type MapFilters,
 } from "@/lib/mapFilters";
@@ -716,6 +717,18 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
     if (pref) await ensurePrefsRef.current([pref.slug]);
     flyToCode(m.code);
   }, [flyToCode]);
+
+  // ページ内の別クライアント島（トップのヒーロー検索の「地図で表示」）からのフライト依頼を受ける。
+  // lib/mapFly.ts の CustomEvent 1本の疎結合ブリッジ（トップ以外では発火しないため無害）。
+  useEffect(() => {
+    const onFlyRequest = (e: Event) => {
+      const code = (e as CustomEvent<{ code: string }>).detail?.code;
+      const m = code ? byCode.get(code) : undefined;
+      if (m) void flyToMuni(m);
+    };
+    window.addEventListener(MAP_FLY_EVENT, onFlyRequest);
+    return () => window.removeEventListener(MAP_FLY_EVENT, onFlyRequest);
+  }, [byCode, flyToMuni]);
 
   // パネル開閉はフル詳細の取得完了で判定（取得中の一瞬は閉のまま）
   const rootClass = [

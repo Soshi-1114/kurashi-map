@@ -3,6 +3,7 @@ import { describe, it, expect, vi, afterEach, beforeEach } from "vitest";
 import { render, screen, cleanup, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import HeroSearch from "@/components/home/HeroSearch";
+import { MAP_FLY_EVENT, type MapFlyDetail } from "@/lib/mapFly";
 import { muniSummary } from "../_fixtures";
 
 // トップのヒーロー検索。MuniSearch と違い、確定で詳細ページへ遷移する。
@@ -71,6 +72,33 @@ describe("HeroSearch", () => {
     await user.type(input, "川");
     expect(screen.getByRole("listbox")).toBeInTheDocument();
     await user.keyboard("{Escape}");
+    expect(screen.queryByRole("listbox")).toBeNull();
+  });
+
+  it("候補行の右端に「{名前}を地図で表示」ボタンが出る（区は displayName）", async () => {
+    const user = userEvent.setup();
+    const { input } = setup();
+    await user.type(input, "川口");
+    expect(screen.getByRole("button", { name: "川口市を地図で表示" })).toBeInTheDocument();
+    await user.clear(input);
+    await user.type(input, "浦和");
+    expect(screen.getByRole("button", { name: "さいたま市浦和区を地図で表示" })).toBeInTheDocument();
+  });
+
+  it("地図ピンのクリックは詳細ページへ遷移せず、MAP_FLY_EVENT を dispatch して候補を閉じる", async () => {
+    const user = userEvent.setup();
+    const { input } = setup();
+    await user.type(input, "川口");
+    const flyCodes: string[] = [];
+    const onFly = (e: Event) => flyCodes.push((e as CustomEvent<MapFlyDetail>).detail.code);
+    window.addEventListener(MAP_FLY_EVENT, onFly);
+    try {
+      await user.click(screen.getByRole("button", { name: "川口市を地図で表示" }));
+    } finally {
+      window.removeEventListener(MAP_FLY_EVENT, onFly);
+    }
+    expect(push).not.toHaveBeenCalled();
+    expect(flyCodes).toEqual(["11203"]);
     expect(screen.queryByRole("listbox")).toBeNull();
   });
 });

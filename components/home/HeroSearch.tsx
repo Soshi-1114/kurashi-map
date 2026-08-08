@@ -1,8 +1,9 @@
 "use client";
 
 // トップのファーストビュー用・自治体検索コンボボックス。
-// 地図ヘッダーの MuniSearch（確定で地図をフライトさせる）と違い、こちらは確定で
-// 自治体詳細ページ /area/{pref}/{code} へ遷移する（「調べる」動線のメインアクション）。
+// 行タップ（主動作）＝自治体詳細ページへ遷移（「調べる」意図のメインアクション）。
+// 行右端の地図ピン（副動作）＝ページ内の地図へスクロールしてその自治体へフライト
+//（「地図で周辺を見たい」意図。検索バーを2本に戻さずに両方の意図を満たす）。
 // ドロップダウンの見た目は既存の .search-results 系クラスを再利用する。
 // コンボボックスの状態機械（絞り込み・キーボード操作）は useMuniCombobox を共有する。
 import { useCallback } from "react";
@@ -10,11 +11,22 @@ import { useRouter } from "next/navigation";
 import type { MuniSummary } from "@/lib/types";
 import { useMuniCombobox } from "@/lib/useMuniCombobox";
 import { muniContextLabel } from "@/lib/muniLabel";
+import { requestMapFly } from "@/lib/mapFly";
 
 export default function HeroSearch({ munis }: { munis: MuniSummary[] }) {
   const router = useRouter();
   const onPick = useCallback((m: MuniSummary) => router.push(`/area/${m.pref}/${m.code}`), [router]);
   const { query, setQuery, filtered, activeIndex, setActiveIndex, pick, onKeyDown } = useMuniCombobox(munis, onPick);
+
+  // 副動作: ページ内の地図へスクロールし、その自治体へフライトさせる（遷移しない）。
+  const showOnMap = useCallback(
+    (m: MuniSummary) => {
+      setQuery("");
+      document.querySelector(".home-map")?.scrollIntoView({ behavior: "smooth" });
+      requestMapFly(m.code);
+    },
+    [setQuery],
+  );
 
   return (
     <div className="home-search">
@@ -42,7 +54,7 @@ export default function HeroSearch({ munis }: { munis: MuniSummary[] }) {
       {filtered.length > 0 && (
         <ul id="home-search-listbox" className="search-results" role="listbox" aria-label="自治体の検索候補">
           {filtered.map((m, i) => (
-            <li key={m.code} role="presentation">
+            <li key={m.code} role="presentation" className="search-row">
               <button
                 id={`hopt-${m.code}`}
                 role="option"
@@ -56,6 +68,18 @@ export default function HeroSearch({ munis }: { munis: MuniSummary[] }) {
                   {muniContextLabel(m) && <span className="search-pref">{muniContextLabel(m)}</span>}
                   <span className="search-name">{m.name}</span>
                 </span>
+              </button>
+              <button
+                type="button"
+                className="search-mapbtn"
+                aria-label={`${m.displayName ?? m.name}を地図で表示`}
+                title="地図で表示"
+                onClick={() => showOnMap(m)}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
               </button>
             </li>
           ))}
