@@ -1104,18 +1104,36 @@
 
 @media (max-width: 640px) {
   .ad-root { padding: var(--space-4) var(--space-4) 48px; }
-  .ad-section { margin-top: 56px; }
-  .ad-cta { margin-top: 56px; padding: var(--space-6); }
+  /* SPの縦長感を抑える: セクション間隔を一段詰める（56→44px） */
+  .ad-section { margin-top: 44px; }
+  .ad-cta { margin-top: 44px; padding: var(--space-6); }
   .ad-hero { grid-template-columns: 1fr; }
   .ad-hero-main { padding: 0; }
   .ad-score { order: 2; }
-  .ad-kpis,
   .ad-metric-grid,
-  .ad-rank-grid,
   .ad-similar-grid,
   .ad-arealink-grid {
     grid-template-columns: 1fr;
   }
+  /* KPIは2列×2段に畳み、アイコンを省いて高さを圧縮（4枚縦積みを解消） */
+  .ad-kpis { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .ad-kpi {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "label"
+      "value"
+      "sub"
+      "compare";
+    padding: var(--space-4);
+  }
+  .ad-kpi-icon { display: none; }
+  .ad-kpi-value { font-size: var(--text-2xl); }
+  /* ランキング14種は2列＋薄めのカードで一覧性を保つ */
+  .ad-rank-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .ad-rankcard { padding: 10px var(--space-3); gap: var(--space-2); }
+  .ad-rankcard-icon { width: 30px; height: 30px; }
+  .ad-rankcard-icon svg { width: 15px; height: 15px; }
+  .ad-rankcard-arrow { display: none; }
   .ad-metric-grid > .ad-span-2 { grid-column: auto; }
   .ad-compare-row { grid-template-columns: 76px 1fr auto; }
   .ad-score-number strong { font-size: 44px; }
