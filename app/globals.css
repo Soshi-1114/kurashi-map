@@ -652,6 +652,11 @@ button { font-family: inherit; }
    地図コンテナ内の absolute 配置をやめて viewport 下部に固定し、
    内部のみ縦スクロール・safe-area 考慮・scrim タップで閉じる。 */
 @media (max-width: 768px) {
+  /* .map-layers は position+z-index でスタッキングコンテキストを作るため、
+     中の fixed な scrim/シートの z-index は外の要素（app-header 12・ドロワー 31）
+     に対してはラッパーの z で比較される。開時はラッパーごと最前面へ上げ、
+     モーダルがヘッダーやドロワーの下に潜らないようにする（SPのみ）。 */
+  .map-layers.is-open { z-index: 62; }
   .layers-scrim {
     display: block;
     position: fixed;
