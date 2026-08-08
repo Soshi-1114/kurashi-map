@@ -6,7 +6,8 @@ import { listSummaryAcrossPrefs, listAllAcrossPrefs } from "@/lib/metrics";
 import { muniLevelOnly } from "@/lib/rankings";
 import { SITE, absoluteUrl } from "@/lib/site";
 import { getAreaStats } from "@/lib/areaStats";
-import { getForeignStats, nationalForeignAvg } from "@/lib/foreignStats";
+import { getForeignStats, nationalForeignAvg, prefForeignAvgs } from "@/lib/foreignStats";
+import { PREFS } from "@/lib/prefs";
 import type { NationalAverages } from "@/lib/compareMetrics";
 import CompareClient, { MAX_COMPARE } from "@/components/compare/CompareClient";
 
@@ -65,6 +66,22 @@ export default async function ComparePage() {
     foreignRatio: nationalForeignAvg(foreignStats),
   };
 
+  // 県平均（選択自治体が同一県のときだけクライアント側で切替表示に使う）。
+  // NationalAverages と同形にして、行定義の書式関数をそのまま流用できるようにする。
+  // 47県×6値の小さな静的propsで、集計ロジックはサーバー側に留める。
+  const foreignByPref = prefForeignAvgs(foreignStats);
+  const prefAverages: Record<string, NationalAverages> = {};
+  for (const p of PREFS) {
+    prefAverages[p.slug] = {
+      rent: areaStats.rent.byPref.get(p.slug) ?? null,
+      landPrice: areaStats.landPrice.byPref.get(p.slug) ?? null,
+      populationChangeRate: areaStats.populationChangeRate.byPref.get(p.slug) ?? null,
+      vacancyRate: areaStats.vacancyRate.byPref.get(p.slug) ?? null,
+      density: areaStats.density.byPref.get(p.slug) ?? null,
+      foreignRatio: foreignByPref.get(p.slug) ?? null,
+    };
+  }
+
   const ldJson = {
     "@context": "https://schema.org",
     "@graph": [
@@ -95,11 +112,12 @@ export default async function ComparePage() {
       </header>
 
       <Suspense fallback={<p className="cmp-empty">読み込み中…</p>}>
-        <CompareClient munis={summary} nationalAverages={nationalAverages} />
+        <CompareClient munis={summary} nationalAverages={nationalAverages} prefAverages={prefAverages} />
       </Suspense>
 
       <section>
-        <h2 className="home-links-h" style={{ marginTop: 28 }}>比較の例</h2>
+        <h2 className="home-links-h" style={{ marginTop: 28 }}>主要都市の比較例</h2>
+        <p className="cmp-presets-note">人口の多い市から機械的に組み合わせた例です。</p>
         <ul className="cmp-presets">
           {presets.map((p) => (
             <li key={p.codes}>
@@ -110,9 +128,9 @@ export default async function ComparePage() {
       </section>
 
       <p className="cmp-note">
-        出典: e-Stat（住宅・土地統計調査／国勢調査）・地価公示／地価調査・こども家庭庁・出入国在留管理庁・国土数値情報・国土地理院。指標の基準時点と更新方針は
+        バーは表示中の自治体と平均のうち最大値を100%とした相対値です（災害リスク等の段階評価にはバーを付けません）。「全国平均（参考）」「県平均」は自治体を1票とする単純平均です（外国人住民比率のみ人口加重平均）。出典: e-Stat（住宅・土地統計調査／国勢調査）・地価公示／地価調査・こども家庭庁・出入国在留管理庁・国土数値情報・国土地理院。指標の基準時点と更新方針は
         <Link href="/about">「このサイトについて」</Link>
-        を参照してください。各自治体の詳しいデータは表の自治体名から個別ページで確認できます。「全国平均（参考）」は自治体を1票とする単純平均です（外国人住民比率のみ人口加重平均）。
+        を参照してください。各自治体の詳しいデータは表の自治体名から個別ページで確認できます。
       </p>
     </div>
   );

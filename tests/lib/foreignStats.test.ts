@@ -3,6 +3,7 @@ import {
   buildForeignStats,
   avgBand,
   nationalForeignAvg,
+  prefForeignAvgs,
   FOREIGN_RATIO_SAME_BAND_PT,
 } from "@/lib/foreignStats";
 import { muni, metric } from "../_fixtures";
@@ -97,6 +98,26 @@ describe("nationalForeignAvg", () => {
 
   it("空のMapなら null", () => {
     expect(nationalForeignAvg(new Map())).toBeNull();
+  });
+});
+
+describe("prefForeignAvgs", () => {
+  it("code の先頭2桁から県スラッグを引き、県ごとの加重平均を集約する", () => {
+    // 実在の codePrefix を使う（13=tokyo, 14=kanagawa）
+    const stats = buildForeignStats([
+      withRatio("13101", "tokyo", 5),
+      withRatio("13102", "tokyo", 1),
+      withRatio("14101", "kanagawa", 3),
+    ]);
+    const byPref = prefForeignAvgs(stats);
+    // tokyo: (500+100)/20000 = 3.00%
+    expect(byPref.get("tokyo")).toBeCloseTo(3.0, 5);
+    expect(byPref.get("kanagawa")).toBeCloseTo(3.0, 5);
+    expect(byPref.has("osaka")).toBe(false);
+  });
+
+  it("空のMapなら空のMap", () => {
+    expect(prefForeignAvgs(new Map()).size).toBe(0);
   });
 });
 
