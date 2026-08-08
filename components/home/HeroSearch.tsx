@@ -37,7 +37,7 @@ export default function HeroSearch({ munis }: { munis: MuniSummary[] }) {
         </svg>
         <input
           type="search"
-          placeholder="市区町村名を入力（例: 宗像市）"
+          placeholder="市区町村名を入力（例: 新宿区）"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={onKeyDown}
