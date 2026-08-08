@@ -22,18 +22,24 @@ const PEEK_PX = 96;   // ハンドル＋自治体名＋家賃の1行が収まる
 // half の高さは「自治体名＋指標カード」の実コンテンツ高に合わせて実測する（余白を出さない）。
 // これは計測前の初期値で、実測値（halfPx state）が入るまでのフォールバック。
 const HALF_PX_FALLBACK = 236;
-// half がコンテンツ実測で画面を占有しすぎないための上限（画面高に対する比）。
-// full=72% より十分小さく、地図の文脈を残す。
-const HALF_MAX_RATIO = 0.62;
-const SHEET_HEIGHT = "calc(72vh + env(safe-area-inset-bottom))"; // 固定高（=full）
+// シートは .map-root 内の absolute。高さの基準は「ビューポート」ではなく
+// 「地図コンテナ」でなければならない: トップの埋め込み地図は 55dvh（min 420px）しかなく、
+// vh 基準にすると箱が地図より大きくなり、上下にはみ出して地図下のページ内容まで覆う。
+// %（=コンテナ比）なら地図が全画面のピラーページでは従来どおり 72dvh 相当になる。
+const SHEET_HEIGHT_RATIO = 0.72;
+const SHEET_HEIGHT = `calc(${SHEET_HEIGHT_RATIO * 100}% + env(safe-area-inset-bottom))`; // 固定高（=full）
+// half がシート箱（=full）に対して占める上限。full に近づけすぎると段の意味が無くなるため
+// 抑え、地図の文脈を残す。
+const HALF_MAX_OF_SHEET = 0.74;
 
-// シート箱の実ピクセル高（translate 計算の基準）。CSS の 72vh は iOS で
-// window.innerHeight と一致しない（URLバー）。translate を innerHeight 基準で
-// 計算すると可視高が CSS箱高とズレてカードが見切れるため、実測 offsetHeight を
-// 基準にする。未計測時のみ innerHeight×0.72 にフォールバック。
+// シート箱の実ピクセル高（translate 計算の基準）。CSS の % は実測しないと px が判らず、
+// translate を別基準で計算すると可視高が CSS箱高とズレてカードが見切れるため、
+// 実測 offsetHeight を基準にする。未計測時のみ地図コンテナ高からの概算にフォールバック。
 function fallbackSheetPx(): number {
-  const h = typeof window !== "undefined" ? window.innerHeight : 800;
-  return Math.round(h * 0.72);
+  if (typeof window === "undefined") return Math.round(800 * SHEET_HEIGHT_RATIO);
+  const root = document.querySelector(".map-root");
+  const base = root?.clientHeight || window.innerHeight;
+  return Math.round(base * SHEET_HEIGHT_RATIO);
 }
 // 各段の「可視高（=シート上端から見える高さ）」。full は箱全体。
 function stageVisiblePx(stage: Stage, halfPx: number, sheetPx: number): number {
@@ -71,7 +77,7 @@ export default function MobileSheet({ municipality, onClose }: Props) {
   //   これにすることで CSS箱高と可視高がズレず、カードの見切れを防ぐ。
   // ・halfPx: 指標カード下端＋下パディング。「名称＋カード」がちょうど見える高さ。カードは
   //   固定 px 高なので本質的にコンテンツ依存（画面比だけだと高い端末で余白・低い端末で見切れ）。
-  //   ただし極端に低い端末で地図が潰れないよう画面比の上限（HALF_MAX_RATIO）でクランプする。
+  //   ただし地図が潰れないようシート箱に対する上限（HALF_MAX_OF_SHEET）でクランプする。
   useEffect(() => {
     if (!municipality) return;
     const measure = () => {
@@ -80,7 +86,9 @@ export default function MobileSheet({ municipality, onClose }: Props) {
       const el = halfContentRef.current;
       if (el && stage !== "peek") {
         const content = el.offsetTop + el.offsetHeight + 20;
-        const cap = Math.round(window.innerHeight * HALF_MAX_RATIO);
+        // 上限もシート箱（=地図コンテナ比）基準にする。ビューポート基準だと
+        // 埋め込み地図で half が箱を超えてしまう。
+        const cap = Math.round((sh ?? fallbackSheetPx()) * HALF_MAX_OF_SHEET);
         setHalfPx(Math.min(Math.round(content), cap));
       }
     };
