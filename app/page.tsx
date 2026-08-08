@@ -72,9 +72,10 @@ export default async function HomePage() {
       </section>
 
       {/* 地図。スクロールするページへの埋め込みなので協調ジェスチャを有効化
-          （SP: 2本指パン / PC: Ctrl+ホイールでズーム）。 */}
+          （SP: 2本指パン / PC: Ctrl+ホイールでズーム）。検索はFVのヒーロー検索に
+          一本化するため、地図ヘッダーの検索は出さない。 */}
       <div className="home-map home-map--embedded">
-        <MapView summary={summary} cooperativeGestures />
+        <MapView summary={summary} cooperativeGestures showSearch={false} />
       </div>
 
       {/* できること・回遊リンク帯（サーバーレンダリング＝クロール可能） */}

@@ -105,4 +105,39 @@ describe("LayersPanel", () => {
     setup({ filterActive: false });
     expect(screen.queryByText(/全国該当/)).toBeNull();
   });
+
+  it("activeCount>0 のときトグルボタンに件数バッジと「設定N件適用中」を出す", () => {
+    setup({ open: false, activeCount: 3 });
+    const toggle = screen.getByRole("button", { name: /表示設定/ });
+    expect(toggle.getAttribute("aria-label")).toContain("設定3件適用中");
+    expect(toggle.textContent).toContain("3");
+  });
+
+  it("activeCount=0 のときバッジを出さない", () => {
+    setup({ open: false, activeCount: 0 });
+    const toggle = screen.getByRole("button", { name: /表示設定/ });
+    expect(toggle.getAttribute("aria-label")).not.toContain("適用中");
+  });
+
+  it("閉じるボタンで onToggleOpen を呼ぶ", async () => {
+    const user = userEvent.setup();
+    const props = setup();
+    await user.click(screen.getByRole("button", { name: "閉じる" }));
+    expect(props.onToggleOpen).toHaveBeenCalledTimes(1);
+  });
+
+  it("Escape キーで onToggleOpen を呼ぶ", async () => {
+    const user = userEvent.setup();
+    const props = setup();
+    await user.keyboard("{Escape}");
+    expect(props.onToggleOpen).toHaveBeenCalledTimes(1);
+  });
+
+  it("isMobile のときパネルが role=dialog になり、PC では dialog にしない", () => {
+    setup({ isMobile: true });
+    expect(screen.getByRole("dialog", { name: "地図の表示設定" })).toBeInTheDocument();
+    cleanup();
+    setup({ isMobile: false });
+    expect(screen.queryByRole("dialog")).toBeNull();
+  });
 });

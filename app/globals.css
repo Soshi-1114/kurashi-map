@@ -193,7 +193,9 @@ html, body {
   z-index: 5; /* 検索ドロップダウンを直下の地図より前面に */
   background: var(--bg-elev);
   border-bottom: 1px solid var(--border);
-  padding: clamp(30px, 6vw, 56px) 22px clamp(26px, 5vw, 46px);
+  /* 地図上の検索を廃止しFV検索に一本化したぶん、SPでは余白を詰めて
+     地図がより早く画面内に現れるようにする */
+  padding: clamp(22px, 5vw, 56px) 22px clamp(18px, 4vw, 46px);
 }
 .home-hero-inner {
   max-width: 760px;
@@ -278,7 +280,11 @@ html, body {
   border-bottom: 1px solid var(--border);
 }
 @media (max-width: 768px) {
-  .home-map--embedded { height: min(60dvh, 540px); }
+  /* SP: 操作可能な地図領域を最低 420px 確保しつつ、下のコンテンツが覗く高さに */
+  .home-map--embedded {
+    height: 55dvh;
+    min-height: 420px;
+  }
 }
 
 /* 地図下の回遊コンテンツ（トップのみ。ドロワーの .home-links とは独立の通常フロー） */
@@ -459,20 +465,28 @@ button { font-family: inherit; }
   box-shadow: 0 0 0 4px var(--accent-soft);
 }
 .app-header-search input::placeholder { color: var(--text-faint); font-weight: 400; }
+/* 検索非表示時（トップページ）にブランドを左端へ保つための伸縮スペーサ */
+.app-header-spacer { flex: 1; }
 
 /* 塗り分け指標の切替＝地図上のフローティング操作（ヘッダーのサイトナビとは分離）。
-   ボタン＋パネルを1つのコンテナにまとめ、地図右上に重ねる。 */
+   ボタン＋パネルを1つのコンテナにまとめ、地図右上に重ねる。
+   top と bottom の両方を固定してコンテナ高に追従させ、パネルの max-height を
+   「地図コンテナ内」に収める（埋め込み地図でも 100dvh を基準にしない）。
+   ラッパー自体はクリックを素通しし、実要素（ボタン・パネル）だけ受ける。 */
 .map-layers {
   position: absolute;
   top: calc(var(--header-h) + env(safe-area-inset-top) + 10px);
   right: 14px;
+  bottom: 14px;
   z-index: 6;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 8px;
+  pointer-events: none;
   transition: right .3s cubic-bezier(0.16, 1, 0.3, 1);
 }
+.map-layers > * { pointer-events: auto; }
 .map-layers-btn {
   display: flex;
   align-items: center;
@@ -497,7 +511,25 @@ button { font-family: inherit; }
   border-color: var(--border-strong);
 }
 /* アイコンのみの正方形ボタン（テキストは常時「なし」で情報量が乏しいため省く）。 */
-.map-layers-btn-icon { width: 44px; padding: 0; }
+.map-layers-btn-icon { width: 44px; padding: 0; position: relative; flex-shrink: 0; }
+/* 設定が既定値から変更されているときだけ出す件数バッジ（常時の強調はしない） */
+.map-layers-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  box-shadow: 0 0 0 2px var(--surface-strong);
+}
 
 /* 検索ドロップダウン — ヘッダーの検索欄直下に */
 .search-results {
@@ -543,7 +575,9 @@ button { font-family: inherit; }
 .search-name { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .search-rent { font-size: var(--text-xs); color: var(--text-muted); font-variant-numeric: tabular-nums; flex-shrink: 0; margin-left: 10px; }
 
-/* レイヤーパネル（ヘッダー直下、デフォルト展開） */
+/* レイヤーパネル。PC はヘッダー直下のポップオーバー（デフォルト展開）。
+   max-height はコンテナ高基準（.map-layers が top/bottom 固定）にし、
+   埋め込み地図でもパネルが地図外へ飛び出さない。 */
 .layers-panel {
   padding: 12px 14px;
   background: var(--surface);
@@ -553,7 +587,7 @@ button { font-family: inherit; }
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-md);
   min-width: 244px;
-  max-height: calc(100dvh - var(--header-h) - env(safe-area-inset-top) - 28px);
+  max-height: calc(100% - 52px); /* トグルボタン44px + gap8px */
   overflow-y: auto;
   animation: layers-in .2s ease;
 }
@@ -562,13 +596,76 @@ button { font-family: inherit; }
   to { opacity: 1; transform: translateY(0); }
 }
 .is-panel-open .map-layers { right: calc(380px + 30px); }
-/* SP でボトムシート展開中は、上から伸びるレイヤーパネルがシートに潜り込まない
-   よう可視シート高（--sheet-h）ぶん上限を詰める。あふれは内部スクロールで読む
-   （トグルボタン44px＋余白を 64px で確保）。 */
+/* モバイル用シートヘッダー・scrim は PC では出さない */
+.layers-scrim { display: none; }
+.layers-head { display: none; }
+/* SP: パネルを画面下から開くモーダルの Bottom Sheet に切り替える。
+   地図コンテナ内の absolute 配置をやめて viewport 下部に固定し、
+   内部のみ縦スクロール・safe-area 考慮・scrim タップで閉じる。 */
 @media (max-width: 768px) {
-  .is-sheet-open .layers-panel {
-    max-height: calc(100dvh - var(--header-h) - env(safe-area-inset-top) - var(--sheet-h, 252px) - 64px);
+  .layers-scrim {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.4);
+    z-index: 60;
+    animation: layers-scrim-in .2s ease;
   }
+  @keyframes layers-scrim-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  .map-layers .layers-panel {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    min-width: 0;
+    max-height: min(80dvh, 720px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 0 16px calc(16px + env(safe-area-inset-bottom));
+    border-radius: 16px 16px 0 0;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    box-shadow: var(--shadow-xl);
+    z-index: 61;
+    animation: layers-sheet-in .24s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @keyframes layers-sheet-in {
+    from { transform: translateY(24px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  .layers-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    margin: 0 -16px 4px;
+    padding: 14px 8px 10px 16px;
+    background: var(--surface-strong);
+    border-bottom: 1px solid var(--border);
+    z-index: 1;
+  }
+  .layers-head-title {
+    font-size: var(--text-base);
+    font-weight: 800;
+    color: var(--text);
+  }
+  .layers-head-close {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+  }
+  .layers-head-close:hover { color: var(--text); }
 }
 /* レイヤーパネル(右上)・凡例(左下)はカード体裁を共通化。タイトルも
    下の .legend-title と同一スペックに揃え、両者の視覚的な一貫性を出す。

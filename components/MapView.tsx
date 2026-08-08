@@ -49,9 +49,11 @@ type Props = {
   initialMetric?: MapMetricKey | "none";
   /** スクロールするページに埋め込む場合 true（1本指パン/ホイールを奪わない協調ジェスチャ）。 */
   cooperativeGestures?: boolean;
+  /** ヘッダーの自治体検索を表示するか。トップページはヒーロー検索と重複するため false。 */
+  showSearch?: boolean;
 };
 
-export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_MAP_METRIC, cooperativeGestures = false }: Props) {
+export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_MAP_METRIC, cooperativeGestures = false, showSearch = true }: Props) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<MapLibreMap | null>(null);
   const muniGeoRef = useRef<GeoJSON.FeatureCollection | null>(null);
@@ -101,7 +103,9 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
   // 初回ビューのポリゴンが描画され切るまで true にしない（凡例先行・白地図対策）
   const [firstPaintReady, setFirstPaintReady] = useState(false);
   const [tooltip, setTooltip] = useState<{ x: number; y: number; name: string; label: string; value: string; flip: boolean } | null>(null);
-  const [layersOpen, setLayersOpen] = useState(true);
+  // レイヤーパネルの初期開閉。モバイルは地図を覆わないよう閉、PCは従来どおり開。
+  // パネル自体は firstPaintReady（クライアント側）まで描画されないため hydration 不整合はない。
+  const [layersOpen, setLayersOpen] = useState(() => typeof window === "undefined" || window.innerWidth >= 768);
   // ハザード実区域ラスタの表示ズーム（HAZARD_ZONE_ZOOM）に達しているか。未満の間は
   // 地図に何も重ねず凡例で「ズームしてください」と誘導する（斜線ハッチは廃止）。
   const [belowHazardZoom, setBelowHazardZoom] = useState(true);
@@ -627,6 +631,12 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
     () => (filterActive ? summary.reduce((n, m) => n + (matchesFilter(m, filters) ? 1 : 0), 0) : 0),
     [filterActive, filters, summary],
   );
+  // レイヤーボタンのバッジ用: 既定値から変更されている設定の数
+  // （塗り分け指標・ハザードオーバーレイ・絞り込み。ベース地図は見た目のみのため含めない）。
+  const layerActiveCount =
+    (activeMetric !== "none" ? 1 : 0) +
+    overlays.size +
+    Object.values(filters).filter((v) => v != null).length;
 
   // フィルタ条件を更新しつつ GA4 に適用イベントを送る共通ハンドラ。
   const updateFilters = useCallback((next: MapFilters) => {
@@ -768,7 +778,11 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
           <img src="/logo.svg" alt="" className="brand-mark" width={30} height={30} />
           <div className="brand-name">KurashiMap</div>
         </div>
-        <MuniSearch municipalities={municipalities} wards={wards} onSelect={flyToMuni} />
+        {showSearch ? (
+          <MuniSearch municipalities={municipalities} wards={wards} onSelect={flyToMuni} />
+        ) : (
+          <div className="app-header-spacer" aria-hidden="true" />
+        )}
         {onMenuClick && (
           <button
             className="app-header-menu-btn"
@@ -801,6 +815,8 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
           onClearFilters={() => setFilters(EMPTY_FILTERS)}
           filterActive={filterActive}
           matchedCount={matchedCount}
+          isMobile={isMobile}
+          activeCount={layerActiveCount}
         />
       )}
 
