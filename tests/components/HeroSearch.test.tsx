@@ -12,18 +12,34 @@ vi.mock("next/navigation", () => ({
   useRouter: () => ({ push }),
 }));
 
-afterEach(cleanup);
-beforeEach(() => push.mockClear());
+// 町丁検索 API（/api/town-search）のモック。「日の里」クエリのみヒットを返す。
+const fetchMock = vi.fn(async (url: string) => ({
+  ok: true,
+  json: async () => ({
+    towns: url.includes(encodeURIComponent("日の里")) ? [{ code: "40220", town: "日の里" }] : [],
+  }),
+}));
 
-const kawaguchi = muniSummary({ code: "11203", name: "川口市" });
-const kawagoe = muniSummary({ code: "11201", name: "川越市" });
-const urawa = muniSummary({
-  code: "11107", name: "浦和区", level: "ward", parentCode: "11100",
-  displayName: "さいたま市浦和区",
+afterEach(() => {
+  cleanup();
+  vi.unstubAllGlobals();
+});
+beforeEach(() => {
+  push.mockClear();
+  fetchMock.mockClear();
+  vi.stubGlobal("fetch", fetchMock);
 });
 
+const kawaguchi = muniSummary({ code: "11203", name: "川口市", kana: "かわぐちし" });
+const kawagoe = muniSummary({ code: "11201", name: "川越市", kana: "かわごえし" });
+const urawa = muniSummary({
+  code: "11107", name: "浦和区", level: "ward", parentCode: "11100",
+  displayName: "さいたま市浦和区", kana: "さいたましうらわく",
+});
+const munakata = muniSummary({ code: "40220", pref: "fukuoka", name: "宗像市", kana: "むなかたし" });
+
 function setup() {
-  render(<HeroSearch munis={[kawaguchi, kawagoe, urawa]} />);
+  render(<HeroSearch munis={[kawaguchi, kawagoe, urawa, munakata]} />);
   return { input: screen.getByRole("combobox") };
 }
 
@@ -83,6 +99,28 @@ describe("HeroSearch", () => {
     await user.clear(input);
     await user.type(input, "浦和");
     expect(screen.getByRole("button", { name: "さいたま市浦和区を地図で表示" })).toBeInTheDocument();
+  });
+
+  it("ひらがな・カタカナの読みでも候補に出る（むなかた → 宗像市）", async () => {
+    const user = userEvent.setup();
+    const { input } = setup();
+    await user.type(input, "むなかた");
+    expect(within(screen.getByRole("option")).getByText("宗像市")).toBeInTheDocument();
+    await user.clear(input);
+    await user.type(input, "ムナカタ");
+    expect(within(screen.getByRole("option")).getByText("宗像市")).toBeInTheDocument();
+  });
+
+  it("町丁名で「自治体名（町丁名）」の候補が出て、クリックで詳細ページへ遷移する", async () => {
+    const user = userEvent.setup();
+    const { input } = setup();
+    await user.type(input, "日の里");
+    // 町丁検索はデバウンス付きの API 呼び出しなので候補の出現を待つ
+    const option = await screen.findByRole("option");
+    expect(within(option).getByText("宗像市")).toBeInTheDocument();
+    expect(within(option).getByText("（日の里）")).toBeInTheDocument();
+    await user.click(option);
+    expect(push).toHaveBeenCalledWith("/area/fukuoka/40220");
   });
 
   it("地図ピンのクリックは詳細ページへ遷移せず、MAP_FLY_EVENT を dispatch して候補を閉じる", async () => {

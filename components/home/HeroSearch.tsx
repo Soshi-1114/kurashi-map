@@ -16,7 +16,10 @@ import { requestMapFly } from "@/lib/mapFly";
 export default function HeroSearch({ munis }: { munis: MuniSummary[] }) {
   const router = useRouter();
   const onPick = useCallback((m: MuniSummary) => router.push(`/area/${m.pref}/${m.code}`), [router]);
-  const { query, setQuery, filtered, activeIndex, setActiveIndex, pick, onKeyDown } = useMuniCombobox(munis, onPick);
+  // townSearch: 町丁名（例: 日の里）やひらがなでも自治体を引けるようにする
+  const { query, setQuery, filtered, activeIndex, setActiveIndex, pick, onKeyDown } = useMuniCombobox(munis, onPick, {
+    townSearch: true,
+  });
 
   // 副動作: ページ内の地図へスクロールし、その自治体へフライトさせる（遷移しない）。
   const showOnMap = useCallback(
@@ -46,17 +49,15 @@ export default function HeroSearch({ munis }: { munis: MuniSummary[] }) {
           aria-expanded={filtered.length > 0}
           aria-controls="home-search-listbox"
           aria-autocomplete="list"
-          aria-activedescendant={
-            activeIndex >= 0 && filtered[activeIndex] ? `hopt-${filtered[activeIndex].code}` : undefined
-          }
+          aria-activedescendant={activeIndex >= 0 && filtered[activeIndex] ? `hopt-${activeIndex}` : undefined}
         />
       </div>
       {filtered.length > 0 && (
         <ul id="home-search-listbox" className="search-results" role="listbox" aria-label="自治体の検索候補">
           {filtered.map((m, i) => (
-            <li key={m.code} role="presentation" className="search-row">
+            <li key={`${m.code}:${m.town ?? ""}`} role="presentation" className="search-row">
               <button
-                id={`hopt-${m.code}`}
+                id={`hopt-${i}`}
                 role="option"
                 aria-selected={i === activeIndex}
                 tabIndex={-1}
@@ -67,6 +68,7 @@ export default function HeroSearch({ munis }: { munis: MuniSummary[] }) {
                 <span className="search-place">
                   {muniContextLabel(m) && <span className="search-pref">{muniContextLabel(m)}</span>}
                   <span className="search-name">{m.name}</span>
+                  {m.town && <span className="search-town">（{m.town}）</span>}
                 </span>
               </button>
               <button

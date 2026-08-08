@@ -183,6 +183,11 @@ export default async function AboutPage() {
           <li>地価: {NEXT_UPDATE.landPrice}</li>
           <li>家賃: {NEXT_UPDATE.rent}</li>
         </ul>
+        <p className="detail-p" style={{ fontSize: 13, color: "var(--text-muted)" }}>
+          このほか、検索サジェスト（自治体の読み仮名・町丁名からの検索）には Geolonia
+          住所データ（国土交通省「位置参照情報」等を元に作成・MIT
+          License）を使用しています。これは検索用のメタデータであり、掲載する統計値には使用していません。
+        </p>
       </section>
 
       <section className="detail-section">

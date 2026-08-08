@@ -1,10 +1,11 @@
 "use client";
 
-// ヘッダーの自治体検索コンボボックス。検索クエリ・候補・キーボード選択位置の
-// 状態はこのコンポーネントが持ち、確定時は onSelect に自治体を渡して自らクエリを
-// クリアする（地図側は選択とフライトだけ担当）。
-import { useCallback, useEffect, useMemo, useState } from "react";
+// ヘッダーの自治体検索コンボボックス。確定時は onSelect に自治体を渡す
+// （地図側は選択とフライトだけ担当）。状態機械は useMuniCombobox を共有し、
+// 名前・ひらがな読み・町丁名（例: 日の里 → 宗像市（日の里））で検索できる。
+import { useCallback, useMemo } from "react";
 import type { MuniSummary } from "@/lib/types";
+import { useMuniCombobox } from "@/lib/useMuniCombobox";
 import { muniContextLabel } from "@/lib/muniLabel";
 import { hasRent } from "@/lib/rentColor";
 
@@ -15,44 +16,14 @@ type Props = {
 };
 
 export default function MuniSearch({ municipalities, wards, onSelect }: Props) {
-  const [searchQuery, setSearchQuery] = useState("");
-  // 検索候補のキーボード選択位置（-1 = 未選択）。コンボボックスの aria-activedescendant に対応。
-  const [activeIndex, setActiveIndex] = useState(-1);
-
-  const filtered = useMemo(() => {
-    const q = searchQuery.trim();
-    if (!q) return [];
-    // 市区町村と区を両方検索対象に
-    return [...municipalities, ...wards]
-      .filter((m) => (m.displayName ?? m.name).includes(q) || m.name.includes(q))
-      .slice(0, 8);
-  }, [searchQuery, municipalities, wards]);
-
-  // 候補リストが変わるたびにキーボード選択位置をリセット
-  useEffect(() => { setActiveIndex(-1); }, [searchQuery]);
-
-  const pick = useCallback((m: MuniSummary) => {
-    setSearchQuery("");
-    void onSelect(m);
-  }, [onSelect]);
-
-  // コンボボックスのキーボード操作（↓↑で候補移動・Enterで確定・Escで閉じる）
-  const onSearchKeyDown = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Escape") { setSearchQuery(""); return; }
-    if (!filtered.length) return;
-    if (e.key === "ArrowDown") {
-      e.preventDefault();
-      setActiveIndex((i) => (i + 1) % filtered.length);
-    } else if (e.key === "ArrowUp") {
-      e.preventDefault();
-      setActiveIndex((i) => (i <= 0 ? filtered.length - 1 : i - 1));
-    } else if (e.key === "Enter") {
-      if (activeIndex >= 0 && activeIndex < filtered.length) {
-        e.preventDefault();
-        pick(filtered[activeIndex]);
-      }
-    }
-  }, [filtered, activeIndex, pick]);
+  // 市区町村と区を両方検索対象に
+  const candidates = useMemo(() => [...municipalities, ...wards], [municipalities, wards]);
+  const onPick = useCallback((m: MuniSummary) => void onSelect(m), [onSelect]);
+  const { query, setQuery, filtered, activeIndex, setActiveIndex, pick, onKeyDown } = useMuniCombobox(
+    candidates,
+    onPick,
+    { townSearch: true },
+  );
 
   return (
     <div className="app-header-search">
@@ -61,23 +32,23 @@ export default function MuniSearch({ municipalities, wards, onSelect }: Props) {
         <input
           type="search"
           placeholder="自治体名で検索"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          onKeyDown={onSearchKeyDown}
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          onKeyDown={onKeyDown}
           aria-label="自治体検索"
           role="combobox"
           aria-expanded={filtered.length > 0}
           aria-controls="muni-search-listbox"
           aria-autocomplete="list"
-          aria-activedescendant={activeIndex >= 0 && filtered[activeIndex] ? `sopt-${filtered[activeIndex].code}` : undefined}
+          aria-activedescendant={activeIndex >= 0 && filtered[activeIndex] ? `sopt-${activeIndex}` : undefined}
         />
       </div>
       {filtered.length > 0 && (
         <ul id="muni-search-listbox" className="search-results" role="listbox" aria-label="自治体の検索候補">
           {filtered.map((m, i) => (
-            <li key={m.code} role="presentation">
+            <li key={`${m.code}:${m.town ?? ""}`} role="presentation">
               <button
-                id={`sopt-${m.code}`}
+                id={`sopt-${i}`}
                 role="option"
                 aria-selected={i === activeIndex}
                 tabIndex={-1}
@@ -90,6 +61,7 @@ export default function MuniSearch({ municipalities, wards, onSelect }: Props) {
                     <span className="search-pref">{muniContextLabel(m)}</span>
                   )}
                   <span className="search-name">{m.name}</span>
+                  {m.town && <span className="search-town">（{m.town}）</span>}
                 </span>
                 <span className="search-rent">{hasRent(m.rent) ? `${m.rent.toLocaleString()}円` : "—"}</span>
               </button>

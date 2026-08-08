@@ -93,6 +93,9 @@ export type MuniSummary = {
   pref: string;
   name: string;
   displayName?: string;
+  // ひらがな読み（検索のかな一致用）。data/muni-kana.json（Geolonia 住所データ由来、
+  // 政令市親市は区の読みから導出）を listSummaryAcrossPrefs で合流させる。
+  kana?: string;
   level?: AdminLevel;
   parentCode?: string;
   rent: number;          // rent.value（円/月）
