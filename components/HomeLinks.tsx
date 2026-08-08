@@ -3,10 +3,19 @@
 // ファーストビューのヒーロー側が持つため、ここには置かない）。
 
 import Link from "next/link";
-import { RANKINGS } from "@/lib/rankings";
+import { RANKINGS, type RankingCategory } from "@/lib/rankings";
 import PrefRegionLinks from "@/components/PrefRegionLinks";
+import Expandable from "@/components/home/Expandable";
 
 export type PopularMuni = { pref: string; code: string; name: string };
+
+// トップに出す代表ランキング（カテゴリごとに数件へ絞り、全量は /ranking に送る）。
+// slug は lib/rankings.ts の定義に一致させる（URLは変更しない）。
+const RANKING_PICKS: Array<{ category: RankingCategory; slugs: string[] }> = [
+  { category: "住まい", slugs: ["rent-cheap", "land-price-high", "vacancy-high"] },
+  { category: "人口・まち", slugs: ["population-most", "population-growth", "population-density"] },
+  { category: "子育て・生活", slugs: ["waitlist-zero"] },
+];
 
 export default function HomeLinks({ popular }: { popular: PopularMuni[] }) {
   return (
@@ -33,11 +42,14 @@ export default function HomeLinks({ popular }: { popular: PopularMuni[] }) {
 
       <section className="home-links-block">
         <h2 className="home-links-h">都道府県から探す</h2>
-        <PrefRegionLinks
-          href={(slug) => `/area/${slug}`}
-          linkClassName="home-pref-link"
-          gridClassName="home-pref-grid"
-        />
+        {/* SPでは長くなりすぎるためクランプ＋「すべて表示」。47県リンクは常にHTMLに存在 */}
+        <Expandable moreLabel="すべての都道府県を表示">
+          <PrefRegionLinks
+            href={(slug) => `/area/${slug}`}
+            linkClassName="home-pref-link"
+            gridClassName="home-pref-grid"
+          />
+        </Expandable>
       </section>
 
       <section className="home-links-block">
@@ -52,13 +64,26 @@ export default function HomeLinks({ popular }: { popular: PopularMuni[] }) {
 
       <section className="home-links-block">
         <h2 className="home-links-h">ランキングで比較</h2>
-        <ul className="home-chip-row">
-          {RANKINGS.map((r) => (
-            <li key={r.slug}>
-              <Link href={`/ranking/${r.slug}`} className="home-chip">{r.title}</Link>
-            </li>
-          ))}
-        </ul>
+        {/* トップでは代表項目のみカテゴリ別に表示し、全14種は /ranking で見せる */}
+        {RANKING_PICKS.map(({ category, slugs }) => (
+          <div key={category} className="home-rank-cat">
+            <p className="home-rank-cat-label">{category}</p>
+            <ul className="home-chip-row">
+              {slugs.map((slug) => {
+                const r = RANKINGS.find((x) => x.slug === slug);
+                if (!r) return null;
+                return (
+                  <li key={r.slug}>
+                    <Link href={`/ranking/${r.slug}`} className="home-chip">{r.shortLabel}</Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ))}
+        <p className="home-rank-all">
+          <Link href="/ranking">すべてのランキングを見る（全{RANKINGS.length}種） →</Link>
+        </p>
       </section>
 
       {popular.length > 0 && (

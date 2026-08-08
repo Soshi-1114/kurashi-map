@@ -13,8 +13,13 @@ import { hasVacancy, vacancyRateText } from "./vacancy";
 import { populationDensity, densityText } from "./populationDensity";
 import { prefNameOf } from "./site";
 
+/** トップページ等でランキング導線をまとめるカテゴリ（URL・ページ内容には影響しない） */
+export type RankingCategory = "住まい" | "人口・まち" | "子育て・生活";
+
 export type RankingDef = {
   slug: string;
+  /** ナビゲーションのグルーピング用カテゴリ */
+  category: RankingCategory;
   /** ページ H1 / 見出し用のフレーズ */
   title: string;
   /**
@@ -205,6 +210,7 @@ function foreignMetaDescription(highLow: "高い" | "低い") {
 export const RANKINGS: RankingDef[] = [
   {
     slug: "rent-cheap",
+    category: "住まい",
     title: "家賃が安い市区町村ランキング",
     seoTitle: "家賃相場が安い市区町村ランキング",
     shortLabel: "家賃が安い",
@@ -220,6 +226,7 @@ export const RANKINGS: RankingDef[] = [
   },
   {
     slug: "rent-high",
+    category: "住まい",
     title: "家賃が高い市区町村ランキング",
     seoTitle: "家賃相場が高い市区町村ランキング",
     shortLabel: "家賃が高い",
@@ -235,6 +242,7 @@ export const RANKINGS: RankingDef[] = [
   },
   {
     slug: "vacancy-high",
+    category: "住まい",
     title: "空き家率が高い市区町村ランキング",
     shortLabel: "空き家率が高い",
     description:
@@ -252,6 +260,7 @@ export const RANKINGS: RankingDef[] = [
   },
   {
     slug: "vacancy-low",
+    category: "住まい",
     title: "空き家率が低い市区町村ランキング",
     shortLabel: "空き家率が低い",
     description:
@@ -269,6 +278,7 @@ export const RANKINGS: RankingDef[] = [
   },
   {
     slug: "land-price-high",
+    category: "住まい",
     title: "地価が高い市区町村ランキング",
     shortLabel: "地価が高い",
     description:
@@ -284,6 +294,7 @@ export const RANKINGS: RankingDef[] = [
   },
   {
     slug: "land-price-low",
+    category: "住まい",
     title: "地価が安い市区町村ランキング",
     shortLabel: "地価が安い",
     description:
@@ -299,6 +310,7 @@ export const RANKINGS: RankingDef[] = [
   },
   {
     slug: "waitlist-zero",
+    category: "子育て・生活",
     title: "待機児童ゼロの市区町村",
     shortLabel: "待機児童ゼロ",
     description:
@@ -315,6 +327,7 @@ export const RANKINGS: RankingDef[] = [
   },
   {
     slug: "population-most",
+    category: "人口・まち",
     title: "人口が多い市区町村ランキング",
     shortLabel: "人口が多い",
     description:
@@ -330,6 +343,7 @@ export const RANKINGS: RankingDef[] = [
   },
   {
     slug: "population-density",
+    category: "人口・まち",
     title: "人口密度が高い市区町村ランキング",
     shortLabel: "人口密度が高い",
     description:
@@ -349,6 +363,7 @@ export const RANKINGS: RankingDef[] = [
   },
   {
     slug: "population-density-low",
+    category: "人口・まち",
     title: "人口密度が低い市区町村ランキング",
     shortLabel: "人口密度が低い",
     description:
@@ -368,6 +383,7 @@ export const RANKINGS: RankingDef[] = [
   },
   {
     slug: "population-growth",
+    category: "人口・まち",
     title: "人口増加率が高い市区町村ランキング",
     shortLabel: "人口増加率",
     description:
@@ -387,6 +403,7 @@ export const RANKINGS: RankingDef[] = [
   },
   {
     slug: "population-decline",
+    category: "人口・まち",
     title: "人口減少率が高い市区町村ランキング",
     shortLabel: "人口減少率",
     description:
@@ -406,6 +423,7 @@ export const RANKINGS: RankingDef[] = [
   },
   {
     slug: "foreign-ratio-high",
+    category: "人口・まち",
     title: "外国人住民比率が高い市区町村ランキング",
     shortLabel: "外国人比率が高い",
     description:
@@ -428,6 +446,7 @@ export const RANKINGS: RankingDef[] = [
   },
   {
     slug: "foreign-ratio-low",
+    category: "人口・まち",
     title: "外国人住民比率が低い市区町村ランキング",
     shortLabel: "外国人比率が低い",
     description:

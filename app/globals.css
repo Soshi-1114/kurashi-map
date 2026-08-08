@@ -325,6 +325,55 @@ html, body {
   .home-cando-item { border-left: none; border-top: 1px solid var(--border); }
   .home-cando-item:first-child { border-top: none; }
 }
+
+/* 「一部表示＋すべて表示」クランプ（SPのみ）。中身は常にDOMに存在し、
+   max-height を絞るだけ（display は変えない＝リンクはHTML上に保持）。 */
+.home-collapse-toggle { display: none; }
+@media (max-width: 768px) {
+  .home-collapse:not(.is-expanded) .home-collapse-body {
+    max-height: 300px;
+    overflow: hidden;
+    position: relative;
+  }
+  /* 続きがあることを示す下端フェード */
+  .home-collapse:not(.is-expanded) .home-collapse-body::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 56px;
+    background: linear-gradient(to bottom, transparent, var(--bg));
+    pointer-events: none;
+  }
+  .home-collapse-toggle {
+    display: block;
+    width: 100%;
+    margin-top: 8px;
+    padding: 10px 16px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-pill);
+    background: var(--surface);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+  }
+  .home-collapse-toggle:hover { color: var(--accent); border-color: var(--accent); }
+}
+
+/* トップのランキング導線（カテゴリ別・代表項目のみ） */
+.home-rank-cat { margin-top: 12px; }
+.home-rank-cat:first-of-type { margin-top: 0; }
+.home-rank-cat-label {
+  margin: 0 0 6px;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--text-faint);
+}
+.home-rank-all { margin: 14px 0 0; font-size: var(--text-sm); }
+.home-rank-all a { color: var(--accent); font-weight: 600; text-decoration: none; }
+.home-rank-all a:hover { text-decoration: underline; }
 body { letter-spacing: 0.005em; }
 a { color: var(--accent); text-decoration: none; transition: color .15s ease; }
 a:hover { color: var(--accent-hover); }
