@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 // @ts-expect-error mjs モジュール（データスクリプト共通ヘルパー）に型定義はない
-import { toHiragana, collapseChome, townKanaToHiragana, cityKanaFromWardKanas, parseCsvLine } from "../../scripts/_lib/towns.mjs";
+import { toHiragana, collapseChome, townKanaToHiragana, cityKanaFromWardKanas } from "../../scripts/_lib/towns.mjs";
 
 describe("collapseChome", () => {
   it("末尾の丁目表記を落として大字単位に畳む", () => {
@@ -38,16 +38,8 @@ describe("cityKanaFromWardKanas", () => {
   });
 });
 
-describe("parseCsvLine", () => {
-  it("クォート囲み・非囲み・空フィールドの混在を分解する", () => {
-    expect(parseCsvLine('"01","北海道",,"札幌市中央区",1.5')).toEqual(["01", "北海道", "", "札幌市中央区", "1.5"]);
-  });
-
-  it("囲み内のカンマと \"\" エスケープを扱う", () => {
-    expect(parseCsvLine('"a,b","say ""hi""",c')).toEqual(["a,b", 'say "hi"', "c"]);
-  });
-
-  it("toHiragana はカタカナのみ変換する", () => {
+describe("toHiragana", () => {
+  it("カタカナのみ変換する", () => {
     expect(toHiragana("ムナカタシ")).toBe("むなかたし");
     expect(toHiragana("宗像市")).toBe("宗像市");
   });

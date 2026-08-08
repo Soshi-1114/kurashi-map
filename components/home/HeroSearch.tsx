@@ -49,15 +49,19 @@ export default function HeroSearch({ munis }: { munis: MuniSummary[] }) {
           aria-expanded={filtered.length > 0}
           aria-controls="home-search-listbox"
           aria-autocomplete="list"
-          aria-activedescendant={activeIndex >= 0 && filtered[activeIndex] ? `hopt-${activeIndex}` : undefined}
+          aria-activedescendant={
+            activeIndex >= 0 && filtered[activeIndex] ? `hopt-${filtered[activeIndex].code}` : undefined
+          }
         />
       </div>
       {filtered.length > 0 && (
         <ul id="home-search-listbox" className="search-results" role="listbox" aria-label="自治体の検索候補">
+          {/* filtered は自治体コード単位に集約済み（同じ自治体が名前ヒットと町丁ヒットの
+              両方で重複することはない）ので、key/id はコードのみで一意 */}
           {filtered.map((m, i) => (
-            <li key={`${m.code}:${m.town ?? ""}`} role="presentation" className="search-row">
+            <li key={m.code} role="presentation" className="search-row">
               <button
-                id={`hopt-${i}`}
+                id={`hopt-${m.code}`}
                 role="option"
                 aria-selected={i === activeIndex}
                 tabIndex={-1}

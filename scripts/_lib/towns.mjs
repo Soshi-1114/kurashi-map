@@ -1,7 +1,7 @@
 // 町丁名・読み仮名データ生成（fetch-towns.mjs）の純粋関数群。
 // テスト: tests/scripts/towns.test.ts
 
-/** カタカナ→ひらがな（長音符・記号はそのまま）。 */
+/** カタカナ→ひらがな（長音符・記号はそのまま）。lib/kana.ts の同名関数と同ロジック（変更時は両方直す）。 */
 export function toHiragana(s) {
   return String(s ?? "").replace(/[ァ-ヶ]/g, (ch) => String.fromCharCode(ch.charCodeAt(0) - 0x60));
 }
@@ -39,27 +39,4 @@ export function cityKanaFromWardKanas(wardKanas) {
   const cut = lcp.lastIndexOf("し");
   if (cut < 0) return null;
   return lcp.slice(0, cut + 1);
-}
-
-/** ダブルクォート囲みCSVの1行をフィールド配列に分解する（囲み内のカンマ・""エスケープ対応）。 */
-export function parseCsvLine(line) {
-  const out = [];
-  let cur = "";
-  let inQuote = false;
-  for (let i = 0; i < line.length; i++) {
-    const ch = line[i];
-    if (inQuote) {
-      if (ch === '"') {
-        if (line[i + 1] === '"') { cur += '"'; i++; }
-        else inQuote = false;
-      } else cur += ch;
-    } else if (ch === '"') {
-      inQuote = true;
-    } else if (ch === ",") {
-      out.push(cur);
-      cur = "";
-    } else cur += ch;
-  }
-  out.push(cur);
-  return out;
 }

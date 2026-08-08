@@ -12,15 +12,15 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { MuniSummary } from "./types";
 import { toHiragana } from "./kana";
+import { TOWN_QUERY_MIN } from "./townSearch";
 
 /** 候補1行。town があれば「町丁名でヒットした自治体」行（例 宗像市（日の里））。 */
 export type ComboboxHit<T extends MuniSummary> = T & { town?: string };
 
 type TownApiHit = { code: string; town: string };
 
-// /api/town-search を呼ぶ最小クエリ長（サーバー側 TOWN_QUERY_MIN と揃える）と
-// 入力中の連打を抑えるデバウンス
-const TOWN_QUERY_MIN = 2;
+// 入力中の連打を抑えるデバウンス（/api/town-search を呼ぶ最小クエリ長は townSearch.ts の
+// TOWN_QUERY_MIN をサーバー側と共有する）
 const TOWN_DEBOUNCE_MS = 150;
 
 export function useMuniCombobox<T extends MuniSummary>(
@@ -49,7 +49,7 @@ export function useMuniCombobox<T extends MuniSummary>(
   // 前回のタイマー・リクエストを破棄するので、反映されるのは常に最新クエリの結果のみ。
   useEffect(() => {
     if (!townSearch || q.length < TOWN_QUERY_MIN) {
-      setTownHits([]);
+      setTownHits((prev) => (prev.length ? [] : prev));
       return;
     }
     const ctrl = new AbortController();

@@ -26,6 +26,7 @@ import { resolvePrefs } from "./_lib/prefs.mjs";
 import { loadMuni, saveMuni } from "./_lib/data.mjs";
 import { loadMuniPolys, findPolyForPoint } from "./_lib/reinfolib.mjs";
 import { version } from "./_lib/versions.mjs";
+import { parseCsvLine } from "./_lib/csv.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
@@ -83,25 +84,6 @@ function decodeCsv(buf) {
 }
 
 // ダブルクォート対応の最小 CSV パーサ（1行 → セル配列）。
-function parseCsvLine(line) {
-  const out = [];
-  let cur = "";
-  let q = false;
-  for (let i = 0; i < line.length; i++) {
-    const c = line[i];
-    if (q) {
-      if (c === '"') {
-        if (line[i + 1] === '"') { cur += '"'; i++; }
-        else q = false;
-      } else cur += c;
-    } else if (c === '"') q = true;
-    else if (c === ",") { out.push(cur); cur = ""; }
-    else cur += c;
-  }
-  out.push(cur);
-  return out;
-}
-
 function colIndex(header, ...needles) {
   for (let i = 0; i < header.length; i++) {
     const h = header[i].replace(/\s/g, "");

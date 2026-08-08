@@ -40,15 +40,18 @@ export default function MuniSearch({ municipalities, wards, onSelect }: Props) {
           aria-expanded={filtered.length > 0}
           aria-controls="muni-search-listbox"
           aria-autocomplete="list"
-          aria-activedescendant={activeIndex >= 0 && filtered[activeIndex] ? `sopt-${activeIndex}` : undefined}
+          aria-activedescendant={
+            activeIndex >= 0 && filtered[activeIndex] ? `sopt-${filtered[activeIndex].code}` : undefined
+          }
         />
       </div>
       {filtered.length > 0 && (
         <ul id="muni-search-listbox" className="search-results" role="listbox" aria-label="自治体の検索候補">
+          {/* filtered は自治体コード単位に集約済みなので key/id はコードのみで一意 */}
           {filtered.map((m, i) => (
-            <li key={`${m.code}:${m.town ?? ""}`} role="presentation">
+            <li key={m.code} role="presentation">
               <button
-                id={`sopt-${i}`}
+                id={`sopt-${m.code}`}
                 role="option"
                 aria-selected={i === activeIndex}
                 tabIndex={-1}

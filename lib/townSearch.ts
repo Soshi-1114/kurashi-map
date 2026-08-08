@@ -10,14 +10,15 @@ type TownIndexEntry = { code: string; town: string; kana: string };
 export const TOWN_QUERY_MIN = 2;
 
 // towns.json のロードは初回リクエストまで遅延し、以後プロセス内で共有する。
-// リテラルでない動的 import は lib/prefs.ts と同じパターン（tsc に 4MB JSON を
-// 型解析させず、バンドラにはチャンクとして含めさせる）。
+// 動的 import はチャンク分割のため（このファイルを読まないページのバンドルに含めない）。
 let indexPromise: Promise<TownIndexEntry[]> | null = null;
 function loadTownIndex(): Promise<TownIndexEntry[]> {
   if (!indexPromise) {
-    const file = "towns";
-    indexPromise = import(`@/data/${file}.json`).then((mod) => {
-      const towns = (mod.default ?? mod).towns as Record<string, [string, string][]>;
+    indexPromise = import("@/data/towns.json").then((mod) => {
+      // tsc は静的パスの JSON import を実データから逐語的に推論する（例:
+      // 個別自治体コードごとの string[][]）ため、素通しせず unknown 経由で
+      // 意図した型（{code: [町丁名, かな][]}）へキャストする。
+      const towns = (mod.default ?? mod).towns as unknown as Record<string, [string, string][]>;
       const out: TownIndexEntry[] = [];
       for (const [code, list] of Object.entries(towns)) {
         for (const [town, kana] of list) out.push({ code, town, kana });
@@ -31,6 +32,8 @@ function loadTownIndex(): Promise<TownIndexEntry[]> {
 /**
  * 町丁名インデックスをクエリで検索する（純関数・テスト対象）。
  * 順位: 名前が前方一致 > 読みが前方一致 > 名前が部分一致 > 読みが部分一致。
+ * スコアは4種類しかないため、比較ソートせず4バケツに振り分けて順に連結する
+ * （インデックス全件を1パス走査するだけで済む）。
  * 結果は自治体単位に1件へ集約する（同じ市の複数町丁が並ぶより、自治体の多様性を優先。
  * 表示する町丁はその自治体で最も順位の高い1件）。
  */
@@ -38,24 +41,22 @@ export function searchTownIndex(index: TownIndexEntry[], rawQuery: string, limit
   const q = rawQuery.trim();
   if (q.length < TOWN_QUERY_MIN) return [];
   const hq = toHiragana(q);
-  const scored: { score: number; code: string; town: string }[] = [];
+  const buckets: TownIndexEntry[][] = [[], [], [], []];
   for (const e of index) {
-    let score: number;
-    if (e.town.startsWith(q)) score = 0;
-    else if (e.kana !== "" && e.kana.startsWith(hq)) score = 1;
-    else if (e.town.includes(q)) score = 2;
-    else if (e.kana !== "" && e.kana.includes(hq)) score = 3;
-    else continue;
-    scored.push({ score, code: e.code, town: e.town });
+    if (e.town.startsWith(q)) buckets[0].push(e);
+    else if (e.kana !== "" && e.kana.startsWith(hq)) buckets[1].push(e);
+    else if (e.town.includes(q)) buckets[2].push(e);
+    else if (e.kana !== "" && e.kana.includes(hq)) buckets[3].push(e);
   }
-  scored.sort((a, b) => a.score - b.score); // 同スコアは元順（=コード順）を保つ安定ソート
   const out: TownHit[] = [];
   const seen = new Set<string>();
-  for (const s of scored) {
-    if (seen.has(s.code)) continue;
-    seen.add(s.code);
-    out.push({ code: s.code, town: s.town });
-    if (out.length >= limit) break;
+  for (const bucket of buckets) {
+    for (const e of bucket) {
+      if (seen.has(e.code)) continue;
+      seen.add(e.code);
+      out.push({ code: e.code, town: e.town });
+      if (out.length >= limit) return out;
+    }
   }
   return out;
 }

@@ -631,10 +631,10 @@ button { font-family: inherit; }
 /* ヒーロー検索の候補行: 主ボタン（詳細ページへ）＋右端の地図ピン（地図で表示）を横並びに */
 .search-row { display: flex; align-items: stretch; gap: 2px; }
 .search-row > button:first-child { flex: 1; min-width: 0; }
-/* .search-results button { width:100% } より高い詳細度で幅を44pxに固定する */
-.search-results .search-mapbtn {
+/* flex-basis（flex の第3値）は width より優先されるため、.search-results button の
+   width:100% と詳細度を競わなくても主軸サイズは44pxに固定される */
+.search-mapbtn {
   flex: 0 0 44px;
-  width: 44px;
   border: none;
   background: transparent;
   color: var(--text-faint);

@@ -19,7 +19,8 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { PREFS } from "./_lib/prefs.mjs";
 import { loadAllMuni } from "./_lib/data.mjs";
-import { toHiragana, collapseChome, townKanaToHiragana, cityKanaFromWardKanas, parseCsvLine } from "./_lib/towns.mjs";
+import { parseCsvLine } from "./_lib/csv.mjs";
+import { toHiragana, collapseChome, townKanaToHiragana, cityKanaFromWardKanas } from "./_lib/towns.mjs";
 
 const CSV_URL = "https://raw.githubusercontent.com/geolonia/japanese-addresses/master/data/latest.csv";
 const SOURCE = "Geolonia 住所データ（国土交通省「位置参照情報」等を元に作成・MIT License）";
@@ -63,8 +64,8 @@ async function loadKnownCodes() {
   return new Set(codes);
 }
 
-const csv = await loadCsv();
-const known = await loadKnownCodes();
+// CSV ダウンロードとローカル data/*.json の読み込みは互いに依存しないので並行実行する
+const [csv, known] = await Promise.all([loadCsv(), loadKnownCodes()]);
 
 // ヘッダー行から列位置を解決（列順変更に耐える）
 const lines = csv.split("\n");
