@@ -83,7 +83,6 @@ function decodeCsv(buf) {
   }
 }
 
-// ダブルクォート対応の最小 CSV パーサ（1行 → セル配列）。
 function colIndex(header, ...needles) {
   for (let i = 0; i < header.length; i++) {
     const h = header[i].replace(/\s/g, "");

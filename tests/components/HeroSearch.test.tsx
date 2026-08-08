@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { describe, it, expect, vi, afterEach, beforeEach } from "vitest";
-import { render, screen, cleanup, within } from "@testing-library/react";
+import { render, screen, cleanup, within, waitFor, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import HeroSearch from "@/components/home/HeroSearch";
 import { MAP_FLY_EVENT, type MapFlyDetail } from "@/lib/mapFly";
@@ -121,6 +121,32 @@ describe("HeroSearch", () => {
     expect(within(option).getByText("（日の里）")).toBeInTheDocument();
     await user.click(option);
     expect(push).toHaveBeenCalledWith("/area/fukuoka/40220");
+  });
+
+  it("町丁検索が失敗した時は、別クエリに前回の町丁候補を持ち越さない", async () => {
+    const user = userEvent.setup();
+    let calls = 0;
+    // 1回目（日の里）は成功、2回目（川口）は失敗を返す町丁検索 API のモック
+    const flakyFetch = vi.fn(async () => {
+      calls++;
+      if (calls === 1) return { ok: true, json: async () => ({ towns: [{ code: "40220", town: "日の里" }] }) };
+      return { ok: false, json: async () => ({}) };
+    });
+    vi.stubGlobal("fetch", flakyFetch);
+    const { input } = setup();
+
+    await user.type(input, "日の里");
+    await screen.findByText("（日の里）");
+
+    // 実ブラウザの「選択→貼り付け／一括置換」を模して、2文字未満を経由せず直接
+    // 別クエリへ書き換える（1文字ずつ打つと2文字未満を経由して townHits が
+    // 別経路でクリアされ、検証したい「失敗レスポンスでの取りこぼし」を再現できない）
+    fireEvent.change(input, { target: { value: "川口" } });
+    await screen.findByText("川口市"); // ローカル一致は即時に出る
+    // 町丁検索の失敗レスポンスが返るまで待ち、前回（宗像市・日の里）の候補が
+    // 無関係な新しいクエリの結果に混ざって残らないことを確認する
+    await waitFor(() => expect(screen.queryByText("（日の里）")).toBeNull());
+    expect(screen.queryByText("宗像市")).toBeNull();
   });
 
   it("地図ピンのクリックは詳細ページへ遷移せず、MAP_FLY_EVENT を dispatch して候補を閉じる", async () => {

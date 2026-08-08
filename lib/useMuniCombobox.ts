@@ -53,14 +53,20 @@ export function useMuniCombobox<T extends MuniSummary>(
       return;
     }
     const ctrl = new AbortController();
+    const clearHits = () => setTownHits((prev) => (prev.length ? [] : prev));
     const timer = setTimeout(async () => {
       try {
         const res = await fetch(`/api/town-search?q=${encodeURIComponent(q)}`, { signal: ctrl.signal });
-        if (!res.ok) return;
+        if (!res.ok) {
+          clearHits(); // サーバーエラー時は古いクエリの町丁候補を残さない
+          return;
+        }
         const json = (await res.json()) as { towns?: TownApiHit[] };
         setTownHits(Array.isArray(json.towns) ? json.towns : []);
       } catch {
-        // 中断・オフライン時は町丁候補なしで自治体候補のみ表示
+        // より新しいクエリに差し替わっての中断（ctrl.abort）は無視（次のリクエストが
+        // 状態を更新する）。オフライン等の実際の失敗時のみ町丁候補なしに戻す。
+        if (!ctrl.signal.aborted) clearHits();
       }
     }, TOWN_DEBOUNCE_MS);
     return () => {
