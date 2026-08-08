@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 import MapView from "@/components/MapView";
 import HomeLinks, { type PopularMuni } from "@/components/HomeLinks";
 import HeroSearch from "@/components/home/HeroSearch";
+import SiteHeader from "@/components/SiteHeader";
 import { listSummaryAcrossPrefs, listAllAcrossPrefs } from "@/lib/metrics";
 import { muniLevelOnly } from "@/lib/rankings";
 import { SITE, absoluteUrl } from "@/lib/site";
@@ -54,6 +55,10 @@ export default async function HomePage() {
   const popular = await getPopularMunis();
   return (
     <main className="home-main">
+      {/* ページヘッダー。スクロールするページなので、地図内のフローティングヘッダー
+          ではなくページ最上部に置く（地図の面積を削らず、検索候補とも重ならない）。 */}
+      <SiteHeader />
+
       {/* ファーストビュー: 何のサービスかを5秒で伝えるコピー＋詳細ページへ遷移する検索。
           地図（プロダクトの中核）はその直下に据える。 */}
       <section className="home-hero">
@@ -72,10 +77,10 @@ export default async function HomePage() {
       </section>
 
       {/* 地図。スクロールするページへの埋め込みなので協調ジェスチャを有効化
-          （SP: 2本指パン / PC: Ctrl+ホイールでズーム）。検索はFVのヒーロー検索に
-          一本化するため、地図ヘッダーの検索は出さない。 */}
+          （SP: 2本指パン / PC: Ctrl+ホイールでズーム）。検索はFVのヒーロー検索に、
+          ロゴ・ナビはページヘッダーに一本化するため、地図内ヘッダーは出さない。 */}
       <div className="home-map home-map--embedded">
-        <MapView summary={summary} cooperativeGestures showSearch={false} />
+        <MapView summary={summary} cooperativeGestures showSearch={false} showHeader={false} />
       </div>
 
       {/* できること・回遊リンク帯（サーバーレンダリング＝クロール可能） */}

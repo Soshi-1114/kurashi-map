@@ -52,9 +52,15 @@ type Props = {
   cooperativeGestures?: boolean;
   /** ヘッダーの自治体検索を表示するか。トップページはヒーロー検索と重複するため false。 */
   showSearch?: boolean;
+  /**
+   * 地図内のフローティングヘッダー（ロゴ＋検索＋メニュー）を出すか。
+   * 全画面地図のピラーページでは地図がページそのものなので必要だが、スクロール
+   * するページに埋め込む場合はページ側のヘッダー（SiteHeader）が担うため false。
+   */
+  showHeader?: boolean;
 };
 
-export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_MAP_METRIC, cooperativeGestures = false, showSearch = true }: Props) {
+export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_MAP_METRIC, cooperativeGestures = false, showSearch = true, showHeader = true }: Props) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<MapLibreMap | null>(null);
   const muniGeoRef = useRef<GeoJSON.FeatureCollection | null>(null);
@@ -733,6 +739,9 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
   // パネル開閉はフル詳細の取得完了で判定（取得中の一瞬は閉のまま）
   const rootClass = [
     "map-root",
+    // ヘッダーを出さない時は、その高さぶんの上端オフセット（--header-h）を畳んで
+    // レイヤーボタン・凡例・サイドパネルを地図の上端まで詰める
+    showHeader ? "" : "map-root--headerless",
     selectedDetail && isMobile ? "is-sheet-open" : "",
     selectedDetail && !isMobile ? "is-panel-open" : "",
   ].filter(Boolean).join(" ");
@@ -784,31 +793,33 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
         </div>
       )}
 
-      {/* 統合ヘッダー（固定） */}
-      <header className="app-header">
-        <div className="app-header-brand">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo.svg" alt="" className="brand-mark" width={30} height={30} />
-          <div className="brand-name">KurashiMap</div>
-        </div>
-        {showSearch ? (
-          <MuniSearch municipalities={municipalities} wards={wards} onSelect={flyToMuni} />
-        ) : (
-          <div className="app-header-spacer" aria-hidden="true" />
-        )}
-        {onMenuClick && (
-          <button
-            className="app-header-menu-btn"
-            aria-label="エリア・ランキングのメニューを開く"
-            onClick={onMenuClick}
-          >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
-              <path d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-            <span className="menu-btn-label">エリア・ランキング</span>
-          </button>
-        )}
-      </header>
+      {/* 統合ヘッダー（固定）。埋め込み地図ではページ側の SiteHeader が担うため出さない */}
+      {showHeader && (
+        <header className="app-header">
+          <div className="app-header-brand">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo.svg" alt="" className="brand-mark" width={30} height={30} />
+            <div className="brand-name">KurashiMap</div>
+          </div>
+          {showSearch ? (
+            <MuniSearch municipalities={municipalities} wards={wards} onSelect={flyToMuni} />
+          ) : (
+            <div className="app-header-spacer" aria-hidden="true" />
+          )}
+          {onMenuClick && (
+            <button
+              className="app-header-menu-btn"
+              aria-label="エリア・ランキングのメニューを開く"
+              onClick={onMenuClick}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                <path d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+              <span className="menu-btn-label">エリア・ランキング</span>
+            </button>
+          )}
+        </header>
+      )}
 
       {/* 塗り分け指標の切替（地図上のフローティング操作）。サイトナビ（ヘッダーの
           メニュー）と地図コントロールを役割で分け、ヘッダーに混在させない。 */}
