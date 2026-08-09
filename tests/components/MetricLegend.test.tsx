@@ -19,7 +19,7 @@ describe("MetricLegend", () => {
   it("塗り分け指標を選ぶと凡例見出しを出す", () => {
     render(<MetricLegend metricKey="rent" overlays={overlays()} belowHazardZoom={false} />);
     expect(screen.getByText("塗り分け中")).toBeInTheDocument();
-    expect(screen.getByText("民営借家中央値（円/月）")).toBeInTheDocument();
+    expect(screen.getByText("民営借家の家賃平均（円/月）")).toBeInTheDocument();
   });
 
   it("塗り分けありでは「データなし」凡例も出す（honesty 方針の可視化）", () => {

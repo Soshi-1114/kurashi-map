@@ -158,7 +158,7 @@ export function SimilarAreaCard({
   href: string;
   name: string;
   comment: string;
-  /** 家賃中央値の表示文字列。データなしは null */
+  /** 家賃平均の表示文字列。データなしは null */
   rent: string | null;
   /** 人口の表示文字列 */
   population: string;

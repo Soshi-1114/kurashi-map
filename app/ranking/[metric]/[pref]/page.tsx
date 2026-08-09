@@ -278,12 +278,16 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
       )}
 
       <section className="detail-section">
-        <h2 className="detail-h2">トップ{cards.length}</h2>
+        <h2 className="detail-h2">
+          {def.membershipList ? `該当する自治体（${def.columnLabel}が多い順）` : `トップ${cards.length}`}
+        </h2>
         <ol className="pref-rank">
           {cards.map((m, i) => (
             <li key={m.code}>
               <Link href={`/area/${m.pref}/${m.code}`} className="pref-rank-item">
-                <span className="pref-rank-no">{i + 1}</span>
+                <span className="pref-rank-no" aria-hidden={def.membershipList || undefined}>
+                  {def.membershipList ? "✓" : i + 1}
+                </span>
                 <span className="pref-rank-name">{m.displayName ?? m.name}</span>
                 <span className="pref-rank-value">{def.display(m)}</span>
               </Link>
@@ -293,12 +297,16 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
       </section>
 
       <section className="detail-section">
-        <h2 className="detail-h2">{prefName}の全ランキング（{ranked.length}自治体）</h2>
+        <h2 className="detail-h2">
+          {def.membershipList
+            ? `${prefName}の該当自治体一覧（${ranked.length}自治体）`
+            : `${prefName}の全ランキング（${ranked.length}自治体）`}
+        </h2>
         <div className="pref-table-wrap">
           <table className="pref-table">
             <thead>
               <tr>
-                <th scope="col" className="num">順位</th>
+                <th scope="col" className="num">{def.membershipList ? "掲載順" : "順位"}</th>
                 <th scope="col">自治体</th>
                 <th scope="col" className="num">{def.columnLabel}</th>
               </tr>

@@ -47,7 +47,7 @@ export type Municipality = {
   // 人口密度（人/km²）は保存せず population と突き合わせて実行時に算出する
   // （在留外国人の人口比と同じ「派生値は保存しない」方針）。
   areaKm2?: number;
-  rent: Metric;          // 民営借家中央値
+  rent: Metric;          // 民営借家の家賃平均
   landPrice: Metric;     // 住宅地地価
   waitlistChildren: Metric; // 待機児童（value=人数）
   // 在留外国人総数（value=人数）。出入国在留管理庁 在留外国人統計。北方領土等は

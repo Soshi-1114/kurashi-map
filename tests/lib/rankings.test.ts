@@ -53,6 +53,26 @@ describe("waitlist-zero ランキング", () => {
     ];
     expect(rankBy(def, list).map((m) => m.code)).toEqual(["Z2", "Z1"]);
   });
+
+  // 並び順は人口で、順位に意味がない。ページ側はこのフラグで「N位」表示を止めるので
+  // フラグと注記が外れないことを固定する。
+  it("membershipList フラグと注記を持つ（順位として表示しないため）", () => {
+    expect(def.membershipList).toBe(true);
+    expect(def.note).toContain("順位表ではありません");
+  });
+});
+
+describe("家賃ランキングの表記", () => {
+  // 値は住宅・土地統計調査の階級中点による加重平均で、中央値ではない。
+  // ラベルが「中央値」に戻らないことを固定する（honesty 方針）。
+  it("家賃ランキングは中央値と表記しない", () => {
+    for (const slug of ["rent-cheap", "rent-high"]) {
+      const def = getRankingBySlug(slug)!;
+      expect(def.columnLabel).toBe("家賃平均");
+      expect(`${def.title}${def.lead}${def.description}${def.note ?? ""}`).not.toContain("家賃中央値");
+      expect(def.note).toContain("加重平均");
+    }
+  });
 });
 
 describe("外国人住民比率ランキング", () => {

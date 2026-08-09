@@ -119,7 +119,7 @@ export function buildHighlights(m: Municipality, ctx: HighlightsCtx): Highlight[
         label: "家賃",
         kind: "deviation",
         score: Math.min(ratio, SCORE_CAP),
-        text: `家賃中央値は${yen(m.rent.value)}円/月で、全国平均（${yen(rentNat)}円）より${pct}%${below ? "低い" : "高い"}水準${suffix}`,
+        text: `家賃平均は${yen(m.rent.value)}円/月で、全国平均（${yen(rentNat)}円）より${pct}%${below ? "低い" : "高い"}水準${suffix}`,
       });
     }
   }
@@ -305,7 +305,7 @@ export function buildHighlights(m: Municipality, ctx: HighlightsCtx): Highlight[
         label: "家賃",
         kind: "deviation",
         score: 0,
-        text: `家賃中央値は${yen(m.rent.value)}円/月（${ctx.prefName}平均は${yen(prefRent)}円）`,
+        text: `家賃平均は${yen(m.rent.value)}円/月（${ctx.prefName}平均は${yen(prefRent)}円）`,
       });
     }
   }

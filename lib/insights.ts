@@ -42,12 +42,12 @@ export type InsightContext = {
 const TEMPLATES = {
   // {cmp}=「を{adv}下回る水準」等の比較句。{tier}=安さの分位表現。
   rent: [
-    "{name}の家賃中央値は{value}円/月で、{pref}平均（{prefAvg}円）{cmp}、{tier}です（全国の安い順で{rank}位/{total}）。",
-    "全国の家賃が安い順で{rank}位/{total}の{name}は、中央値が{value}円/月で、{pref}平均{cmp}です。",
-    "{tier}に位置する{name}の家賃中央値は{value}円/月で、{pref}平均（{prefAvg}円）{cmp}となっています。",
-    "{value}円/月が{name}の家賃中央値です。{pref}平均{cmp}で、全国順位は{rank}位/{total}となっています。",
-    "{name}では家賃中央値が{value}円/月となっており、{pref}平均（{prefAvg}円）{cmp}、{tier}に分類されます。",
-    "家賃中央値は{value}円/月です。{name}は{pref}平均{cmp}で、全国の安い順では{rank}位/{total}に位置します。",
+    "{name}の家賃平均は{value}円/月で、{pref}平均（{prefAvg}円）{cmp}、{tier}です（全国の安い順で{rank}位/{total}）。",
+    "全国の家賃が安い順で{rank}位/{total}の{name}は、家賃平均が{value}円/月で、{pref}平均{cmp}です。",
+    "{tier}に位置する{name}の家賃平均は{value}円/月で、{pref}平均（{prefAvg}円）{cmp}となっています。",
+    "{value}円/月が{name}の家賃平均です。{pref}平均{cmp}で、全国順位は{rank}位/{total}となっています。",
+    "{name}では家賃平均が{value}円/月となっており、{pref}平均（{prefAvg}円）{cmp}、{tier}に分類されます。",
+    "家賃平均は{value}円/月です。{name}は{pref}平均{cmp}で、全国の安い順では{rank}位/{total}に位置します。",
   ],
   land: [
     "{name}の公示地価は{value}円/㎡で、全国順位は{rank}位/{total}、{tier}です。",
@@ -58,12 +58,12 @@ const TEMPLATES = {
     "公示地価は{value}円/㎡です。{name}は全国順位{rank}位/{total}で、{tier}に該当します。",
   ],
   cost: [
-    "{name}では家賃中央値が{rentValue}円/月、公示地価が{landValue}円/㎡で、いずれも県平均より{sideword}です。",
-    "家賃中央値は{rentValue}円/月、公示地価は{landValue}円/㎡です。{name}はいずれも県平均より{sideword}となっています。",
-    "{rentValue}円/月の家賃中央値と{landValue}円/㎡の公示地価を持つ{name}は、両指標とも県平均より{sideword}です。",
-    "{name}の家賃中央値は{rentValue}円/月、公示地価は{landValue}円/㎡で、家賃・地価とも県平均より{sideword}です。",
-    "家賃中央値{rentValue}円/月、公示地価{landValue}円/㎡が{name}の水準で、両指標とも県平均より{sideword}となっています。",
-    "{name}では家賃中央値と公示地価がそれぞれ{rentValue}円/月、{landValue}円/㎡となっており、どちらも県平均より{sideword}です。",
+    "{name}では家賃平均が{rentValue}円/月、公示地価が{landValue}円/㎡で、いずれも県平均より{sideword}です。",
+    "家賃平均は{rentValue}円/月、公示地価は{landValue}円/㎡です。{name}はいずれも県平均より{sideword}となっています。",
+    "{rentValue}円/月の家賃平均と{landValue}円/㎡の公示地価を持つ{name}は、両指標とも県平均より{sideword}です。",
+    "{name}の家賃平均は{rentValue}円/月、公示地価は{landValue}円/㎡で、家賃・地価とも県平均より{sideword}です。",
+    "家賃平均{rentValue}円/月、公示地価{landValue}円/㎡が{name}の水準で、両指標とも県平均より{sideword}となっています。",
+    "{name}では家賃平均と公示地価がそれぞれ{rentValue}円/月、{landValue}円/㎡となっており、どちらも県平均より{sideword}です。",
   ],
   population: [
     "{name}の人口は{value}人で、{tier}です。直近の動向は{trend}となっています。",

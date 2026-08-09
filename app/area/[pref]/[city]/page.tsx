@@ -106,7 +106,7 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
     // このフォールバックは北方領土6村相当（在留外国人統計・人口ともに対象外）のみが
     // 到達する。他の2分岐（GSC分析に基づき調整済み）と違い実質的な閲覧数が小さいため、
     // 「特徴」の先頭1件があれば1文だけ添えて差異化する（0件ならそのまま）。
-    const rentPhrase = hasRent(m.rent.value) ? `家賃中央値${m.rent.value.toLocaleString()}円/月、` : "";
+    const rentPhrase = hasRent(m.rent.value) ? `家賃平均${m.rent.value.toLocaleString()}円/月、` : "";
     const popPhrase = m.population > 0 ? `人口${pop}人、` : "";
     const [areaStats, rankPositions, prefRanks] = await Promise.all([
       getAreaStats(),
@@ -220,7 +220,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
   // Dataset 構造化データ（政府統計の実データを地理単位で提示する性質に適合）。
   // variableMeasured は実データのある指標のみ載せる（欠損は推計しない honesty 方針）。
   const variableMeasured = [
-    hasRent(m.rent.value) && { "@type": "PropertyValue", name: "民営借家家賃中央値", unitText: "JPY/月", value: m.rent.value },
+    hasRent(m.rent.value) && { "@type": "PropertyValue", name: "民営借家の家賃平均", unitText: "JPY/月", value: m.rent.value },
     hasLandPrice(m.landPrice.value) && { "@type": "PropertyValue", name: "住宅地地価（公示地価）", unitText: "JPY/m2", value: m.landPrice.value },
     { "@type": "PropertyValue", name: "人口", unitText: "人", value: m.population },
     isWaitlistDisclosed(m.waitlistChildren) && { "@type": "PropertyValue", name: "待機児童数", unitText: "人", value: m.waitlistChildren.value },
@@ -231,10 +231,10 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
   const dataset = {
     "@type": "Dataset",
     name: `${prefName}${heading}の生活統計データ（家賃・地価・人口・災害リスク・外国人比率）`,
-    description: `${prefName}${heading}の家賃中央値・公示地価・人口・待機児童数・災害リスク（浸水／土砂／津波／高潮／液状化）・在留外国人比率を、政府統計（総務省・国土交通省・こども家庭庁・出入国在留管理庁）および国土数値情報の実データでまとめた統計データセット。推計値は使用していません。`,
+    description: `${prefName}${heading}の家賃平均・公示地価・人口・待機児童数・災害リスク（浸水／土砂／津波／高潮／液状化）・在留外国人比率を、政府統計（総務省・国土交通省・こども家庭庁・出入国在留管理庁）および国土数値情報の実データでまとめた統計データセット。推計値は使用していません。`,
     url: absoluteUrl(`/area/${m.pref}/${m.code}`),
     identifier: m.code,
-    keywords: ["家賃中央値", "公示地価", "人口", "待機児童", "災害リスク", "外国人住民比率", heading, prefName],
+    keywords: ["家賃平均", "公示地価", "人口", "待機児童", "災害リスク", "外国人住民比率", heading, prefName],
     isAccessibleForFree: true,
     creator: { "@type": "Organization", name: SITE.name, url: SITE.baseUrl },
     includedInDataCatalog: { "@type": "DataCatalog", name: "e-Stat 政府統計の総合窓口", url: "https://www.e-stat.go.jp/" },
@@ -396,7 +396,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
           <KpiCard
             icon={Home}
             tone="ad-tone-rent"
-            label="家賃中央値"
+            label="家賃平均"
             value={hasRent(m.rent.value) ? m.rent.value.toLocaleString() : null}
             unit="円/月"
             sub={hasRent(m.rent.value) ? `県内で${rentBand(m.rent.value)}` : undefined}
@@ -452,7 +452,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
           >
             <MetricPrimary value={hasRent(m.rent.value) ? m.rent.value.toLocaleString() : null} unit="円/月" />
             {rentRows.length > 0 ? (
-              <CompareBar rows={rentRows} format={yen} caption="家賃中央値の比較（自治体・県平均・全国平均）" />
+              <CompareBar rows={rentRows} format={yen} caption="家賃平均の比較（自治体・県平均・全国平均）" />
             ) : (
               <p className="ad-note"><Info size={15} aria-hidden="true" />住宅統計の集計対象外のため家賃データはありません。</p>
             )}
@@ -468,6 +468,15 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
                 ? `${vacancyRateText(m.vacancy)}（空き家${m.vacancy.vacant.toLocaleString()}戸 / 住宅${m.vacancy.total.toLocaleString()}戸・2023年）`
                 : "データなし（住宅統計の集計対象外）"}
             </p>
+            {hasRent(m.rent.value) && (
+              <p className="ad-note">
+                <Info size={15} aria-hidden="true" />
+                <span>
+                  家賃は住宅・土地統計調査の家賃階級別の借家数から、階級の中点で加重平均した算出値です（
+                  <Link href="/about#calc" className="ad-note-link">算出方法</Link>）。
+                </span>
+              </p>
+            )}
             {hasRent(m.rent.value) && <SourceLine source={m.rent.source} asOf={m.rent.asOf} estimated={m.rent.isEstimated} />}
           </MetricCard>
 
@@ -563,7 +572,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
       </Section>
       {/* 家賃が近い自治体 */}
       {related.length > 0 && (
-        <Section icon={Home} tone="ad-tone-rent" title="家賃水準が近い自治体" sub={`${m.name}と家賃中央値が近い${prefName}の自治体`}>
+        <Section icon={Home} tone="ad-tone-rent" title="家賃水準が近い自治体" sub={`${m.name}と家賃平均が近い${prefName}の自治体`}>
           <ul className="ad-arealink-grid">
             {related.map((r) => (
               <li key={r.code}>
@@ -678,12 +687,19 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
         <ul className="ad-rank-grid">
           {RANKINGS.map((r) => {
             const pos = rankPositions.get(r.slug)?.get(m.code);
+            // membershipList 型（例: 待機児童ゼロ）は「条件に該当する自治体の一覧」で、
+            // 並び順は人口など別の指標。順位として見せると意味を誤読するため出さない。
+            const rankText = pos
+              ? r.membershipList
+                ? `該当（全国 ${pos.total.toLocaleString()}自治体）`
+                : `全国 ${pos.rank.toLocaleString()}位 / ${pos.total.toLocaleString()}`
+              : undefined;
             return (
               <li key={r.slug}>
                 <RankingCard
                   icon={Trophy}
                   title={r.shortLabel}
-                  rankText={pos ? `全国 ${pos.rank.toLocaleString()}位 / ${pos.total.toLocaleString()}` : undefined}
+                  rankText={rankText}
                   href={`/ranking/${r.slug}`}
                 />
               </li>

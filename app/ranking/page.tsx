@@ -92,11 +92,12 @@ export default async function RankingIndexPage() {
         <span className="rk-eyebrow"><Trophy size={14} aria-hidden="true" />政府統計の実データで比較</span>
         <h1 className="rk-title">
           住みやすさ・家賃ランキング
-          <span className="rk-title-sub">全国 1,918 市区町村を横断比較</span>
+          <span className="rk-title-sub">全国 {munis.length.toLocaleString()} 市区町村を横断比較</span>
         </h1>
         <p className="rk-lead">
           家賃・地価・子育て・人口などの指標ごとに、全国の市区町村を実データでランキング。
-          各カードはいまの<strong>1位</strong>を示しています。気になる指標を選んでください。
+          各カードはいまの<strong>1位</strong>（該当自治体の一覧型は該当例）を示しています。気になる指標を選んでください。
+          集計対象は{munis.length.toLocaleString()}自治体で、政令指定都市の行政区は親市との重複を避けるため除外しています。
         </p>
         <ul className="rk-hero-meta">
           <li className="rk-meta-pill"><Trophy size={13} aria-hidden="true" /><b>{RANKINGS.length}</b> 種類の指標</li>
@@ -126,7 +127,12 @@ export default async function RankingIndexPage() {
                   </div>
                   {top1 && (
                     <div className="rk-champ-winner">
-                      <span className="rk-champ-medal" aria-label="1位">1</span>
+                      {/* membershipList 型（待機児童ゼロ等）は順位ではないのでメダルを出さない */}
+                      {def.membershipList ? (
+                        <span className="rk-champ-medal" aria-label="該当自治体の例">✓</span>
+                      ) : (
+                        <span className="rk-champ-medal" aria-label="1位">1</span>
+                      )}
                       <span className="rk-champ-winner-body">
                         <span className="rk-champ-town">
                           {top1.displayName ?? top1.name}

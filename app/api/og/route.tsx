@@ -16,7 +16,7 @@ export function GET() {
           titleSize={84}
         />
         <div style={{ marginTop: "auto", display: "flex", gap: 16 }}>
-          <Pill>全国1,918市区町村</Pill>
+          <Pill>全国1,918エリア</Pill>
           <Pill>政府統計の実データ</Pill>
           <Pill>無料</Pill>
         </div>

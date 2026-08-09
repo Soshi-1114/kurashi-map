@@ -723,7 +723,7 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
     });
   }, []);
 
-  // サイドパネル余白用：選択中自治体と同県・同階層で家賃中央値が近い上位3件。
+  // サイドパネル余白用：選択中自治体と同県・同階層で家賃平均が近い上位3件。
   const relatedNearby = useMemo(() => {
     const m = selectedDetail;
     if (!m || !hasRent(m.rent.value)) return [];

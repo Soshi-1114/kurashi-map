@@ -11,7 +11,7 @@ import { SITE, absoluteUrl } from "@/lib/site";
 
 const HOME_TITLE = "市区町村の住みやすさを地図で比較｜家賃・地価・子育て・災害リスク｜KurashiMap";
 const HOME_DESC =
-  "全国1,918市区町村の家賃相場・地価・人口・待機児童・災害リスク・外国人住民比率を地図で横断比較できる無料サービス。政府統計の実データだけを使い、推計値は使いません。気になる街の住みやすさをまとめてチェック。";
+  "全国1,918エリア（市区町村と政令指定都市の行政区）の家賃相場・地価・人口・待機児童・災害リスク・外国人住民比率を地図で横断比較できる無料サービス。政府統計の実データだけを使い、推計値は使いません。気になる街の住みやすさをまとめてチェック。";
 
 const HOME_OG = absoluteUrl("/api/og");
 
@@ -65,7 +65,7 @@ export default async function HomePage() {
         <div className="home-hero-inner">
           <h1 className="home-hero-title">データで、暮らす場所を考える。</h1>
           <p className="home-hero-sub">
-            全国1,918市区町村を、家賃相場・地価・人口増減・待機児童・災害リスク・空き家率・外国人住民比率の公的データで調べて比較できます。推計値は使いません。
+            全国1,918エリア（市区町村と政令指定都市の行政区）を、家賃相場・地価・人口増減・待機児童・災害リスク・空き家率・外国人住民比率の公的データで調べて比較できます。推計値は使いません。
           </p>
           <HeroSearch munis={summary} />
           <p className="home-hero-actions">
