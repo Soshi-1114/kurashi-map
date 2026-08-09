@@ -495,8 +495,26 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
       // 初期化直後の追加リサイズ
       requestAnimationFrame(() => map.resize());
 
+      // 「地図の上の2本指は地図の操作」を iOS Safari でも成立させる。
+      // MapLibre は touch-action: pan-x pan-y だけで2本指を確保する設計だが、
+      // iOS Safari はページのピンチズーム（user-scalable を殺していない＝a11y的に
+      // 正しい状態）を touch-action では譲らないため、2本指が地図ではなくページの
+      // 拡大に奪われる。地図キャンバス上の2本指に限って既定動作を止め、MapLibre に
+      // 渡す。1本指は素通しするので、埋め込み地図のページスクロールは従来どおり。
+      const canvasContainer = map.getCanvasContainer();
+      const blockTwoFingerTouch = (e: TouchEvent) => {
+        if (e.touches.length >= 2) e.preventDefault();
+      };
+      // iOS Safari のピンチは touch イベントに加えて独自の gesture* も発火する
+      const blockSafariGesture = (e: Event) => e.preventDefault();
+      const SAFARI_GESTURE_START: string = "gesturestart";
+      canvasContainer.addEventListener("touchstart", blockTwoFingerTouch, { passive: false });
+      canvasContainer.addEventListener(SAFARI_GESTURE_START, blockSafariGesture);
+
       cleanup = () => {
         ro.disconnect();
+        canvasContainer.removeEventListener("touchstart", blockTwoFingerTouch);
+        canvasContainer.removeEventListener(SAFARI_GESTURE_START, blockSafariGesture);
         map.remove();
         mapRef.current = null;
       };
