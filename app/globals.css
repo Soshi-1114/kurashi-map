@@ -1461,6 +1461,17 @@ button { font-family: inherit; }
   width: 52px;
 }
 .sheet-content { padding: 0 20px 20px; overflow-y: auto; flex: 1; }
+/* 埋め込み地図（トップ）では full 段でもシート箱が 330px 程度しかなく、
+   中身が .sheet-content の内部スクロールになる。見出し行を流れに任せると
+   スクロール時に「どの自治体か」と閉じるボタンが画面から消えるため固定する。 */
+.sheet-content > .panel-head-top {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  margin: 0 -20px;
+  padding: 0 20px 8px;
+  background: var(--surface-strong);
+}
 
 
 /* ========== Area Detail Page ========== */
