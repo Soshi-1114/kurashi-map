@@ -143,10 +143,14 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
   }, [summary]);
 
   useEffect(() => {
-    const detect = () => setIsMobile(window.innerWidth < 768);
+    // CSS の (max-width: 768px) と同じ判定を matchMedia で共有する。
+    // innerWidth < 768 だと 768px ちょうどで「CSS はシート・JS は PC 扱い」に
+    // 割れ、レイヤーシートが portal されず閉じられなくなる。
+    const mq = window.matchMedia("(max-width: 768px)");
+    const detect = () => setIsMobile(mq.matches);
     detect();
-    window.addEventListener("resize", detect);
-    return () => window.removeEventListener("resize", detect);
+    mq.addEventListener("change", detect);
+    return () => mq.removeEventListener("change", detect);
   }, []);
 
   // 指定緊急避難場所のプロット（詳細は useShelterOverlay）。moveend の再評価用に

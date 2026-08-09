@@ -5,6 +5,7 @@
 // 表示形態は2通り: PC は地図右上のポップオーバー、モバイル（isMobile）は
 // 画面下から開くモーダルの Bottom Sheet（scrim・ESC・スクロールロック・フォーカス移動つき）。
 import { useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import { MAP_METRICS, getMapMetric, type MapMetricKey } from "@/lib/mapMetrics";
 import {
   RENT_MAX_OPTIONS, LAND_MAX_OPTIONS, FLOOD_MAX_OPTIONS, type MapFilters,
@@ -95,23 +96,10 @@ export default function LayersPanel({
     };
   }, [open, isMobile, onToggleOpen]);
 
-  return (
-    <div className={`map-layers ${open ? "is-open" : ""}`}>
-      <button
-        className={`map-layers-btn map-layers-btn-icon ${open ? "is-active" : ""}`}
-        aria-label={`地図の表示設定（塗り分け・ハザードマップ・絞り込み）を開閉${activeCount > 0 ? `（設定${activeCount}件適用中）` : ""}`}
-        aria-expanded={open}
-        onClick={onToggleOpen}
-      >
-        <LayersIcon />
-        {activeCount > 0 && (
-          <span className="map-layers-badge" aria-hidden="true">{activeCount}</span>
-        )}
-      </button>
-      {open && (
-        <>
-          {/* モバイルのみ表示される背面オーバーレイ（タップで閉じる） */}
-          <div className="layers-scrim" onClick={onToggleOpen} aria-hidden="true" />
+  const body = (
+    <>
+      {/* モバイルのみ表示される背面オーバーレイ（タップで閉じる） */}
+      <div className="layers-scrim" onClick={onToggleOpen} aria-hidden="true" />
           <div
             ref={panelRef}
             className="layers-panel"
@@ -229,9 +217,31 @@ export default function LayersPanel({
               <button className="filter-clear" onClick={onClearFilters}>クリア</button>
             </div>
           )}
-          </div>
-        </>
-      )}
+      </div>
+    </>
+  );
+
+  return (
+    <div className="map-layers">
+      <button
+        className={`map-layers-btn map-layers-btn-icon ${open ? "is-active" : ""}`}
+        aria-label={`地図の表示設定（塗り分け・ハザードマップ・絞り込み）を開閉${activeCount > 0 ? `（設定${activeCount}件適用中）` : ""}`}
+        aria-expanded={open}
+        onClick={onToggleOpen}
+      >
+        <LayersIcon />
+        {activeCount > 0 && (
+          <span className="map-layers-badge" aria-hidden="true">{activeCount}</span>
+        )}
+      </button>
+      {/* モバイルのシートは body 直下へ portal する。地図コンテナ（埋め込み時は
+          overflow:hidden）の内側に置くと、iOS WebKit では position:fixed の子が
+          その overflow で切り取られ、scrim と閉じるボタンが画面外に消えて
+          「開いたら閉じられない」状態になるため。PC のポップオーバーは
+          .map-layers を基準に配置するので、その場に残す。 */}
+      {open && (isMobile
+        ? createPortal(<div className="layers-sheet">{body}</div>, document.body)
+        : body)}
     </div>
   );
 }

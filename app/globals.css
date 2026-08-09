@@ -102,17 +102,22 @@ html, body {
    常に DOM に存在＝クロール可能（display:none にはせず画面外へ退避させるだけ）。 */
 /* 地図ページ（トップ／割合マップ）はベースカラーをブルーのまま据え置く。
    他ページ（エリア詳細・ランキング等）はアイボリー＋テラコッタ。CSS変数を
-   .home-main にローカル上書きして配下（ヘッダー・検索・地図UI・パネル）へ伝播。 */
-.home-main {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
+   ローカル上書きして配下（ヘッダー・検索・地図UI・パネル）へ伝播させる。
+   .layers-sheet（モバイルのレイヤーシート）は body 直下へ portal されて
+   .home-main の子ではなくなるため、同じパレットを明示的に当てる。 */
+.home-main,
+.layers-sheet {
   --bg: #f5f8fc;
   --accent: #2563eb;
   --accent-hover: #1d4ed8;
   --accent-soft: rgba(37, 99, 235, 0.10);
   --accent-glow: rgba(37, 99, 235, 0.25);
   --accent-grad-start: #5b8bf0;
+}
+.home-main {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
   background: var(--bg);
 }
 .home-root { position: relative; width: 100%; }
@@ -734,11 +739,10 @@ button { font-family: inherit; }
    地図コンテナ内の absolute 配置をやめて viewport 下部に固定し、
    内部のみ縦スクロール・safe-area 考慮・scrim タップで閉じる。 */
 @media (max-width: 768px) {
-  /* .map-layers は position+z-index でスタッキングコンテキストを作るため、
-     中の fixed な scrim/シートの z-index は外の要素（app-header 12・ドロワー 31）
-     に対してはラッパーの z で比較される。開時はラッパーごと最前面へ上げ、
-     モーダルがヘッダーやドロワーの下に潜らないようにする（SPのみ）。 */
-  .map-layers.is-open { z-index: 62; }
+  /* シートは body 直下へ portal している（LayersPanel 参照）ので、scrim/パネルの
+     z-index はルートのスタッキングコンテキストでそのまま効く。地図コンテナ内の
+     ラッパー(.map-layers)を持ち上げる必要はない（持ち上げるとトグルボタンだけが
+     scrim の上に残ってしまう）。 */
   .layers-scrim {
     display: block;
     position: fixed;
@@ -751,7 +755,7 @@ button { font-family: inherit; }
     from { opacity: 0; }
     to { opacity: 1; }
   }
-  .map-layers .layers-panel {
+  .layers-sheet .layers-panel {
     position: fixed;
     left: 0;
     right: 0;
