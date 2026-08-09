@@ -79,16 +79,42 @@ export default function LayersPanel({
 
     let unlock: (() => void) | undefined;
     if (isMobile) {
+      // html を overflow:hidden にするだけだとルートスクローラの位置が 0 に落ちる。
+      // scrim は半透明なので、背後のページがページ先頭へ飛ぶのがそのまま見えるうえ、
+      // 解除しても位置が戻らない（地図まで下スクロール→開く→閉じたら先頭）。
+      // body を現在位置ぶん引き上げて固定すれば、見た目は据え置きのまま
+      // スクロールだけ止まる（iOS Safari でも効く定番手）。
       const docEl = document.documentElement;
-      const prevDoc = docEl.style.overflow;
-      const prevBody = document.body.style.overflow;
-      docEl.style.overflow = "hidden";
-      document.body.style.overflow = "hidden";
-      unlock = () => {
-        docEl.style.overflow = prevDoc;
-        document.body.style.overflow = prevBody;
+      const body = document.body;
+      const prevScrollY = window.scrollY;
+      const prevDocOverflow = docEl.style.overflow;
+      const prevBody = {
+        position: body.style.position,
+        top: body.style.top,
+        left: body.style.left,
+        right: body.style.right,
+        width: body.style.width,
+        overflow: body.style.overflow,
       };
-      closeBtnRef.current?.focus();
+      body.style.position = "fixed";
+      body.style.top = `-${prevScrollY}px`;
+      body.style.left = "0";
+      body.style.right = "0";
+      body.style.width = "100%";
+      body.style.overflow = "hidden";
+      docEl.style.overflow = "hidden";
+      unlock = () => {
+        docEl.style.overflow = prevDocOverflow;
+        body.style.position = prevBody.position;
+        body.style.top = prevBody.top;
+        body.style.left = prevBody.left;
+        body.style.right = prevBody.right;
+        body.style.width = prevBody.width;
+        body.style.overflow = prevBody.overflow;
+        window.scrollTo(0, prevScrollY);
+      };
+      // フォーカス移動でスクロールが動かないようにする
+      closeBtnRef.current?.focus({ preventScroll: true });
     }
     return () => {
       document.removeEventListener("keydown", onKeyDown);
