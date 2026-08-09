@@ -748,11 +748,16 @@
 }
 /* 「＋比較する」導線。カード全体が既にリンクのため二重<a>を避け、カードの下に
    小さなテキストリンクとして並べる（ボタン化・新規セクション化はしない）。 */
+/* すぐ上の大きなカードリンク（自治体詳細へ）と誤タップしやすいので、
+   文字は小さいままでも当たり判定は 40px 確保する（WCAG 2.5.8 の 24px 超）。
+   幅はテキスト分だけに留め、カード全体が二重リンクに見えないようにする。 */
 .ad-compare-add {
-  display: block;
-  margin-top: 6px;
-  padding-left: 2px;
-  font-size: var(--text-2xs);
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  margin-top: 2px;
+  padding: 0 10px 0 2px;
+  font-size: var(--text-xs);
   font-weight: 600;
   color: var(--text-muted);
 }

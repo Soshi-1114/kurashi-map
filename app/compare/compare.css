@@ -72,10 +72,11 @@
   font-weight: 600;
 }
 .cmp-chip-remove {
+  position: relative;
   display: grid;
   place-items: center;
-  width: 22px;
-  height: 22px;
+  width: 28px;
+  height: 28px;
   border: none;
   border-radius: 50%;
   background: var(--surface-muted);
@@ -83,6 +84,13 @@
   font-size: var(--text-sm);
   line-height: 1;
   cursor: pointer;
+}
+/* 見た目の丸は 28px のまま、指の当たり判定だけ 44px に広げる（WCAG 2.5.5）。
+   チップの文字側へ広がるが、文字はリンクではないので誤爆先がない。 */
+.cmp-chip-remove::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
 }
 .cmp-chip-remove:hover {
   background: var(--surface-muted-hover);
