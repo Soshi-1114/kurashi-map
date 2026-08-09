@@ -4,6 +4,7 @@ import { listSummaryAcrossPrefs } from "@/lib/metrics";
 import { SITE, prefNameOf, absoluteUrl } from "@/lib/site";
 import { hasRent } from "@/lib/rentColor";
 import type { MuniSummary } from "@/lib/types";
+import PageShell from "@/components/PageShell";
 
 type SearchParams = { q?: string };
 
@@ -47,12 +48,7 @@ export default async function SearchPage(props: { searchParams: Promise<SearchPa
   const results = matchMuni(all, q);
 
   return (
-    <div className="detail-root">
-      <nav aria-label="パンくず" className="breadcrumb">
-        <Link href="/" className="breadcrumb-link">{SITE.name}</Link>
-        <span aria-hidden="true">/</span>
-        <span className="breadcrumb-current">検索</span>
-      </nav>
+    <PageShell width="narrow" innerClassName="detail-root" trail={[{ name: SITE.name, href: "/" }, { name: "検索" }]}>
 
       <header className="detail-hero">
         <h1 className="detail-title">
@@ -76,7 +72,7 @@ export default async function SearchPage(props: { searchParams: Promise<SearchPa
         {q ? (
           results.length > 0 ? (
             <>
-              <p className="detail-p" style={{ color: "var(--text-muted)", fontSize: 13.5 }}>
+              <p className="detail-p detail-p-muted">
                 「{q}」に一致する自治体 {results.length}件{results.length === MAX_RESULTS ? "（上位のみ）" : ""}
               </p>
               <ul className="related-grid">
@@ -99,17 +95,17 @@ export default async function SearchPage(props: { searchParams: Promise<SearchPa
             <p className="detail-p">「{q}」に一致する自治体は見つかりませんでした。市区町村名（例: 川口市、浦和区）でお試しください。</p>
           )
         ) : (
-          <p className="detail-p" style={{ color: "var(--text-muted)" }}>
+          <p className="detail-p detail-p-muted">
             市区町村名を入力して検索してください。地図から探す場合は{" "}
             <Link href="/" className="breadcrumb-link">トップの地図</Link> もご利用いただけます。
           </p>
         )}
       </section>
 
-      <div style={{ marginTop: 28, display: "flex", gap: 16, flexWrap: "wrap" }}>
+      <div className="detail-footnav">
         <Link href="/ranking" className="detail-back">ランキング</Link>
         <Link href="/" className="detail-back">地図に戻る</Link>
       </div>
-    </div>
+    </PageShell>
   );
 }

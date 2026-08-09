@@ -6,7 +6,7 @@ export const SITE = {
   description: "市区町村の住みやすさを地図で横断比較",
   baseUrl: "https://kurashimap.jp",
   locale: "ja_JP",
-  brandColor: "#2563eb",
+  brandColor: "#3a739e",
 } as const;
 
 // pref スラッグ → 和名。対応県マニフェスト（PREFS）から導出するので、

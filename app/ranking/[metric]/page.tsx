@@ -10,6 +10,7 @@ import { RANKINGS, getRankingBySlug, muniLevelOnly, rankBy, type RankingDef } fr
 import { PREFS } from "@/lib/prefs";
 import { SITE, prefNameOf, absoluteUrl } from "@/lib/site";
 import PrefRegionLinks from "@/components/PrefRegionLinks";
+import PageShell from "@/components/PageShell";
 
 type Params = { metric: string };
 
@@ -118,16 +119,9 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
   };
 
   return (
-    <div className="rk-root">
+    <PageShell innerClassName="rk-root" trail={[{ name: SITE.name, href: "/" }, { name: "ランキング", href: "/ranking" }, { name: def.shortLabel }]}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }} />
 
-      <nav aria-label="パンくず" className="breadcrumb">
-        <Link href="/" className="breadcrumb-link">{SITE.name}</Link>
-        <span aria-hidden="true">/</span>
-        <Link href="/ranking" className="breadcrumb-link">ランキング</Link>
-        <span aria-hidden="true">/</span>
-        <span className="breadcrumb-current">{def.shortLabel}</span>
-      </nav>
 
       <header className="rk-hero rk-reveal">
         <span className="rk-eyebrow"><Database size={14} aria-hidden="true" />全国ランキング</span>
@@ -141,10 +135,10 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
           <li className="rk-meta-pill"><Database size={13} aria-hidden="true" />政府統計の実データ</li>
         </ul>
         {def.note && (
-          <p className="rk-lead" style={{ fontSize: "var(--text-sm)", marginTop: 12 }}>{def.note}</p>
+          <p className="rk-lead rk-lead--note">{def.note}</p>
         )}
         {def.nextUpdate && (
-          <p className="rk-lead" style={{ fontSize: "var(--text-sm)", marginTop: def.note ? 6 : 12 }}>
+          <p className="rk-lead rk-lead--note">
             📅 次回更新予定: {def.nextUpdate}
           </p>
         )}
@@ -238,7 +232,7 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
                       </Link>
                     </th>
                     <td>
-                      <Link href={`/area/${m.pref}`} className="pref-table-link" style={{ fontWeight: 500 }}>
+                      <Link href={`/area/${m.pref}`} className="pref-table-link pref-table-link--muted">
                         {prefNameOf(m.pref)}
                       </Link>
                     </td>
@@ -323,6 +317,6 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
         <Link href="/ranking" className="rk-back"><ArrowLeft size={15} aria-hidden="true" />ランキング一覧</Link>
         <Link href="/" className="rk-back"><MapIcon size={15} aria-hidden="true" />地図に戻る</Link>
       </nav>
-    </div>
+    </PageShell>
   );
 }

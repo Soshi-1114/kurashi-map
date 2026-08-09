@@ -8,6 +8,7 @@ import type { Metadata } from "next";
 import { getMunicipality } from "@/lib/metrics";
 import { NEXT_UPDATE, formatAsOfJa } from "@/lib/rankings";
 import { SITE, absoluteUrl } from "@/lib/site";
+import PageShell from "@/components/PageShell";
 
 const PATH = "/about";
 const TITLE = `${SITE.name}について｜データの出典と更新方針`;
@@ -125,14 +126,9 @@ export default async function AboutPage() {
   };
 
   return (
-    <div className="detail-root">
+    <PageShell width="narrow" innerClassName="detail-root" trail={[{ name: SITE.name, href: "/" }, { name: "このサイトについて" }]}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }} />
 
-      <nav aria-label="パンくず" className="breadcrumb">
-        <Link href="/" className="breadcrumb-link">{SITE.name}</Link>
-        <span aria-hidden="true">/</span>
-        <span className="breadcrumb-current">このサイトについて</span>
-      </nav>
 
       <header className="detail-hero">
         <h1 className="detail-title">{SITE.name}について</h1>
@@ -175,7 +171,7 @@ export default async function AboutPage() {
             </tbody>
           </table>
         </div>
-        <h3 className="detail-h2" style={{ fontSize: 16, marginTop: 20 }}>次回の更新予定</h3>
+        <h3 className="h3 detail-h3">次回の更新予定</h3>
         <ul className="detail-p" style={{ paddingLeft: "1.2em" }}>
           <li>在留外国人: {NEXT_UPDATE.foreign}</li>
           <li>人口: {NEXT_UPDATE.population}</li>
@@ -183,7 +179,7 @@ export default async function AboutPage() {
           <li>地価: {NEXT_UPDATE.landPrice}</li>
           <li>家賃: {NEXT_UPDATE.rent}</li>
         </ul>
-        <p className="detail-p" style={{ fontSize: 13, color: "var(--text-muted)" }}>
+        <p className="detail-p detail-p-muted">
           このほか、検索サジェスト（自治体の読み仮名・町丁名からの検索）には Geolonia
           住所データ（国土交通省「位置参照情報」等を元に作成・MIT
           License）を使用しています。これは検索用のメタデータであり、掲載する統計値には使用していません。
@@ -202,7 +198,7 @@ export default async function AboutPage() {
 
       <section className="detail-section">
         <h2 className="detail-h2">免責事項</h2>
-        <p className="detail-p" style={{ fontSize: 13, color: "var(--text-muted)" }}>
+        <p className="detail-p detail-p-muted">
           本サイトの情報は、住まい選びの参考情報として公的統計を整理・可視化したものであり、内容の完全性・正確性・最新性を保証するものではありません。統計の基準時点以降に状況が変わっている場合があります。重要な判断（契約・購入など）の際は、必ず各自治体・出典元の一次情報をご確認ください。本サイトの利用により生じた損害について、運営者は責任を負いかねます。
         </p>
       </section>
@@ -214,11 +210,11 @@ export default async function AboutPage() {
         </p>
       </section>
 
-      <div style={{ marginTop: 28, display: "flex", gap: 16, flexWrap: "wrap" }}>
+      <div className="detail-footnav">
         <Link href="/" className="detail-back">地図で見る</Link>
         <Link href="/ranking" className="detail-back">ランキング一覧</Link>
         <Link href="/privacy" className="detail-back">プライバシーポリシー</Link>
       </div>
-    </div>
+    </PageShell>
   );
 }

@@ -11,6 +11,7 @@ import { hasRent, rentBand } from "@/lib/rentColor";
 import { hasLandPrice } from "@/lib/landPrice";
 import { isWaitlistDisclosed } from "@/lib/waitlist";
 import type { Municipality } from "@/lib/types";
+import PageShell from "@/components/PageShell";
 
 type Params = { pref: string };
 
@@ -132,14 +133,9 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
   };
 
   return (
-    <div className="rk-root">
+    <PageShell innerClassName="rk-root" trail={[{ name: SITE.name, href: "/" }, { name: prefName }]}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }} />
 
-      <nav aria-label="パンくず" className="breadcrumb">
-        <Link href="/" className="breadcrumb-link">{SITE.name}</Link>
-        <span aria-hidden="true">/</span>
-        <span className="breadcrumb-current">{prefName}</span>
-      </nav>
 
       <header className="rk-hero rk-reveal">
         <span className="rk-eyebrow"><MapIcon size={14} aria-hidden="true" />都道府県データ</span>
@@ -337,6 +333,6 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
         <Link href="/" className="rk-back"><ArrowLeft size={15} aria-hidden="true" />地図に戻る</Link>
         <Link href="/ranking" className="rk-back"><ArrowUpRight size={15} aria-hidden="true" />全国ランキング</Link>
       </nav>
-    </div>
+    </PageShell>
   );
 }

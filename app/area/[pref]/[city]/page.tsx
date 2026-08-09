@@ -63,6 +63,7 @@ import {
 import { SupportBanner } from "@/components/area/SupportBanner";
 import { FurusatoLink } from "@/components/area/FurusatoLink";
 import { supportUrl, furusatoUrlTemplate } from "@/lib/monetization";
+import PageShell from "@/components/PageShell";
 
 type Params = { pref: string; city: string };
 
@@ -324,21 +325,17 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
       : undefined;
 
   return (
-    <div className="ad-root">
+    <PageShell
+      width="wide"
+      innerClassName="ad-root"
+      trail={[
+        { name: SITE.name, href: "/" },
+        { name: prefName, href: `/area/${m.pref}` },
+        ...(parent ? [{ name: parent.name, href: `/area/${parent.pref}/${parent.code}` }] : []),
+        { name: m.name },
+      ]}
+    >
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }} />
-      <nav aria-label="パンくず" className="breadcrumb">
-        <Link href="/" className="breadcrumb-link">{SITE.name}</Link>
-        <span aria-hidden="true">/</span>
-        <Link href={`/area/${m.pref}`} className="breadcrumb-link">{prefName}</Link>
-        {parent && (
-          <>
-            <span aria-hidden="true">/</span>
-            <Link href={`/area/${parent.pref}/${parent.code}`} className="breadcrumb-link">{parent.name}</Link>
-          </>
-        )}
-        <span aria-hidden="true">/</span>
-        <span className="breadcrumb-current">{m.name}</span>
-      </nav>
       {/* ① Hero */}
       <header className="ad-hero">
         <div className="ad-hero-main">
@@ -704,7 +701,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
       </Section>
       {/* 出典（折りたたみ） */}
       <Reveal>
-        <details className="ad-sources" style={{ marginTop: 32 }}>
+        <details className="ad-sources">
           <summary className="ad-sources-summary">
             <Info size={15} aria-hidden="true" />
             出典・データについて
@@ -759,6 +756,6 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
         <Link href="/ranking" className="ad-back"><Trophy size={14} aria-hidden="true" />ランキング</Link>
         <Link href="/" className="ad-back"><MapIcon size={14} aria-hidden="true" />地図に戻る</Link>
       </div>
-    </div>
+    </PageShell>
   );
 }

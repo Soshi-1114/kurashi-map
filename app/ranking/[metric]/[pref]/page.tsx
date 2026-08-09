@@ -9,6 +9,7 @@ import { SITE, absoluteUrl } from "@/lib/site";
 import { getForeignStats } from "@/lib/foreignStats";
 import { countWaitlistDisclosed } from "@/lib/waitlist";
 import type { Municipality } from "@/lib/types";
+import PageShell from "@/components/PageShell";
 
 type Params = { metric: string; pref: string };
 
@@ -181,18 +182,9 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
   };
 
   return (
-    <div className="detail-root">
+    <PageShell innerClassName="detail-root" trail={[{ name: SITE.name, href: "/" }, { name: "ランキング", href: "/ranking" }, { name: def.shortLabel, href: `/ranking/${def.slug}` }, { name: prefName }]}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }} />
 
-      <nav aria-label="パンくず" className="breadcrumb">
-        <Link href="/" className="breadcrumb-link">{SITE.name}</Link>
-        <span aria-hidden="true">/</span>
-        <Link href="/ranking" className="breadcrumb-link">ランキング</Link>
-        <span aria-hidden="true">/</span>
-        <Link href={`/ranking/${def.slug}`} className="breadcrumb-link">{def.shortLabel}</Link>
-        <span aria-hidden="true">/</span>
-        <span className="breadcrumb-current">{prefName}</span>
-      </nav>
 
       <header className="detail-hero">
         <h1 className="detail-title">
@@ -204,11 +196,11 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
         </p>
         {def.note && <p className="detail-note">{def.note}</p>}
         {def.nextUpdate && <p className="detail-note">📅 次回更新予定: {def.nextUpdate}</p>}
-        <div style={{ marginTop: 14, display: "flex", gap: 10, flexWrap: "wrap" }}>
-          <Link href={`/ranking/${def.slug}`} className="related-card" style={{ display: "inline-flex", width: "auto", padding: "8px 14px" }}>
+        <div className="detail-inline-links">
+          <Link href={`/ranking/${def.slug}`} className="related-card related-card--inline">
             <span className="related-name">📊 全国版を見る</span>
           </Link>
-          <Link href={`/area/${pref.slug}`} className="related-card" style={{ display: "inline-flex", width: "auto", padding: "8px 14px" }}>
+          <Link href={`/area/${pref.slug}`} className="related-card related-card--inline">
             <span className="related-name">🗾 {prefName}の全自治体</span>
           </Link>
         </div>
@@ -230,12 +222,12 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
               <ul className="mini-cards cols-2">
                 <li className="mini-card">
                   <div className="mini-card-label">県内中央値</div>
-                  <div className="mini-card-value" style={{ fontSize: 20 }}>{def.display(summary.prefMedian)}</div>
+                  <div className="mini-card-value mini-card-value--lg">{def.display(summary.prefMedian)}</div>
                   <p className="mini-card-sub">全国中央値: {def.display(summary.nationalMedian)}</p>
                 </li>
                 <li className="mini-card">
                   <div className="mini-card-label">県内1位の全国順位</div>
-                  <div className="mini-card-value" style={{ fontSize: 20 }}>
+                  <div className="mini-card-value mini-card-value--lg">
                     {summary.top1NationalRank.toLocaleString()}<span className="unit"> 位</span>
                   </div>
                   <p className="mini-card-sub">全国{summary.nationalCount.toLocaleString()}自治体中（{cards[0].displayName ?? cards[0].name}）</p>
@@ -351,16 +343,16 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
 
       <section className="detail-section">
         <h2 className="detail-h2">出典・データについて</h2>
-        <p className="detail-p" style={{ fontSize: 13, color: "var(--text-muted)" }}>
+        <p className="detail-p detail-p-muted">
           家賃は住宅・土地統計調査、地価は地価公示・地価調査、待機児童はこども家庭庁の公表値、人口は国勢調査、外国人住民比率は出入国在留管理庁「在留外国人統計」に基づきます（e-Stat ほか）。政令指定都市の行政区は親市との重複を避けるため集計から除外しています。データのない自治体はランキングの対象外です。
         </p>
       </section>
 
-      <div style={{ marginTop: 28, display: "flex", gap: 16, flexWrap: "wrap" }}>
+      <div className="detail-footnav">
         <Link href={`/ranking/${def.slug}`} className="detail-back">← 全国版</Link>
         <Link href="/ranking" className="detail-back">ランキング一覧</Link>
         <Link href={`/area/${pref.slug}`} className="detail-back">{prefName}の一覧</Link>
       </div>
-    </div>
+    </PageShell>
   );
 }

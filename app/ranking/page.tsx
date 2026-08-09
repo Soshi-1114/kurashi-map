@@ -5,6 +5,7 @@ import { Trophy, ArrowUpRight, Wallet, Home, JapaneseYen, Baby, Users, Globe2, S
 import { listAllAcrossPrefs } from "@/lib/metrics";
 import { RANKINGS, muniLevelOnly, rankBy, type RankingDef } from "@/lib/rankings";
 import { SITE, prefNameOf, absoluteUrl } from "@/lib/site";
+import PageShell from "@/components/PageShell";
 
 export function generateMetadata(): Metadata {
   const title = `住みやすさ・家賃ランキング一覧｜全国の市区町村を比較｜${SITE.name}`;
@@ -79,14 +80,9 @@ export default async function RankingIndexPage() {
   };
 
   return (
-    <div className="rk-root">
+    <PageShell innerClassName="rk-root" trail={[{ name: SITE.name, href: "/" }, { name: "ランキング" }]}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }} />
 
-      <nav aria-label="パンくず" className="breadcrumb">
-        <Link href="/" className="breadcrumb-link">{SITE.name}</Link>
-        <span aria-hidden="true">/</span>
-        <span className="breadcrumb-current">ランキング</span>
-      </nav>
 
       <header className="rk-hero rk-reveal">
         <span className="rk-eyebrow"><Trophy size={14} aria-hidden="true" />政府統計の実データで比較</span>
@@ -146,6 +142,6 @@ export default async function RankingIndexPage() {
       <nav className="rk-footnav" aria-label="関連リンク">
         <Link href="/" className="rk-back">← 地図に戻る</Link>
       </nav>
-    </div>
+    </PageShell>
   );
 }

@@ -216,8 +216,8 @@ export default function MobileSheet({ municipality, onClose }: Props) {
         <div className="sheet-content">
           <div className="panel-head-top">
             <div style={{ minWidth: 0, flex: 1 }}>
-              <h2 className="panel-title" style={{ fontSize: 17 }}>{heading}</h2>
-              <p className="panel-sub" style={{ margin: "2px 0 0" }}>
+              <h2 className="panel-title" style={{ fontSize: "var(--text-lg)" }}>{heading}</h2>
+              <p className="panel-sub" style={{ margin: "var(--space-1) 0 0" }}>
                 {hasRent(m.rent.value) ? (
                   <>家賃 <strong style={{ color: "var(--text)", fontVariantNumeric: "tabular-nums" }}>{m.rent.value.toLocaleString()}</strong> 円/月</>
                 ) : (
@@ -241,19 +241,19 @@ export default function MobileSheet({ municipality, onClose }: Props) {
           {/* peek では指標カードは隠す（地図優先・名称＋家賃のみ）。
               half 高の実測はこの要素の下端を基準にする（ref）。 */}
           {stage !== "peek" && (
-            <div ref={halfContentRef} style={{ marginTop: 10 }}>
+            <div ref={halfContentRef} style={{ marginTop: "var(--space-3)" }}>
               <MetricCards m={m} />
             </div>
           )}
 
           {stage === "full" && (
-            <div style={{ marginTop: 14 }}>
+            <div style={{ marginTop: "var(--space-4)" }}>
               <div className="summary-block">{buildSummary(m)}</div>
-              <p style={{ fontSize: 13, color: "var(--text-muted)", margin: "8px 0" }}>
+              <p style={{ fontSize: "var(--text-sm)", color: "var(--text-muted)", margin: "var(--space-2) 0" }}>
                 人口 {m.population.toLocaleString()}人
               </p>
               {m.hazard.note && (
-                <p style={{ fontSize: 13, color: "var(--text-muted)", margin: "8px 0" }}>
+                <p style={{ fontSize: "var(--text-sm)", color: "var(--text-muted)", margin: "var(--space-2) 0" }}>
                   災害メモ: {m.hazard.note}
                 </p>
               )}
