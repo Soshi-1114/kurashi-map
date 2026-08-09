@@ -4,8 +4,7 @@
 
 import Link from "next/link";
 import { RANKINGS, type RankingCategory } from "@/lib/rankings";
-import PrefRegionLinks from "@/components/PrefRegionLinks";
-import Expandable from "@/components/home/Expandable";
+import PrefRegionPicker from "@/components/home/PrefRegionPicker";
 
 export type PopularMuni = { pref: string; code: string; name: string };
 
@@ -42,14 +41,8 @@ export default function HomeLinks({ popular }: { popular: PopularMuni[] }) {
 
       <section className="home-links-block">
         <h2 className="home-links-h">都道府県から探す</h2>
-        {/* SPでは長くなりすぎるためクランプ＋「すべて表示」。47県リンクは常にHTMLに存在 */}
-        <Expandable moreLabel="すべての都道府県を表示">
-          <PrefRegionLinks
-            href={(slug) => `/area/${slug}`}
-            linkClassName="home-pref-link"
-            gridClassName="home-pref-grid"
-          />
-        </Expandable>
+        {/* 地方タブ → 都道府県の2段階。47県リンクは全地方ぶん常にHTMLに存在する */}
+        <PrefRegionPicker />
       </section>
 
       <section className="home-links-block">

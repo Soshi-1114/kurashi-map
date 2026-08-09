@@ -173,13 +173,48 @@ html, body {
   font-size: var(--text-base); font-weight: 800; color: var(--text); margin: 0 0 12px;
   border-left: 3px solid var(--accent); padding-left: 9px;
 }
-.home-pref-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 7px; }
+/* auto-fill（auto-fit ではない）。auto-fit は空トラックを畳んで項目を引き伸ばすため、
+   1県だけの地方（北海道）でカードが行いっぱいに伸びてしまう。トラックを残せば
+   どの地方でもカード幅が揃う。 */
+.home-pref-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 7px; }
+@media (max-width: 768px) {
+  .home-pref-grid { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); }
+}
 .home-pref-link {
-  display: block; text-align: center; font-size: var(--text-sm); font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+  min-height: 44px; text-align: center; font-size: var(--text-sm); font-weight: 600;
   padding: 9px 6px; border: 1px solid var(--border); border-radius: var(--radius-sm);
   color: var(--text); background: var(--surface-strong);
 }
 .home-pref-link:hover { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
+
+/* 「都道府県から探す」: 地方タブ → 都道府県（PrefRegionPicker）。
+   選択中のタブだけが塗り、他は地図で見る/ランキングのチップと同じ体裁に揃える。 */
+.home-region-tabs { display: flex; flex-wrap: wrap; gap: 7px; margin: 0 0 14px; }
+.home-region-tab {
+  display: inline-flex; align-items: center; min-height: 40px;
+  font-family: inherit; font-size: var(--text-sm); font-weight: 700;
+  padding: 0 15px; border: 1px solid var(--border); border-radius: var(--radius-pill);
+  background: var(--surface-strong); color: var(--text-muted); cursor: pointer;
+  transition: background-color .15s ease, border-color .15s ease, color .15s ease;
+}
+.home-region-tab:hover { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
+.home-region-tab[aria-selected="true"] {
+  background: var(--accent); border-color: var(--accent); color: #fff;
+}
+.home-region-tab[aria-selected="true"]:hover { background: var(--accent-hover); color: #fff; }
+/* .home-pref-grid の display:grid が作者スタイルとして UA の [hidden] に勝つため、
+   パネル側で明示的に隠す（グリッドはこの div の子なので通常は影響しないが、
+   将来クラスが付け替わっても hidden が効くようにしておく）。 */
+.home-region-panel[hidden] { display: none; }
+.home-region-panel { animation: home-region-in .16s ease both; }
+@keyframes home-region-in {
+  from { opacity: 0; transform: translateY(3px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-region-panel { animation: none; }
+}
 .home-chip-row { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 7px; }
 .home-chip {
   display: inline-flex; font-size: var(--text-sm); font-weight: 700;
@@ -389,42 +424,6 @@ html, body {
   .home-cando { grid-template-columns: 1fr; }
   .home-cando-item { border-left: none; border-top: 1px solid var(--border); }
   .home-cando-item:first-child { border-top: none; }
-}
-
-/* 「一部表示＋すべて表示」クランプ（SPのみ）。中身は常にDOMに存在し、
-   max-height を絞るだけ（display は変えない＝リンクはHTML上に保持）。 */
-.home-collapse-toggle { display: none; }
-@media (max-width: 768px) {
-  .home-collapse:not(.is-expanded) .home-collapse-body {
-    max-height: 300px;
-    overflow: hidden;
-    position: relative;
-  }
-  /* 続きがあることを示す下端フェード */
-  .home-collapse:not(.is-expanded) .home-collapse-body::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 56px;
-    background: linear-gradient(to bottom, transparent, var(--bg));
-    pointer-events: none;
-  }
-  .home-collapse-toggle {
-    display: block;
-    width: 100%;
-    margin-top: 8px;
-    padding: 10px 16px;
-    border: 1px solid var(--border-strong);
-    border-radius: var(--radius-pill);
-    background: var(--surface);
-    font-size: var(--text-sm);
-    font-weight: 600;
-    color: var(--text-muted);
-    cursor: pointer;
-  }
-  .home-collapse-toggle:hover { color: var(--accent); border-color: var(--accent); }
 }
 
 /* トップのランキング導線（カテゴリ別・代表項目のみ） */
