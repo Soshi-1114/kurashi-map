@@ -262,7 +262,7 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
         collectBaseLabels(map, labelDimRef.current);
 
         // コロプレス・ハザードラスタ・避難場所のソース/レイヤーを一括追加。
-        addKurashiLayers(map, { prefGeo, muniGeo, wardsGeo });
+        addKurashiLayers(map, { prefGeo, muniGeo, wardsGeo }, activeMetricRef.current);
 
         // クリック処理は最前面の1フィーチャだけに適用する（レイヤー別の delegated
         // ハンドラだと、政令市（z>=11）で親市 muni-fill と区 wards-fill が両方発火し
