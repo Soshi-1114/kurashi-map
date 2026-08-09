@@ -17,6 +17,7 @@ import {
   liquefactionLevelOf,
   liquefactionLabel,
   liquefactionIsRisk,
+  HAZARD_MAX_LEVEL_DISCLAIMER,
 } from "@/lib/hazardScale";
 import { NoData, SourceLine } from "./cards";
 
@@ -125,7 +126,7 @@ export function DisasterCard({ m }: { m: Municipality }) {
       <p className="ad-note">
         <Info size={15} aria-hidden="true" />
         <span>
-          これらはこの自治体の区域内で確認された<strong>最大の区分</strong>です。区域の広さや、住まいの場所ごとのリスクを示すものではありません。地点ごとの危険度は各自治体のハザードマップでご確認ください。
+          これらはこの自治体の区域内で確認された<strong>最大の区分</strong>です。{HAZARD_MAX_LEVEL_DISCLAIMER}
         </span>
       </p>
       <SourceLine source={m.hazard.source} asOf={m.hazard.asOf} />

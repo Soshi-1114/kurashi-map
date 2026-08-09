@@ -5,6 +5,7 @@ import { Trophy, ArrowUpRight, Wallet, Home, JapaneseYen, Baby, Users, Globe2, S
 import { listAllAcrossPrefs } from "@/lib/metrics";
 import { RANKINGS, muniLevelOnly, rankBy, type RankingDef } from "@/lib/rankings";
 import { SITE, prefNameOf, absoluteUrl } from "@/lib/site";
+import { RankBadge } from "@/components/RankBadge";
 
 export function generateMetadata(): Metadata {
   const title = `住みやすさ・家賃ランキング一覧｜全国の市区町村を比較｜${SITE.name}`;
@@ -127,12 +128,13 @@ export default async function RankingIndexPage() {
                   </div>
                   {top1 && (
                     <div className="rk-champ-winner">
-                      {/* membershipList 型（待機児童ゼロ等）は順位ではないのでメダルを出さない */}
-                      {def.membershipList ? (
-                        <span className="rk-champ-medal" aria-label="該当自治体の例">✓</span>
-                      ) : (
-                        <span className="rk-champ-medal" aria-label="1位">1</span>
-                      )}
+                      <RankBadge
+                        className="rk-champ-medal"
+                        isList={def.membershipList}
+                        rank={1}
+                        rankAriaLabel="1位"
+                        checkAriaLabel="該当自治体の例"
+                      />
                       <span className="rk-champ-winner-body">
                         <span className="rk-champ-town">
                           {top1.displayName ?? top1.name}

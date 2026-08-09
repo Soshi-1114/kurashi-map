@@ -10,6 +10,7 @@ import { RANKINGS, getRankingBySlug, muniLevelOnly, rankBy, type RankingDef } fr
 import { PREFS } from "@/lib/prefs";
 import { SITE, prefNameOf, absoluteUrl } from "@/lib/site";
 import PrefRegionLinks from "@/components/PrefRegionLinks";
+import { RankBadge } from "@/components/RankBadge";
 
 type Params = { metric: string };
 
@@ -63,7 +64,10 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
   if (!def) notFound();
 
   const allMunis = muniLevelOnly(await listAllAcrossPrefs());
-  const ranked = rankBy(def, allMunis, TOP_TABLE);
+  // limit なしで一度だけ絞り込み・整列し、掲載用の先頭 TOP_TABLE 件と該当総数の
+  // 両方をここから導く（allMunis を二度フィルタしない）。
+  const fullRanked = rankBy(def, allMunis);
+  const ranked = fullRanked.slice(0, TOP_TABLE);
   if (ranked.length === 0) notFound();
   const podium = ranked.slice(0, 3);          // トップ3＝順位台
   const ladder = ranked.slice(3, TOP_CARDS);  // 4位以降＝序列ラダー
@@ -72,7 +76,7 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
   const isList = def.membershipList === true;
   // 一覧型は掲載数（TOP_TABLE で頭打ち）と該当総数が大きく違う。「該当N自治体」が
   // 掲載数に見えないよう、該当総数を別に数えて併記する。
-  const qualifiedCount = isList ? allMunis.filter((m) => def.qualifies(m)).length : ranked.length;
+  const qualifiedCount = isList ? fullRanked.length : ranked.length;
 
   const others = RANKINGS.filter((r) => r.slug !== def.slug);
   // この指標に該当データがある都道府県（県別ランキングへの導線）
@@ -198,11 +202,7 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
             {podium.map((m, i) => (
               <li key={m.code} style={{ display: "contents" }}>
                 <Link href={`/area/${m.pref}/${m.code}`} className={`rk-podium-card is-${i + 1}`}>
-                  {isList ? (
-                    <span className="rk-medal" aria-hidden="true">✓</span>
-                  ) : (
-                    <span className="rk-medal" aria-label={`${i + 1}位`}>{i + 1}</span>
-                  )}
+                  <RankBadge className="rk-medal" isList={isList} rank={i + 1} rankAriaLabel={`${i + 1}位`} />
                   <span className="rk-podium-body">
                     <span className="rk-podium-name">{m.displayName ?? m.name}</span>
                     <span className="rk-podium-pref">{prefNameOf(m.pref)}</span>
@@ -219,7 +219,7 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
             {ladder.map((m, i) => (
               <li key={m.code}>
                 <Link href={`/area/${m.pref}/${m.code}`} className="rk-ladder-row">
-                  <span className="rk-ladder-rank" aria-hidden={isList || undefined}>{isList ? "✓" : i + 4}</span>
+                  <RankBadge className="rk-ladder-rank" isList={isList} rank={i + 4} />
                   <span className="rk-ladder-name">
                     {m.displayName ?? m.name}
                     <span className="rk-ladder-pref">{prefNameOf(m.pref)}</span>

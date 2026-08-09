@@ -6,6 +6,12 @@
 import type { HazardInfo } from "./types";
 import { isHazardEvaluated } from "./coverage";
 
+// 表示している浸水深・土砂災害区分などは自治体内で確認された「最大の区分」であり、
+// 区域の広さや地点ごとのリスクを示すものではない、という注記（honesty 方針）。
+// DisasterCard と About の両方で同じ文言を使うための単一ソース。
+export const HAZARD_MAX_LEVEL_DISCLAIMER =
+  "区域の広さや、住まいの場所ごとのリスクを示すものではありません。地点ごとの危険度は各自治体のハザードマップでご確認ください。";
+
 // ---- 浸水深ランク（洪水 XKT026 / 国交省凡例 6 段階）----
 // level: 0=浸水なし, 1..6=深さ段階, -1=評価対象外
 export const FLOOD_LEVEL_LABELS = [

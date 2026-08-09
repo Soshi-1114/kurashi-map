@@ -8,6 +8,7 @@ import { PREFS, getPrefBySlug } from "@/lib/prefs";
 import { SITE, absoluteUrl } from "@/lib/site";
 import { getForeignStats } from "@/lib/foreignStats";
 import { countWaitlistDisclosed } from "@/lib/waitlist";
+import { RankBadge } from "@/components/RankBadge";
 import type { Municipality } from "@/lib/types";
 
 type Params = { metric: string; pref: string };
@@ -285,9 +286,7 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
           {cards.map((m, i) => (
             <li key={m.code}>
               <Link href={`/area/${m.pref}/${m.code}`} className="pref-rank-item">
-                <span className="pref-rank-no" aria-hidden={def.membershipList || undefined}>
-                  {def.membershipList ? "✓" : i + 1}
-                </span>
+                <RankBadge className="pref-rank-no" isList={def.membershipList} rank={i + 1} />
                 <span className="pref-rank-name">{m.displayName ?? m.name}</span>
                 <span className="pref-rank-value">{def.display(m)}</span>
               </Link>

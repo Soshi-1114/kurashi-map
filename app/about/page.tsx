@@ -8,6 +8,7 @@ import type { Metadata } from "next";
 import { getMunicipality } from "@/lib/metrics";
 import { NEXT_UPDATE, formatAsOfJa } from "@/lib/rankings";
 import { SITE, absoluteUrl } from "@/lib/site";
+import { HAZARD_MAX_LEVEL_DISCLAIMER } from "@/lib/hazardScale";
 
 const PATH = "/about";
 const TITLE = `${SITE.name}について｜データの出典と更新方針`;
@@ -212,7 +213,7 @@ export default async function AboutPage() {
             <strong>人口密度</strong>：人口 ÷ 面積（国土地理院「全国都道府県市区町村別面積調」）。こちらも表示時に算出しています。
           </li>
           <li>
-            <strong>災害リスク</strong>：表示している浸水深・土砂災害区分などは、<strong>その自治体の区域内で確認された最大の区分</strong>です。区域の広さや、住まいの場所ごとのリスクを示すものではありません。地点ごとの危険度は各自治体のハザードマップでご確認ください。
+            <strong>災害リスク</strong>：表示している浸水深・土砂災害区分などは、<strong>その自治体の区域内で確認された最大の区分</strong>です。{HAZARD_MAX_LEVEL_DISCLAIMER}
           </li>
         </ul>
       </section>
