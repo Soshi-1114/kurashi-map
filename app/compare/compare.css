@@ -1,0 +1,317 @@
+/* 自治体比較ページ（/compare）。cmp-* 名前空間。
+   トークンは globals.css の :root を使用（アイボリー＋テラコッタのコンテンツ面）。 */
+
+.cmp-root {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 20px 56px;
+}
+.cmp-hero {
+  padding: 26px 0 6px;
+}
+.cmp-title {
+  margin: 0 0 8px;
+  font-size: var(--text-2xl);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+.cmp-lead {
+  margin: 0;
+  max-width: 640px;
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  color: var(--text-muted);
+}
+
+/* ピッカー */
+.cmp-picker {
+  margin: 18px 0 6px;
+}
+.cmp-search {
+  position: relative;
+  max-width: 480px;
+}
+.cmp-search input {
+  width: 100%;
+  padding: 12px 16px;
+  /* iOS Safari の自動ズーム回避のため 16px 固定 */
+  font-size: 16px;
+  font-family: inherit;
+  color: var(--text);
+  background: var(--surface-strong);
+  border: 1.5px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.cmp-search input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.cmp-search input:disabled {
+  color: var(--text-faint);
+  background: var(--surface-muted);
+}
+.cmp-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+}
+.cmp-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px 6px 14px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  background: var(--bg-elev);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+.cmp-chip-remove {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 50%;
+  background: var(--surface-muted);
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+  line-height: 1;
+  cursor: pointer;
+}
+/* 見た目の丸は 28px のまま、指の当たり判定だけ 44px に広げる（WCAG 2.5.5）。
+   チップの文字側へ広がるが、文字はリンクではないので誤爆先がない。 */
+.cmp-chip-remove::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+}
+.cmp-chip-remove:hover {
+  background: var(--surface-muted-hover);
+  color: var(--text);
+}
+.cmp-empty {
+  margin: 22px 0;
+  padding: 18px;
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}
+
+/* 比較テーブル（SP は横スクロール・1列目は sticky） */
+.cmp-scroll {
+  margin-top: 20px;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-elev);
+}
+.cmp-table {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+.cmp-table th,
+.cmp-table td {
+  padding: 10px 14px;
+  border-top: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+  font-variant-numeric: tabular-nums;
+}
+.cmp-table thead th {
+  border-top: none;
+  background: var(--surface-subtle);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.cmp-table thead th a {
+  color: var(--accent);
+  font-size: var(--text-sm);
+  text-decoration: none;
+}
+.cmp-table thead th a:hover {
+  text-decoration: underline;
+}
+.cmp-rowlabel {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  min-width: 11em;
+  background: var(--bg-elev);
+  font-weight: 600;
+  color: var(--text-muted);
+  box-shadow: 1px 0 0 var(--border);
+}
+.cmp-table thead .cmp-rowlabel {
+  background: var(--surface-subtle);
+}
+.cmp-group th {
+  background: var(--surface-muted);
+  font-size: var(--text-xs);
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+/* 全国平均（参考）列: 選択自治体ではなく参照用の数値であることを背景色で区別する */
+.cmp-avg-col {
+  background: var(--surface-subtle);
+  color: var(--text-muted);
+  font-style: normal;
+  white-space: nowrap;
+}
+.cmp-table thead .cmp-avg-col {
+  font-size: var(--text-xs);
+  font-weight: 700;
+}
+.cmp-loading {
+  color: var(--text-faint);
+}
+
+/* 簡易バー（数値指標のみ。負値を取りうる指標・順序尺度の災害リスクには付けない） */
+.cmp-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.cmp-cell-text {
+  white-space: nowrap;
+}
+.cmp-bar-track {
+  position: relative;
+  height: 5px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-muted);
+  overflow: hidden;
+}
+.cmp-bar-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+}
+/* 全国平均（参考）列のバーは控えめな色にし、選択自治体と視覚的に区別する */
+.cmp-bar-track.is-avg .cmp-bar-fill {
+  background: var(--text-faint);
+}
+
+/* 平均の比較基準トグル（全国平均／県平均。同一県比較のときだけ表示） */
+.cmp-avg-toggle {
+  display: inline-flex;
+  gap: 0;
+  margin-top: 18px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+.cmp-avg-toggle .filter-seg {
+  border: none;
+  border-radius: 0;
+  padding: 8px 14px;
+  font-size: var(--text-sm);
+  background: var(--bg-elev);
+  color: var(--text-muted);
+  cursor: pointer;
+}
+.cmp-avg-toggle .filter-seg.is-active {
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* SP: 指標単位の縦型比較（PCではテーブルを使うため非表示） */
+.cmp-mrows { display: none; }
+@media (max-width: 768px) {
+  .cmp-scroll { display: none; }
+  .cmp-mrows {
+    display: block;
+    margin-top: 16px;
+  }
+  .cmp-mgroup {
+    margin-top: 22px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--bg-elev);
+    overflow: hidden;
+  }
+  .cmp-mgroup-title {
+    margin: 0;
+    padding: 9px 14px;
+    background: var(--surface-muted);
+    font-size: var(--text-xs);
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    color: var(--text);
+  }
+  .cmp-mrow {
+    padding: 12px 14px 14px;
+    border-top: 1px solid var(--border);
+  }
+  .cmp-mrow:first-of-type { border-top: none; }
+  .cmp-mrow-label {
+    margin: 0 0 8px;
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--text-muted);
+  }
+  .cmp-mrow-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .cmp-mrow-item {
+    display: grid;
+    grid-template-columns: 7.5em 1fr;
+    gap: 10px;
+    align-items: start;
+  }
+  .cmp-mrow-name {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--text);
+    overflow-wrap: anywhere;
+  }
+  .cmp-mrow-item.is-avg .cmp-mrow-name {
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+  .cmp-mrow-value {
+    font-size: var(--text-sm);
+    font-variant-numeric: tabular-nums;
+  }
+  .cmp-mrow-value .cmp-cell { gap: 4px; }
+}
+
+/* プリセット・説明 */
+.cmp-presets-note {
+  margin: 4px 0 0;
+  font-size: var(--text-xs);
+  color: var(--text-faint);
+}
+.cmp-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+}
+.cmp-note {
+  margin: 26px 0 0;
+  font-size: var(--text-xs);
+  line-height: var(--leading-normal);
+  color: var(--text-faint);
+}

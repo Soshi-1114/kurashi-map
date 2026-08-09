@@ -1,7 +1,11 @@
 "use client";
 
-// 地図上のフローティング操作パネル（塗り分け指標・ベース地図・ハザードマップ・絞り込み）。
+// 地図上の操作パネル（塗り分け指標・ベース地図・ハザードマップ・絞り込み）。
 // 状態は持たず、すべて props 経由（状態の単一ソースは MapView）。
+// 表示形態は2通り: PC は地図右上のポップオーバー、モバイル（isMobile）は
+// 画面下から開くモーダルの Bottom Sheet（scrim・ESC・スクロールロック・フォーカス移動つき）。
+import { useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import { MAP_METRICS, getMapMetric, type MapMetricKey } from "@/lib/mapMetrics";
 import {
   RENT_MAX_OPTIONS, LAND_MAX_OPTIONS, FLOOD_MAX_OPTIONS, type MapFilters,
@@ -25,6 +29,10 @@ type Props = {
   onClearFilters: () => void;
   filterActive: boolean;
   matchedCount: number;
+  /** モバイル表示（MapView の isMobile と連動。true で Bottom Sheet 化） */
+  isMobile?: boolean;
+  /** 既定値から変更されている設定の数（>0 でトグルボタンにバッジ表示） */
+  activeCount?: number;
 };
 
 export default function LayersPanel({
@@ -34,19 +42,110 @@ export default function LayersPanel({
   overlays, onClearOverlays, onToggleOverlay,
   filters, onChangeFilters, onClearFilters,
   filterActive, matchedCount,
+  isMobile = false,
+  activeCount = 0,
 }: Props) {
-  return (
-    <div className={`map-layers ${open ? "is-open" : ""}`}>
-      <button
-        className={`map-layers-btn map-layers-btn-icon ${open ? "is-active" : ""}`}
-        aria-label="地図の表示設定（塗り分け・ハザードマップ・絞り込み）を開閉"
-        aria-expanded={open}
-        onClick={onToggleOpen}
-      >
-        <LayersIcon />
-      </button>
-      {open && (
-        <div className="layers-panel">
+  const panelRef = useRef<HTMLDivElement | null>(null);
+  const closeBtnRef = useRef<HTMLButtonElement | null>(null);
+
+  // Escape で閉じる（PC/モバイル共通）。モバイルはモーダルなので加えて
+  // body スクロールをロックし、開いた直後に閉じるボタンへフォーカスを移す。
+  useEffect(() => {
+    if (!open) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onToggleOpen();
+        return;
+      }
+      // モバイルのみ: シート内で Tab をループさせる軽量フォーカストラップ
+      if (isMobile && e.key === "Tab" && panelRef.current) {
+        const focusables = panelRef.current.querySelectorAll<HTMLElement>(
+          'button, input, [tabindex]:not([tabindex="-1"])',
+        );
+        if (focusables.length === 0) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        const active = document.activeElement;
+        if (e.shiftKey && active === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && active === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+    document.addEventListener("keydown", onKeyDown);
+
+    let unlock: (() => void) | undefined;
+    if (isMobile) {
+      // html を overflow:hidden にするだけだとルートスクローラの位置が 0 に落ちる。
+      // scrim は半透明なので、背後のページがページ先頭へ飛ぶのがそのまま見えるうえ、
+      // 解除しても位置が戻らない（地図まで下スクロール→開く→閉じたら先頭）。
+      // body を現在位置ぶん引き上げて固定すれば、見た目は据え置きのまま
+      // スクロールだけ止まる（iOS Safari でも効く定番手）。
+      const docEl = document.documentElement;
+      const body = document.body;
+      const prevScrollY = window.scrollY;
+      const prevDocOverflow = docEl.style.overflow;
+      const prevBody = {
+        position: body.style.position,
+        top: body.style.top,
+        left: body.style.left,
+        right: body.style.right,
+        width: body.style.width,
+        overflow: body.style.overflow,
+      };
+      body.style.position = "fixed";
+      body.style.top = `-${prevScrollY}px`;
+      body.style.left = "0";
+      body.style.right = "0";
+      body.style.width = "100%";
+      body.style.overflow = "hidden";
+      docEl.style.overflow = "hidden";
+      unlock = () => {
+        docEl.style.overflow = prevDocOverflow;
+        body.style.position = prevBody.position;
+        body.style.top = prevBody.top;
+        body.style.left = prevBody.left;
+        body.style.right = prevBody.right;
+        body.style.width = prevBody.width;
+        body.style.overflow = prevBody.overflow;
+        window.scrollTo(0, prevScrollY);
+      };
+      // フォーカス移動でスクロールが動かないようにする
+      closeBtnRef.current?.focus({ preventScroll: true });
+    }
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      unlock?.();
+    };
+  }, [open, isMobile, onToggleOpen]);
+
+  const body = (
+    <>
+      {/* モバイルのみ表示される背面オーバーレイ（タップで閉じる） */}
+      <div className="layers-scrim" onClick={onToggleOpen} aria-hidden="true" />
+          <div
+            ref={panelRef}
+            className="layers-panel"
+            {...(isMobile ? { role: "dialog", "aria-modal": true, "aria-label": "地図の表示設定" } : {})}
+          >
+            {/* モバイルのみ表示されるシートヘッダー（タイトル＋明示的な閉じるボタン） */}
+            <div className="layers-head">
+              <span className="layers-head-title">地図の表示設定</span>
+              <button
+                ref={closeBtnRef}
+                type="button"
+                className="layers-head-close"
+                aria-label="閉じる"
+                onClick={onToggleOpen}
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                  <path d="M6 6l12 12M18 6L6 18" />
+                </svg>
+              </button>
+            </div>
           <div className="layers-title">塗り分け指標</div>
           <div className="metric-radios" role="radiogroup" aria-label="塗り分け指標">
             {MAP_METRICS.map((m) => (
@@ -144,8 +243,31 @@ export default function LayersPanel({
               <button className="filter-clear" onClick={onClearFilters}>クリア</button>
             </div>
           )}
-        </div>
-      )}
+      </div>
+    </>
+  );
+
+  return (
+    <div className="map-layers">
+      <button
+        className={`map-layers-btn map-layers-btn-icon ${open ? "is-active" : ""}`}
+        aria-label={`地図の表示設定（塗り分け・ハザードマップ・絞り込み）を開閉${activeCount > 0 ? `（設定${activeCount}件適用中）` : ""}`}
+        aria-expanded={open}
+        onClick={onToggleOpen}
+      >
+        <LayersIcon />
+        {activeCount > 0 && (
+          <span className="map-layers-badge" aria-hidden="true">{activeCount}</span>
+        )}
+      </button>
+      {/* モバイルのシートは body 直下へ portal する。地図コンテナ（埋め込み時は
+          overflow:hidden）の内側に置くと、iOS WebKit では position:fixed の子が
+          その overflow で切り取られ、scrim と閉じるボタンが画面外に消えて
+          「開いたら閉じられない」状態になるため。PC のポップオーバーは
+          .map-layers を基準に配置するので、その場に残す。 */}
+      {open && (isMobile
+        ? createPortal(<div className="layers-sheet">{body}</div>, document.body)
+        : body)}
     </div>
   );
 }

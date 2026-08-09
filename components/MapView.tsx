@@ -20,6 +20,7 @@ import { PREFS, getPrefByCode } from "@/lib/prefs";
 import { hasRent } from "@/lib/rentColor";
 import { getMapMetric, TREND_PROPERTY, type MapMetricKey } from "@/lib/mapMetrics";
 import { trackSelectMunicipality, trackChangeMetric, trackApplyFilter } from "@/lib/analytics";
+import { MAP_FLY_EVENT } from "@/lib/mapFly";
 import {
   EMPTY_FILTERS, isFilterActive, matchesFilter, buildMatchExpression, type MapFilters,
 } from "@/lib/mapFilters";
@@ -43,9 +44,23 @@ import MuniSearch from "./map/MuniSearch";
 import AreaPanel from "./AreaPanel";
 import MobileSheet from "./MobileSheet";
 
-type Props = { summary: MuniSummary[]; onMenuClick?: () => void; initialMetric?: MapMetricKey | "none" };
+type Props = {
+  summary: MuniSummary[];
+  onMenuClick?: () => void;
+  initialMetric?: MapMetricKey | "none";
+  /** スクロールするページに埋め込む場合 true（1本指パン/ホイールを奪わない協調ジェスチャ）。 */
+  cooperativeGestures?: boolean;
+  /** ヘッダーの自治体検索を表示するか。トップページはヒーロー検索と重複するため false。 */
+  showSearch?: boolean;
+  /**
+   * 地図内のフローティングヘッダー（ロゴ＋検索＋メニュー）を出すか。
+   * 全画面地図のピラーページでは地図がページそのものなので必要だが、スクロール
+   * するページに埋め込む場合はページ側のヘッダー（SiteHeader）が担うため false。
+   */
+  showHeader?: boolean;
+};
 
-export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_MAP_METRIC }: Props) {
+export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_MAP_METRIC, cooperativeGestures = false, showSearch = true, showHeader = true }: Props) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<MapLibreMap | null>(null);
   const muniGeoRef = useRef<GeoJSON.FeatureCollection | null>(null);
@@ -64,6 +79,8 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
   const labelDimRef = useRef<LabelDimState>({ ids: [], text: new Map(), icon: new Map() });
   // 地図初期化完了前に検索確定された自治体コード（初期化後に flyTo を実行する）。
   const pendingFlyRef = useRef<string | null>(null);
+  // 協調ジェスチャ設定（マウント後は不変。初期化 effect を再実行させないため ref に保持）。
+  const cooperativeRef = useRef(cooperativeGestures);
 
   // ベース地図スタイル。state は UI 表示用、ref は地図初期化 effect が再実行されない
   // よう現在値を保持する用。
@@ -93,7 +110,9 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
   // 初回ビューのポリゴンが描画され切るまで true にしない（凡例先行・白地図対策）
   const [firstPaintReady, setFirstPaintReady] = useState(false);
   const [tooltip, setTooltip] = useState<{ x: number; y: number; name: string; label: string; value: string; flip: boolean } | null>(null);
-  const [layersOpen, setLayersOpen] = useState(true);
+  // レイヤーパネルの初期開閉。モバイルは地図を覆わないよう閉、PCは従来どおり開。
+  // パネル自体は firstPaintReady（クライアント側）まで描画されないため hydration 不整合はない。
+  const [layersOpen, setLayersOpen] = useState(() => typeof window === "undefined" || window.innerWidth >= 768);
   // ハザード実区域ラスタの表示ズーム（HAZARD_ZONE_ZOOM）に達しているか。未満の間は
   // 地図に何も重ねず凡例で「ズームしてください」と誘導する（斜線ハッチは廃止）。
   const [belowHazardZoom, setBelowHazardZoom] = useState(true);
@@ -124,10 +143,14 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
   }, [summary]);
 
   useEffect(() => {
-    const detect = () => setIsMobile(window.innerWidth < 768);
+    // CSS の (max-width: 768px) と同じ判定を matchMedia で共有する。
+    // innerWidth < 768 だと 768px ちょうどで「CSS はシート・JS は PC 扱い」に
+    // 割れ、レイヤーシートが portal されず閉じられなくなる。
+    const mq = window.matchMedia("(max-width: 768px)");
+    const detect = () => setIsMobile(mq.matches);
     detect();
-    window.addEventListener("resize", detect);
-    return () => window.removeEventListener("resize", detect);
+    mq.addEventListener("change", detect);
+    return () => mq.removeEventListener("change", detect);
   }, []);
 
   // 指定緊急避難場所のプロット（詳細は useShelterOverlay）。moveend の再評価用に
@@ -186,6 +209,15 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
         center: [139.825, 35.44],
         zoom: 9,
         attributionControl: { compact: true },
+        // 埋め込み時はページスクロールを奪わない（モバイル2本指パン・PC Ctrl+ホイール）。
+        cooperativeGestures: cooperativeRef.current,
+        locale: cooperativeRef.current
+          ? {
+              "CooperativeGesturesHandler.WindowsHelpText": "Ctrl キーを押しながらスクロールすると地図を拡大縮小できます",
+              "CooperativeGesturesHandler.MacHelpText": "⌘ キーを押しながらスクロールすると地図を拡大縮小できます",
+              "CooperativeGesturesHandler.MobileHelpText": "2本の指で地図を操作できます",
+            }
+          : undefined,
       });
       map.addControl(new maplibregl.NavigationControl({ showCompass: false, visualizePitch: false }), "bottom-right");
 
@@ -230,7 +262,7 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
         collectBaseLabels(map, labelDimRef.current);
 
         // コロプレス・ハザードラスタ・避難場所のソース/レイヤーを一括追加。
-        addKurashiLayers(map, { prefGeo, muniGeo, wardsGeo });
+        addKurashiLayers(map, { prefGeo, muniGeo, wardsGeo }, activeMetricRef.current);
 
         // クリック処理は最前面の1フィーチャだけに適用する（レイヤー別の delegated
         // ハンドラだと、政令市（z>=11）で親市 muni-fill と区 wards-fill が両方発火し
@@ -467,8 +499,26 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
       // 初期化直後の追加リサイズ
       requestAnimationFrame(() => map.resize());
 
+      // 「地図の上の2本指は地図の操作」を iOS Safari でも成立させる。
+      // MapLibre は touch-action: pan-x pan-y だけで2本指を確保する設計だが、
+      // iOS Safari はページのピンチズーム（user-scalable を殺していない＝a11y的に
+      // 正しい状態）を touch-action では譲らないため、2本指が地図ではなくページの
+      // 拡大に奪われる。地図キャンバス上の2本指に限って既定動作を止め、MapLibre に
+      // 渡す。1本指は素通しするので、埋め込み地図のページスクロールは従来どおり。
+      const canvasContainer = map.getCanvasContainer();
+      const blockTwoFingerTouch = (e: TouchEvent) => {
+        if (e.touches.length >= 2) e.preventDefault();
+      };
+      // iOS Safari のピンチは touch イベントに加えて独自の gesture* も発火する
+      const blockSafariGesture = (e: Event) => e.preventDefault();
+      const SAFARI_GESTURE_START: string = "gesturestart";
+      canvasContainer.addEventListener("touchstart", blockTwoFingerTouch, { passive: false });
+      canvasContainer.addEventListener(SAFARI_GESTURE_START, blockSafariGesture);
+
       cleanup = () => {
         ro.disconnect();
+        canvasContainer.removeEventListener("touchstart", blockTwoFingerTouch);
+        canvasContainer.removeEventListener(SAFARI_GESTURE_START, blockSafariGesture);
         map.remove();
         mapRef.current = null;
       };
@@ -610,6 +660,12 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
     () => (filterActive ? summary.reduce((n, m) => n + (matchesFilter(m, filters) ? 1 : 0), 0) : 0),
     [filterActive, filters, summary],
   );
+  // レイヤーボタンのバッジ用: 既定値から変更されている設定の数
+  // （塗り分け指標・ハザードオーバーレイ・絞り込み。ベース地図は見た目のみのため含めない）。
+  const layerActiveCount =
+    (activeMetric !== "none" ? 1 : 0) +
+    overlays.size +
+    Object.values(filters).filter((v) => v != null).length;
 
   // フィルタ条件を更新しつつ GA4 に適用イベントを送る共通ハンドラ。
   const updateFilters = useCallback((next: MapFilters) => {
@@ -690,9 +746,24 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
     flyToCode(m.code);
   }, [flyToCode]);
 
+  // ページ内の別クライアント島（トップのヒーロー検索の「地図で表示」）からのフライト依頼を受ける。
+  // lib/mapFly.ts の CustomEvent 1本の疎結合ブリッジ（トップ以外では発火しないため無害）。
+  useEffect(() => {
+    const onFlyRequest = (e: Event) => {
+      const code = (e as CustomEvent<{ code: string }>).detail?.code;
+      const m = code ? byCode.get(code) : undefined;
+      if (m) void flyToMuni(m);
+    };
+    window.addEventListener(MAP_FLY_EVENT, onFlyRequest);
+    return () => window.removeEventListener(MAP_FLY_EVENT, onFlyRequest);
+  }, [byCode, flyToMuni]);
+
   // パネル開閉はフル詳細の取得完了で判定（取得中の一瞬は閉のまま）
   const rootClass = [
     "map-root",
+    // ヘッダーを出さない時は、その高さぶんの上端オフセット（--header-h）を畳んで
+    // レイヤーボタン・凡例・サイドパネルを地図の上端まで詰める
+    showHeader ? "" : "map-root--headerless",
     selectedDetail && isMobile ? "is-sheet-open" : "",
     selectedDetail && !isMobile ? "is-panel-open" : "",
   ].filter(Boolean).join(" ");
@@ -744,27 +815,33 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
         </div>
       )}
 
-      {/* 統合ヘッダー（固定） */}
-      <header className="app-header">
-        <div className="app-header-brand">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo.svg" alt="" className="brand-mark" width={30} height={30} />
-          <div className="brand-name">KurashiMap</div>
-        </div>
-        <MuniSearch municipalities={municipalities} wards={wards} onSelect={flyToMuni} />
-        {onMenuClick && (
-          <button
-            className="app-header-menu-btn"
-            aria-label="エリア・ランキングのメニューを開く"
-            onClick={onMenuClick}
-          >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
-              <path d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-            <span className="menu-btn-label">エリア・ランキング</span>
-          </button>
-        )}
-      </header>
+      {/* 統合ヘッダー（固定）。埋め込み地図ではページ側の SiteHeader が担うため出さない */}
+      {showHeader && (
+        <header className="app-header">
+          <div className="app-header-brand">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo.svg" alt="" className="brand-mark" width={30} height={30} />
+            <div className="brand-name">KurashiMap</div>
+          </div>
+          {showSearch ? (
+            <MuniSearch municipalities={municipalities} wards={wards} onSelect={flyToMuni} />
+          ) : (
+            <div className="app-header-spacer" aria-hidden="true" />
+          )}
+          {onMenuClick && (
+            <button
+              className="app-header-menu-btn"
+              aria-label="エリア・ランキングのメニューを開く"
+              onClick={onMenuClick}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                <path d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+              <span className="menu-btn-label">エリア・ランキング</span>
+            </button>
+          )}
+        </header>
+      )}
 
       {/* 塗り分け指標の切替（地図上のフローティング操作）。サイトナビ（ヘッダーの
           メニュー）と地図コントロールを役割で分け、ヘッダーに混在させない。 */}
@@ -784,6 +861,8 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
           onClearFilters={() => setFilters(EMPTY_FILTERS)}
           filterActive={filterActive}
           matchedCount={matchedCount}
+          isMobile={isMobile}
+          activeCount={layerActiveCount}
         />
       )}
 

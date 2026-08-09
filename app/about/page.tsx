@@ -183,6 +183,21 @@ export default async function AboutPage() {
           <li>地価: {NEXT_UPDATE.landPrice}</li>
           <li>家賃: {NEXT_UPDATE.rent}</li>
         </ul>
+        <p className="detail-p" style={{ fontSize: 13, color: "var(--text-muted)" }}>
+          このほか、検索サジェスト（自治体の読み仮名・町丁名からの検索）には Geolonia
+          住所データ（国土交通省「位置参照情報」等を元に作成・MIT
+          License）を使用しています。これは検索用のメタデータであり、掲載する統計値には使用していません。
+        </p>
+      </section>
+
+      <section className="detail-section">
+        <h2 className="detail-h2">「この自治体の特徴」の算出方法</h2>
+        <p className="detail-p">
+          各自治体ページの「特徴」欄は、収録済みの実データだけを使って機械的に抽出しています。家賃・地価は全国平均との相対差、人口増減率・空き家率・外国人住民比率は全国平均とのポイント差、人口・人口密度は全国順位のパーセンタイルをそれぞれスコア化し、差が一定のしきい値を超えた指標を最大5件表示します。差が小さい指標は表示しません。
+        </p>
+        <p className="detail-p">
+          表示は「全国平均より◯%低い」「全国◯位」のような客観的な比較にとどめ、<strong>数値の良し悪しの評価（住みやすい・おすすめ等）は行いません。</strong>平均はいずれも有効値を持つ自治体のみで算出し、欠損を推計で埋めることはありません（外国人住民比率の全国平均のみ人口加重平均、それ以外は自治体を1票とする単純平均）。
+        </p>
       </section>
 
       <section className="detail-section">

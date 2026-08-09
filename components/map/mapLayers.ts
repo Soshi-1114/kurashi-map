@@ -3,7 +3,7 @@
 // 1回だけ呼ばれる。イベントハンドラ（クリック・ホバー）は state を触るため
 // MapView 側に置き、ここは「何をどの順で描くか」だけを持つ。
 import type { Map as MapLibreMap, DataDrivenPropertyValueSpecification } from "maplibre-gl";
-import { getMapMetric, DEFAULT_METRIC_KEY } from "@/lib/mapMetrics";
+import { getMapMetric, DEFAULT_METRIC_KEY, type MapMetricKey } from "@/lib/mapMetrics";
 import {
   HAZARD_OVERLAYS, HAZARD_ZONE_ZOOM, GSI_HAZARD_ATTRIBUTION, gsiTileUrl,
 } from "@/lib/mapHazards";
@@ -20,7 +20,14 @@ export function addKurashiLayers(
     muniGeo: GeoJSON.FeatureCollection;
     wardsGeo: GeoJSON.FeatureCollection;
   },
+  /** 初期の塗り分け指標。ページごとに異なる（未指定なら DEFAULT_MAP_METRIC）。
+   *  色式・不透明度をこの値で作り、初期描画に別指標の色が一瞬出るのを防ぐ。 */
+  initialMetric: MapMetricKey | "none" = DEFAULT_MAP_METRIC,
 ) {
+  const initialFillColor = getMapMetric(
+    initialMetric === "none" ? DEFAULT_METRIC_KEY : initialMetric,
+  ).colorExpression() as DataDrivenPropertyValueSpecification<string>;
+  const initialFillOpacity = initialMetric === "none" ? 0 : MUNI_FILL_OPACITY;
   map.addSource("prefectures", { type: "geojson", data: geo.prefGeo, promoteId: "code" });
   map.addSource("muni", { type: "geojson", data: geo.muniGeo, promoteId: "code" });
   map.addSource("wards", { type: "geojson", data: geo.wardsGeo, promoteId: "code" });
@@ -75,8 +82,8 @@ export function addKurashiLayers(
     source: "muni",
     minzoom: MUNI_MIN_ZOOM,
     paint: {
-      "fill-color": getMapMetric(DEFAULT_METRIC_KEY).colorExpression() as DataDrivenPropertyValueSpecification<string>,
-      "fill-opacity": DEFAULT_MAP_METRIC === "none" ? 0 : MUNI_FILL_OPACITY,
+      "fill-color": initialFillColor,
+      "fill-opacity": initialFillOpacity,
     },
   }, firstSymbolId);
   // 絞り込み減光：条件に該当しない自治体を白でマスク（既定は非表示。
@@ -131,8 +138,8 @@ export function addKurashiLayers(
     source: "wards",
     minzoom: WARDS_MIN_ZOOM,
     paint: {
-      "fill-color": getMapMetric(DEFAULT_METRIC_KEY).colorExpression() as DataDrivenPropertyValueSpecification<string>,
-      "fill-opacity": DEFAULT_MAP_METRIC === "none" ? 0 : MUNI_FILL_OPACITY,
+      "fill-color": initialFillColor,
+      "fill-opacity": initialFillOpacity,
     },
   }, firstSymbolId);
   map.addLayer({

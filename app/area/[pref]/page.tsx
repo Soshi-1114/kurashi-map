@@ -2,8 +2,9 @@ import "../../league.css";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Wallet, MapIcon, BarChart3, Database, ArrowLeft, ArrowUpRight, Building2 } from "lucide-react";
+import { Wallet, MapIcon, BarChart3, Database, ArrowLeft, ArrowUpRight, Building2, Users } from "lucide-react";
 import { listMunicipalities, listAll } from "@/lib/metrics";
+import { getRankingBySlug, rankBy } from "@/lib/rankings";
 import { PREFS, getPrefBySlug } from "@/lib/prefs";
 import { SITE, absoluteUrl } from "@/lib/site";
 import { hasRent, rentBand } from "@/lib/rentColor";
@@ -91,6 +92,13 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
 
   // 全自治体一覧（行政コード順 = 行政の標準的な並び）。displayName で区はフルネーム表示。
   const listed = [...all].sort((a, b) => a.code.localeCompare(b.code));
+
+  // 人口・人口増減の県内上位（ランキング定義の qualifies/display を流用。上位5のみの
+  // コンパクト表示にとどめ、全順位は県別ランキングページへ誘導する）。
+  const popDef = getRankingBySlug("population-most");
+  const growthDef = getRankingBySlug("population-growth");
+  const popTop = popDef ? rankBy(popDef, muni, 5) : [];
+  const growthTop = growthDef ? rankBy(growthDef, muni, 5) : [];
 
   const ldJson = {
     "@context": "https://schema.org",
@@ -221,6 +229,58 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
               ))}
             </ol>
           )}
+        </section>
+      )}
+
+      {(popTop.length > 0 || growthTop.length > 0) && popDef && growthDef && (
+        <section className="rk-section">
+          <div className="rk-section-head">
+            <span className="rk-section-icon rk-tone-pop"><Users size={20} aria-hidden="true" /></span>
+            <div className="rk-section-heading">
+              <h2 className="rk-h2">人口・人口増減で見る</h2>
+              <p className="rk-section-sub">{prefName}内の人口が多い自治体と、人口増減率（2020→2025年国勢調査）が高い自治体。</p>
+            </div>
+          </div>
+          <div className="rk-duo">
+            {popTop.length > 0 && (
+              <div>
+                <h3 className="rk-duo-h">人口が多い 上位{popTop.length}</h3>
+                <ol className="rk-ladder">
+                  {popTop.map((m, i) => (
+                    <li key={m.code}>
+                      <Link href={`/area/${m.pref}/${m.code}`} className="rk-ladder-row">
+                        <span className="rk-ladder-rank">{i + 1}</span>
+                        <span className="rk-ladder-name">{m.displayName ?? m.name}</span>
+                        <span className="rk-ladder-value">{popDef.display(m)}</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ol>
+                <Link href={`/ranking/population-most/${pref.slug}`} className="rk-duo-more">
+                  {prefName}の人口ランキングを見る<ArrowUpRight size={14} aria-hidden="true" />
+                </Link>
+              </div>
+            )}
+            {growthTop.length > 0 && (
+              <div>
+                <h3 className="rk-duo-h">人口増減率が高い 上位{growthTop.length}</h3>
+                <ol className="rk-ladder">
+                  {growthTop.map((m, i) => (
+                    <li key={m.code}>
+                      <Link href={`/area/${m.pref}/${m.code}`} className="rk-ladder-row">
+                        <span className="rk-ladder-rank">{i + 1}</span>
+                        <span className="rk-ladder-name">{m.displayName ?? m.name}</span>
+                        <span className="rk-ladder-value">{growthDef.display(m)}</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ol>
+                <Link href={`/ranking/population-growth/${pref.slug}`} className="rk-duo-more">
+                  {prefName}の人口増減ランキングを見る<ArrowUpRight size={14} aria-hidden="true" />
+                </Link>
+              </div>
+            )}
+          </div>
         </section>
       )}
 

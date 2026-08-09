@@ -7,6 +7,10 @@ import { Municipality, MuniSummary } from "./types";
 import { PREFS, getPrefBySlug, getPrefByCode, loadPrefData } from "./prefs";
 import { floodLevelOf, landslideLevelOf, tsunamiLevelOf, stormSurgeLevelOf, liquefactionLevelOf } from "./hazardScale";
 import { foreignRatioPct } from "./foreignResidents";
+import muniKana from "@/data/muni-kana.json";
+
+// 自治体のひらがな読み（検索のかな一致用）。scripts/fetch-towns.mjs が生成。
+const KANA = muniKana.kana as Record<string, string>;
 
 // pref データのキャッシュ（同一 build/request 内で同じ pref を複数回呼んでも 1 度しかロードしない）
 const cache = new Map<string, Promise<{ muni: Municipality[]; wards: Municipality[] }>>();
@@ -72,6 +76,7 @@ export async function listSummaryAcrossPrefs(): Promise<MuniSummary[]> {
         pref: m.pref,
         name: m.name,
         displayName: m.displayName,
+        kana: KANA[m.code],
         level: m.level,
         parentCode: m.parentCode,
         rent: m.rent.value,

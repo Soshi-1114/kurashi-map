@@ -102,17 +102,22 @@ html, body {
    常に DOM に存在＝クロール可能（display:none にはせず画面外へ退避させるだけ）。 */
 /* 地図ページ（トップ／割合マップ）はベースカラーをブルーのまま据え置く。
    他ページ（エリア詳細・ランキング等）はアイボリー＋テラコッタ。CSS変数を
-   .home-main にローカル上書きして配下（ヘッダー・検索・地図UI・パネル）へ伝播。 */
-.home-main {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
+   ローカル上書きして配下（ヘッダー・検索・地図UI・パネル）へ伝播させる。
+   .layers-sheet（モバイルのレイヤーシート）は body 直下へ portal されて
+   .home-main の子ではなくなるため、同じパレットを明示的に当てる。 */
+.home-main,
+.layers-sheet {
   --bg: #f5f8fc;
   --accent: #2563eb;
   --accent-hover: #1d4ed8;
   --accent-soft: rgba(37, 99, 235, 0.10);
   --accent-glow: rgba(37, 99, 235, 0.25);
   --accent-grad-start: #5b8bf0;
+}
+.home-main {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
   background: var(--bg);
 }
 .home-root { position: relative; width: 100%; }
@@ -168,13 +173,48 @@ html, body {
   font-size: var(--text-base); font-weight: 800; color: var(--text); margin: 0 0 12px;
   border-left: 3px solid var(--accent); padding-left: 9px;
 }
-.home-pref-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 7px; }
+/* auto-fill（auto-fit ではない）。auto-fit は空トラックを畳んで項目を引き伸ばすため、
+   1県だけの地方（北海道）でカードが行いっぱいに伸びてしまう。トラックを残せば
+   どの地方でもカード幅が揃う。 */
+.home-pref-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 7px; }
+@media (max-width: 768px) {
+  .home-pref-grid { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); }
+}
 .home-pref-link {
-  display: block; text-align: center; font-size: var(--text-sm); font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+  min-height: 44px; text-align: center; font-size: var(--text-sm); font-weight: 600;
   padding: 9px 6px; border: 1px solid var(--border); border-radius: var(--radius-sm);
   color: var(--text); background: var(--surface-strong);
 }
 .home-pref-link:hover { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
+
+/* 「都道府県から探す」: 地方タブ → 都道府県（PrefRegionPicker）。
+   選択中のタブだけが塗り、他は地図で見る/ランキングのチップと同じ体裁に揃える。 */
+.home-region-tabs { display: flex; flex-wrap: wrap; gap: 7px; margin: 0 0 14px; }
+.home-region-tab {
+  display: inline-flex; align-items: center; min-height: 40px;
+  font-family: inherit; font-size: var(--text-sm); font-weight: 700;
+  padding: 0 15px; border: 1px solid var(--border); border-radius: var(--radius-pill);
+  background: var(--surface-strong); color: var(--text-muted); cursor: pointer;
+  transition: background-color .15s ease, border-color .15s ease, color .15s ease;
+}
+.home-region-tab:hover { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
+.home-region-tab[aria-selected="true"] {
+  background: var(--accent); border-color: var(--accent); color: #fff;
+}
+.home-region-tab[aria-selected="true"]:hover { background: var(--accent-hover); color: #fff; }
+/* .home-pref-grid の display:grid が作者スタイルとして UA の [hidden] に勝つため、
+   パネル側で明示的に隠す（グリッドはこの div の子なので通常は影響しないが、
+   将来クラスが付け替わっても hidden が効くようにしておく）。 */
+.home-region-panel[hidden] { display: none; }
+.home-region-panel { animation: home-region-in .16s ease both; }
+@keyframes home-region-in {
+  from { opacity: 0; transform: translateY(3px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-region-panel { animation: none; }
+}
 .home-chip-row { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 7px; }
 .home-chip {
   display: inline-flex; font-size: var(--text-sm); font-weight: 700;
@@ -183,6 +223,221 @@ html, body {
 }
 .home-chip:hover { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
 .home-links-foot { margin-top: 32px; font-size: var(--text-xs); color: var(--text-faint); line-height: var(--leading-normal); }
+
+/* ============================================================
+   ページヘッダー（スクロールするページ用・SiteHeader）
+   全画面地図のピラーページが使う地図内フローティングヘッダー（.app-header）とは別物。
+   ============================================================ */
+.site-header {
+  background: var(--surface-strong);
+  border-bottom: 1px solid var(--border);
+}
+.site-header-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 9px 22px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.site-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  text-decoration: none;
+  color: var(--text);
+}
+.site-header-nav {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.site-header-nav a {
+  padding: 7px 11px;
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-muted);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color .15s, background-color .15s;
+}
+.site-header-nav a:hover,
+.site-header-nav a:focus-visible { color: var(--accent); background: var(--accent-soft); }
+@media (max-width: 560px) {
+  .site-header-inner { padding: 8px 16px; gap: 10px; }
+  .site-header-nav a { padding: 6px 8px; font-size: var(--text-xs); }
+  /* 幅が足りないので副次の導線は隠す（同じリンクがトップのフッターにある） */
+  .site-header-nav-optional { display: none; }
+}
+
+/* ============================================================
+   トップのファーストビュー（ヒーロー）
+   「何のサービスか」を5秒で伝えるコピー＋詳細ページへ遷移する検索。
+   ============================================================ */
+.home-hero {
+  position: relative;
+  /* 検索ドロップダウンを直下の地図より前面に。地図（.home-map）は position:relative の
+     z-index:auto でスタッキングコンテキストを作らないため、その内部の app-header(12)・
+     map-loading(11) が同じ土俵に出てくる。それらより上、かつドロワー(30/31)と
+     モバイルのレイヤーシート(60-62)より下に置く。 */
+  z-index: 20;
+  background: var(--bg-elev);
+  border-bottom: 1px solid var(--border);
+  /* 地図上の検索を廃止しFV検索に一本化したぶん、余白を詰めて
+     地図がより早く画面内に現れるようにする（375pxでヒーロー高 ≤300px 目標） */
+  padding: clamp(18px, 4vw, 48px) 22px clamp(14px, 3vw, 40px);
+}
+.home-hero-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+}
+.home-hero-title {
+  margin: 0 0 6px;
+  font-size: clamp(21px, 4.2vw, 34px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  color: var(--text);
+}
+.home-hero-sub {
+  margin: 0 auto 14px;
+  max-width: 640px;
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  color: var(--text-muted);
+}
+.home-search {
+  position: relative;
+  max-width: 560px;
+  margin: 0 auto;
+  text-align: left;
+}
+.home-search-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.home-search-wrap svg {
+  position: absolute;
+  left: 18px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+.home-search input {
+  width: 100%;
+  padding: 15px 18px 15px 46px;
+  /* iOS Safari は font-size < 16px の入力にフォーカスすると自動ズームするため 16px 固定 */
+  font-size: 16px;
+  font-family: inherit;
+  font-weight: 500;
+  color: var(--text);
+  background: var(--surface-strong);
+  border: 1.5px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  outline: none;
+  box-shadow: var(--shadow-sm);
+  transition: border-color .2s, box-shadow .2s;
+}
+.home-search input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+.home-search input::placeholder { color: var(--text-faint); font-weight: 400; }
+.home-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 12px 0 0;
+}
+.home-hero-action {
+  padding: 6px 13px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color .15s, border-color .15s;
+}
+.home-hero-action:hover { color: var(--accent); border-color: var(--accent); }
+@media (max-width: 768px) {
+  .home-hero-action { font-size: var(--text-xs); }
+}
+
+/* スクロールページに埋め込む地図（トップ）。ピラーページの 100dvh とは別定義 */
+.home-map--embedded {
+  height: min(72dvh, 680px);
+  border-bottom: 1px solid var(--border);
+  /* ボトムシートは「下へ translate して隠す」設計。全画面地図では画面外に逃げるが、
+     埋め込み地図では地図下のページ内容の上に出てしまうため、地図の枠で切り取る。
+     position:fixed の子（モバイルのレイヤーシート）は overflow の対象外なので影響しない。 */
+  overflow: hidden;
+}
+@media (max-width: 768px) {
+  /* SP: 操作可能な地図領域を最低 420px 確保しつつ、下のコンテンツが覗く高さに */
+  .home-map--embedded {
+    height: 55dvh;
+    min-height: 420px;
+  }
+}
+
+/* 地図下の回遊コンテンツ（トップのみ。ドロワーの .home-links とは独立の通常フロー） */
+.home-content {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 10px 22px 56px;
+}
+
+/* 「できること」3項目 — 罫線で区切る密なグリッド（巨大カードにしない） */
+.home-cando {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-elev);
+}
+.home-cando-item {
+  padding: 14px 16px;
+  border-left: 1px solid var(--border);
+}
+.home-cando-item:first-child { border-left: none; }
+.home-cando dt {
+  margin: 0 0 4px;
+  font-size: var(--text-sm);
+  font-weight: 800;
+  color: var(--text);
+}
+.home-cando dd {
+  margin: 0;
+  font-size: var(--text-xs);
+  line-height: var(--leading-normal);
+  color: var(--text-muted);
+}
+@media (max-width: 768px) {
+  .home-cando { grid-template-columns: 1fr; }
+  .home-cando-item { border-left: none; border-top: 1px solid var(--border); }
+  .home-cando-item:first-child { border-top: none; }
+}
+
+/* トップのランキング導線（カテゴリ別・代表項目のみ） */
+.home-rank-cat { margin-top: 12px; }
+.home-rank-cat:first-of-type { margin-top: 0; }
+.home-rank-cat-label {
+  margin: 0 0 6px;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--text-faint);
+}
+.home-rank-all { margin: 14px 0 0; font-size: var(--text-sm); }
+.home-rank-all a { color: var(--accent); font-weight: 600; text-decoration: none; }
+.home-rank-all a:hover { text-decoration: underline; }
 body { letter-spacing: 0.005em; }
 a { color: var(--accent); text-decoration: none; transition: color .15s ease; }
 a:hover { color: var(--accent-hover); }
@@ -193,6 +448,9 @@ button { font-family: inherit; }
   --header-h: 60px;
 }
 .map-root { position: relative; width: 100%; height: 100%; background: var(--bg); }
+/* 地図内ヘッダーを出さない場合（ページ側の SiteHeader が担う）。その高さぶんの
+   上端オフセットを畳み、レイヤーボタン・凡例・サイドパネルを地図上端まで詰める。 */
+.map-root--headerless { --header-h: 0px; }
 .map-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
 /* 初期描画用スケルトン地図（LCP 要素）。canvas より上・ヘッダーやローディングより下に
@@ -323,20 +581,28 @@ button { font-family: inherit; }
   box-shadow: 0 0 0 4px var(--accent-soft);
 }
 .app-header-search input::placeholder { color: var(--text-faint); font-weight: 400; }
+/* 検索非表示時（トップページ）にブランドを左端へ保つための伸縮スペーサ */
+.app-header-spacer { flex: 1; }
 
 /* 塗り分け指標の切替＝地図上のフローティング操作（ヘッダーのサイトナビとは分離）。
-   ボタン＋パネルを1つのコンテナにまとめ、地図右上に重ねる。 */
+   ボタン＋パネルを1つのコンテナにまとめ、地図右上に重ねる。
+   top と bottom の両方を固定してコンテナ高に追従させ、パネルの max-height を
+   「地図コンテナ内」に収める（埋め込み地図でも 100dvh を基準にしない）。
+   ラッパー自体はクリックを素通しし、実要素（ボタン・パネル）だけ受ける。 */
 .map-layers {
   position: absolute;
   top: calc(var(--header-h) + env(safe-area-inset-top) + 10px);
   right: 14px;
+  bottom: 14px;
   z-index: 6;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 8px;
+  pointer-events: none;
   transition: right .3s cubic-bezier(0.16, 1, 0.3, 1);
 }
+.map-layers > * { pointer-events: auto; }
 .map-layers-btn {
   display: flex;
   align-items: center;
@@ -361,7 +627,25 @@ button { font-family: inherit; }
   border-color: var(--border-strong);
 }
 /* アイコンのみの正方形ボタン（テキストは常時「なし」で情報量が乏しいため省く）。 */
-.map-layers-btn-icon { width: 44px; padding: 0; }
+.map-layers-btn-icon { width: 44px; padding: 0; position: relative; flex-shrink: 0; }
+/* 設定が既定値から変更されているときだけ出す件数バッジ（常時の強調はしない） */
+.map-layers-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  box-shadow: 0 0 0 2px var(--surface-strong);
+}
 
 /* 検索ドロップダウン — ヘッダーの検索欄直下に */
 .search-results {
@@ -405,9 +689,30 @@ button { font-family: inherit; }
 .search-place { display: flex; align-items: baseline; gap: 7px; min-width: 0; }
 .search-pref { font-size: var(--text-xs); font-weight: 500; color: var(--text-faint); flex-shrink: 0; }
 .search-name { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+/* 町丁名ヒット行の「（日の里）」部分。自治体名より控えめに */
+.search-town { font-size: var(--text-xs); color: var(--text-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .search-rent { font-size: var(--text-xs); color: var(--text-muted); font-variant-numeric: tabular-nums; flex-shrink: 0; margin-left: 10px; }
+/* ヒーロー検索の候補行: 主ボタン（詳細ページへ）＋右端の地図ピン（地図で表示）を横並びに */
+.search-row { display: flex; align-items: stretch; gap: 2px; }
+.search-row > button:first-child { flex: 1; min-width: 0; }
+/* flex-basis（flex の第3値）は width より優先されるため、.search-results button の
+   width:100% と詳細度を競わなくても主軸サイズは44pxに固定される */
+.search-mapbtn {
+  flex: 0 0 44px;
+  border: none;
+  background: transparent;
+  color: var(--text-faint);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  display: grid;
+  place-items: center;
+}
+.search-mapbtn:hover,
+.search-mapbtn:focus-visible { color: var(--accent); background: var(--accent-soft); }
 
-/* レイヤーパネル（ヘッダー直下、デフォルト展開） */
+/* レイヤーパネル。PC はヘッダー直下のポップオーバー（デフォルト展開）。
+   max-height はコンテナ高基準（.map-layers が top/bottom 固定）にし、
+   埋め込み地図でもパネルが地図外へ飛び出さない。 */
 .layers-panel {
   padding: 12px 14px;
   background: var(--surface);
@@ -417,7 +722,7 @@ button { font-family: inherit; }
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-md);
   min-width: 244px;
-  max-height: calc(100dvh - var(--header-h) - env(safe-area-inset-top) - 28px);
+  max-height: calc(100% - 52px); /* トグルボタン44px + gap8px */
   overflow-y: auto;
   animation: layers-in .2s ease;
 }
@@ -426,13 +731,80 @@ button { font-family: inherit; }
   to { opacity: 1; transform: translateY(0); }
 }
 .is-panel-open .map-layers { right: calc(380px + 30px); }
-/* SP でボトムシート展開中は、上から伸びるレイヤーパネルがシートに潜り込まない
-   よう可視シート高（--sheet-h）ぶん上限を詰める。あふれは内部スクロールで読む
-   （トグルボタン44px＋余白を 64px で確保）。 */
+/* モバイル用シートヘッダー・scrim は PC では出さない */
+.layers-scrim { display: none; }
+.layers-head { display: none; }
+/* SP: パネルを画面下から開くモーダルの Bottom Sheet に切り替える。
+   地図コンテナ内の absolute 配置をやめて viewport 下部に固定し、
+   内部のみ縦スクロール・safe-area 考慮・scrim タップで閉じる。 */
 @media (max-width: 768px) {
-  .is-sheet-open .layers-panel {
-    max-height: calc(100dvh - var(--header-h) - env(safe-area-inset-top) - var(--sheet-h, 252px) - 64px);
+  /* シートは body 直下へ portal している（LayersPanel 参照）ので、scrim/パネルの
+     z-index はルートのスタッキングコンテキストでそのまま効く。地図コンテナ内の
+     ラッパー(.map-layers)を持ち上げる必要はない（持ち上げるとトグルボタンだけが
+     scrim の上に残ってしまう）。 */
+  .layers-scrim {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.4);
+    z-index: 60;
+    animation: layers-scrim-in .2s ease;
   }
+  @keyframes layers-scrim-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  .layers-sheet .layers-panel {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    min-width: 0;
+    max-height: min(80dvh, 720px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 0 16px calc(16px + env(safe-area-inset-bottom));
+    border-radius: 16px 16px 0 0;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    box-shadow: var(--shadow-xl);
+    z-index: 61;
+    animation: layers-sheet-in .24s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @keyframes layers-sheet-in {
+    from { transform: translateY(24px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  .layers-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    margin: 0 -16px 4px;
+    padding: 14px 8px 10px 16px;
+    background: var(--surface-strong);
+    border-bottom: 1px solid var(--border);
+    z-index: 1;
+  }
+  .layers-head-title {
+    font-size: var(--text-base);
+    font-weight: 800;
+    color: var(--text);
+  }
+  .layers-head-close {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+  }
+  .layers-head-close:hover { color: var(--text); }
 }
 /* レイヤーパネル(右上)・凡例(左下)はカード体裁を共通化。タイトルも
    下の .legend-title と同一スペックに揃え、両者の視覚的な一貫性を出す。
@@ -915,9 +1287,14 @@ button { font-family: inherit; }
 .sheet .metric-grid::-webkit-scrollbar { display: none; }
 .sheet .metric-grid > .metric-card {
   flex: 0 0 auto;
-  width: 158px;
+  /* 「112,505 円/月」「2,392,885 円/㎡」が折り返さない幅。狭いとカードが縦に伸び、
+     シートの half 段がそのぶん高くなって地図を覆う（出典表記は honesty 方針で残す）。 */
+  width: 176px;
+  padding: 10px 12px;
   scroll-snap-align: start;
 }
+.sheet .metric-value { font-size: var(--text-base); margin-top: 2px; }
+.sheet .metric-meta { margin-top: 4px; line-height: 1.35; }
 .metric-card {
   background: var(--surface-subtle);
   border: 1px solid var(--border);
@@ -1083,6 +1460,17 @@ button { font-family: inherit; }
   width: 52px;
 }
 .sheet-content { padding: 0 20px 20px; overflow-y: auto; flex: 1; }
+/* 埋め込み地図（トップ）では full 段でもシート箱が 330px 程度しかなく、
+   中身が .sheet-content の内部スクロールになる。見出し行を流れに任せると
+   スクロール時に「どの自治体か」と閉じるボタンが画面から消えるため固定する。 */
+.sheet-content > .panel-head-top {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  margin: 0 -20px;
+  padding: 0 20px 8px;
+  background: var(--surface-strong);
+}
 
 
 /* ========== Area Detail Page ========== */

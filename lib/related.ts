@@ -50,3 +50,20 @@ export function findSimilar(
     .slice(0, limit)
     .map((x) => x.m);
 }
+
+// 同一都道府県内で人口規模が近い自治体を返す（回遊導線用。実データのみの決定論）。
+// 呼び出し側が同県・同階層のリスト（peers）を渡す想定。exclude は既出カードとの重複防止。
+export function findClosePopulationInPref(
+  all: Municipality[],
+  target: Municipality,
+  limit = 4,
+  exclude: Set<string> = new Set(),
+): Municipality[] {
+  if (target.population <= 0) return [];
+  return all
+    .filter((m) => m.code !== target.code && !exclude.has(m.code) && m.population > 0)
+    .map((m) => ({ m, diff: Math.abs(m.population - target.population) }))
+    .sort((a, b) => a.diff - b.diff || a.m.code.localeCompare(b.m.code))
+    .slice(0, limit)
+    .map((x) => x.m);
+}

@@ -8,6 +8,7 @@
 
 import type { Municipality } from "./types";
 import { foreignRatioPct, hasForeignData } from "./foreignResidents";
+import { getPrefByCode } from "./prefs";
 
 // 全国平均との差が ±このポイント以内なら「同程度」とみなす（マジックナンバー回避の定数）。
 export const FOREIGN_RATIO_SAME_BAND_PT = 0.5;
@@ -105,6 +106,27 @@ export function avgBand(ratio: number, avg: number): AvgBand {
   if (ratio >= avg + FOREIGN_RATIO_SAME_BAND_PT) return "higher";
   if (ratio <= avg - FOREIGN_RATIO_SAME_BAND_PT) return "lower";
   return "similar";
+}
+
+// 全国平均のみを取り出す（Map の値はどのエントリも同じ nationalAvg を持つ）。
+// 比較ページの「全国平均（参考）」列など、順位や県平均が不要な場面向け。
+export function nationalForeignAvg(stats: Map<string, ForeignComparison>): number | null {
+  const first = stats.values().next();
+  return first.done ? null : first.value.nationalAvg;
+}
+
+/**
+ * 県スラッグ → 外国人住民比率の県平均（加重平均）の対応表を取り出す。
+ * buildForeignStats が各エントリに保持している prefAvg を県単位に集約するだけで、
+ * 再集計はしない（比較ページの「県平均」切替用）。code の先頭2桁から県を引く。
+ */
+export function prefForeignAvgs(stats: Map<string, ForeignComparison>): Map<string, number> {
+  const out = new Map<string, number>();
+  for (const [code, fc] of stats) {
+    const pref = getPrefByCode(code)?.slug;
+    if (pref && !out.has(pref)) out.set(pref, fc.prefAvg);
+  }
+  return out;
 }
 
 // ビルド／リクエスト内で集計を1度だけ行うためのキャッシュ。

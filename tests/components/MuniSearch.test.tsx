@@ -1,14 +1,29 @@
 // @vitest-environment jsdom
-import { describe, it, expect, vi, afterEach } from "vitest";
+import { describe, it, expect, vi, afterEach, beforeEach } from "vitest";
 import { render, screen, cleanup, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import MuniSearch from "@/components/map/MuniSearch";
 import { muniSummary } from "../_fixtures";
 
-afterEach(cleanup);
+// 町丁検索 API（/api/town-search）のモック。「日の里」クエリのみヒットを返す。
+const fetchMock = vi.fn(async (url: string) => ({
+  ok: true,
+  json: async () => ({
+    towns: url.includes(encodeURIComponent("日の里")) ? [{ code: "11203", town: "日の里" }] : [],
+  }),
+}));
 
-const kawaguchi = muniSummary({ code: "11203", name: "川口市", rent: 73473 });
-const kawagoe = muniSummary({ code: "11201", name: "川越市", rent: 58000 });
+afterEach(() => {
+  cleanup();
+  vi.unstubAllGlobals();
+});
+beforeEach(() => {
+  fetchMock.mockClear();
+  vi.stubGlobal("fetch", fetchMock);
+});
+
+const kawaguchi = muniSummary({ code: "11203", name: "川口市", rent: 73473, kana: "かわぐちし" });
+const kawagoe = muniSummary({ code: "11201", name: "川越市", rent: 58000, kana: "かわごえし" });
 const noRent = muniSummary({ code: "11464", name: "東秩父村", rent: 0 });
 // 政令市の区（displayName から親市名を導出する分岐の確認用）
 const urawa = muniSummary({
@@ -101,6 +116,24 @@ describe("MuniSearch", () => {
     await user.keyboard("{Escape}");
     expect((input as HTMLInputElement).value).toBe("");
     expect(screen.queryByRole("listbox")).toBeNull();
+  });
+
+  it("ひらがなの読みでも候補に出る（かわごえ → 川越市）", async () => {
+    const user = userEvent.setup();
+    const { input } = setup();
+    await user.type(input, "かわごえ");
+    expect(within(screen.getByRole("option")).getByText("川越市")).toBeInTheDocument();
+  });
+
+  it("町丁名ヒットは「自治体名（町丁名）」で表示し、確定で onSelect に自治体を渡す", async () => {
+    const user = userEvent.setup();
+    const { input, onSelect } = setup();
+    await user.type(input, "日の里");
+    const option = await screen.findByRole("option");
+    expect(within(option).getByText("川口市")).toBeInTheDocument();
+    expect(within(option).getByText("（日の里）")).toBeInTheDocument();
+    await user.click(option);
+    expect(onSelect).toHaveBeenCalledWith(expect.objectContaining({ code: "11203" }));
   });
 
   it("combobox の aria-expanded が候補の有無に追従する", async () => {

@@ -27,8 +27,8 @@ function setup(overrides: Partial<React.ComponentProps<typeof LayersPanel>> = {}
     matchedCount: 0,
     ...overrides,
   };
-  render(<LayersPanel {...props} />);
-  return props;
+  const utils = render(<LayersPanel {...props} />);
+  return { ...props, ...utils };
 }
 
 describe("LayersPanel", () => {
@@ -104,5 +104,74 @@ describe("LayersPanel", () => {
   it("filterActive でないとき該当件数を出さない", () => {
     setup({ filterActive: false });
     expect(screen.queryByText(/全国該当/)).toBeNull();
+  });
+
+  it("activeCount>0 のときトグルボタンに件数バッジと「設定N件適用中」を出す", () => {
+    setup({ open: false, activeCount: 3 });
+    const toggle = screen.getByRole("button", { name: /表示設定/ });
+    expect(toggle.getAttribute("aria-label")).toContain("設定3件適用中");
+    expect(toggle.textContent).toContain("3");
+  });
+
+  it("activeCount=0 のときバッジを出さない", () => {
+    setup({ open: false, activeCount: 0 });
+    const toggle = screen.getByRole("button", { name: /表示設定/ });
+    expect(toggle.getAttribute("aria-label")).not.toContain("適用中");
+  });
+
+  it("閉じるボタンで onToggleOpen を呼ぶ", async () => {
+    const user = userEvent.setup();
+    const props = setup();
+    await user.click(screen.getByRole("button", { name: "閉じる" }));
+    expect(props.onToggleOpen).toHaveBeenCalledTimes(1);
+  });
+
+  it("Escape キーで onToggleOpen を呼ぶ", async () => {
+    const user = userEvent.setup();
+    const props = setup();
+    await user.keyboard("{Escape}");
+    expect(props.onToggleOpen).toHaveBeenCalledTimes(1);
+  });
+
+  it("isMobile のときパネルが role=dialog になり、PC では dialog にしない", () => {
+    setup({ isMobile: true });
+    expect(screen.getByRole("dialog", { name: "地図の表示設定" })).toBeInTheDocument();
+    cleanup();
+    setup({ isMobile: false });
+    expect(screen.queryByRole("dialog")).toBeNull();
+  });
+
+  // html を overflow:hidden にするだけだとルートスクローラの位置が 0 に落ち、
+  // 半透明の scrim 越しに背後がページ先頭へ飛んで見え、閉じても戻らない。
+  it("モバイル: 現在位置ぶん body を固定してロックし、解除時に位置を戻す", () => {
+    const scrollTo = vi.fn();
+    const prevScrollTo = window.scrollTo;
+    Object.defineProperty(window, "scrollY", { value: 900, configurable: true });
+    window.scrollTo = scrollTo as unknown as typeof window.scrollTo;
+
+    const { unmount } = setup({ isMobile: true });
+    expect(document.documentElement.style.overflow).toBe("hidden");
+    expect(document.body.style.position).toBe("fixed");
+    // 見た目を据え置くため、ロック前のスクロール量ぶん引き上げる
+    expect(document.body.style.top).toBe("-900px");
+
+    // ロック中はブラウザ側でスクロール位置が 0 になる
+    Object.defineProperty(window, "scrollY", { value: 0, configurable: true });
+    unmount();
+
+    expect(document.documentElement.style.overflow).toBe("");
+    expect(document.body.style.position).toBe("");
+    expect(document.body.style.top).toBe("");
+    expect(scrollTo).toHaveBeenCalledWith(0, 900);
+
+    window.scrollTo = prevScrollTo;
+    Object.defineProperty(window, "scrollY", { value: 0, configurable: true });
+  });
+
+  it("PC: スクロールロックをかけない", () => {
+    const { unmount } = setup({ isMobile: false });
+    expect(document.documentElement.style.overflow).toBe("");
+    expect(document.body.style.position).toBe("");
+    unmount();
   });
 });

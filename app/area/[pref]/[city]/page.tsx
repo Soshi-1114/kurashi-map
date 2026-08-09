@@ -18,12 +18,14 @@ import {
   Trophy,
   Map as MapIcon,
   ArrowLeft,
+  ArrowUpRight,
   Search,
   BarChart3,
+  Sparkles,
 } from "lucide-react";
 import { getMunicipality, listAll, listAllAcrossPrefs } from "@/lib/metrics";
 import { buildSummary } from "@/lib/summary";
-import { findRelatedByRent, findSimilar } from "@/lib/related";
+import { findRelatedByRent, findSimilar, findClosePopulationInPref } from "@/lib/related";
 import { RANKINGS, formatAsOfJa } from "@/lib/rankings";
 import { muniLastModified } from "@/lib/dataFreshness";
 import { getRankPositions } from "@/lib/rankingStats";
@@ -37,6 +39,8 @@ import { isAmenitiesCounted, coverageReason } from "@/lib/coverage";
 import { hasForeignData, foreignRatioPct } from "@/lib/foreignResidents";
 import { getForeignStats, avgBand, type ForeignComparison } from "@/lib/foreignStats";
 import { getAreaStats } from "@/lib/areaStats";
+import { getPrefRanks } from "@/lib/prefRanks";
+import { buildHighlights } from "@/lib/highlights";
 import { buildInsights } from "@/lib/insights";
 import { computeLivability } from "@/lib/livabilityScore";
 import { Reveal } from "@/components/area/Reveal";
@@ -45,6 +49,7 @@ import { ScorePanel } from "@/components/area/ScorePanel";
 import { OverviewCard } from "@/components/area/OverviewCard";
 import { DisasterCard } from "@/components/area/DisasterCard";
 import { CompareBar, type CompareRow } from "@/components/area/CompareBar";
+import { HighlightList } from "@/components/area/HighlightList";
 import {
   KpiCard,
   MetricCard,
@@ -98,9 +103,25 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
   } else if (foreignAvailable) {
     description = `${fullName}（${prefName}）の在留外国人割合は${foreignRatioPct(m).toFixed(2)}%、人口${pop}人。家賃・地価・災害リスクなどの住環境データと住みやすさスコアを地図とランキングで確認できます。出典: 出入国在留管理庁「在留外国人統計」。`;
   } else {
+    // このフォールバックは北方領土6村相当（在留外国人統計・人口ともに対象外）のみが
+    // 到達する。他の2分岐（GSC分析に基づき調整済み）と違い実質的な閲覧数が小さいため、
+    // 「特徴」の先頭1件があれば1文だけ添えて差異化する（0件ならそのまま）。
     const rentPhrase = hasRent(m.rent.value) ? `家賃中央値${m.rent.value.toLocaleString()}円/月、` : "";
     const popPhrase = m.population > 0 ? `人口${pop}人、` : "";
-    description = `${fullName}（${prefName}）の住みやすさ・住環境データ。${popPhrase}${rentPhrase}地価・待機児童・災害リスクなどをまとめて地図とランキングで比較できる${SITE.name}の自治体ページ。`;
+    const [areaStats, rankPositions, prefRanks] = await Promise.all([
+      getAreaStats(),
+      getRankPositions(),
+      getPrefRanks(),
+    ]);
+    const highlights = buildHighlights(m, { areaStats, foreign: null, rankPositions, prefRanks, prefName });
+    const topHighlightKey = highlights[0]?.key;
+    const highlightPhrase = highlights.length > 0 ? `${highlights[0].text}。` : "";
+    // 末尾の指標列挙は、直前のハイライト文とテーマが重複するものだけを外す
+    // （例: 待機児童ゼロが特徴文で既に出ていれば「待機児童」を列挙し直さない）。
+    const topics = ["地価", "待機児童", "災害リスク"]
+      .filter((t) => !(t === "地価" && topHighlightKey === "landPrice") && !(t === "待機児童" && topHighlightKey === "waitlistZero"))
+      .join("・");
+    description = `${fullName}（${prefName}）の住みやすさ・住環境データ。${popPhrase}${rentPhrase}${highlightPhrase}${topics}などをまとめて地図とランキングで比較できる${SITE.name}の自治体ページ。`;
   }
   const url = absoluteUrl(`/area/${m.pref}/${m.code}`);
   const ogImage = absoluteUrl(`/api/og/${m.code}`);
@@ -143,8 +164,10 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
   const parent = m.parentCode ? all.find((x) => x.code === m.parentCode) ?? null : null;
   const heading = m.displayName ?? m.name;
 
-  // 同県の主要自治体（人口の多い順）。自身と「家賃が近い」「似ている」既出分を除く。
-  const excluded = new Set([m.code, ...relatedCodes, ...similar.map((s) => s.code)]);
+  // 人口規模が近い同県内の自治体（回遊導線）。「家賃が近い」「似ているエリア」との重複を除外。
+  const closePop = findClosePopulationInPref(peers, m, 4, new Set([...relatedCodes, ...similar.map((s) => s.code)]));
+  // 同県の主要自治体（人口の多い順）。自身と既出カード（家賃が近い・似ている・人口規模が近い）を除く。
+  const excluded = new Set([m.code, ...relatedCodes, ...similar.map((s) => s.code), ...closePop.map((p) => p.code)]);
   const majorPeers = peers
     .filter((x) => !excluded.has(x.code))
     .sort((a, b) => b.population - a.population)
@@ -162,11 +185,18 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
       ? all.filter((x) => x.level === "ward" && x.parentCode === m.code)
       : [];
 
-  // 解釈の補助線・比較バーの平均値（すべて実データから集計。推計なし）。
-  const foreignStats = await getForeignStats();
+  // 解釈の補助線・比較バーの平均値（すべて実データから集計。推計なし）。互いに独立
+  // な集計なので並列に取得する（各モジュールとも初回のみ全自治体を走査しキャッシュする）。
+  const [foreignStats, areaStats, rankPositions, prefRanks] = await Promise.all([
+    getForeignStats(),
+    getAreaStats(),
+    getRankPositions(),
+    getPrefRanks(),
+  ]);
   const fc: ForeignComparison | null = foreignStats.get(m.code) ?? null;
-  const areaStats = await getAreaStats();
-  const rankPositions = await getRankPositions();
+
+  // 「この自治体の特徴」= 全国・県平均との偏差や順位から決定論的に抽出（lib/highlights.ts）。
+  const highlights = buildHighlights(m, { areaStats, foreign: fc, rankPositions, prefRanks, prefName });
 
   // 住みやすさ総合スコア・5軸（実データのみ。治安は法務方針で対象外）。
   const liv = computeLivability(m);
@@ -249,14 +279,6 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
     ],
   };
 
-  // データから導く特徴タグ（編集値ではなく実データ由来。honesty 方針）。
-  const tags: string[] = [];
-  if (hasRent(m.rent.value)) tags.push(`家賃${rentBand(m.rent.value)}`);
-  tags.push(`人口${m.populationTrend}`);
-  if (isWaitlistDisclosed(m.waitlistChildren) && m.waitlistChildren.value === 0) tags.push("待機児童ゼロ");
-  const disasterAxis = liv.axes.find((a) => a.key === "disaster");
-  if (disasterAxis?.stars != null && disasterAxis.stars >= 4) tags.push("災害リスク低め");
-
   // 家賃の比較バー（自治体／県平均／全国平均）。有効値のみ行に積む。
   const rentRows: CompareRow[] = [];
   if (hasRent(m.rent.value)) {
@@ -277,6 +299,29 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
 
   const yen = (v: number) => `${v.toLocaleString()}円`;
   const pct = (v: number) => `${v.toFixed(2)}%`;
+
+  // KPI カードの比較文脈（全国順位・県内順位・全国平均）。取れない部分は省略する。
+  // 家賃は全国平均との高低で「安い順」「高い順」のどちらのランキングを見せるか切り替える
+  // （lib/highlights.ts の rankSuffix と同じ方向判定。高い自治体に「安い順で1,900位」は出さない）。
+  const rentAboveAvg = areaStats.rent.national != null && m.rent.value > areaStats.rent.national;
+  const rentRankPos = rankPositions.get(rentAboveAvg ? "rent-high" : "rent-cheap")?.get(m.code);
+  const rentCompare = hasRent(m.rent.value)
+    ? [
+        rentRankPos ? `${rentAboveAvg ? "高い" : "安い"}順で全国${rentRankPos.rank.toLocaleString()}位` : null,
+        areaStats.rent.national != null ? `全国平均${areaStats.rent.national.toLocaleString()}円` : null,
+      ].filter(Boolean).join("・") || undefined
+    : undefined;
+  const popNatPos = rankPositions.get("population-most")?.get(m.code);
+  const popPrefPos = prefRanks.get("population-most")?.get(m.code);
+  const popCompare =
+    [
+      popPrefPos ? `${prefName}内${popPrefPos.rank.toLocaleString()}位/${popPrefPos.total.toLocaleString()}` : null,
+      popNatPos ? `全国${popNatPos.rank.toLocaleString()}位` : null,
+    ].filter(Boolean).join("・") || undefined;
+  const landCompare =
+    hasLandPrice(m.landPrice.value) && areaStats.landPrice.national != null
+      ? `全国平均${areaStats.landPrice.national.toLocaleString()}円/㎡`
+      : undefined;
 
   return (
     <div className="ad-root">
@@ -306,17 +351,24 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
             <span className="ad-title-sub">の住みやすさ</span>
           </h1>
           <p className="ad-lead">{buildSummary(m)}</p>
-          {tags.length > 0 && (
-            <ul className="ad-tags">
-              {tags.map((t) => (
-                <li key={t} className="ad-tag">{t}</li>
-              ))}
-            </ul>
-          )}
+          <Link href={`/compare?codes=${m.code}`} className="ad-compare-add ad-compare-add-hero">
+            この自治体を比較ページで見る<ArrowUpRight size={13} aria-hidden="true" />
+          </Link>
         </div>
 
         <ScorePanel liv={liv} />
       </header>
+      {/* この自治体の特徴（全国・県平均との偏差や順位から決定論的に抽出。評価語なし） */}
+      {highlights.length > 0 && (
+        <Section
+          icon={Sparkles}
+          tone="ad-tone-pop"
+          title={`${m.name}の特徴`}
+          sub={`全国・${prefName}平均との比較で目立つ指標`}
+        >
+          <HighlightList highlights={highlights} />
+        </Section>
+      )}
       {/* AI総評 + こんな人におすすめ */}
       <Reveal>
         <OverviewCard m={m} liv={liv} />
@@ -348,6 +400,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
             value={hasRent(m.rent.value) ? m.rent.value.toLocaleString() : null}
             unit="円/月"
             sub={hasRent(m.rent.value) ? `県内で${rentBand(m.rent.value)}` : undefined}
+            compare={rentCompare}
           />
           <KpiCard
             icon={Users}
@@ -356,6 +409,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
             value={m.population.toLocaleString()}
             unit="人"
             sub={`人口トレンド: ${m.populationTrend}`}
+            compare={popCompare}
           />
           <KpiCard
             icon={JapaneseYen}
@@ -363,6 +417,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
             label="地価（住宅地）"
             value={hasLandPrice(m.landPrice.value) ? m.landPrice.value.toLocaleString() : null}
             unit="円/㎡"
+            compare={landCompare}
             nodataLabel="対象外"
           />
           <KpiCard
@@ -517,6 +572,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
                   name={r.displayName ?? r.name}
                   meta={hasRent(r.rent.value) ? `${r.rent.value.toLocaleString()}円/月` : "データなし"}
                 />
+                <Link href={`/compare?codes=${m.code},${r.code}`} className="ad-compare-add">＋比較する</Link>
               </li>
             ))}
           </ul>
@@ -535,6 +591,29 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
                   rent={hasRent(s.rent.value) ? `${s.rent.value.toLocaleString()}円` : null}
                   population={`${s.population.toLocaleString()}人`}
                 />
+                <Link href={`/compare?codes=${m.code},${s.code}`} className="ad-compare-add">＋比較する</Link>
+              </li>
+            ))}
+          </ul>
+        </Section>
+      )}
+      {/* 人口規模が近い同県内の自治体 */}
+      {closePop.length > 0 && (
+        <Section
+          icon={Users}
+          tone="ad-tone-pop"
+          title={`人口規模が近い${prefName}の自治体`}
+          sub={`${m.name}（人口${m.population.toLocaleString()}人）と規模が近い自治体`}
+        >
+          <ul className="ad-arealink-grid">
+            {closePop.map((p) => (
+              <li key={p.code}>
+                <AreaLinkCard
+                  href={`/area/${p.pref}/${p.code}`}
+                  name={p.displayName ?? p.name}
+                  meta={`人口 ${p.population.toLocaleString()}人`}
+                />
+                <Link href={`/compare?codes=${m.code},${p.code}`} className="ad-compare-add">＋比較する</Link>
               </li>
             ))}
           </ul>
