@@ -58,7 +58,7 @@ function rentStar(m: Municipality): AxisScore {
   }
   const v = m.rent.value;
   const stars = v < 50000 ? 5 : v < 55000 ? 4 : v < 60000 ? 3 : v < 65000 ? 2 : 1;
-  return { key: "rent", label: "家賃", stars, note: `中央値 ${v.toLocaleString()}円/月` };
+  return { key: "rent", label: "家賃", stars, note: `平均 ${v.toLocaleString()}円/月` };
 }
 
 // ---- 子育て: 待機児童が少ないほど高評価 ----

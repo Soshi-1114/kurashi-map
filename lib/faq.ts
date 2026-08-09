@@ -39,10 +39,10 @@ export function buildFaq(m: Municipality, prefName: string): QA[] {
 
   // 家賃
   qa.push({
-    q: `${name}の家賃相場（民営借家中央値）はいくらですか？`,
+    q: `${name}の家賃相場（民営借家の家賃平均）はいくらですか？`,
     a: hasRent(m.rent.value)
-      ? `${name}の民営借家の家賃中央値は${m.rent.value.toLocaleString()}円/月です。${prefName}内では家賃水準は${rentBand(m.rent.value)}に位置します（出典: ${m.rent.source}）。`
-      : `${name}は住宅・土地統計調査の集計対象外のため、家賃中央値のデータはありません。`,
+      ? `${name}の民営借家の家賃平均は${m.rent.value.toLocaleString()}円/月です。${prefName}内では家賃水準は${rentBand(m.rent.value)}に位置します（出典: ${m.rent.source}）。`
+      : `${name}は住宅・土地統計調査の集計対象外のため、家賃平均のデータはありません。`,
   });
 
   // 地価（データのある自治体のみ）

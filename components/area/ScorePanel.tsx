@@ -1,5 +1,6 @@
 // Hero 右カラムの「住みやすさ総合スコア」。総合点＋5段階星＋5軸の内訳を表示。
 // スコアは実データ指標のみから算出（lib/livabilityScore.ts）。対象外指標は「データなし」。
+import Link from "next/link";
 import type { Livability } from "@/lib/livabilityScore";
 import { scoreBandLabel } from "@/lib/livabilityScore";
 import { Stars } from "./Stars";
@@ -55,7 +56,10 @@ export function ScorePanel({ liv }: { liv: Livability }) {
 
       <p className="ad-score-foot">
         <Info size={13} aria-hidden="true" />
-        実データの{liv.evaluated}/{liv.total}指標から算出した目安です。
+        <span>
+          実データの{liv.evaluated}/{liv.total}指標から算出した目安です（
+          <Link href="/about#score" className="ad-score-foot-link">算出方法</Link>）。
+        </span>
       </p>
     </div>
   );

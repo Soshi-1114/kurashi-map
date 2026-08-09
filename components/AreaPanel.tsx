@@ -102,8 +102,8 @@ export function MetricCards({ m }: { m: Municipality }) {
   const rentHasData = hasRent(m.rent.value);
   const cards = [
     rentHasData
-      ? { label: "家賃中央値", value: `${m.rent.value.toLocaleString()} ${m.rent.unit}`, source: m.rent.source, asOf: m.rent.asOf, est: m.rent.isEstimated }
-      : { label: "家賃中央値", value: "データなし", source: "住宅統計の集計対象外", asOf: "-", est: false },
+      ? { label: "家賃平均", value: `${m.rent.value.toLocaleString()} ${m.rent.unit}`, source: m.rent.source, asOf: m.rent.asOf, est: m.rent.isEstimated }
+      : { label: "家賃平均", value: "データなし", source: "住宅統計の集計対象外", asOf: "-", est: false },
     hasLandPrice(m.landPrice.value)
       ? { label: "地価", value: `${m.landPrice.value.toLocaleString()} ${m.landPrice.unit}`, source: m.landPrice.source, asOf: m.landPrice.asOf, est: m.landPrice.isEstimated }
       : { label: "地価", value: "データなし", source: m.landPrice.source, asOf: m.landPrice.asOf, est: false },
