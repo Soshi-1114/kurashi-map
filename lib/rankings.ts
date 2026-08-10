@@ -205,11 +205,17 @@ const VACANCY_FAQ: { q: string; a: string }[] = [
 // 上位表示されるが、一般的な description（{top1}名のみ）では「全国/県のランキング」に
 // しか見えずクリックされにくい（例: 岡崎市 人口＝3位表示・impressions11・clicks0）。
 // 都道府県別ページでは該当県の全市区町村を掲載していることを明記し、期待値を合わせる。
-function populationMetaDescription(metric: "most" | "densityHigh" | "densityLow") {
-  const noun = metric === "most" ? "人口" : "人口密度";
-  const verb = metric === "densityLow" ? "低い" : metric === "densityHigh" ? "高い" : "多い";
-  const valueOf = (m: Municipality) =>
-    metric === "most" ? `${m.population.toLocaleString()}人` : densityText(populationDensity(m) ?? 0);
+const POPULATION_METRIC_TEXT: Record<
+  "most" | "densityHigh" | "densityLow",
+  { noun: string; verb: string; valueOf: (m: Municipality) => string }
+> = {
+  most: { noun: "人口", verb: "多い", valueOf: (m) => `${m.population.toLocaleString()}人` },
+  densityHigh: { noun: "人口密度", verb: "高い", valueOf: (m) => densityText(populationDensity(m) ?? 0) },
+  densityLow: { noun: "人口密度", verb: "低い", valueOf: (m) => densityText(populationDensity(m) ?? 0) },
+};
+
+function populationMetaDescription(metric: keyof typeof POPULATION_METRIC_TEXT) {
+  const { noun, verb, valueOf } = POPULATION_METRIC_TEXT[metric];
   return (top1: Municipality | null): string => {
     const head = `全国の市区町村を${noun}が${verb}順にランキング。`;
     const tail = `都道府県ごとのページでは、県内の全市区町村を${noun}順に掲載しています。`;
