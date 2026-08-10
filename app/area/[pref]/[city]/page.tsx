@@ -223,18 +223,15 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
   // 回遊セクション（家賃が近い／似ているエリア／人口規模が近い／行政区／兄弟区／
   // 主要自治体）はどれもデータ次第で消えるため、最初に描画されるものへ #compare を
   // 付ける。1つも無ければ「比較」の項目自体を出さない（存在しない飛び先を作らない）。
-  const compareOrder = ["related", "similar", "closePop", "childWards", "siblings", "majorPeers"] as const;
-  const comparePresent: Record<(typeof compareOrder)[number], boolean> = {
-    related: related.length > 0,
-    similar: similar.length > 0,
-    closePop: closePop.length > 0,
-    childWards: childWards.length > 0,
-    siblings: siblings.length > 0 && parent != null,
-    majorPeers: majorPeers.length > 0,
-  };
-  const firstCompareKey = compareOrder.find((k) => comparePresent[k]);
-  const compareAnchor = (k: (typeof compareOrder)[number]) =>
-    k === firstCompareKey ? "compare" : undefined;
+  const firstCompareKey = ([
+    ["related", related.length > 0],
+    ["similar", similar.length > 0],
+    ["closePop", closePop.length > 0],
+    ["childWards", childWards.length > 0],
+    ["siblings", siblings.length > 0 && parent != null],
+    ["majorPeers", majorPeers.length > 0],
+  ] as const).find(([, present]) => present)?.[0];
+  const compareAnchor = (key: string) => (key === firstCompareKey ? "compare" : undefined);
 
   const navItems: SectionNavItem[] = [
     { id: "overview", label: "概要" },

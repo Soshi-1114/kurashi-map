@@ -18,7 +18,7 @@ import { RENT_COLORS, RENT_NODATA_COLOR } from "@/lib/rentColor";
 
 const ROOT = join(__dirname, "..", "..");
 
-/** リポジトリ内の CSS ファイルをすべて集める（node_modules / .next は除く）。 */
+/** app/ 配下の CSS をすべて集める（スタイルシートはすべてここにある）。 */
 function cssFiles(dir = join(ROOT, "app"), acc: string[] = []): string[] {
   for (const e of readdirSync(dir, { withFileTypes: true })) {
     const p = join(dir, e.name);
@@ -28,16 +28,20 @@ function cssFiles(dir = join(ROOT, "app"), acc: string[] = []): string[] {
   return acc;
 }
 
-const CSS_PATHS = cssFiles();
-const globals = readFileSync(join(ROOT, "app", "globals.css"), "utf8");
+// 各ファイルは1回だけ読む（禁止色のチェックはケースごとに回るので、
+// ケース内で読むと同じファイルを何十回も読むことになる）。
+const CSS = cssFiles().map((path) => ({
+  rel: path.slice(ROOT.length + 1),
+  lower: readFileSync(path, "utf8").toLowerCase(),
+}));
+
+const globals = CSS.find((f) => f.rel.endsWith("globals.css"))!;
 
 /** globals.css の :root ブロックから `--name: value;` を拾う。 */
 function rootTokens(): Map<string, string> {
-  const start = globals.indexOf(":root {");
-  expect(start).toBeGreaterThanOrEqual(0);
+  const start = globals.lower.indexOf(":root {");
   // :root は入れ子を持たないので、最初の "\n}" までを本体とみなす
-  const end = globals.indexOf("\n}", start);
-  const body = globals.slice(start, end);
+  const body = globals.lower.slice(start, globals.lower.indexOf("\n}", start));
   const map = new Map<string, string>();
   for (const m of body.matchAll(/(--[a-z0-9-]+)\s*:\s*([^;]+);/g)) {
     map.set(m[1], m[2].trim());
@@ -47,10 +51,13 @@ function rootTokens(): Map<string, string> {
 
 const tokens = rootTokens();
 
-describe("globals.css の :root", () => {
-  it("トークンを読み出せる", () => {
+/** その色を含む CSS ファイル（相対パス）を返す。空なら混入なし。 */
+const cssContaining = (hex: string) =>
+  CSS.filter((f) => f.lower.includes(hex.toLowerCase())).map((f) => f.rel);
+
+describe("globals.css の :root を読み出せる", () => {
+  it("トークンが取れている", () => {
     expect(tokens.size).toBeGreaterThan(30);
-    expect(tokens.get("--color-primary")).toBeDefined();
   });
 });
 
@@ -58,7 +65,6 @@ describe("OG画像の配色（lib/og.tsx）が :root と一致する", () => {
   // OG の各キー → 対応する CSS カスタムプロパティ
   const MAPPING: Record<keyof typeof OG, string> = {
     primary: "--color-primary",
-    primaryHover: "--color-primary-hover",
     primaryBg: "--color-primary-bg",
     primarySubtle: "--color-primary-subtle",
     surface: "--color-surface",
@@ -68,9 +74,7 @@ describe("OG画像の配色（lib/og.tsx）が :root と一致する", () => {
   };
 
   it.each(Object.entries(MAPPING))("OG.%s は %s と同値", (key, cssVar) => {
-    const expected = tokens.get(cssVar);
-    expect(expected, `${cssVar} が :root に無い`).toBeDefined();
-    expect(OG[key as keyof typeof OG].toLowerCase()).toBe(expected!.toLowerCase());
+    expect(OG[key as keyof typeof OG].toLowerCase()).toBe(tokens.get(cssVar));
   });
 
   it("OG のキーはすべてマッピングされている（新色の追加漏れを検出）", () => {
@@ -80,7 +84,7 @@ describe("OG画像の配色（lib/og.tsx）が :root と一致する", () => {
 
 describe("themeColor（lib/site.ts）が :root と一致する", () => {
   it("SITE.brandColor === --color-primary", () => {
-    expect(SITE.brandColor.toLowerCase()).toBe(tokens.get("--color-primary")!.toLowerCase());
+    expect(SITE.brandColor.toLowerCase()).toBe(tokens.get("--color-primary"));
   });
 });
 
@@ -88,10 +92,10 @@ describe("コロプレス配色を CSS へ複製しない", () => {
   // 地図の家賃コロプレスは lib/rentColor.ts が唯一の出どころ。CSS 側に同じ hex を
   // 書くと片方だけ更新されて静かにズレる（実際に .rent-bar-track で起きていた）。
   it.each([...RENT_COLORS, RENT_NODATA_COLOR])("%s が CSS に出現しない", (hex) => {
-    const hits = CSS_PATHS.filter((p) =>
-      readFileSync(p, "utf8").toLowerCase().includes(hex.toLowerCase()),
-    ).map((p) => p.slice(ROOT.length + 1));
-    expect(hits, `コロプレス色 ${hex} は CSS に書かず lib/rentColor.ts から流し込むこと`).toEqual([]);
+    expect(
+      cssContaining(hex),
+      `コロプレス色 ${hex} は CSS に書かず lib/rentColor.ts から流し込むこと`,
+    ).toEqual([]);
   });
 });
 
@@ -110,18 +114,10 @@ describe("退役したパレットが CSS に戻っていない", () => {
     "#f5f8fc", // 旧・地図ページの地色
     "#1d4ed8", // 旧ブルー accent hover
     "#5b8bf0", // 旧ブルー CTA グラデ上端
+    "rgba(199, 91, 57", // テラコッタの rgba 表記
   ];
 
   it.each(RETIRED)("%s が CSS に出現しない", (hex) => {
-    const hits = CSS_PATHS.filter((p) =>
-      readFileSync(p, "utf8").toLowerCase().includes(hex.toLowerCase()),
-    ).map((p) => p.slice(ROOT.length + 1));
-    expect(hits).toEqual([]);
-  });
-
-  it("テラコッタの rgba 表記も残っていない", () => {
-    const hits = CSS_PATHS.filter((p) => /rgba\(\s*199,\s*91,\s*57/.test(readFileSync(p, "utf8")))
-      .map((p) => p.slice(ROOT.length + 1));
-    expect(hits).toEqual([]);
+    expect(cssContaining(hex)).toEqual([]);
   });
 });

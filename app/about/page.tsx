@@ -126,7 +126,7 @@ export default async function AboutPage() {
   };
 
   return (
-    <PageShell width="narrow" innerClassName="detail-root" trail={[{ name: SITE.name, href: "/" }, { name: "このサイトについて" }]}>
+    <PageShell width="narrow" trail={[{ name: SITE.name, href: "/" }, { name: "このサイトについて" }]}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }} />
 
 

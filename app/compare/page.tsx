@@ -97,7 +97,7 @@ export default async function ComparePage() {
   };
 
   return (
-    <PageShell innerClassName="cmp-root" trail={[{ name: SITE.name, href: "/" }, { name: "自治体を比較" }]}>
+    <PageShell trail={[{ name: SITE.name, href: "/" }, { name: "自治体を比較" }]}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }} />
 
       <header className="cmp-hero">

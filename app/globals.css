@@ -33,7 +33,6 @@
   --color-warning: #a24a07;
   --color-warning-bg: #fbeedc;
   --color-danger: #b91c1c;
-  --color-danger-bg: #fbe9e9;
 
   /* ---- データカテゴリの意味色（fg/bg ペア）----
      使用箇所はアイコンチップ・小バッジ・アクセント線・グラフに限定し、
@@ -74,9 +73,6 @@
   --text-faint: #94a3b8; /* 補助テキスト専用（白地 2.56:1 のため本文には使わない） */
   --accent: var(--color-primary);
   --accent-hover: var(--color-primary-hover);
-  /* テキスト用の別名。--color-primary 自体が淡色地の上でも AA を満たすので同値だが、
-     「テキストとして使っている」意図を残すために名前は分けておく。 */
-  --accent-text: var(--color-primary);
   /* 半透明のまま維持: hover / focus / is-active のティントとして地図上の半透明パネル
      （.metric-radio.is-active 等）にも載るため。不透明の塗りが要る箇所は
      --color-primary-bg を使う。 */
@@ -88,7 +84,6 @@
   --radius-sm: 10px;  /* control */
   --radius-md: 14px;  /* button / input / 小カード */
   --radius-lg: 16px;  /* card / hero */
-  --radius-xl: 20px;  /* large container */
   --radius-pill: 999px;
 
   /* ===== デザイントークン #13 Phase A =====
@@ -110,7 +105,6 @@
   --space-6: 24px;
   --space-8: 32px;
   --space-10: 48px; /* セクション間（PC） */
-  --space-12: 64px; /* ページ下端の余白など */
 
   --text-3xs: 10px;
   --text-2xs: 11px;
@@ -122,7 +116,6 @@
   --text-xl: 19px;
   --text-2xl: 22px;
   --text-3xl: 27px;
-  --text-4xl: 34px;
   /* 16px はトークン化しない（検索入力=iOSズーム抑止の機能値。リテラル維持）。
      半端値(13.5/11.5 等)は最近傍ステップへ丸める＝最大±1px（Phase B 方針 1a）。 */
 
@@ -261,7 +254,7 @@ html, body {
   border-radius: var(--radius-md);
   /* カテゴリ意味色は .tone-* / .rk-tone-* / .ad-tone-* が --tone-* を渡してくる */
   background: var(--tone-bg, var(--accent-soft));
-  color: var(--tone-fg, var(--accent-text));
+  color: var(--tone-fg, var(--accent));
   flex-shrink: 0;
 }
 .section-head-link,
@@ -272,7 +265,7 @@ html, body {
   gap: 4px;
   font-size: var(--text-sm);
   font-weight: 600;
-  color: var(--accent-text);
+  color: var(--accent);
   white-space: nowrap;
 }
 
@@ -358,7 +351,7 @@ html, body {
 .ad-support-btn:hover,
 .home-hero-action:hover {
   border-color: var(--accent);
-  color: var(--accent-text);
+  color: var(--accent);
 }
 .btn-ghost,
 .detail-back,
@@ -366,7 +359,7 @@ html, body {
 .ad-back {
   background: transparent;
   border-color: transparent;
-  color: var(--accent-text);
+  color: var(--accent);
 }
 /* 文字は小さいままでも当たり判定は 44px を確保する（WCAG 2.5.5 / 2.5.8）。 */
 .detail-back,
@@ -403,7 +396,7 @@ html, body {
 .chip--selected,
 .ad-pref-badge {
   background: var(--accent-soft);
-  color: var(--accent-text);
+  color: var(--accent);
 }
 /* Status */
 .chip--good, .ad-chip.is-good { background: var(--color-success-bg); color: var(--color-success); }
@@ -421,7 +414,7 @@ html, body {
   font-size: clamp(40px, 8vw, 56px);
   font-weight: 800;
   letter-spacing: -0.03em;
-  color: var(--accent-text);
+  color: var(--accent);
 }
 .status-title { margin: var(--space-3) 0 0; font-size: var(--text-xl); font-weight: 700; }
 .status-text {
@@ -527,18 +520,23 @@ html, body {
 /* 「都道府県から探す」: 地方タブ → 都道府県（PrefRegionPicker）。
    選択中のタブだけが塗り、他は地図で見る/ランキングのチップと同じ体裁に揃える。 */
 .home-region-tabs { display: flex; flex-wrap: wrap; gap: 7px; margin: 0 0 14px; }
-.home-region-tab {
+/* 自治体詳細のセクションナビ（.ad-secnav a）も同じチップ。定義はここだけに置く。 */
+.home-region-tab,
+.ad-secnav a {
   display: inline-flex; align-items: center; min-height: 40px;
   font-family: inherit; font-size: var(--text-sm); font-weight: 700;
   padding: 0 15px; border: 1px solid var(--border); border-radius: var(--radius-pill);
   background: var(--surface-strong); color: var(--text-muted); cursor: pointer;
   transition: background-color .15s ease, border-color .15s ease, color .15s ease;
 }
-.home-region-tab:hover { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
-.home-region-tab[aria-selected="true"] {
+.home-region-tab:hover,
+.ad-secnav a:hover { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
+.home-region-tab[aria-selected="true"],
+.ad-secnav a[aria-current="true"] {
   background: var(--accent); border-color: var(--accent); color: #fff;
 }
-.home-region-tab[aria-selected="true"]:hover { background: var(--accent-hover); color: #fff; }
+.home-region-tab[aria-selected="true"]:hover,
+.ad-secnav a[aria-current="true"]:hover { background: var(--accent-hover); color: #fff; }
 /* .home-pref-grid の display:grid が作者スタイルとして UA の [hidden] に勝つため、
    パネル側で明示的に隠す（グリッドはこの div の子なので通常は影響しないが、
    将来クラスが付け替わっても hidden が効くようにしておく）。 */
@@ -1175,7 +1173,7 @@ button { font-family: inherit; }
   transition: background .15s ease;
 }
 .metric-radio:hover { background: rgba(15,23,42,0.04); }
-.metric-radio.is-active { background: var(--accent-soft); color: var(--accent-text); font-weight: 700; }
+.metric-radio.is-active { background: var(--accent-soft); color: var(--accent); font-weight: 700; }
 .metric-radio input { position: absolute; opacity: 0; pointer-events: none; }
 .metric-radio-label { font-size: var(--text-base); color: var(--text); font-weight: 500; }
 .metric-radio::before {
@@ -1548,7 +1546,7 @@ button { font-family: inherit; }
 .trend-chip {
   margin-left: 4px;
   background: var(--accent-soft);
-  color: var(--accent-text);
+  color: var(--accent);
   border-radius: var(--radius-pill);
   letter-spacing: 0.02em;
 }
@@ -1765,7 +1763,8 @@ button { font-family: inherit; }
    3系統が別々の配色を持っていた（同じ「家賃」がブルーとテラコッタで食い違う等）。
    意味色は :root の --cat-* ペアに一本化し、3つのプレフィックスをここでまとめて
    定義する。globals.css は全ルートに載るので、各ページCSS側の定義は削除済み。
-   --tone-bg / --tone-fg を読む側（.detail-shead-icon / .infra-card svg 等）は無変更。 */
+   tone クラスは --tone-* を渡すだけ。実際に塗るのは
+   .section-head-icon / .rk-section-icon / .ad-section-icon のグループ。 */
 .tone-rent,    .rk-tone-rent,    .ad-tone-rent    { --tone-bg: var(--cat-housing-bg); --tone-fg: var(--cat-housing-fg); }
 .tone-land,    .rk-tone-land,    .ad-tone-land    { --tone-bg: var(--cat-land-bg);    --tone-fg: var(--cat-land-fg); }
 .tone-pop,     .rk-tone-pop,     .ad-tone-pop     { --tone-bg: var(--cat-pop-bg);     --tone-fg: var(--cat-pop-fg); }
@@ -1773,12 +1772,6 @@ button { font-family: inherit; }
 .tone-infra,   .rk-tone-infra,   .ad-tone-infra   { --tone-bg: var(--cat-infra-bg);   --tone-fg: var(--cat-infra-fg); }
 .tone-hazard,  .rk-tone-hazard,  .ad-tone-hazard  { --tone-bg: var(--cat-hazard-bg);  --tone-fg: var(--cat-hazard-fg); }
 .tone-foreign, .rk-tone-foreign, .ad-tone-foreign { --tone-bg: var(--cat-nature-bg);  --tone-fg: var(--cat-nature-fg); }
-/* .rk-* / .ad-* のアイコンチップは background/color を直接持っていたので、
-   ここで --tone-* から引くようにして .detail-shead-icon と同じ規則に揃える。 */
-[class*="rk-tone-"], [class*="ad-tone-"] {
-  background: var(--tone-bg, var(--accent-soft));
-  color: var(--tone-fg, var(--accent-text));
-}
 
 
 
@@ -1801,8 +1794,8 @@ button { font-family: inherit; }
 .detail-section { margin-top: var(--space-10); padding-top: var(--space-6); border-top: 1px solid var(--border); }
 .detail-section:first-of-type { margin-top: var(--space-8); padding-top: 0; border-top: none; }
 /* ランキング系ページの素の見出し（アイコンチップを持たない h2）にアクセントバーを
-   付けて、単調な黒文字の羅列にメリハリを出す。アイコン付きの自治体ページ見出しは
-   .detail-shead 配下なのでこの直下セレクタには当たらない。 */
+   付けて、単調な黒文字の羅列にメリハリを出す。アイコンチップ付きの見出しは
+   .section-head 配下の h2 なので、この直下セレクタには当たらない。 */
 .detail-section > .detail-h2 {
   border-left: 3px solid var(--accent);
   padding-left: 9px;
@@ -1830,7 +1823,7 @@ button { font-family: inherit; }
   color: var(--text);
   margin: 0;
 }
-.detail-p strong { color: var(--accent-text); font-weight: 700; font-variant-numeric: tabular-nums; }
+.detail-p strong { color: var(--accent); font-weight: 700; font-variant-numeric: tabular-nums; }
 .detail-p-muted { font-size: var(--text-sm); color: var(--text-muted); }
 .detail-note {
   display: flex;
@@ -1897,7 +1890,7 @@ button { font-family: inherit; }
   text-decoration: none;
 }
 .related-card svg { color: var(--text-faint); flex-shrink: 0; }
-.related-card:hover svg { color: var(--accent-text); }
+.related-card:hover svg { color: var(--accent); }
 .related-name { font-size: var(--text-base); font-weight: 700; color: var(--text); letter-spacing: -0.005em; }
 .related-rent { font-size: var(--text-xs); color: var(--text-muted); font-variant-numeric: tabular-nums; flex-shrink: 0; }
 /* 見出しと補足が両方長い場合（ランキング一覧など）に横並びだと見出しが
@@ -1911,7 +1904,6 @@ button { font-family: inherit; }
 /* 見出し直下に置く小さなインラインリンク列 */
 .detail-inline-links { margin-top: var(--space-3); display: flex; gap: 10px; flex-wrap: wrap; }
 .related-card--inline { display: inline-flex; width: auto; padding: 8px 14px; }
-.mini-card-value--lg { font-size: var(--text-2xl); }
 .pref-table-link--muted { font-weight: 500; }
 .detail-back { min-height: 40px; padding: 8px 0; font-size: var(--text-sm); font-weight: 600; }
 .detail-back:hover { color: var(--accent-hover); }
@@ -1959,7 +1951,7 @@ button { font-family: inherit; }
 .pref-table tbody th { font-weight: 700; text-align: left; padding: 9px 14px; white-space: nowrap; }
 .pref-table tbody td { padding: 9px 14px; color: var(--text-muted); white-space: nowrap; }
 .pref-table-link { color: var(--text); font-weight: 700; }
-.pref-table-link:hover { color: var(--accent-text); }
+.pref-table-link:hover { color: var(--accent); }
 
 /* 都道府県チップ（県別ランキングへの導線） */
 .pref-chip-grid { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }

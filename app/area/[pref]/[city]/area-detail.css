@@ -12,7 +12,6 @@
   --ad-primary: var(--accent);
   --ad-success: var(--color-success);
   --ad-warning: var(--color-warning);
-  --ad-danger: var(--color-danger);
   --ad-card: var(--surface-strong);
   --ad-subtle: var(--surface-subtle); /* 淡色パネル（注記・出典・データなし） */
   --ad-border: var(--border);
@@ -48,33 +47,9 @@
   scrollbar-width: none;
 }
 .ad-secnav::-webkit-scrollbar { display: none; }
-.ad-secnav a {
-  display: inline-flex;
-  align-items: center;
-  flex: none;
-  min-height: 40px;
-  padding: 0 15px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-pill);
-  background: var(--surface-strong);
-  color: var(--text-muted);
-  font-size: var(--text-sm);
-  font-weight: 700;
-  white-space: nowrap;
-  transition: background-color .15s ease, border-color .15s ease, color .15s ease;
-}
-.ad-secnav a:hover {
-  border-color: var(--accent);
-  background: var(--accent-soft);
-  color: var(--accent-text);
-}
-/* 現在地。色だけでなく塗りの有無で状態が分かる（.home-region-tab と同じ扱い） */
-.ad-secnav a[aria-current="true"] {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #fff;
-}
-.ad-secnav a[aria-current="true"]:hover { background: var(--accent-hover); color: #fff; }
+/* チップの見た目（hover・現在地の塗りを含む）は globals.css の .home-region-tab と
+   共有している。ここに置くのは横スクロールさせるための差分だけ。 */
+.ad-secnav a { flex: none; white-space: nowrap; }
 
 /* アンカー先の見出しがナビ帯の下に潜らないようにする */
 .ad-hero[id],
@@ -210,10 +185,6 @@
 
 /* ---- 住みやすさ総合スコア（Hero 右） ---- */
 .ad-score {
-  background: var(--ad-card);
-  border: 1px solid var(--ad-border);
-  border-radius: var(--ad-radius);
-  box-shadow: var(--ad-shadow);
   padding: var(--space-5);
   display: flex;
   flex-direction: column;
@@ -431,10 +402,6 @@
   column-gap: var(--space-4);
   row-gap: 2px;
   align-content: center;
-  background: var(--ad-card);
-  border: 1px solid var(--ad-border);
-  border-radius: var(--ad-radius);
-  box-shadow: var(--ad-shadow);
   padding: var(--space-5);
   transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
 }
@@ -507,10 +474,6 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
-  background: var(--ad-card);
-  border: 1px solid var(--ad-border);
-  border-radius: var(--ad-radius);
-  box-shadow: var(--ad-shadow);
   padding: var(--space-6);
   transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
 }
@@ -584,8 +547,6 @@
   font-weight: 700;
   white-space: nowrap;
 }
-.ad-chip.is-good { background: var(--color-success-bg); color: var(--color-success); }
-.ad-chip.is-warn { background: var(--color-warning-bg); color: var(--color-warning); }
 
 /* カード内の小さな統計行（インフラ・国籍など） */
 .ad-statline {
@@ -791,17 +752,15 @@
   grid-template-columns: 1fr auto auto;
   align-items: center;
   gap: 8px;
-  background: var(--ad-card);
-  border: 1px solid var(--ad-border);
+  /* 面は .card グループが供給する。一覧に密に並ぶ小さめカードなので角丸だけ一段小さくする。 */
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-xs);
   padding: 14px 16px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
 }
 .ad-arealink:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--ad-shadow);
-  border-color: var(--accent-glow);
+  transform: translateY(-1px);
+  box-shadow: var(--ad-shadow-hover);
+  border-color: var(--accent);
 }
 .ad-arealink-name { font-weight: 700; font-size: var(--text-base); }
 .ad-arealink-meta { font-size: var(--text-xs); color: var(--text-muted); font-weight: 600; }
@@ -819,10 +778,6 @@
   display: flex;
   align-items: center;
   gap: var(--space-3);
-  background: var(--ad-card);
-  border: 1px solid var(--ad-border);
-  border-radius: var(--ad-radius);
-  box-shadow: var(--ad-shadow);
   padding: var(--space-4) var(--space-5);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -855,10 +810,6 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  background: var(--ad-card);
-  border: 1px solid var(--ad-border);
-  border-radius: var(--ad-radius);
-  box-shadow: var(--ad-shadow);
   padding: var(--space-5);
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
@@ -1129,7 +1080,6 @@
   .ad-secnav a { padding: 0 12px; font-size: var(--text-xs); }
   .ad-cta { margin-top: 44px; padding: var(--space-6); }
   .ad-hero { grid-template-columns: 1fr; }
-  .ad-hero-main { padding: 0; }
   .ad-score { order: 2; }
   .ad-metric-grid,
   .ad-similar-grid,
@@ -1159,7 +1109,6 @@
   .ad-compare-row { grid-template-columns: 76px 1fr auto; }
   .ad-score-number strong { font-size: 44px; }
   /* 支援・ふるさと納税は縦積みにしてボタンを全幅化 */
-  .ad-support-section { margin-top: var(--space-10); }
   .ad-support,
   .ad-furusato {
     flex-direction: column;

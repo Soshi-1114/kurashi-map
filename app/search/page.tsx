@@ -48,7 +48,7 @@ export default async function SearchPage(props: { searchParams: Promise<SearchPa
   const results = matchMuni(all, q);
 
   return (
-    <PageShell width="narrow" innerClassName="detail-root" trail={[{ name: SITE.name, href: "/" }, { name: "検索" }]}>
+    <PageShell width="narrow" trail={[{ name: SITE.name, href: "/" }, { name: "検索" }]}>
 
       <header className="detail-hero">
         <h1 className="detail-title">

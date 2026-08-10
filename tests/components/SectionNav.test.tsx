@@ -30,7 +30,7 @@ function stubIntersectionObserver() {
 afterEach(() => {
   cleanup();
   vi.unstubAllGlobals();
-  delete (window as { gtag?: unknown }).gtag;
+  delete window.gtag;
 });
 
 beforeEach(() => {
@@ -70,7 +70,7 @@ describe("SectionNav", () => {
   it("クリックで現在地が移り、GA4 に select_section を送る", async () => {
     stubIntersectionObserver();
     const gtag = vi.fn();
-    (window as { gtag?: unknown }).gtag = gtag;
+    window.gtag = gtag;
     render(<SectionNav items={ITEMS} municipalityCode="40220" />);
 
     await userEvent.click(screen.getByRole("link", { name: "ランキング" }));

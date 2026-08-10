@@ -182,7 +182,7 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
   };
 
   return (
-    <PageShell innerClassName="detail-root" trail={[{ name: SITE.name, href: "/" }, { name: "ランキング", href: "/ranking" }, { name: def.shortLabel, href: `/ranking/${def.slug}` }, { name: prefName }]}>
+    <PageShell trail={[{ name: SITE.name, href: "/" }, { name: "ランキング", href: "/ranking" }, { name: def.shortLabel, href: `/ranking/${def.slug}` }, { name: prefName }]}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }} />
 
 
@@ -222,12 +222,12 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
               <ul className="mini-cards cols-2">
                 <li className="mini-card">
                   <div className="mini-card-label">県内中央値</div>
-                  <div className="mini-card-value mini-card-value--lg">{def.display(summary.prefMedian)}</div>
+                  <div className="mini-card-value">{def.display(summary.prefMedian)}</div>
                   <p className="mini-card-sub">全国中央値: {def.display(summary.nationalMedian)}</p>
                 </li>
                 <li className="mini-card">
                   <div className="mini-card-label">県内1位の全国順位</div>
-                  <div className="mini-card-value mini-card-value--lg">
+                  <div className="mini-card-value">
                     {summary.top1NationalRank.toLocaleString()}<span className="unit"> 位</span>
                   </div>
                   <p className="mini-card-sub">全国{summary.nationalCount.toLocaleString()}自治体中（{cards[0].displayName ?? cards[0].name}）</p>

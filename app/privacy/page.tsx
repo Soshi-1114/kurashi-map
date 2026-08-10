@@ -57,7 +57,7 @@ export default function PrivacyPage() {
   };
 
   return (
-    <PageShell width="narrow" innerClassName="detail-root" trail={[{ name: SITE.name, href: "/" }, { name: "プライバシーポリシー" }]}>
+    <PageShell width="narrow" trail={[{ name: SITE.name, href: "/" }, { name: "プライバシーポリシー" }]}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }} />
 
 

@@ -6,7 +6,7 @@
 import type { ReactNode } from "react";
 import { SITE } from "./site";
 
-export const OG_SIZE = { width: 1200, height: 630 };
+const OG_SIZE = { width: 1200, height: 630 };
 
 /** OG画像の配色。
  *
@@ -16,7 +16,6 @@ export const OG_SIZE = { width: 1200, height: 630 };
  *  対応するトークンを用意し、テストのマッピングに追加すること。 */
 export const OG = {
   primary: "#3a739e",       // --color-primary
-  primaryHover: "#2e6a92",  // --color-primary-hover
   primaryBg: "#eaf4fb",     // --color-primary-bg
   primarySubtle: "#f3f8fc", // --color-primary-subtle
   surface: "#ffffff",       // --color-surface
@@ -36,7 +35,7 @@ export const OG_RESPONSE = {
 };
 
 /** フッタに出すサイトのホスト名（"kurashimap.jp"）。SITE.baseUrl から導出する。 */
-const SITE_HOST = SITE.baseUrl.replace(/^https?:\/\//, "").replace(/\/$/, "");
+const SITE_HOST = new URL(SITE.baseUrl).host;
 
 // ブランドロゴ（家ピン＋地図ベース）。satori はインライン SVG の clipPath/polygon を
 // 完全には描けないため、resvg が完全対応する data URI 画像として渡す。
