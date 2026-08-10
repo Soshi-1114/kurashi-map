@@ -170,6 +170,12 @@ html, body {
   border-radius: var(--radius-xs);
 }
 
+/* ページ内アンカー（自治体詳細のセクションナビ、トップの「都道府県から探す」）へ
+   飛ぶ時のスクロール。動きに敏感な利用者には無効にする。 */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
 /* ---- ページシェル: 幅は3段階だけ ---- */
 .page-root {
   max-width: 1040px;

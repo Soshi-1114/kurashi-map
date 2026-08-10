@@ -23,6 +23,11 @@ export function trackSelectMunicipality(code: string, method: "map" | "search"):
   track("select_municipality", { municipality_code: code, method });
 }
 
+/** 自治体詳細ページのセクションナビでの移動。どのセクションが実際に使われているかを見る。 */
+export function trackSelectSection(sectionId: string, municipalityCode: string): void {
+  track("select_section", { section: sectionId, municipality_code: municipalityCode });
+}
+
 /** 塗り分け指標の切り替え。 */
 export function trackChangeMetric(metricKey: string): void {
   track("change_metric", { metric_key: metricKey });

@@ -1,9 +1,14 @@
 # 自治体詳細ページのナビゲーション設計（タブ／セクションナビ）
 
 デザインシステム統一のモックにあった「概要／データ／比較／ランキング／詳細情報」のタブについて、
-現状の情報構造を棚卸しし、実装方式を比較して推奨案をまとめた検討メモ。**この文書時点では未実装。**
+現状の情報構造を棚卸しし、実装方式を比較して結論を出した記録。
 
-対象: `app/area/[pref]/[city]/page.tsx`（約770行）＋ `components/area/*`（11ファイル）＋ `app/area/[pref]/[city]/area-detail.css`
+> **状況: 方式 B（セクションナビ）を実装済み。** 実装は
+> `components/area/SectionNav.tsx` ＋ `app/area/[pref]/[city]/page.tsx` のアンカー付与 ＋
+> `area-detail.css` の `.ad-secnav`。方式 A（真のタブ）と C（一部折りたたみ）は未実施で、
+> 判断材料として §5・§6 に残してある。実装の詳細は §4。
+
+対象: `app/area/[pref]/[city]/page.tsx`（約790行）＋ `components/area/*`（12ファイル）＋ `app/area/[pref]/[city]/area-detail.css`
 
 ---
 
@@ -92,54 +97,64 @@
 
 ---
 
-## 4. B の設計（着手する場合の設計図）
+## 4. B の実装
 
 ### 4-1. マークアップ
+
+ラッパー要素は足さず、**既存セクションに `id` を付けるだけ**にした
+（`.ad-section:first-of-type` などの構造セレクタを動かさないため）。
 
 ```
 PageShell
  └ .ad-root
     ├ Breadcrumb
-    ├ header.ad-hero                       ← タイトル・スコア
-    ├ nav.ad-secnav  (sticky)              ← ★新規
+    ├ header.ad-hero#overview              ← タイトル・スコア
+    ├ nav.ad-secnav  (sticky, top:0)       ← 追加
     │   概要 | データ | 比較 | ランキング | 詳細情報
-    ├ section#overview  … 特徴 / 総評 / データで見る / KPI
+    ├ section  … 特徴 / 総評 / データで見る / KPI
     ├ section#data      … 詳細データ
-    ├ section#compare   … 回遊カード群
+    ├ section#compare   … 回遊カード群の先頭（データ次第で位置が動く）
     ├ section#ranking   … ランキング14種
-    └ section#details   … FAQ / 出典 / 支援 / CTA
+    └ section#details   … FAQ（以降に 出典 / 支援 / CTA）
 ```
 
-- `components/area/Section.tsx` は現在 `id` を受け取らない（`Reveal.tsx` も同様）。
-  両方に `id?: string` を足す（`Reveal` は `as` で `section` を出せるので、`id` を透過させるだけ）。
-- アンカーは5つのグループ先頭セクションに付ける。既存のセクション分割は変えない。
+`Section` と `Reveal` に `id?: string` を足して透過させた。どちらも server component のままなので、
+アンカーは SSR の HTML に載る。ナビは `<nav>` にしてある（`<section>` にすると
+`.ad-section:first-of-type` の意味が変わってしまう）。`.ad-reveal` はアニメ中だけ `transform` を持つため、
+ナビは `Reveal` の外（`.ad-root` の直下）に置いている。
 
-### 4-2. `components/area/SectionNav.tsx`（新規・クライアント）
+### 4-2. `#compare` がデータ次第で動く件
 
-- `<nav aria-label="このページの目次">` ＋ `<a href="#overview">` 等。**素のアンカーなので JS 無効でも動く。**
-- `IntersectionObserver` で現在位置のリンクに `aria-current="true"` を付けるだけ（表示の切替はしない）。
-- キーボード操作は通常のリンクなので追加実装不要。`role="tablist"` は使わない（タブではないため、
-  スクリーンリーダーに誤った期待を与えない）。
+回遊セクション（家賃が近い／似ているエリア／人口規模が近い／行政区／兄弟区／主要自治体）は
+**すべてデータ次第で消える**。`page.tsx` で「最初に描画されるもの」を純粋な計算で決めて `#compare` を付け、
+1つも無ければナビ項目自体を出さない（存在しない飛び先を作らない）。
+政令市の親・区・小規模町村で壊れたアンカーが出ないことを実機で確認済み。
 
-### 4-3. CSS
+### 4-3. `components/area/SectionNav.tsx`（クライアント）
 
-- `.ad-secnav { position: sticky; top: 0; z-index: 5; background: var(--surface-strong); border-bottom: 1px solid var(--border); }`
-  `.site-header` は非sticky なので競合しない。SP では横スクロール可（`overflow-x: auto`）。
-- 各アンカー先に `scroll-margin-top: 56px`（ナビの高さ分）。
-- チップの見た目は `globals.css` の `.home-region-tab`（`aria-selected` で塗り分け）を流用し、
-  `aria-current="true"` セレクタで同じ配色にする＝トップのタブと同一の部品に見える。
-- `@media (prefers-reduced-motion: reduce)` で `scroll-behavior: auto`。
+- `<nav aria-label="このページの目次">` ＋ 素の `<a href="#...">`。**JS 無効でもアンカーとして動く**
+  （実機で JS を切ってリンク5本が HTML にあることを確認）。
+- `role="tablist"` は使わない（タブではないので支援技術に誤った期待を与えない）。現在地は `aria-current="true"`。
+- `IntersectionObserver` は**現在地の見た目だけ**に使い、コンテンツの表示可否には一切関与しない
+  （`Reveal.tsx` の「JS 依存の可視制御で事故った」経緯を踏まえた制約）。
+  IO が無い環境ではスクロールスパイを諦めるだけで、リンクは生きたまま。
+- クリック直後は IO を待たずに現在地を確定し、スムーススクロール中の途中発火を短時間無視する。
 
-### 4-4. 計測
+### 4-4. CSS とオフセット
 
-`lib/analytics.ts` の `track()` を再利用して `track("select_section", { section, municipality_code })` を送る。
+- `.ad-secnav`: `position: sticky; top: 0; z-index: 5`。詳細ページには他に z-index を使う要素が無く、
+  30/31（トップのドロワー）と 60/61（モバイルのレイヤーシート）は他UIの予約帯。
+  `.site-header` は非 sticky なので競合しない。SP はチップが入り切らない時だけ `overflow-x: auto`。
+- チップの見た目は `globals.css` の `.home-region-tab` に揃えた（`aria-current="true"` で塗り）。
+- ナビ帯の高さ 61px を `--ad-secnav-h` / `SectionNav.tsx` の `NAV_OFFSET` /
+  アンカー先の `scroll-margin-top` で共有。実測で見出しはナビ下端の 8px 下に着地する。
+- `globals.css` に `@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth } }`。
+  トップの `#home-explore` にも効く。
+
+### 4-5. 計測
+
+クリックで `select_section`（`lib/analytics.ts` の `trackSelectSection`）を送る。
 どのセクションが実際に使われているかが分かれば、次にどこを削る／伸ばすかの判断材料になる。
-
-### 4-5. 想定工数
-
-`Section`/`Reveal` への `id` 追加、`SectionNav` 新規、CSS 約40行、`page.tsx` のグルーピング。
-**半日程度**。`page.tsx` の差分はセクションを5つの `<div id>` でくくるだけで、
-既存のコンポーネント・データ取得・JSON-LD には触らない。
 
 ---
 
@@ -155,7 +170,7 @@ Google も明示的に許容する形式。
 | 回遊カード群（4〜6セクション） | −840px | −2,200px |
 | 合計 | 約 −1,460px | 約 −2,860px |
 
-SP で 9,025px → 約6,200px。B と組み合わせても実装コストはほぼ増えない。
+SP で 9,025px → 約6,200px。B と組み合わせても実装コストはほぼ増えない。**未実施。**
 
 ---
 
@@ -174,11 +189,16 @@ SP で 9,025px → 約6,200px。B と組み合わせても実装コストはほ�
 
 ---
 
-## 7. 推奨
+## 7. 結論と次の判断材料
 
-**B（セクションナビ）を実装し、必要なら C（ランキングと回遊カードの折りたたみ）を足す。**
+**B（セクションナビ）を採用・実装した。** モックのタブバーの見た目と「長いページを渡り歩ける」価値を
+得つつ、このページが担っている SEO 上の役割（可視な FAQ・61〜77本の内部リンク）を一切損なわない。
 
-モックのタブバーの見た目と「長いページを渡り歩ける」価値を得つつ、
-このページが担っている SEO 上の役割（可視な FAQ・61〜77本の内部リンク）を一切損なわない。
+**次に判断すべきこと**: `select_section` の計測が溜まったら、
+1. どのセクションへの移動が多いか → セクションの並び順やナビ項目の粒度を見直す
+2. GA4 のスクロール到達率が依然として低いか → 低ければ C（ランキング14枚と回遊カードの
+   `details` 折りたたみ、SP で約 −2,860px）を足す
+3. それでも足りない場合に限り A（真のタブ）を検討する。その際は §6 の制約を必ず守る
+
 A は初期表示の高さでは最も効くが、失うものが集客の中核に直結するため、
-本当に必要だと分かってから（例: GA4 でスクロール到達率が著しく低いことが確認できてから）で遅くない。
+本当に必要だと分かってからで遅くない。

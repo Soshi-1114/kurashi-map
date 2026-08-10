@@ -64,6 +64,7 @@ import { SupportBanner } from "@/components/area/SupportBanner";
 import { FurusatoLink } from "@/components/area/FurusatoLink";
 import { supportUrl, furusatoUrlTemplate } from "@/lib/monetization";
 import PageShell from "@/components/PageShell";
+import SectionNav, { type SectionNavItem } from "@/components/area/SectionNav";
 
 type Params = { pref: string; city: string };
 
@@ -218,6 +219,31 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
   // よくある質問（可視テキストと FAQPage 構造化データで同じソースを共有）
   const faq = buildFaq(m, prefName);
 
+  // セクションナビ（ページ内アンカー）。コンテンツは隠さず、飛び先を示すだけ。
+  // 回遊セクション（家賃が近い／似ているエリア／人口規模が近い／行政区／兄弟区／
+  // 主要自治体）はどれもデータ次第で消えるため、最初に描画されるものへ #compare を
+  // 付ける。1つも無ければ「比較」の項目自体を出さない（存在しない飛び先を作らない）。
+  const compareOrder = ["related", "similar", "closePop", "childWards", "siblings", "majorPeers"] as const;
+  const comparePresent: Record<(typeof compareOrder)[number], boolean> = {
+    related: related.length > 0,
+    similar: similar.length > 0,
+    closePop: closePop.length > 0,
+    childWards: childWards.length > 0,
+    siblings: siblings.length > 0 && parent != null,
+    majorPeers: majorPeers.length > 0,
+  };
+  const firstCompareKey = compareOrder.find((k) => comparePresent[k]);
+  const compareAnchor = (k: (typeof compareOrder)[number]) =>
+    k === firstCompareKey ? "compare" : undefined;
+
+  const navItems: SectionNavItem[] = [
+    { id: "overview", label: "概要" },
+    { id: "data", label: "データ" },
+    ...(firstCompareKey ? [{ id: "compare", label: "比較" }] : []),
+    { id: "ranking", label: "ランキング" },
+    { id: "details", label: "詳細情報" },
+  ];
+
   // Dataset 構造化データ（政府統計の実データを地理単位で提示する性質に適合）。
   // variableMeasured は実データのある指標のみ載せる（欠損は推計しない honesty 方針）。
   const variableMeasured = [
@@ -337,7 +363,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
     >
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }} />
       {/* ① Hero */}
-      <header className="ad-hero">
+      <header className="ad-hero" id="overview">
         <div className="ad-hero-main">
           <Link href={`/area/${m.pref}`} className="ad-pref-badge">
             <MapPin size={14} aria-hidden="true" />
@@ -355,6 +381,9 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
 
         <ScorePanel liv={liv} />
       </header>
+      {/* ページ内ナビ（sticky）。長い詳細ページのどこに何があるかを示す。
+          タブではないのでコンテンツは隠さない。 */}
+      <SectionNav items={navItems} municipalityCode={m.code} />
       {/* この自治体の特徴（全国・県平均との偏差や順位から決定論的に抽出。評価語なし） */}
       {highlights.length > 0 && (
         <Section
@@ -437,7 +466,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
         数値は政府統計・国土数値情報の実データです。データのない項目は推計で埋めず「データなし／対象外」と明示しています。
       </p>
       {/* ③ 詳細情報グリッド */}
-      <Section icon={Wallet} tone="ad-tone-rent" title="詳細データ">
+      <Section icon={Wallet} tone="ad-tone-rent" title="詳細データ" id="data">
         <div className="ad-metric-grid">
           {/* 家賃・住宅コスト */}
           <MetricCard
@@ -560,7 +589,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
       </Section>
       {/* 家賃が近い自治体 */}
       {related.length > 0 && (
-        <Section icon={Home} tone="ad-tone-rent" title="家賃水準が近い自治体" sub={`${m.name}と家賃中央値が近い${prefName}の自治体`}>
+        <Section icon={Home} tone="ad-tone-rent" title="家賃水準が近い自治体" sub={`${m.name}と家賃中央値が近い${prefName}の自治体`} id={compareAnchor("related")}>
           <ul className="ad-arealink-grid">
             {related.map((r) => (
               <li key={r.code}>
@@ -577,7 +606,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
       )}
       {/* 似ているエリア */}
       {similar.length > 0 && (
-        <Section icon={Search} tone="ad-tone-pop" title="似ているエリアを探す" sub={`${m.name}と特徴が似ているエリア`}>
+        <Section icon={Search} tone="ad-tone-pop" title="似ているエリアを探す" sub={`${m.name}と特徴が似ているエリア`} id={compareAnchor("similar")}>
           <ul className="ad-similar-grid">
             {similar.map((s) => (
               <li key={s.code}>
@@ -601,6 +630,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
           tone="ad-tone-pop"
           title={`人口規模が近い${prefName}の自治体`}
           sub={`${m.name}（人口${m.population.toLocaleString()}人）と規模が近い自治体`}
+          id={compareAnchor("closePop")}
         >
           <ul className="ad-arealink-grid">
             {closePop.map((p) => (
@@ -618,7 +648,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
       )}
       {/* 政令市の親ページ → 区一覧（下りリンク） */}
       {childWards.length > 0 && (
-        <Section icon={MapIcon} tone="ad-tone-infra" title={`${m.name}の行政区（${childWards.length}区）`} sub="区ごとの家賃・人口・住環境データを見る">
+        <Section icon={MapIcon} tone="ad-tone-infra" title={`${m.name}の行政区（${childWards.length}区）`} sub="区ごとの家賃・人口・住環境データを見る" id={compareAnchor("childWards")}>
           <ul className="ad-arealink-grid">
             {childWards.map((w) => (
               <li key={w.code}>
@@ -634,7 +664,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
       )}
       {/* 兄弟区 */}
       {siblings.length > 0 && parent && (
-        <Section icon={MapIcon} tone="ad-tone-infra" title={`${parent.name}のほかの区`}>
+        <Section icon={MapIcon} tone="ad-tone-infra" title={`${parent.name}のほかの区`} id={compareAnchor("siblings")}>
           <ul className="ad-arealink-grid">
             {siblings.map((s) => (
               <li key={s.code}>
@@ -656,6 +686,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
           title={`${prefName}の主要自治体`}
           sub={`${prefName}で人口の多い自治体`}
           link={{ href: `/area/${m.pref}`, label: `全${prefName}の一覧` }}
+          id={compareAnchor("majorPeers")}
         >
           <ul className="ad-arealink-grid">
             {majorPeers.map((p) => (
@@ -671,7 +702,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
         </Section>
       )}
       {/* ランキング */}
-      <Section icon={Trophy} tone="ad-tone-hazard" title="ランキングで比較">
+      <Section icon={Trophy} tone="ad-tone-hazard" title="ランキングで比較" id="ranking">
         <ul className="ad-rank-grid">
           {RANKINGS.map((r) => {
             const pos = rankPositions.get(r.slug)?.get(m.code);
@@ -689,7 +720,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
         </ul>
       </Section>
       {/* FAQ（Accordion・デフォルト閉じる） */}
-      <Section icon={Info} tone="ad-tone-infra" title={`${m.name}のよくある質問`}>
+      <Section icon={Info} tone="ad-tone-infra" title={`${m.name}のよくある質問`} id="details">
         <div className="ad-faq">
           {faq.map(({ q, a }, i) => (
             <details key={i} className="ad-faq-item">

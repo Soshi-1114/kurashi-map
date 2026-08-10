@@ -20,7 +20,66 @@
   --ad-shadow: var(--shadow-card);             /* カードは原則シャドウなし */
   --ad-shadow-hover: var(--shadow-card-hover);
   --ad-gap: var(--space-6); /* 24px */
+  /* セクションナビ帯の高さ（10 + 40 + 10 + 1px border）。
+     アンカー先の scroll-margin-top と SectionNav.tsx の NAV_OFFSET と揃える。 */
+  --ad-secnav-h: 61px;
   color: var(--text);
+}
+
+/* ============================================================================
+   ページ内ナビ（SectionNav）— ヒーロー直下に貼り付く目次
+   タブではないのでコンテンツは隠さない。見た目はトップの地方タブ
+   （.home-region-tab）と同じチップに揃える。
+   ========================================================================== */
+.ad-secnav {
+  position: sticky;
+  top: 0;
+  /* このページには z-index を使う要素が他に無い。30/31（トップのドロワー）と
+     60/61（モバイルのレイヤーシート）は他UIの予約帯なので、十分下の値にする。 */
+  z-index: 5;
+  display: flex;
+  gap: 7px;
+  margin: var(--space-5) 0 0;
+  padding: 10px 0;
+  background: var(--surface-strong);
+  border-bottom: 1px solid var(--border);
+  /* SP でチップが入り切らない時だけ横に流す（ページ自体は横スクロールさせない） */
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.ad-secnav::-webkit-scrollbar { display: none; }
+.ad-secnav a {
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+  min-height: 40px;
+  padding: 0 15px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--surface-strong);
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  white-space: nowrap;
+  transition: background-color .15s ease, border-color .15s ease, color .15s ease;
+}
+.ad-secnav a:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent-text);
+}
+/* 現在地。色だけでなく塗りの有無で状態が分かる（.home-region-tab と同じ扱い） */
+.ad-secnav a[aria-current="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.ad-secnav a[aria-current="true"]:hover { background: var(--accent-hover); color: #fff; }
+
+/* アンカー先の見出しがナビ帯の下に潜らないようにする */
+.ad-hero[id],
+.ad-section[id] {
+  scroll-margin-top: calc(var(--ad-secnav-h) + var(--space-2));
 }
 
 /* 控えめな fade-up（CSS のみ・必ず可視で終わる。reduced-motion で無効） */
@@ -1066,6 +1125,8 @@
   .ad-root { padding: var(--space-4) var(--space-4) 48px; }
   /* SPの縦長感を抑える: セクション間隔を一段詰める（56→44px） */
   .ad-section { margin-top: 44px; }
+  .ad-secnav { margin-top: var(--space-4); gap: 6px; }
+  .ad-secnav a { padding: 0 12px; font-size: var(--text-xs); }
   .ad-cta { margin-top: 44px; padding: var(--space-6); }
   .ad-hero { grid-template-columns: 1fr; }
   .ad-hero-main { padding: 0; }
