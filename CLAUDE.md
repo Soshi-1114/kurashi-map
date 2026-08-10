@@ -9,7 +9,7 @@ KurashiMap は、市区町村別の住みやすさ関連データ（家賃・地
 ```bash
 npm run dev          # next dev → http://localhost:3000
 npm run build        # next build — 全自治体の詳細ページを静的生成
-npm run lint         # next lint
+npm run lint         # eslint .（flat config: eslint.config.mjs）
 npm run typecheck    # tsc --noEmit
 npm run test         # vitest run（全テストを1回実行）
 npm run test:watch   # vitest ウォッチモード
