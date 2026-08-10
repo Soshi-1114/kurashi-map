@@ -31,14 +31,14 @@ import { muniLastModified } from "@/lib/dataFreshness";
 import { getRankPositions } from "@/lib/rankingStats";
 import { buildFaq } from "@/lib/faq";
 import { SITE, prefNameOf, absoluteUrl } from "@/lib/site";
-import { compactPopulation, compactYen } from "@/lib/format";
 import { getAmbiguousNames } from "@/lib/muniLabel";
+import { buildMuniTitle } from "@/lib/muniMeta";
 import { hasRent, rentBand } from "@/lib/rentColor";
 import { isWaitlistDisclosed } from "@/lib/waitlist";
 import { hasLandPrice } from "@/lib/landPrice";
 import { hasVacancy, vacancyRateText } from "@/lib/vacancy";
 import { isAmenitiesCounted, coverageReason } from "@/lib/coverage";
-import { hasForeignData, foreignRatioPct } from "@/lib/foreignResidents";
+import { hasForeignData, foreignRatioPct, hasForeignRatio } from "@/lib/foreignResidents";
 import { getForeignStats, avgBand, type ForeignComparison } from "@/lib/foreignStats";
 import { getAreaStats } from "@/lib/areaStats";
 import { getPrefRanks } from "@/lib/prefRanks";
@@ -83,54 +83,36 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
   const fullName = m.displayName ?? m.name;
   const pop = m.population.toLocaleString();
 
-  // 在留外国人統計の対象（北方領土6村など対象外を除く）かつ人口が有効かどうか。
+  // 在留外国人割合。対象外（北方領土6村）・人口0 は foreignRatioPct がセンチネルを返す。
   // 「{自治体} 外国人 割合」は大手が手薄な検索意図で本サイトの主力（441表示・平均8.9位）
-  // だが、title を独占させると他の意図を締め出すため配置は下の title 生成を参照
-  // （対象外は数値なしの文言にフォールバックする＝honesty 方針）。
-  const foreignAvailable = hasForeignData(m.foreignResidents.source) && m.population > 0;
-  const [fc, ambiguousNames] = await Promise.all([
-    foreignAvailable ? getForeignStats().then((s) => s.get(m.code) ?? null) : Promise.resolve(null),
-    getAmbiguousNames(),
-  ]);
+  // だが、title を独占させると他の意図を締め出すため、配置は lib/muniMeta.ts を参照。
+  const foreignRatio = foreignRatioPct(m);
+  const hasForeign = hasForeignRatio(foreignRatio);
+  // 全国平均・順位の比較統計。政令市の行政区は 1自治体1エントリの集計から外れるため
+  // 取得できず、description は比率のみの文面になる（比率自体は上で算出済み）。
+  const fc = hasForeign ? (await getForeignStats()).get(m.code) ?? null : null;
 
-  // title は「人口 → 家賃 → 在留外国人割合」の順に実数値を並べる。
-  //
-  // 経緯: 2026-07 の分析では「{自治体} 外国人」対策として在留外国人割合を title の主軸に
-  // 据えたが、2026-08 の GSC 分析でこれが他の検索意図を締め出していると判明した
-  // （人口系152表示・CTR 0%／家賃系はそもそも県ハブに誤着地。いずれも title に語が無い）。
-  // 一方「{自治体} 住みやすさ」は自治体ページでは4クエリ・5表示まで縮小しており
-  // （住みやすさ需要は県単位へ移動）、title の文字数を割く価値が無くなったため本文・
-  // description・H1 側に残して title からは外す。詳細は docs/seo/gsc-seo-roadmap-2026-08.md。
-  //
-  // 県名は同名自治体（池田町=4県 など59ページ）のときだけ添える。全件に付けると
-  // 30文字前後の表示上限で肝心の数値が切れるため。
-  const namePart = ambiguousNames.has(fullName) ? `${fullName}（${prefName}）` : fullName;
-  const titleMetrics = [
-    m.population > 0 ? `人口${compactPopulation(m.population)}` : null,
-    hasRent(m.rent.value) ? `家賃${compactYen(m.rent.value)}` : null,
-  ].filter((s): s is string => s !== null);
-  // 政令市の行政区は全国順位を持たない（getForeignStats は muniLevelOnly 相当で区を除く）が、
-  // 比率自体は人口と在留外国人数から算出できるので、区でも数値付きで出す。
-  const titleForeignRatio = fc ? fc.ratio : foreignAvailable ? foreignRatioPct(m) : null;
-  // 在留外国人統計の対象外（北方領土6村）は人口も0のため titleMetrics が空になる。
-  const title =
-    titleMetrics.length > 0
-      ? `${namePart}の${titleMetrics.join("・")}｜${titleForeignRatio !== null ? `外国人${titleForeignRatio.toFixed(1)}%` : "住環境データ"} - ${SITE.name}`
-      : `${namePart}の住みやすさ・住環境データ - ${SITE.name}`;
+  const title = buildMuniTitle(m, {
+    prefName,
+    ambiguous: (await getAmbiguousNames()).has(fullName),
+  });
 
-  // description には実数値を2〜3個含める。比較統計（全国平均・順位）が取れる場合は
-  // それを優先し、取れない場合は段階的にフォールバックする（数値はビルド時データ由来）。
-  // title に出した人口・家賃を実数（丸めなし）で先頭に置き、title で削った「住みやすさ」も
-  // ここで補う。在留外国人割合は全国平均・全国順位という title に入らない文脈を担う。
+  // description には実数値を2〜3個含める。title に出した人口・家賃を実数（丸めなし）で
+  // 先頭に置き、title で削った「住みやすさ」もここで補う。在留外国人割合には全国平均・
+  // 全国順位という title に入らない文脈を担わせる（数値はビルド時データ由来）。
   const descRent = hasRent(m.rent.value) ? `家賃平均${m.rent.value.toLocaleString()}円/月、` : "";
   let description: string;
-  if (foreignAvailable && fc) {
-    description = `${fullName}（${prefName}）の人口は${pop}人、${descRent}在留外国人割合${fc.ratio.toFixed(2)}%（全国平均${fc.nationalAvg.toFixed(2)}%、全国${fc.nationalRank.toLocaleString()}位）。地価・子育て・災害リスクなどの住環境データと住みやすさスコアを地図とランキングで比較できます。`;
-  } else if (foreignAvailable) {
-    description = `${fullName}（${prefName}）の人口は${pop}人、${descRent}在留外国人割合${foreignRatioPct(m).toFixed(2)}%。地価・子育て・災害リスクなどの住環境データと住みやすさスコアを地図とランキングで比較できます。出典: 出入国在留管理庁「在留外国人統計」。`;
+  if (hasForeign) {
+    // 比較統計が取れる場合はそれを載せ、代わりに出典表記を落とす（文字数の都合。
+    // 出典はページ本文と構造化データが持つ）。
+    const context = fc
+      ? `（全国平均${fc.nationalAvg.toFixed(2)}%、全国${fc.nationalRank.toLocaleString()}位）`
+      : "";
+    const source = fc ? "" : "出典: 出入国在留管理庁「在留外国人統計」。";
+    description = `${fullName}（${prefName}）の人口は${pop}人、${descRent}在留外国人割合${foreignRatio.toFixed(2)}%${context}。地価・子育て・災害リスクなどの住環境データと住みやすさスコアを地図とランキングで比較できます。${source}`;
   } else {
     // このフォールバックは北方領土6村相当（在留外国人統計・人口ともに対象外）のみが
-    // 到達する。他の2分岐（GSC分析に基づき調整済み）と違い実質的な閲覧数が小さいため、
+    // 到達する。上の分岐（GSC分析に基づき調整済み）と違い実質的な閲覧数が小さいため、
     // 「特徴」の先頭1件があれば1文だけ添えて差異化する（0件ならそのまま）。
     const popPhrase = m.population > 0 ? `人口${pop}人、` : "";
     const [areaStats, rankPositions, prefRanks] = await Promise.all([

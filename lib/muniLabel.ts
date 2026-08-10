@@ -16,8 +16,8 @@ export function muniContextLabel(m: MuniSummary): string {
 type NamedMuni = Pick<Municipality, "pref" | "name"> & { displayName?: string };
 
 /**
- * 複数の都道府県に同じ表示名が存在する自治体名の集合（池田町=北海道/福井/岐阜/大阪、
- * 美浜町=福井/愛知/和歌山 など26名称・59ページ）。
+ * 複数の都道府県に同じ表示名が存在する自治体名の集合（池田町=北海道/福井/長野/岐阜、
+ * 美浜町=福井/愛知/和歌山 など25名称・57ページ）。
  *
  * 詳細ページの title は文字数が厳しく全件に県名を添えると本題の数値が切れるため、
  * 「名前だけでは検索結果で区別できないページ」に限って県名を添える判定に使う。
@@ -28,27 +28,29 @@ type NamedMuni = Pick<Municipality, "pref" | "name"> & { displayName?: string };
  * 人口0＝数値なしの title になることで自然に分かれる。
  */
 export function buildAmbiguousNames(all: NamedMuni[]): Set<string> {
-  const prefsByLabel = new Map<string, Set<string>>();
+  // 名前ごとに「最初に見た県」だけ覚え、違う県で再出現したらその時点で曖昧と確定する。
+  const firstPrefByLabel = new Map<string, string>();
+  const ambiguous = new Set<string>();
   for (const m of all) {
     const label = m.displayName ?? m.name;
-    const prefs = prefsByLabel.get(label);
-    if (prefs) prefs.add(m.pref);
-    else prefsByLabel.set(label, new Set([m.pref]));
-  }
-  const ambiguous = new Set<string>();
-  for (const [label, prefs] of prefsByLabel) {
-    if (prefs.size > 1) ambiguous.add(label);
+    const seen = firstPrefByLabel.get(label);
+    if (seen === undefined) firstPrefByLabel.set(label, m.pref);
+    else if (seen !== m.pref) ambiguous.add(label);
   }
   return ambiguous;
 }
 
-let ambiguousCache: Set<string> | null = null;
+// 構築結果ではなく Promise をキャッシュする。ビルドは generateMetadata を複数ページ
+// 並行で走らせるため、値をキャッシュすると最初の一群が揃って未設定の状態を通過し、
+// 同じ構築を人数ぶん重複実行してしまう（lib/metrics.ts の pref ロードと同じ方針）。
+let ambiguousCache: Promise<Set<string>> | null = null;
 
-/** 全 pref 横断の同名自治体セットを返す（初回のみ構築してキャッシュ。rankingStats と同方針）。 */
-export async function getAmbiguousNames(): Promise<Set<string>> {
-  if (!ambiguousCache) {
-    const { listAllAcrossPrefs } = await import("./metrics");
-    ambiguousCache = buildAmbiguousNames(await listAllAcrossPrefs());
-  }
+/** 全 pref 横断の同名自治体セットを返す（初回のみ構築してキャッシュ）。 */
+export function getAmbiguousNames(): Promise<Set<string>> {
+  // metrics は data/*.json を引き込むため、クライアントに配られるこのモジュールからは
+  // 静的 import せず、キャッシュミス時にだけ動的 import する。
+  ambiguousCache ??= import("./metrics").then(({ listAllAcrossPrefs }) =>
+    listAllAcrossPrefs().then(buildAmbiguousNames),
+  );
   return ambiguousCache;
 }

@@ -14,8 +14,13 @@ describe("buildAmbiguousNames", () => {
     expect(ambiguous.has("川口市")).toBe(false);
   });
 
-  it("同一県内に1件しかない名前は曖昧でない", () => {
-    expect(buildAmbiguousNames([{ pref: "tokyo", name: "港区" }]).size).toBe(0);
+  it("同一県内の同名は曖昧としない（県名を添えても区別できないため）", () => {
+    // 北海道の泊村（積丹郡・北方領土）が唯一の実例。
+    const all = [
+      { pref: "hokkaido", name: "泊村" },
+      { pref: "hokkaido", name: "泊村" },
+    ];
+    expect(buildAmbiguousNames(all).size).toBe(0);
   });
 
   it("displayName があればそれを名前として使う（政令市の区は衝突しない）", () => {
@@ -31,7 +36,7 @@ describe("buildAmbiguousNames", () => {
 describe("buildAmbiguousNames（実データ）", () => {
   it("既知の同名自治体を検出し、政令市の区は含めない", async () => {
     const ambiguous = buildAmbiguousNames(await listAllAcrossPrefs());
-    // 池田町は北海道・福井・岐阜・大阪に存在する
+    // 池田町は北海道・福井・長野・岐阜に存在する
     expect(ambiguous.has("池田町")).toBe(true);
     // 府中市は東京・広島に存在する
     expect(ambiguous.has("府中市")).toBe(true);

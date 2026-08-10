@@ -26,16 +26,22 @@ export function barWidthPct(value: number, max: number): number {
 // 「万」に丸めて文字数を節約する。ページ本文・description は実数のまま扱う
 // （丸めるのは表示の都合であって、データを推計・改変するものではない）。
 
+/**
+ * 「万」単位の短縮表記。1万未満は実数のまま、100万以上は小数を落とす
+ * （"109.7万" より "110万" のほうが読みやすい）。単位は呼び出し側が渡す。
+ */
+function compactMan(value: number, unit: string): string {
+  if (value < 10000) return `${value.toLocaleString()}${unit}`;
+  const man = value / 10000;
+  return `${man >= 100 ? Math.round(man) : man.toFixed(1)}万${unit}`;
+}
+
 /** 人口の短縮表記。例: 695043 → "69.5万人"、1096951 → "110万人"、3456 → "3,456人"。 */
 export function compactPopulation(value: number): string {
-  if (value < 10000) return `${value.toLocaleString()}人`;
-  const man = value / 10000;
-  // 100万人以上は小数を落とす（"109.7万人" より "110万人" のほうが読みやすい）。
-  return man >= 100 ? `${Math.round(man).toLocaleString()}万人` : `${man.toFixed(1)}万人`;
+  return compactMan(value, "人");
 }
 
 /** 金額の短縮表記。例: 78000 → "7.8万円"、9500 → "9,500円"。 */
 export function compactYen(value: number): string {
-  if (value < 10000) return `${value.toLocaleString()}円`;
-  return `${(value / 10000).toFixed(1)}万円`;
+  return compactMan(value, "円");
 }
