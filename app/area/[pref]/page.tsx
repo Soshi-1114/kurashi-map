@@ -19,6 +19,16 @@ export function generateStaticParams() {
   return PREFS.map((p) => ({ pref: p.slug }));
 }
 
+/** 県別ランキングページへの「もっと見る」導線（家賃・人口セクション共通）。 */
+function RankMoreLink({ href, label }: { href: string; label: string }) {
+  return (
+    <Link href={href} className="rk-duo-more">
+      {label}
+      <ArrowUpRight size={14} aria-hidden="true" />
+    </Link>
+  );
+}
+
 /** 整数配列の中央値（偶数長は平均を四捨五入）。空なら 0。 */
 function median(nums: number[]): number {
   if (nums.length === 0) return 0;
@@ -230,12 +240,8 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
             </ol>
           )}
           <div className="rk-more-links">
-            <Link href={`/ranking/rent-cheap/${pref.slug}`} className="rk-duo-more">
-              {prefName}の家賃相場ランキング（安い順）を見る<ArrowUpRight size={14} aria-hidden="true" />
-            </Link>
-            <Link href={`/ranking/rent-high/${pref.slug}`} className="rk-duo-more">
-              {prefName}の家賃相場ランキング（高い順）を見る<ArrowUpRight size={14} aria-hidden="true" />
-            </Link>
+            <RankMoreLink href={`/ranking/rent-cheap/${pref.slug}`} label={`${prefName}の家賃相場ランキング（安い順）を見る`} />
+            <RankMoreLink href={`/ranking/rent-high/${pref.slug}`} label={`${prefName}の家賃相場ランキング（高い順）を見る`} />
           </div>
         </section>
       )}
@@ -264,9 +270,7 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
                     </li>
                   ))}
                 </ol>
-                <Link href={`/ranking/population-most/${pref.slug}`} className="rk-duo-more">
-                  {prefName}の人口ランキングを見る<ArrowUpRight size={14} aria-hidden="true" />
-                </Link>
+                <RankMoreLink href={`/ranking/population-most/${pref.slug}`} label={`${prefName}の人口ランキングを見る`} />
               </div>
             )}
             {growthTop.length > 0 && (
@@ -283,9 +287,7 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
                     </li>
                   ))}
                 </ol>
-                <Link href={`/ranking/population-growth/${pref.slug}`} className="rk-duo-more">
-                  {prefName}の人口増減ランキングを見る<ArrowUpRight size={14} aria-hidden="true" />
-                </Link>
+                <RankMoreLink href={`/ranking/population-growth/${pref.slug}`} label={`${prefName}の人口増減ランキングを見る`} />
               </div>
             )}
           </div>
