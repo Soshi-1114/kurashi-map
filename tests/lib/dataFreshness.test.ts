@@ -1,5 +1,11 @@
 import { describe, it, expect } from "vitest";
-import { parseAsOf, muniLastModified, latestLastModified } from "@/lib/dataFreshness";
+import {
+  TEMPLATE_REVISED_AT,
+  parseAsOf,
+  muniLastModified,
+  latestLastModified,
+  withTemplateRevision,
+} from "@/lib/dataFreshness";
 import { muni, metric, hazard } from "../_fixtures";
 
 const iso = (d: Date | null) => (d ? d.toISOString().slice(0, 10) : null);
@@ -56,5 +62,41 @@ describe("latestLastModified", () => {
   });
   it("空配列は null", () => {
     expect(latestLastModified([])).toBeNull();
+  });
+});
+
+describe("withTemplateRevision", () => {
+  const at = (d: string) => new Date(`${d}T00:00:00Z`);
+
+  it("テンプレート改訂日のほうが新しければそちらを返す", () => {
+    // データは2023年の調査でも、2026-08-11 にページの中身を変えたなら更新扱い
+    expect(iso(withTemplateRevision(at("2023-01-01"), "2026-08-11"))).toBe("2026-08-11");
+  });
+
+  it("データのほうが新しければデータ日付を返す", () => {
+    expect(iso(withTemplateRevision(at("2026-09-01"), "2026-08-11"))).toBe("2026-09-01");
+  });
+
+  it("同日ならその日付", () => {
+    expect(iso(withTemplateRevision(at("2026-08-11"), "2026-08-11"))).toBe("2026-08-11");
+  });
+});
+
+describe("TEMPLATE_REVISED_AT", () => {
+  it("全キーが YYYY-MM-DD 形式で解釈できる（sitemap が不正日付を出さないため）", () => {
+    const keys = Object.keys(TEMPLATE_REVISED_AT) as (keyof typeof TEMPLATE_REVISED_AT)[];
+    expect(keys.length).toBeGreaterThan(0);
+    for (const k of keys) {
+      const v = TEMPLATE_REVISED_AT[k];
+      expect(v).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      expect(Number.isNaN(Date.parse(`${v}T00:00:00Z`))).toBe(false);
+    }
+  });
+
+  it("未来日を入れない（lastModified が未来だと検索エンジンに無視される）", () => {
+    const todayUtc = new Date().toISOString().slice(0, 10);
+    for (const v of Object.values(TEMPLATE_REVISED_AT)) {
+      expect(v <= todayUtc).toBe(true);
+    }
   });
 });

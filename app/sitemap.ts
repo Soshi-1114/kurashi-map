@@ -3,13 +3,21 @@ import type { Municipality } from "@/lib/types";
 import { listAllAcrossPrefs } from "@/lib/metrics";
 import { PREFS } from "@/lib/prefs";
 import { RANKINGS, muniLevelOnly } from "@/lib/rankings";
-import { latestLastModified, muniLastModified } from "@/lib/dataFreshness";
+import {
+  TEMPLATE_REVISED_AT,
+  latestLastModified,
+  muniLastModified,
+  withTemplateRevision,
+} from "@/lib/dataFreshness";
 import { absoluteUrl } from "@/lib/site";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const all = await listAllAcrossPrefs();
   // lastModified はデータの実 vintage（asOf）から導く。毎ビルド now を入れると
   // 「常に全更新」のノイズ信号になるため、データ更新時だけ日付が動くようにする。
+  // ただしテンプレート改訂（title 刷新・セクション追加など、データは変わらないが
+  // ページ内容が変わる変更）は asOf に現れないため、該当ページ種別では
+  // TEMPLATE_REVISED_AT との新しい方を採る（lib/dataFreshness.ts 参照）。
   const fallback = new Date();
   const siteLatest = latestLastModified(all) ?? fallback;
 
@@ -78,7 +86,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     ...RANKINGS.map((r) => ({
       url: absoluteUrl(`/ranking/${r.slug}`),
-      lastModified: siteLatest,
+      lastModified: withTemplateRevision(siteLatest, TEMPLATE_REVISED_AT.ranking),
       changeFrequency: "monthly" as const,
       priority: 0.8,
     })),
@@ -87,7 +95,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       const munis = muniLevelOnly(byPref.get(p.slug) ?? []);
       return RANKINGS.filter((r) => munis.some((m) => r.qualifies(m))).map((r) => ({
         url: absoluteUrl(`/ranking/${r.slug}/${p.slug}`),
-        lastModified: prefLatest.get(p.slug) ?? siteLatest,
+        lastModified: withTemplateRevision(
+          prefLatest.get(p.slug) ?? siteLatest,
+          TEMPLATE_REVISED_AT.rankingPref,
+        ),
         changeFrequency: "monthly" as const,
         priority: 0.6,
       }));
@@ -95,13 +106,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // 県別ハブページ（全自治体への内部リンク集約・検索の入口）
     ...PREFS.map((p) => ({
       url: absoluteUrl(`/area/${p.slug}`),
-      lastModified: prefLatest.get(p.slug) ?? siteLatest,
+      lastModified: withTemplateRevision(prefLatest.get(p.slug) ?? siteLatest, TEMPLATE_REVISED_AT.areaPref),
       changeFrequency: "monthly" as const,
       priority: 0.8,
     })),
     ...all.map((m) => ({
       url: absoluteUrl(`/area/${m.pref}/${m.code}`),
-      lastModified: muniLastModified(m) ?? prefLatest.get(m.pref) ?? siteLatest,
+      lastModified: withTemplateRevision(
+        muniLastModified(m) ?? prefLatest.get(m.pref) ?? siteLatest,
+        TEMPLATE_REVISED_AT.areaMuni,
+      ),
       changeFrequency: "monthly" as const,
       priority: 0.7,
     })),
