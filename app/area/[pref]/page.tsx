@@ -2,10 +2,11 @@ import "../../league.css";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Wallet, MapIcon, BarChart3, Database, ArrowLeft, ArrowUpRight, Building2, Users, Trophy } from "lucide-react";
+import { Wallet, MapIcon, BarChart3, Database, ArrowLeft, ArrowUpRight, Building2, Users } from "lucide-react";
 import { listMunicipalities, listAll } from "@/lib/metrics";
 import { RANKINGS, getRankingBySlug, rankBy } from "@/lib/rankings";
 import { getPrefMetricSummaries } from "@/lib/prefAggregates";
+import RankPillLinks from "@/components/RankPillLinks";
 import { PREFS, getPrefBySlug } from "@/lib/prefs";
 import { SITE, absoluteUrl } from "@/lib/site";
 import { hasRent, rentBand } from "@/lib/rentColor";
@@ -123,7 +124,7 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
 
   // 県別ランキングへの導線。データのある指標だけを全件並べる（従来は家賃・人口の4本のみ
   // で、14指標×47県のページが既に存在するのに大半が孤立していた）。
-  const prefRankings = RANKINGS.filter((r) => rankBy(r, muni, 1).length > 0);
+  const prefRankings = RANKINGS.filter((r) => muni.some(r.qualifies));
 
   const ldJson = {
     "@context": "https://schema.org",
@@ -349,27 +350,13 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
         </section>
       )}
 
-      {prefRankings.length > 0 && (
-        <section className="rk-section">
-          <div className="rk-section-head">
-            <span className="rk-section-icon"><Trophy size={20} aria-hidden="true" /></span>
-            <div className="rk-section-heading">
-              <h2 className="rk-h2">{prefName}のランキングで比べる</h2>
-              <p className="rk-section-sub">{prefName}内の市区町村を、指標ごとに並べて比較できます。</p>
-            </div>
-          </div>
-          <ul className="rk-pill-grid">
-            {prefRankings.map((r) => (
-              <li key={r.slug}>
-                <Link href={`/ranking/${r.slug}/${pref.slug}`} className="rk-pill">
-                  {prefName}の{r.title}
-                  <ArrowUpRight size={16} aria-hidden="true" />
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
+      <RankPillLinks
+        title={`${prefName}のランキングで比べる`}
+        sub={`${prefName}内の市区町村を、指標ごとに並べて比較できます。`}
+        rankings={prefRankings}
+        href={(r) => `/ranking/${r.slug}/${pref.slug}`}
+        label={(r) => `${prefName}の${r.title}`}
+      />
 
       <section className="rk-section">
         <div className="rk-section-head">

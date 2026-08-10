@@ -1,6 +1,7 @@
-import { describe, it, expect } from "vitest";
-import { buildPrefMetricSummaries } from "@/lib/prefAggregates";
+import { describe, it, expect, beforeAll } from "vitest";
+import { buildPrefMetricSummaries, type PrefMetricSummary } from "@/lib/prefAggregates";
 import { listAllAcrossPrefs } from "@/lib/metrics";
+import { RANKINGS } from "@/lib/rankings";
 import { muni, metric } from "../_fixtures";
 
 describe("buildPrefMetricSummaries", () => {
@@ -61,16 +62,28 @@ describe("buildPrefMetricSummaries", () => {
 });
 
 describe("buildPrefMetricSummaries（実データ）", () => {
-  it("東京都は家賃・地価・人口密度の中央値が全国1位になる", async () => {
-    const byPref = buildPrefMetricSummaries(await listAllAcrossPrefs());
+  // 全自治体の集計は重いので1度だけ実行して共有する。
+  let byPref: Map<string, PrefMetricSummary[]>;
+  beforeAll(async () => {
+    byPref = buildPrefMetricSummaries(await listAllAcrossPrefs());
+  });
+
+  it("東京都は家賃・地価・人口密度の中央値が全国1位になる", () => {
     const tokyo = byPref.get("tokyo") ?? [];
     for (const slug of ["rent-high", "land-price-high", "population-density"]) {
       expect(tokyo.find((s) => s.slug === slug)?.rank).toBe(1);
     }
   });
 
-  it("全都道府県が指標を持ち、順位は1..総数の範囲に収まる", async () => {
-    const byPref = buildPrefMetricSummaries(await listAllAcrossPrefs());
+  it("概況の指標は RANKINGS の prefSummary フラグから導出する（slug 変更で静かに欠落しない）", () => {
+    const expected = RANKINGS.filter((r) => r.prefSummary);
+    expect(expected.length).toBeGreaterThan(0);
+    expect(byPref.get("tokyo")).toEqual(
+      expected.map((r) => expect.objectContaining({ slug: r.slug, label: r.columnLabel })),
+    );
+  });
+
+  it("全都道府県が指標を持ち、順位は1..総数の範囲に収まる", () => {
     expect(byPref.size).toBe(47);
     for (const summaries of byPref.values()) {
       expect(summaries.length).toBeGreaterThan(0);

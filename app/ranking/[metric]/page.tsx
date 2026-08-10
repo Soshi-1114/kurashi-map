@@ -3,13 +3,14 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import {
-  Trophy, BarChart3, MapPin, Info, Database, ArrowLeft, ArrowUpRight, Map as MapIcon, ShieldCheck,
+  Trophy, BarChart3, MapPin, Info, Database, ArrowLeft, Map as MapIcon, ShieldCheck,
 } from "lucide-react";
 import { listAllAcrossPrefs } from "@/lib/metrics";
 import { RANKINGS, getRankingBySlug, muniLevelOnly, rankBy, type RankingDef } from "@/lib/rankings";
 import { PREFS } from "@/lib/prefs";
 import { SITE, prefNameOf, absoluteUrl } from "@/lib/site";
 import PrefRegionLinks from "@/components/PrefRegionLinks";
+import RankPillLinks from "@/components/RankPillLinks";
 import { RankBadge } from "@/components/RankBadge";
 import PageShell from "@/components/PageShell";
 
@@ -294,25 +295,13 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
         </section>
       )}
 
-      <section className="rk-section">
-        <div className="rk-section-head">
-          <span className="rk-section-icon"><Trophy size={20} aria-hidden="true" /></span>
-          <div className="rk-section-heading">
-            <h2 className="rk-h2">ほかのランキング</h2>
-            <p className="rk-section-sub">同じ実データで、別の指標でも比べてみましょう。</p>
-          </div>
-        </div>
-        <ul className="rk-pill-grid">
-          {others.map((r) => (
-            <li key={r.slug}>
-              <Link href={`/ranking/${r.slug}`} className="rk-pill">
-                {r.title}
-                <ArrowUpRight size={16} aria-hidden="true" />
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </section>
+      <RankPillLinks
+        title="ほかのランキング"
+        sub="同じ実データで、別の指標でも比べてみましょう。"
+        rankings={others}
+        href={(r) => `/ranking/${r.slug}`}
+        label={(r) => r.title}
+      />
 
       {faq.length > 0 && (
         <section className="rk-section">

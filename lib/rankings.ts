@@ -69,6 +69,13 @@ export type RankingDef = {
    * 比較せず、このフラグで分岐する（compareForeignAvg と同じ capability 方式）。
    */
   membershipList?: boolean;
+  /**
+   * 県ハブ（/area/{pref}）の「データ概況」表に出す指標（ラベルは columnLabel を使う）。
+   * 表裏のある指標（家賃が安い/高い 等）は同じ値の並べ替え違いなので "高い順"（order:
+   * "desc"）の側だけに付ける。概況の順位は def.order ではなく sortValue の降順で決めるため、
+   * 向きは常に「高い順」で揃う（membershipList と同じ capability 方式）。
+   */
+  prefSummary?: boolean;
   /** テーブルの値カラム見出し */
   columnLabel: string;
   order: "asc" | "desc";
@@ -265,6 +272,7 @@ export const RANKINGS: RankingDef[] = [
       "全国の市区町村を民営借家の家賃平均が高い順にランキング。最も家賃が高いのは{top1}。家賃相場の高い自治体を政府統計（住宅・土地統計調査）の実データで比較できます。",
     lead: "全国の市区町村を民営借家の家賃平均が高い順に並べたランキングです。",
     note: RENT_NOTE,
+    prefSummary: true,
     columnLabel: "家賃平均",
     order: "desc",
     nextUpdate: NEXT_UPDATE.rent,
@@ -282,6 +290,7 @@ export const RANKINGS: RankingDef[] = [
     lead: "全国の市区町村を、空き家率（空き家数 ÷ 住宅総数）が高い順に並べたランキングです（住宅・土地統計調査 2023年）。",
     intro: vacancyIntro("高い"),
     faq: VACANCY_FAQ,
+    prefSummary: true,
     columnLabel: "空き家率",
     order: "desc",
     freshnessLabel: () => VACANCY_FRESHNESS,
@@ -316,6 +325,7 @@ export const RANKINGS: RankingDef[] = [
     description:
       "全国の市区町村を住宅地の地価が高い順にランキング。最も地価が高いのは{top1}。地価公示・地価調査の実データで自治体を比較できます。",
     lead: "全国の市区町村を住宅地の地価（円/㎡）が高い順に並べたランキングです。",
+    prefSummary: true,
     columnLabel: "地価（住宅地）",
     order: "desc",
     freshnessLabel: freshnessFromAsOf((m) => m.landPrice.asOf),
@@ -385,6 +395,7 @@ export const RANKINGS: RankingDef[] = [
     metaDescription: populationMetaDescription("densityHigh"),
     lead: "全国の市区町村を、人口密度（人口 ÷ 面積、人/km²）が高い順に並べたランキングです。",
     note: "人口は2025年国勢調査（速報）、面積は国土地理院「全国都道府県市区町村別面積調」に基づきます。境界未定部を持つ自治体の面積は国土地理院公表の参考値です。",
+    prefSummary: true,
     columnLabel: "人口密度",
     order: "desc",
     freshnessLabel: () => POPULATION_FRESHNESS,
@@ -426,6 +437,7 @@ export const RANKINGS: RankingDef[] = [
       "全国の市区町村を5年間（2020→2025年国勢調査）の人口増減率が高い順にランキング。最も人口増加率が高いのは{top1}。国勢調査の実データで人口が増えている自治体を比較できます。",
     lead: "全国の市区町村を、5年間（2020→2025年国勢調査）の人口増減率が高い順に並べたランキングです。",
     note: "人口増減率は2020年と2025年の国勢調査人口の比較（%）で、転入・出生などの内訳は含みません。人口規模が小さい自治体や、震災からの帰還が進む自治体（福島県大熊町など）では率が大きく出ることがあります。",
+    prefSummary: true,
     columnLabel: "人口増減率（2020→2025）",
     order: "desc",
     freshnessLabel: () => POPULATION_FRESHNESS,
@@ -473,6 +485,7 @@ export const RANKINGS: RankingDef[] = [
     compareForeignAvg: true,
     freshnessLabel: foreignFreshnessLabel,
     nextUpdate: NEXT_UPDATE.foreign,
+    prefSummary: true,
     columnLabel: "外国人住民比率",
     order: "desc",
     // 在留外国人統計の対象かつ人口が有効（比率を算出できる）自治体のみ。
@@ -513,6 +526,17 @@ export function getRankingBySlug(slug: string): RankingDef | null {
 /** 市区町村のみ（政令市の行政区を除外）。ランキングは market-level の1自治体1エントリ。 */
 export function muniLevelOnly(all: Municipality[]): Municipality[] {
   return all.filter((m) => (m.level ?? "muni") !== "ward");
+}
+
+/** 都道府県スラッグごとに自治体をまとめる（県内順位・県内中央値の集計で共通に使う）。 */
+export function groupByPref(munis: Municipality[]): Map<string, Municipality[]> {
+  const byPref = new Map<string, Municipality[]>();
+  for (const m of munis) {
+    const list = byPref.get(m.pref);
+    if (list) list.push(m);
+    else byPref.set(m.pref, [m]);
+  }
+  return byPref;
 }
 
 /** 整列済みランキングの中央値に当たる自治体を返す（値の整形に def.display を使い回すため、値でなく自治体を返す）。 */
