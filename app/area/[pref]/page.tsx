@@ -51,8 +51,12 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
   const muni = await listMunicipalities(params.pref);
   const { count, rentMedian } = prefStats(muni);
   const medPhrase = rentMedian > 0 ? `家賃の県内中央値${rentMedian.toLocaleString()}円/月、` : "";
-  const title = `${pref.nameJa}の住みやすさ・家賃相場ランキング｜${count}市区町村を比較｜${SITE.name}`;
-  const description = `${pref.nameJa}の全${count}市区町村の${medPhrase}地価・人口・待機児童・災害リスク・外国人比率を一覧で比較。家賃が安い自治体ランキングや子育て環境を、政府統計の実データでチェックできる${SITE.name}の都道府県ページ。`;
+  // title/description には「家賃相場ランキング」等、/ranking/rent-cheap|high/{pref} と
+  // 完全一致する語を含めない。2026-08 GSC分析で「{県} 相場」系クエリがこのハブページに
+  // 30〜40位で着地し、平均5〜9位で走っている該当ランキングページを食っていた
+  // （docs/seo/kurashimap-gsc-analysis-2026-08-10.md §9 参照）。
+  const title = `${pref.nameJa}の住みやすさ・市区町村データ｜${count}市区町村を比較｜${SITE.name}`;
+  const description = `${pref.nameJa}の全${count}市区町村の${medPhrase}地価・人口・待機児童・災害リスク・外国人比率を一覧で比較。家賃・地価が安い自治体や子育て環境を、政府統計の実データでチェックできる${SITE.name}の都道府県ページ。`;
   const url = absoluteUrl(`/area/${pref.slug}`);
   const ogImage = absoluteUrl(`/api/og/pref/${pref.slug}`);
   return {
@@ -189,8 +193,8 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
           <div className="rk-section-head">
             <span className="rk-section-icon rk-tone-rent"><Wallet size={20} aria-hidden="true" /></span>
             <div className="rk-section-heading">
-              <h2 className="rk-h2">家賃が安い市区町村ランキング</h2>
-              <p className="rk-section-sub">{prefName}内で民営借家の家賃平均が低い順 上位{cheapest.length}自治体。</p>
+              <h2 className="rk-h2">家賃で見る</h2>
+              <p className="rk-section-sub">{prefName}内で民営借家の家賃平均が低い順 上位{cheapest.length}自治体。全順位は家賃ランキングページで確認できます。</p>
             </div>
           </div>
 
@@ -225,6 +229,14 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
               ))}
             </ol>
           )}
+          <div className="rk-more-links">
+            <Link href={`/ranking/rent-cheap/${pref.slug}`} className="rk-duo-more">
+              {prefName}の家賃相場ランキング（安い順）を見る<ArrowUpRight size={14} aria-hidden="true" />
+            </Link>
+            <Link href={`/ranking/rent-high/${pref.slug}`} className="rk-duo-more">
+              {prefName}の家賃相場ランキング（高い順）を見る<ArrowUpRight size={14} aria-hidden="true" />
+            </Link>
+          </div>
         </section>
       )}
 

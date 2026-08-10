@@ -533,3 +533,12 @@
   text-decoration: none;
 }
 .rk-duo-more:hover { text-decoration: underline; }
+
+/* rk-duo-more を rk-duo（2列グリッド）の外で複数並べる時の縦積み用ラッパ */
+.rk-more-links {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 10px;
+}
+.rk-more-links .rk-duo-more { margin-top: 0; }
