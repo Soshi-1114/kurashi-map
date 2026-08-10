@@ -111,6 +111,22 @@ npm run gsc:analyze -- --days 28 --compare        # 直前の同じ長さの期�
 npm run gsc:analyze -- --days 28 --compare=yoy    # 前年同期と比較（サイト全体・ページ単位のみ）
 ```
 
+**施策の効果検証**（本番反映日を挟んで前後を比べる）:
+
+```bash
+# 本番反映日の前後28日を比較。「後」がまだ足りない場合は警告付きで切り詰める
+npm run gsc:analyze -- --days 28 --since=2026-08-20
+
+# 任意の基準期間と比較（例: 施策投入前の28日を基準にする）
+npm run gsc:analyze -- --days 28 --baseline=2026-07-11..2026-08-07
+```
+
+`--since` / `--baseline` は過去のレポートディレクトリを読むのではなく **GSC API から当該期間を取り直す**（`reports/gsc/` は Git 管理外で再現性がなく、ディレクトリ名も実行日であってデータ期間ではないため）。GSC は約16か月ぶん保持しているので、過去の任意期間はいつでも再構成できる。
+
+どの施策がどのURL群を変えたかは **`docs/seo/url-sets.json`** に定義する（施策と同じPRでコミットする）。グロブ（`*`=1セグメント、`**`=以降すべて）で指定でき、比較実行時に summary.md の「施策URLセットの効果」節と `url-sets.csv` に前後比較が出る。
+
+比較ありで実行すると、上記に加えて **ページタイプ別の増減**（`page-type-diff.csv`）と **自治体ページの露出率（Exposure Rate）の推移** も出力される。
+
 出力先は `reports/gsc/{実行日}/`（Git 管理外。`.gitignore` 参照）:
 
 ```
@@ -120,6 +136,7 @@ reports/gsc/2026-08-10/
   analysis-prompt.md       # analysis.json を分析させるためのプロンプト雛形
   daily.csv / pages.csv / queries.csv / page-query.csv
   municipalities.csv / prefectures.csv / opportunities.csv / no-impression-pages.csv
+  page-type-diff.csv / url-sets.csv   # 比較あり（--compare / --since / --baseline）のときのみ
   raw/                     # GSC API の生レスポンス（トレーサビリティ用）
 ```
 

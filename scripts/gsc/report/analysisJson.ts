@@ -3,11 +3,24 @@
 
 import { REPORT_TOP_N } from "../config";
 import { round } from "../format";
+import type { MetricsDiff } from "../aggregate";
 import type { Metrics } from "../types";
 import type { ReportBundle } from "./types";
 
 function m(x: Metrics) {
   return { clicks: x.clicks, impressions: x.impressions, ctr: round(x.ctr, 4), position: round(x.position, 2) };
+}
+
+/** 前後比較（current/previous/差分）の共通形。pageTypes と urlSets が共有する。 */
+function md(d: MetricsDiff) {
+  return {
+    current: m(d.current),
+    previous: m(d.previous),
+    clicksDelta: d.clicksDelta,
+    impressionsDelta: d.impressionsDelta,
+    ctrDelta: round(d.ctrDelta, 4),
+    positionDelta: round(d.positionDelta, 2),
+  };
 }
 
 export function buildAnalysisJson(b: ReportBundle): object {
@@ -83,6 +96,36 @@ export function buildAnalysisJson(b: ReportBundle): object {
       positionImprove: b.compare?.positionImprove.slice(0, REPORT_TOP_N.winners).map(diffJson) ?? [],
       positionDecline: b.compare?.positionDecline.slice(0, REPORT_TOP_N.losers).map(diffJson) ?? [],
     },
+    // 施策の効果検証用（--since / --baseline で本番反映日を挟んだときに意味を持つ）。
+    effect: b.compare
+      ? {
+          mode: b.compare.mode,
+          period: b.compare.period,
+          warning: b.compare.warning ?? null,
+          pageTypes: b.compare.pageTypes.map((d) => ({
+            pageType: d.pageType,
+            pageCount: d.pageCount,
+            prevPageCount: d.prevPageCount,
+            ...md(d),
+          })),
+          coverage: {
+            ...b.compare.coverage,
+            exposureRate: round(b.compare.coverage.exposureRate, 4),
+            prevExposureRate: round(b.compare.coverage.prevExposureRate, 4),
+            rateDelta: round(b.compare.coverage.rateDelta, 4),
+          },
+          urlSets: b.compare.urlSets.map((s) => ({
+            name: s.name,
+            pr: s.pr ?? null,
+            note: s.note ?? null,
+            // 比較期間がこのセットの本番反映日を挟んでいるか（false なら施策の効果ではない）
+            straddlesDeploy: s.straddlesDeploy,
+            matchedPages: s.matchedPages,
+            prevMatchedPages: s.prevMatchedPages,
+            ...md(s),
+          })),
+        }
+      : null,
     winners: b.compare?.winners.slice(0, REPORT_TOP_N.winners).map(diffJson) ?? [],
     losers: b.compare?.losers.slice(0, REPORT_TOP_N.losers).map(diffJson) ?? [],
     newVisibilityPages: b.compare?.newVisibility.slice(0, REPORT_TOP_N.newVisibility).map(diffJson) ?? [],

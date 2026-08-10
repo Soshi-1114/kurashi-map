@@ -1,8 +1,19 @@
 // analyze.ts が組み立て、summary.md / analysis.json / analysis-prompt.md の
 // 3つのレポートジェネレータへ渡す集計結果一式。
 
-import type { DailyPoint, MuniAgg, MuniCoverage, PageTypeAgg, PrefAgg, QueryCategoryAgg } from "../aggregate";
+import type {
+  CoverageDiff,
+  DailyPoint,
+  MuniAgg,
+  MuniCoverage,
+  PageTypeAgg,
+  PageTypeDiff,
+  PrefAgg,
+  QueryCategoryAgg,
+  UrlSetAgg,
+} from "../aggregate";
 import type { OpportunityRow, PeriodDiffRow } from "../opportunities";
+import type { ComparedMode } from "../periods";
 import type { Metrics, PeriodRange, QueryCategory, UrlMeta } from "../types";
 
 export interface PageRow extends Metrics {
@@ -23,7 +34,7 @@ export interface PageQueryRow extends Metrics {
 }
 
 export interface CompareBundle {
-  mode: "adjacent" | "yoy";
+  mode: ComparedMode;
   period: PeriodRange;
   site: Metrics;
   pageDiffs: PeriodDiffRow[];
@@ -32,6 +43,14 @@ export interface CompareBundle {
   positionImprove: PeriodDiffRow[];
   positionDecline: PeriodDiffRow[];
   newVisibility: PeriodDiffRow[];
+  /** ページタイプ別の前後比較 */
+  pageTypes: PageTypeDiff[];
+  /** 自治体ページの露出率（Exposure Rate）の推移 */
+  coverage: CoverageDiff;
+  /** 施策対象URLセットごとの前後比較（docs/seo/url-sets.json 由来。未定義なら空） */
+  urlSets: UrlSetAgg[];
+  /** 期間の取り方に関する注意書き（日数が揃わない場合など） */
+  warning?: string;
 }
 
 export interface FixedWindowComparison {

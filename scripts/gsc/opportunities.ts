@@ -2,7 +2,7 @@
 // すべてページ単位（page dimension の集計）で判定する。クエリ単位の詳細は page-query.csv に
 // 別途出力されるので、ここでの目的は summary.md の「打ち手候補」を安定した粒度で出すこと。
 
-import { EMPTY_METRICS } from "./aggregate";
+import { EMPTY_METRICS, diffMetrics } from "./aggregate";
 import { OPPORTUNITY_THRESHOLDS } from "./config";
 import type { Metrics, PageType, UrlMeta } from "./types";
 
@@ -137,6 +137,8 @@ export function comparePages(
     const c = current.get(url) ?? EMPTY_METRICS;
     const p = prev.get(url) ?? EMPTY_METRICS;
     const meta = classifyUrl(url);
+    // 差分の算出（順位差のガードを含む）は diffMetrics に集約する。
+    const { clicksDelta, impressionsDelta, positionDelta } = diffMetrics(c, p);
     rows.push({
       ...c,
       url,
@@ -147,9 +149,9 @@ export function comparePages(
       prevImpressions: p.impressions,
       prevCtr: p.ctr,
       prevPosition: p.position,
-      clicksDelta: c.clicks - p.clicks,
-      impressionsDelta: c.impressions - p.impressions,
-      positionDelta: p.impressions > 0 && c.impressions > 0 ? p.position - c.position : 0,
+      clicksDelta,
+      impressionsDelta,
+      positionDelta,
     });
   }
   return rows;

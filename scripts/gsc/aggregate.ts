@@ -45,6 +45,17 @@ function getOrInsert<K, V>(map: Map<K, V>, key: K, make: () => V): V {
 
 export const EMPTY_METRICS: Metrics = { clicks: 0, impressions: 0, ctr: 0, position: 0 };
 
+/** Metrics 群を合算しつつ、露出のあった（impressions>0）件数も数える。 */
+function sumWithExposed(items: Iterable<Metrics>): { metrics: Metrics; exposed: number } {
+  const acc = newAccum();
+  let exposed = 0;
+  for (const m of items) {
+    addToAccum(acc, m);
+    if (m.impressions > 0) exposed++;
+  }
+  return { metrics: finalizeAccum(acc), exposed };
+}
+
 export function totalMetrics(rows: GscApiRow[]): Metrics {
   const acc = newAccum();
   for (const r of rows) addToAccum(acc, r);
@@ -199,6 +210,23 @@ export interface MuniCoverage {
 }
 
 /**
+ * 自治体マスタを基準に、露出のあった（impressions>0）ページ数だけを数える。
+ * 前期間の Exposure Rate を出すために aggregateMunicipalities を丸ごと動かすと、
+ * 1,918件ぶんの行組み立て・ステータス判定・整列をして1つの整数しか使わないため。
+ */
+export function countExposedMunicipalities(
+  pageMetrics: Map<string, Metrics>,
+  muniMaster: Map<string, MuniMeta>,
+): MuniCoverage {
+  let exposed = 0;
+  for (const meta of muniMaster.values()) {
+    if ((pageMetrics.get(meta.url)?.impressions ?? 0) > 0) exposed++;
+  }
+  const total = muniMaster.size;
+  return { total, exposed, noImpression: total - exposed, exposureRate: total > 0 ? exposed / total : 0 };
+}
+
+/**
  * 自治体マスタ（KurashiMap 側の全 URL）を基準に、GSC 側のページ別指標と突き合わせる。
  * GSC に一度も出てこない自治体（= impressions が無い）も「0行」として必ず1行出力するため、
  * 「表示回数0で GSC データに存在しない」ページを検出できる（仕様 9. の要件）。
@@ -258,14 +286,9 @@ export function aggregatePrefectures(muniRows: MuniAgg[]): PrefAgg[] {
   }
   const out: PrefAgg[] = [];
   for (const [slug, list] of byPref) {
-    const acc = newAccum();
-    let exposed = 0;
-    for (const m of list) {
-      addToAccum(acc, m);
-      if (m.impressions > 0) exposed++;
-    }
+    const { metrics, exposed } = sumWithExposed(list);
     out.push({
-      ...finalizeAccum(acc),
+      ...metrics,
       prefSlug: slug,
       prefNameJa: list[0].prefNameJa,
       municipalityCount: list.length,
@@ -274,4 +297,139 @@ export function aggregatePrefectures(muniRows: MuniAgg[]): PrefAgg[] {
     });
   }
   return out.sort((a, b) => b.clicks - a.clicks);
+}
+
+// ===== 期間比較（施策の効果検証用） =====
+
+/** 前後2期間の同じ指標を並べ、差分を添えた行。 */
+export interface MetricsDiff {
+  current: Metrics;
+  previous: Metrics;
+  clicksDelta: number;
+  impressionsDelta: number;
+  /** previous.position - current.position。正の値=順位改善（数値が小さくなった）。 */
+  positionDelta: number;
+  /** current.ctr - previous.ctr（比率のままの差。表示側で % 化する）。 */
+  ctrDelta: number;
+}
+
+export function diffMetrics(current: Metrics, previous: Metrics): MetricsDiff {
+  return {
+    current,
+    previous,
+    clicksDelta: current.clicks - previous.clicks,
+    impressionsDelta: current.impressions - previous.impressions,
+    // 片方でも露出が無いと順位の差は意味を持たないため0にする（comparePages と同方針）。
+    positionDelta:
+      previous.impressions > 0 && current.impressions > 0 ? previous.position - current.position : 0,
+    ctrDelta: current.ctr - previous.ctr,
+  };
+}
+
+export interface PageTypeDiff extends MetricsDiff {
+  pageType: PageType;
+  pageCount: number;
+  prevPageCount: number;
+}
+
+/** ページタイプ別の前後比較。どちらか一方にしか出てこないタイプも0埋めで並べる。 */
+export function comparePageTypes(current: PageTypeAgg[], previous: PageTypeAgg[]): PageTypeDiff[] {
+  const prevByType = new Map(previous.map((p) => [p.pageType, p]));
+  const types = new Set<PageType>([...current.map((c) => c.pageType), ...previous.map((p) => p.pageType)]);
+  const curByType = new Map(current.map((c) => [c.pageType, c]));
+  const out: PageTypeDiff[] = [];
+  for (const pageType of types) {
+    const c = curByType.get(pageType);
+    const p = prevByType.get(pageType);
+    out.push({
+      pageType,
+      pageCount: c?.pageCount ?? 0,
+      prevPageCount: p?.pageCount ?? 0,
+      ...diffMetrics(c ?? EMPTY_METRICS, p ?? EMPTY_METRICS),
+    });
+  }
+  return out.sort((a, b) => b.current.clicks - a.current.clicks);
+}
+
+/** 露出率（Exposure Rate）の推移。 */
+export interface CoverageDiff {
+  total: number;
+  exposed: number;
+  prevExposed: number;
+  exposureRate: number;
+  prevExposureRate: number;
+  /** exposureRate - prevExposureRate（比率のままの差） */
+  rateDelta: number;
+}
+
+export function diffCoverage(current: MuniCoverage, previous: MuniCoverage): CoverageDiff {
+  return {
+    total: current.total,
+    exposed: current.exposed,
+    prevExposed: previous.exposed,
+    exposureRate: current.exposureRate,
+    prevExposureRate: previous.exposureRate,
+    rateDelta: current.exposureRate - previous.exposureRate,
+  };
+}
+
+/** 施策対象URLセットの集計結果。 */
+export interface UrlSetAgg extends MetricsDiff {
+  name: string;
+  pr?: number;
+  note?: string;
+  /** セットに一致し、かつ当期に露出のあったURL数 */
+  matchedPages: number;
+  prevMatchedPages: number;
+  /**
+   * 比較した2期間が、このセットの本番反映日（since）を実際に挟んでいるか。
+   * false なら「施策前 vs 施策後」になっておらず、この行の増減は施策の効果ではない。
+   * セットが since を持たない場合は判定不能で null。
+   */
+  straddlesDeploy: boolean | null;
+}
+
+export interface UrlSetInput {
+  name: string;
+  pr?: number;
+  note?: string;
+  /** 本番反映日 YYYY-MM-DD（任意） */
+  since?: string;
+  matches: (path: string) => boolean;
+}
+
+/**
+ * URL セットごとに、一致するページの指標を合算して前後比較する。
+ * 「PR #129 で触ったページ群は全体としてどう動いたか」を1行で見るためのもの。
+ */
+export function aggregateUrlSets(
+  sets: UrlSetInput[],
+  current: Map<string, Metrics>,
+  previous: Map<string, Metrics>,
+  /** 比較した2期間。セットの since を挟めているかの判定に使う（省略時は判定しない）。 */
+  window?: { currentStart: string; previousEnd: string },
+): UrlSetAgg[] {
+  return sets.map((set) => {
+    const matched = (m: Map<string, Metrics>) =>
+      sumWithExposed(
+        (function* () {
+          for (const [path, metrics] of m) if (set.matches(path)) yield metrics;
+        })(),
+      );
+    const c = matched(current);
+    const p = matched(previous);
+    return {
+      name: set.name,
+      pr: set.pr,
+      note: set.note,
+      matchedPages: c.exposed,
+      prevMatchedPages: p.exposed,
+      // 「前期間が反映日より前に終わり、当期間が反映日以降に始まる」ときだけ施策の前後になる。
+      straddlesDeploy:
+        set.since && window
+          ? window.previousEnd < set.since && set.since <= window.currentStart
+          : null,
+      ...diffMetrics(c.metrics, p.metrics),
+    };
+  });
 }

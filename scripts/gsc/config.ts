@@ -69,3 +69,8 @@ export const REPORT_TOP_N = {
 };
 
 export const REPORT_OUT_DIR = "reports/gsc";
+
+// 施策対象URLセットの定義ファイル（リポジトリルートからの相対パス）。
+// reports/ は .gitignore 済みで新規クローンに存在しないため、施策と同じPRでコミットできる
+// docs/seo/ に置く。書式は scripts/gsc/urlSets.ts の UrlSet 型を参照。
+export const URL_SETS_PATH = "docs/seo/url-sets.json";

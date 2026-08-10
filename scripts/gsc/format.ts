@@ -19,3 +19,13 @@ export function deltaPctText(current: number, prev: number): string {
   if (prev === 0) return current > 0 ? "新規" : "-";
   return `${round(((current - prev) / prev) * 100, 1)}%`;
 }
+
+/**
+ * 増減の符号付き表示。0 は "±0" にして「変化なし」と「未計測」を見分けられるようにする。
+ * 例: signedText(12) → "+12" / signedText(-0.3, 1) → "-0.3" / signedText(1.2, 2, "pt") → "+1.2pt"
+ */
+export function signedText(n: number, decimals = 0, unit = ""): string {
+  const v = round(n, decimals);
+  const sign = v > 0 ? "+" : v < 0 ? "" : "±";
+  return `${sign}${v}${unit}`;
+}
