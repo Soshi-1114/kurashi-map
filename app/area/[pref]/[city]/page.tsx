@@ -31,12 +31,14 @@ import { muniLastModified } from "@/lib/dataFreshness";
 import { getRankPositions } from "@/lib/rankingStats";
 import { buildFaq } from "@/lib/faq";
 import { SITE, prefNameOf, absoluteUrl } from "@/lib/site";
+import { getAmbiguousNames } from "@/lib/muniLabel";
+import { buildMuniTitle } from "@/lib/muniMeta";
 import { hasRent, rentBand } from "@/lib/rentColor";
 import { isWaitlistDisclosed } from "@/lib/waitlist";
 import { hasLandPrice } from "@/lib/landPrice";
 import { hasVacancy, vacancyRateText } from "@/lib/vacancy";
 import { isAmenitiesCounted, coverageReason } from "@/lib/coverage";
-import { hasForeignData, foreignRatioPct } from "@/lib/foreignResidents";
+import { hasForeignData, foreignRatioPct, hasForeignRatio } from "@/lib/foreignResidents";
 import { getForeignStats, avgBand, type ForeignComparison } from "@/lib/foreignStats";
 import { getAreaStats } from "@/lib/areaStats";
 import { getPrefRanks } from "@/lib/prefRanks";
@@ -81,34 +83,37 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
   const fullName = m.displayName ?? m.name;
   const pop = m.population.toLocaleString();
 
-  // SEO 主軸: 大手が手薄な「{自治体} 外国人 割合」「{自治体} 在留外国人」を狙う。
-  // 在留外国人統計の対象（北方領土6村など対象外を除く）かつ人口が有効な自治体は
-  // 比率を主軸に据え、対象外は人口・住環境にフォールバックする（honesty 方針）。
-  const foreignAvailable = hasForeignData(m.foreignResidents.source) && m.population > 0;
-  const fc = foreignAvailable ? (await getForeignStats()).get(m.code) ?? null : null;
+  // 在留外国人割合。対象外（北方領土6村）・人口0 は foreignRatioPct がセンチネルを返す。
+  // 「{自治体} 外国人 割合」は大手が手薄な検索意図で本サイトの主力（441表示・平均8.9位）
+  // だが、title を独占させると他の意図を締め出すため、配置は lib/muniMeta.ts を参照。
+  const foreignRatio = foreignRatioPct(m);
+  const hasForeign = hasForeignRatio(foreignRatio);
+  // 全国平均・順位の比較統計。政令市の行政区は 1自治体1エントリの集計から外れるため
+  // 取得できず、description は比率のみの文面になる（比率自体は上で算出済み）。
+  const fc = hasForeign ? (await getForeignStats()).get(m.code) ?? null : null;
 
-  // title に実数値（比率・全国順位）を含める: GSC 分析（2026-07）で「{自治体} 外国人」が
-  // 多数表示・低CTR（例: 足立区 80表示/0クリック）だったため、スニペットで数値が即答する形にする。
-  // 「住みやすさ」を先頭に置くのはキーワード調査（2026-07）で「{自治体} 住みやすさ」が
-  // 約300表示/title不一致だったための対応（ページには住みやすさスコア・総評を表示済み）。
-  const title = foreignAvailable
-    ? fc
-      ? `${fullName}の住みやすさ・在留外国人割合${fc.ratio.toFixed(2)}%（全国${fc.nationalRank.toLocaleString()}位） - ${SITE.name}`
-      : `${fullName}の住みやすさ・在留外国人割合｜人口・住環境データ - ${SITE.name}`
-    : `${fullName}の住みやすさ・人口・住環境データ｜地図で見る - ${SITE.name}`;
+  const title = buildMuniTitle(m, {
+    prefName,
+    ambiguous: (await getAmbiguousNames()).has(fullName),
+  });
 
-  // description には実数値を2〜3個含める。比較統計（全国平均・順位）が取れる場合は
-  // それを優先し、取れない場合は段階的にフォールバックする（数値はビルド時データ由来）。
+  // description には実数値を2〜3個含める。title に出した人口・家賃を実数（丸めなし）で
+  // 先頭に置き、title で削った「住みやすさ」もここで補う。在留外国人割合には全国平均・
+  // 全国順位という title に入らない文脈を担わせる（数値はビルド時データ由来）。
+  const descRent = hasRent(m.rent.value) ? `家賃平均${m.rent.value.toLocaleString()}円/月、` : "";
   let description: string;
-  if (foreignAvailable && fc) {
-    description = `${fullName}（${prefName}）の在留外国人割合は${fc.ratio.toFixed(2)}%（全国平均${fc.nationalAvg.toFixed(2)}%、全国${fc.nationalRank.toLocaleString()}位）。人口${pop}人などの住環境データと住みやすさスコアを地図とランキングで確認できます。出典: 出入国在留管理庁「在留外国人統計」。`;
-  } else if (foreignAvailable) {
-    description = `${fullName}（${prefName}）の在留外国人割合は${foreignRatioPct(m).toFixed(2)}%、人口${pop}人。家賃・地価・災害リスクなどの住環境データと住みやすさスコアを地図とランキングで確認できます。出典: 出入国在留管理庁「在留外国人統計」。`;
+  if (hasForeign) {
+    // 比較統計が取れる場合はそれを載せ、代わりに出典表記を落とす（文字数の都合。
+    // 出典はページ本文と構造化データが持つ）。
+    const context = fc
+      ? `（全国平均${fc.nationalAvg.toFixed(2)}%、全国${fc.nationalRank.toLocaleString()}位）`
+      : "";
+    const source = fc ? "" : "出典: 出入国在留管理庁「在留外国人統計」。";
+    description = `${fullName}（${prefName}）の人口は${pop}人、${descRent}在留外国人割合${foreignRatio.toFixed(2)}%${context}。地価・子育て・災害リスクなどの住環境データと住みやすさスコアを地図とランキングで比較できます。${source}`;
   } else {
     // このフォールバックは北方領土6村相当（在留外国人統計・人口ともに対象外）のみが
-    // 到達する。他の2分岐（GSC分析に基づき調整済み）と違い実質的な閲覧数が小さいため、
+    // 到達する。上の分岐（GSC分析に基づき調整済み）と違い実質的な閲覧数が小さいため、
     // 「特徴」の先頭1件があれば1文だけ添えて差異化する（0件ならそのまま）。
-    const rentPhrase = hasRent(m.rent.value) ? `家賃平均${m.rent.value.toLocaleString()}円/月、` : "";
     const popPhrase = m.population > 0 ? `人口${pop}人、` : "";
     const [areaStats, rankPositions, prefRanks] = await Promise.all([
       getAreaStats(),
@@ -123,7 +128,7 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
     const topics = ["地価", "待機児童", "災害リスク"]
       .filter((t) => !(t === "地価" && topHighlightKey === "landPrice") && !(t === "待機児童" && topHighlightKey === "waitlistZero"))
       .join("・");
-    description = `${fullName}（${prefName}）の住みやすさ・住環境データ。${popPhrase}${rentPhrase}${highlightPhrase}${topics}などをまとめて地図とランキングで比較できる${SITE.name}の自治体ページ。`;
+    description = `${fullName}（${prefName}）の住みやすさ・住環境データ。${popPhrase}${descRent}${highlightPhrase}${topics}などをまとめて地図とランキングで比較できる${SITE.name}の自治体ページ。`;
   }
   const url = absoluteUrl(`/area/${m.pref}/${m.code}`);
   const ogImage = absoluteUrl(`/api/og/${m.code}`);
