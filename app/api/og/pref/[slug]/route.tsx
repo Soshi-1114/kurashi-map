@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 import { listMunicipalities } from "@/lib/metrics";
 import { getPrefBySlug } from "@/lib/prefs";
-import { OgFrame, OgHeading, Pill, OG_SIZE } from "@/lib/og";
+import { OgFrame, OgHeading, Pill, OG_RESPONSE } from "@/lib/og";
 
 // listMunicipalities が全県の data/*.json をバンドルするため edge だとサイズ上限超過。
 // og/[code] と同じく Node ランタイムにして Edge Function サイズ制限から外す。
@@ -29,6 +29,6 @@ export async function GET(_req: Request, props: { params: Promise<{ slug: string
         </div>
       </OgFrame>
     ),
-    OG_SIZE,
+    OG_RESPONSE,
   );
 }

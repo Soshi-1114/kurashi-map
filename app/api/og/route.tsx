@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { OgFrame, OgHeading, Pill, OG_SIZE } from "@/lib/og";
+import { OgFrame, OgHeading, Pill, OG_RESPONSE } from "@/lib/og";
 
 // 他の OG ルートと揃えて Node ランタイムに統一（next/og 本体が Edge サイズ上限に近く、
 // 上限ぎりぎりで将来 flaky になるのを避ける）。
@@ -22,6 +22,6 @@ export function GET() {
         </div>
       </OgFrame>
     ),
-    OG_SIZE,
+    OG_RESPONSE,
   );
 }

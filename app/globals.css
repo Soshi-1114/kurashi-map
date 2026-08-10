@@ -147,19 +147,6 @@ html, body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-/* 全画面地図用のシェル — iOS Safari の 100vh は URLバー込みの layout viewport を
-   返すため、bottom:0 のシートが画面外にはみ出る。100dvh で visible viewport に
-   合わせ、URLバー出現/退避にも追従させる。 */
-.app-shell {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  height: 100dvh;
-  overflow: hidden;
-}
-
 /* ============================================================================
    共通プリミティブ（Design System）
    ============================================================================
@@ -251,7 +238,6 @@ html, body {
 
 /* ---- セクション見出し（アイコンチップ＋H2＋sub＋右リンク）---- */
 .section-head,
-.detail-shead,
 .rk-section-head,
 .ad-section-head {
   display: flex;
@@ -260,7 +246,6 @@ html, body {
   margin: 0 0 var(--space-4);
 }
 .section-head-icon,
-.detail-shead-icon,
 .rk-section-icon,
 .ad-section-icon {
   display: grid;
@@ -274,7 +259,6 @@ html, body {
   flex-shrink: 0;
 }
 .section-head-link,
-.detail-shead-link,
 .ad-section-link {
   margin-left: auto;
   display: inline-flex;
@@ -290,7 +274,6 @@ html, body {
    シャドウは地図コントロール／サジェスト／ドロワー／ボトムシートなど
    「浮いているUI」だけに使う。 */
 .card,
-.detail-card,
 .metric-card,
 .mini-card,
 .related-card,
@@ -396,12 +379,8 @@ html, body {
 .chip,
 .trend-chip,
 .ad-chip,
-.hero-stat-badge,
-.mini-card-flag,
 .rk-meta-pill,
-.detail-pref-badge,
-.ad-pref-badge,
-.rk-pref-badge {
+.ad-pref-badge {
   display: inline-flex;
   align-items: center;
   gap: 4px;
@@ -416,18 +395,13 @@ html, body {
 }
 /* Selected（ブランド） */
 .chip--selected,
-.detail-pref-badge,
-.ad-pref-badge,
-.rk-pref-badge {
+.ad-pref-badge {
   background: var(--accent-soft);
   color: var(--accent-text);
 }
 /* Status */
 .chip--good, .ad-chip.is-good { background: var(--color-success-bg); color: var(--color-success); }
 .chip--warn, .ad-chip.is-warn { background: var(--color-warning-bg); color: var(--color-warning); }
-.chip--danger { background: var(--color-danger-bg); color: var(--color-danger); }
-/* Semantic（データカテゴリ）— --tone-* を渡された時だけ効く */
-.chip--tone { background: var(--tone-bg); color: var(--tone-fg); }
 
 /* ---- error / not-found ---- */
 .status-page {
@@ -1177,41 +1151,6 @@ button { font-family: inherit; }
   text-transform: uppercase;
   margin-bottom: 12px;
 }
-.layer-toggle {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 5px 0;
-  cursor: pointer;
-  user-select: none;
-}
-.layer-toggle.is-disabled { cursor: default; opacity: 0.7; }
-.layer-toggle input { position: absolute; opacity: 0; pointer-events: none; }
-.layer-switch {
-  width: 34px;
-  height: 20px;
-  background: var(--control-track);
-  border-radius: var(--radius-pill);
-  position: relative;
-  flex-shrink: 0;
-  transition: background .2s ease;
-}
-.layer-switch::after {
-  content: "";
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 16px;
-  height: 16px;
-  background: var(--surface-strong);
-  border-radius: 50%;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-  transition: left .2s ease;
-}
-.layer-toggle input:checked + .layer-switch { background: var(--accent); }
-.layer-toggle input:checked + .layer-switch::after { left: 16px; }
-.layer-label { font-size: var(--text-base); color: var(--text); font-weight: 500; }
-
 /* 指標切替ラジオ（家賃 / 地価 / 人口トレンド） */
 .metric-radios {
   display: flex;
@@ -1250,8 +1189,7 @@ button { font-family: inherit; }
 .metric-radio.is-active .metric-radio-label { font-weight: 700; color: var(--text); }
 /* キーボードフォーカスの可視化（WCAG 2.4.7）。native input を opacity:0 で隠して
    いるため、focus-visible 時に親ラベルへリングを出して操作位置を明示する。 */
-.metric-radio:has(input:focus-visible),
-.layer-toggle:has(input:focus-visible) {
+.metric-radio:has(input:focus-visible) {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
@@ -1837,8 +1775,6 @@ button { font-family: inherit; }
 }
 
 
-.detail-pref-badge { font-size: var(--text-xs); padding: 4px 12px; margin-bottom: 12px; }
-.detail-pref-badge:hover { background: var(--color-primary-bg); text-decoration: none; }
 
 .detail-title-sub {
   font-size: var(--text-xl);
@@ -1853,74 +1789,7 @@ button { font-family: inherit; }
   line-height: var(--leading-relaxed);
   margin: 12px 0 0;
 }
-.hero-stats {
-  list-style: none;
-  margin: 20px 0 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-}
-.hero-stat {
-  display: flex;
-  flex-direction: column;
-  padding: 13px 14px;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-}
-.hero-stat.is-highlight {
-  background: var(--cat-housing-bg);
-  border-color: var(--cat-housing-fg);
-}
-.hero-stat.is-nodata-card {
-  background: var(--bg);
-  border-style: dashed;
-  border-color: var(--border-strong);
-}
-.hero-stat-head {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: var(--text-xs);
-  font-weight: 700;
-  color: var(--text-muted);
-  letter-spacing: 0.02em;
-}
-.hero-stat.is-highlight .hero-stat-head { color: var(--cat-housing-fg); }
-.hero-stat-value {
-  font-size: var(--text-2xl);
-  font-weight: 800;
-  margin-top: 5px;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
-  font-variant-numeric: tabular-nums;
-}
-.hero-stat.is-highlight .hero-stat-value { color: var(--cat-housing-fg); }
-.hero-stat-value .unit { font-size: var(--text-xs); font-weight: 600; }
-.hero-stat-value.is-nodata { font-size: var(--text-md); font-weight: 700; color: var(--text-faint); }
-.hero-stat-badge { align-self: flex-start; margin-top: 7px; padding: 2px 8px; }
-.badge-rent  { color: var(--cat-housing-fg); background: var(--cat-housing-bg); }
-.badge-good  { color: var(--color-success); background: var(--color-success-bg); }
-/* 人口トレンドは地図の PRGn（紫=減少／緑=増加）に統一。赤=悪い の含みを排除し、
-   サイト全体で encoding を一致させる。 */
-.badge-up    { color: #176b34; background: #d9f0d3; } /* PRGn 緑=増加（データの色） */
-.badge-down  { color: #6b2480; background: #ecd9f1; } /* PRGn 紫=減少（データの色） */
-.badge-muted { color: var(--text-muted); background: var(--border); }
 
-.detail-honesty-note {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 16px 0 0;
-  padding: 10px 12px;
-  background: var(--bg);
-  border-radius: var(--radius-md);
-  font-size: var(--text-xs);
-  color: var(--text-muted);
-  line-height: 1.6;
-}
-.detail-honesty-note svg { flex-shrink: 0; color: var(--text-faint); }
 
 /* セクション間に細いディバイダを入れて区切りを明確化（先頭セクションは線なし）。 */
 .detail-section { margin-top: var(--space-10); padding-top: var(--space-6); border-top: 1px solid var(--border); }
@@ -1949,13 +1818,6 @@ button { font-family: inherit; }
   line-height: var(--leading-relaxed);
 }
 
-.detail-sublead {
-  font-size: var(--text-sm);
-  color: var(--text-muted);
-  line-height: var(--leading-normal);
-  margin: -4px 0 12px;
-}
-.detail-card { padding: var(--space-4) var(--space-5); }
 .detail-p {
   font-size: var(--text-md);
   line-height: var(--leading-relaxed);
@@ -1964,16 +1826,6 @@ button { font-family: inherit; }
 }
 .detail-p strong { color: var(--accent-text); font-weight: 700; font-variant-numeric: tabular-nums; }
 .detail-p-muted { font-size: var(--text-sm); color: var(--text-muted); }
-.detail-source-line {
-  font-size: var(--text-xs);
-  color: var(--text-faint);
-  margin: 12px 0 0;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-.detail-source-line .metric-est { margin-left: 0; }
 .detail-note {
   display: flex;
   gap: 8px;
@@ -1985,36 +1837,6 @@ button { font-family: inherit; }
 }
 .detail-note svg { flex-shrink: 0; margin-top: 2px; color: var(--warn); }
 
-/* 家賃: 県内ポジションバー */
-.rent-bar { margin-top: 14px; }
-.rent-bar-scale {
-  display: flex;
-  justify-content: space-between;
-  font-size: var(--text-2xs);
-  color: var(--text-faint);
-  margin-bottom: 5px;
-}
-.rent-bar-track {
-  position: relative;
-  height: 8px;
-  border-radius: var(--radius-pill);
-  /* 中立化: 緑→赤（安い=良い/高い=悪い の含み）をやめ、地図の家賃コロプレスと
-     同じブルー系 sequential（淡=低い→濃=高い）に揃える。 */
-  /* 家賃コロプレスの色帯。値は lib/rentColor.ts の RENT_COLORS と同じ「固定の契約」で、
-     ブランドカラーとは別系統（データの色）。TS 定数との二重管理なので、
-     RENT_COLORS を変える時はここも合わせること。 */
-  background: linear-gradient(90deg, #dbeafe, #93c5fd, #60a5fa, #2563eb, #1e3a8a);
-}
-.rent-bar-marker {
-  position: absolute;
-  top: -3px;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: var(--surface-strong);
-  border: 2.5px solid var(--cat-housing-fg);
-  transform: translateX(-50%);
-}
 
 /* 子育て・インフラ: ミニカード */
 .mini-cards { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
@@ -2037,69 +1859,11 @@ button { font-family: inherit; }
 }
 .mini-card-value .unit { font-size: var(--text-xs); font-weight: 600; }
 .mini-card-value.is-nodata { font-size: var(--text-md); font-weight: 700; color: var(--text-faint); }
-.mini-card-flag {
-  margin-left: 8px;
-  font-size: var(--text-2xs);
-  font-weight: 700;
-  padding: 2px 8px;
-  border-radius: var(--radius-pill);
-  color: var(--color-success);
-  background: var(--color-success-bg);
-  vertical-align: middle;
-}
-/* 人口トレンドの配色は .badge-up / .badge-down と同一（地図の PRGn に揃える）。
-   同じ値を3度書いていたのをやめ、下の共通定義にまとめた。 */
 .mini-card-sub { font-size: var(--text-xs); color: var(--text-faint); margin: 8px 0 0; }
 .mini-card.center { text-align: center; }
 
-/* 国籍内訳（上位5件）。内訳データを収録した時に点灯する一覧表示。 */
-.nationality-list { list-style: none; margin: 6px 0 0; padding: 0; }
-.nationality-item {
-  display: flex;
-  justify-content: space-between;
-  gap: 8px;
-  font-size: var(--text-sm);
-  padding: 3px 0;
-  border-bottom: 1px solid var(--border);
-}
-.nationality-item:last-child { border-bottom: 0; }
-.nationality-name { color: var(--text); }
-.nationality-count { color: var(--text-muted); font-variant-numeric: tabular-nums; }
-.infra-card { background: var(--bg); border: none; }
-.infra-card svg { color: var(--tone-fg, var(--accent-text)); }
-.infra-card .mini-card-value { margin-top: 5px; }
 
-/* 災害リスク */
-.hazard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.hazard-cell {
-  display: flex;
-  align-items: center;
-  gap: 11px;
-  padding: 14px 16px;
-  border-radius: var(--radius-md);
-  background: var(--bg);
-}
-.hazard-cell.is-risk { background: var(--cat-hazard-bg); }
-.hazard-cell svg { flex-shrink: 0; color: var(--text-faint); }
-.hazard-cell.is-risk svg { color: var(--cat-hazard-fg); }
-.hazard-cell-label { font-size: var(--text-xs); color: var(--text-muted); }
-.hazard-cell.is-risk .hazard-cell-label { color: var(--cat-hazard-fg); }
-.hazard-cell-value { font-size: var(--text-lg); font-weight: 800; margin-top: 1px; }
-.hazard-cell.is-risk .hazard-cell-value { color: var(--cat-hazard-fg); }
 
-/* データなし/対象外カード */
-.nodata-card {
-  display: flex;
-  gap: 11px;
-  align-items: flex-start;
-  background: var(--bg);
-  border-radius: var(--radius-md);
-  padding: 14px 16px;
-}
-.nodata-card svg { flex-shrink: 0; color: var(--text-faint); margin-top: 1px; }
-.nodata-card-text { font-size: var(--text-base); line-height: var(--leading-normal); color: var(--text); margin: 0; }
-.nodata-card-text strong { font-weight: 800; }
-.nodata-card-reason { display: block; font-size: var(--text-xs); color: var(--text-faint); margin-top: 2px; }
 
 .related-grid {
   list-style: none;
@@ -2147,11 +1911,9 @@ button { font-family: inherit; }
 .detail-back:hover { color: var(--accent-hover); }
 
 @media (max-width: 640px) {
-  .detail-root { padding: 20px 16px 64px; }
-  .detail-hero { padding: 20px 18px 18px; }
-  .detail-title { font-size: var(--text-3xl); }
-  .detail-title-sub { font-size: 16px; }
-  .hero-stats { grid-template-columns: repeat(2, 1fr); }
+  /* シェルの余白は .page-root、H1 は共通の .h1（clamp）が持つ。
+     ここで上書きすると他ページとリズムがずれるので、固有の微調整だけ残す。 */
+  .detail-title-sub { font-size: var(--text-md); }
 }
 
 /* 県ページ: 家賃ランキング */
@@ -2169,9 +1931,7 @@ button { font-family: inherit; }
 .pref-rank-item:hover { border-color: var(--accent); background: var(--accent-soft); text-decoration: none; }
 .pref-rank-no { font-size: var(--text-sm); font-weight: 800; color: var(--accent); text-align: center; font-variant-numeric: tabular-nums; }
 .pref-rank-name { font-size: var(--text-md); font-weight: 700; color: var(--text); display: inline-flex; flex-direction: column; gap: 1px; min-width: 0; }
-.pref-rank-pref { font-size: var(--text-2xs); font-weight: 600; color: var(--text-faint); }
 .pref-rank-value { font-size: var(--text-sm); font-weight: 700; color: var(--text-muted); display: inline-flex; align-items: center; gap: 8px; font-variant-numeric: tabular-nums; }
-.pref-rank-band { font-size: var(--text-2xs); font-weight: 700; color: var(--accent); background: var(--accent-soft); padding: 2px 7px; border-radius: var(--radius-pill); }
 
 /* 県ページ: 全自治体テーブル */
 .pref-table-wrap { margin-top: 12px; overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius-md); }

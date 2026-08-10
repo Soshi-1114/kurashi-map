@@ -1,5 +1,13 @@
 // 家賃→色の5段階コロプレス。しきい値は固定（型と同じく契約面）。
 // 配色は視認性とブランド性で随時更新可。
+//
+// ここの色は「データの色」であって、サイトのブランドカラー（globals.css の
+// --color-primary 系）とは別系統。ブランドを変えてもここは動かさない。
+//
+// この配列を CSS へ複製しないこと。以前 globals.css に同じ5色の
+// linear-gradient がベタ書きされていて二重管理になっていた。凡例など色帯を
+// 描く必要がある場合は、MetricLegend.tsx と同じく本定数からインライン style で
+// 流し込む。CSS への複製は tests/lib/designTokens.test.ts が検出して失敗させる。
 export const RENT_THRESHOLDS = [50000, 55000, 60000, 65000] as const;
 
 // Tailwind blue 系の5段階。淡→濃でしっかり差が出る視認性重視。

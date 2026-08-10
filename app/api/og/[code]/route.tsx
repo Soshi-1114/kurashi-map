@@ -3,13 +3,12 @@ import { getMunicipality } from "@/lib/metrics";
 import { prefNameOf } from "@/lib/site";
 import { hasRent } from "@/lib/rentColor";
 import { hasLandPrice } from "@/lib/landPrice";
+import { OG_RESPONSE, OgFrame, OgHeading, Stat } from "@/lib/og";
 
 // getMunicipality はテンプレートリテラル動的 import で全県の data/*.json をバンドルするため、
 // edge だと Edge Function サイズ上限(4.02MB)を超える。Node ランタイムなら制限が桁違いに大きく、
 // next/og(ImageResponse) も Node で動作する。OG 画像は Cache-Control で長期キャッシュ済み。
 export const runtime = "nodejs";
-
-const OG_SIZE = { width: 1200, height: 630 };
 
 export async function GET(_req: Request, props: { params: Promise<{ code: string }> }) {
   const params = await props.params;
@@ -25,7 +24,6 @@ export async function GET(_req: Request, props: { params: Promise<{ code: string
   // 区の場合はパンくず的に "埼玉県 / さいたま市" を上に出し、見出しは "浦和区" のみ
   const parent = m.parentCode ? await getMunicipality(m.parentCode) : null;
   const breadcrumbText = parent ? `${prefName} / ${parent.name}` : prefName;
-  const heading = m.name;
   const rentHasData = hasRent(m.rent.value);
   const rent = m.rent.value.toLocaleString();
   const pop = m.population.toLocaleString();
@@ -37,59 +35,9 @@ export async function GET(_req: Request, props: { params: Promise<{ code: string
 
   return new ImageResponse(
     (
-      <div
-        style={{
-          width: "100%",
-          height: "100%",
-          background:
-            "linear-gradient(135deg, #eff6ff 0%, #dbeafe 45%, #bfdbfe 100%)",
-          display: "flex",
-          flexDirection: "column",
-          padding: "64px 72px",
-          fontFamily: "sans-serif",
-          color: "#0f172a",
-          position: "relative",
-        }}
-      >
-        {/* Brand */}
-        <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-          <div
-            style={{
-              width: 44,
-              height: 44,
-              borderRadius: 12,
-              background: "linear-gradient(135deg, #60a5fa, #2563eb 60%, #1e3a8a)",
-              boxShadow: "inset 0 -2px 6px rgba(0,0,0,0.18), 0 4px 12px rgba(37,99,235,0.4)",
-            }}
-          />
-          <div style={{ fontSize: 28, fontWeight: 800, letterSpacing: "-0.01em" }}>
-            KurashiMap
-          </div>
-        </div>
+      <OgFrame>
+        <OgHeading eyebrow={breadcrumbText} title={m.name} sub="の住みやすさ" titleSize={96} />
 
-        {/* Title */}
-        <div style={{ marginTop: 56, display: "flex", flexDirection: "column" }}>
-          <div style={{ fontSize: 26, color: "#475569", fontWeight: 600 }}>
-            {breadcrumbText}
-          </div>
-          <div
-            style={{
-              marginTop: 4,
-              fontSize: 96,
-              fontWeight: 900,
-              letterSpacing: "-0.03em",
-              lineHeight: 1.05,
-              color: "#0f172a",
-            }}
-          >
-            {heading}
-          </div>
-          <div style={{ marginTop: 8, fontSize: 28, color: "#1e3a8a", fontWeight: 600 }}>
-            の住みやすさ
-          </div>
-        </div>
-
-        {/* Stats row */}
         <div style={{ marginTop: "auto", display: "flex", gap: 24 }}>
           {rentHasData ? (
             <Stat label="家賃中央値" value={`${rent}円/月`} accent />
@@ -99,58 +47,8 @@ export async function GET(_req: Request, props: { params: Promise<{ code: string
           <Stat label="人口" value={`${pop}人`} />
           <Stat label="地価" value={land} />
         </div>
-
-        {/* Footer */}
-        <div
-          style={{
-            position: "absolute",
-            right: 72,
-            top: 72,
-            fontSize: 18,
-            color: "#64748b",
-            fontWeight: 600,
-            background: "rgba(255,255,255,0.7)",
-            padding: "6px 14px",
-            borderRadius: 999,
-            border: "1px solid rgba(15,23,42,0.08)",
-          }}
-        >
-          kurashimap.jp
-        </div>
-      </div>
+      </OgFrame>
     ),
-    {
-      ...OG_SIZE,
-      // OG 画像は対象データが更新（四半期/年次）→再デプロイされた時のみ変わる。
-      // 明示しないとリクエストごとに生成されうるため、長めにキャッシュする
-      // （ブラウザ1日／CDN7日。再デプロイで CDN は自動パージされる）。
-      headers: {
-        "Cache-Control": "public, max-age=86400, s-maxage=604800",
-      },
-    },
-  );
-}
-
-function Stat({ label, value, accent }: { label: string; value: string; accent?: boolean }) {
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        background: accent ? "#1e3a8a" : "rgba(255,255,255,0.85)",
-        color: accent ? "#ffffff" : "#0f172a",
-        padding: "16px 24px",
-        borderRadius: 16,
-        border: accent ? "none" : "1px solid rgba(15,23,42,0.08)",
-        boxShadow: accent
-          ? "0 12px 30px rgba(30,58,138,0.35)"
-          : "0 4px 12px rgba(15,23,42,0.08)",
-      }}
-    >
-      <span style={{ fontSize: 16, opacity: 0.8, fontWeight: 600 }}>{label}</span>
-      <span style={{ fontSize: 36, fontWeight: 800, marginTop: 4, letterSpacing: "-0.01em" }}>
-        {value}
-      </span>
-    </div>
+    OG_RESPONSE,
   );
 }

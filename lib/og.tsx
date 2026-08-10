@@ -1,15 +1,47 @@
-// OG画像の共有パーツ。既存の自治体OG（app/api/og/[code]）の意匠に揃え、
-// トップ・県・ランキングの各OGルートで使い回す。すべて edge ランタイム互換の
-// 純粋な JSX（Node API なし）。
+// OG画像の共有パーツ。トップ・自治体・県・ランキングの4ルートすべてがここを使う
+// （意匠を1箇所に集約し、ルートごとに分岐させない）。純粋な JSX のみで Node API なし。
 //
 // 注: next/og の組込フォントには U+33A1（㎡）が無いので、値整形側で m² に置換する。
 
 import type { ReactNode } from "react";
+import { SITE } from "./site";
 
 export const OG_SIZE = { width: 1200, height: 630 };
 
-// ブランドロゴ①（家ピン＋地図ベース）。satori はインライン SVG の clipPath/polygon を
-// 完全には描けないため、resvg が完全対応する data URI 画像として渡す（public/logo.svg と同一）。
+/** OG画像の配色。
+ *
+ *  Satori は CSS 変数を解決できないため、globals.css の :root をそのまま参照できない。
+ *  そこで値を TS 側に写し、両者が一致していることを tests/lib/designTokens.test.ts で
+ *  検証する（片方だけ変えるとテストが落ちる）。新しい色を足す時は必ず :root 側にも
+ *  対応するトークンを用意し、テストのマッピングに追加すること。 */
+export const OG = {
+  primary: "#3a739e",       // --color-primary
+  primaryHover: "#2e6a92",  // --color-primary-hover
+  primaryBg: "#eaf4fb",     // --color-primary-bg
+  primarySubtle: "#f3f8fc", // --color-primary-subtle
+  surface: "#ffffff",       // --color-surface
+  ink: "#1e293b",           // --color-ink
+  inkMuted: "#64748b",      // --color-ink-muted
+  line: "#e2e8f0",          // --color-line
+} as const;
+
+/** ImageResponse の共通オプション。
+ *
+ *  OG 画像は対象データが更新（四半期/年次）→再デプロイされた時のみ変わる。
+ *  明示しないとリクエストごとに生成されうるため、4ルート共通で長めにキャッシュする
+ *  （ブラウザ1日／CDN7日。再デプロイで CDN は自動パージされる）。 */
+export const OG_RESPONSE = {
+  ...OG_SIZE,
+  headers: { "Cache-Control": "public, max-age=86400, s-maxage=604800" },
+};
+
+/** フッタに出すサイトのホスト名（"kurashimap.jp"）。SITE.baseUrl から導出する。 */
+const SITE_HOST = SITE.baseUrl.replace(/^https?:\/\//, "").replace(/\/$/, "");
+
+// ブランドロゴ（家ピン＋地図ベース）。satori はインライン SVG の clipPath/polygon を
+// 完全には描けないため、resvg が完全対応する data URI 画像として渡す。
+// ここの色はロゴそのものの配色であり、UI のブランドカラー（OG.primary）とは別系統。
+// public/logo.svg の手動コピーなので、ロゴを差し替えた時は両方を更新すること。
 const LOGO_SVG =
   `<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">` +
   `<defs><clipPath id="tile"><rect width="64" height="64" rx="15"/></clipPath></defs>` +
@@ -40,19 +72,19 @@ export function OgFrame({ children }: { children: ReactNode }) {
       style={{
         width: "100%",
         height: "100%",
-        background: "linear-gradient(135deg, #eff6ff 0%, #dbeafe 45%, #bfdbfe 100%)",
+        background: `linear-gradient(135deg, ${OG.primarySubtle} 0%, ${OG.primaryBg} 100%)`,
         display: "flex",
         flexDirection: "column",
         padding: "64px 72px",
         fontFamily: "sans-serif",
-        color: "#0f172a",
+        color: OG.ink,
         position: "relative",
       }}
     >
       <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={LOGO_URI} width="46" height="46" alt="" />
-        <div style={{ fontSize: 28, fontWeight: 800, letterSpacing: "-0.01em" }}>KurashiMap</div>
+        <div style={{ fontSize: 28, fontWeight: 800, letterSpacing: "-0.01em" }}>{SITE.name}</div>
       </div>
 
       {children}
@@ -63,15 +95,15 @@ export function OgFrame({ children }: { children: ReactNode }) {
           right: 72,
           top: 72,
           fontSize: 18,
-          color: "#64748b",
+          color: OG.inkMuted,
           fontWeight: 600,
-          background: "rgba(255,255,255,0.7)",
+          background: OG.surface,
           padding: "6px 14px",
           borderRadius: 999,
-          border: "1px solid rgba(15,23,42,0.08)",
+          border: `1px solid ${OG.line}`,
         }}
       >
-        kurashimap.jp
+        {SITE_HOST}
       </div>
     </div>
   );
@@ -84,12 +116,12 @@ export function Stat({ label, value, accent }: { label: string; value: string; a
       style={{
         display: "flex",
         flexDirection: "column",
-        background: accent ? "#1e3a8a" : "rgba(255,255,255,0.85)",
-        color: accent ? "#ffffff" : "#0f172a",
+        background: accent ? OG.primary : OG.surface,
+        color: accent ? "#fff" : OG.ink,
         padding: "16px 24px",
         borderRadius: 16,
-        border: accent ? "none" : "1px solid rgba(15,23,42,0.08)",
-        boxShadow: accent ? "0 12px 30px rgba(30,58,138,0.35)" : "0 4px 12px rgba(15,23,42,0.08)",
+        // サイト側の Card 規則（1px ボーダー・シャドウなし）に揃える
+        border: `1px solid ${accent ? OG.primary : OG.line}`,
       }}
     >
       <span style={{ fontSize: 16, opacity: 0.8, fontWeight: 600 }}>{label}</span>
@@ -109,12 +141,11 @@ export function Pill({ children }: { children: ReactNode }) {
         alignItems: "center",
         fontSize: 24,
         fontWeight: 700,
-        color: "#1e3a8a",
-        background: "rgba(255,255,255,0.85)",
-        border: "1px solid rgba(15,23,42,0.08)",
+        color: OG.primary,
+        background: OG.surface,
+        border: `1px solid ${OG.line}`,
         padding: "10px 22px",
         borderRadius: 999,
-        boxShadow: "0 4px 12px rgba(15,23,42,0.08)",
       }}
     >
       {children}
@@ -137,7 +168,7 @@ export function OgHeading({
   return (
     <div style={{ marginTop: 52, display: "flex", flexDirection: "column" }}>
       {eyebrow && (
-        <div style={{ fontSize: 26, color: "#475569", fontWeight: 600 }}>{eyebrow}</div>
+        <div style={{ fontSize: 26, color: OG.inkMuted, fontWeight: 600 }}>{eyebrow}</div>
       )}
       <div
         style={{
@@ -146,13 +177,13 @@ export function OgHeading({
           fontWeight: 900,
           letterSpacing: "-0.03em",
           lineHeight: 1.08,
-          color: "#0f172a",
+          color: OG.ink,
         }}
       >
         {title}
       </div>
       {sub && (
-        <div style={{ marginTop: 12, fontSize: 30, color: "#1e3a8a", fontWeight: 600 }}>{sub}</div>
+        <div style={{ marginTop: 12, fontSize: 30, color: OG.primary, fontWeight: 600 }}>{sub}</div>
       )}
     </div>
   );

@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 import { getRankingBySlug } from "@/lib/rankings";
 import { getMunicipality } from "@/lib/metrics";
-import { OgFrame, OgHeading, Pill, OG_SIZE } from "@/lib/og";
+import { OgFrame, OgHeading, Pill, OG_RESPONSE } from "@/lib/og";
 
 // next/og の Edge ランタイムは本体だけで Edge Function サイズ上限(4.02MB)に肉薄するため、
 // lib インポートを足す本ルートは超過する。他の OG ルートと揃えて Node ランタイムにする。
@@ -35,6 +35,6 @@ export async function GET(_req: Request, props: { params: Promise<{ metric: stri
         </div>
       </OgFrame>
     ),
-    OG_SIZE,
+    OG_RESPONSE,
   );
 }
