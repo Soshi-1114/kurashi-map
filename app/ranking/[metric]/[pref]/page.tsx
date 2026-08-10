@@ -86,8 +86,12 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
   const fresh = freshness ? `【${freshness}】` : "";
   const title = `${pref.nameJa}の${def.seoTitle ?? def.title}${fresh}｜市区町村を比較｜${SITE.name}`;
   // description にも県固有の実数値（県内中央値）を含め、検索結果スニペットで即答する。
+  // 「{pref}内○○市区町村を掲載」は先頭付近に置く: 2026-08 GSC分析で、県別ページには
+  // 「{市} 人口」のような特定1市を探す検索が着地するが、この情報が末尾だと検索結果の
+  // スニペット切れで見えず「県全体のランキングだけ」と誤解されクリックされない例が
+  // 確認できた（例: /ranking/population-most/aichi の「岡崎市 人口」3位表示・クリック0）。
   const medianText = ranked.length > 0 && !def.membershipList ? `県内中央値は${def.display(medianOf(ranked))}。` : "";
-  const description = `${pref.nameJa}の${def.title}。1位は${top1}。${medianText}${pref.nameJa}内の${ranked.length}市区町村を政府統計の実データで比較できる${SITE.name}。`;
+  const description = `${pref.nameJa}の${def.title}（${pref.nameJa}内${ranked.length}市区町村を掲載）。1位は${top1}。${medianText}政府統計の実データで比較できる${SITE.name}。`;
   const url = absoluteUrl(`/ranking/${def.slug}/${pref.slug}`);
   const ogImage = absoluteUrl(`/api/og/ranking/${def.slug}`);
   return {

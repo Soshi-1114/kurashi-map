@@ -160,6 +160,39 @@ describe("population-decline ランキング", () => {
   });
 });
 
+describe("population-most / population-density の metaDescription", () => {
+  // 2026-08 GSC分析: 「{市} 人口」のような特定1市を探す検索でも表示されるため、
+  // 都道府県別ページで全市区町村を掲載していることを明記する（rankings.ts 参照）。
+  it("population-most は1位の人口数と国勢調査時点を含む", () => {
+    const def = getRankingBySlug("population-most")!;
+    const top1 = muni({ pref: "kanagawa", name: "横浜市", population: 3770000 });
+    const desc = def.metaDescription!(top1);
+    expect(desc).toContain("3,770,000人");
+    expect(desc).toContain("国勢調査");
+    expect(desc).toContain("県内の全市区町村");
+  });
+
+  it("population-density は1位の人口密度を含む", () => {
+    const def = getRankingBySlug("population-density")!;
+    const top1 = muni({ pref: "tokyo", name: "豊島区", population: 300000, areaKm2: 13 });
+    const desc = def.metaDescription!(top1);
+    expect(desc).toContain("人/km²");
+    expect(desc).toContain("県内の全市区町村");
+  });
+
+  it("population-density-low も同様の実数値を含む", () => {
+    const def = getRankingBySlug("population-density-low")!;
+    const top1 = muni({ pref: "hokkaido", name: "音威子府村", population: 700, areaKm2: 276 });
+    const desc = def.metaDescription!(top1);
+    expect(desc).toContain("人/km²");
+  });
+
+  it("top1 が null でもフォールバック文言を返す", () => {
+    const def = getRankingBySlug("population-most")!;
+    expect(def.metaDescription!(null)).toContain("国勢調査");
+  });
+});
+
 describe("land-price-low ランキング", () => {
   const def = getRankingBySlug("land-price-low")!;
 
