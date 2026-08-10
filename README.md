@@ -81,6 +81,53 @@ kurashi-map/
 
 定期/手動でデータを更新する GitHub Actions（`data-update-annual` / `data-update-quarterly`）の更新頻度・手動更新箇所・実行手順・既知の注意点は **[`docs/data-update.md`](docs/data-update.md)** を参照。
 
+## GSC分析ツール（SEO分析）
+
+`scripts/gsc/`（TypeScript、`tsx` で実行）は Google Search Console の Search Analytics API から検索パフォーマンスを取得し、
+KurashiMap の URL構造・自治体マスタ（`data/*.json`）と突き合わせて SEO 分析データセットを生成するツール。
+GSC API 呼び出し（`api.ts` / `auth.ts`）、分類（`urlMeta.ts` / `queryMeta.ts`）、集計（`aggregate.ts`）、
+Opportunity 抽出（`opportunities.ts`）、レポート出力（`report/`）を分離している。閾値・分類ルールは `config.ts` に集約。
+
+### GSC分析ツールの認証設定
+
+1. Google Cloud Console でプロジェクトを作成し、**Search Console API** を有効化する。
+2. サービスアカウントを作成し、JSON キーをダウンロードする（Git 管理しないこと）。
+3. [Search Console](https://search.google.com/search-console) の対象プロパティ（`https://kurashimap.jp/` または
+   ドメインプロパティ `sc-domain:kurashimap.jp`）の「設定 → ユーザーと権限」で、サービスアカウントのメールアドレスを
+   **閲覧者（Restricted）以上**として追加する。
+4. `.env.local` に以下のいずれかを設定する（`.env.example` 参照）。
+   - `GOOGLE_APPLICATION_CREDENTIALS=/path/to/service-account.json`（推奨。ファイルは Git 管理しない）
+   - もしくは `GSC_CLIENT_EMAIL` + `GSC_PRIVATE_KEY`（JSON 内の値をそのまま貼り付け。`\n` は自動で改行に変換される）
+5. `GSC_SITE_URL` で対象プロパティを指定する（既定 `sc-domain:kurashimap.jp`）。URLプレフィックスプロパティを使う場合は
+   `GSC_SITE_URL=https://kurashimap.jp/` にする。
+
+### GSCデータ取得・分析
+
+```bash
+npm run gsc:analyze -- --days 28          # 既定28日
+npm run gsc:analyze -- --days 7
+npm run gsc:analyze -- --days 90
+npm run gsc:analyze -- --days 28 --compare        # 直前の同じ長さの期間と比較
+npm run gsc:analyze -- --days 28 --compare=yoy    # 前年同期と比較（サイト全体・ページ単位のみ）
+```
+
+出力先は `reports/gsc/{実行日}/`（Git 管理外。`.gitignore` 参照）:
+
+```
+reports/gsc/2026-08-10/
+  summary.md              # 人間・AI 双方向けのMarkdownレポート
+  analysis.json           # ChatGPT / Claude にそのまま渡せる分析用JSON
+  analysis-prompt.md       # analysis.json を分析させるためのプロンプト雛形
+  daily.csv / pages.csv / queries.csv / page-query.csv
+  municipalities.csv / prefectures.csv / opportunities.csv / no-impression-pages.csv
+  raw/                     # GSC API の生レスポンス（トレーサビリティ用）
+```
+
+**GSC データの既知の制約**（`summary.md` の Data Notes にも記載）: Search Analytics API は 1 サイトあたりの返却上限・
+上位データ中心の抽出・低頻度クエリの匿名化があり、完全な全件取得は保証されない。直近数日はデータ未確定のため集計対象から
+除外している（`config.ts` の `END_DATE_LAG_DAYS`）。期間比較のうち Winners/Losers・順位変動・新規露出はページ単位のみで、
+クエリ単位の期間比較は行わない。
+
 ## データの扱い（honesty 方針）
 
 欠損を推計値で埋めず、`source` 文字列のセンチネルで UI が「データなし／対象外／区別非公表」を表示する。

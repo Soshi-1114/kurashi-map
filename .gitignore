@@ -27,3 +27,7 @@ next-env.d.ts
 
 # ローカルのレビュー用スクショ（リポジトリには含めない）
 screenshots/
+
+# GSC分析ツールのサービスアカウントキー・出力レポート
+gsc-service-account*.json
+reports/gsc/
