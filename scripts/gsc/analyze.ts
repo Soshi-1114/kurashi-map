@@ -2,8 +2,15 @@
 //
 //   npm run gsc:analyze -- --days 28
 //   npm run gsc:analyze -- --days 90
-//   npm run gsc:analyze -- --days 28 --compare
-//   npm run gsc:analyze -- --days 28 --compare=yoy
+//   npm run gsc:analyze -- --days 28 --compare          # 直前の同じ長さの期間と比較
+//   npm run gsc:analyze -- --days 28 --compare=yoy      # 前年同期と比較
+//
+// 施策の効果検証（本番反映日を挟んで前後を比べる）:
+//   npm run gsc:analyze -- --days 28 --since=2026-08-20            # 反映日の前後28日
+//   npm run gsc:analyze -- --days 28 --baseline=2026-07-11..2026-08-07  # 任意の基準期間と比較
+//
+// --since / --baseline は GSC API から当該期間を取り直す（過去レポートのディレクトリは
+// .gitignore 済みで再現性が無いため）。施策対象URLセットは docs/seo/url-sets.json。
 //
 // フロー: fetch（GSC API） → classify（URL/クエリ） → aggregate（集計） →
 //         opportunities（抽出） → report（CSV / summary.md / analysis.json / analysis-prompt.md）
@@ -19,7 +26,10 @@ import {
   aggregatePageTypes,
   aggregatePrefectures,
   aggregateQueryCategories,
+  aggregateUrlSets,
   buildDailySeries,
+  comparePageTypes,
+  diffCoverage,
   groupByKey,
   metricsFromDailyPoints,
   totalMetrics,
@@ -47,6 +57,8 @@ import type { CompareBundle, FixedWindowComparison, ReportBundle } from "./repor
 import type { GscApiRow, PeriodRange } from "./types";
 import { buildMuniNameMatcher, classifyQuery, normalizeQuery } from "./queryMeta";
 import { classifyUrl, fetchPageRows, loadMuniMaster, type PageRowsFetch } from "./urlMeta";
+import { addDays, resolvePeriods, toISODate, type CompareMode } from "./periods";
+import { loadUrlSets } from "./urlSets";
 
 // ===== 引数パース =====
 
@@ -63,7 +75,11 @@ function hasFlag(argv: string[], name: string): boolean {
 
 interface Cli {
   days: number;
-  compareMode: "none" | "adjacent" | "yoy";
+  compareMode: CompareMode;
+  /** compareMode="baseline" のときの比較期間 */
+  baseline?: string;
+  /** compareMode="since" のときの起点日（本番反映日） */
+  since?: string;
   siteUrl: string;
   outDir: string;
 }
@@ -74,21 +90,21 @@ function parseArgs(argv: string[]): Cli {
   if (!Number.isFinite(days) || days <= 0 || !Number.isInteger(days)) {
     throw new Error(`--days は正の整数で指定してください（例: 7 / 28 / 90）。受け取った値: "${daysArg}"`);
   }
-  const compareMode: Cli["compareMode"] = !hasFlag(argv, "compare") ? "none" : readArg(argv, "compare") === "yoy" ? "yoy" : "adjacent";
+  // --since / --baseline は --compare より優先する（どちらも比較期間の指定なので）。
+  const since = readArg(argv, "since");
+  const baseline = readArg(argv, "baseline");
+  const compareMode: CompareMode = since
+    ? "since"
+    : baseline
+      ? "baseline"
+      : !hasFlag(argv, "compare")
+        ? "none"
+        : readArg(argv, "compare") === "yoy"
+          ? "yoy"
+          : "adjacent";
   const siteUrl = readArg(argv, "site-url") ?? GSC_SITE_URL;
   const outDir = readArg(argv, "out") ?? REPORT_OUT_DIR;
-  return { days, compareMode, siteUrl, outDir };
-}
-
-// ===== 日付ユーティリティ =====
-
-function toISODate(d: Date): string {
-  return d.toISOString().slice(0, 10);
-}
-function addDays(iso: string, delta: number): string {
-  const d = new Date(`${iso}T00:00:00Z`);
-  d.setUTCDate(d.getUTCDate() + delta);
-  return toISODate(d);
+  return { days, compareMode, baseline, since, siteUrl, outDir };
 }
 
 // ===== メイン =====
@@ -99,22 +115,21 @@ async function main(): Promise<void> {
   const today = toISODate(new Date());
 
   // GSC はデータ確定までラグがあるため、直近 END_DATE_LAG_DAYS 日は除外する。
-  const endDate = addDays(today, -END_DATE_LAG_DAYS);
-  const startDate = addDays(endDate, -(cli.days - 1));
-  const current: PeriodRange = { startDate, endDate, label: `直近${cli.days}日` };
-
-  let previous: PeriodRange | null = null;
-  if (cli.compareMode === "adjacent") {
-    const prevEnd = addDays(startDate, -1);
-    const prevStart = addDays(prevEnd, -(cli.days - 1));
-    previous = { startDate: prevStart, endDate: prevEnd, label: `前${cli.days}日` };
-  } else if (cli.compareMode === "yoy") {
-    previous = { startDate: addDays(startDate, -365), endDate: addDays(endDate, -365), label: "前年同期" };
-  }
+  const plan = resolvePeriods({
+    days: cli.days,
+    today,
+    lagDays: END_DATE_LAG_DAYS,
+    compareMode: cli.compareMode,
+    baseline: cli.baseline,
+    since: cli.since,
+  });
+  const { current, previous } = plan;
+  if (plan.warning) console.warn(`[gsc] 注意: ${plan.warning}`);
 
   // 日別サイト全体トレンド + 直近7日/28日の固定比較は、--days の指定に関わらず常に
   // 直近90日分から算出する（仕様10. の最低要件を常に満たすため）。
-  const dailyRange: PeriodRange = { startDate: addDays(endDate, -89), endDate, label: "直近90日" };
+  const dataEnd = addDays(today, -END_DATE_LAG_DAYS);
+  const dailyRange: PeriodRange = { startDate: addDays(dataEnd, -89), endDate: dataEnd, label: "直近90日" };
 
   console.log(`[gsc] site=${cli.siteUrl} period=${current.startDate}〜${current.endDate} compare=${cli.compareMode}`);
 
@@ -182,8 +197,11 @@ async function main(): Promise<void> {
   let compare: CompareBundle | null = null;
   if (previous && pageMetricsPrev) {
     const diffRows = comparePages(pageMetricsCurrent, pageMetricsPrev, classifyUrlFn);
+    // 前期間も同じ集計関数を通す（ページタイプ別・露出率の推移を出すため）。
+    const prevPageTypes = aggregatePageTypes(pageRowsPrev, classifyUrlFn);
+    const { coverage: prevCoverage } = aggregateMunicipalities(pageMetricsPrev, [], muniMaster, null);
     compare = {
-      mode: cli.compareMode === "yoy" ? "yoy" : "adjacent",
+      mode: cli.compareMode === "none" ? "adjacent" : cli.compareMode,
       period: previous,
       site: totalMetrics(pageRowsPrev),
       pageDiffs: diffRows,
@@ -192,6 +210,10 @@ async function main(): Promise<void> {
       positionImprove: findPositionImprove(diffRows),
       positionDecline: findPositionDecline(diffRows),
       newVisibility: findNewVisibility(diffRows),
+      pageTypes: comparePageTypes(pageTypes, prevPageTypes),
+      coverage: diffCoverage(muniCoverage, prevCoverage),
+      urlSets: aggregateUrlSets(loadUrlSets(), pageMetricsCurrent, pageMetricsPrev),
+      warning: plan.warning,
     };
   }
 

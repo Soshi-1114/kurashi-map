@@ -275,3 +275,120 @@ export function aggregatePrefectures(muniRows: MuniAgg[]): PrefAgg[] {
   }
   return out.sort((a, b) => b.clicks - a.clicks);
 }
+
+// ===== 期間比較（施策の効果検証用） =====
+
+/** 前後2期間の同じ指標を並べ、差分を添えた行。 */
+export interface MetricsDiff {
+  current: Metrics;
+  previous: Metrics;
+  clicksDelta: number;
+  impressionsDelta: number;
+  /** previous.position - current.position。正の値=順位改善（数値が小さくなった）。 */
+  positionDelta: number;
+  /** current.ctr - previous.ctr（比率のままの差。表示側で % 化する）。 */
+  ctrDelta: number;
+}
+
+export function diffMetrics(current: Metrics, previous: Metrics): MetricsDiff {
+  return {
+    current,
+    previous,
+    clicksDelta: current.clicks - previous.clicks,
+    impressionsDelta: current.impressions - previous.impressions,
+    // 片方でも露出が無いと順位の差は意味を持たないため0にする（comparePages と同方針）。
+    positionDelta:
+      previous.impressions > 0 && current.impressions > 0 ? previous.position - current.position : 0,
+    ctrDelta: current.ctr - previous.ctr,
+  };
+}
+
+export interface PageTypeDiff extends MetricsDiff {
+  pageType: PageType;
+  pageCount: number;
+  prevPageCount: number;
+}
+
+/** ページタイプ別の前後比較。どちらか一方にしか出てこないタイプも0埋めで並べる。 */
+export function comparePageTypes(current: PageTypeAgg[], previous: PageTypeAgg[]): PageTypeDiff[] {
+  const prevByType = new Map(previous.map((p) => [p.pageType, p]));
+  const types = new Set<PageType>([...current.map((c) => c.pageType), ...previous.map((p) => p.pageType)]);
+  const curByType = new Map(current.map((c) => [c.pageType, c]));
+  const out: PageTypeDiff[] = [];
+  for (const pageType of types) {
+    const c = curByType.get(pageType);
+    const p = prevByType.get(pageType);
+    out.push({
+      pageType,
+      pageCount: c?.pageCount ?? 0,
+      prevPageCount: p?.pageCount ?? 0,
+      ...diffMetrics(c ?? EMPTY_METRICS, p ?? EMPTY_METRICS),
+    });
+  }
+  return out.sort((a, b) => b.current.clicks - a.current.clicks);
+}
+
+/** 露出率（Exposure Rate）の推移。 */
+export interface CoverageDiff {
+  total: number;
+  exposed: number;
+  prevExposed: number;
+  exposureRate: number;
+  prevExposureRate: number;
+  /** exposureRate - prevExposureRate（比率のままの差） */
+  rateDelta: number;
+}
+
+export function diffCoverage(current: MuniCoverage, previous: MuniCoverage): CoverageDiff {
+  return {
+    total: current.total,
+    exposed: current.exposed,
+    prevExposed: previous.exposed,
+    exposureRate: current.exposureRate,
+    prevExposureRate: previous.exposureRate,
+    rateDelta: current.exposureRate - previous.exposureRate,
+  };
+}
+
+/** 施策対象URLセットの集計結果。 */
+export interface UrlSetAgg extends MetricsDiff {
+  name: string;
+  pr?: number;
+  note?: string;
+  /** セットに一致し、かつ当期に露出のあったURL数 */
+  matchedPages: number;
+  prevMatchedPages: number;
+}
+
+/**
+ * URL セットごとに、一致するページの指標を合算して前後比較する。
+ * 「PR #129 で触ったページ群は全体としてどう動いたか」を1行で見るためのもの。
+ */
+export function aggregateUrlSets(
+  sets: { name: string; pr?: number; note?: string; matches: (path: string) => boolean }[],
+  current: Map<string, Metrics>,
+  previous: Map<string, Metrics>,
+): UrlSetAgg[] {
+  return sets.map((set) => {
+    const sum = (m: Map<string, Metrics>) => {
+      const acc = newAccum();
+      let pages = 0;
+      for (const [path, metrics] of m) {
+        if (!set.matches(path)) continue;
+        addToAccum(acc, metrics);
+        if (metrics.impressions > 0) pages++;
+      }
+      return { metrics: finalizeAccum(acc), pages };
+    };
+    const c = sum(current);
+    const p = sum(previous);
+    return {
+      name: set.name,
+      pr: set.pr,
+      note: set.note,
+      matchedPages: c.pages,
+      prevMatchedPages: p.pages,
+      ...diffMetrics(c.metrics, p.metrics),
+    };
+  });
+}

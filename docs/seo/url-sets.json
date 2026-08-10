@@ -1,0 +1,46 @@
+[
+  {
+    "name": "pr-126-population-rankings",
+    "pr": 126,
+    "since": "2026-08-10",
+    "note": "population-most/density 系に実数値入り metaDescription を追加。県別ランキング description で「県内N市区町村を掲載」を文頭へ移動（全ランキング共通）",
+    "include": [
+      "/ranking/population-most",
+      "/ranking/population-most/*",
+      "/ranking/population-density",
+      "/ranking/population-density/*",
+      "/ranking/population-density-low",
+      "/ranking/population-density-low/*"
+    ]
+  },
+  {
+    "name": "pr-126-pref-ranking-descriptions",
+    "pr": 126,
+    "since": "2026-08-10",
+    "note": "県別ランキングページの description テンプレート変更（掲載件数を文頭へ）。全ランキング×全県が対象",
+    "include": ["/ranking/*/*"]
+  },
+  {
+    "name": "pr-127-pref-hub-rent-cannibalization",
+    "pr": 127,
+    "since": "2026-08-10",
+    "note": "県ハブの title から「家賃相場ランキング」を除去し、家賃ランキングへの内部リンクを追加",
+    "include": ["/area/*"],
+    "exclude": ["/area/*/*"]
+  },
+  {
+    "name": "pr-129-muni-title",
+    "pr": 129,
+    "since": "2026-08-10",
+    "note": "自治体詳細の title を人口・家賃・在留外国人割合の実数値並びに変更。同名自治体には県名を付与",
+    "include": ["/area/*/*"]
+  },
+  {
+    "name": "pr-130-pref-hub-summary",
+    "pr": 130,
+    "since": "2026-08-10",
+    "note": "県ハブに「データ概況」表（県内中央値＋全国順位）を追加し、県別ランキングへの導線を全指標に拡張",
+    "include": ["/area/*"],
+    "exclude": ["/area/*/*"]
+  }
+]

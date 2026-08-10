@@ -10,6 +10,10 @@ import {
   metricsFromDailyPoints,
   metricsFromRow,
   totalMetrics,
+  diffMetrics,
+  comparePageTypes,
+  diffCoverage,
+  aggregateUrlSets,
 } from "../../../scripts/gsc/aggregate";
 import type { GscApiRow, MuniMeta } from "../../../scripts/gsc/types";
 
@@ -164,5 +168,75 @@ describe("aggregatePageTypes / aggregateQueryCategories", () => {
     const rows = [row(["家賃相場"], 3, 30, 4), row(["家賃 高い"], 1, 10, 8)];
     const agg = aggregateQueryCategories(rows, () => "money");
     expect(agg[0]).toMatchObject({ category: "money", queryCount: 2, clicks: 4 });
+  });
+});
+
+describe("期間比較（施策の効果検証）", () => {
+  const metrics = (clicks: number, impressions: number, position: number) => ({
+    clicks,
+    impressions,
+    ctr: impressions > 0 ? clicks / impressions : 0,
+    position,
+  });
+
+  it("diffMetrics は clicks/impressions/CTR の差と、正=改善の順位差を返す", () => {
+    const d = diffMetrics(metrics(20, 500, 5), metrics(10, 400, 8));
+    expect(d.clicksDelta).toBe(10);
+    expect(d.impressionsDelta).toBe(100);
+    expect(d.positionDelta).toBeCloseTo(3); // 8位 → 5位 = +3（改善）
+    expect(d.ctrDelta).toBeCloseTo(0.04 - 0.025);
+  });
+
+  it("片方の期間に露出が無いときは順位差を0にする（比較不能なため）", () => {
+    expect(diffMetrics(metrics(0, 0, 0), metrics(10, 400, 8)).positionDelta).toBe(0);
+    expect(diffMetrics(metrics(10, 400, 8), metrics(0, 0, 0)).positionDelta).toBe(0);
+  });
+
+  it("comparePageTypes は片方にしか無いタイプも0埋めで並べる", () => {
+    const cur = [
+      { pageType: "ranking" as const, pageCount: 3, ...metrics(20, 500, 5) },
+      { pageType: "map" as const, pageCount: 1, ...metrics(5, 50, 9) },
+    ];
+    const prev = [{ pageType: "ranking" as const, pageCount: 2, ...metrics(10, 400, 8) }];
+    const diffs = comparePageTypes(cur, prev);
+    const byType = new Map(diffs.map((d) => [d.pageType, d]));
+    expect(byType.get("ranking")?.clicksDelta).toBe(10);
+    expect(byType.get("ranking")?.prevPageCount).toBe(2);
+    // 前期間に存在しなかった map も行として出る
+    expect(byType.get("map")?.previous.clicks).toBe(0);
+    expect(byType.get("map")?.clicksDelta).toBe(5);
+  });
+
+  it("diffCoverage は露出ページ数と露出率の推移を返す", () => {
+    const d = diffCoverage(
+      { total: 1918, exposed: 900, noImpression: 1018, exposureRate: 900 / 1918 },
+      { total: 1918, exposed: 872, noImpression: 1046, exposureRate: 872 / 1918 },
+    );
+    expect(d.exposed - d.prevExposed).toBe(28);
+    expect(d.rateDelta).toBeCloseTo((900 - 872) / 1918);
+  });
+
+  it("aggregateUrlSets はセットに一致するページだけを合算して前後比較する", () => {
+    const sets = [
+      { name: "hub", matches: (p: string) => /^\/area\/[^/]+$/.test(p) },
+      { name: "muni", matches: (p: string) => /^\/area\/[^/]+\/[^/]+$/.test(p) },
+    ];
+    const current = new Map([
+      ["/area/tokyo", metrics(5, 100, 20)],
+      ["/area/tokyo/13121", metrics(10, 200, 8)],
+      ["/ranking/rent-cheap", metrics(50, 900, 4)],
+    ]);
+    const previous = new Map([
+      ["/area/tokyo", metrics(1, 80, 32)],
+      ["/area/tokyo/13121", metrics(2, 150, 12)],
+    ]);
+    const [hub, muni] = aggregateUrlSets(sets, current, previous);
+    // ランキングページはどちらのセットにも入らない
+    expect(hub.current.clicks).toBe(5);
+    expect(hub.clicksDelta).toBe(4);
+    expect(hub.positionDelta).toBeCloseTo(12); // 32位 → 20位
+    expect(muni.current.clicks).toBe(10);
+    expect(muni.matchedPages).toBe(1);
+    expect(muni.prevMatchedPages).toBe(1);
   });
 });

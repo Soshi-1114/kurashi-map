@@ -102,6 +102,44 @@ export function writeAllCsvs(outDir: string, b: ReportBundle): void {
     { key: "positionDelta", header: "positionDelta", value: (r) => (r.positionDelta === undefined ? undefined : round(r.positionDelta, 2)) },
   ]);
 
+  if (b.compare) {
+    writeCsvFile(path.join(outDir, "page-type-diff.csv"), b.compare.pageTypes, [
+      { key: "pageType", header: "pageType", value: (r) => r.pageType },
+      { key: "pages", header: "pages", value: (r) => r.pageCount },
+      { key: "prevPages", header: "prevPages", value: (r) => r.prevPageCount },
+      { key: "clicks", header: "clicks", value: (r) => r.current.clicks },
+      { key: "prevClicks", header: "prevClicks", value: (r) => r.previous.clicks },
+      { key: "clicksDelta", header: "clicksDelta", value: (r) => r.clicksDelta },
+      { key: "impressions", header: "impressions", value: (r) => r.current.impressions },
+      { key: "prevImpressions", header: "prevImpressions", value: (r) => r.previous.impressions },
+      { key: "impressionsDelta", header: "impressionsDelta", value: (r) => r.impressionsDelta },
+      { key: "ctr", header: "ctr", value: (r) => round(r.current.ctr, 4) },
+      { key: "prevCtr", header: "prevCtr", value: (r) => round(r.previous.ctr, 4) },
+      { key: "position", header: "position", value: (r) => round(r.current.position, 2) },
+      { key: "prevPosition", header: "prevPosition", value: (r) => round(r.previous.position, 2) },
+      { key: "positionDelta", header: "positionDelta", value: (r) => round(r.positionDelta, 2) },
+    ]);
+
+    writeCsvFile(path.join(outDir, "url-sets.csv"), b.compare.urlSets, [
+      { key: "name", header: "name", value: (r) => r.name },
+      { key: "pr", header: "pr", value: (r) => r.pr },
+      { key: "matchedPages", header: "matchedPages", value: (r) => r.matchedPages },
+      { key: "prevMatchedPages", header: "prevMatchedPages", value: (r) => r.prevMatchedPages },
+      { key: "clicks", header: "clicks", value: (r) => r.current.clicks },
+      { key: "prevClicks", header: "prevClicks", value: (r) => r.previous.clicks },
+      { key: "clicksDelta", header: "clicksDelta", value: (r) => r.clicksDelta },
+      { key: "impressions", header: "impressions", value: (r) => r.current.impressions },
+      { key: "prevImpressions", header: "prevImpressions", value: (r) => r.previous.impressions },
+      { key: "impressionsDelta", header: "impressionsDelta", value: (r) => r.impressionsDelta },
+      { key: "ctr", header: "ctr", value: (r) => round(r.current.ctr, 4) },
+      { key: "prevCtr", header: "prevCtr", value: (r) => round(r.previous.ctr, 4) },
+      { key: "position", header: "position", value: (r) => round(r.current.position, 2) },
+      { key: "prevPosition", header: "prevPosition", value: (r) => round(r.previous.position, 2) },
+      { key: "positionDelta", header: "positionDelta", value: (r) => round(r.positionDelta, 2) },
+      { key: "note", header: "note", value: (r) => r.note },
+    ]);
+  }
+
   writeCsvFile(path.join(outDir, "no-impression-pages.csv"), b.noImpressionMunicipalities, [
     { key: "code", header: "code", value: (r) => r.code },
     { key: "name", header: "name", value: (r) => r.name },
