@@ -1,8 +1,10 @@
 # SEO施策ロードマップ（2026-08 調査結果）
 
-`docs/seo/kurashimap-seo-improvement-priorities-2026-08-10.md` の P1〜P3 全項目について、
+一次資料: [`kurashimap-seo-improvement-priorities-2026-08-10.md`](./kurashimap-seo-improvement-priorities-2026-08-10.md) の P1〜P3 全項目について、
 コードとGSC実データ（直近28日 2026-07-11〜2026-08-07、`npm run gsc:analyze -- --days 28 --compare`）を
 突き合わせて調査した結果と、そこから導いた実行順。
+
+**本ドキュメントは 2026-08-10 時点の調査記録**であり、実行状況は追随しない。着手済みの項目は下記「実行順の提案」に対応PRを併記する。
 
 **この調査で当初の優先順位から変わった点**（詳細は各節）:
 
@@ -38,7 +40,6 @@
 
 - 「菊陽町 人口」43 imp・平均10.5位・**0クリック** → title に「人口」が無い
 - 「輪島市 家賃相場」「青森市 家賃相場」等は `/area/{pref}` ハブに31〜43位で誤着地。正解であるはずの自治体詳細ページ（その市の `rent.value` を持つ）が浮上しない
-- 外国人系も平均8.9位で CTR 1.13%（=順位は取れているのにクリックされていない）
 - 加えて `displayName` が県をまたいで重複する自治体が26種・**59ページ**（池田町×4、朝日町/美郷町/南部町/美浜町/美里町×3…）。title に県名が無いためSERPで区別できない
 
 ### 対応
@@ -63,13 +64,16 @@ PR #127 で `/area/{pref}` の title から「家賃相場ランキング」を�
 
 ### 対応案
 
-`components/MetricMapHub.tsx` + `app/map/rent/page.tsx` をテンプレートに **`/map/rent/{pref}` 47ページ**を新設（H1「{県}の家賃相場マップ」、県内中央値/最小/最大＋全市区町村表）。
+`components/MetricMapHub.tsx`（`MetricHubConfig` で設定駆動）を土台に **`/map/rent/{pref}` 47ページ**を新設（H1「{県}の家賃相場マップ」、県内中央値/最小/最大＋全市区町村表）。rent 専用ページを手書きせず、**`app/map/[metric]/[pref]` として `MAP_METRICS` × `PREFS` で生成し、当面 rent のみ有効化する**（地価・人口増減・外国人割合も同じ「相場/平均」ギャップを持つため、メカニズムを一般化しておく）。
 
 - 使用フィールド: `m.rent.value` / `m.rent.asOf` のみ
 - 「相場/平均/目安」≠「安い/ランキング」なので `/ranking/rent-cheap/{pref}` とカニバらない
 - `/map/foreign-ratio` が同テンプレートで **CTR 18.42%** の実績あり
+- ただし `MetricMapHub` はセクション一覧を描画するだけで、県内中央値/最小/最大と全市区町村表は新規コンポーネント。`app/map/rent/page.tsx` も全国 `HomeShell` + `listSummaryAcrossPrefs()` のため県スコープ化が要る。「テンプレート流用」ではなく新規実装として見積もること
 
 ※ より低コストな代替案（`/ranking/rent-cheap/{pref}` に相場サマリーを追加）もあるが、PR #127 で閉じたばかりのカニバリゼーションを再び開くリスクがある。
+
+**未解決**: 下記「都道府県ハブのコンテンツ拡充」の県サマリーも家賃を含むため、本案と県レベルで重複する。同一フェーズで両方投入すると本ドキュメントが問題視しているカニバリゼーションを自ら再現するので、**どちらが `{県} 家賃相場` の受け皿かを着手前に一本化する**こと。
 
 ---
 
@@ -132,8 +136,10 @@ money 系クエリを除くと、残る最大のクラスタは **「{県} 住�
 
 ### 対応案（効果順）
 
-1. **県サマリー（県平均＋全国◯位）** — `lib/areaStats.ts` の `getAreaStats().byPref` が家賃・地価・人口増減率・空き家率・人口密度の47県値を既に返す。`lib/foreignStats.ts` の `prefForeignAvgs()` も同様。**これらをソートするだけで「全国◯位/47」が新規データ無しで導出できる。** 47ページが本当に異なる内容になる
-2. **関連ランキングを13指標すべてに拡張** — 13ランキング×47県のページは既に全部存在するのに、ハブからは**4/13しかリンクしていない**。`RANKINGS` をループするだけ
+1. **県サマリー（県平均＋全国◯位）** — `lib/areaStats.ts` の `getAreaStats().byPref` が家賃・地価・人口増減率・空き家率・人口密度の47県値を既に返す。`lib/foreignStats.ts` の `prefForeignAvgs(stats)` も県別値を返す（ただし `getForeignStats()` の結果を渡す必要があり、返すのは `prefAvg` の1指標のみ）。**これらをソートするだけで「全国◯位/47」が新規データ無しで導出できる。** 47ページが本当に異なる内容になる
+   - ※ 順位を主張する土台としては**自治体を1票とする単純平均が妥当か**を先に決めること（港区と檜原村が同じ重みになる）。PR #130 はこれを理由に単純平均を採らず県内中央値を用いている
+2. **関連ランキングを全指標に拡張** — ランキング×47県のページはデータが該当する県ぶん既に存在するのに、ハブからは**14指標中4つしかリンクしていない**。`RANKINGS`（`lib/rankings.ts`）を全件ループするだけ
+   - 47県すべてに14ページ揃うわけではない。`app/sitemap.ts` も県ハブも `qualifies` / `rankBy(...).length > 0` で絞るため、14×47=658 は上限
 3. **県内自治体の「住みやすさ」ランキング** — `lib/livabilityScore.ts` の既存の自治体スコアで県内順位を出す（下記 livability 節参照）
 4. 災害・子育て・インフラのサマリーカード（`hazard`/`waitlistChildren`/`amenities`/`shelters` を県内集計）
 5. 県版FAQ＋FAQPage構造化データ（`lib/faq.ts` は自治体専用なので県版を追加）
@@ -142,7 +148,7 @@ money 系クエリを除くと、残る最大のクラスタは **「{県} 住�
 
 ## P2: GSC計測ツールの拡張
 
-現状で**存在する**のは URL単位の期間比較（`comparePages`）のみ、しかも派生サブセットしかCSVに出ていない。**欠けている**のは: page-query の期間比較、pageType別の期間比較、Exposure Rate 推移、ranking template別集計、CTR改善対象のbefore/after、施策URLセット追跡。
+現状で**存在する**のは URL単位の期間比較（`comparePages`）と、サイト全体の前期間合計（`analyze.ts` の `site: totalMetrics(pageRowsPrev)`）・自治体単位の前期間比較（`aggregateMunicipalities` → `classifyMuniStatus`）。ただし**CSVに出ているのは派生サブセット（positionImprove / positionDecline / newVisibility）だけで、`pageDiffs` 全体は出力されない**。**欠けている**のは: page-query の期間比較、pageType別の期間比較、Exposure Rate 推移、ranking template別集計、CTR改善対象のbefore/after、施策URLセット追跡。
 
 ### 設計判断: レポートdirの比較ではなく、任意期間の再取得
 
@@ -152,7 +158,7 @@ money 系クエリを除くと、残る最大のクラスタは **「{県} 住�
 
 ### 施策URLセット追跡
 
-`docs/seo/url-sets.json`（gitignore されない場所）に、変更と同じPRで人が追記する形式:
+`scripts/gsc/url-sets.json`（gitignore されない、かつ消費側の `scripts/gsc/` 配下。クエリ分類を持つ `scripts/gsc/config.ts` と同種の設定であり、`docs/` に機械可読の実行時入力を置かない）に、変更と同じPRで人が追記する形式:
 
 ```json
 [{ "name": "pr-126-population-rankings", "pr": 126, "since": "2026-08-10",
@@ -207,9 +213,9 @@ PR #126 は約658 URL、PR #127 は47県ハブ全部に影響するため、**�
 ## 実行順の提案
 
 **フェーズ1（すぐ着手可能・計測を待たない）**
-1. 自治体詳細ページの title 刷新 ← 3調査が独立に到達した最優先
-2. `/map/rent/{pref}` 新設（`{県} 家賃相場` の受け皿）
-3. 都道府県ハブの県サマリー＋全13ランキングへのリンク拡張
+1. 自治体詳細ページの title 刷新 ← 3調査が独立に到達した最優先 — **PR #129 で着手中**（実装は外国人割合を description に移さず title に残す形を採っている。上記「対応」の記述より PR を正とする）
+2. `/map/rent/{pref}` 新設（`{県} 家賃相場` の受け皿）— **PR #130 で保留**（1つの検索意図に二重介入すること、PR #127 自体が未計測の賭けであることが理由）。上記「未解決」の一本化が先
+3. 都道府県ハブの県サマリー＋全ランキング（`RANKINGS` 全件）へのリンク拡張 — **PR #130 で着手中**（県サマリーは単純平均ではなく県内中央値。`lib/prefAggregates.ts` の `getPrefMetricSummaries()`）
 
 **フェーズ2（診断してから決める）**
 4. GSC URL Inspection API での264ページ診断 → 結果に応じて Exposure Rate 施策を決定
