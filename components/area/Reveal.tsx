@@ -11,15 +11,19 @@ export function Reveal({
   children,
   delay = 0,
   className,
+  id,
   as: Tag = "div",
 }: {
   children: ReactNode;
   delay?: number;
   className?: string;
+  /** セクションナビ（SectionNav）のアンカー先にする時だけ渡す */
+  id?: string;
   as?: "div" | "section" | "li";
 }) {
   return (
     <Tag
+      id={id}
       className={`ad-reveal ${className ?? ""}`}
       style={delay ? { animationDelay: `${delay}ms` } : undefined}
     >

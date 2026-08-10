@@ -6,6 +6,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { SITE, absoluteUrl } from "@/lib/site";
+import PageShell from "@/components/PageShell";
 
 const PATH = "/privacy";
 const TITLE = `プライバシーポリシー｜${SITE.name}`;
@@ -56,14 +57,9 @@ export default function PrivacyPage() {
   };
 
   return (
-    <div className="detail-root">
+    <PageShell width="narrow" trail={[{ name: SITE.name, href: "/" }, { name: "プライバシーポリシー" }]}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }} />
 
-      <nav aria-label="パンくず" className="breadcrumb">
-        <Link href="/" className="breadcrumb-link">{SITE.name}</Link>
-        <span aria-hidden="true">/</span>
-        <span className="breadcrumb-current">プライバシーポリシー</span>
-      </nav>
 
       <header className="detail-hero">
         <h1 className="detail-title">プライバシーポリシー</h1>
@@ -132,7 +128,7 @@ export default function PrivacyPage() {
         <p className="detail-p">
           当サイトは、法令の変更やサービス内容の変更に応じて、本ポリシーを予告なく改定することがあります。改定後の内容は本ページに掲載した時点から効力を生じます。
         </p>
-        <p className="detail-p" style={{ fontSize: 13, color: "var(--text-muted)" }}>
+        <p className="detail-p detail-p-muted">
           最終更新日: {LAST_UPDATED}
         </p>
       </section>
@@ -141,6 +137,6 @@ export default function PrivacyPage() {
         <Link href="/" className="detail-back">地図で見る</Link>
         <Link href="/about" className="detail-back">このサイトについて</Link>
       </div>
-    </div>
+    </PageShell>
   );
 }

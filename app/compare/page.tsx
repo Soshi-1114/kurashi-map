@@ -10,6 +10,7 @@ import { getForeignStats, nationalForeignAvg, prefForeignAvgs } from "@/lib/fore
 import { PREFS } from "@/lib/prefs";
 import type { NationalAverages } from "@/lib/compareMetrics";
 import CompareClient, { MAX_COMPARE } from "@/components/compare/CompareClient";
+import PageShell from "@/components/PageShell";
 
 // 自治体比較ページ。骨格（説明・プリセット・パンくず）は SSG の静的HTML、
 // 選択状態は ?codes= のクエリとしてクライアント側で扱う（組合せの静的生成はしない）。
@@ -96,13 +97,8 @@ export default async function ComparePage() {
   };
 
   return (
-    <div className="cmp-root">
+    <PageShell trail={[{ name: SITE.name, href: "/" }, { name: "自治体を比較" }]}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }} />
-      <nav aria-label="パンくず" className="breadcrumb">
-        <Link href="/" className="breadcrumb-link">{SITE.name}</Link>
-        <span aria-hidden="true">/</span>
-        <span className="breadcrumb-current">自治体を比較</span>
-      </nav>
 
       <header className="cmp-hero">
         <h1 className="cmp-title">自治体を比較する</h1>
@@ -116,7 +112,7 @@ export default async function ComparePage() {
       </Suspense>
 
       <section>
-        <h2 className="home-links-h" style={{ marginTop: 28 }}>主要都市の比較例</h2>
+        <h2 className="h2 cmp-h2">主要都市の比較例</h2>
         <p className="cmp-presets-note">人口の多い市から機械的に組み合わせた例です。</p>
         <ul className="cmp-presets">
           {presets.map((p) => (
@@ -132,6 +128,6 @@ export default async function ComparePage() {
         <Link href="/about">「このサイトについて」</Link>
         を参照してください。各自治体の詳しいデータは表の自治体名から個別ページで確認できます。
       </p>
-    </div>
+    </PageShell>
   );
 }

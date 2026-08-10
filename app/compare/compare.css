@@ -1,19 +1,15 @@
 /* 自治体比較ページ（/compare）。cmp-* 名前空間。
-   トークンは globals.css の :root を使用（アイボリー＋テラコッタのコンテンツ面）。 */
+   面・タイポ・シェルは globals.css の共通プリミティブ
+   （.page-root / .page-hero / .h1 / .card / .btn / .chip）に委譲し、
+   ここには比較テーブル固有のレイアウトだけを置く。 */
 
-.cmp-root {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 0 20px 56px;
-}
-.cmp-hero {
-  padding: 26px 0 6px;
-}
-.cmp-title {
-  margin: 0 0 8px;
-  font-size: var(--text-2xl);
-  font-weight: 800;
-  letter-spacing: -0.01em;
+.cmp-title { margin: 0 0 8px; }
+/* 比較例セクションの見出し（以前はトップ用の .home-links-h を借用していた） */
+.cmp-h2 {
+  margin-top: var(--space-8);
+  border-left: 3px solid var(--accent);
+  padding-left: 9px;
+  font-size: var(--text-lg);
 }
 .cmp-lead {
   margin: 0;

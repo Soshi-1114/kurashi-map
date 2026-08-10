@@ -6,24 +6,55 @@
    - レスポンシブ: PC=3カラム Hero / 詳細グリッド / Tablet=2列 / Mobile=1列。
    ========================================================================== */
 
+/* 面の値はすべて globals.css の共通トークンへ委譲する（自前の色・影・角丸を持たない）。
+   レイアウト（max-width / padding）は共通の .page-root が担当するのでここには無い。 */
 .ad-root {
-  /* プロンプト指定のカラー（既存トークンに無いものを補完） */
   --ad-primary: var(--accent);
-  --ad-success: #16a34a;
-  --ad-warning: #f59e0b;
-  --ad-danger: #ef4444;
-  --ad-card: #ffffff;
-  --ad-subtle: #f4f1e8; /* アイボリー基調に合わせた淡色パネル（注記・出典・データなし） */
+  --ad-success: var(--color-success);
+  --ad-warning: var(--color-warning);
+  --ad-card: var(--surface-strong);
+  --ad-subtle: var(--surface-subtle); /* 淡色パネル（注記・出典・データなし） */
   --ad-border: var(--border);
-  --ad-radius: var(--radius-lg); /* 20px */
-  --ad-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
-  --ad-shadow-hover: 0 20px 44px rgba(15, 23, 42, 0.14);
+  --ad-radius: var(--radius-lg);
+  --ad-shadow: var(--shadow-card);             /* カードは原則シャドウなし */
+  --ad-shadow-hover: var(--shadow-card-hover);
   --ad-gap: var(--space-6); /* 24px */
-
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: var(--space-5) var(--space-5) 64px;
+  /* セクションナビ帯の高さ（10 + 40 + 10 + 1px border）。
+     アンカー先の scroll-margin-top と SectionNav.tsx の NAV_OFFSET と揃える。 */
+  --ad-secnav-h: 61px;
   color: var(--text);
+}
+
+/* ============================================================================
+   ページ内ナビ（SectionNav）— ヒーロー直下に貼り付く目次
+   タブではないのでコンテンツは隠さない。見た目はトップの地方タブ
+   （.home-region-tab）と同じチップに揃える。
+   ========================================================================== */
+.ad-secnav {
+  position: sticky;
+  top: 0;
+  /* このページには z-index を使う要素が他に無い。30/31（トップのドロワー）と
+     60/61（モバイルのレイヤーシート）は他UIの予約帯なので、十分下の値にする。 */
+  z-index: 5;
+  display: flex;
+  gap: 7px;
+  margin: var(--space-5) 0 0;
+  padding: 10px 0;
+  background: var(--surface-strong);
+  border-bottom: 1px solid var(--border);
+  /* SP でチップが入り切らない時だけ横に流す（ページ自体は横スクロールさせない） */
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.ad-secnav::-webkit-scrollbar { display: none; }
+/* チップの見た目（hover・現在地の塗りを含む）は globals.css の .home-region-tab と
+   共有している。ここに置くのは横スクロールさせるための差分だけ。 */
+.ad-secnav a { flex: none; white-space: nowrap; }
+
+/* アンカー先の見出しがナビ帯の下に潜らないようにする */
+.ad-hero[id],
+.ad-section[id] {
+  scroll-margin-top: calc(var(--ad-secnav-h) + var(--space-2));
 }
 
 /* 控えめな fade-up（CSS のみ・必ず可視で終わる。reduced-motion で無効） */
@@ -37,64 +68,28 @@
 
 /* ---- セクション間の余白（80px 相当） ---- */
 .ad-section {
-  margin-top: 72px;
+  margin-top: var(--space-10);
 }
 .ad-section:first-of-type {
   margin-top: var(--space-8);
 }
 
-.ad-section-head {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  margin-bottom: var(--space-5);
-}
-.ad-section-icon {
-  display: grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-md);
-  background: var(--accent-soft);
-  color: var(--ad-primary);
-  flex: none;
-}
+
 .ad-section-heading {
   flex: 1;
   min-width: 0;
 }
-.ad-h2 {
-  font-size: var(--text-2xl);
-  font-weight: 700;
-  letter-spacing: 0.01em;
-  margin: 0;
-}
+
 .ad-section-sub {
   margin: 2px 0 0;
   color: var(--text-muted);
   font-size: var(--text-sm);
   font-weight: 500;
 }
-.ad-section-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  color: var(--ad-primary);
-  font-weight: 600;
-  font-size: var(--text-sm);
-  white-space: nowrap;
-}
-.ad-section-link:hover {
-  color: var(--accent-hover);
-}
+.ad-section-link:hover { color: var(--accent-hover); }
 
 /* セクションのトーン別アイコン配色 */
-.ad-tone-rent { background: rgba(199, 91, 57, 0.10); color: #c75b39; }
-.ad-tone-kids { background: rgba(22, 163, 74, 0.12); color: #16a34a; }
-.ad-tone-hazard { background: rgba(245, 158, 11, 0.14); color: #d97706; }
-.ad-tone-infra { background: rgba(139, 92, 246, 0.12); color: #7c3aed; }
-.ad-tone-foreign { background: rgba(13, 148, 136, 0.12); color: #0d9488; }
-.ad-tone-pop { background: rgba(236, 72, 153, 0.10); color: #db2777; }
+/* .ad-tone-* の配色は globals.css の .tone-* / --cat-* に一本化した。ここには持たない。 */
 
 /* ============================================================================
    ① Hero
@@ -104,14 +99,12 @@
   grid-template-columns: 1fr minmax(300px, 360px);
   gap: var(--ad-gap);
   align-items: stretch;
-  margin-top: var(--space-4);
 }
 .ad-hero-main {
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
   justify-content: center;
-  padding: var(--space-4) 0;
 }
 .ad-pref-badge {
   display: inline-flex;
@@ -125,14 +118,8 @@
   font-weight: 700;
   font-size: var(--text-xs);
 }
-.ad-pref-badge:hover { background: rgba(37, 99, 235, 0.16); }
-.ad-title {
-  margin: 0;
-  font-size: clamp(32px, 5vw, 46px);
-  font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: 0.01em;
-}
+.ad-pref-badge:hover { background: var(--color-primary-bg); }
+.ad-title { margin: 0; }
 .ad-title-sub {
   display: block;
   font-size: var(--text-lg);
@@ -198,10 +185,6 @@
 
 /* ---- 住みやすさ総合スコア（Hero 右） ---- */
 .ad-score {
-  background: var(--ad-card);
-  border: 1px solid var(--ad-border);
-  border-radius: var(--ad-radius);
-  box-shadow: var(--ad-shadow);
   padding: var(--space-5);
   display: flex;
   flex-direction: column;
@@ -296,7 +279,7 @@
   display: inline-block;
 }
 .ad-star-bg {
-  color: #e2e8f0;
+  color: var(--border);
 }
 .ad-star-fg {
   position: absolute;
@@ -305,8 +288,8 @@
   display: inline-flex;
 }
 .ad-star-fill {
-  color: #f59e0b;
-  fill: #f59e0b;
+  color: var(--cat-infra-fg);
+  fill: var(--cat-infra-fg);
 }
 
 /* ============================================================================
@@ -316,7 +299,7 @@
   display: grid;
   grid-template-columns: 1.6fr 1fr;
   gap: var(--ad-gap);
-  background: linear-gradient(180deg, #fbf7ee, #fbfaf6);
+  background: var(--color-primary-subtle);
   border: 1px solid var(--ad-border);
   border-radius: var(--ad-radius);
   box-shadow: var(--ad-shadow);
@@ -396,7 +379,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #db2777;
+  background: var(--cat-kids-fg);
 }
 
 /* ============================================================================
@@ -419,16 +402,13 @@
   column-gap: var(--space-4);
   row-gap: 2px;
   align-content: center;
-  background: var(--ad-card);
-  border: 1px solid var(--ad-border);
-  border-radius: var(--ad-radius);
-  box-shadow: var(--ad-shadow);
   padding: var(--space-5);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
 }
 .ad-kpi:hover {
-  transform: translateY(-4px);
+  transform: translateY(-1px);
   box-shadow: var(--ad-shadow-hover);
+  border-color: var(--accent);
 }
 .ad-kpi-icon {
   grid-area: icon;
@@ -494,16 +474,13 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
-  background: var(--ad-card);
-  border: 1px solid var(--ad-border);
-  border-radius: var(--ad-radius);
-  box-shadow: var(--ad-shadow);
   padding: var(--space-6);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
 }
 .ad-metric-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-1px);
   box-shadow: var(--ad-shadow-hover);
+  border-color: var(--accent);
 }
 .ad-metric-head {
   display: flex;
@@ -570,8 +547,6 @@
   font-weight: 700;
   white-space: nowrap;
 }
-.ad-chip.is-good { background: rgba(22, 163, 74, 0.12); color: #15803d; }
-.ad-chip.is-warn { background: rgba(245, 158, 11, 0.16); color: #b45309; }
 
 /* カード内の小さな統計行（インフラ・国籍など） */
 .ad-statline {
@@ -640,12 +615,12 @@
   display: block;
   height: 100%;
   border-radius: var(--radius-pill);
-  background: #cbd5e1;
+  background: var(--control-track);
   transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .ad-compare-row.is-self .ad-compare-label { color: var(--text); font-weight: 700; }
 .ad-compare-row.is-self .ad-compare-fill {
-  background: linear-gradient(90deg, var(--ad-primary), #e89b7e);
+  background: var(--ad-primary);
 }
 .ad-compare-value {
   font-size: var(--text-xs);
@@ -696,7 +671,7 @@
   gap: 1px;
 }
 .ad-risk-on { color: var(--ad-warning); fill: var(--ad-warning); }
-.ad-risk-off { color: #e2e8f0; }
+.ad-risk-off { color: var(--border); }
 .ad-hazard-note {
   display: flex;
   align-items: flex-start;
@@ -705,7 +680,7 @@
   border-radius: var(--radius-sm);
   padding: 10px 12px;
   font-size: var(--text-xs);
-  color: #92400e;
+  color: var(--color-warning);
   line-height: 1.6;
   margin: 0;
 }
@@ -735,7 +710,7 @@
   padding: 1px 6px;
   border-radius: var(--radius-xs);
   background: var(--warn-soft);
-  color: #b45309;
+  color: var(--color-warning);
   font-weight: 700;
 }
 
@@ -781,17 +756,15 @@
   grid-template-columns: 1fr auto auto;
   align-items: center;
   gap: 8px;
-  background: var(--ad-card);
-  border: 1px solid var(--ad-border);
+  /* 面は .card グループが供給する。一覧に密に並ぶ小さめカードなので角丸だけ一段小さくする。 */
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-xs);
   padding: 14px 16px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
 }
 .ad-arealink:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--ad-shadow);
-  border-color: var(--accent-glow);
+  transform: translateY(-1px);
+  box-shadow: var(--ad-shadow-hover);
+  border-color: var(--accent);
 }
 .ad-arealink-name { font-weight: 700; font-size: var(--text-base); }
 .ad-arealink-meta { font-size: var(--text-xs); color: var(--text-muted); font-weight: 600; }
@@ -809,22 +782,18 @@
   display: flex;
   align-items: center;
   gap: var(--space-3);
-  background: var(--ad-card);
-  border: 1px solid var(--ad-border);
-  border-radius: var(--ad-radius);
-  box-shadow: var(--ad-shadow);
   padding: var(--space-4) var(--space-5);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-.ad-rankcard:hover { transform: translateY(-4px); box-shadow: var(--ad-shadow-hover); }
+.ad-rankcard:hover { transform: translateY(-1px); box-shadow: var(--ad-shadow-hover); border-color: var(--accent); }
 .ad-rankcard-icon {
   display: grid;
   place-items: center;
   width: 42px;
   height: 42px;
   border-radius: var(--radius-md);
-  background: linear-gradient(135deg, #fbbf24, #f59e0b);
-  color: #fff;
+  background: var(--cat-housing-bg);
+  color: var(--cat-housing-fg);
   flex: none;
 }
 .ad-rankcard-body { flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
@@ -845,14 +814,10 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  background: var(--ad-card);
-  border: 1px solid var(--ad-border);
-  border-radius: var(--ad-radius);
-  box-shadow: var(--ad-shadow);
   padding: var(--space-5);
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
-.ad-similar:hover { transform: translateY(-4px); box-shadow: var(--ad-shadow-hover); border-color: var(--accent-glow); }
+.ad-similar:hover { transform: translateY(-1px); box-shadow: var(--ad-shadow-hover); border-color: var(--accent); }
 .ad-similar-head { display: flex; align-items: center; gap: 8px; }
 .ad-similar-icon {
   display: grid;
@@ -860,8 +825,8 @@
   width: 30px;
   height: 30px;
   border-radius: var(--radius-sm);
-  background: rgba(236, 72, 153, 0.10);
-  color: #db2777;
+  background: var(--cat-pop-bg);
+  color: var(--cat-pop-fg);
   flex: none;
 }
 .ad-similar-name { font-weight: 700; font-size: var(--text-md); flex: 1; }
@@ -919,6 +884,7 @@
 }
 
 .ad-sources {
+  margin-top: var(--space-8);
   background: var(--ad-subtle);
   border: 1px solid var(--ad-border);
   border-radius: var(--radius-md);
@@ -952,12 +918,11 @@
    ページ下部 CTA
    ========================================================================== */
 .ad-cta {
-  margin-top: 72px;
-  background: linear-gradient(135deg, #8a3c24, #c75b39);
-  border-radius: var(--radius-xl);
+  margin-top: var(--space-10);
+  background: var(--accent);
+  border-radius: var(--radius-lg);
   padding: var(--space-8);
   color: #fff;
-  box-shadow: var(--ad-shadow);
 }
 .ad-cta-title { margin: 0; font-size: var(--text-2xl); font-weight: 800; }
 .ad-cta-sub { margin: 6px 0 var(--space-5); font-size: var(--text-sm); opacity: 0.85; }
@@ -982,7 +947,7 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
   transition: background 0.2s ease, transform 0.2s ease;
 }
-.ad-cta-chip:hover { background: rgba(255, 255, 255, 0.26); transform: translateY(-2px); }
+.ad-cta-chip:hover { background: rgba(255, 255, 255, 0.26); transform: translateY(-1px); }
 
 /* フッターナビ */
 .ad-footnav {
@@ -1027,7 +992,7 @@
    - CLS 対策: 各行に min-height を確保して後発描画でのレイアウトシフトを防ぐ。
    ========================================================================== */
 .ad-support-section {
-  margin-top: 72px;
+  margin-top: var(--space-10);
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
@@ -1051,7 +1016,7 @@
   gap: 10px;
   min-width: 0;
 }
-.ad-support-icon { color: #e0567a; flex: none; margin-top: 2px; }
+.ad-support-icon { color: var(--cat-kids-fg); flex: none; margin-top: 2px; }
 .ad-furusato-icon { color: var(--ad-primary); flex: none; margin-top: 2px; }
 .ad-support-copy,
 .ad-furusato-copy {
@@ -1115,9 +1080,10 @@
   .ad-root { padding: var(--space-4) var(--space-4) 48px; }
   /* SPの縦長感を抑える: セクション間隔を一段詰める（56→44px） */
   .ad-section { margin-top: 44px; }
+  .ad-secnav { margin-top: var(--space-4); gap: 6px; }
+  .ad-secnav a { padding: 0 12px; font-size: var(--text-xs); }
   .ad-cta { margin-top: 44px; padding: var(--space-6); }
   .ad-hero { grid-template-columns: 1fr; }
-  .ad-hero-main { padding: 0; }
   .ad-score { order: 2; }
   .ad-metric-grid,
   .ad-similar-grid,
@@ -1147,7 +1113,6 @@
   .ad-compare-row { grid-template-columns: 76px 1fr auto; }
   .ad-score-number strong { font-size: 44px; }
   /* 支援・ふるさと納税は縦積みにしてボタンを全幅化 */
-  .ad-support-section { margin-top: 56px; }
   .ad-support,
   .ad-furusato {
     flex-direction: column;

@@ -22,6 +22,7 @@ KurashiMap は Google Analytics 4（gtag.js）でページビューに加えて�
 | `select_municipality` | 自治体を選択した時（地図クリック／検索） | `components/MapView.tsx` |
 | `change_metric` | 塗り分け指標を切り替えた時 | `components/MapView.tsx` |
 | `apply_filter` | 条件フィルタ（家賃上限／地価上限／浸水なし）を変更した時 | `components/MapView.tsx` |
+| `select_section` | 自治体詳細ページの目次（セクションナビ）で移動した時 | `components/area/SectionNav.tsx` |
 
 ### パラメータ
 
@@ -35,6 +36,8 @@ KurashiMap は Google Analytics 4（gtag.js）でページビューに加えて�
 | `select_municipality` | `municipality_code` | 文字列 | `13104` | 自治体コード（5桁） |
 | | `method` | 文字列 | `map` `search` | 選択の導線 |
 | `change_metric` | `metric_key` | 文字列 | `rent` `landPrice` `populationTrend` | |
+| `select_section` | `section` | 文字列 | `overview` `data` `compare` `ranking` `details` | 移動先のセクション |
+| | `municipality_code` | 文字列 | `40220` | 自治体コード（5桁） |
 | `apply_filter` | `rent_max` | 数値 | `0` `50000` `60000` `70000` | 家賃上限（円/月）。`0`=条件なし |
 | | `land_max` | 数値 | `0` `50000` `100000` `200000` | 地価上限（円/㎡）。`0`=条件なし |
 | | `flood_max` | 数値 | `-1` `0` `2` `3` | 浸水深ランク上限（`-1`=条件なし, `0`=浸水なし限定, `2`=〜3m, `3`=〜5m） |

@@ -12,6 +12,7 @@ export function Section({
   title,
   sub,
   link,
+  id,
   children,
 }: {
   icon?: LucideIcon;
@@ -20,10 +21,12 @@ export function Section({
   title: string;
   sub?: string;
   link?: { href: string; label: string };
+  /** セクションナビ（SectionNav）のアンカー先にする時だけ渡す */
+  id?: string;
   children: ReactNode;
 }) {
   return (
-    <Reveal as="section" className="ad-section">
+    <Reveal as="section" id={id} className="ad-section">
       <div className="ad-section-head">
         {Icon && (
           <span className={`ad-section-icon ${tone ?? ""}`} aria-hidden="true">
