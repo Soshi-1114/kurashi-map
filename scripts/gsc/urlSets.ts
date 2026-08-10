@@ -10,6 +10,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { URL_SETS_PATH } from "./config";
+import { escapeRegExp } from "./queryMeta";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..", "..");
@@ -34,23 +35,12 @@ export interface UrlSet {
  * 例: "/ranking/*\/*" は /ranking/rent-cheap/saitama に一致し /ranking/rent-cheap には一致しない。
  */
 export function globToRegExp(glob: string): RegExp {
-  let out = "";
-  for (let i = 0; i < glob.length; i++) {
-    const c = glob[i];
-    if (c === "*") {
-      if (glob[i + 1] === "*") {
-        out += ".*";
-        i++;
-      } else {
-        out += "[^/]*";
-      }
-    } else if ("\\^$.|?+()[]{}".includes(c)) {
-      out += `\\${c}`;
-    } else {
-      out += c;
-    }
-  }
-  return new RegExp(`^${out}$`);
+  // ワイルドカードで分割し、それ以外の区間はまとめてエスケープする（queryMeta と共有）。
+  const body = glob
+    .split(/(\*\*|\*)/)
+    .map((part) => (part === "**" ? ".*" : part === "*" ? "[^/]*" : escapeRegExp(part)))
+    .join("");
+  return new RegExp(`^${body}$`);
 }
 
 export interface CompiledUrlSet extends UrlSet {
@@ -66,15 +56,36 @@ export function compileUrlSet(set: UrlSet): CompiledUrlSet {
   };
 }
 
+/** パターンの正規化キー（同一URL群のセットを検出するため。順序差は無視する）。 */
+function patternKey(set: UrlSet): string {
+  return JSON.stringify([[...set.include].sort(), [...(set.exclude ?? [])].sort()]);
+}
+
 function assertValid(sets: unknown): UrlSet[] {
   if (!Array.isArray(sets)) throw new Error(`${URL_SETS_PATH} は配列である必要があります。`);
-  return sets.map((s, i) => {
+  const validated = sets.map((s, i) => {
     const set = s as Partial<UrlSet>;
     if (!set.name || !Array.isArray(set.include) || set.include.length === 0) {
       throw new Error(`${URL_SETS_PATH}[${i}] には name と1件以上の include が必要です。`);
     }
     return set as UrlSet;
   });
+
+  // 同じURL群を指すセットが2つあると、レポートに必ず同じ数字の行が並び「別々に効果を
+  // 測れている」と誤読させる。同日に同じページへ入れた施策は1セットにまとめること。
+  const seen = new Map<string, string>();
+  for (const set of validated) {
+    const key = patternKey(set);
+    const dup = seen.get(key);
+    if (dup) {
+      throw new Error(
+        `${URL_SETS_PATH}: "${dup}" と "${set.name}" が同一のURL群を指しています。` +
+          `効果を分離できないため1セットにまとめ、note に両方の施策を書いてください。`,
+      );
+    }
+    seen.set(key, set.name);
+  }
+  return validated;
 }
 
 /** docs/seo/url-sets.json を読み込む。ファイルが無ければ空配列（機能は任意）。 */

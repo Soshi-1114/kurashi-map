@@ -9,7 +9,8 @@ export function normalizeQuery(q: string): string {
   return q.trim().replace(/\s+/g, " ");
 }
 
-function escapeRegExp(s: string): string {
+/** 正規表現メタ文字のエスケープ（urlSets.ts のグロブ変換と共有）。 */
+export function escapeRegExp(s: string): string {
   return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 

@@ -2,8 +2,9 @@
 // round/pctText で丸め、表は Markdown テーブルとして出す（人間にも AI にも読みやすい形式）。
 
 import { REPORT_TOP_N } from "../config";
-import { pctText, positionText, round } from "../format";
+import { pctText, positionText, round, signedText } from "../format";
 import type { Metrics } from "../types";
+import type { MetricsDiff } from "../aggregate";
 import type { FixedWindowComparison, ReportBundle } from "./types";
 
 function mdTable(headers: string[], rows: string[][]): string {
@@ -14,19 +15,30 @@ function mdTable(headers: string[], rows: string[][]): string {
   return `${head}\n${sep}\n${body}\n`;
 }
 
-/** 増減の符号付き整数。0 は "±0"。 */
-function signed(n: number): string {
-  return n > 0 ? `+${n}` : n < 0 ? String(n) : "±0";
-}
-/** 比率の差をパーセントポイントで。例: 0.012 → "+1.20pt"。 */
-function signedPctPoints(ratioDelta: number): string {
-  const pts = round(ratioDelta * 100, 2);
-  return pts > 0 ? `+${pts}pt` : pts < 0 ? `${pts}pt` : "±0pt";
-}
-/** 掲載順位の差。正=改善。 */
-function signedPosition(delta: number): string {
-  const d = round(delta, 1);
-  return d > 0 ? `+${d}` : d < 0 ? String(d) : "±0";
+/** 前後比較テーブルの共通見出し（clicks 以降）。 */
+const DIFF_HEADERS = [
+  "clicks",
+  "Δclicks",
+  "impressions",
+  "Δimpressions",
+  "CTR",
+  "ΔCTR",
+  "平均掲載順位",
+  "Δ順位",
+];
+
+/** DIFF_HEADERS に対応するセル。ΔCTR はパーセントポイント、Δ順位は正=改善。 */
+function diffCells(d: MetricsDiff): string[] {
+  return [
+    String(d.current.clicks),
+    signedText(d.clicksDelta),
+    String(d.current.impressions),
+    signedText(d.impressionsDelta),
+    pctText(d.current.ctr),
+    signedText(d.ctrDelta * 100, 2, "pt"),
+    positionText(d.current.position),
+    signedText(d.positionDelta, 1),
+  ];
 }
 
 function metricsCells(m: Metrics): string[] {
@@ -59,7 +71,7 @@ export function buildSummaryMarkdown(b: ReportBundle): string {
   parts.push(
     `対象期間: **${b.current.label}**（${b.current.startDate} 〜 ${b.current.endDate}）\n` +
       (b.compare
-        ? `比較期間（${b.compare.mode === "yoy" ? "前年同期" : "直前期間"}）: ${b.compare.period.startDate} 〜 ${b.compare.period.endDate}\n`
+        ? `比較期間（${b.compare.period.label}）: ${b.compare.period.startDate} 〜 ${b.compare.period.endDate}\n`
         : "期間比較: なし（--compare で有効化）\n"),
   );
 
@@ -77,7 +89,7 @@ export function buildSummaryMarkdown(b: ReportBundle): string {
         : null,
       topCategory ? `- 最大流入クエリカテゴリ: **${topCategory.category}**（clicks ${topCategory.clicks} / query数 ${topCategory.queryCount}）` : null,
       b.compare
-        ? `- 期間比較: clicks ${b.site.clicks - b.compare.site.clicks >= 0 ? "+" : ""}${b.site.clicks - b.compare.site.clicks} / impressions ${b.site.impressions - b.compare.site.impressions >= 0 ? "+" : ""}${b.site.impressions - b.compare.site.impressions}`
+        ? `- 期間比較: clicks ${signedText(b.site.clicks - b.compare.site.clicks)} / impressions ${signedText(b.site.impressions - b.compare.site.impressions)}`
         : null,
     ]
       .filter(Boolean)
@@ -128,18 +140,8 @@ export function buildSummaryMarkdown(b: ReportBundle): string {
     parts.push("\n### ページタイプ別の増減\n\n");
     parts.push(
       mdTable(
-        ["pageType", "clicks", "Δclicks", "impressions", "Δimpressions", "CTR", "ΔCTR", "平均掲載順位", "Δ順位"],
-        b.compare.pageTypes.map((d) => [
-          d.pageType,
-          String(d.current.clicks),
-          signed(d.clicksDelta),
-          String(d.current.impressions),
-          signed(d.impressionsDelta),
-          pctText(d.current.ctr),
-          signedPctPoints(d.ctrDelta),
-          positionText(d.current.position),
-          signedPosition(d.positionDelta),
-        ]),
+        ["pageType", ...DIFF_HEADERS],
+        b.compare.pageTypes.map((d) => [d.pageType, ...diffCells(d)]),
       ),
     );
     parts.push("\n※ Δ順位は正の値が改善（掲載順位の数値が小さくなった）。\n");
@@ -155,28 +157,22 @@ export function buildSummaryMarkdown(b: ReportBundle): string {
         ],
       ),
     );
-    parts.push(`\n増減: ${signed(cov.exposed - cov.prevExposed)}ページ（${signedPctPoints(cov.rateDelta)}）\n`);
+    parts.push(`\n増減: ${signedText(cov.exposed - cov.prevExposed)}ページ（${signedText(cov.rateDelta * 100, 2, "pt")}）\n`);
 
     if (b.compare.urlSets.length > 0) {
       parts.push("\n### 施策URLセットの効果\n\n");
       parts.push(
-        "`docs/seo/url-sets.json` で定義した施策対象URL群ごとの前後比較。**本番反映日より前の期間と比べていない場合、この表は施策の効果を示さない**（期間の指定は `--since` を参照）。\n\n",
+        "`docs/seo/url-sets.json` で定義した施策対象URL群ごとの前後比較。「前後判定」は比較した2期間がそのセットの本番反映日（`since`）を実際に挟んでいるかで、⚠️ の行の増減は施策の効果ではない（`--since` で期間を指定し直すこと）。— はセットに `since` が無く判定できないもの。\n\n",
       );
       parts.push(
         mdTable(
-          ["セット", "PR", "対象ページ数", "clicks", "Δclicks", "impressions", "Δimpressions", "CTR", "ΔCTR", "平均掲載順位", "Δ順位"],
+          ["セット", "PR", "前後判定", "対象ページ数", ...DIFF_HEADERS],
           b.compare.urlSets.map((s) => [
             s.name,
             s.pr ? `#${s.pr}` : "-",
+            s.straddlesDeploy === null ? "—" : s.straddlesDeploy ? "✅" : "⚠️ 挟めていない",
             `${s.matchedPages}（前 ${s.prevMatchedPages}）`,
-            String(s.current.clicks),
-            signed(s.clicksDelta),
-            String(s.current.impressions),
-            signed(s.impressionsDelta),
-            pctText(s.current.ctr),
-            signedPctPoints(s.ctrDelta),
-            positionText(s.current.position),
-            signedPosition(s.positionDelta),
+            ...diffCells(s),
           ]),
         ),
       );

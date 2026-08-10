@@ -3,6 +3,7 @@
 import path from "node:path";
 import { writeCsvFile, type CsvColumn } from "../csv";
 import { round } from "../format";
+import type { MetricsDiff } from "../aggregate";
 import type { Metrics } from "../types";
 import type { ReportBundle } from "./types";
 
@@ -13,6 +14,23 @@ function metricColumns<T extends Metrics>(): CsvColumn<T>[] {
     { key: "impressions", header: "impressions", value: (r) => r.impressions },
     { key: "ctr", header: "ctr", value: (r) => round(r.ctr, 4) },
     { key: "position", header: "position", value: (r) => round(r.position, 2) },
+  ];
+}
+
+/** 前後比較行の共通列（current/previous/delta の三つ組）。 */
+function diffMetricColumns<T extends MetricsDiff>(): CsvColumn<T>[] {
+  return [
+    { key: "clicks", header: "clicks", value: (r) => r.current.clicks },
+    { key: "prevClicks", header: "prevClicks", value: (r) => r.previous.clicks },
+    { key: "clicksDelta", header: "clicksDelta", value: (r) => r.clicksDelta },
+    { key: "impressions", header: "impressions", value: (r) => r.current.impressions },
+    { key: "prevImpressions", header: "prevImpressions", value: (r) => r.previous.impressions },
+    { key: "impressionsDelta", header: "impressionsDelta", value: (r) => r.impressionsDelta },
+    { key: "ctr", header: "ctr", value: (r) => round(r.current.ctr, 4) },
+    { key: "prevCtr", header: "prevCtr", value: (r) => round(r.previous.ctr, 4) },
+    { key: "position", header: "position", value: (r) => round(r.current.position, 2) },
+    { key: "prevPosition", header: "prevPosition", value: (r) => round(r.previous.position, 2) },
+    { key: "positionDelta", header: "positionDelta", value: (r) => round(r.positionDelta, 2) },
   ];
 }
 
@@ -107,35 +125,16 @@ export function writeAllCsvs(outDir: string, b: ReportBundle): void {
       { key: "pageType", header: "pageType", value: (r) => r.pageType },
       { key: "pages", header: "pages", value: (r) => r.pageCount },
       { key: "prevPages", header: "prevPages", value: (r) => r.prevPageCount },
-      { key: "clicks", header: "clicks", value: (r) => r.current.clicks },
-      { key: "prevClicks", header: "prevClicks", value: (r) => r.previous.clicks },
-      { key: "clicksDelta", header: "clicksDelta", value: (r) => r.clicksDelta },
-      { key: "impressions", header: "impressions", value: (r) => r.current.impressions },
-      { key: "prevImpressions", header: "prevImpressions", value: (r) => r.previous.impressions },
-      { key: "impressionsDelta", header: "impressionsDelta", value: (r) => r.impressionsDelta },
-      { key: "ctr", header: "ctr", value: (r) => round(r.current.ctr, 4) },
-      { key: "prevCtr", header: "prevCtr", value: (r) => round(r.previous.ctr, 4) },
-      { key: "position", header: "position", value: (r) => round(r.current.position, 2) },
-      { key: "prevPosition", header: "prevPosition", value: (r) => round(r.previous.position, 2) },
-      { key: "positionDelta", header: "positionDelta", value: (r) => round(r.positionDelta, 2) },
+      ...diffMetricColumns(),
     ]);
 
     writeCsvFile(path.join(outDir, "url-sets.csv"), b.compare.urlSets, [
       { key: "name", header: "name", value: (r) => r.name },
       { key: "pr", header: "pr", value: (r) => r.pr },
+      { key: "straddlesDeploy", header: "straddlesDeploy", value: (r) => String(r.straddlesDeploy) },
       { key: "matchedPages", header: "matchedPages", value: (r) => r.matchedPages },
       { key: "prevMatchedPages", header: "prevMatchedPages", value: (r) => r.prevMatchedPages },
-      { key: "clicks", header: "clicks", value: (r) => r.current.clicks },
-      { key: "prevClicks", header: "prevClicks", value: (r) => r.previous.clicks },
-      { key: "clicksDelta", header: "clicksDelta", value: (r) => r.clicksDelta },
-      { key: "impressions", header: "impressions", value: (r) => r.current.impressions },
-      { key: "prevImpressions", header: "prevImpressions", value: (r) => r.previous.impressions },
-      { key: "impressionsDelta", header: "impressionsDelta", value: (r) => r.impressionsDelta },
-      { key: "ctr", header: "ctr", value: (r) => round(r.current.ctr, 4) },
-      { key: "prevCtr", header: "prevCtr", value: (r) => round(r.previous.ctr, 4) },
-      { key: "position", header: "position", value: (r) => round(r.current.position, 2) },
-      { key: "prevPosition", header: "prevPosition", value: (r) => round(r.previous.position, 2) },
-      { key: "positionDelta", header: "positionDelta", value: (r) => round(r.positionDelta, 2) },
+      ...diffMetricColumns(),
       { key: "note", header: "note", value: (r) => r.note },
     ]);
   }

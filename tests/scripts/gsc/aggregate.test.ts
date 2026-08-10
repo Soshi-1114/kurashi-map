@@ -14,6 +14,7 @@ import {
   comparePageTypes,
   diffCoverage,
   aggregateUrlSets,
+  countExposedMunicipalities,
 } from "../../../scripts/gsc/aggregate";
 import type { GscApiRow, MuniMeta } from "../../../scripts/gsc/types";
 
@@ -214,6 +215,35 @@ describe("期間比較（施策の効果検証）", () => {
     );
     expect(d.exposed - d.prevExposed).toBe(28);
     expect(d.rateDelta).toBeCloseTo((900 - 872) / 1918);
+  });
+
+  it("straddlesDeploy は比較期間が本番反映日を挟んでいるかを判定する", () => {
+    const sets = [{ name: "s", since: "2026-08-10", matches: () => true }];
+    const cur = new Map([["/a", metrics(1, 10, 5)]]);
+    const prev = new Map([["/a", metrics(1, 10, 5)]]);
+    // 前期間が反映日より前に終わり、当期間が反映日以降に始まる → 挟めている
+    const ok = aggregateUrlSets(sets, cur, prev, { currentStart: "2026-08-10", previousEnd: "2026-08-09" });
+    expect(ok[0].straddlesDeploy).toBe(true);
+    // 当期間が反映日より前に始まっている → 施策前後になっていない
+    const ng = aggregateUrlSets(sets, cur, prev, { currentStart: "2026-08-01", previousEnd: "2026-07-04" });
+    expect(ng[0].straddlesDeploy).toBe(false);
+    // since が無い／比較窓が渡されない場合は判定不能
+    expect(aggregateUrlSets([{ name: "x", matches: () => true }], cur, prev, { currentStart: "2026-08-10", previousEnd: "2026-08-09" })[0].straddlesDeploy).toBeNull();
+    expect(aggregateUrlSets(sets, cur, prev)[0].straddlesDeploy).toBeNull();
+  });
+
+  it("countExposedMunicipalities は露出ページ数だけを数える（前期間の露出率用）", () => {
+    const master = new Map([
+      ["11203", { code: "11203", prefSlug: "saitama", prefNameJa: "埼玉県", name: "川口市", displayName: "川口市", url: "/area/saitama/11203" }],
+      ["11100", { code: "11100", prefSlug: "saitama", prefNameJa: "埼玉県", name: "さいたま市", displayName: "さいたま市", url: "/area/saitama/11100" }],
+    ]);
+    const pageMetrics = new Map([["/area/saitama/11203", metrics(5, 100, 8)]]);
+    expect(countExposedMunicipalities(pageMetrics, master)).toEqual({
+      total: 2,
+      exposed: 1,
+      noImpression: 1,
+      exposureRate: 0.5,
+    });
   });
 
   it("aggregateUrlSets はセットに一致するページだけを合算して前後比較する", () => {

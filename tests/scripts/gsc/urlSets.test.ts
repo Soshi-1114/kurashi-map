@@ -51,7 +51,7 @@ describe("loadUrlSets（実ファイル）", () => {
     const byName = new Map(sets.map((s) => [s.name, s]));
 
     // 県ハブのセットは自治体詳細を含めない
-    const hub = byName.get("pr-127-pref-hub-rent-cannibalization");
+    const hub = byName.get("pr-127-130-pref-hub");
     expect(hub?.matches("/area/tokyo")).toBe(true);
     expect(hub?.matches("/area/tokyo/13121")).toBe(false);
 
@@ -71,5 +71,10 @@ describe("loadUrlSets（実ファイル）", () => {
       expect(s.name).toBeTruthy();
       expect(s.include.length).toBeGreaterThan(0);
     }
+  });
+
+  it("同一URL群を指すセットが重複していない（効果を分離できないため）", () => {
+    const keys = loadUrlSets().map((s) => JSON.stringify([[...s.include].sort(), [...(s.exclude ?? [])].sort()]));
+    expect(new Set(keys).size).toBe(keys.length);
   });
 });

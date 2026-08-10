@@ -13,6 +13,7 @@ import type {
   UrlSetAgg,
 } from "../aggregate";
 import type { OpportunityRow, PeriodDiffRow } from "../opportunities";
+import type { ComparedMode } from "../periods";
 import type { Metrics, PeriodRange, QueryCategory, UrlMeta } from "../types";
 
 export interface PageRow extends Metrics {
@@ -33,7 +34,7 @@ export interface PageQueryRow extends Metrics {
 }
 
 export interface CompareBundle {
-  mode: "adjacent" | "yoy" | "baseline" | "since";
+  mode: ComparedMode;
   period: PeriodRange;
   site: Metrics;
   pageDiffs: PeriodDiffRow[];

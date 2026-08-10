@@ -9,14 +9,23 @@
 
 import type { PeriodRange } from "./types";
 
+/** CLI が要求した比較の種類。"none" は「比較しない」という指示。 */
 export type CompareMode = "none" | "adjacent" | "yoy" | "baseline" | "since";
 
-export interface PeriodPlan {
+/** 実際に比較が行われたときの種類（"none" は起こり得ないので型から除く）。 */
+export type ComparedMode = Exclude<CompareMode, "none">;
+
+/**
+ * 決定した期間。previous と mode は必ず一緒に存在する／一緒に無いので、
+ * 判別可能ユニオンにして「比較していないのに mode がある」状態を型で防ぐ。
+ */
+export type PeriodPlan = {
   current: PeriodRange;
-  previous: PeriodRange | null;
+  /** データが確定している終端（today - lagDays）。呼び出し側が再計算しないよう返す。 */
+  dataEnd: string;
   /** 期間の切り詰めなど、レポートに残すべき注意書き（無ければ undefined） */
   warning?: string;
-}
+} & ({ previous: null; mode: null } | { previous: PeriodRange; mode: ComparedMode });
 
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 
@@ -90,6 +99,8 @@ export function resolvePeriods(opts: ResolveOptions): PeriodPlan {
     }
     return {
       current: { startDate: since, endDate: currentEnd, label: `${since}以降${available}日` },
+      dataEnd,
+      mode: "since",
       previous: {
         startDate: addDays(since, -days),
         endDate: addDays(since, -1),
@@ -106,7 +117,7 @@ export function resolvePeriods(opts: ResolveOptions): PeriodPlan {
   const startDate = addDays(endDate, -(days - 1));
   const current: PeriodRange = { startDate, endDate, label: `直近${days}日` };
 
-  if (compareMode === "none") return { current, previous: null };
+  if (compareMode === "none") return { current, dataEnd, previous: null, mode: null };
 
   if (compareMode === "baseline") {
     if (!opts.baseline) throw new Error("--baseline には期間（YYYY-MM-DD..YYYY-MM-DD）が必要です。");
@@ -114,6 +125,8 @@ export function resolvePeriods(opts: ResolveOptions): PeriodPlan {
     const span = diffDays(range.startDate, range.endDate) + 1;
     return {
       current,
+      dataEnd,
+      mode: "baseline",
       previous: { ...range, label: `${range.startDate}〜${range.endDate}` },
       warning:
         span !== days
@@ -125,6 +138,8 @@ export function resolvePeriods(opts: ResolveOptions): PeriodPlan {
   if (compareMode === "yoy") {
     return {
       current,
+      dataEnd,
+      mode: "yoy",
       previous: { startDate: addDays(startDate, -365), endDate: addDays(endDate, -365), label: "前年同期" },
     };
   }
@@ -133,6 +148,8 @@ export function resolvePeriods(opts: ResolveOptions): PeriodPlan {
   const prevEnd = addDays(startDate, -1);
   return {
     current,
+    dataEnd,
+    mode: "adjacent",
     previous: { startDate: addDays(prevEnd, -(days - 1)), endDate: prevEnd, label: `前${days}日` },
   };
 }

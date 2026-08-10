@@ -3,11 +3,24 @@
 
 import { REPORT_TOP_N } from "../config";
 import { round } from "../format";
+import type { MetricsDiff } from "../aggregate";
 import type { Metrics } from "../types";
 import type { ReportBundle } from "./types";
 
 function m(x: Metrics) {
   return { clicks: x.clicks, impressions: x.impressions, ctr: round(x.ctr, 4), position: round(x.position, 2) };
+}
+
+/** 前後比較（current/previous/差分）の共通形。pageTypes と urlSets が共有する。 */
+function md(d: MetricsDiff) {
+  return {
+    current: m(d.current),
+    previous: m(d.previous),
+    clicksDelta: d.clicksDelta,
+    impressionsDelta: d.impressionsDelta,
+    ctrDelta: round(d.ctrDelta, 4),
+    positionDelta: round(d.positionDelta, 2),
+  };
 }
 
 export function buildAnalysisJson(b: ReportBundle): object {
@@ -93,12 +106,7 @@ export function buildAnalysisJson(b: ReportBundle): object {
             pageType: d.pageType,
             pageCount: d.pageCount,
             prevPageCount: d.prevPageCount,
-            current: m(d.current),
-            previous: m(d.previous),
-            clicksDelta: d.clicksDelta,
-            impressionsDelta: d.impressionsDelta,
-            ctrDelta: round(d.ctrDelta, 4),
-            positionDelta: round(d.positionDelta, 2),
+            ...md(d),
           })),
           coverage: {
             ...b.compare.coverage,
@@ -110,14 +118,11 @@ export function buildAnalysisJson(b: ReportBundle): object {
             name: s.name,
             pr: s.pr ?? null,
             note: s.note ?? null,
+            // 比較期間がこのセットの本番反映日を挟んでいるか（false なら施策の効果ではない）
+            straddlesDeploy: s.straddlesDeploy,
             matchedPages: s.matchedPages,
             prevMatchedPages: s.prevMatchedPages,
-            current: m(s.current),
-            previous: m(s.previous),
-            clicksDelta: s.clicksDelta,
-            impressionsDelta: s.impressionsDelta,
-            ctrDelta: round(s.ctrDelta, 4),
-            positionDelta: round(s.positionDelta, 2),
+            ...md(s),
           })),
         }
       : null,

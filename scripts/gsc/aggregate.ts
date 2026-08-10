@@ -45,6 +45,17 @@ function getOrInsert<K, V>(map: Map<K, V>, key: K, make: () => V): V {
 
 export const EMPTY_METRICS: Metrics = { clicks: 0, impressions: 0, ctr: 0, position: 0 };
 
+/** Metrics 群を合算しつつ、露出のあった（impressions>0）件数も数える。 */
+function sumWithExposed(items: Iterable<Metrics>): { metrics: Metrics; exposed: number } {
+  const acc = newAccum();
+  let exposed = 0;
+  for (const m of items) {
+    addToAccum(acc, m);
+    if (m.impressions > 0) exposed++;
+  }
+  return { metrics: finalizeAccum(acc), exposed };
+}
+
 export function totalMetrics(rows: GscApiRow[]): Metrics {
   const acc = newAccum();
   for (const r of rows) addToAccum(acc, r);
@@ -199,6 +210,23 @@ export interface MuniCoverage {
 }
 
 /**
+ * 自治体マスタを基準に、露出のあった（impressions>0）ページ数だけを数える。
+ * 前期間の Exposure Rate を出すために aggregateMunicipalities を丸ごと動かすと、
+ * 1,918件ぶんの行組み立て・ステータス判定・整列をして1つの整数しか使わないため。
+ */
+export function countExposedMunicipalities(
+  pageMetrics: Map<string, Metrics>,
+  muniMaster: Map<string, MuniMeta>,
+): MuniCoverage {
+  let exposed = 0;
+  for (const meta of muniMaster.values()) {
+    if ((pageMetrics.get(meta.url)?.impressions ?? 0) > 0) exposed++;
+  }
+  const total = muniMaster.size;
+  return { total, exposed, noImpression: total - exposed, exposureRate: total > 0 ? exposed / total : 0 };
+}
+
+/**
  * 自治体マスタ（KurashiMap 側の全 URL）を基準に、GSC 側のページ別指標と突き合わせる。
  * GSC に一度も出てこない自治体（= impressions が無い）も「0行」として必ず1行出力するため、
  * 「表示回数0で GSC データに存在しない」ページを検出できる（仕様 9. の要件）。
@@ -258,14 +286,9 @@ export function aggregatePrefectures(muniRows: MuniAgg[]): PrefAgg[] {
   }
   const out: PrefAgg[] = [];
   for (const [slug, list] of byPref) {
-    const acc = newAccum();
-    let exposed = 0;
-    for (const m of list) {
-      addToAccum(acc, m);
-      if (m.impressions > 0) exposed++;
-    }
+    const { metrics, exposed } = sumWithExposed(list);
     out.push({
-      ...finalizeAccum(acc),
+      ...metrics,
       prefSlug: slug,
       prefNameJa: list[0].prefNameJa,
       municipalityCount: list.length,
@@ -358,6 +381,21 @@ export interface UrlSetAgg extends MetricsDiff {
   /** セットに一致し、かつ当期に露出のあったURL数 */
   matchedPages: number;
   prevMatchedPages: number;
+  /**
+   * 比較した2期間が、このセットの本番反映日（since）を実際に挟んでいるか。
+   * false なら「施策前 vs 施策後」になっておらず、この行の増減は施策の効果ではない。
+   * セットが since を持たない場合は判定不能で null。
+   */
+  straddlesDeploy: boolean | null;
+}
+
+export interface UrlSetInput {
+  name: string;
+  pr?: number;
+  note?: string;
+  /** 本番反映日 YYYY-MM-DD（任意） */
+  since?: string;
+  matches: (path: string) => boolean;
 }
 
 /**
@@ -365,29 +403,32 @@ export interface UrlSetAgg extends MetricsDiff {
  * 「PR #129 で触ったページ群は全体としてどう動いたか」を1行で見るためのもの。
  */
 export function aggregateUrlSets(
-  sets: { name: string; pr?: number; note?: string; matches: (path: string) => boolean }[],
+  sets: UrlSetInput[],
   current: Map<string, Metrics>,
   previous: Map<string, Metrics>,
+  /** 比較した2期間。セットの since を挟めているかの判定に使う（省略時は判定しない）。 */
+  window?: { currentStart: string; previousEnd: string },
 ): UrlSetAgg[] {
   return sets.map((set) => {
-    const sum = (m: Map<string, Metrics>) => {
-      const acc = newAccum();
-      let pages = 0;
-      for (const [path, metrics] of m) {
-        if (!set.matches(path)) continue;
-        addToAccum(acc, metrics);
-        if (metrics.impressions > 0) pages++;
-      }
-      return { metrics: finalizeAccum(acc), pages };
-    };
-    const c = sum(current);
-    const p = sum(previous);
+    const matched = (m: Map<string, Metrics>) =>
+      sumWithExposed(
+        (function* () {
+          for (const [path, metrics] of m) if (set.matches(path)) yield metrics;
+        })(),
+      );
+    const c = matched(current);
+    const p = matched(previous);
     return {
       name: set.name,
       pr: set.pr,
       note: set.note,
-      matchedPages: c.pages,
-      prevMatchedPages: p.pages,
+      matchedPages: c.exposed,
+      prevMatchedPages: p.exposed,
+      // 「前期間が反映日より前に終わり、当期間が反映日以降に始まる」ときだけ施策の前後になる。
+      straddlesDeploy:
+        set.since && window
+          ? window.previousEnd < set.since && set.since <= window.currentStart
+          : null,
       ...diffMetrics(c.metrics, p.metrics),
     };
   });

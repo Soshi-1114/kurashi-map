@@ -29,6 +29,7 @@ import {
   aggregateUrlSets,
   buildDailySeries,
   comparePageTypes,
+  countExposedMunicipalities,
   diffCoverage,
   groupByKey,
   metricsFromDailyPoints,
@@ -84,24 +85,23 @@ interface Cli {
   outDir: string;
 }
 
+/** --since / --baseline は --compare より優先する（どちらも比較期間の指定なので）。 */
+function resolveCompareMode(argv: string[], since?: string, baseline?: string): CompareMode {
+  if (since) return "since";
+  if (baseline) return "baseline";
+  if (!hasFlag(argv, "compare")) return "none";
+  return readArg(argv, "compare") === "yoy" ? "yoy" : "adjacent";
+}
+
 function parseArgs(argv: string[]): Cli {
   const daysArg = readArg(argv, "days") ?? String(DEFAULT_DAYS);
   const days = Number(daysArg);
   if (!Number.isFinite(days) || days <= 0 || !Number.isInteger(days)) {
     throw new Error(`--days は正の整数で指定してください（例: 7 / 28 / 90）。受け取った値: "${daysArg}"`);
   }
-  // --since / --baseline は --compare より優先する（どちらも比較期間の指定なので）。
   const since = readArg(argv, "since");
   const baseline = readArg(argv, "baseline");
-  const compareMode: CompareMode = since
-    ? "since"
-    : baseline
-      ? "baseline"
-      : !hasFlag(argv, "compare")
-        ? "none"
-        : readArg(argv, "compare") === "yoy"
-          ? "yoy"
-          : "adjacent";
+  const compareMode = resolveCompareMode(argv, since, baseline);
   const siteUrl = readArg(argv, "site-url") ?? GSC_SITE_URL;
   const outDir = readArg(argv, "out") ?? REPORT_OUT_DIR;
   return { days, compareMode, baseline, since, siteUrl, outDir };
@@ -128,8 +128,11 @@ async function main(): Promise<void> {
 
   // 日別サイト全体トレンド + 直近7日/28日の固定比較は、--days の指定に関わらず常に
   // 直近90日分から算出する（仕様10. の最低要件を常に満たすため）。
-  const dataEnd = addDays(today, -END_DATE_LAG_DAYS);
-  const dailyRange: PeriodRange = { startDate: addDays(dataEnd, -89), endDate: dataEnd, label: "直近90日" };
+  const dailyRange: PeriodRange = {
+    startDate: addDays(plan.dataEnd, -89),
+    endDate: plan.dataEnd,
+    label: "直近90日",
+  };
 
   console.log(`[gsc] site=${cli.siteUrl} period=${current.startDate}〜${current.endDate} compare=${cli.compareMode}`);
 
@@ -199,9 +202,9 @@ async function main(): Promise<void> {
     const diffRows = comparePages(pageMetricsCurrent, pageMetricsPrev, classifyUrlFn);
     // 前期間も同じ集計関数を通す（ページタイプ別・露出率の推移を出すため）。
     const prevPageTypes = aggregatePageTypes(pageRowsPrev, classifyUrlFn);
-    const { coverage: prevCoverage } = aggregateMunicipalities(pageMetricsPrev, [], muniMaster, null);
+    const prevCoverage = countExposedMunicipalities(pageMetricsPrev, muniMaster);
     compare = {
-      mode: cli.compareMode === "none" ? "adjacent" : cli.compareMode,
+      mode: plan.mode,
       period: previous,
       site: totalMetrics(pageRowsPrev),
       pageDiffs: diffRows,
@@ -212,7 +215,10 @@ async function main(): Promise<void> {
       newVisibility: findNewVisibility(diffRows),
       pageTypes: comparePageTypes(pageTypes, prevPageTypes),
       coverage: diffCoverage(muniCoverage, prevCoverage),
-      urlSets: aggregateUrlSets(loadUrlSets(), pageMetricsCurrent, pageMetricsPrev),
+      urlSets: aggregateUrlSets(loadUrlSets(), pageMetricsCurrent, pageMetricsPrev, {
+        currentStart: current.startDate,
+        previousEnd: previous.endDate,
+      }),
       warning: plan.warning,
     };
   }
