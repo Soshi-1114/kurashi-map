@@ -40,7 +40,7 @@ export async function GET(_req: Request, props: { params: Promise<{ code: string
 
         <div style={{ marginTop: "auto", display: "flex", gap: 24 }}>
           {rentHasData ? (
-            <Stat label="家賃中央値" value={`${rent}円/月`} accent />
+            <Stat label="家賃平均" value={`${rent}円/月`} accent />
           ) : (
             <Stat label="人口増減" value={m.populationTrend} accent />
           )}

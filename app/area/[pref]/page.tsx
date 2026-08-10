@@ -50,7 +50,7 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
   if (!pref) return { title: "見つかりません | KurashiMap" };
   const muni = await listMunicipalities(params.pref);
   const { count, rentMedian } = prefStats(muni);
-  const medPhrase = rentMedian > 0 ? `家賃中央値${rentMedian.toLocaleString()}円/月、` : "";
+  const medPhrase = rentMedian > 0 ? `家賃の県内中央値${rentMedian.toLocaleString()}円/月、` : "";
   const title = `${pref.nameJa}の住みやすさ・家賃相場ランキング｜${count}市区町村を比較｜${SITE.name}`;
   const description = `${pref.nameJa}の全${count}市区町村の${medPhrase}地価・人口・待機児童・災害リスク・外国人比率を一覧で比較。家賃が安い自治体ランキングや子育て環境を、政府統計の実データでチェックできる${SITE.name}の都道府県ページ。`;
   const url = absoluteUrl(`/area/${pref.slug}`);
@@ -144,9 +144,9 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
           <span className="rk-title-sub">の住みやすさ・市区町村比較</span>
         </h1>
         <p className="rk-lead">
-          {prefName}の全<strong>{stats.count}</strong>市区町村を、家賃中央値・地価・人口・待機児童・災害リスクで横断比較。
+          {prefName}の全<strong>{stats.count}</strong>市区町村を、家賃平均・地価・人口・待機児童・災害リスクで横断比較。
           {stats.rentMedian > 0 && (
-            <>家賃中央値は<strong>{stats.rentMedian.toLocaleString()}</strong>円/月（{stats.rentMin.toLocaleString()}〜{stats.rentMax.toLocaleString()}円/月）、</>
+            <>家賃平均の県内中央値は<strong>{stats.rentMedian.toLocaleString()}</strong>円/月（{stats.rentMin.toLocaleString()}〜{stats.rentMax.toLocaleString()}円/月）、</>
           )}
           待機児童ゼロは<strong>{stats.waitlistZero}</strong>自治体です。
         </p>
@@ -157,7 +157,7 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
             <span className="rk-kpi-value">{stats.count}<span className="rk-kpi-unit">市区町村</span></span>
           </li>
           <li className="rk-kpi">
-            <span className="rk-kpi-label">家賃中央値</span>
+            <span className="rk-kpi-label">家賃の県内中央値</span>
             {stats.rentMedian > 0 ? (
               <span className="rk-kpi-value">{stats.rentMedian.toLocaleString()}<span className="rk-kpi-unit">円/月</span></span>
             ) : (
@@ -190,7 +190,7 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
             <span className="rk-section-icon rk-tone-rent"><Wallet size={20} aria-hidden="true" /></span>
             <div className="rk-section-heading">
               <h2 className="rk-h2">家賃が安い市区町村ランキング</h2>
-              <p className="rk-section-sub">{prefName}内で民営借家の家賃中央値が低い順 上位{cheapest.length}自治体。</p>
+              <p className="rk-section-sub">{prefName}内で民営借家の家賃平均が低い順 上位{cheapest.length}自治体。</p>
             </div>
           </div>
 
@@ -294,7 +294,7 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
               <thead>
                 <tr>
                   <th scope="col">自治体</th>
-                  <th scope="col" className="num">家賃中央値</th>
+                  <th scope="col" className="num">家賃平均</th>
                   <th scope="col" className="num">地価（住宅地）</th>
                   <th scope="col" className="num">人口</th>
                 </tr>

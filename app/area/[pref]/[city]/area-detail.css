@@ -580,6 +580,10 @@
   margin: 0;
 }
 .ad-note svg { flex: none; margin-top: 1px; color: var(--text-faint); }
+.ad-note-link,
+.ad-score-foot-link { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.ad-note-link:hover,
+.ad-score-foot-link:hover { color: var(--text); }
 
 /* 比較バー */
 .ad-compare {

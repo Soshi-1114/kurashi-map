@@ -71,7 +71,7 @@ kurashi-map/
 |---|---|---|
 | `build-base.mjs` | N03から skeleton JSON＋簡略化geojsonを生成（政令市は区をdissolve） | 国土数値情報 N03 |
 | `fetch-population-2025.mjs` | 人口・増減トレンド | 令和7年(2025)国勢調査 速報 |
-| `fetch-rent.mjs` | 民営借家中央値 | 住宅・土地統計調査（e-Stat） |
+| `fetch-rent.mjs` | 民営借家の家賃平均 | 住宅・土地統計調査（e-Stat） |
 | `fetch-land-price.mjs` | 住宅地地価 | 地価公示／都道府県地価調査（L01/L02） |
 | `fetch-hazard.mjs` | 浸水想定・土砂災害警戒区域 | 国土数値情報（reinfolib XKT026/029） |
 | `fetch-amenities.mjs` | 駅・保育園等・医療機関の数 | 国土数値情報（reinfolib XKT015/007/010） |

@@ -6,10 +6,10 @@ import { floodLevelOf, floodGraded, floodLevelLabel } from "./hazardScale";
 // 将来はLLM生成に差し替える前提。シグネチャを変えないこと。
 export function buildSummary(m: Municipality): string {
   const name = m.displayName ?? m.name;
-  // 民営借家中央値が 0/未満は住宅統計の集計対象外（データなし）。
+  // 民営借家の家賃平均が 0/未満は住宅統計の集計対象外（データなし）。
   const rent =
     m.rent.value > 0
-      ? `民営借家中央値${m.rent.value.toLocaleString()}${m.rent.unit}`
+      ? `民営借家の家賃平均${m.rent.value.toLocaleString()}${m.rent.unit}`
       : "家賃データなし";
   const wait = !isWaitlistDisclosed(m.waitlistChildren)
     ? "待機児童は区別非公表"

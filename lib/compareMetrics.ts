@@ -155,7 +155,7 @@ export const COMPARE_ROWS: CompareRowDef[] = [
   // ---- 住まい ----
   numericRow({
     key: "rent",
-    label: "家賃中央値（民営借家）",
+    label: "家賃平均（民営借家）",
     group: "住まい",
     raw: (m) => (hasRent(m.rent.value) ? m.rent.value : null),
     format: (v) => `${v.toLocaleString()}円/月`,

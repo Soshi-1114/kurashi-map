@@ -10,6 +10,7 @@ import { RANKINGS, getRankingBySlug, muniLevelOnly, rankBy, type RankingDef } fr
 import { PREFS } from "@/lib/prefs";
 import { SITE, prefNameOf, absoluteUrl } from "@/lib/site";
 import PrefRegionLinks from "@/components/PrefRegionLinks";
+import { RankBadge } from "@/components/RankBadge";
 import PageShell from "@/components/PageShell";
 
 type Params = { metric: string };
@@ -64,10 +65,19 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
   if (!def) notFound();
 
   const allMunis = muniLevelOnly(await listAllAcrossPrefs());
-  const ranked = rankBy(def, allMunis, TOP_TABLE);
+  // limit なしで一度だけ絞り込み・整列し、掲載用の先頭 TOP_TABLE 件と該当総数の
+  // 両方をここから導く（allMunis を二度フィルタしない）。
+  const fullRanked = rankBy(def, allMunis);
+  const ranked = fullRanked.slice(0, TOP_TABLE);
   if (ranked.length === 0) notFound();
   const podium = ranked.slice(0, 3);          // トップ3＝順位台
   const ladder = ranked.slice(3, TOP_CARDS);  // 4位以降＝序列ラダー
+  // membershipList 型（例: 待機児童ゼロ）は「条件に該当する自治体の一覧」で、並び順は
+  // 人口など別の指標。順位・メダル・「N位」表記を出すと意味を誤読するため見せ方を変える。
+  const isList = def.membershipList === true;
+  // 一覧型は掲載数（TOP_TABLE で頭打ち）と該当総数が大きく違う。「該当N自治体」が
+  // 掲載数に見えないよう、該当総数を別に数えて併記する。
+  const qualifiedCount = isList ? fullRanked.length : ranked.length;
 
   const others = RANKINGS.filter((r) => r.slug !== def.slug);
   // この指標に該当データがある都道府県（県別ランキングへの導線）
@@ -130,7 +140,14 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
           {def.lead}データのある自治体のみを対象に、政府統計の実データで集計しています（推計値は含みません）。
         </p>
         <ul className="rk-hero-meta">
-          <li className="rk-meta-pill"><Trophy size={13} aria-hidden="true" />上位 <b>{ranked.length}</b> 位を掲載</li>
+          <li className="rk-meta-pill">
+            <Trophy size={13} aria-hidden="true" />
+            {isList ? (
+              <>全国 <b>{qualifiedCount.toLocaleString()}</b> 自治体が該当</>
+            ) : (
+              <>上位 <b>{ranked.length}</b> 位を掲載</>
+            )}
+          </li>
           {freshness && <li className="rk-meta-pill"><ShieldCheck size={13} aria-hidden="true" />{freshness}</li>}
           <li className="rk-meta-pill"><Database size={13} aria-hidden="true" />政府統計の実データ</li>
         </ul>
@@ -163,17 +180,23 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
         <div className="rk-section-head">
           <span className="rk-section-icon"><Trophy size={20} aria-hidden="true" /></span>
           <div className="rk-section-heading">
-            <h2 className="rk-h2">トップ{Math.min(TOP_CARDS, ranked.length)}</h2>
-            <p className="rk-section-sub">{def.columnLabel}でみる上位。自治体名から住環境データの詳細へ。</p>
+            <h2 className="rk-h2">
+              {isList ? `該当する自治体（${def.columnLabel}が多い順）` : `トップ${Math.min(TOP_CARDS, ranked.length)}`}
+            </h2>
+            <p className="rk-section-sub">
+              {isList
+                ? `順位ではなく、条件に該当する自治体の一覧です（掲載順は${def.columnLabel}の多い順）。`
+                : `${def.columnLabel}でみる上位。自治体名から住環境データの詳細へ。`}
+            </p>
           </div>
         </div>
 
         {podium.length > 0 && (
-          <ol className="rk-podium" aria-label="トップ3">
+          <ol className="rk-podium" aria-label={isList ? "該当する自治体" : "トップ3"}>
             {podium.map((m, i) => (
               <li key={m.code} style={{ display: "contents" }}>
                 <Link href={`/area/${m.pref}/${m.code}`} className={`rk-podium-card is-${i + 1}`}>
-                  <span className="rk-medal" aria-label={`${i + 1}位`}>{i + 1}</span>
+                  <RankBadge className="rk-medal" isList={isList} rank={i + 1} rankAriaLabel={`${i + 1}位`} />
                   <span className="rk-podium-body">
                     <span className="rk-podium-name">{m.displayName ?? m.name}</span>
                     <span className="rk-podium-pref">{prefNameOf(m.pref)}</span>
@@ -190,7 +213,7 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
             {ladder.map((m, i) => (
               <li key={m.code}>
                 <Link href={`/area/${m.pref}/${m.code}`} className="rk-ladder-row">
-                  <span className="rk-ladder-rank">{i + 4}</span>
+                  <RankBadge className="rk-ladder-rank" isList={isList} rank={i + 4} />
                   <span className="rk-ladder-name">
                     {m.displayName ?? m.name}
                     <span className="rk-ladder-pref">{prefNameOf(m.pref)}</span>
@@ -207,8 +230,16 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
         <div className="rk-section-head">
           <span className="rk-section-icon"><BarChart3 size={20} aria-hidden="true" /></span>
           <div className="rk-section-heading">
-            <h2 className="rk-h2">全国ランキング 上位{ranked.length}</h2>
-            <p className="rk-section-sub">{def.columnLabel}の全順位表。横スクロールで全列を確認できます。</p>
+            <h2 className="rk-h2">
+              {isList
+                ? `該当自治体の一覧（全${qualifiedCount.toLocaleString()}自治体のうち${ranked.length}件）`
+                : `全国ランキング 上位${ranked.length}`}
+            </h2>
+            <p className="rk-section-sub">
+              {isList
+                ? `該当する全${qualifiedCount.toLocaleString()}自治体のうち、${def.columnLabel}が多い${ranked.length}件を掲載しています（順位ではありません）。横スクロールで全列を確認できます。`
+                : `${def.columnLabel}の全順位表。横スクロールで全列を確認できます。`}
+            </p>
           </div>
         </div>
         <div className="rk-table-wrap">
@@ -216,7 +247,7 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
             <table className="pref-table">
               <thead>
                 <tr>
-                  <th scope="col" className="num">順位</th>
+                  <th scope="col" className="num">{isList ? "掲載順" : "順位"}</th>
                   <th scope="col">自治体</th>
                   <th scope="col">都道府県</th>
                   <th scope="col" className="num">{def.columnLabel}</th>
