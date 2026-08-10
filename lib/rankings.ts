@@ -200,6 +200,25 @@ const VACANCY_FAQ: { q: string; a: string }[] = [
   },
 ];
 
+// 人口・人口密度ランキングの meta description（1位の実数値を含む）。
+// 2026-08 GSC分析: population-most 系は「{市} 人口」のような特定1市の人口を探す検索でも
+// 上位表示されるが、一般的な description（{top1}名のみ）では「全国/県のランキング」に
+// しか見えずクリックされにくい（例: 岡崎市 人口＝3位表示・impressions11・clicks0）。
+// 都道府県別ページでは該当県の全市区町村を掲載していることを明記し、期待値を合わせる。
+function populationMetaDescription(metric: "most" | "densityHigh" | "densityLow") {
+  const noun = metric === "most" ? "人口" : "人口密度";
+  const verb = metric === "densityLow" ? "低い" : metric === "densityHigh" ? "高い" : "多い";
+  const valueOf = (m: Municipality) =>
+    metric === "most" ? `${m.population.toLocaleString()}人` : densityText(populationDensity(m) ?? 0);
+  return (top1: Municipality | null): string => {
+    const head = `全国の市区町村を${noun}が${verb}順にランキング。`;
+    const tail = `都道府県ごとのページでは、県内の全市区町村を${noun}順に掲載しています。`;
+    if (!top1) return `${head}国勢調査の実データで比較できます。${tail}`;
+    const name = `${prefNameOf(top1.pref)}${top1.displayName ?? top1.name}`;
+    return `${head}最も${noun}が${verb}のは${name}（${valueOf(top1)}、${POPULATION_FRESHNESS}）。${tail}`;
+  };
+}
+
 // 1位自治体（実データ）から「名前・比率・基準年」を含む meta description を組み立てる。
 function foreignMetaDescription(highLow: "高い" | "低い") {
   return (top1: Municipality | null): string => {
@@ -340,6 +359,7 @@ export const RANKINGS: RankingDef[] = [
     shortLabel: "人口が多い",
     description:
       "全国の市区町村を人口が多い順にランキング。最も人口が多いのは{top1}。国勢調査の人口（実データ）で自治体規模を比較できます。",
+    metaDescription: populationMetaDescription("most"),
     lead: "全国の市区町村を、人口が多い順に並べたランキングです（国勢調査）。",
     columnLabel: "人口",
     order: "desc",
@@ -356,6 +376,7 @@ export const RANKINGS: RankingDef[] = [
     shortLabel: "人口密度が高い",
     description:
       "全国の市区町村を人口密度（人/km²）が高い順にランキング。最も人口密度が高いのは{top1}。国勢調査人口と国土地理院の面積データで比較できます。",
+    metaDescription: populationMetaDescription("densityHigh"),
     lead: "全国の市区町村を、人口密度（人口 ÷ 面積、人/km²）が高い順に並べたランキングです。",
     note: "人口は2025年国勢調査（速報）、面積は国土地理院「全国都道府県市区町村別面積調」に基づきます。境界未定部を持つ自治体の面積は国土地理院公表の参考値です。",
     columnLabel: "人口密度",
@@ -376,6 +397,7 @@ export const RANKINGS: RankingDef[] = [
     shortLabel: "人口密度が低い",
     description:
       "全国の市区町村を人口密度（人/km²）が低い順にランキング。最も人口密度が低いのは{top1}。国勢調査人口と国土地理院の面積データで比較できます。",
+    metaDescription: populationMetaDescription("densityLow"),
     lead: "全国の市区町村を、人口密度（人口 ÷ 面積、人/km²）が低い順に並べたランキングです。",
     note: "人口は2025年国勢調査（速報）、面積は国土地理院「全国都道府県市区町村別面積調」に基づきます。境界未定部を持つ自治体の面積は国土地理院公表の参考値です。",
     columnLabel: "人口密度",
