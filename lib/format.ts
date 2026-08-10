@@ -20,3 +20,22 @@ export function signedPct(value: number, decimals = 1): string {
 export function barWidthPct(value: number, max: number): number {
   return Math.max(4, (value / max) * 100);
 }
+
+// ===== title 用の短縮表記 =====
+// 検索結果の title は日本語で概ね30文字前後で切れるため、桁数の多い実数値は
+// 「万」に丸めて文字数を節約する。ページ本文・description は実数のまま扱う
+// （丸めるのは表示の都合であって、データを推計・改変するものではない）。
+
+/** 人口の短縮表記。例: 695043 → "69.5万人"、1096951 → "110万人"、3456 → "3,456人"。 */
+export function compactPopulation(value: number): string {
+  if (value < 10000) return `${value.toLocaleString()}人`;
+  const man = value / 10000;
+  // 100万人以上は小数を落とす（"109.7万人" より "110万人" のほうが読みやすい）。
+  return man >= 100 ? `${Math.round(man).toLocaleString()}万人` : `${man.toFixed(1)}万人`;
+}
+
+/** 金額の短縮表記。例: 78000 → "7.8万円"、9500 → "9,500円"。 */
+export function compactYen(value: number): string {
+  if (value < 10000) return `${value.toLocaleString()}円`;
+  return `${(value / 10000).toFixed(1)}万円`;
+}
