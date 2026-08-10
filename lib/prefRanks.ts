@@ -3,20 +3,14 @@
 // rankingStats.buildRankPositions と同じ形（RANKINGS を全件イテレートし slug をキーにする）
 // にすることで、ランキング定義の追加・slug変更に自動追従する（個別指標をハードコードしない）。
 
-import { RANKINGS, muniLevelOnly, rankBy } from "./rankings";
+import { RANKINGS, groupByPref, muniLevelOnly, rankBy } from "./rankings";
 import type { Municipality } from "./types";
 
 export type PrefRankPos = { rank: number; total: number };
 
 /** 全自治体から、ランキング slug → (code → 県内順位) の対応表を構築する。 */
 export function buildPrefRanks(all: Municipality[]): Map<string, Map<string, PrefRankPos>> {
-  const munis = muniLevelOnly(all);
-  const byPref = new Map<string, Municipality[]>();
-  for (const m of munis) {
-    const arr = byPref.get(m.pref);
-    if (arr) arr.push(m);
-    else byPref.set(m.pref, [m]);
-  }
+  const byPref = groupByPref(muniLevelOnly(all));
 
   const out = new Map<string, Map<string, PrefRankPos>>();
   for (const def of RANKINGS) {

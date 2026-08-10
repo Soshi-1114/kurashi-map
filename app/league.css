@@ -542,3 +542,14 @@
   margin-top: 10px;
 }
 .rk-more-links .rk-duo-more { margin-top: 0; }
+
+/* 表セル内の補助ラベル（データ概況の「中央値に当たる自治体名」など）。
+   値の下に小さく muted で添える。rk-ladder-band のようなアクセント色のピルは
+   数値主体の表の中では主張が強すぎるため、こちらを使う。 */
+.rk-cell-note {
+  display: block;
+  margin-top: 2px;
+  font-size: var(--text-2xs);
+  font-weight: 600;
+  color: var(--text-muted);
+}

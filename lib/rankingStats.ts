@@ -33,6 +33,17 @@ export async function getRankPositions(): Promise<Map<string, Map<string, RankPo
   return cache;
 }
 
+/** 全自治体から、ランキング slug → 全国中央値に当たる自治体の対応表を構築する。 */
+export function buildNationalMedians(all: Municipality[]): Map<string, Municipality> {
+  const munis = muniLevelOnly(all);
+  const out = new Map<string, Municipality>();
+  for (const def of RANKINGS) {
+    const ranked = rankBy(def, munis);
+    if (ranked.length > 0) out.set(def.slug, medianOf(ranked));
+  }
+  return out;
+}
+
 let medianCache: Map<string, Municipality> | null = null;
 
 /**
@@ -43,12 +54,7 @@ let medianCache: Map<string, Municipality> | null = null;
 export async function getNationalMedians(): Promise<Map<string, Municipality>> {
   if (!medianCache) {
     const { listAllAcrossPrefs } = await import("./metrics");
-    const munis = muniLevelOnly(await listAllAcrossPrefs());
-    medianCache = new Map();
-    for (const def of RANKINGS) {
-      const ranked = rankBy(def, munis);
-      if (ranked.length > 0) medianCache.set(def.slug, medianOf(ranked));
-    }
+    medianCache = buildNationalMedians(await listAllAcrossPrefs());
   }
   return medianCache;
 }

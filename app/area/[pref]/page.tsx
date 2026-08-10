@@ -4,7 +4,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Wallet, MapIcon, BarChart3, Database, ArrowLeft, ArrowUpRight, Building2, Users } from "lucide-react";
 import { listMunicipalities, listAll } from "@/lib/metrics";
-import { getRankingBySlug, rankBy } from "@/lib/rankings";
+import { RANKINGS, getRankingBySlug, rankBy } from "@/lib/rankings";
+import { getPrefMetricSummaries } from "@/lib/prefAggregates";
+import RankPillLinks from "@/components/RankPillLinks";
 import { PREFS, getPrefBySlug } from "@/lib/prefs";
 import { SITE, absoluteUrl } from "@/lib/site";
 import { hasRent, rentBand } from "@/lib/rentColor";
@@ -115,6 +117,15 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
   const popTop = popDef ? rankBy(popDef, muni, 5) : [];
   const growthTop = growthDef ? rankBy(growthDef, muni, 5) : [];
 
+  // 県のデータ概況（県内中央値と、その中央値で47都道府県を並べた順位）。
+  // 「{県} 住みやすさ」が県ハブだけに着地し平均35.6位（2026-08 GSC分析）＝内容の薄さが
+  // 原因と判断したため、47ページが実データで確実に異なる中身を持つようにする。
+  const prefSummaries = (await getPrefMetricSummaries()).get(pref.slug) ?? [];
+
+  // 県別ランキングへの導線。データのある指標だけを全件並べる（従来は家賃・人口の4本のみ
+  // で、14指標×47県のページが既に存在するのに大半が孤立していた）。
+  const prefRankings = RANKINGS.filter((r) => muni.some(r.qualifies));
+
   const ldJson = {
     "@context": "https://schema.org",
     "@graph": [
@@ -197,6 +208,51 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
           </Link>
         </div>
       </header>
+
+      {prefSummaries.length > 0 && (
+        <section className="rk-section">
+          <div className="rk-section-head">
+            <span className="rk-section-icon"><BarChart3 size={20} aria-hidden="true" /></span>
+            <div className="rk-section-heading">
+              <h2 className="rk-h2">{prefName}のデータ概況</h2>
+              <p className="rk-section-sub">
+                県内の市区町村を値の順に並べた「中央値」と、その中央値で全国の都道府県を並べたときの位置です。
+              </p>
+            </div>
+          </div>
+          <div className="rk-table-wrap">
+            <div className="pref-table-wrap">
+              <table className="pref-table">
+                <thead>
+                  <tr>
+                    <th scope="col">指標</th>
+                    <th scope="col" className="num">{prefName}の中央値</th>
+                    <th scope="col" className="num">全国の中央値</th>
+                    <th scope="col" className="num">全国順位（高い順）</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {prefSummaries.map((s) => (
+                    <tr key={s.slug}>
+                      <th scope="row">{s.label}</th>
+                      <td className="num">
+                        {s.valueText}
+                        <span className="rk-cell-note">{s.medianMuniName}</span>
+                      </td>
+                      <td className="num">{s.nationalText}</td>
+                      <td className="num">{s.rank} / {s.total}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <p className="rk-section-sub">
+            中央値は「県内の市区町村を値の順に並べた真ん中の自治体の値」で、平均ではありません（人口規模による重み付けをしていません）。
+            順位は値が高い順で、高い・低いに優劣の意味はありません。データのない自治体は集計に含めていません。
+          </p>
+        </section>
+      )}
 
       {cheapPodium.length > 0 && (
         <section className="rk-section">
@@ -293,6 +349,14 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
           </div>
         </section>
       )}
+
+      <RankPillLinks
+        title={`${prefName}のランキングで比べる`}
+        sub={`${prefName}内の市区町村を、指標ごとに並べて比較できます。`}
+        rankings={prefRankings}
+        href={(r) => `/ranking/${r.slug}/${pref.slug}`}
+        label={(r) => `${prefName}の${r.title}`}
+      />
 
       <section className="rk-section">
         <div className="rk-section-head">
