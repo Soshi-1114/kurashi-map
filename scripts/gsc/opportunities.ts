@@ -34,19 +34,32 @@ function baseRow(type: OpportunityType, url: string, m: Metrics, classifyUrl: Cl
   return { type, url, pageType: meta.pageType, muniName: meta.muniName, prefNameJa: meta.prefNameJa, ...m };
 }
 
+/** pageMetrics を predicate で絞り込み、OpportunityRow の配列にする（並び替えは呼び出し側）。 */
+function collectByPredicate(
+  pageMetrics: Map<string, Metrics>,
+  classifyUrl: ClassifyUrl,
+  type: OpportunityType,
+  predicate: (m: Metrics) => boolean,
+): OpportunityRow[] {
+  const out: OpportunityRow[] = [];
+  for (const [url, m] of pageMetrics) {
+    if (predicate(m)) out.push(baseRow(type, url, m, classifyUrl));
+  }
+  return out;
+}
+
 // --- Opportunity A: 高表示・低CTR ---
 export function findHighImpressionLowCtr(
   pageMetrics: Map<string, Metrics>,
   classifyUrl: ClassifyUrl,
   t = OPPORTUNITY_THRESHOLDS.highImpressionLowCtr,
 ): OpportunityRow[] {
-  const out: OpportunityRow[] = [];
-  for (const [url, m] of pageMetrics) {
-    if (m.impressions >= t.minImpressions && m.position <= t.maxPosition && m.ctr < t.maxCtr) {
-      out.push(baseRow("highImpressionLowCtr", url, m, classifyUrl));
-    }
-  }
-  return out.sort((a, b) => b.impressions - a.impressions);
+  return collectByPredicate(
+    pageMetrics,
+    classifyUrl,
+    "highImpressionLowCtr",
+    (m) => m.impressions >= t.minImpressions && m.position <= t.maxPosition && m.ctr < t.maxCtr,
+  ).sort((a, b) => b.impressions - a.impressions);
 }
 
 // --- Opportunity B: 2ページ目上位（11〜15位を優先） ---
@@ -55,13 +68,12 @@ export function findPage2(
   classifyUrl: ClassifyUrl,
   t = OPPORTUNITY_THRESHOLDS.page2,
 ): OpportunityRow[] {
-  const out: OpportunityRow[] = [];
-  for (const [url, m] of pageMetrics) {
-    if (m.position >= t.minPosition && m.position <= t.maxPosition && m.impressions >= t.minImpressions) {
-      out.push(baseRow("page2", url, m, classifyUrl));
-    }
-  }
-  return out.sort((a, b) => {
+  return collectByPredicate(
+    pageMetrics,
+    classifyUrl,
+    "page2",
+    (m) => m.position >= t.minPosition && m.position <= t.maxPosition && m.impressions >= t.minImpressions,
+  ).sort((a, b) => {
     const aPriority = a.position >= t.priorityMin && a.position <= t.priorityMax ? 0 : 1;
     const bPriority = b.position >= t.priorityMin && b.position <= t.priorityMax ? 0 : 1;
     if (aPriority !== bPriority) return aPriority - bPriority;
@@ -75,13 +87,12 @@ export function findNearTop(
   classifyUrl: ClassifyUrl,
   t = OPPORTUNITY_THRESHOLDS.nearTop,
 ): OpportunityRow[] {
-  const out: OpportunityRow[] = [];
-  for (const [url, m] of pageMetrics) {
-    if (m.position >= t.minPosition && m.position <= t.maxPosition && m.impressions >= t.minImpressions) {
-      out.push(baseRow("nearTop", url, m, classifyUrl));
-    }
-  }
-  return out.sort((a, b) => a.position - b.position);
+  return collectByPredicate(
+    pageMetrics,
+    classifyUrl,
+    "nearTop",
+    (m) => m.position >= t.minPosition && m.position <= t.maxPosition && m.impressions >= t.minImpressions,
+  ).sort((a, b) => a.position - b.position);
 }
 
 // --- Opportunity D: 表示回数が多いのにクリック0 ---
@@ -90,13 +101,12 @@ export function findZeroClickHighImpression(
   classifyUrl: ClassifyUrl,
   t = OPPORTUNITY_THRESHOLDS.zeroClickHighImpression,
 ): OpportunityRow[] {
-  const out: OpportunityRow[] = [];
-  for (const [url, m] of pageMetrics) {
-    if (m.clicks === 0 && m.impressions >= t.minImpressions) {
-      out.push(baseRow("zeroClickHighImpression", url, m, classifyUrl));
-    }
-  }
-  return out.sort((a, b) => b.impressions - a.impressions);
+  return collectByPredicate(
+    pageMetrics,
+    classifyUrl,
+    "zeroClickHighImpression",
+    (m) => m.clicks === 0 && m.impressions >= t.minImpressions,
+  ).sort((a, b) => b.impressions - a.impressions);
 }
 
 // --- 期間比較（Opportunity E/F/G + Winners/Losers） ---
@@ -145,18 +155,20 @@ export function comparePages(
   return rows;
 }
 
-export function topWinners(diffRows: PeriodDiffRow[], n: number): PeriodDiffRow[] {
+/** sign=1: 増加順（Winners）/ sign=-1: 減少順（Losers）。 */
+function topByClicksDelta(diffRows: PeriodDiffRow[], n: number, sign: 1 | -1): PeriodDiffRow[] {
   return [...diffRows]
-    .filter((r) => r.clicksDelta > 0)
-    .sort((a, b) => b.clicksDelta - a.clicksDelta)
+    .filter((r) => sign * r.clicksDelta > 0)
+    .sort((a, b) => sign * (b.clicksDelta - a.clicksDelta))
     .slice(0, n);
 }
 
+export function topWinners(diffRows: PeriodDiffRow[], n: number): PeriodDiffRow[] {
+  return topByClicksDelta(diffRows, n, 1);
+}
+
 export function topLosers(diffRows: PeriodDiffRow[], n: number): PeriodDiffRow[] {
-  return [...diffRows]
-    .filter((r) => r.clicksDelta < 0)
-    .sort((a, b) => a.clicksDelta - b.clicksDelta)
-    .slice(0, n);
+  return topByClicksDelta(diffRows, n, -1);
 }
 
 // --- Opportunity E: 順位急上昇 ---

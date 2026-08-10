@@ -1,6 +1,7 @@
 // summary.md 生成。仕様14. の見出し構成をそのまま章立てにする。数値は format.ts の
 // round/pctText で丸め、表は Markdown テーブルとして出す（人間にも AI にも読みやすい形式）。
 
+import { REPORT_TOP_N } from "../config";
 import { pctText, positionText, round } from "../format";
 import type { Metrics } from "../types";
 import type { FixedWindowComparison, ReportBundle } from "./types";
@@ -117,7 +118,7 @@ export function buildSummaryMarkdown(b: ReportBundle): string {
     ),
   );
 
-  const topMuni = b.municipalities.filter((m) => m.impressions > 0).slice(0, 30);
+  const topMuni = b.municipalities.filter((m) => m.impressions > 0).slice(0, REPORT_TOP_N.summaryDisplay);
   parts.push("\n## Municipality Performance\n");
   parts.push(
     `自治体詳細ページ ${b.muniCoverage.total} 件中、GSC 露出あり ${b.muniCoverage.exposed} 件（${exposureRate}）。上位30件:\n\n`,
@@ -159,7 +160,7 @@ export function buildSummaryMarkdown(b: ReportBundle): string {
       ? mdTable(
           ["url", "muni/pref", "clicks", "prevClicks", "Δclicks", "impressions", "position"],
           b.compare.winners
-            .slice(0, 30)
+            .slice(0, REPORT_TOP_N.summaryDisplay)
             .map((r) => [r.url, r.muniName ?? r.prefNameJa ?? "-", String(r.clicks), String(r.prevClicks), `+${r.clicksDelta}`, String(r.impressions), positionText(r.position)]),
         )
       : "_--compare 未指定のため算出なし_\n",
@@ -171,7 +172,7 @@ export function buildSummaryMarkdown(b: ReportBundle): string {
       ? mdTable(
           ["url", "muni/pref", "clicks", "prevClicks", "Δclicks", "impressions", "position"],
           b.compare.losers
-            .slice(0, 30)
+            .slice(0, REPORT_TOP_N.summaryDisplay)
             .map((r) => [r.url, r.muniName ?? r.prefNameJa ?? "-", String(r.clicks), String(r.prevClicks), String(r.clicksDelta), String(r.impressions), positionText(r.position)]),
         )
       : "_--compare 未指定のため算出なし_\n",
@@ -182,7 +183,7 @@ export function buildSummaryMarkdown(b: ReportBundle): string {
     b.compare
       ? mdTable(
           ["url", "muni/pref", "impressions", "clicks", "position"],
-          b.compare.newVisibility.slice(0, 30).map((r) => [r.url, r.muniName ?? r.prefNameJa ?? "-", String(r.impressions), String(r.clicks), positionText(r.position)]),
+          b.compare.newVisibility.slice(0, REPORT_TOP_N.summaryDisplay).map((r) => [r.url, r.muniName ?? r.prefNameJa ?? "-", String(r.impressions), String(r.clicks), positionText(r.position)]),
         )
       : "_--compare 未指定のため算出なし_\n",
   );
@@ -192,7 +193,7 @@ export function buildSummaryMarkdown(b: ReportBundle): string {
     mdTable(
       ["url", "muni/pref", "impressions", "clicks", "CTR", "position"],
       b.opportunities.highImpressionLowCtr
-        .slice(0, 30)
+        .slice(0, REPORT_TOP_N.summaryDisplay)
         .map((r) => [r.url, r.muniName ?? r.prefNameJa ?? "-", String(r.impressions), String(r.clicks), pctText(r.ctr), positionText(r.position)]),
     ),
   );
@@ -202,7 +203,7 @@ export function buildSummaryMarkdown(b: ReportBundle): string {
     mdTable(
       ["url", "muni/pref", "impressions", "clicks", "CTR", "position"],
       b.opportunities.page2
-        .slice(0, 30)
+        .slice(0, REPORT_TOP_N.summaryDisplay)
         .map((r) => [r.url, r.muniName ?? r.prefNameJa ?? "-", String(r.impressions), String(r.clicks), pctText(r.ctr), positionText(r.position)]),
     ),
   );
@@ -214,7 +215,7 @@ export function buildSummaryMarkdown(b: ReportBundle): string {
   parts.push(
     mdTable(
       ["自治体", "都道府県", "url"],
-      b.noImpressionMunicipalities.slice(0, 30).map((m) => [m.name, m.prefNameJa, m.url]),
+      b.noImpressionMunicipalities.slice(0, REPORT_TOP_N.summaryDisplay).map((m) => [m.name, m.prefNameJa, m.url]),
     ),
   );
 

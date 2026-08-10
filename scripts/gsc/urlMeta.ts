@@ -10,7 +10,8 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 // @ts-expect-error mjs モジュール（データスクリプト共通ヘルパー）に型定義はない
 import { PREFS as SCRIPT_PREFS } from "../_lib/prefs.mjs";
-import type { MuniMeta, PageType, UrlMeta } from "./types";
+import { fetchAllRows, type QueryOptions } from "./api";
+import type { GscApiRow, MuniMeta, PageType, UrlMeta } from "./types";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..", "..");
@@ -83,6 +84,23 @@ export function normalizeUrlPath(raw: string): string {
  */
 export function normalizePageRows<T extends { keys: string[] }>(rows: T[]): T[] {
   return rows.map((r) => ({ ...r, keys: [normalizeUrlPath(r.keys[0]), ...r.keys.slice(1)] }));
+}
+
+export interface PageRowsFetch {
+  /** GSC の生レスポンス（page キーがフル URL のまま。raw/ ダンプ用） */
+  raw: GscApiRow[];
+  /** normalizePageRows 済み（自治体マスタ等との突き合わせ用） */
+  normalized: GscApiRow[];
+}
+
+/**
+ * dimensions に "page" を含む取得を、生レスポンスと正規化済みの両方を返す形にまとめる。
+ * 取得と正規化を呼び出し側で別々に行うと正規化を呼び忘れる余地があるため、1つの関数に
+ * 閉じ込める（page dimension を fetch する箇所は必ずこれを経由する）。
+ */
+export async function fetchPageRows(opts: QueryOptions): Promise<PageRowsFetch> {
+  const raw = await fetchAllRows(opts);
+  return { raw, normalized: normalizePageRows(raw) };
 }
 
 /** URL を pageType に分類し、pref/muni/ranking 等の付帯情報を付与する。 */

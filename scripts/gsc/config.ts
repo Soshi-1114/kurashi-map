@@ -12,6 +12,9 @@ export const END_DATE_LAG_DAYS = 3;
 export const DEFAULT_DAYS = 28;
 export const ALLOWED_QUICK_DAYS = [7, 28, 90] as const;
 
+// 日別サイトトレンドの移動平均日数（summary.md「直近N日」節・daily.csv の *MA7 列）。
+export const MA_WINDOW_DAYS = 7;
+
 // Opportunity 抽出の閾値。仕様書の条件をそのまま定数化。
 export const OPPORTUNITY_THRESHOLDS = {
   highImpressionLowCtr: { minImpressions: 100, maxPosition: 10, maxCtr: 0.03 },
@@ -37,6 +40,9 @@ export const MUNI_STATUS_THRESHOLDS = {
   strongMinClicks: 5,
 } as const;
 
+// クエリの自治体名マッチング対象とする最小文字数（1文字の自治体名は誤判定が多いため除外）。
+export const MIN_MUNI_NAME_MATCH_LENGTH = 2;
+
 // クエリ分類（config.ts で追加・変更しやすいよう、単純な正規表現のマップに集約）。
 // 判定順序: branded → municipality（自治体マスタと突合） → 以下のテーマ別パターン → other。
 export const QUERY_CATEGORY_PATTERNS: Partial<Record<QueryCategory, RegExp>> = {
@@ -58,6 +64,8 @@ export const REPORT_TOP_N = {
   lowCtr: 50,
   page2: 50,
   noImpressionPages: 100,
+  // summary.md の各表に実際に表示する行数（CSV/analysis.json は上記の上限まで含む）。
+  summaryDisplay: 30,
 };
 
 export const REPORT_OUT_DIR = "reports/gsc";

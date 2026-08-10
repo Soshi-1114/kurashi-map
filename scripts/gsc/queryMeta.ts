@@ -2,7 +2,7 @@
 // ここでは「branded → municipality（自治体マスタと突合） → テーマ別パターン → other」の
 // 判定順序だけを持つ（ルールの追加・変更は config.ts の編集だけで完結する設計）。
 
-import { QUERY_CATEGORY_PATTERNS } from "./config";
+import { MIN_MUNI_NAME_MATCH_LENGTH, QUERY_CATEGORY_PATTERNS } from "./config";
 import type { MuniMeta, QueryCategory } from "./types";
 
 export function normalizeQuery(q: string): string {
@@ -22,7 +22,7 @@ export type MuniNameMatcher = (query: string) => string | null;
  */
 export function buildMuniNameMatcher(muniMaster: Map<string, MuniMeta>): MuniNameMatcher {
   const names = [...new Set([...muniMaster.values()].flatMap((m) => [m.name, m.displayName]))]
-    .filter((n): n is string => Boolean(n) && n.length >= 2)
+    .filter((n): n is string => Boolean(n) && n.length >= MIN_MUNI_NAME_MATCH_LENGTH)
     .sort((a, b) => b.length - a.length);
   if (names.length === 0) return () => null;
   const pattern = new RegExp(names.map(escapeRegExp).join("|"));

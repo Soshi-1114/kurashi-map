@@ -22,7 +22,6 @@ import {
   buildDailySeries,
   groupByKey,
   metricsFromDailyPoints,
-  metricsFromRow,
   totalMetrics,
   type DailyPoint,
 } from "./aggregate";
@@ -42,11 +41,12 @@ import {
 } from "./opportunities";
 import { buildAnalysisJson } from "./report/analysisJson";
 import { buildAnalysisPrompt } from "./report/analysisPrompt";
+import { buildPageQueryRows, buildPageRows, buildQueryRows } from "./report/rows";
 import { buildSummaryMarkdown } from "./report/summary";
-import type { CompareBundle, FixedWindowComparison, PageQueryRow, PageRow, QueryRow, ReportBundle } from "./report/types";
+import type { CompareBundle, FixedWindowComparison, ReportBundle } from "./report/types";
 import type { GscApiRow, PeriodRange } from "./types";
 import { buildMuniNameMatcher, classifyQuery, normalizeQuery } from "./queryMeta";
-import { classifyUrl, loadMuniMaster, normalizePageRows } from "./urlMeta";
+import { classifyUrl, fetchPageRows, loadMuniMaster, type PageRowsFetch } from "./urlMeta";
 
 // ===== 引数パース =====
 
@@ -118,35 +118,31 @@ async function main(): Promise<void> {
 
   console.log(`[gsc] site=${cli.siteUrl} period=${current.startDate}〜${current.endDate} compare=${cli.compareMode}`);
 
-  console.log("[gsc] fetching: daily site trend (date) ...");
-  const dailyRowsRaw = await fetchAllRows({ siteUrl: cli.siteUrl, ...dailyRange, dimensions: ["date"] });
+  // 各 dimensions の取得はそれぞれ独立しているため、まとめて並行実行する
+  // （GSC API 側の 429/5xx リトライは api.ts の fetchAllRows が個別に処理する）。
+  console.log(`[gsc] fetching ${previous ? 7 : 6} datasets from GSC ...`);
+  const [dailyRowsRaw, pageCurrent, queryRowsCurrent, pageQueryCurrent, deviceRowsCurrent, countryRowsCurrent, pagePrev] =
+    await Promise.all([
+      fetchAllRows({ siteUrl: cli.siteUrl, ...dailyRange, dimensions: ["date"] }),
+      fetchPageRows({ siteUrl: cli.siteUrl, ...current, dimensions: ["page"] }),
+      fetchAllRows({ siteUrl: cli.siteUrl, ...current, dimensions: ["query"] }),
+      fetchPageRows({ siteUrl: cli.siteUrl, ...current, dimensions: ["page", "query"] }),
+      fetchAllRows({ siteUrl: cli.siteUrl, ...current, dimensions: ["device"] }),
+      fetchAllRows({ siteUrl: cli.siteUrl, ...current, dimensions: ["country"] }),
+      previous
+        ? fetchPageRows({ siteUrl: cli.siteUrl, ...previous, dimensions: ["page"] })
+        : Promise.resolve<PageRowsFetch | null>(null),
+    ]);
+  console.log("[gsc] fetch done.");
 
-  console.log("[gsc] fetching: pages (page) ...");
-  const pageRowsCurrentRaw = await fetchAllRows({ siteUrl: cli.siteUrl, ...current, dimensions: ["page"] });
   // GSC は page キーにフル URL を返すが、自治体マスタ等はパスのみで管理しているため
-  // 突き合わせ用に正規化する（raw/ には正規化前の生レスポンスを残す）。
-  const pageRowsCurrent = normalizePageRows(pageRowsCurrentRaw);
-
-  console.log("[gsc] fetching: queries (query) ...");
-  const queryRowsCurrent = await fetchAllRows({ siteUrl: cli.siteUrl, ...current, dimensions: ["query"] });
-
-  console.log("[gsc] fetching: page x query ...");
-  const pageQueryRowsCurrentRaw = await fetchAllRows({ siteUrl: cli.siteUrl, ...current, dimensions: ["page", "query"] });
-  const pageQueryRowsCurrent = normalizePageRows(pageQueryRowsCurrentRaw);
-
-  console.log("[gsc] fetching: device ...");
-  const deviceRowsCurrent = await fetchAllRows({ siteUrl: cli.siteUrl, ...current, dimensions: ["device"] });
-
-  console.log("[gsc] fetching: country ...");
-  const countryRowsCurrent = await fetchAllRows({ siteUrl: cli.siteUrl, ...current, dimensions: ["country"] });
-
-  let pageRowsPrevRaw: GscApiRow[] = [];
-  let pageRowsPrev: GscApiRow[] = [];
-  if (previous) {
-    console.log(`[gsc] fetching: pages for previous period (${previous.startDate}〜${previous.endDate}) ...`);
-    pageRowsPrevRaw = await fetchAllRows({ siteUrl: cli.siteUrl, ...previous, dimensions: ["page"] });
-    pageRowsPrev = normalizePageRows(pageRowsPrevRaw);
-  }
+  // 突き合わせ用に正規化する（raw/ には正規化前の生レスポンスを残す。fetchPageRows が両方返す）。
+  const pageRowsCurrentRaw = pageCurrent.raw;
+  const pageRowsCurrent = pageCurrent.normalized;
+  const pageQueryRowsCurrentRaw = pageQueryCurrent.raw;
+  const pageQueryRowsCurrent = pageQueryCurrent.normalized;
+  const pageRowsPrevRaw: GscApiRow[] = pagePrev?.raw ?? [];
+  const pageRowsPrev: GscApiRow[] = pagePrev?.normalized ?? [];
 
   // ===== 分類 =====
   const muniMaster = loadMuniMaster();
@@ -199,23 +195,9 @@ async function main(): Promise<void> {
     };
   }
 
-  const pages: PageRow[] = [...pageMetricsCurrent.entries()].map(([url, m]) => ({
-    url,
-    meta: classifyUrlFn(url),
-    ...m,
-  }));
-  const queries: QueryRow[] = [...queryMetricsCurrent.entries()].map(([query, m]) => ({
-    query,
-    category: classifyQueryFn(query),
-    ...m,
-  }));
-  const pageQueries: PageQueryRow[] = pageQueryRowsCurrent.map((r) => ({
-    url: r.keys[0],
-    meta: classifyUrlFn(r.keys[0]),
-    query: r.keys[1],
-    category: classifyQueryFn(r.keys[1]),
-    ...metricsFromRow(r),
-  }));
+  const pages = buildPageRows(pageMetricsCurrent, classifyUrlFn);
+  const queries = buildQueryRows(queryMetricsCurrent, classifyQueryFn);
+  const pageQueries = buildPageQueryRows(pageQueryRowsCurrent, classifyUrlFn, classifyQueryFn);
 
   const noImpressionMunicipalities = municipalities.filter((m) => m.status === "noImpression");
 

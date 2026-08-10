@@ -6,7 +6,7 @@
 //   position = Σ(position × impressions) / 総impressions
 // で導出する（GSC の仕様と同じ、impressions 加重）。
 
-import { MUNI_STATUS_THRESHOLDS } from "./config";
+import { MA_WINDOW_DAYS, MUNI_STATUS_THRESHOLDS } from "./config";
 import type { GscApiRow, Metrics, MuniMeta, PageType, QueryCategory, UrlMeta } from "./types";
 
 interface Accum {
@@ -18,15 +18,11 @@ interface Accum {
 function newAccum(): Accum {
   return { clicks: 0, impressions: 0, posWeighted: 0 };
 }
-function addRowToAccum(acc: Accum, row: GscApiRow): void {
-  acc.clicks += row.clicks;
-  acc.impressions += row.impressions;
-  acc.posWeighted += row.position * row.impressions;
-}
-function addMetricsToAccum(acc: Accum, m: Metrics): void {
-  acc.clicks += m.clicks;
-  acc.impressions += m.impressions;
-  acc.posWeighted += m.position * m.impressions;
+/** GscApiRow・Metrics どちらも clicks/impressions/position を持つ（構造的部分型）ので共用する。 */
+function addToAccum(acc: Accum, x: { clicks: number; impressions: number; position: number }): void {
+  acc.clicks += x.clicks;
+  acc.impressions += x.impressions;
+  acc.posWeighted += x.position * x.impressions;
 }
 function finalizeAccum(acc: Accum): Metrics {
   return {
@@ -37,11 +33,21 @@ function finalizeAccum(acc: Accum): Metrics {
   };
 }
 
+/** Map の get-or-insert。無ければ make() で作って登録し、その値を返す。 */
+function getOrInsert<K, V>(map: Map<K, V>, key: K, make: () => V): V {
+  let v = map.get(key);
+  if (v === undefined) {
+    v = make();
+    map.set(key, v);
+  }
+  return v;
+}
+
 export const EMPTY_METRICS: Metrics = { clicks: 0, impressions: 0, ctr: 0, position: 0 };
 
 export function totalMetrics(rows: GscApiRow[]): Metrics {
   const acc = newAccum();
-  for (const r of rows) addRowToAccum(acc, r);
+  for (const r of rows) addToAccum(acc, r);
   return finalizeAccum(acc);
 }
 
@@ -57,26 +63,14 @@ export function metricsFromRow(row: GscApiRow): Metrics {
 
 export function metricsFromDailyPoints(points: DailyPoint[]): Metrics {
   const acc = newAccum();
-  for (const p of points) {
-    acc.clicks += p.clicks;
-    acc.impressions += p.impressions;
-    acc.posWeighted += p.position * p.impressions;
-  }
+  for (const p of points) addToAccum(acc, p);
   return finalizeAccum(acc);
 }
 
 /** rows を keyFn の戻り値でグルーピングし、キーごとの Metrics を返す。 */
 export function groupByKey<T extends string>(rows: GscApiRow[], keyFn: (r: GscApiRow) => T): Map<T, Metrics> {
   const accs = new Map<T, Accum>();
-  for (const r of rows) {
-    const k = keyFn(r);
-    let a = accs.get(k);
-    if (!a) {
-      a = newAccum();
-      accs.set(k, a);
-    }
-    addRowToAccum(a, r);
-  }
+  for (const r of rows) addToAccum(getOrInsert(accs, keyFn(r), newAccum), r);
   const out = new Map<T, Metrics>();
   for (const [k, a] of accs) out.set(k, finalizeAccum(a));
   return out;
@@ -95,7 +89,7 @@ export function buildDailySeries(dateRows: GscApiRow[]): DailyPoint[] {
   const dates = [...byDate.keys()].sort();
   const points = dates.map((date) => ({ date, ...(byDate.get(date) as Metrics) }));
   return points.map((p, i) => {
-    const windowPoints = points.slice(Math.max(0, i - 6), i + 1);
+    const windowPoints = points.slice(Math.max(0, i - (MA_WINDOW_DAYS - 1)), i + 1);
     const clicksMA7 = windowPoints.reduce((s, w) => s + w.clicks, 0) / windowPoints.length;
     const impressionsMA7 = windowPoints.reduce((s, w) => s + w.impressions, 0) / windowPoints.length;
     return { ...p, clicksMA7, impressionsMA7 };
@@ -118,18 +112,8 @@ export function aggregatePageTypes(
   for (const r of pageRows) {
     const url = r.keys[0];
     const pageType = classifyUrl(url).pageType;
-    let a = byType.get(pageType);
-    if (!a) {
-      a = newAccum();
-      byType.set(pageType, a);
-    }
-    addRowToAccum(a, r);
-    let s = distinctPages.get(pageType);
-    if (!s) {
-      s = new Set();
-      distinctPages.set(pageType, s);
-    }
-    s.add(url);
+    addToAccum(getOrInsert(byType, pageType, newAccum), r);
+    getOrInsert(distinctPages, pageType, () => new Set<string>()).add(url);
   }
   return [...byType.entries()]
     .map(([pageType, a]) => ({ pageType, ...finalizeAccum(a), pageCount: distinctPages.get(pageType)?.size ?? 0 }))
@@ -152,18 +136,8 @@ export function aggregateQueryCategories(
   for (const r of queryRows) {
     const q = r.keys[0];
     const cat = classifyQuery(q);
-    let a = byCat.get(cat);
-    if (!a) {
-      a = newAccum();
-      byCat.set(cat, a);
-    }
-    addRowToAccum(a, r);
-    let s = distinct.get(cat);
-    if (!s) {
-      s = new Set();
-      distinct.set(cat, s);
-    }
-    s.add(q);
+    addToAccum(getOrInsert(byCat, cat, newAccum), r);
+    getOrInsert(distinct, cat, () => new Set<string>()).add(q);
   }
   return [...byCat.entries()]
     .map(([category, a]) => ({ category, ...finalizeAccum(a), queryCount: distinct.get(category)?.size ?? 0 }))
@@ -237,14 +211,7 @@ export function aggregateMunicipalities(
 ): { rows: MuniAgg[]; coverage: MuniCoverage } {
   const queryCountByPath = new Map<string, Set<string>>();
   for (const r of pageQueryRows) {
-    const p = r.keys[0];
-    const q = r.keys[1];
-    let s = queryCountByPath.get(p);
-    if (!s) {
-      s = new Set();
-      queryCountByPath.set(p, s);
-    }
-    s.add(q);
+    getOrInsert(queryCountByPath, r.keys[0], () => new Set<string>()).add(r.keys[1]);
   }
 
   const rows: MuniAgg[] = [];
@@ -294,7 +261,7 @@ export function aggregatePrefectures(muniRows: MuniAgg[]): PrefAgg[] {
     const acc = newAccum();
     let exposed = 0;
     for (const m of list) {
-      addMetricsToAccum(acc, m);
+      addToAccum(acc, m);
       if (m.impressions > 0) exposed++;
     }
     out.push({
