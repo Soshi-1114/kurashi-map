@@ -68,8 +68,9 @@ export function latestLastModified(munis: Municipality[]): Date | null {
 // なお docs/seo/url-sets.json の since（効果計測の起点）とは目的が違うので値がずれてよい:
 // lastModified は「いつ変わったか」、since は「新しい内容が丸一日配信された最初の日」。
 export const TEMPLATE_REVISED_AT = {
-  /** /area/{pref}/{code} 自治体詳細。2026-08-10: title を人口・家賃・外国人割合の実数値並びに刷新（PR #129） */
-  areaMuni: "2026-08-10",
+  /** /area/{pref}/{code} 自治体詳細。2026-08-11: 将来人口（IPSS 2050年推計）カードを追加（PR #138）。
+   *  2026-08-10: title を人口・家賃・外国人割合の実数値並びに刷新（PR #129） */
+  areaMuni: "2026-08-11",
   /** /area/{pref} 県ハブ。2026-08-10: title の重複解消＋データ概況表・全ランキング導線を追加（PR #127/#130） */
   areaPref: "2026-08-10",
   /** /ranking/{slug} 全国ランキング。2026-08-10: population 系に実数値入り description を追加（PR #126） */
