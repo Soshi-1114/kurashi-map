@@ -8,6 +8,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { PREFS } from "./_lib/prefs.mjs";
+import { IPSS_YEARS } from "./_lib/ipss.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const prefArg = process.argv.find((a) => a.startsWith("--pref="))?.slice(7);
@@ -94,6 +95,30 @@ function checkMuni(file, slug, m, level) {
     if (m.vacancy.rate >= 0 && m.vacancy.total <= 0) err(file, code, "vacancy が実データなのに total が 0");
     if (!isStr(m.vacancy.source)) err(file, code, "vacancy.source が空");
     if (!isStr(m.vacancy.asOf)) err(file, code, "vacancy.asOf が空");
+  }
+  if (m.futurePopulation !== undefined) {
+    const fp = m.futurePopulation;
+    const excluded = isStr(fp.source) && fp.source.includes("対象外");
+    if (!isNum(fp.base2020)) err(file, code, "futurePopulation.base2020 が数値でない");
+    if (!isStr(fp.source)) err(file, code, "futurePopulation.source が空");
+    if (!isStr(fp.asOf)) err(file, code, "futurePopulation.asOf が空");
+    for (const key of ["young2050", "working2050", "elderly2050"]) {
+      if (!isNum(fp[key]) || fp[key] < 0) err(file, code, `futurePopulation.${key} が非負数値でない`);
+    }
+    if (typeof fp.total !== "object" || fp.total === null) {
+      err(file, code, "futurePopulation.total がオブジェクトでない");
+    } else if (excluded) {
+      // 対象外センチネルは base2020=0・total 空で表現する（0 を実データに見せない）。
+      if (fp.base2020 !== 0 || Object.keys(fp.total).length !== 0) {
+        err(file, code, "futurePopulation が対象外なのに数値が入っている");
+      }
+    } else {
+      // 実データは 2025〜2050 の5年刻み6時点が揃い、基準人口が正であること。
+      if (fp.base2020 <= 0) err(file, code, "futurePopulation が実データなのに base2020 が正でない");
+      for (const y of IPSS_YEARS.slice(1)) {
+        if (!isNum(fp.total[y]) || fp.total[y] < 0) err(file, code, `futurePopulation.total.${y} が非負数値でない`);
+      }
+    }
   }
 }
 

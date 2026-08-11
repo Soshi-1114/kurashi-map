@@ -423,3 +423,33 @@ node scripts/fetch-towns.mjs --file=/path/latest.csv   # 取得済みローカ�
   最長共通接頭辞を「最後のし」で切って導出する（`scripts/_lib/towns.mjs`
   `cityKanaFromWardKanas`。名古屋市の中区/中村区/中川区のような区名側の共通音は
   この打ち切りで除去される。テストあり）。
+
+## 11. 将来推計人口（IPSS）の更新（手動）
+
+出典: 国立社会保障・人口問題研究所「日本の地域別将来推計人口」（現行は令和5(2023)年推計。2020年国勢調査基準、2050年まで5年刻み）。利用条件は公共データ利用規約（PDL1.0）で、出典表記が必須（data JSON の `futurePopulation.source` に記載済み）。
+
+**更新頻度: 約5年周期**（次回は2028年頃見込み）。annual / quarterly ワークフローには載せず、新推計の公表時にのみ以下を手動実行する。
+
+```bash
+# 1. 結果表 Excel 4本を取得（URL は scripts/_lib/versions.mjs の IPSS_BASE_URL）
+mkdir -p /tmp/ipss && cd /tmp/ipss
+for f in kekkahyo1 kekkahyo2_1 kekkahyo2_2 kekkahyo2_3; do
+  curl -sL -A "Mozilla/5.0" -O "https://www.ipss.go.jp/pp-shicyoson/j/shicyoson23/2gaiyo_hyo/$f.xlsx"
+done
+
+# 2. 全県へ反映（不一致が出るとエラー終了する）
+cd /path/to/kurashi-map
+node scripts/fetch-future-population.mjs --all
+
+# 3. 検証
+node scripts/validate-data.mjs
+npx vitest run tests/lib/futurePopulation.test.ts
+```
+
+新推計への切り替え時のチェックリスト:
+
+- `scripts/_lib/versions.mjs` の `IPSS_BASE_URL`（`shicyoson{NN}` 部分）と `IPSS_ASOF` をセットで更新。
+- `scripts/fetch-future-population.mjs` の `SOURCE` の推計年表記（「令和5年推計」）を更新。
+- **対象外リストの見直し**（`scripts/_lib/ipss.mjs`）: 福島県浜通り13市町村が個別推計されるようになったか、市町村合併・政令市の区再編でコードが変わっていないかを確認する。スクリプトは IPSS 側に見つからない自治体があるとエラー終了するので、そこで検出できる。
+- 現行データの既知の特殊ケース: ①浜通り13市町村＝「浜通り地域」一括推計のため対象外センチネル ②北方領土6村＝対象外 ③浜松市＝2024年の区再編（7区→3区）より前の旧区で推計されているため、中央区・浜名区は対象外、天竜区は区域変更なしの改称なので旧コード22137を読み替え（`FUTURE_CODE_REMAP`）。
+- 推計の基準人口（`base2020`）は IPSS 内部の国勢調査基準値で、`population`（最新の国勢調査）とは基準が異なる。減少率の分母を混ぜないこと（`lib/futurePopulation.ts` に集約済み）。
