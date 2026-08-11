@@ -116,7 +116,8 @@ const foreignFreshnessLabel = freshnessFromAsOf((m) => m.foreignResidents.asOf);
 
 // 人口の鮮度ラベル。Municipality に人口の asOf フィールドが無いため固定文字列とし、
 // 確定値公表・次回調査での更新時に NEXT_UPDATE.population と合わせて書き換える。
-const POPULATION_FRESHNESS = "2025年国勢調査";
+// エリア詳細ページの将来人口カード（現在人口のラベル）も参照するため export。
+export const POPULATION_FRESHNESS = "2025年国勢調査";
 
 // 将来推計人口の鮮度ラベル。asOf("2023")由来の「2023年最新」は誤解を招くため推計名を明示。
 const FUTURE_FRESHNESS = "令和5(2023)年推計";

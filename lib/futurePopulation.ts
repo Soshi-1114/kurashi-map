@@ -9,8 +9,25 @@
 // ような負のセンチネル数値は実データと衝突し得るため使わない。
 
 import type { Municipality } from "./types";
+import { signedPct } from "./format";
 
 type FuturePopulation = NonNullable<Municipality["futurePopulation"]>;
+
+/** フィールド未収録（ETL 未実行）時の nodata センチネル（SHELTER_NODATA と同じ役割）。 */
+export const FUTURE_POP_NODATA = "対象外（未収録）";
+
+/**
+ * NoData 表示用の source / asOf。hasFuturePopulation の否定分岐では
+ * m.futurePopulation が undefined に絞り込まれセンチネルの source を参照できないため、
+ * UI は絞り込み前の値をこのアクセサ経由で取り出す。
+ */
+export function futurePopSource(fp: Municipality["futurePopulation"]): string {
+  return fp?.source ?? FUTURE_POP_NODATA;
+}
+
+export function futurePopAsOf(fp: Municipality["futurePopulation"]): string {
+  return fp?.asOf ?? "-";
+}
 
 /**
  * 市区町村別の将来推計があるか。フィールド未収録（ETL 未実行）と、
@@ -44,12 +61,21 @@ export function futureChangeRate2050(fp: Municipality["futurePopulation"]): numb
  */
 export function futureRateText(fp: Municipality["futurePopulation"]): string {
   const r = futureChangeRate2050(fp);
-  return r == null ? "—" : `${r > 0 ? "+" : ""}${r.toFixed(1)}%`;
+  return r == null ? "—" : `${signedPct(r)}%`;
+}
+
+/** 2050年の年齢3区分の構成比（対2050年総人口、%）。データなし・総人口0は null。 */
+export function ageComposition2050(
+  fp: Municipality["futurePopulation"],
+): { young: number; working: number; elderly: number } | null {
+  if (!hasFuturePopulation(fp)) return null;
+  const t2050 = futureTotal(fp, "2050");
+  if (t2050 == null || t2050 <= 0) return null;
+  const pct = (v: number) => (v / t2050) * 100;
+  return { young: pct(fp.young2050), working: pct(fp.working2050), elderly: pct(fp.elderly2050) };
 }
 
 /** 2050年の高齢化率（65歳以上 ÷ 総人口、%）。データなしは null。 */
 export function elderlyRatio2050(fp: Municipality["futurePopulation"]): number | null {
-  if (!hasFuturePopulation(fp)) return null;
-  const t2050 = futureTotal(fp, "2050");
-  return t2050 == null || t2050 <= 0 ? null : (fp.elderly2050 / t2050) * 100;
+  return ageComposition2050(fp)?.elderly ?? null;
 }

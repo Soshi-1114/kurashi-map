@@ -57,3 +57,21 @@ export function muni(partial: Partial<Municipality> = {}): Municipality {
     ...partial,
   };
 }
+
+// IPSS 将来推計人口（実データ形）。センチネル形は各テストで source を上書きして作る。
+export const FUTURE_POP_SOURCE = "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）";
+
+export function futurePop(
+  partial: Partial<NonNullable<Municipality["futurePopulation"]>> = {},
+): NonNullable<Municipality["futurePopulation"]> {
+  return {
+    base2020: 600000,
+    total: { "2050": 580000 },
+    young2050: 60000,
+    working2050: 340000,
+    elderly2050: 180000,
+    source: FUTURE_POP_SOURCE,
+    asOf: "2023",
+    ...partial,
+  };
+}

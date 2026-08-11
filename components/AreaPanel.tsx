@@ -10,7 +10,7 @@ import { hasLandPrice } from "@/lib/landPrice";
 import { isHazardEvaluated } from "@/lib/coverage";
 import { hasForeignData, foreignRatioPct } from "@/lib/foreignResidents";
 import { hasShelterData, SHELTER_NODATA } from "@/lib/shelters";
-import { hasFuturePopulation, futureTotal } from "@/lib/futurePopulation";
+import { hasFuturePopulation, futureTotal, futurePopSource, futurePopAsOf } from "@/lib/futurePopulation";
 import { floodLevelOf, landslideLevelOf, floodGraded, floodLevelLabel, landslideLevelLabel } from "@/lib/hazardScale";
 
 type Props = {
@@ -102,8 +102,8 @@ function hazardCardValue(h: Municipality["hazard"]): string {
 export function MetricCards({ m }: { m: Municipality }) {
   const rentHasData = hasRent(m.rent.value);
   // 型ガードの否定分岐では source/asOf を参照できない（センチネルも同型のため）ので先に取り出す。
-  const futurePopSource = m.futurePopulation?.source ?? "対象外（未収録）";
-  const futurePopAsOf = m.futurePopulation?.asOf ?? "-";
+  const fpSource = futurePopSource(m.futurePopulation);
+  const fpAsOf = futurePopAsOf(m.futurePopulation);
   const cards = [
     rentHasData
       ? { label: "家賃平均", value: `${m.rent.value.toLocaleString()} ${m.rent.unit}`, source: m.rent.source, asOf: m.rent.asOf, est: m.rent.isEstimated }
@@ -126,7 +126,7 @@ export function MetricCards({ m }: { m: Municipality }) {
     // 将来推計人口（IPSS 公的推計）。est=true で「推計」ラベルを必ず表示する。
     hasFuturePopulation(m.futurePopulation)
       ? { label: "2050年推計人口", value: `${(futureTotal(m.futurePopulation, "2050") ?? 0).toLocaleString()} 人`, source: m.futurePopulation.source, asOf: m.futurePopulation.asOf, est: true }
-      : { label: "2050年推計人口", value: "対象外", source: futurePopSource, asOf: futurePopAsOf, est: false },
+      : { label: "2050年推計人口", value: "対象外", source: fpSource, asOf: fpAsOf, est: false },
   ];
   return (
     <div className="metric-grid">
