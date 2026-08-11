@@ -39,6 +39,7 @@ import { hasLandPrice } from "@/lib/landPrice";
 import { hasVacancy, vacancyRateText } from "@/lib/vacancy";
 import { isAmenitiesCounted, coverageReason } from "@/lib/coverage";
 import { hasForeignData, foreignRatioPct, hasForeignRatio } from "@/lib/foreignResidents";
+import { hasFuturePopulation, futureTotal, futureChangeRate2050 } from "@/lib/futurePopulation";
 import { getForeignStats, avgBand, type ForeignComparison } from "@/lib/foreignStats";
 import { getAreaStats } from "@/lib/areaStats";
 import { getPrefRanks } from "@/lib/prefRanks";
@@ -170,6 +171,9 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
   const prefName = prefNameOf(m.pref);
   const parent = m.parentCode ? all.find((x) => x.code === m.parentCode) ?? null : null;
   const heading = m.displayName ?? m.name;
+  // 将来推計の対象外理由（NoData 表示用）。型ガードの否定分岐では source を参照できない
+  // （センチネルも FuturePopulation 型のため）ので、絞り込み前にここで取り出しておく。
+  const futurePopSource = m.futurePopulation?.source ?? "対象外（未収録）";
 
   // 人口規模が近い同県内の自治体（回遊導線）。「家賃が近い」「似ているエリア」との重複を除外。
   const closePop = findClosePopulationInPref(peers, m, 4, new Set([...relatedCodes, ...similar.map((s) => s.code)]));
@@ -596,6 +600,68 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
               <NoData text="在留外国人統計の対象外です。" reason={coverageReason(m.foreignResidents.source)} />
             )}
           </MetricCard>
+
+          {/* 将来人口（IPSS 公的推計）。「今と将来」を同じ画面で見る2050暮らしビューの土台。
+              titleへの反映は行わない（進行中のtitle刷新の計測と競合させない。
+              docs/seo/gsc-seo-roadmap-2026-08.md 参照）。 */}
+          <div className="ad-span-2">
+            <MetricCard
+              icon={Users}
+              tone="ad-tone-pop"
+              title="将来人口（公的推計）"
+              link={{ href: "/map/future-population", label: "2050年推計人口を地図で見る" }}
+            >
+              {hasFuturePopulation(m.futurePopulation) ? (
+                <>
+                  <MetricPrimary value={(futureTotal(m.futurePopulation, "2050") ?? 0).toLocaleString()} unit="人（2050年・推計）" />
+                  {(() => {
+                    const rate = futureChangeRate2050(m.futurePopulation);
+                    return rate == null ? null : (
+                      <p className="ad-note">
+                        2020年（推計の基準年）比 {rate > 0 ? "+" : ""}
+                        {rate.toFixed(1)}%
+                      </p>
+                    );
+                  })()}
+                  <CompareBar
+                    rows={[
+                      { label: "現在（2025年国勢調査）", value: m.population, self: true },
+                      { label: "2030年（推計）", value: futureTotal(m.futurePopulation, "2030") ?? 0 },
+                      { label: "2040年（推計）", value: futureTotal(m.futurePopulation, "2040") ?? 0 },
+                      { label: "2050年（推計）", value: futureTotal(m.futurePopulation, "2050") ?? 0 },
+                    ]}
+                    format={(v) => `${v.toLocaleString()}人`}
+                    caption="現在人口と将来推計人口の推移"
+                  />
+                  {(() => {
+                    const fp = m.futurePopulation;
+                    const t = futureTotal(fp, "2050");
+                    if (!hasFuturePopulation(fp) || t == null || t <= 0) return null;
+                    const pctOf = (v: number) => ((v / t) * 100).toFixed(1);
+                    return (
+                      <p className="ad-note">
+                        2050年の年齢構成（推計）: 年少（0-14歳）{fp.young2050.toLocaleString()}人（{pctOf(fp.young2050)}%）・
+                        生産年齢（15-64歳）{fp.working2050.toLocaleString()}人（{pctOf(fp.working2050)}%）・
+                        高齢（65歳以上）{fp.elderly2050.toLocaleString()}人（{pctOf(fp.elderly2050)}%）
+                      </p>
+                    );
+                  })()}
+                  <p className="ad-note">
+                    <Info size={15} aria-hidden="true" />
+                    <span>
+                      国立社会保障・人口問題研究所（令和5(2023)年推計）の公表値です。一定の仮定に基づく公的推計であり、将来を保証するものではありません。推計の基準は2020年国勢調査で、現在人口（2025年国勢調査）とは調査基準が異なります。
+                    </span>
+                  </p>
+                  <SourceLine source={m.futurePopulation.source} asOf={m.futurePopulation.asOf} estimated />
+                </>
+              ) : (
+                <NoData
+                  text="市区町村別の将来推計はありません。"
+                  reason={coverageReason(futurePopSource)}
+                />
+              )}
+            </MetricCard>
+          </div>
         </div>
       </Section>
       {/* 家賃が近い自治体 */}
