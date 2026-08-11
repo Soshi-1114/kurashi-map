@@ -36,6 +36,13 @@ export const VERSIONS = {
   MENCHO_URL: "https://www.gsi.go.jp/KOKUJYOHO/MENCHO/backnumber/R8_04_mencho.csv",
   MENCHO_ASOF: "2026-04-01",
 
+  // IPSS「日本の地域別将来推計人口」結果表 Excel の配布ディレクトリと推計年。
+  // 約5年周期（次回は2028年頃見込み）の手動更新のみで、定期ワークフローには載せない
+  // （docs/data-update.md §将来推計人口）。新推計が出たら URL の shicyoson{NN} と
+  // ASOF を同時に更新し、fetch-future-population.mjs を全県で再実行する。
+  IPSS_BASE_URL: "https://www.ipss.go.jp/pp-shicyoson/j/shicyoson23/2gaiyo_hyo",
+  IPSS_ASOF: "2023",
+
   // 出入国在留管理庁「在留外国人統計」の基準時点（半期公表・手動更新）。
   // 期を更新したら statInfId とセットで合わせる（docs/data-update.md §在留外国人）。
   FOREIGN_ASOF: "2025-12",

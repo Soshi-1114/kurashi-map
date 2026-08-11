@@ -67,6 +67,21 @@ export type Municipality = {
     source: string;
     asOf: string;
   };
+  // IPSS「日本の地域別将来推計人口」（令和5(2023)年推計）。公的推計の公表値をそのまま
+  // 収録し、自前の推計・按分はしない。減少率・高齢化率などの派生値は保存せず実行時算出
+  //（lib/futurePopulation.ts）。対象外（福島浜通り13市町村・北方領土6村・浜松市の
+  // 再編後2区）は数値0 + source センチネル（hasFuturePopulation 参照）。
+  // 基準人口 base2020 は2020年国勢調査ベースで、population（2025年国勢調査）とは
+  // 調査基準が異なる。減少率は必ず base2020 を分母にする。
+  futurePopulation?: {
+    base2020: number;                 // 推計の基準人口（2020年）
+    total: Record<string, number>;    // { "2025": n, ..., "2050": n }（5年刻み）
+    young2050: number;                // 2050年 0-14歳
+    working2050: number;              // 2050年 15-64歳
+    elderly2050: number;              // 2050年 65歳以上
+    source: string;
+    asOf: string;                     // "2023"（令和5年推計）
+  };
   hazard: HazardInfo;
   amenities?: {
     stations: number;            // 駅数
