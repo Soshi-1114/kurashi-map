@@ -1,6 +1,5 @@
 import { describe, it, expect } from "vitest";
 import {
-  FUTURE_NODATA,
   hasFuturePopulation,
   futureTotal,
   futureChangeRate2050,
@@ -46,9 +45,9 @@ describe("futureChangeRate2050", () => {
     expect(futureChangeRate2050(fp({ total: { ...fp().total, "2050": 101000 } }))).toBeCloseTo(1);
   });
 
-  it("対象外・未収録は FUTURE_NODATA", () => {
-    expect(futureChangeRate2050(undefined)).toBe(FUTURE_NODATA);
-    expect(futureChangeRate2050(fp({ base2020: 0, total: {}, source: "対象外（北方領土）" }))).toBe(FUTURE_NODATA);
+  it("対象外・未収録は null（増減率は負値が正常値なので負のセンチネルは使わない）", () => {
+    expect(futureChangeRate2050(undefined)).toBeNull();
+    expect(futureChangeRate2050(fp({ base2020: 0, total: {}, source: "対象外（北方領土）" }))).toBeNull();
   });
 });
 
@@ -57,8 +56,8 @@ describe("elderlyRatio2050", () => {
     expect(elderlyRatio2050(fp())).toBeCloseTo((31000 / 78000) * 100);
   });
 
-  it("対象外は FUTURE_NODATA", () => {
-    expect(elderlyRatio2050(fp({ base2020: 0, total: {}, source: "対象外（浜通り…）" }))).toBe(FUTURE_NODATA);
+  it("対象外は null", () => {
+    expect(elderlyRatio2050(fp({ base2020: 0, total: {}, source: "対象外（浜通り…）" }))).toBeNull();
   });
 });
 

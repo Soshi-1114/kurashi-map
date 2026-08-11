@@ -4,13 +4,13 @@
 // 派生値（増減率・高齢化率）は保存せず、ここで生値から算出する（人口密度・外国人比率と
 // 同じ「派生値は保存しない」方針）。分母は必ず IPSS 内部の2020年基準人口（base2020）で、
 // 調査基準の異なる現在の population（2025年国勢調査）とは混ぜない。
+//
+// データなしの表現は null。増減率は負値が正常値（減少）なので、foreignRatio の -1 の
+// ような負のセンチネル数値は実データと衝突し得るため使わない。
 
 import type { Municipality } from "./types";
 
 type FuturePopulation = NonNullable<Municipality["futurePopulation"]>;
-
-/** 算出不能（データなし・対象外）を表すセンチネル。UI 側は has* で先に判定すること。 */
-export const FUTURE_NODATA = -1;
 
 /**
  * 市区町村別の将来推計があるか。フィールド未収録（ETL 未実行）と、
@@ -29,17 +29,17 @@ export function futureTotal(fp: Municipality["futurePopulation"], year: string):
 
 /**
  * 2020年基準人口 → 2050年推計人口の増減率（%）。例: -32.4 = 32.4%減。
- * データなしは FUTURE_NODATA。
+ * データなしは null。
  */
-export function futureChangeRate2050(fp: Municipality["futurePopulation"]): number {
+export function futureChangeRate2050(fp: Municipality["futurePopulation"]): number | null {
   const t2050 = futureTotal(fp, "2050");
-  if (t2050 == null || !hasFuturePopulation(fp)) return FUTURE_NODATA;
+  if (t2050 == null || !hasFuturePopulation(fp)) return null;
   return ((t2050 - fp.base2020) / fp.base2020) * 100;
 }
 
-/** 2050年の高齢化率（65歳以上 ÷ 総人口、%）。データなしは FUTURE_NODATA。 */
-export function elderlyRatio2050(fp: Municipality["futurePopulation"]): number {
+/** 2050年の高齢化率（65歳以上 ÷ 総人口、%）。データなしは null。 */
+export function elderlyRatio2050(fp: Municipality["futurePopulation"]): number | null {
   const t2050 = futureTotal(fp, "2050");
-  if (t2050 == null || t2050 <= 0 || !hasFuturePopulation(fp)) return FUTURE_NODATA;
+  if (t2050 == null || t2050 <= 0 || !hasFuturePopulation(fp)) return null;
   return (fp.elderly2050 / t2050) * 100;
 }
