@@ -8,7 +8,7 @@ import type { Municipality } from "./types";
 
 const NODATA_COLOR = RENT_NODATA_COLOR; // gray-300 を欠損色として全指標で共通化
 
-export type MapMetricKey = "rent" | "landPrice" | "populationTrend" | "foreignRatio";
+export type MapMetricKey = "rent" | "landPrice" | "populationTrend" | "foreignRatio" | "futurePopulation";
 
 type NumericLegend = {
   kind: "numeric";
@@ -36,11 +36,13 @@ export type MapMetric = {
 // 数値指標 → MapLibre step 式。値 <= nodataMax（センチネル）はデータなし色。
 // 既定 nodataMax=0（家賃・地価は実値が常に正なので 0以下＝欠損）。在留外国人比率は
 // 0% が実データのため nodataMax=-1 を渡し、欠損(-1)だけをデータなしに分岐する。
+// 将来人口増減率のように負値が正常値の指標は、数値センチネルを持てないため
+// nodataMax=null を渡してフィールド欠落（["has"] ガード）だけで欠損を判定する。
 function numericStepExpression(
   property: string,
   thresholds: readonly number[],
   colors: readonly string[],
-  nodataMax = 0,
+  nodataMax: number | null = 0,
 ): unknown {
   const step: unknown[] = ["step", ["get", property], colors[0]];
   for (let i = 0; i < thresholds.length; i++) {
@@ -52,7 +54,7 @@ function numericStepExpression(
   return [
     "case",
     ["!", ["has", property]], NODATA_COLOR,
-    ["<=", ["to-number", ["get", property]], nodataMax], NODATA_COLOR,
+    ...(nodataMax !== null ? [["<=", ["to-number", ["get", property]], nodataMax], NODATA_COLOR] : []),
     step,
   ];
 }
@@ -74,6 +76,12 @@ const TREND_ITEMS = [
   { value: "微増", color: "#7fbf7b" }, // PRGn green-300
   { value: "増加", color: "#1b7837" }, // PRGn green-700
 ] as const;
+
+// 2050年将来推計人口の増減率（%）。人口トレンドと同じ PRGn（紫=減少⇔緑=増加）を
+// 連続値5段階に割り当てる（色覚多様性への配慮も同じ理由）。しきい値は実分布から:
+// 中央値 -33% / p90 -5% / 増加は107自治体（5.6%）。「0以上=増加=緑」を独立セルにする。
+const FUTURE_CHANGE_THRESHOLDS = [-50, -30, -10, 0] as const;
+const FUTURE_CHANGE_COLORS = ["#762a83", "#9970ab", "#c2a5cf", "#e7d4e8", "#1b7837"] as const;
 
 export const MAP_METRICS: readonly MapMetric[] = [
   {
@@ -157,6 +165,28 @@ export const MAP_METRICS: readonly MapMetric[] = [
       const v = Number(raw);
       if (!Number.isFinite(v) || v < 0) return "データなし";
       return `${v.toFixed(1)}%`;
+    },
+  },
+  {
+    key: "futurePopulation",
+    label: "2050年人口",
+    legendTitle: "2050年推計人口の増減率（2020年比）",
+    description:
+      "2050年の将来推計人口の増減率（2020年国勢調査基準）。公的推計の公表値で、予測を保証するものではありません。\n出典: 国立社会保障・人口問題研究所（令和5年推計）。",
+    nodataLabel: "データなし（浜通り地域など対象外）",
+    legend: {
+      kind: "numeric",
+      colors: FUTURE_CHANGE_COLORS,
+      scaleLabels: ["-50%", "-30%", "-10%", "0%"],
+    },
+    colorExpression: () =>
+      numericStepExpression("futureChangeRate", FUTURE_CHANGE_THRESHOLDS, FUTURE_CHANGE_COLORS, null),
+    formatValue: (raw) => {
+      // データなしはプロパティ欠落（null/undefined）。負値は正常値（減少）なので
+      // 他指標のような「負=データなし」判定はしない。
+      const v = Number(raw);
+      if (raw == null || raw === "" || !Number.isFinite(v)) return "データなし";
+      return `${v > 0 ? "+" : ""}${v.toFixed(1)}%`;
     },
   },
 ];

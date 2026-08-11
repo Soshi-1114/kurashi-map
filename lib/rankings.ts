@@ -11,6 +11,7 @@ import { isWaitlistDisclosed } from "./waitlist";
 import { hasForeignData, foreignRatioPct } from "./foreignResidents";
 import { hasVacancy, vacancyRateText } from "./vacancy";
 import { populationDensity, densityText } from "./populationDensity";
+import { hasFuturePopulation, futureChangeRate2050, futureRateText } from "./futurePopulation";
 import { prefNameOf } from "./site";
 
 /** トップページ等でランキング導線をまとめるカテゴリ（URL・ページ内容には影響しない） */
@@ -117,6 +118,9 @@ const foreignFreshnessLabel = freshnessFromAsOf((m) => m.foreignResidents.asOf);
 // 確定値公表・次回調査での更新時に NEXT_UPDATE.population と合わせて書き換える。
 const POPULATION_FRESHNESS = "2025年国勢調査";
 
+// 将来推計人口の鮮度ラベル。asOf("2023")由来の「2023年最新」は誤解を招くため推計名を明示。
+const FUTURE_FRESHNESS = "令和5(2023)年推計";
+
 // 外国人住民比率ランキングの導入文（薄ページ対策・中立フレーミング）。high/low で傾向解説を分岐。
 function foreignIntro(highLow: "高い" | "低い"): string[] {
   const trend =
@@ -174,6 +178,8 @@ export const NEXT_UPDATE = {
   foreign: "在留外国人統計は年2回公表です。次回は2026年6月末時点の市区町村別データが2026年12月中旬に公表見込みで、公表後すみやかに更新予定です。",
   vacancy:
     "出典（住宅・土地統計調査）は5年周期のため、現在の2023年調査が最新の公表データです。次回は2028年調査（結果公表は2029年以降）の見込みです。",
+  future:
+    "地域別将来推計人口は約5年周期で改定されます。現在の令和5(2023)年推計が最新で、次回（2028年頃見込み）の公表後に更新予定です。",
 } as const;
 
 // 空き家率の鮮度ラベル。asOf 由来の「2023年最新」は誤解を招くため、調査名を明示する固定文字列。
@@ -206,6 +212,46 @@ const VACANCY_FAQ: { q: string; a: string }[] = [
     a: "住宅・土地統計調査は5年周期で、現在の2023年調査が最新です。次回は2028年調査（公表は2029年以降）の見込みで、公表後すみやかに反映します。",
   },
 ];
+
+// 将来推計人口ランキング（IPSS 令和5年推計）の共通注記。公的推計の位置づけと
+// 対象外自治体の理由、基準の違いを中立に説明する（煽り表現は使わない方針）。
+const FUTURE_NOTE =
+  "将来推計人口は国立社会保障・人口問題研究所（IPSS）の令和5(2023)年推計の公表値で、2020年国勢調査を基準としています。一定の仮定に基づく公的推計であり、将来を保証するものではありません。福島県浜通りの13市町村（浜通り地域として一括推計）・北方領土・浜松市中央区/浜名区（2024年の区再編前の旧区単位で推計）は市区町村別の推計がないため対象外です。";
+
+const FUTURE_FAQ: { q: string; a: string }[] = [
+  {
+    q: "将来推計人口とは何ですか？",
+    a: "国立社会保障・人口問題研究所（IPSS）が公表する「日本の地域別将来推計人口」（令和5(2023)年推計）の市区町村別の値です。2020年国勢調査を基準に、出生・死亡・移動の仮定を置いて2050年まで5年刻みで推計されています。本サイトは公表値をそのまま掲載し、独自の推計や補間は行っていません。",
+  },
+  {
+    q: "この数字は将来を予測するものですか？",
+    a: "一定の仮定に基づく公的推計であり、将来の人口を保証・断定するものではありません。今後の社会経済状況や政策によって実際の人口は変わり得ます。",
+  },
+  {
+    q: "掲載されていない自治体があるのはなぜですか？",
+    a: "福島県浜通りの13市町村は震災・原発事故の影響により「浜通り地域」として一括推計されており、市町村別の推計値が存在しません。北方領土の6村も推計対象外です。浜松市の中央区・浜名区は2024年の区再編前の旧区単位で推計されているため、現行の区別データがありません。",
+  },
+  {
+    q: "現在の人口とどう違いますか？",
+    a: "本サイトの現在人口は2025年国勢調査（速報）、将来推計の基準人口は2020年国勢調査です。調査基準が異なるため、増減率は推計内部の2020年値を分母に算出しています。",
+  },
+];
+
+// 1位自治体（実データ）から増減率・基準年を含む meta description を組み立てる。
+function futureMetaDescription(direction: "decline" | "resilient") {
+  const head =
+    direction === "decline"
+      ? "全国の市区町村を2050年の将来推計人口の減少率が大きい順にランキング。"
+      : "全国の市区町村を2050年の将来推計人口の減少率が小さい順（増加を含む）にランキング。";
+  const tail =
+    "国立社会保障・人口問題研究所（令和5年推計）の公表値で、2050年に人口がどう変わる見込みかを比較できます。";
+  return (top1: Municipality | null): string => {
+    const rate = top1 ? futureChangeRate2050(top1.futurePopulation) : null;
+    if (!top1 || rate == null) return `${head}${tail}`;
+    const name = `${prefNameOf(top1.pref)}${top1.displayName ?? top1.name}`;
+    return `${head}1位は${name}（2020年比${futureRateText(top1.futurePopulation)}）。${tail}`;
+  };
+}
 
 // 人口・人口密度ランキングの meta description（1位の実数値を含む）。
 // 2026-08 GSC分析: population-most 系は「{市} 人口」のような特定1市の人口を探す検索でも
@@ -468,6 +514,46 @@ export const RANKINGS: RankingDef[] = [
       const r = m.populationChangeRate ?? 0;
       return `${r > 0 ? "+" : ""}${r.toFixed(1)}%`;
     },
+  },
+  {
+    slug: "future-population-decline",
+    category: "人口・まち",
+    title: "2050年推計人口の減少率が大きい市区町村ランキング",
+    seoTitle: "2050年の将来推計人口 減少率ランキング",
+    shortLabel: "2050年人口減少率",
+    description:
+      "全国の市区町村を2050年将来推計人口の減少率が大きい順にランキング。国立社会保障・人口問題研究所（令和5年推計）の公表値で比較できます。",
+    metaDescription: futureMetaDescription("decline"),
+    lead: "全国の市区町村を、2050年の将来推計人口の減少率（2020年国勢調査基準）が大きい順に並べたランキングです。",
+    note: FUTURE_NOTE,
+    faq: FUTURE_FAQ,
+    columnLabel: "人口増減率（2020→2050・推計）",
+    order: "asc",
+    freshnessLabel: () => FUTURE_FRESHNESS,
+    nextUpdate: NEXT_UPDATE.future,
+    qualifies: (m) => hasFuturePopulation(m.futurePopulation),
+    sortValue: (m) => futureChangeRate2050(m.futurePopulation) ?? 0,
+    display: (m) => futureRateText(m.futurePopulation),
+  },
+  {
+    slug: "future-population-resilient",
+    category: "人口・まち",
+    title: "2050年推計人口の減少率が小さい市区町村ランキング",
+    seoTitle: "2050年も人口を維持する見込みの市区町村ランキング【将来推計人口】",
+    shortLabel: "2050年人口維持",
+    description:
+      "全国の市区町村を2050年将来推計人口の減少率が小さい順（増加を含む）にランキング。国立社会保障・人口問題研究所（令和5年推計）の公表値で比較できます。",
+    metaDescription: futureMetaDescription("resilient"),
+    lead: "全国の市区町村を、2050年の将来推計人口の減少率（2020年国勢調査基準）が小さい順に並べたランキングです。推計上、人口が増える見込みの自治体が上位に入ります。",
+    note: FUTURE_NOTE,
+    faq: FUTURE_FAQ,
+    columnLabel: "人口増減率（2020→2050・推計）",
+    order: "desc",
+    freshnessLabel: () => FUTURE_FRESHNESS,
+    nextUpdate: NEXT_UPDATE.future,
+    qualifies: (m) => hasFuturePopulation(m.futurePopulation),
+    sortValue: (m) => futureChangeRate2050(m.futurePopulation) ?? 0,
+    display: (m) => futureRateText(m.futurePopulation),
   },
   {
     slug: "foreign-ratio-high",

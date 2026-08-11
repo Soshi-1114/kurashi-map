@@ -212,3 +212,60 @@ describe("RANKINGS レジストリ", () => {
     expect(new Set(slugs).size).toBe(slugs.length);
   });
 });
+
+describe("将来推計人口ランキング（IPSS 令和5年推計）", () => {
+  const decline = getRankingBySlug("future-population-decline")!;
+  const resilient = getRankingBySlug("future-population-resilient")!;
+
+  const SOURCE = "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）";
+  const at = (code: string, base2020: number, t2050: number) =>
+    muni({
+      code,
+      futurePopulation: {
+        base2020,
+        // ランキングが読むのは 2050 のみ（中間年は本テストでは不要）
+        total: { "2050": t2050 },
+        young2050: 0,
+        working2050: 0,
+        elderly2050: t2050,
+        source: SOURCE,
+        asOf: "2023",
+      },
+    });
+
+  const list = [
+    at("A", 100000, 50000), // -50%
+    at("B", 100000, 105000), // +5%
+    at("C", 100000, 80000), // -20%
+    muni({ code: "X" }), // futurePopulation なし → 除外
+    at("Y", 0, 0), // 対象外相当（base2020=0）→ 除外
+  ];
+
+  it("decline は減少率が大きい順、データなし・対象外は除外", () => {
+    expect(rankBy(decline, list).map((m) => m.code)).toEqual(["A", "C", "B"]);
+  });
+
+  it("resilient は減少率が小さい順（増加が先頭）", () => {
+    expect(rankBy(resilient, list).map((m) => m.code)).toEqual(["B", "C", "A"]);
+  });
+
+  it("display は符号付き小数1桁の%（2020年基準）", () => {
+    expect(decline.display(at("A", 100000, 50000))).toBe("-50.0%");
+    expect(decline.display(at("B", 100000, 105000))).toBe("+5.0%");
+  });
+
+  it("metaDescription は1位の増減率を含み、公的推計である旨を明示する", () => {
+    const desc = decline.metaDescription!(at("A", 100000, 50000));
+    expect(desc).toContain("-50.0%");
+    expect(desc).toContain("令和5年推計");
+    expect(decline.metaDescription!(null)).toContain("将来推計人口");
+  });
+
+  it("note に対象外の理由と「保証ではない」旨がある（煽り表現は使わない）", () => {
+    for (const def of [decline, resilient]) {
+      expect(def.note).toContain("保証するものではありません");
+      expect(def.note).toContain("浜通り");
+      expect(`${def.title}${def.lead}${def.note}`).not.toMatch(/消滅|消える/);
+    }
+  });
+});

@@ -119,6 +119,10 @@ export type MuniSummary = {
   // 在留外国人の人口比（%）。地図の塗り分け用。-1=データなし（北方領土等の対象外／
   // 人口不明）。0% は実データ（lib/foreignResidents.ts foreignRatioPct で算出）。
   foreignRatio: number;
+  // 2020→2050年の将来推計人口の増減率（%・IPSS 令和5年推計）。地図の塗り分け用。
+  // 減少（負値）が正常値のため負のセンチネルは使えず、データなし（対象外）は
+  // フィールド欠落で表現する（lib/futurePopulation.ts futureChangeRate2050 で算出）。
+  futureChangeRate?: number;
   // 浸水深ランク。-1=評価対象外（reinfolib圏外）, 0=なし, 1..6（lib/hazardScale.ts）。
   // 旧 hasFloodRisk(>0)・hazardEvaluated(>=0) を1フィールドに集約。地図の濃淡と
   // 「浸水深◯m以下」フィルタの単一ソース。
