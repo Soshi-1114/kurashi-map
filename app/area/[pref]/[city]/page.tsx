@@ -26,7 +26,7 @@ import {
 import { getMunicipality, listAll, listAllAcrossPrefs } from "@/lib/metrics";
 import { buildSummary } from "@/lib/summary";
 import { findRelatedByRent, findSimilar, findClosePopulationInPref } from "@/lib/related";
-import { RANKINGS, formatAsOfJa } from "@/lib/rankings";
+import { RANKINGS, formatAsOfJa, POPULATION_FRESHNESS } from "@/lib/rankings";
 import { muniLastModified } from "@/lib/dataFreshness";
 import { getRankPositions } from "@/lib/rankingStats";
 import { buildFaq } from "@/lib/faq";
@@ -39,6 +39,14 @@ import { hasLandPrice } from "@/lib/landPrice";
 import { hasVacancy, vacancyRateText } from "@/lib/vacancy";
 import { isAmenitiesCounted, coverageReason } from "@/lib/coverage";
 import { hasForeignData, foreignRatioPct, hasForeignRatio } from "@/lib/foreignResidents";
+import {
+  hasFuturePopulation,
+  futureTotal,
+  futureChangeRate2050,
+  futureRateText,
+  ageComposition2050,
+  futurePopSource,
+} from "@/lib/futurePopulation";
 import { getForeignStats, avgBand, type ForeignComparison } from "@/lib/foreignStats";
 import { getAreaStats } from "@/lib/areaStats";
 import { getPrefRanks } from "@/lib/prefRanks";
@@ -170,6 +178,11 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
   const prefName = prefNameOf(m.pref);
   const parent = m.parentCode ? all.find((x) => x.code === m.parentCode) ?? null : null;
   const heading = m.displayName ?? m.name;
+  // 将来人口カードの派生値。const に取れば型ガードの絞り込みが JSX 内へ伝播する。
+  const fp = m.futurePopulation;
+  const fp2050 = futureTotal(fp, "2050");
+  const fpRate = futureChangeRate2050(fp);
+  const fpAges = ageComposition2050(fp);
 
   // 人口規模が近い同県内の自治体（回遊導線）。「家賃が近い」「似ているエリア」との重複を除外。
   const closePop = findClosePopulationInPref(peers, m, 4, new Set([...relatedCodes, ...similar.map((s) => s.code)]));
@@ -596,6 +609,56 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
               <NoData text="在留外国人統計の対象外です。" reason={coverageReason(m.foreignResidents.source)} />
             )}
           </MetricCard>
+
+          {/* 将来人口（IPSS 公的推計）。「今と将来」を同じ画面で見る2050暮らしビューの土台。
+              titleへの反映は行わない（進行中のtitle刷新の計測と競合させない。
+              docs/seo/gsc-seo-roadmap-2026-08.md 参照）。 */}
+          <div className="ad-span-2">
+            <MetricCard
+              icon={Users}
+              tone="ad-tone-pop"
+              title="将来人口（公的推計）"
+              link={{ href: "/map/future-population", label: "2050年推計人口を地図で見る" }}
+            >
+              {hasFuturePopulation(fp) ? (
+                <>
+                  <MetricPrimary value={(fp2050 ?? 0).toLocaleString()} unit="人（2050年・推計）" />
+                  {fpRate != null && (
+                    <p className="ad-note">2020年（推計の基準年）比 {futureRateText(fp)}</p>
+                  )}
+                  <CompareBar
+                    rows={[
+                      { label: `現在（${POPULATION_FRESHNESS}）`, value: m.population, self: true },
+                      { label: "2030年（推計）", value: futureTotal(fp, "2030") ?? 0 },
+                      { label: "2040年（推計）", value: futureTotal(fp, "2040") ?? 0 },
+                      { label: "2050年（推計）", value: fp2050 ?? 0 },
+                    ]}
+                    format={(v) => `${v.toLocaleString()}人`}
+                    caption="現在人口と将来推計人口の推移"
+                  />
+                  {fpAges && (
+                    <p className="ad-note">
+                      2050年の年齢構成（推計）: 年少（0-14歳）{fp.young2050.toLocaleString()}人（{fpAges.young.toFixed(1)}%）・
+                      生産年齢（15-64歳）{fp.working2050.toLocaleString()}人（{fpAges.working.toFixed(1)}%）・
+                      高齢（65歳以上）{fp.elderly2050.toLocaleString()}人（{fpAges.elderly.toFixed(1)}%）
+                    </p>
+                  )}
+                  <p className="ad-note">
+                    <Info size={15} aria-hidden="true" />
+                    <span>
+                      国立社会保障・人口問題研究所（令和5(2023)年推計）の公表値です。一定の仮定に基づく公的推計であり、将来を保証するものではありません。推計の基準は2020年国勢調査で、現在人口（2025年国勢調査）とは調査基準が異なります。
+                    </span>
+                  </p>
+                  <SourceLine source={fp.source} asOf={fp.asOf} estimated />
+                </>
+              ) : (
+                <NoData
+                  text="市区町村別の将来推計はありません。"
+                  reason={coverageReason(futurePopSource(fp))}
+                />
+              )}
+            </MetricCard>
+          </div>
         </div>
       </Section>
       {/* 家賃が近い自治体 */}
