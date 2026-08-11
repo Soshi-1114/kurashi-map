@@ -50,7 +50,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9,
     },
     // 指標別 地図ハブ（家賃・地価・人口増減。/map/foreign-ratio と同構成のピラー群）。
-    ...["/map/rent", "/map/land-price", "/map/population-trend"].map((path) => ({
+    ...["/map/rent", "/map/land-price", "/map/population-trend", "/map/future-population"].map((path) => ({
       url: absoluteUrl(path),
       lastModified: siteLatest,
       changeFrequency: "monthly" as const,
