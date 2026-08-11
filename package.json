@@ -9,7 +9,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
@@ -18,9 +18,9 @@
     "gsc:analyze": "tsx --env-file=.env.local scripts/gsc/analyze.ts"
   },
   "dependencies": {
-    "lucide-react": "^1.28.0",
+    "lucide-react": "^1.31.0",
     "maplibre-gl": "^5.24.0",
-    "next": "^15.5.22",
+    "next": "^15.5.23",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
   },
@@ -28,15 +28,15 @@
     "postcss": "^8.5.10"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.2",
-    "@testing-library/user-event": "^14.6.1",
-    "@turf/turf": "^7.3.5",
+    "@testing-library/user-event": "^14.6.3",
+    "@turf/turf": "^7.4.0",
     "@types/node": "^22.10.0",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.4",
-    "eslint": "^8.57.1",
-    "eslint-config-next": "^15.5.20",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.3.0",
     "google-auth-library": "^9.15.0",
     "jsdom": "^29.1.1",
     "tsx": "^4.19.2",
