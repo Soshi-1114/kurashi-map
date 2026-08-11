@@ -77,6 +77,12 @@ const TREND_ITEMS = [
   { value: "増加", color: "#1b7837" }, // PRGn green-700
 ] as const;
 
+// 2050年将来推計人口の増減率（%）。人口トレンドと同じ PRGn（紫=減少⇔緑=増加）を
+// 連続値5段階に割り当てる（色覚多様性への配慮も同じ理由）。しきい値は実分布から:
+// 中央値 -33% / p90 -5% / 増加は107自治体（5.6%）。「0以上=増加=緑」を独立セルにする。
+const FUTURE_CHANGE_THRESHOLDS = [-50, -30, -10, 0] as const;
+const FUTURE_CHANGE_COLORS = ["#762a83", "#9970ab", "#c2a5cf", "#e7d4e8", "#1b7837"] as const;
+
 export const MAP_METRICS: readonly MapMetric[] = [
   {
     key: "rent",
@@ -161,13 +167,29 @@ export const MAP_METRICS: readonly MapMetric[] = [
       return `${v.toFixed(1)}%`;
     },
   },
+  {
+    key: "futurePopulation",
+    label: "2050年人口",
+    legendTitle: "2050年推計人口の増減率（2020年比）",
+    description:
+      "2050年の将来推計人口の増減率（2020年国勢調査基準）。公的推計の公表値で、予測を保証するものではありません。\n出典: 国立社会保障・人口問題研究所（令和5年推計）。",
+    nodataLabel: "データなし（浜通り地域など対象外）",
+    legend: {
+      kind: "numeric",
+      colors: FUTURE_CHANGE_COLORS,
+      scaleLabels: ["-50%", "-30%", "-10%", "0%"],
+    },
+    colorExpression: () =>
+      numericStepExpression("futureChangeRate", FUTURE_CHANGE_THRESHOLDS, FUTURE_CHANGE_COLORS, null),
+    formatValue: (raw) => {
+      // データなしはプロパティ欠落（null/undefined）。負値は正常値（減少）なので
+      // 他指標のような「負=データなし」判定はしない。
+      const v = Number(raw);
+      if (raw == null || raw === "" || !Number.isFinite(v)) return "データなし";
+      return `${v > 0 ? "+" : ""}${v.toFixed(1)}%`;
+    },
+  },
 ];
-
-// 2050年将来推計人口の増減率（%）。人口トレンドと同じ PRGn（紫=減少⇔緑=増加）を
-// 連続値5段階に割り当てる（色覚多様性への配慮も同じ理由）。しきい値は実分布から:
-// 中央値 -33% / p90 -5% / 増加は107自治体（5.6%）。「0以上=増加=緑」を独立セルにする。
-const FUTURE_CHANGE_THRESHOLDS = [-50, -30, -10, 0] as const;
-const FUTURE_CHANGE_COLORS = ["#762a83", "#9970ab", "#c2a5cf", "#e7d4e8", "#1b7837"] as const;
 
 export const DEFAULT_METRIC_KEY: MapMetricKey = "rent";
 

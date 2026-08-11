@@ -11,7 +11,6 @@ import HomeShell from "@/components/HomeShell";
 import { MetricMapHubBody, hubMetadata, hubLdJson, type MetricHubConfig } from "@/components/MetricMapHub";
 import { listSummaryAcrossPrefs, listAllAcrossPrefs } from "@/lib/metrics";
 import { getRankingBySlug, rankBy, muniLevelOnly } from "@/lib/rankings";
-import { futureChangeRate2050 } from "@/lib/futurePopulation";
 import { PREFS } from "@/lib/prefs";
 import { SITE, absoluteUrl } from "@/lib/site";
 
@@ -23,10 +22,8 @@ async function loadConfig(): Promise<MetricHubConfig> {
   const all = muniLevelOnly(await listAllAcrossPrefs());
   const resilient = rankBy(RESILIENT, all, 12);
   const decline = rankBy(DECLINE, all, 8);
-  const rateText = (m: (typeof all)[number]) => {
-    const r = futureChangeRate2050(m.futurePopulation);
-    return r == null ? "—" : `${r > 0 ? "+" : ""}${r.toFixed(1)}%`;
-  };
+  // 値の整形はランキング定義に委譲する（/map/population-trend と同じパターン）。
+  const rateText = (m: (typeof all)[number]) => DECLINE.display(m);
   return {
     path: PATH,
     title: `2050年将来推計人口マップ｜市区町村の人口増減の見込みを地図で見る - ${SITE.name}`,

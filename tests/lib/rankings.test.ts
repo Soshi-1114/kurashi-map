@@ -223,7 +223,8 @@ describe("将来推計人口ランキング（IPSS 令和5年推計）", () => {
       code,
       futurePopulation: {
         base2020,
-        total: { "2025": base2020, "2030": base2020, "2035": base2020, "2040": base2020, "2045": base2020, "2050": t2050 },
+        // ランキングが読むのは 2050 のみ（中間年は本テストでは不要）
+        total: { "2050": t2050 },
         young2050: 0,
         working2050: 0,
         elderly2050: t2050,

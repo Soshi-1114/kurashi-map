@@ -11,7 +11,7 @@ import { isWaitlistDisclosed } from "./waitlist";
 import { hasForeignData, foreignRatioPct } from "./foreignResidents";
 import { hasVacancy, vacancyRateText } from "./vacancy";
 import { populationDensity, densityText } from "./populationDensity";
-import { hasFuturePopulation, futureChangeRate2050 } from "./futurePopulation";
+import { hasFuturePopulation, futureChangeRate2050, futureRateText } from "./futurePopulation";
 import { prefNameOf } from "./site";
 
 /** トップページ等でランキング導線をまとめるカテゴリ（URL・ページ内容には影響しない） */
@@ -243,14 +243,13 @@ function futureMetaDescription(direction: "decline" | "resilient") {
     direction === "decline"
       ? "全国の市区町村を2050年の将来推計人口の減少率が大きい順にランキング。"
       : "全国の市区町村を2050年の将来推計人口の減少率が小さい順（増加を含む）にランキング。";
+  const tail =
+    "国立社会保障・人口問題研究所（令和5年推計）の公表値で、2050年に人口がどう変わる見込みかを比較できます。";
   return (top1: Municipality | null): string => {
-    const tail =
-      "国立社会保障・人口問題研究所（令和5年推計）の公表値で、2050年に人口がどう変わる見込みかを比較できます。";
     const rate = top1 ? futureChangeRate2050(top1.futurePopulation) : null;
     if (!top1 || rate == null) return `${head}${tail}`;
     const name = `${prefNameOf(top1.pref)}${top1.displayName ?? top1.name}`;
-    const rateText = `${rate > 0 ? "+" : ""}${rate.toFixed(1)}%`;
-    return `${head}1位は${name}（2020年比${rateText}）。${tail}`;
+    return `${head}1位は${name}（2020年比${futureRateText(top1.futurePopulation)}）。${tail}`;
   };
 }
 
@@ -534,10 +533,7 @@ export const RANKINGS: RankingDef[] = [
     nextUpdate: NEXT_UPDATE.future,
     qualifies: (m) => hasFuturePopulation(m.futurePopulation),
     sortValue: (m) => futureChangeRate2050(m.futurePopulation) ?? 0,
-    display: (m) => {
-      const r = futureChangeRate2050(m.futurePopulation);
-      return r == null ? "—" : `${r > 0 ? "+" : ""}${r.toFixed(1)}%`;
-    },
+    display: (m) => futureRateText(m.futurePopulation),
   },
   {
     slug: "future-population-resilient",
@@ -557,10 +553,7 @@ export const RANKINGS: RankingDef[] = [
     nextUpdate: NEXT_UPDATE.future,
     qualifies: (m) => hasFuturePopulation(m.futurePopulation),
     sortValue: (m) => futureChangeRate2050(m.futurePopulation) ?? 0,
-    display: (m) => {
-      const r = futureChangeRate2050(m.futurePopulation);
-      return r == null ? "—" : `${r > 0 ? "+" : ""}${r.toFixed(1)}%`;
-    },
+    display: (m) => futureRateText(m.futurePopulation),
   },
   {
     slug: "foreign-ratio-high",

@@ -37,6 +37,16 @@ export function futureChangeRate2050(fp: Municipality["futurePopulation"]): numb
   return t2050 == null ? null : ((t2050 - fp.base2020) / fp.base2020) * 100;
 }
 
+/**
+ * 2020→2050年増減率の表示テキスト（符号付き小数1桁%）。データなしは "—"。
+ * ランキングの display・meta description・地図ハブが共有する
+ * （vacancyRateText / densityText と同じ「表示整形も派生値としてここに置く」方針）。
+ */
+export function futureRateText(fp: Municipality["futurePopulation"]): string {
+  const r = futureChangeRate2050(fp);
+  return r == null ? "—" : `${r > 0 ? "+" : ""}${r.toFixed(1)}%`;
+}
+
 /** 2050年の高齢化率（65歳以上 ÷ 総人口、%）。データなしは null。 */
 export function elderlyRatio2050(fp: Municipality["futurePopulation"]): number | null {
   if (!hasFuturePopulation(fp)) return null;
