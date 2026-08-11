@@ -32,14 +32,14 @@ export function futureTotal(fp: Municipality["futurePopulation"], year: string):
  * データなしは null。
  */
 export function futureChangeRate2050(fp: Municipality["futurePopulation"]): number | null {
+  if (!hasFuturePopulation(fp)) return null;
   const t2050 = futureTotal(fp, "2050");
-  if (t2050 == null || !hasFuturePopulation(fp)) return null;
-  return ((t2050 - fp.base2020) / fp.base2020) * 100;
+  return t2050 == null ? null : ((t2050 - fp.base2020) / fp.base2020) * 100;
 }
 
 /** 2050年の高齢化率（65歳以上 ÷ 総人口、%）。データなしは null。 */
 export function elderlyRatio2050(fp: Municipality["futurePopulation"]): number | null {
+  if (!hasFuturePopulation(fp)) return null;
   const t2050 = futureTotal(fp, "2050");
-  if (t2050 == null || t2050 <= 0 || !hasFuturePopulation(fp)) return null;
-  return (fp.elderly2050 / t2050) * 100;
+  return t2050 == null || t2050 <= 0 ? null : (fp.elderly2050 / t2050) * 100;
 }

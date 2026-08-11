@@ -13,6 +13,8 @@
 //
 // 市区町村レベルの行（市などの別 0-3）のみ採用し、都道府県計(a)と浜通り地域(9)は捨てる。
 
+import { NORTHERN_TERRITORIES_CODES } from "./prefs.mjs";
+
 /** 結果表の年次列の並び（列4から）。 */
 export const IPSS_YEARS = ["2020", "2025", "2030", "2035", "2040", "2045", "2050"];
 
@@ -67,10 +69,9 @@ export const HAMADORI_CODES = new Set([
   "07564", // 飯舘村
 ]);
 
-/** 北方領土の6村。IPSS の推計対象に含まれない（在留外国人統計と同じ扱い）。 */
-export const NORTHERN_TERRITORIES_CODES = new Set([
-  "01695", "01696", "01697", "01698", "01699", "01700",
-]);
+// 北方領土の6村は IPSS の推計対象に含まれない（在留外国人統計と同じ扱い）。
+// コード集合は prefs.mjs に一元化してある（fetch-foreign-residents.mjs と共有）。
+export { NORTHERN_TERRITORIES_CODES };
 
 /**
  * 浜松市の現行区のうち、IPSS の旧区に対応が取れないもの。
@@ -87,8 +88,10 @@ export const HAMAMATSU_UNMAPPABLE_CODES = new Set([
  * 現行コード → IPSS 旧コードの読み替え。浜松市天竜区は2024年の区再編で
  * 区域変更なくコードのみ 22137→22140 に変わったため、同一区域として読み替える
  * （按分・推計ではなく、同じ区の改称に伴うコード変更）。
+ * 「このデータソースの基準年が2024年再編より古い」ことに由来する読み替えなので、
+ * 汎用のコード変換表ではなく IPSS モジュールに閉じる。
  */
-export const FUTURE_CODE_REMAP = new Map([["22140", "22137"]]);
+export const IPSS_CODE_REMAP = new Map([["22140", "22137"]]);
 
 /** コードに応じた「対象外」センチネルの理由文。対象外でなければ null。 */
 export function exclusionReason(code) {

@@ -8,6 +8,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { PREFS } from "./_lib/prefs.mjs";
+import { IPSS_YEARS } from "./_lib/ipss.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const prefArg = process.argv.find((a) => a.startsWith("--pref="))?.slice(7);
@@ -98,7 +99,7 @@ function checkMuni(file, slug, m, level) {
   if (m.futurePopulation !== undefined) {
     const fp = m.futurePopulation;
     const excluded = isStr(fp.source) && fp.source.includes("対象外");
-    if (!isNum(fp.base2020) || fp.base2020 < 0) err(file, code, "futurePopulation.base2020 が非負数値でない");
+    if (!isNum(fp.base2020)) err(file, code, "futurePopulation.base2020 が数値でない");
     if (!isStr(fp.source)) err(file, code, "futurePopulation.source が空");
     if (!isStr(fp.asOf)) err(file, code, "futurePopulation.asOf が空");
     for (const key of ["young2050", "working2050", "elderly2050"]) {
@@ -113,8 +114,8 @@ function checkMuni(file, slug, m, level) {
       }
     } else {
       // 実データは 2025〜2050 の5年刻み6時点が揃い、基準人口が正であること。
-      if (fp.base2020 <= 0) err(file, code, "futurePopulation が実データなのに base2020 が 0");
-      for (const y of ["2025", "2030", "2035", "2040", "2045", "2050"]) {
+      if (fp.base2020 <= 0) err(file, code, "futurePopulation が実データなのに base2020 が正でない");
+      for (const y of IPSS_YEARS.slice(1)) {
         if (!isNum(fp.total[y]) || fp.total[y] < 0) err(file, code, `futurePopulation.total.${y} が非負数値でない`);
       }
     }

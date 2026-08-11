@@ -19,7 +19,7 @@ import { fileURLToPath } from "node:url";
 import { existsSync } from "node:fs";
 import * as fs from "node:fs";
 import XLSX from "xlsx";
-import { resolvePrefs, PREFS } from "./_lib/prefs.mjs";
+import { resolvePrefs, PREFS, NORTHERN_TERRITORIES_CODES } from "./_lib/prefs.mjs";
 
 // xlsx の ESM ビルド（xlsx.mjs）は fs を自動注入しないため、readFile 前に明示的に渡す。
 XLSX.set_fs?.(fs);
@@ -49,11 +49,8 @@ const META = {
   asOf: ASOF,
   isEstimated: false,
 };
-// 北方領土の村（歯舞群島・色丹島・国後島・択捉島）は調査対象外（注4）。
-// 災害・地価と同じ「対象外（理由）」センチネルで欠損を明示する。
-const NORTHERN_TERRITORIES = new Set([
-  "01695", "01696", "01697", "01698", "01699", "01700",
-]);
+// 北方領土の村は調査対象外（注4）。災害・地価と同じ「対象外（理由）」センチネルで
+// 欠損を明示する。コード集合は prefs.mjs に一元化（IPSS 将来推計人口と共有）。
 
 // Excel(PVTシート) → Map<市区町村コード, 総数>。ヘッダ行（"市区町村コード"始まり）を
 // 検出し、以降の5桁コード行のみ採用（"99999 未定・不詳" や "総計" 行は5桁でない／除外）。
@@ -95,7 +92,7 @@ async function applyPref(pref, excel, p2w) {
   let withData = 0, parents = 0, excluded = 0, zero = 0;
 
   const setFrom = (m) => {
-    if (NORTHERN_TERRITORIES.has(m.code)) {
+    if (NORTHERN_TERRITORIES_CODES.has(m.code)) {
       m.foreignResidents = { value: 0, ...META, source: "対象外（北方領土）" };
       excluded++;
       return;

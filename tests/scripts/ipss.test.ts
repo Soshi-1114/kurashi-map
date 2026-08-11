@@ -4,7 +4,7 @@ import {
   IPSS_YEARS,
   parseIpssSheet,
   exclusionReason,
-  FUTURE_CODE_REMAP,
+  IPSS_CODE_REMAP,
   HAMADORI_CODES,
   NORTHERN_TERRITORIES_CODES,
   HAMAMATSU_UNMAPPABLE_CODES,
@@ -58,6 +58,6 @@ describe("exclusionReason", () => {
 
   it("天竜区は対象外ではなく旧コードへの読み替え（区域変更なしの改称のため）", () => {
     expect(exclusionReason("22140")).toBeNull();
-    expect(FUTURE_CODE_REMAP.get("22140")).toBe("22137");
+    expect(IPSS_CODE_REMAP.get("22140")).toBe("22137");
   });
 });

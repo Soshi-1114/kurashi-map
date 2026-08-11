@@ -27,7 +27,7 @@ import {
   IPSS_YEARS,
   parseIpssSheet,
   exclusionReason,
-  FUTURE_CODE_REMAP,
+  IPSS_CODE_REMAP,
 } from "./_lib/ipss.mjs";
 
 // xlsx の ESM ビルドは fs を自動注入しないため明示的に渡す（fetch-foreign-residents と同じ）。
@@ -39,14 +39,6 @@ const ROOT = path.resolve(__dirname, "..");
 const XLSX_DIR = process.env.IPSS_XLSX_DIR || "/tmp/ipss";
 const ASOF = version("IPSS_ASOF");
 const SOURCE = "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）";
-
-// 結果表 → 用途。2-4（75歳以上）は現状未使用のため取得対象に含めない。
-const FILES = {
-  total: "kekkahyo1.xlsx", // 総人口
-  young: "kekkahyo2_1.xlsx", // 0-14歳
-  working: "kekkahyo2_2.xlsx", // 15-64歳
-  elderly: "kekkahyo2_3.xlsx", // 65歳以上
-};
 
 function readSheet(name) {
   const fp = path.join(XLSX_DIR, name);
@@ -62,9 +54,13 @@ function readSheet(name) {
 
 const prefs = resolvePrefs(process.argv.slice(2));
 
-const tables = Object.fromEntries(Object.entries(FILES).map(([k, f]) => [k, readSheet(f)]));
+// 結果表 4本。2-4（75歳以上）は現状未使用のため取得対象に含めない。
+const totalSheet = readSheet("kekkahyo1.xlsx"); // 総人口
+const youngSheet = readSheet("kekkahyo2_1.xlsx"); // 0-14歳
+const workingSheet = readSheet("kekkahyo2_2.xlsx"); // 15-64歳
+const elderlySheet = readSheet("kekkahyo2_3.xlsx"); // 65歳以上
 console.log(
-  `IPSS 結果表を読込: 総人口 ${tables.total.size} 自治体 / 年齢3区分 ${tables.young.size}・${tables.working.size}・${tables.elderly.size}`,
+  `IPSS 結果表を読込: 総人口 ${totalSheet.size} 自治体 / 年齢3区分 ${youngSheet.size}・${workingSheet.size}・${elderlySheet.size}`,
 );
 
 const Y2050 = IPSS_YEARS.indexOf("2050");
@@ -92,11 +88,11 @@ for (const pref of prefs) {
       continue;
     }
     // 浜松市天竜区: 2024年再編で区域変更なくコードのみ変わったため旧コードで引く。
-    const ipssCode = FUTURE_CODE_REMAP.get(m.code) ?? m.code;
-    const total = tables.total.get(ipssCode);
-    const young = tables.young.get(ipssCode);
-    const working = tables.working.get(ipssCode);
-    const elderly = tables.elderly.get(ipssCode);
+    const ipssCode = IPSS_CODE_REMAP.get(m.code) ?? m.code;
+    const total = totalSheet.get(ipssCode);
+    const young = youngSheet.get(ipssCode);
+    const working = workingSheet.get(ipssCode);
+    const elderly = elderlySheet.get(ipssCode);
     if (!total || !young || !working || !elderly) {
       unmatched.push(`${m.code} ${m.displayName ?? m.name}（${pref.nameJa}）`);
       continue;
