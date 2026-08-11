@@ -38,9 +38,22 @@
     "name": "pr-129-muni-title",
     "pr": 129,
     "since": "2026-08-11",
-    "note": "自治体詳細の title を人口・家賃・在留外国人割合の実数値並びに変更。同名自治体には県名を付与",
+    "note": "自治体詳細の title を人口・家賃・在留外国人割合の実数値並びに変更。同名自治体には県名を付与（#129）。さらに 2026-08-12 以降は将来人口カードの本文追加（#138、title/description 不変）も同一URL群に乗る。8/12 以降の変動は両施策の合算として読む",
     "include": [
       "/area/*/*"
+    ]
+  },
+  {
+    "name": "pr-137-future-population-pages",
+    "pr": 137,
+    "since": "2026-08-12",
+    "note": "IPSS 将来推計人口の新規URL群: 全国/県別ランキング2種（減少幅・維持）と地図ハブ。新規ページなので効果はゼロベースからの成長で見る",
+    "include": [
+      "/ranking/future-population-decline",
+      "/ranking/future-population-decline/*",
+      "/ranking/future-population-resilient",
+      "/ranking/future-population-resilient/*",
+      "/map/future-population"
     ]
   }
 ]
