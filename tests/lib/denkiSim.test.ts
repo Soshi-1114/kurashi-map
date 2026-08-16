@@ -6,29 +6,17 @@ import {
   estimateMonthly,
   compareOffers,
 } from "@/lib/denkiSim";
-import type { DenkiAreaPricing, DenkiPlansFile } from "@/lib/denki";
+import type { DenkiAreaPricing } from "@/lib/denkiPlans";
+import { denkiPricing, denkiPlan, denkiPlansFile } from "../_fixtures";
 
-// アンペア制（従量電灯B型）のフィクスチャ: 基本 30A=900 / 40A=1200 / 50A=1500、
-// 従量 〜120=20円 / 120〜300=25円 / 300〜=28円
-const amperePricing: DenkiAreaPricing = {
-  basic: { type: "ampere", yenPerMonth: { "30": 900, "40": 1200, "50": 1500 } },
-  tiers: [
-    { upTo: 120, yenPerKwh: 20 },
-    { upTo: 300, yenPerKwh: 25 },
-    { upTo: null, yenPerKwh: 28 },
-  ],
-};
+// アンペア制（従量電灯B型）: 基本 30A=900 / 40A=1200 / 50A=1500、
+// 従量 〜120=20円 / 120〜300=25円 / 300〜=28円（tests/_fixtures.ts の既定値）
+const amperePricing = denkiPricing();
 
-// 最低料金制（従量電灯A型）のフィクスチャ: 最低料金 400円（最初の15kWhを含む）、
-// 従量 15〜120=20円 / 120〜300=25円 / 300〜=28円
-const minimumPricing: DenkiAreaPricing = {
+// 最低料金制（従量電灯A型）: 最低料金 400円（最初の15kWhを含む）、従量は同じ3段階
+const minimumPricing = denkiPricing({
   basic: { type: "minimum", yenPerMonth: 400, includedKwh: 15 },
-  tiers: [
-    { upTo: 120, yenPerKwh: 20 },
-    { upTo: 300, yenPerKwh: 25 },
-    { upTo: null, yenPerKwh: 28 },
-  ],
-};
+});
 
 describe("estimateMonthly (アンペア制)", () => {
   it("使用量 0 は基本料金のみ", () => {
@@ -79,46 +67,30 @@ describe("estimateMonthly (最低料金制)", () => {
 });
 
 describe("compareOffers", () => {
-  const file: DenkiPlansFile = {
-    asOf: "2026-08",
+  const file = denkiPlansFile({
     plans: [
-      {
-        offerId: "baseline-tokyo",
-        company: "大手電力",
-        planName: "従量電灯B",
-        kind: "baseline",
-        areas: { tokyo: amperePricing },
-        officialUrl: "https://example.com/",
-        sourceUrl: "https://example.com/",
-        sourceAsOf: "2026-08",
-      },
-      {
+      denkiPlan({ offerId: "baseline-tokyo" }),
+      denkiPlan({
         offerId: "cheap-power",
         company: "安い電力",
         planName: "プランS",
         kind: "offer",
         areas: {
-          tokyo: {
+          tokyo: denkiPricing({
             basic: { type: "ampere", yenPerMonth: { "30": 800, "40": 1100, "50": 1400 } },
             tiers: [{ upTo: null, yenPerKwh: 21 }],
-          },
+          }),
         },
-        officialUrl: "https://example.com/",
-        sourceUrl: "https://example.com/",
-        sourceAsOf: "2026-08",
-      },
-      {
+      }),
+      denkiPlan({
         offerId: "kansai-only",
         company: "関西限定電力",
         planName: "プランK",
         kind: "offer",
         areas: { kansai: minimumPricing },
-        officialUrl: "https://example.com/",
-        sourceUrl: "https://example.com/",
-        sourceAsOf: "2026-08",
-      },
+      }),
     ],
-  };
+  });
 
   it("エリア外のプランは含まれない", () => {
     const result = compareOffers(file, "tokyo", 300, 30);

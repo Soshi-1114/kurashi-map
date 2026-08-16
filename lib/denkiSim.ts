@@ -4,10 +4,12 @@
 // （口座振替割引等）は含まない。UI 側は必ず前提条件（含まない費目・使用量の
 // 出典・確認時点）を表示し、断定表現（「〇円安くなる」）を使わないこと。
 
-import type { DenkiArea, DenkiAreaPricing, DenkiPlansFile } from "./denki";
+import type { DenkiArea } from "./denki";
+import type { Ampere, DenkiAreaPricing, DenkiPlansFile } from "./denkiPlans";
 
-/** 契約アンペア（アンペア制プランのみ使用。最低料金制エリアでは無視される）。 */
-export type Ampere = 30 | 40 | 50;
+/** 選択できる世帯人数。6人以上は使用量の手入力で対応する（合成値は作らない）。 */
+export type HouseholdSize = 1 | 2 | 3 | 4 | 5;
+export const HOUSEHOLD_SIZES: HouseholdSize[] = [1, 2, 3, 4, 5];
 
 /**
  * 世帯人数 → 月間電気使用量の目安（kWh/月）。
@@ -17,10 +19,9 @@ export type Ampere = 30 | 40 | 50;
  * 換算定義（1kWh = 3.6MJ）で kWh に換算し 12 で割った値（四捨五入）。
  * kWh の直接公表値は全国全体（3,911kWh/年）のみで、世帯人数別は GJ 公表
  * （図表集 図1-62、e-Stat statsDataId=0004029148）。全体値での逆換算検算は一致。
- * 公式区分は 1〜5人・6人以上の6区分。ここでは 5人の値までを持ち、
- * 6人以上の世帯は使用量の手入力で対応する（合成値は作らない）。
+ * 公式区分は 1〜5人・6人以上の6区分。ここでは 5人の値までを持つ。
  */
-export const HOUSEHOLD_KWH: Record<1 | 2 | 3 | 4 | 5, number> = {
+export const HOUSEHOLD_KWH: Record<HouseholdSize, number> = {
   1: 201, // 2,406 kWh/年
   2: 330, // 3,958 kWh/年
   3: 428, // 5,131 kWh/年
@@ -36,35 +37,26 @@ export const HOUSEHOLD_KWH_SOURCE = {
 };
 
 /** 世帯人数ごとの契約アンペア既定値（変更可能な初期値）。 */
-export function defaultAmpere(householdSize: 1 | 2 | 3 | 4 | 5): Ampere {
+export function defaultAmpere(householdSize: HouseholdSize): Ampere {
   return householdSize <= 2 ? 30 : 40;
 }
 
 /**
  * 1 プラン・1 エリアの月額目安（円、四捨五入）。
- * - アンペア制: 基本料金（契約 A 別） + 3段階従量
+ * - アンペア制: 基本料金（契約 A 別） + 段階従量
  * - 最低料金制: 最低料金（最初の includedKwh を含む） + 超過分の段階従量
  *   （tiers の upTo は月間使用量の絶対値。最初の段階の下限は includedKwh）
  */
 export function estimateMonthly(pricing: DenkiAreaPricing, kwh: number, ampere: Ampere): number {
   const { basic, tiers } = pricing;
-  let total: number;
-  let charged: number; // ここまでの kWh は課金済み（または基本料金に含まれる）
-  if (basic.type === "ampere") {
-    total = basic.yenPerMonth[String(ampere) as "30" | "40" | "50"];
-    charged = 0;
-  } else {
-    total = basic.yenPerMonth;
-    charged = Math.min(kwh, basic.includedKwh);
-  }
+  // charged = ここまでの kWh は課金済み（または基本料金に含まれる）
+  let total = basic.type === "ampere" ? basic.yenPerMonth[`${ampere}`] : basic.yenPerMonth;
+  let charged = basic.type === "minimum" ? Math.min(kwh, basic.includedKwh) : 0;
   for (const t of tiers) {
-    if (charged >= kwh) break;
-    const upper = t.upTo ?? Infinity;
-    const span = Math.min(kwh, upper) - charged;
-    if (span > 0) {
-      total += span * t.yenPerKwh;
-      charged = Math.min(kwh, upper);
-    }
+    const upper = Math.min(kwh, t.upTo ?? Infinity);
+    if (upper <= charged) continue;
+    total += (upper - charged) * t.yenPerKwh;
+    charged = upper;
   }
   return Math.round(total);
 }

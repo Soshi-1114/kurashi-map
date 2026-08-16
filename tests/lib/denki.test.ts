@@ -5,10 +5,16 @@ import {
   PREF_TO_AREA,
   AREA_EXCEPTIONS,
   areaForMuni,
-  validateDenkiPlans,
 } from "@/lib/denki";
-import type { DenkiPlansFile, DenkiAreaPricing } from "@/lib/denki";
 import { PREFS } from "@/lib/prefs";
+import kanaJson from "@/data/muni-kana.json";
+
+describe("DENKI_AREAS / DENKI_AREA_LABELS", () => {
+  it("10エリアあり、全エリアにラベルがある（型・一覧はラベル Record から導出）", () => {
+    expect(DENKI_AREAS).toHaveLength(10);
+    for (const a of DENKI_AREAS) expect(DENKI_AREA_LABELS[a]).toMatch(/エリア$/);
+  });
+});
 
 describe("PREF_TO_AREA", () => {
   it("全47県のマッピングがある", () => {
@@ -34,9 +40,6 @@ describe("areaForMuni", () => {
   it("政令市の行政区コードも先頭2桁で判定できる", () => {
     expect(areaForMuni("14104")?.area).toBe("tokyo"); // 横浜市中区
   });
-  it("label はエリア表示名", () => {
-    expect(areaForMuni("13104")?.label).toBe(DENKI_AREA_LABELS.tokyo);
-  });
   it("不正コードは null", () => {
     expect(areaForMuni("1310")).toBeNull();
     expect(areaForMuni("abcde")).toBeNull();
@@ -53,13 +56,13 @@ describe("areaForMuni", () => {
     expect(areaForMuni("24562")?.area).toBe("kansai"); // 紀宝町
     expect(areaForMuni("37364")?.area).toBe("chugoku"); // 直島町
     expect(areaForMuni("15216")?.area).toBe("tohoku"); // 糸魚川市（市区町村単位では例外なし）
-    // 富士市は市域内で東西に分かれる
+    // 富士市は市域内で東西に分かれる（出典も UI に渡る）
     const fuji = areaForMuni("22210")!;
     expect(fuji.area).toBe("tokyo");
     expect(fuji.altArea).toBe("chubu");
     expect(fuji.note).toBeTruthy();
+    expect(fuji.source).toMatch(/^https?:\/\//);
   });
-
   it("例外自治体は AREA_EXCEPTIONS が優先される", () => {
     for (const [code, ex] of Object.entries(AREA_EXCEPTIONS)) {
       const r = areaForMuni(code);
@@ -69,86 +72,15 @@ describe("areaForMuni", () => {
       expect(ex.source, `${code}: 出典必須`).toMatch(/^https?:\/\//);
     }
   });
-  it("例外リストのコードは5桁で、既定と異なる情報を持つ", () => {
+  it("例外リストのコードは実在する自治体で、既定と異なる情報を持つ", () => {
+    // 手打ちコードの取り違え（例: 22344→22343）を実データで検出する
+    const kana = (kanaJson as { kana: Record<string, string> }).kana;
     for (const [code, ex] of Object.entries(AREA_EXCEPTIONS)) {
-      expect(code).toMatch(/^\d{5}$/);
+      expect(kana[code], `${code}: data/muni-kana.json に存在しない`).toBeDefined();
       const prefDefault = PREF_TO_AREA[code.slice(0, 2)];
       // 主エリアが県既定と同じなら altArea（一部別エリア）があるはず。
       // どちらも既定どおりならそのエントリは不要。
       expect(ex.area !== prefDefault || ex.altArea !== undefined, `${code}: 例外の意味がない`).toBe(true);
     }
-  });
-});
-
-describe("validateDenkiPlans", () => {
-  const pricing: DenkiAreaPricing = {
-    basic: { type: "ampere", yenPerMonth: { "30": 900, "40": 1200, "50": 1500 } },
-    tiers: [
-      { upTo: 120, yenPerKwh: 20 },
-      { upTo: 300, yenPerKwh: 25 },
-      { upTo: null, yenPerKwh: 28 },
-    ],
-  };
-  const validFile = (): DenkiPlansFile => ({
-    asOf: "2026-08",
-    plans: [
-      {
-        offerId: "baseline-all",
-        company: "大手",
-        planName: "従量電灯",
-        kind: "baseline",
-        areas: Object.fromEntries(DENKI_AREAS.map((a) => [a, pricing])),
-        officialUrl: "https://example.com/",
-        sourceUrl: "https://example.com/",
-        sourceAsOf: "2026-08-01",
-      },
-    ],
-  });
-
-  it("正しいファイルはエラーなし", () => {
-    expect(validateDenkiPlans(validFile())).toEqual([]);
-  });
-  it("baseline が欠けるエリアを検出", () => {
-    const f = validFile();
-    delete f.plans[0].areas.okinawa;
-    expect(validateDenkiPlans(f).join("\n")).toContain("okinawa の baseline がない");
-  });
-  it("offerId 重複を検出", () => {
-    const f = validFile();
-    f.plans.push({ ...f.plans[0], kind: "offer" });
-    expect(validateDenkiPlans(f).join("\n")).toContain("重複");
-  });
-  it("単価 0 を検出", () => {
-    const f = validFile();
-    f.plans[0].areas.tokyo = {
-      ...pricing,
-      tiers: [{ upTo: null, yenPerKwh: 0 }],
-    };
-    expect(validateDenkiPlans(f).join("\n")).toContain("単価が正でない");
-  });
-  it("段階の upTo が昇順でないのを検出", () => {
-    const f = validFile();
-    f.plans[0].areas.tokyo = {
-      ...pricing,
-      tiers: [
-        { upTo: 300, yenPerKwh: 20 },
-        { upTo: 120, yenPerKwh: 25 },
-        { upTo: null, yenPerKwh: 28 },
-      ],
-    };
-    expect(validateDenkiPlans(f).join("\n")).toContain("昇順でない");
-  });
-  it("最終段階の upTo が null でないのを検出", () => {
-    const f = validFile();
-    f.plans[0].areas.tokyo = {
-      ...pricing,
-      tiers: [{ upTo: 120, yenPerKwh: 20 }],
-    };
-    expect(validateDenkiPlans(f).join("\n")).toContain("null であるべき");
-  });
-  it("asOf の形式違反を検出", () => {
-    const f = validFile();
-    f.asOf = "2026/08";
-    expect(validateDenkiPlans(f).join("\n")).toContain("YYYY-MM");
   });
 });
