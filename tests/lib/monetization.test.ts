@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach } from "vitest";
-import { generateFurusatoUrl, supportUrl, furusatoUrlTemplate } from "@/lib/monetization";
+import { generateFurusatoUrl, supportUrl, furusatoUrlTemplate, denkiOfferUrl } from "@/lib/monetization";
 
 // process.env を書き換えるテストは毎回クリーンアップする。
 const KEYS = ["NEXT_PUBLIC_SUPPORT_URL", "NEXT_PUBLIC_FURUSATO_URL_TEMPLATE"] as const;
@@ -77,5 +77,31 @@ describe("generateFurusatoUrl", () => {
     process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "https://broken.example/";
     const url = generateFurusatoUrl("札幌市", "北海道");
     expect(url).toContain("https://www.satofull.jp/search/?keyword=");
+  });
+});
+
+describe("denkiOfferUrl", () => {
+  it("提携リンク未設定なら公式サイトへの素リンク + UTM", () => {
+    const { url, isAffiliate } = denkiOfferUrl("unknown-offer", "https://example.com/plan");
+    expect(isAffiliate).toBe(false);
+    expect(url).toContain("https://example.com/plan?");
+    expect(url).toContain("utm_source=kurashimap");
+    expect(url).toContain("utm_campaign=denki");
+  });
+  it("公式URLに ? があれば & で連結", () => {
+    const { url } = denkiOfferUrl("unknown-offer", "https://example.com/plan?id=1");
+    expect(url).toContain("plan?id=1&utm_source=kurashimap");
+  });
+  it("提携リンクがあればそのまま使い、UTM は付けない（ASP 計測を壊さない）", () => {
+    const { url, isAffiliate } = denkiOfferUrl("looop", "https://example.com/plan", {
+      looop: "https://aff.example/track?id=abc",
+    });
+    expect(isAffiliate).toBe(true);
+    expect(url).toBe("https://aff.example/track?id=abc");
+    expect(url).not.toContain("utm_source");
+  });
+  it("提携リンクが空白のみならフォールバック", () => {
+    const { isAffiliate } = denkiOfferUrl("looop", "https://example.com/plan", { looop: "  " });
+    expect(isAffiliate).toBe(false);
   });
 });

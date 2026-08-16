@@ -41,3 +41,46 @@ export function trackApplyFilter(params: { rentMax: number | null; landMax: numb
     flood_max: params.floodMax ?? -1, // -1=条件なし（0=浸水なしに限定と区別）
   });
 }
+
+/** 電気料金シミュレーション実行（/denki）。入力確定ごとに1回（連続入力は呼び出し側で debounce）。 */
+export function trackDenkiSimulate(params: {
+  area: string;
+  householdSize: number;
+  kwh: number;
+  kwhOverridden: boolean;
+  ampere: number;
+  municipalityCode?: string;
+}): void {
+  track("denki_simulate", {
+    area: params.area,
+    household_size: params.householdSize,
+    kwh: params.kwh,
+    kwh_overridden: params.kwhOverridden,
+    ampere: params.ampere,
+    ...(params.municipalityCode ? { municipality_code: params.municipalityCode } : {}),
+  });
+}
+
+/** 電気料金の比較結果リスト表示（エリアごとに1回）。オファー別 CTR の分母。 */
+export function trackDenkiOfferImpression(params: { area: string; offerCount: number; hasAffiliate: boolean }): void {
+  track("denki_offer_impression", {
+    area: params.area,
+    offer_count: params.offerCount,
+    has_affiliate: params.hasAffiliate,
+  });
+}
+
+/** 電気プランの外部リンククリック。オファー別 CTR の分子・キーイベント候補。 */
+export function trackDenkiOfferClick(params: {
+  offerId: string;
+  area: string;
+  isAffiliate: boolean;
+  position: number;
+}): void {
+  track("denki_offer_click", {
+    offer_id: params.offerId,
+    area: params.area,
+    is_affiliate: params.isAffiliate,
+    position: params.position,
+  });
+}
