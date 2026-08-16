@@ -10,6 +10,7 @@ import {
   withTemplateRevision,
 } from "@/lib/dataFreshness";
 import { absoluteUrl } from "@/lib/site";
+import { denkiPlansLastModified } from "@/lib/denkiPlans";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const all = await listAllAcrossPrefs();
@@ -62,6 +63,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: siteLatest,
       changeFrequency: "monthly",
       priority: 0.7,
+    },
+    // 電気代シミュレーター（横断ツール。?code= プリセットは同一ページの状態なので URL は1件）。
+    // lastModified は料金プランデータの確認時点（data/denki-plans.json の asOf）から導く。
+    {
+      url: absoluteUrl("/denki"),
+      lastModified: denkiPlansLastModified(),
+      changeFrequency: "monthly",
+      priority: 0.8,
     },
     // サイトについて（データの出典・更新方針。E-E-A-T ページ）。
     {
