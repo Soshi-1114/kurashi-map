@@ -26,7 +26,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { MuniSummary } from "./types";
 import { toHiragana } from "./kana";
 import { TOWN_QUERY_MIN } from "./townSearch";
-import { STATION_QUERY_MIN, type StationHit } from "./stationSearch";
+import { STATION_QUERY_MIN, type StationHit, type StationPoint } from "./stationSearch";
 import { useSearchHistory } from "./useSearchHistory";
 
 /**
@@ -36,7 +36,7 @@ import { useSearchHistory } from "./useSearchHistory";
  */
 export type ComboboxHit<T extends MuniSummary> = T & {
   town?: string;
-  station?: { name: string; lng: number; lat: number };
+  station?: StationPoint;
 };
 
 type TownApiHit = { code: string; town: string };

@@ -9,9 +9,9 @@
 import { useCallback, useMemo } from "react";
 import type { MuniSummary } from "@/lib/types";
 import { useMuniCombobox, type ComboboxHit } from "@/lib/useMuniCombobox";
-import { muniContextLabel } from "@/lib/muniLabel";
 import { hasRent } from "@/lib/rentColor";
 import { SearchHistoryHeader } from "@/components/SearchHistoryHeader";
+import { SearchHitLabel } from "@/components/SearchHitLabel";
 
 type Props = {
   municipalities: MuniSummary[];
@@ -33,13 +33,13 @@ export default function MuniSearch({ municipalities, wards, onSelect }: Props) {
         <input
           ref={inputRef}
           type="search"
-          placeholder="自治体名で検索"
+          placeholder="自治体名・駅で検索"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={onKeyDown}
           onFocus={onFocus}
           onBlur={onBlur}
-          aria-label="自治体検索"
+          aria-label="自治体・駅の検索"
           role="combobox"
           aria-expanded={filtered.length > 0}
           aria-controls="muni-search-listbox"
@@ -71,14 +71,7 @@ export default function MuniSearch({ municipalities, wards, onSelect }: Props) {
                 onClick={() => pick(m)}
                 onMouseEnter={() => setActiveIndex(i)}
               >
-                <span className="search-place">
-                  {muniContextLabel(m) && (
-                    <span className="search-pref">{muniContextLabel(m)}</span>
-                  )}
-                  <span className="search-name">{m.name}</span>
-                  {m.town && <span className="search-town">（{m.town}）</span>}
-                  {m.station && <span className="search-town">（{m.station.name}駅）</span>}
-                </span>
+                <SearchHitLabel m={m} />
                 <span className="search-rent">{hasRent(m.rent) ? `${m.rent.toLocaleString()}円` : "—"}</span>
               </button>
             </li>

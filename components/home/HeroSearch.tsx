@@ -1,9 +1,10 @@
 "use client";
 
 // トップのファーストビュー用・自治体検索コンボボックス。
-// 行タップ（主動作）＝自治体詳細ページへ遷移（「調べる」意図のメインアクション）。
+// 行タップ（主動作）＝自治体詳細ページへ遷移（「調べる」意図のメインアクション。
+// 駅行はその駅がある自治体の詳細ページへ）。
 // 行右端の地図ピン（副動作）＝ページ内の地図へスクロールしてその自治体へフライト
-//（「地図で周辺を見たい」意図。検索バーを2本に戻さずに両方の意図を満たす）。
+//（「地図で周辺を見たい」意図。駅行は自治体 bbox ではなく駅座標へマーカー付きで飛ぶ）。
 // ドロップダウンの見た目は既存の .search-results 系クラスを再利用する。
 // コンボボックスの状態機械（絞り込み・キーボード操作）は useMuniCombobox を共有する。
 // クエリが空でフォーカス中は、検索結果の代わりに「最近見た自治体」履歴を出す
@@ -11,26 +12,28 @@
 import { useCallback } from "react";
 import { useRouter } from "next/navigation";
 import type { MuniSummary } from "@/lib/types";
-import { useMuniCombobox } from "@/lib/useMuniCombobox";
-import { muniContextLabel } from "@/lib/muniLabel";
+import { useMuniCombobox, type ComboboxHit } from "@/lib/useMuniCombobox";
+import { comboboxHitSuffix } from "@/lib/muniLabel";
 import { requestMapFly } from "@/lib/mapFly";
 import { SearchHistoryHeader } from "@/components/SearchHistoryHeader";
+import { SearchHitLabel } from "@/components/SearchHitLabel";
 
 export default function HeroSearch({ munis }: { munis: MuniSummary[] }) {
   const router = useRouter();
   const onPick = useCallback((m: MuniSummary) => router.push(`/area/${m.pref}/${m.code}`), [router]);
-  // townSearch: 町丁名（例: 日の里）やひらがなでも自治体を引けるようにする
+  // townSearch: 町丁名（例: 日の里）やひらがな、stationSearch: 駅名（例: 品川駅）でも
+  // 自治体を引けるようにする
   const { query, setQuery, filtered, isHistory, activeIndex, setActiveIndex, pick, close, recordHistory, clearHistory, onKeyDown, onFocus, onBlur, inputRef } =
-    useMuniCombobox(munis, onPick, { townSearch: true, history: true });
+    useMuniCombobox(munis, onPick, { townSearch: true, stationSearch: true, history: true });
 
-  // 副動作: ページ内の地図へスクロールし、その自治体へフライトさせる（遷移しない）。
-  // 確定扱いなので履歴にも記録する。閉じ方はフックの close() に委ねる。
+  // 副動作: ページ内の地図へスクロールし、その自治体（駅行なら駅座標）へフライトさせる
+  // （遷移しない）。確定扱いなので履歴にも記録する。閉じ方はフックの close() に委ねる。
   const showOnMap = useCallback(
-    (m: MuniSummary) => {
+    (m: ComboboxHit<MuniSummary>) => {
       close();
       recordHistory(m.code);
       document.querySelector(".home-map")?.scrollIntoView({ behavior: "smooth" });
-      requestMapFly(m.code);
+      requestMapFly({ code: m.code, station: m.station });
     },
     [close, recordHistory],
   );
@@ -45,20 +48,18 @@ export default function HeroSearch({ munis }: { munis: MuniSummary[] }) {
         <input
           ref={inputRef}
           type="search"
-          placeholder="市区町村名を入力（例: 新宿区）"
+          placeholder="自治体名・駅で検索"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={onKeyDown}
           onFocus={onFocus}
           onBlur={onBlur}
-          aria-label="自治体を検索してデータページへ移動"
+          aria-label="自治体・駅を検索してデータページへ移動"
           role="combobox"
           aria-expanded={filtered.length > 0}
           aria-controls="home-search-listbox"
           aria-autocomplete="list"
-          aria-activedescendant={
-            activeIndex >= 0 && filtered[activeIndex] ? `hopt-${filtered[activeIndex].code}` : undefined
-          }
+          aria-activedescendant={activeIndex >= 0 && filtered[activeIndex] ? `hopt-${activeIndex}` : undefined}
         />
       </div>
       {filtered.length > 0 && (
@@ -72,12 +73,12 @@ export default function HeroSearch({ munis }: { munis: MuniSummary[] }) {
           onMouseDown={(e) => e.preventDefault()}
         >
           {isHistory && <SearchHistoryHeader onClear={clearHistory} />}
-          {/* filtered は自治体コード単位に集約済み（同じ自治体が名前ヒットと町丁ヒットの
-              両方で重複することはない）ので、key/id はコードのみで一意 */}
+          {/* 駅行は自治体行とコードが重複しうるため、key/id とも行番号ベースで一意にする
+              （リストはクエリごとに全行作り直され、並べ替え・部分更新はない） */}
           {filtered.map((m, i) => (
-            <li key={m.code} role="presentation" className="search-row">
+            <li key={i} role="presentation" className="search-row">
               <button
-                id={`hopt-${m.code}`}
+                id={`hopt-${i}`}
                 role="option"
                 aria-selected={i === activeIndex}
                 tabIndex={-1}
@@ -85,16 +86,12 @@ export default function HeroSearch({ munis }: { munis: MuniSummary[] }) {
                 onClick={() => pick(m)}
                 onMouseEnter={() => setActiveIndex(i)}
               >
-                <span className="search-place">
-                  {muniContextLabel(m) && <span className="search-pref">{muniContextLabel(m)}</span>}
-                  <span className="search-name">{m.name}</span>
-                  {m.town && <span className="search-town">（{m.town}）</span>}
-                </span>
+                <SearchHitLabel m={m} />
               </button>
               <button
                 type="button"
                 className="search-mapbtn"
-                aria-label={`${m.displayName ?? m.name}を地図で表示`}
+                aria-label={`${m.station ? comboboxHitSuffix(m) : (m.displayName ?? m.name)}を地図で表示`}
                 title="地図で表示"
                 onClick={() => showOnMap(m)}
               >

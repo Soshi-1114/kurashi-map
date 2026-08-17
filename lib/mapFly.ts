@@ -5,11 +5,17 @@
 // MapView 側がマウント中だけ listen して既存の flyToMuni を呼ぶ。
 // 状態管理ライブラリや context の持ち回りを避けるための window イベント1本のみ。
 
+import type { StationPoint } from "./stationSearch";
+
 export const MAP_FLY_EVENT = "kurashimap:flyto";
 
-export type MapFlyDetail = { code: string };
+/** 地図へのフライト依頼。station 付きは自治体 bbox ではなく駅座標へ点フライト（マーカー付き）。 */
+export type MapFlyDetail = {
+  code: string;
+  station?: StationPoint;
+};
 
-/** ページ内の地図へ「この自治体へフライトして」と依頼する（地図未マウント時は無視される）。 */
-export function requestMapFly(code: string): void {
-  window.dispatchEvent(new CustomEvent<MapFlyDetail>(MAP_FLY_EVENT, { detail: { code } }));
+/** ページ内の地図へフライトを依頼する（地図未マウント時は無視される）。 */
+export function requestMapFly(detail: MapFlyDetail): void {
+  window.dispatchEvent(new CustomEvent<MapFlyDetail>(MAP_FLY_EVENT, { detail }));
 }
