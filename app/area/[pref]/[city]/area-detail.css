@@ -20,7 +20,8 @@
   --ad-shadow-hover: var(--shadow-card-hover);
   --ad-gap: var(--space-6); /* 24px */
   /* セクションナビ帯の高さ（10 + 40 + 10 + 1px border）。
-     アンカー先の scroll-margin-top と SectionNav.tsx の NAV_OFFSET と揃える。 */
+     アンカー先の scroll-margin-top がこの値+8px。SectionNav.tsx 側は offsetHeight を
+     実測し、現在地判定の閾値をこの +8px スラックに合わせている。 */
   --ad-secnav-h: 61px;
   color: var(--text);
 }
@@ -51,9 +52,23 @@
    共有している。ここに置くのは横スクロールさせるための差分だけ。 */
 .ad-secnav a { flex: none; white-space: nowrap; }
 
-/* アンカー先の見出しがナビ帯の下に潜らないようにする */
+/* PC は行単位のまとめチップ（.ad-nav-pc）、SP はカード単位のチップ（.ad-nav-sp）を
+   出し分ける。2列グリッドでは同じ行のカードが同一スクロール位置になり、カード単位の
+   チップだとスクロールスパイが右列しか現在地にできないため（SectionNav.tsx 参照）。
+   ブレークポイントは .ad-metric-grid の1列化（下の 640px）と揃える。JS 側は
+   どちらが表示中かを描画結果から読むだけで、この切替がすべての単一ソース。 */
+.ad-secnav .ad-nav-sp { display: none; }
+/* 現在地チップへの追従スクロール（SectionNav の scrollTo）を滑らかに。
+   reduced-motion では自動的に即時ジャンプになる（html の scroll-behavior と同じ）。 */
+@media (prefers-reduced-motion: no-preference) {
+  .ad-secnav { scroll-behavior: smooth; }
+}
+
+/* アンカー先の見出しがナビ帯の下に潜らないようにする。目次はセクションだけでなく
+   詳細データ内の各カード（.ad-metric-card[id]）にも直接飛ぶため、両方に効かせる。 */
 .ad-hero[id],
-.ad-section[id] {
+.ad-section[id],
+.ad-metric-card[id] {
   scroll-margin-top: calc(var(--ad-secnav-h) + var(--space-2));
 }
 
@@ -1078,6 +1093,9 @@
   .ad-section { margin-top: 44px; }
   .ad-secnav { margin-top: var(--space-4); gap: 6px; }
   .ad-secnav a { padding: 0 12px; font-size: var(--text-xs); }
+  /* グリッドが1列になるのでカード単位のチップに切替（上の .ad-nav-sp/-pc 参照） */
+  .ad-secnav .ad-nav-sp { display: inline-flex; }
+  .ad-secnav .ad-nav-pc { display: none; }
   .ad-cta { margin-top: 44px; padding: var(--space-6); }
   .ad-hero { grid-template-columns: 1fr; }
   .ad-score { order: 2; }

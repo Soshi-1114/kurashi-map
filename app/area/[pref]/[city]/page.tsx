@@ -10,7 +10,6 @@ import {
   Baby,
   Wallet,
   ShieldAlert,
-  Building2,
   Globe2,
   TrainFront,
   Stethoscope,
@@ -270,12 +269,22 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
   ] as const).find(([, present]) => present)?.[0];
   const compareAnchor = (key: string) => (key === firstCompareKey ? "compare" : undefined);
 
+  // 詳細データのチップは PC（2列グリッド）では行単位、SP（1列）ではカード単位。
+  // 同じ行のカードは同一スクロール位置のため、PC でカード単位にするとスクロール
+  // スパイが右列しか現在地にできない（SectionNav.tsx の only の経緯コメント参照）。
   const navItems: SectionNavItem[] = [
     { id: "overview", label: "概要" },
-    { id: "data", label: "データ" },
+    { id: "rent", label: "環境", only: "pc" },
+    { id: "rent", label: "家賃", only: "sp" },
+    { id: "kids", label: "子育て・生活環境", only: "sp" },
+    { id: "hazard", label: "災害・外国人比率", only: "pc" },
+    { id: "hazard", label: "災害リスク", only: "sp" },
+    { id: "foreign", label: "外国人比率", only: "sp" },
+    { id: "future-pop", label: "将来人口" },
     ...(firstCompareKey ? [{ id: "compare", label: "比較" }] : []),
     { id: "ranking", label: "ランキング" },
-    { id: "details", label: "詳細情報" },
+    // 飛び先はFAQセクション（「◯◯市のよくある質問」）。id はリンク互換のため据え置き
+    { id: "details", label: "Q&A" },
   ];
 
   // Dataset 構造化データ（政府統計の実データを地理単位で提示する性質に適合）。
@@ -514,6 +523,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
         <div className="ad-metric-grid">
           {/* 家賃・住宅コスト */}
           <MetricCard
+            id="rent"
             icon={Wallet}
             tone="ad-tone-rent"
             title="家賃・住居コスト"
@@ -550,11 +560,12 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
             {hasRent(m.rent.value) && <SourceLine source={m.rent.source} asOf={m.rent.asOf} estimated={m.rent.isEstimated} />}
           </MetricCard>
 
-          {/* 子育て */}
+          {/* 子育て・生活環境（待機児童＋生活インフラを1カードに統合） */}
           <MetricCard
+            id="kids"
             icon={Baby}
             tone="ad-tone-kids"
-            title="子育て環境"
+            title="子育て・生活環境"
             badge={
               isWaitlistDisclosed(m.waitlistChildren) && m.waitlistChildren.value === 0
                 ? { text: "待機児童ゼロ", tone: "is-good" }
@@ -571,19 +582,8 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
             ) : (
               <NoData text="区別非公表です。" reason={m.waitlistChildren.source.replace("区別非公表（", "").replace(/）.*$/, "")} />
             )}
-          </MetricCard>
-
-          {/* 災害リスク（横長） */}
-          <div className="ad-span-2">
-            <MetricCard icon={ShieldAlert} tone="ad-tone-hazard" title="災害リスク">
-              <DisasterCard m={m} />
-            </MetricCard>
-          </div>
-
-          {/* 生活インフラ */}
-          {m.amenities && (
-            <MetricCard icon={Building2} tone="ad-tone-infra" title="生活インフラ">
-              {isAmenitiesCounted(m.amenities.source) ? (
+            {m.amenities &&
+              (isAmenitiesCounted(m.amenities.source) ? (
                 <>
                   <div className="ad-statline">
                     <span className="ad-stat">
@@ -602,16 +602,21 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
                   <SourceLine source={m.amenities.source} asOf={m.amenities.asOf} />
                 </>
               ) : (
-                <NoData text="集計対象外です。" reason={coverageReason(m.amenities.source)} />
-              )}
-            </MetricCard>
-          )}
+                <NoData text="生活インフラは集計対象外です。" reason={coverageReason(m.amenities.source)} />
+              ))}
+          </MetricCard>
+
+          {/* 災害リスク */}
+          <MetricCard id="hazard" icon={ShieldAlert} tone="ad-tone-hazard" title="災害リスク">
+            <DisasterCard m={m} />
+          </MetricCard>
 
           {/* 外国人比率 */}
           <MetricCard
+            id="foreign"
             icon={Globe2}
             tone="ad-tone-foreign"
-            title="外国人住民（多様性・国際性）"
+            title="外国人比率"
             link={{ href: mapHrefForCode(m.code, "/map/foreign-ratio"), label: "地図・ランキングで見る" }}
           >
             {hasForeignData(m.foreignResidents.source) ? (
@@ -644,6 +649,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
               docs/seo/gsc-seo-roadmap-2026-08.md 参照）。 */}
           <div className="ad-span-2">
             <MetricCard
+              id="future-pop"
               icon={Users}
               tone="ad-tone-pop"
               title="将来人口（公的推計）"

@@ -204,6 +204,10 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
     let cleanup: (() => void) | null = null;
 
     const startInit = () => void (async () => {
+      // 外部の基本地図スタイル（tiles.openfreemap.org 等）の取得は map.on("load") まで
+      // 発火しないため、それを待たず自前の同一オリジンファイルを並行して取得開始する
+      // （直列ウォーターフォールを避け、CDN 往復と自前fetchを同時に走らせる）。
+      const prefGeoPromise = fetchGeoJsonOrEmpty("/prefectures.geojson");
       const { default: maplibregl } = await import("maplibre-gl");
       // 動的 import 中にアンマウントされた / 既にマップが立っていれば中断
       if (disposed || !containerRef.current || mapRef.current) return;
@@ -270,10 +274,11 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
       map.on("load", async () => {
         // ディープリンク時は東京湾デフォルト→目的地の二段ジャンプを避け、県 bbox へ直行する
         if (!prefTarget) map.fitBounds(TOKYO_BAY_BBOX, { padding: 40, duration: 0 });
-        // prefectures(47県の輪郭, 約580KB)だけ起動時にロード。各県の市区町村/区
+        // prefectures(47県の輪郭, 約369KB)だけ起動時にロード。各県の市区町村/区
         // ポリゴンは全件で22MB超あり SP 実機で破綻するため、ズームしてビューポートに
         // 入った県だけを遅延ロードする（下の ensurePrefs / checkViewport）。
-        const prefGeo = await fetchGeoJsonOrEmpty("/prefectures.geojson");
+        // fetch 自体は startInit 冒頭で基本地図スタイルの読み込みと並行して開始済み。
+        const prefGeo = await prefGeoPromise;
         prefGeoRef.current = prefGeo;
 
         // 県 slug → bbox（ディープリンクの初期フィットと遅延ロード判定で共用）

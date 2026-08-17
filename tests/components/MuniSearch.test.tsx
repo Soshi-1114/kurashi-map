@@ -143,4 +143,28 @@ describe("MuniSearch", () => {
     await user.type(input, "川");
     expect(input).toHaveAttribute("aria-expanded", "true");
   });
+
+  it("選択した自治体が「最近見た自治体」として次回フォーカス時に出る", async () => {
+    const user = userEvent.setup();
+    const { input } = setup();
+    await user.type(input, "川口");
+    await user.click(screen.getByRole("option"));
+    expect(screen.queryByRole("listbox")).toBeNull();
+
+    await user.click(input);
+    expect(screen.getByText("最近見た自治体")).toBeInTheDocument();
+    expect(within(screen.getByRole("option")).getByText("川口市")).toBeInTheDocument();
+  });
+
+  it("履歴のクリアボタンで履歴が消える", async () => {
+    const user = userEvent.setup();
+    const { input } = setup();
+    await user.type(input, "川口");
+    await user.click(screen.getByRole("option"));
+    await user.click(input);
+    expect(screen.getByText("最近見た自治体")).toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: /クリア/ }));
+    expect(screen.queryByRole("listbox")).toBeNull();
+  });
 });
