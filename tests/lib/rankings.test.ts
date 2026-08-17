@@ -1,5 +1,8 @@
 import { describe, it, expect } from "vitest";
-import { getRankingBySlug, muniLevelOnly, rankBy, RANKINGS, housingSurveyLabel, landPriceSurveyLabel, appendFreshness } from "@/lib/rankings";
+import {
+  getRankingBySlug, muniLevelOnly, rankBy, RANKINGS,
+  housingSurveyLabel, landPriceSurveyLabel, appendFreshness, freshnessPrefix,
+} from "@/lib/rankings";
 import { muni, metric } from "../_fixtures";
 
 describe("muniLevelOnly", () => {
@@ -306,5 +309,20 @@ describe("appendFreshness", () => {
 
   it("freshness が null なら素通しする", () => {
     expect(appendFreshness("説明文。", null)).toBe("説明文。");
+  });
+});
+
+describe("freshnessPrefix", () => {
+  it("複数候補のうち最も新しい asOf を「【…更新】」の形で返す", () => {
+    expect(freshnessPrefix(["2023", "2025-12", "2025"])).toBe("【2025年12月更新】");
+  });
+
+  it("null/undefined/データなしセンチネルは無視する", () => {
+    expect(freshnessPrefix([null, undefined, "-", "2024"])).toBe("【2024年更新】");
+  });
+
+  it("候補が1つも解釈できなければ空文字（description に何も付けない）", () => {
+    expect(freshnessPrefix([null, undefined])).toBe("");
+    expect(freshnessPrefix([])).toBe("");
   });
 });

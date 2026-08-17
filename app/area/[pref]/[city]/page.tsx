@@ -26,7 +26,10 @@ import {
 import { getMunicipality, listAll, listAllAcrossPrefs } from "@/lib/metrics";
 import { buildSummary } from "@/lib/summary";
 import { findRelatedByRent, findSimilar, findClosePopulationInPref } from "@/lib/related";
-import { RANKINGS, formatAsOfJa, POPULATION_FRESHNESS, housingSurveyLabel, landPriceSurveyLabel } from "@/lib/rankings";
+import {
+  RANKINGS, formatAsOfJa, POPULATION_FRESHNESS, POPULATION_ASOF,
+  housingSurveyLabel, landPriceSurveyLabel, freshnessPrefix,
+} from "@/lib/rankings";
 import { mapHrefForCode } from "@/lib/mapDeepLink";
 import { muniLastModified } from "@/lib/dataFreshness";
 import { getRankPositions } from "@/lib/rankingStats";
@@ -111,6 +114,12 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
   // 先頭に置き、title で削った「住みやすさ」もここで補う。在留外国人割合には全国平均・
   // 全国順位という title に入らない文脈を担わせる（数値はビルド時データ由来）。
   const descRent = hasRent(m.rent.value) ? `家賃平均${m.rent.value.toLocaleString()}円/月、` : "";
+  // description 冒頭の「更新」バッジ用。本文に実際に書く指標の asOf だけを集める
+  // （地価など本文に出てこない指標を混ぜるとバッジの年と本文が食い違うため）。
+  const bodyAsOf: (string | null)[] = [
+    m.population > 0 ? POPULATION_ASOF : null,
+    hasRent(m.rent.value) ? m.rent.asOf : null,
+  ];
   let description: string;
   if (hasForeign) {
     // 比較統計が取れる場合はそれを載せ、代わりに出典表記を落とす（文字数の都合。
@@ -119,7 +128,8 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
       ? `（全国平均${fc.nationalAvg.toFixed(2)}%、全国${fc.nationalRank.toLocaleString()}位・${formatAsOfJa(m.foreignResidents.asOf)}時点）`
       : "";
     const source = fc ? "" : `出典: 出入国在留管理庁「在留外国人統計」（${formatAsOfJa(m.foreignResidents.asOf)}）。`;
-    description = `${fullName}（${prefName}）の人口は${pop}人（${POPULATION_FRESHNESS}）、${descRent}在留外国人割合${foreignRatio.toFixed(2)}%${context}。地価・子育て・災害リスクなどの住環境データと住みやすさスコアを地図とランキングで比較できます。${source}`;
+    const prefix = freshnessPrefix([...bodyAsOf, m.foreignResidents.asOf]);
+    description = `${prefix}${fullName}（${prefName}）の人口は${pop}人（${POPULATION_FRESHNESS}）、${descRent}在留外国人割合${foreignRatio.toFixed(2)}%${context}。地価・子育て・災害リスクなどの住環境データと住みやすさスコアを地図とランキングで比較できます。${source}`;
   } else {
     // このフォールバックは北方領土6村相当（在留外国人統計・人口ともに対象外）のみが
     // 到達する。上の分岐（GSC分析に基づき調整済み）と違い実質的な閲覧数が小さいため、
@@ -138,7 +148,8 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
     const topics = ["地価", "待機児童", "災害リスク"]
       .filter((t) => !(t === "地価" && topHighlightKey === "landPrice") && !(t === "待機児童" && topHighlightKey === "waitlistZero"))
       .join("・");
-    description = `${fullName}（${prefName}）の住みやすさ・住環境データ。${popPhrase}${descRent}${highlightPhrase}${topics}などをまとめて地図とランキングで比較できる${SITE.name}の自治体ページ。`;
+    const prefix = freshnessPrefix(bodyAsOf);
+    description = `${prefix}${fullName}（${prefName}）の住みやすさ・住環境データ。${popPhrase}${descRent}${highlightPhrase}${topics}などをまとめて地図とランキングで比較できる${SITE.name}の自治体ページ。`;
   }
   const url = absoluteUrl(`/area/${m.pref}/${m.code}`);
   const ogImage = absoluteUrl(`/api/og/${m.code}`);

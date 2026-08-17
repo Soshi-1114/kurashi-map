@@ -53,6 +53,24 @@ export function latestLastModified(munis: Municipality[]): Date | null {
   return max;
 }
 
+/**
+ * 複数の asOf 候補から最も新しいものを1つ、元の文字列のまま返す（表示整形は呼び出し側）。
+ * パース不能・null・undefined は無視。1つも解釈できなければ null。
+ *
+ * description 冒頭の「更新」バッジ等、複数指標の asOf を比較して最新を選ぶ用途で使う。
+ * 呼び出し側は「実際に本文へ書く指標の asOf だけ」を渡すこと（本文に出てこない指標を
+ * 混ぜると、バッジの年と本文の内容が食い違い誤解を招く）。
+ */
+export function latestAsOf(asOfs: (string | null | undefined)[]): string | null {
+  let best: { raw: string; date: Date } | null = null;
+  for (const raw of asOfs) {
+    if (!raw) continue;
+    const date = parseAsOf(raw);
+    if (date && (!best || date > best.date)) best = { raw, date };
+  }
+  return best?.raw ?? null;
+}
+
 // ===== テンプレート改訂日 =====
 //
 // sitemap の lastModified は上記のとおりデータの asOf 由来だが、それだけだと
@@ -71,13 +89,15 @@ export function latestLastModified(munis: Municipality[]): Date | null {
 // なお docs/seo/url-sets.json の since（効果計測の起点）とは目的が違うので値がずれてよい:
 // lastModified は「いつ変わったか」、since は「新しい内容が丸一日配信された最初の日」。
 export const TEMPLATE_REVISED_AT = {
-  /** /area/{pref}/{code} 自治体詳細。2026-08-17: description・本文にデータ基準年度を追記＋地図ディープリンク導線、
-   *  電気代シミュレーター導線（供給エリア名表示）を追加（PR #142）。
+  /** /area/{pref}/{code} 自治体詳細。2026-08-17: description・本文にデータ基準年度を追記、
+   *  description 冒頭に「更新」鮮度バッジ（本文言及指標の最新 asOf のみ）を追加、
+   *  地図ディープリンク導線、電気代シミュレーター導線（供給エリア名表示）を追加（PR #142/#144）。
    *  2026-08-11: 将来人口（IPSS 2050年推計）カードを追加（PR #138）。
    *  2026-08-10: title を人口・家賃・外国人割合の実数値並びに刷新（PR #129）
    *  注: 2026-08-17 は本番反映日。デプロイがずれたら実反映日に直すこと */
   areaMuni: "2026-08-17",
-  /** /area/{pref} 県ハブ。2026-08-17: description・lead・出典にデータ基準年度を追記。
+  /** /area/{pref} 県ハブ。2026-08-17: description・lead・出典にデータ基準年度を追記、
+   *  description 冒頭に「更新」鮮度バッジを追加、全市区町村一覧テーブルを並び替え可能に（PR #144）。
    *  2026-08-10: title の重複解消＋データ概況表・全ランキング導線を追加（PR #127/#130） */
   areaPref: "2026-08-17",
   /** /ranking/{slug} 全国ランキング。2026-08-17: description に基準年度追記＋家賃系 title に調査年度（freshnessLabel）。

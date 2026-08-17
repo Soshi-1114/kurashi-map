@@ -6,7 +6,7 @@ import { Wallet, MapIcon, BarChart3, Database, ArrowLeft, ArrowUpRight, Building
 import { listMunicipalities, listAll } from "@/lib/metrics";
 import {
   RANKINGS, getRankingBySlug, rankBy,
-  POPULATION_FRESHNESS, CENSUS_PERIOD, housingSurveyLabel, landPriceSurveyLabel,
+  POPULATION_FRESHNESS, CENSUS_PERIOD, housingSurveyLabel, landPriceSurveyLabel, freshnessPrefix,
 } from "@/lib/rankings";
 import { getPrefMetricSummaries } from "@/lib/prefAggregates";
 import RankPillLinks from "@/components/RankPillLinks";
@@ -57,6 +57,7 @@ function prefStats(muni: Municipality[]) {
   // その場合だけ調査名のみのフォールバックにする。
   const rentAsOf = muni.find((m) => hasRent(m.rent.value))?.rent.asOf ?? null;
   const rentSurveyLabel = rentAsOf ? housingSurveyLabel(rentAsOf) : "住宅・土地統計調査";
+  const freshness = freshnessPrefix([rentAsOf]);
   const landPriceLabels = [...new Set(
     muni
       .filter((m) => hasLandPrice(m.landPrice.value))
@@ -71,6 +72,9 @@ function prefStats(muni: Municipality[]) {
     floodCount,
     rentSurveyLabel,
     landPriceLabels,
+    // description 冒頭の「更新」バッジ。description には家賃中央値の asOf しか
+    // 書かないので、それ以外の指標（地価等）は混ぜない。
+    freshness,
   };
 }
 
@@ -79,7 +83,7 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
   const pref = getPrefBySlug(params.pref);
   if (!pref) return { title: "見つかりません | KurashiMap" };
   const muni = await listMunicipalities(params.pref);
-  const { count, rentMedian, rentSurveyLabel } = prefStats(muni);
+  const { count, rentMedian, rentSurveyLabel, freshness } = prefStats(muni);
   const medPhrase =
     rentMedian > 0 ? `家賃の県内中央値${rentMedian.toLocaleString()}円/月（${rentSurveyLabel}）、` : "";
   // title/description には「家賃相場ランキング」等、/ranking/rent-cheap|high/{pref} と
@@ -87,7 +91,7 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
   // 30〜40位で着地し、平均5〜9位で走っている該当ランキングページを食っていた
   // （docs/seo/kurashimap-gsc-analysis-2026-08-10.md §9 参照）。
   const title = `${pref.nameJa}の住みやすさ・市区町村データ｜${count}市区町村を比較｜${SITE.name}`;
-  const description = `${pref.nameJa}の全${count}市区町村の${medPhrase}地価・人口・待機児童・災害リスク・外国人比率を一覧で比較。家賃・地価が安い自治体や子育て環境を、政府統計の実データでチェックできる${SITE.name}の都道府県ページ。`;
+  const description = `${freshness}${pref.nameJa}の全${count}市区町村の${medPhrase}地価・人口・待機児童・災害リスク・外国人比率を一覧で比較。家賃・地価が安い自治体や子育て環境を、政府統計の実データでチェックできる${SITE.name}の都道府県ページ。`;
   const url = absoluteUrl(`/area/${pref.slug}`);
   const ogImage = absoluteUrl(`/api/og/pref/${pref.slug}`);
   return {
