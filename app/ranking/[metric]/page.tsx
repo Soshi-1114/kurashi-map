@@ -10,7 +10,7 @@ import { RANKINGS, getRankingBySlug, muniLevelOnly, rankBy, appendFreshness, typ
 import { PREFS } from "@/lib/prefs";
 import { SITE, prefNameOf, absoluteUrl } from "@/lib/site";
 import PrefRegionLinks from "@/components/PrefRegionLinks";
-import RankPillLinks from "@/components/RankPillLinks";
+import RankLinkList from "@/components/RankLinkList";
 import { RankBadge } from "@/components/RankBadge";
 import PageShell from "@/components/PageShell";
 
@@ -297,12 +297,11 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
         </section>
       )}
 
-      <RankPillLinks
+      <RankLinkList
         title="ほかのランキング"
         sub="同じ実データで、別の指標でも比べてみましょう。"
         rankings={others}
         href={(r) => `/ranking/${r.slug}`}
-        label={(r) => r.title}
       />
 
       {faq.length > 0 && (

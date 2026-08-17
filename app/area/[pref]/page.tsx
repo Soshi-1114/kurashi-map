@@ -9,7 +9,7 @@ import {
   POPULATION_FRESHNESS, CENSUS_PERIOD, housingSurveyLabel, landPriceSurveyLabel, freshnessPrefix,
 } from "@/lib/rankings";
 import { getPrefMetricSummaries } from "@/lib/prefAggregates";
-import RankPillLinks from "@/components/RankPillLinks";
+import RankLinkList from "@/components/RankLinkList";
 import { PREFS, getPrefBySlug } from "@/lib/prefs";
 import { mapHrefForPref } from "@/lib/mapDeepLink";
 import { SITE, absoluteUrl } from "@/lib/site";
@@ -383,12 +383,12 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
         </section>
       )}
 
-      <RankPillLinks
+      <RankLinkList
         title={`${prefName}のランキングで比べる`}
         sub={`${prefName}内の市区町村を、指標ごとに並べて比較できます。`}
         rankings={prefRankings}
         href={(r) => `/ranking/${r.slug}/${pref.slug}`}
-        label={(r) => `${prefName}の${r.title}`}
+        labelPrefix={`${prefName}の`}
       />
 
       <section className="rk-section">
