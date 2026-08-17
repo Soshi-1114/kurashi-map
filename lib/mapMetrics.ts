@@ -88,7 +88,7 @@ export const MAP_METRICS: readonly MapMetric[] = [
     key: "rent",
     label: "家賃",
     legendTitle: "民営借家の家賃平均（円/月）",
-    description: "民営借家の1か月あたり家賃の平均（住宅・土地統計調査の家賃階級別借家数から算出）。",
+    description: "民営借家の1か月あたり家賃の平均\n（住宅・土地統計調査の家賃階級別借家数から算出）。",
     nodataLabel: "データなし（住宅統計の集計対象外）",
     legend: {
       kind: "numeric",
