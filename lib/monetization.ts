@@ -12,10 +12,49 @@ const UTM = {
   medium: "referral",
 } as const;
 
+/** 送客導線の一覧（campaign 名の単一の正典。導線を増やす時はここに足す）。 */
+type UtmCampaign = "furusato" | "denki";
+
+/** base URL に UTM を付与する（`?` の有無で結合子を選ぶ）。 */
+function withUtm(base: string, campaign: UtmCampaign): string {
+  const sep = base.includes("?") ? "&" : "?";
+  return `${base}${sep}utm_source=${UTM.source}&utm_medium=${UTM.medium}&utm_campaign=${campaign}`;
+}
+
 /** 投げ銭・サポーターの支援先 URL。未設定なら支援導線は表示しない。 */
 export function supportUrl(): string | null {
   const u = process.env.NEXT_PUBLIC_SUPPORT_URL?.trim();
   return u ? u : null;
+}
+
+/**
+ * 電気プラン（/denki）のアフィリエイトリンク設定。
+ *
+ * NEXT_PUBLIC_* はビルド時の静的置換なので process.env[動的キー] は使えない。
+ * 提携する会社を増やすときは data/denki-plans.json に offer を足すのと併せて
+ * ここに 1 行追加する（どのみち JSON 編集＝デプロイが必要なので追加摩擦はない）。
+ */
+function denkiAffLinks(): Record<string, string | undefined> {
+  return {
+    // 例: "looop-denki": process.env.NEXT_PUBLIC_DENKI_AFF_LOOOP,
+  };
+}
+
+/**
+ * 電気プランの外部リンク URL を返す。
+ * - env にアフィリエイトリンクがあればそれを使う（ASP 計測を壊さないよう UTM は付けない）
+ * - なければ公式サイトへの素リンク + UTM（導線を非表示にせず、ツールとしての有用性を保つ）
+ *
+ * @param links テスト用の注入口（既定は env 由来の denkiAffLinks()）
+ */
+export function denkiOfferUrl(
+  offerId: string,
+  officialUrl: string,
+  links: Record<string, string | undefined> = denkiAffLinks(),
+): { url: string; isAffiliate: boolean } {
+  const aff = links[offerId]?.trim();
+  if (aff) return { url: aff, isAffiliate: true };
+  return { url: withUtm(officialUrl, "denki"), isAffiliate: false };
 }
 
 /**
@@ -53,7 +92,5 @@ export function generateFurusatoUrl(cityName: string, prefName?: string): string
     base = `https://www.satofull.jp/search/?keyword=${encoded}`;
   }
 
-  // UTM を付与（テンプレートに ? が含まれるかで結合子を選ぶ）。
-  const sep = base.includes("?") ? "&" : "?";
-  return `${base}${sep}utm_source=${UTM.source}&utm_medium=${UTM.medium}&utm_campaign=furusato`;
+  return withUtm(base, "furusato");
 }

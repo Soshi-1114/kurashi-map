@@ -1,0 +1,165 @@
+/* /denki 電気料金シミュレーター（dnk- 名前空間）。
+   面・タイポ・シェルは globals.css の共通プリミティブ
+   （.page-hero / .h1 / .card = .dnk-hero / .dnk-title / .dnk-row）と
+   league.css の FAQ・出典（.rk-faq* / .rk-sources*）に委譲し、
+   ここにはシミュレーター固有のレイアウトだけを置く。 */
+
+.dnk-title { margin: 0 0 8px; }
+.dnk-h2 {
+  margin-top: var(--space-8);
+  border-left: 3px solid var(--accent);
+  padding-left: 9px;
+  font-size: var(--text-lg);
+}
+.dnk-lead {
+  margin: 0;
+  max-width: 640px;
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  color: var(--text-muted);
+}
+
+.dnk-sim {
+  margin: var(--space-4) 0 var(--space-2);
+}
+
+.dnk-boundary {
+  background: var(--warn-soft);
+  border: 1px solid var(--color-warning);
+  border-radius: var(--radius-xs);
+  padding: 10px var(--space-3);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+  margin: 0 0 var(--space-3);
+}
+
+.dnk-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-4);
+  margin-bottom: var(--space-2);
+}
+.dnk-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 130px;
+}
+.dnk-label {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+.dnk-field select,
+.dnk-field input {
+  font: inherit;
+  padding: 8px 10px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-xs);
+  background: var(--surface-strong);
+  min-height: 40px;
+}
+.dnk-field input {
+  width: 130px;
+}
+
+.dnk-kwh-note,
+.dnk-ad-note {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+.dnk-kwh-note { margin: 4px 0 0; }
+.dnk-ad-note { margin: var(--space-2) 0 0; }
+
+.dnk-results {
+  list-style: none;
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+/* 面・枠は globals.css の .card リスト（.dnk-row を登録済み）に委譲 */
+.dnk-row {
+  padding: var(--space-3) 14px;
+}
+.dnk-row-baseline {
+  background: var(--surface-muted);
+}
+.dnk-row-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 10px;
+}
+.dnk-company {
+  font-weight: 700;
+}
+.dnk-pr {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--color-warning);
+  background: var(--color-warning-bg);
+  border-radius: 4px;
+  padding: 1px 5px;
+  margin-left: 6px;
+  vertical-align: 2px;
+}
+.dnk-plan {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+.dnk-row-amount {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  margin-top: 6px;
+}
+.dnk-monthly {
+  font-size: 1.35rem;
+  font-variant-numeric: tabular-nums;
+}
+.dnk-per {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+.dnk-diff {
+  font-size: var(--text-sm);
+  color: var(--color-warning);
+  font-variant-numeric: tabular-nums;
+}
+.dnk-diff-minus {
+  color: var(--color-success);
+}
+.dnk-baseline-tag {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  padding: 1px 8px;
+}
+.dnk-notes {
+  margin: 6px 0 0;
+  padding-left: 18px;
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+.dnk-link {
+  display: inline-block;
+  margin-top: var(--space-2);
+  font-size: var(--text-sm);
+}
+
+.dnk-assumptions {
+  background: var(--surface-muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 14px var(--space-4);
+  margin-top: var(--space-3);
+}
+.dnk-assumptions ul {
+  margin: 0;
+  padding-left: 18px;
+  line-height: var(--leading-relaxed);
+  font-size: var(--text-sm);
+}

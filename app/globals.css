@@ -194,6 +194,7 @@ html, body {
 .detail-hero,
 .rk-hero,
 .cmp-hero,
+.dnk-hero,
 .ad-hero {
   padding: var(--space-2) 0 var(--space-6);
   background: none;
@@ -206,7 +207,8 @@ html, body {
 .detail-title,
 .rk-title,
 .ad-title,
-.cmp-title {
+.cmp-title,
+.dnk-title {
   margin: 0;
   font-size: clamp(26px, 4vw, 34px);
   font-weight: 800;
@@ -276,6 +278,7 @@ html, body {
 .metric-card,
 .mini-card,
 .related-card,
+.dnk-row,
 .rk-champ,
 .rk-pill,
 .rk-podium-card,

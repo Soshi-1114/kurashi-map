@@ -45,3 +45,8 @@ export function compactPopulation(value: number): string {
 export function compactYen(value: number): string {
   return compactMan(value, "円");
 }
+
+/** 金額の桁区切り表記（短縮しない）。例: 9607 → "9,607円"。 */
+export function yen(value: number): string {
+  return `${value.toLocaleString("ja-JP")}円`;
+}

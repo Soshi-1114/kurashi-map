@@ -66,6 +66,8 @@ export type OfferEstimate = {
   company: string;
   planName: string;
   kind: "baseline" | "offer";
+  /** 公式サイト URL（UI が外部リンクを組み立てるのに使う。プラン JSON を引き直させない） */
+  officialUrl: string;
   /** 月額目安（円） */
   monthlyYen: number;
   /** baseline との差額（負 = baseline より安い）。baseline 自身と baseline 不在時は null */
@@ -99,6 +101,7 @@ export function compareOffers(
       company: plan.company,
       planName: plan.planName,
       kind: plan.kind,
+      officialUrl: plan.officialUrl,
       monthlyYen,
       diffYen:
         plan.kind === "offer" && baseline ? monthlyYen - baseline.monthlyYen : null,
