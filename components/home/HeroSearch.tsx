@@ -6,29 +6,44 @@
 //（「地図で周辺を見たい」意図。検索バーを2本に戻さずに両方の意図を満たす）。
 // ドロップダウンの見た目は既存の .search-results 系クラスを再利用する。
 // コンボボックスの状態機械（絞り込み・キーボード操作）は useMuniCombobox を共有する。
+// クエリが空でフォーカス中は、検索結果の代わりに「最近見た自治体」履歴を出す
+// （useSearchHistory / useMuniCombobox の historyCodes 連携）。
 import { useCallback } from "react";
 import { useRouter } from "next/navigation";
+import { History, X } from "lucide-react";
 import type { MuniSummary } from "@/lib/types";
 import { useMuniCombobox } from "@/lib/useMuniCombobox";
+import { useSearchHistory } from "@/lib/useSearchHistory";
 import { muniContextLabel } from "@/lib/muniLabel";
 import { requestMapFly } from "@/lib/mapFly";
 
 export default function HeroSearch({ munis }: { munis: MuniSummary[] }) {
   const router = useRouter();
-  const onPick = useCallback((m: MuniSummary) => router.push(`/area/${m.pref}/${m.code}`), [router]);
+  const { codes: historyCodes, record, clear } = useSearchHistory();
+  const onPick = useCallback(
+    (m: MuniSummary) => {
+      record(m.code);
+      router.push(`/area/${m.pref}/${m.code}`);
+    },
+    [router, record],
+  );
   // townSearch: 町丁名（例: 日の里）やひらがなでも自治体を引けるようにする
-  const { query, setQuery, filtered, activeIndex, setActiveIndex, pick, onKeyDown } = useMuniCombobox(munis, onPick, {
-    townSearch: true,
-  });
+  const { query, setQuery, filtered, isHistory, activeIndex, setActiveIndex, pick, onKeyDown, onFocus, onBlur, inputRef } =
+    useMuniCombobox(munis, onPick, { townSearch: true, historyCodes });
 
   // 副動作: ページ内の地図へスクロールし、その自治体へフライトさせる（遷移しない）。
+  // 実DOMの focus も明示的に外す（候補クリックの mousedown を preventDefault して
+  // いるため、blur() しないと実focusが外れず、次にこの input をクリックしても
+  // focus イベントが発火せず履歴が開かなくなる）。
   const showOnMap = useCallback(
     (m: MuniSummary) => {
+      record(m.code);
       setQuery("");
+      inputRef.current?.blur();
       document.querySelector(".home-map")?.scrollIntoView({ behavior: "smooth" });
       requestMapFly(m.code);
     },
-    [setQuery],
+    [setQuery, record, inputRef],
   );
 
   return (
@@ -39,11 +54,14 @@ export default function HeroSearch({ munis }: { munis: MuniSummary[] }) {
           <line x1="21" y1="21" x2="16.65" y2="16.65" />
         </svg>
         <input
+          ref={inputRef}
           type="search"
           placeholder="市区町村名を入力（例: 新宿区）"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={onKeyDown}
+          onFocus={onFocus}
+          onBlur={onBlur}
           aria-label="自治体を検索してデータページへ移動"
           role="combobox"
           aria-expanded={filtered.length > 0}
@@ -56,6 +74,19 @@ export default function HeroSearch({ munis }: { munis: MuniSummary[] }) {
       </div>
       {filtered.length > 0 && (
         <ul id="home-search-listbox" className="search-results" role="listbox" aria-label="自治体の検索候補">
+          {isHistory && (
+            <li className="search-history-head" role="presentation">
+              <span><History size={13} aria-hidden="true" /> 最近見た自治体</span>
+              <button
+                type="button"
+                className="search-history-clear"
+                onMouseDown={(e) => e.preventDefault()}
+                onClick={clear}
+              >
+                <X size={12} aria-hidden="true" /> クリア
+              </button>
+            </li>
+          )}
           {/* filtered は自治体コード単位に集約済み（同じ自治体が名前ヒットと町丁ヒットの
               両方で重複することはない）ので、key/id はコードのみで一意 */}
           {filtered.map((m, i) => (
@@ -66,6 +97,7 @@ export default function HeroSearch({ munis }: { munis: MuniSummary[] }) {
                 aria-selected={i === activeIndex}
                 tabIndex={-1}
                 className={i === activeIndex ? "is-active" : undefined}
+                onMouseDown={(e) => e.preventDefault()}
                 onClick={() => pick(m)}
                 onMouseEnter={() => setActiveIndex(i)}
               >
@@ -80,6 +112,7 @@ export default function HeroSearch({ munis }: { munis: MuniSummary[] }) {
                 className="search-mapbtn"
                 aria-label={`${m.displayName ?? m.name}を地図で表示`}
                 title="地図で表示"
+                onMouseDown={(e) => e.preventDefault()}
                 onClick={() => showOnMap(m)}
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">

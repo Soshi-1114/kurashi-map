@@ -50,6 +50,7 @@ export function KpiCard({
 
 // ---- 指標カード（詳細グリッドの共通シェル: アイコン＋タイトル＋本文＋詳細リンク）----
 export function MetricCard({
+  id,
   icon: Icon,
   tone,
   title,
@@ -57,6 +58,7 @@ export function MetricCard({
   link,
   children,
 }: {
+  id?: string;
   icon: LucideIcon;
   tone?: string;
   title: string;
@@ -65,7 +67,7 @@ export function MetricCard({
   children: ReactNode;
 }) {
   return (
-    <article className="ad-metric-card">
+    <article className="ad-metric-card" id={id}>
       <header className="ad-metric-head">
         <span className={`ad-metric-icon ${tone ?? ""}`} aria-hidden="true">
           <Icon size={20} />

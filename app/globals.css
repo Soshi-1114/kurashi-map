@@ -1049,6 +1049,33 @@ button { font-family: inherit; }
 }
 .search-mapbtn:hover,
 .search-mapbtn:focus-visible { color: var(--accent); background: var(--accent-soft); }
+/* 「最近見た自治体」履歴の見出し行（クエリ空・フォーカス時のみ表示） */
+.search-history-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 6px 14px 4px;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--text-faint);
+}
+.search-history-head span { display: flex; align-items: center; gap: 5px; }
+.search-history-clear {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  border: none;
+  background: transparent;
+  color: var(--text-faint);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: var(--radius-sm);
+}
+.search-history-clear:hover,
+.search-history-clear:focus-visible { color: var(--accent); background: var(--accent-soft); }
 
 /* レイヤーパネル。PC はヘッダー直下のポップオーバー（デフォルト展開）。
    max-height はコンテナ高基準（.map-layers が top/bottom 固定）にし、
@@ -1611,6 +1638,7 @@ button { font-family: inherit; }
   letter-spacing: -0.015em;
   font-variant-numeric: tabular-nums;
 }
+.metric-sub { font-size: var(--text-3xs); color: var(--text-muted); margin-top: 3px; font-variant-numeric: tabular-nums; }
 .metric-meta { font-size: var(--text-3xs); color: var(--text-faint); margin-top: 6px; }
 .metric-est {
   display: inline-block;

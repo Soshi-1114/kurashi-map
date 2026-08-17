@@ -48,6 +48,10 @@ export type Municipality = {
   // （在留外国人の人口比と同じ「派生値は保存しない」方針）。
   areaKm2?: number;
   rent: Metric;          // 民営借家の家賃平均
+  // 家賃階級別借家数の分布（住宅・土地統計調査）から算出した目安レンジ。件数のある
+  // 最小区分の下限〜最大区分の上限。max=null は最上位区分「20万円以上」で上限なし
+  // （fetch-rent.mjs rentRange 参照）。rent.value（加重平均）と対象自治体は同じ。
+  rentRange?: { min: number; max: number | null };
   landPrice: Metric;     // 住宅地地価
   waitlistChildren: Metric; // 待機児童（value=人数）
   // 在留外国人総数（value=人数）。出入国在留管理庁 在留外国人統計。北方領土等は

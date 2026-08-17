@@ -104,10 +104,13 @@ export function MetricCards({ m }: { m: Municipality }) {
   // 型ガードの否定分岐では source/asOf を参照できない（センチネルも同型のため）ので先に取り出す。
   const fpSource = futurePopSource(m.futurePopulation);
   const fpAsOf = futurePopAsOf(m.futurePopulation);
+  const rentRangeText = m.rentRange
+    ? `目安レンジ ${m.rentRange.min.toLocaleString()}〜${m.rentRange.max != null ? m.rentRange.max.toLocaleString() : "200,000"}円/月${m.rentRange.max == null ? "以上" : ""}`
+    : undefined;
   const cards = [
     rentHasData
-      ? { label: "家賃平均", value: `${m.rent.value.toLocaleString()} ${m.rent.unit}`, source: m.rent.source, asOf: m.rent.asOf, est: m.rent.isEstimated }
-      : { label: "家賃平均", value: "データなし", source: "住宅統計の集計対象外", asOf: "-", est: false },
+      ? { label: "家賃平均", value: `${m.rent.value.toLocaleString()} ${m.rent.unit}`, sub: rentRangeText, source: m.rent.source, asOf: m.rent.asOf, est: m.rent.isEstimated }
+      : { label: "家賃平均", value: "データなし", sub: undefined, source: "住宅統計の集計対象外", asOf: "-", est: false },
     hasLandPrice(m.landPrice.value)
       ? { label: "地価", value: `${m.landPrice.value.toLocaleString()} ${m.landPrice.unit}`, source: m.landPrice.source, asOf: m.landPrice.asOf, est: m.landPrice.isEstimated }
       : { label: "地価", value: "データなし", source: m.landPrice.source, asOf: m.landPrice.asOf, est: false },
@@ -137,6 +140,7 @@ export function MetricCards({ m }: { m: Municipality }) {
             {c.value}
             {c.est && <span className="metric-est">推計</span>}
           </div>
+          {c.sub && <div className="metric-sub">{c.sub}</div>}
           <div className="metric-meta">
             {c.source}（{formatAsOfJa(c.asOf)}）
           </div>

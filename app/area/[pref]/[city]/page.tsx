@@ -255,7 +255,12 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
 
   const navItems: SectionNavItem[] = [
     { id: "overview", label: "概要" },
-    { id: "data", label: "データ" },
+    { id: "rent", label: "家賃" },
+    { id: "kids", label: "子育て" },
+    { id: "hazard", label: "災害リスク" },
+    ...(m.amenities ? [{ id: "amenities", label: "生活インフラ" }] : []),
+    { id: "foreign", label: "外国人住民" },
+    { id: "future-pop", label: "将来人口" },
     ...(firstCompareKey ? [{ id: "compare", label: "比較" }] : []),
     { id: "ranking", label: "ランキング" },
     { id: "details", label: "詳細情報" },
@@ -487,6 +492,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
         <div className="ad-metric-grid">
           {/* 家賃・住宅コスト */}
           <MetricCard
+            id="rent"
             icon={Wallet}
             tone="ad-tone-rent"
             title="家賃・住居コスト"
@@ -494,6 +500,11 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
             link={{ href: "/ranking/rent-high", label: "家賃ランキングで比較" }}
           >
             <MetricPrimary value={hasRent(m.rent.value) ? m.rent.value.toLocaleString() : null} unit="円/月" />
+            {m.rentRange && (
+              <p className="ad-note">
+                目安レンジ: {yen(m.rentRange.min)}〜{m.rentRange.max != null ? yen(m.rentRange.max) : "200,000円以上"}
+              </p>
+            )}
             {rentRows.length > 0 ? (
               <CompareBar rows={rentRows} format={yen} caption="家賃平均の比較（自治体・県平均・全国平均）" />
             ) : (
@@ -516,7 +527,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
                 <Info size={15} aria-hidden="true" />
                 <span>
                   家賃は住宅・土地統計調査の家賃階級別の借家数から、階級の中点で加重平均した算出値です（
-                  <Link href="/about#calc" className="ad-note-link">算出方法</Link>）。
+                  <Link href="/about#calc" className="ad-note-link">算出方法</Link>）。目安レンジは、件数のある家賃階級のうち最も低い階級の下限〜最も高い階級の上限です。
                 </span>
               </p>
             )}
@@ -525,6 +536,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
 
           {/* 子育て */}
           <MetricCard
+            id="kids"
             icon={Baby}
             tone="ad-tone-kids"
             title="子育て環境"
@@ -548,14 +560,14 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
 
           {/* 災害リスク（横長） */}
           <div className="ad-span-2">
-            <MetricCard icon={ShieldAlert} tone="ad-tone-hazard" title="災害リスク">
+            <MetricCard id="hazard" icon={ShieldAlert} tone="ad-tone-hazard" title="災害リスク">
               <DisasterCard m={m} />
             </MetricCard>
           </div>
 
           {/* 生活インフラ */}
           {m.amenities && (
-            <MetricCard icon={Building2} tone="ad-tone-infra" title="生活インフラ">
+            <MetricCard id="amenities" icon={Building2} tone="ad-tone-infra" title="生活インフラ">
               {isAmenitiesCounted(m.amenities.source) ? (
                 <>
                   <div className="ad-statline">
@@ -582,6 +594,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
 
           {/* 外国人比率 */}
           <MetricCard
+            id="foreign"
             icon={Globe2}
             tone="ad-tone-foreign"
             title="外国人住民（多様性・国際性）"
@@ -617,6 +630,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
               docs/seo/gsc-seo-roadmap-2026-08.md 参照）。 */}
           <div className="ad-span-2">
             <MetricCard
+              id="future-pop"
               icon={Users}
               tone="ad-tone-pop"
               title="将来人口（公的推計）"

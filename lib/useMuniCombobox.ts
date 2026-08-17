@@ -9,7 +9,16 @@
 // （クエリはカタカナ→ひらがな正規化するので「ムナカタ」でも可）。
 // townSearch を有効にすると、さらに /api/town-search で町丁名（大字）からも自治体を
 // 引き、候補の後ろに「自治体名（町丁名）」行として追加する（例: 日の里 → 宗像市（日の里））。
-import { useCallback, useEffect, useMemo, useState } from "react";
+//
+// historyCodes を渡すと、クエリが空 かつ 入力にフォーカス中は検索結果の代わりに
+// 履歴（最近選んだ自治体）を候補として返す（isHistory=true）。フォーカス管理も
+// このフックが持つ（onFocus/onBlur を返す input.ref に渡す）。選択確定時は
+// inputRef.current?.blur() で実DOMのfocusも外す（pick 直後に履歴が同じ内容で
+// 再表示されるチラつきを防ぐだけでなく、候補クリックの mousedown を
+// preventDefault している都合上、実DOMのfocusはクリックだけでは外れない
+// ——blur しないと次のクリックで再び focus イベントが発火せず、`focused` state が
+// false のまま固まる）。
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { MuniSummary } from "./types";
 import { toHiragana } from "./kana";
 import { TOWN_QUERY_MIN } from "./townSearch";
@@ -26,13 +35,16 @@ const TOWN_DEBOUNCE_MS = 150;
 export function useMuniCombobox<T extends MuniSummary>(
   candidates: T[],
   onPick: (m: T) => void,
-  opts?: { limit?: number; townSearch?: boolean },
+  opts?: { limit?: number; townSearch?: boolean; historyCodes?: string[] },
 ) {
   const limit = opts?.limit ?? 8;
   const townSearch = opts?.townSearch ?? false;
+  const historyCodes = opts?.historyCodes;
   const [query, setQuery] = useState("");
   const [activeIndex, setActiveIndex] = useState(-1);
   const [townHits, setTownHits] = useState<TownApiHit[]>([]);
+  const [focused, setFocused] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const q = query.trim();
 
@@ -96,14 +108,31 @@ export function useMuniCombobox<T extends MuniSummary>(
     return out;
   }, [q, muniHits, townHits, byCode, limit]);
 
+  // 履歴候補（クエリ空・フォーカス中のみ使う）。コード配列から候補配列を都度解決するので、
+  // 表示名の陳腐化がない。
+  const historyHits = useMemo<ComboboxHit<T>[]>(() => {
+    if (!historyCodes?.length) return [];
+    const out: ComboboxHit<T>[] = [];
+    for (const code of historyCodes) {
+      const m = byCode.get(code);
+      if (m) out.push(m);
+    }
+    return out.slice(0, limit);
+  }, [historyCodes, byCode, limit]);
+
+  const isHistory = !q && focused && historyHits.length > 0;
+  const options = isHistory ? historyHits : filtered;
+
   // クエリが変わったらキーボード選択位置をリセット
   useEffect(() => {
     setActiveIndex(-1);
-  }, [query]);
+  }, [query, isHistory]);
 
   const pick = useCallback(
     (m: T) => {
       setQuery("");
+      setFocused(false);
+      inputRef.current?.blur();
       onPick(m);
     },
     [onPick],
@@ -116,22 +145,37 @@ export function useMuniCombobox<T extends MuniSummary>(
         setQuery("");
         return;
       }
-      if (!filtered.length) return;
+      if (!options.length) return;
       if (e.key === "ArrowDown") {
         e.preventDefault();
-        setActiveIndex((i) => (i + 1) % filtered.length);
+        setActiveIndex((i) => (i + 1) % options.length);
       } else if (e.key === "ArrowUp") {
         e.preventDefault();
-        setActiveIndex((i) => (i <= 0 ? filtered.length - 1 : i - 1));
+        setActiveIndex((i) => (i <= 0 ? options.length - 1 : i - 1));
       } else if (e.key === "Enter") {
-        if (activeIndex >= 0 && activeIndex < filtered.length) {
+        if (activeIndex >= 0 && activeIndex < options.length) {
           e.preventDefault();
-          pick(filtered[activeIndex]);
+          pick(options[activeIndex]);
         }
       }
     },
-    [filtered, activeIndex, pick],
+    [options, activeIndex, pick],
   );
 
-  return { query, setQuery, filtered, activeIndex, setActiveIndex, pick, onKeyDown };
+  const onFocus = useCallback(() => setFocused(true), []);
+  const onBlur = useCallback(() => setFocused(false), []);
+
+  return {
+    query,
+    setQuery,
+    filtered: options,
+    isHistory,
+    activeIndex,
+    setActiveIndex,
+    pick,
+    onKeyDown,
+    onFocus,
+    onBlur,
+    inputRef,
+  };
 }

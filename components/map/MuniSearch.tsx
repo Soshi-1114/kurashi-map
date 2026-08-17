@@ -3,9 +3,13 @@
 // ヘッダーの自治体検索コンボボックス。確定時は onSelect に自治体を渡す
 // （地図側は選択とフライトだけ担当）。状態機械は useMuniCombobox を共有し、
 // 名前・ひらがな読み・町丁名（例: 日の里 → 宗像市（日の里））で検索できる。
+// クエリが空でフォーカス中は、検索結果の代わりに「最近見た自治体」履歴を出す
+// （useSearchHistory / useMuniCombobox の historyCodes 連携）。
 import { useCallback, useMemo } from "react";
+import { History, X } from "lucide-react";
 import type { MuniSummary } from "@/lib/types";
 import { useMuniCombobox } from "@/lib/useMuniCombobox";
+import { useSearchHistory } from "@/lib/useSearchHistory";
 import { muniContextLabel } from "@/lib/muniLabel";
 import { hasRent } from "@/lib/rentColor";
 
@@ -18,23 +22,30 @@ type Props = {
 export default function MuniSearch({ municipalities, wards, onSelect }: Props) {
   // 市区町村と区を両方検索対象に
   const candidates = useMemo(() => [...municipalities, ...wards], [municipalities, wards]);
-  const onPick = useCallback((m: MuniSummary) => void onSelect(m), [onSelect]);
-  const { query, setQuery, filtered, activeIndex, setActiveIndex, pick, onKeyDown } = useMuniCombobox(
-    candidates,
-    onPick,
-    { townSearch: true },
+  const { codes: historyCodes, record, clear } = useSearchHistory();
+  const onPick = useCallback(
+    (m: MuniSummary) => {
+      record(m.code);
+      void onSelect(m);
+    },
+    [onSelect, record],
   );
+  const { query, setQuery, filtered, isHistory, activeIndex, setActiveIndex, pick, onKeyDown, onFocus, onBlur, inputRef } =
+    useMuniCombobox(candidates, onPick, { townSearch: true, historyCodes });
 
   return (
     <div className="app-header-search">
       <div className="search-input-wrap">
         <SearchIcon />
         <input
+          ref={inputRef}
           type="search"
           placeholder="自治体名で検索"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={onKeyDown}
+          onFocus={onFocus}
+          onBlur={onBlur}
           aria-label="自治体検索"
           role="combobox"
           aria-expanded={filtered.length > 0}
@@ -47,6 +58,19 @@ export default function MuniSearch({ municipalities, wards, onSelect }: Props) {
       </div>
       {filtered.length > 0 && (
         <ul id="muni-search-listbox" className="search-results" role="listbox" aria-label="自治体の検索候補">
+          {isHistory && (
+            <li className="search-history-head" role="presentation">
+              <span><History size={13} aria-hidden="true" /> 最近見た自治体</span>
+              <button
+                type="button"
+                className="search-history-clear"
+                onMouseDown={(e) => e.preventDefault()}
+                onClick={clear}
+              >
+                <X size={12} aria-hidden="true" /> クリア
+              </button>
+            </li>
+          )}
           {/* filtered は自治体コード単位に集約済みなので key/id はコードのみで一意 */}
           {filtered.map((m, i) => (
             <li key={m.code} role="presentation">
@@ -56,6 +80,7 @@ export default function MuniSearch({ municipalities, wards, onSelect }: Props) {
                 aria-selected={i === activeIndex}
                 tabIndex={-1}
                 className={i === activeIndex ? "is-active" : undefined}
+                onMouseDown={(e) => e.preventDefault()}
                 onClick={() => pick(m)}
                 onMouseEnter={() => setActiveIndex(i)}
               >
