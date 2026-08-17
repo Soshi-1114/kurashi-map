@@ -285,9 +285,7 @@ html, body {
 .rk-ladder-row,
 .ad-kpi,
 .ad-metric-card,
-.ad-arealink,
 .ad-rankcard,
-.ad-similar,
 .ad-score {
   background: var(--surface-strong);
   border: 1px solid var(--border);
