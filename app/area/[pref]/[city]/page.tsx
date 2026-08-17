@@ -27,6 +27,7 @@ import { getMunicipality, listAll, listAllAcrossPrefs } from "@/lib/metrics";
 import { buildSummary } from "@/lib/summary";
 import { findRelatedByRent, findSimilar, findClosePopulationInPref } from "@/lib/related";
 import { RANKINGS, formatAsOfJa, POPULATION_FRESHNESS, housingSurveyLabel, landPriceSurveyLabel } from "@/lib/rankings";
+import { mapHrefForCode } from "@/lib/mapDeepLink";
 import { muniLastModified } from "@/lib/dataFreshness";
 import { getRankPositions } from "@/lib/rankingStats";
 import { buildFaq } from "@/lib/faq";
@@ -871,7 +872,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
               <Link href="/map/foreign-ratio" className="ad-cta-chip"><Globe2 size={16} aria-hidden="true" />外国人比率で見る</Link>
             </li>
             <li>
-              <Link href={`/?code=${m.code}`} className="ad-cta-chip"><MapIcon size={16} aria-hidden="true" />地図で見る</Link>
+              <Link href={mapHrefForCode(m.code)} className="ad-cta-chip"><MapIcon size={16} aria-hidden="true" />地図で見る</Link>
             </li>
           </ul>
         </section>
@@ -879,7 +880,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
       <div className="ad-footnav">
         <Link href={`/area/${m.pref}`} className="ad-back"><ArrowLeft size={14} aria-hidden="true" />{prefName}の一覧</Link>
         <Link href="/ranking" className="ad-back"><Trophy size={14} aria-hidden="true" />ランキング</Link>
-        <Link href={`/?code=${m.code}`} className="ad-back"><MapIcon size={14} aria-hidden="true" />地図で見る</Link>
+        <Link href={mapHrefForCode(m.code)} className="ad-back"><MapIcon size={14} aria-hidden="true" />地図で見る</Link>
       </div>
     </PageShell>
   );

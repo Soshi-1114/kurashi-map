@@ -35,7 +35,7 @@ import {
 } from "./map/mapConstants";
 import {
   fetchGeoJsonOrEmpty, computeBbox, collectBaseLabels, applyJapaneseLabels,
-  MUNI_FILL_OPACITY, type LabelDimState,
+  flyToPrefBbox, MUNI_FILL_OPACITY, type LabelDimState,
 } from "./map/mapHelpers";
 import { addKurashiLayers } from "./map/mapLayers";
 import { useShelterOverlay } from "./map/useShelterOverlay";
@@ -188,15 +188,13 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
     const currentZoom = map.getZoom();
     map.fitBounds(bbox, { padding, maxZoom: 13.5, duration: opts?.instant ? 0 : 800 });
     if (wardFeat && currentZoom < minZoom) {
-      if (opts?.instant) {
-        // duration: 0 の fitBounds は同期でカメラが確定するため、即座に判定できる
-        if (map.getZoom() < minZoom) map.easeTo({ zoom: minZoom, duration: 0 });
-      } else {
-        // fitBounds の結果が minZoom 未満ならズーム引き上げ
-        setTimeout(() => {
-          if (map.getZoom() < minZoom) map.easeTo({ zoom: minZoom, duration: 400 });
-        }, 850);
-      }
+      // fitBounds の結果が minZoom 未満ならズーム引き上げ。instant（duration: 0）は
+      // fitBounds がその場で同期完了するため即座に判定でき、非 instant はアニメーション完了を待つ。
+      const raiseZoom = () => {
+        if (map.getZoom() < minZoom) map.easeTo({ zoom: minZoom, duration: opts?.instant ? 0 : 400 });
+      };
+      if (opts?.instant) raiseZoom();
+      else setTimeout(raiseZoom, 850);
     }
   }, []);
 
@@ -292,13 +290,9 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
         if (prefTarget) {
           const bb = prefBboxBySlug.get(prefTarget);
           if (bb) {
-            const sp = typeof window !== "undefined" && window.innerWidth < 768;
-            // padding / maxZoom は都道府県クリック時の fly-in と同一（初期表示なので即時）
-            map.fitBounds([[bb[0], bb[1]], [bb[2], bb[3]]], {
-              padding: sp ? { top: 80, bottom: 264, left: 24, right: 24 } : { top: 60, bottom: 60, left: 60, right: 60 },
-              maxZoom: 9.5,
-              duration: 0,
-            });
+            // 都道府県クリック時の fly-in（下の pref-fill クリックハンドラ）と同じ
+            // flyToPrefBbox を使い、初期表示なので即時（duration: 0）にする。
+            flyToPrefBbox(map, [[bb[0], bb[1]], [bb[2], bb[3]]], 0);
           } else {
             map.fitBounds(TOKYO_BAY_BBOX, { padding: 40, duration: 0 });
           }
@@ -357,12 +351,7 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
           if (!f) return;
           const bbox = computeBbox(f.geometry);
           if (!bbox) return;
-          const sp = typeof window !== "undefined" && window.innerWidth < 768;
-          map.fitBounds(bbox, {
-            padding: sp ? { top: 80, bottom: 264, left: 24, right: 24 } : { top: 60, bottom: 60, left: 60, right: 60 },
-            maxZoom: 9.5,
-            duration: 900,
-          });
+          flyToPrefBbox(map, bbox, 900);
         });
         map.on("mousemove", "pref-fill", (e) => {
           if (map.getZoom() >= PREF_CLICK_MAX_ZOOM) return;

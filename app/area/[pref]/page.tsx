@@ -11,6 +11,7 @@ import {
 import { getPrefMetricSummaries } from "@/lib/prefAggregates";
 import RankPillLinks from "@/components/RankPillLinks";
 import { PREFS, getPrefBySlug } from "@/lib/prefs";
+import { mapHrefForPref } from "@/lib/mapDeepLink";
 import { SITE, absoluteUrl } from "@/lib/site";
 import { hasRent, rentBand } from "@/lib/rentColor";
 import { hasLandPrice } from "@/lib/landPrice";
@@ -51,7 +52,10 @@ function prefStats(muni: Municipality[]) {
   const floodCount = muni.filter((m) => m.hazard.hasFloodRisk).length;
   // 基準年度の表示用。家賃は県内で単一年度、地価は地価公示・地価調査が混在しうるため
   // 県内に現れる「年度+調査名」ラベルを重複排除して列挙する（実データの asOf 由来）。
+  // データなし県（rents が空）はデータ更新のタイミング次第で理論上ありうるため、
+  // その場合だけ調査名のみのフォールバックにする。
   const rentAsOf = muni.find((m) => hasRent(m.rent.value))?.rent.asOf ?? null;
+  const rentSurveyLabel = rentAsOf ? housingSurveyLabel(rentAsOf) : "住宅・土地統計調査";
   const landPriceLabels = [...new Set(
     muni
       .filter((m) => hasLandPrice(m.landPrice.value))
@@ -64,7 +68,7 @@ function prefStats(muni: Municipality[]) {
     rentMax: rents.length ? Math.max(...rents) : 0,
     waitlistZero,
     floodCount,
-    rentAsOf,
+    rentSurveyLabel,
     landPriceLabels,
   };
 }
@@ -74,11 +78,9 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
   const pref = getPrefBySlug(params.pref);
   if (!pref) return { title: "見つかりません | KurashiMap" };
   const muni = await listMunicipalities(params.pref);
-  const { count, rentMedian, rentAsOf } = prefStats(muni);
+  const { count, rentMedian, rentSurveyLabel } = prefStats(muni);
   const medPhrase =
-    rentMedian > 0
-      ? `家賃の県内中央値${rentMedian.toLocaleString()}円/月（${rentAsOf ? housingSurveyLabel(rentAsOf) : "住宅・土地統計調査"}）、`
-      : "";
+    rentMedian > 0 ? `家賃の県内中央値${rentMedian.toLocaleString()}円/月（${rentSurveyLabel}）、` : "";
   // title/description には「家賃相場ランキング」等、/ranking/rent-cheap|high/{pref} と
   // 完全一致する語を含めない。2026-08 GSC分析で「{県} 相場」系クエリがこのハブページに
   // 30〜40位で着地し、平均5〜9位で走っている該当ランキングページを食っていた
@@ -187,7 +189,7 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
         <p className="rk-lead">
           {prefName}の全<strong>{stats.count}</strong>市区町村を、家賃平均・地価・人口・待機児童・災害リスクで横断比較。
           {stats.rentMedian > 0 && (
-            <>家賃平均の県内中央値は<strong>{stats.rentMedian.toLocaleString()}</strong>円/月（{stats.rentMin.toLocaleString()}〜{stats.rentMax.toLocaleString()}円/月・{stats.rentAsOf ? housingSurveyLabel(stats.rentAsOf) : "住宅・土地統計調査"}）、</>
+            <>家賃平均の県内中央値は<strong>{stats.rentMedian.toLocaleString()}</strong>円/月（{stats.rentMin.toLocaleString()}〜{stats.rentMax.toLocaleString()}円/月・{stats.rentSurveyLabel}）、</>
           )}
           待機児童ゼロは<strong>{stats.waitlistZero}</strong>自治体です。
         </p>
@@ -216,7 +218,7 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
         </ul>
 
         <div className="rk-hero-actions">
-          <Link href={`/?pref=${pref.slug}`} className="rk-action rk-action-primary">
+          <Link href={mapHrefForPref(pref.slug)} className="rk-action rk-action-primary">
             <MapIcon size={15} aria-hidden="true" />地図で{prefName}を見る
           </Link>
           <Link href="/ranking" className="rk-action rk-action-ghost">
@@ -418,13 +420,13 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
             <Database size={15} aria-hidden="true" />出典・データについて
           </summary>
           <p className="rk-sources-body">
-            本ページの数値は政府統計・国土数値情報の実データです。家賃は{stats.rentAsOf ? housingSurveyLabel(stats.rentAsOf) : "住宅・土地統計調査"}、人口は{POPULATION_FRESHNESS}（ともに e-Stat 経由）、地価は{stats.landPriceLabels || "地価公示・地価調査"}、ハザードは不動産情報ライブラリ（reinfolib）／国土数値情報、待機児童はこども家庭庁の公表値に基づきます。データのない項目は推計で埋めず「—／データなし」と明示しています。
+            本ページの数値は政府統計・国土数値情報の実データです。家賃は{stats.rentSurveyLabel}、人口は{POPULATION_FRESHNESS}（ともに e-Stat 経由）、地価は{stats.landPriceLabels || "地価公示・地価調査"}、ハザードは不動産情報ライブラリ（reinfolib）／国土数値情報、待機児童はこども家庭庁の公表値に基づきます。データのない項目は推計で埋めず「—／データなし」と明示しています。
           </p>
         </details>
       </section>
 
       <nav className="rk-footnav" aria-label="関連リンク">
-        <Link href={`/?pref=${pref.slug}`} className="rk-back"><ArrowLeft size={15} aria-hidden="true" />地図で{prefName}を見る</Link>
+        <Link href={mapHrefForPref(pref.slug)} className="rk-back"><ArrowLeft size={15} aria-hidden="true" />地図で{prefName}を見る</Link>
         <Link href="/ranking" className="rk-back"><ArrowUpRight size={15} aria-hidden="true" />全国ランキング</Link>
       </nav>
     </PageShell>
