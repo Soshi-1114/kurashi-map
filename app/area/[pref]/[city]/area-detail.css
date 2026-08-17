@@ -730,19 +730,17 @@
 }
 
 /* ============================================================================
-   回遊カード・ランキング・類似エリア
+   回遊リスト（AreaLinkRow）・ランキング
    ========================================================================== */
 /* 回遊セクション共通の一覧。カードのグリッドではなく、1枚の面の中に区切り線で
    並ぶコンパクトな行（AreaLinkRow）。行本体（自治体詳細へ）と「＋比較する」は
-   別リンクなので、行の右端に横並びで置く。 */
+   別リンクなので、行の右端に横並びで置く。
+   面（background/border/radius/shadow）は globals.css の共有サーフェスグループが
+   供給する。ここに置くのはリスト固有の差分だけ。 */
 .ad-arearow-list {
   list-style: none;
   margin: 0;
   padding: 2px var(--space-5);
-  background: var(--surface-strong);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-card);
 }
 .ad-arearow {
   display: flex;

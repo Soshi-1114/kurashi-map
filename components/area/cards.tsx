@@ -104,9 +104,16 @@ export function MetricPrimary({
   );
 }
 
-// ---- 回遊リストの1行（家賃が近い・似ているエリア・主要自治体・兄弟区など）----
-// カードのグリッドではなく、区切り線で並ぶコンパクトな行。compareHref があれば
-// 行の右端に「＋比較する」を添える（行本体が既にリンクのため別 <a> にする）。
+// ---- 回遊リスト（家賃が近い・似ているエリア・主要自治体・兄弟区など）----
+// カードのグリッドではなく、1枚の面の中に区切り線で並ぶコンパクトな行。
+// 面と行の区切り線は .ad-arearow-list（親 ul）側の CSS が前提なので、
+// ul と li をセットでここに置いて対にする。
+export function AreaLinkList({ children }: { children: ReactNode }) {
+  return <ul className="ad-arearow-list">{children}</ul>;
+}
+
+// 1行。compareHref があれば行の右端に「＋比較する」を添える
+// （行本体が既にリンクのため別 <a> にする）。
 export function AreaLinkRow({
   href,
   name,
