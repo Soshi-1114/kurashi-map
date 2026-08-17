@@ -18,6 +18,7 @@ import { hasLandPrice } from "@/lib/landPrice";
 import { isWaitlistDisclosed } from "@/lib/waitlist";
 import type { Municipality } from "@/lib/types";
 import PageShell from "@/components/PageShell";
+import { PrefMuniTable, type PrefMuniRow } from "@/components/area/PrefMuniTable";
 
 type Params = { pref: string };
 
@@ -127,6 +128,16 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
 
   // 全自治体一覧（行政コード順 = 行政の標準的な並び）。displayName で区はフルネーム表示。
   const listed = [...all].sort((a, b) => a.code.localeCompare(b.code));
+  // テーブル表示用の軽量な行（Municipality 全体ではなく表示に必要な値だけを
+  // クライアントコンポーネントへ渡す）。並び替えは PrefMuniTable 側で行う。
+  const listedRows: PrefMuniRow[] = listed.map((m) => ({
+    code: m.code,
+    pref: m.pref,
+    label: m.displayName ?? m.name,
+    rent: m.rent.value,
+    landPrice: m.landPrice.value,
+    population: m.population,
+  }));
 
   // 人口・人口増減の県内上位（ランキング定義の qualifies/display を流用。上位5のみの
   // コンパクト表示にとどめ、全順位は県別ランキングページへ誘導する）。
@@ -381,36 +392,11 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
           <span className="rk-section-icon"><Building2 size={20} aria-hidden="true" /></span>
           <div className="rk-section-heading">
             <h2 className="rk-h2">{prefName}の全市区町村一覧</h2>
-            <p className="rk-section-sub">自治体名から、家賃・地価・子育て・災害リスクの詳細ページへ。</p>
+            <p className="rk-section-sub">自治体名から、家賃・地価・子育て・災害リスクの詳細ページへ。見出しクリックで並び替えできます。</p>
           </div>
         </div>
         <div className="rk-table-wrap">
-          <div className="pref-table-wrap">
-            <table className="pref-table">
-              <thead>
-                <tr>
-                  <th scope="col">自治体</th>
-                  <th scope="col" className="num">家賃平均</th>
-                  <th scope="col" className="num">地価（住宅地）</th>
-                  <th scope="col" className="num">人口</th>
-                </tr>
-              </thead>
-              <tbody>
-                {listed.map((m) => (
-                  <tr key={m.code}>
-                    <th scope="row">
-                      <Link href={`/area/${m.pref}/${m.code}`} className="pref-table-link">
-                        {m.displayName ?? m.name}
-                      </Link>
-                    </th>
-                    <td className="num">{hasRent(m.rent.value) ? `${m.rent.value.toLocaleString()}円` : "—"}</td>
-                    <td className="num">{hasLandPrice(m.landPrice.value) ? `${m.landPrice.value.toLocaleString()}円/㎡` : "—"}</td>
-                    <td className="num">{m.population.toLocaleString()}人</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <PrefMuniTable rows={listedRows} />
         </div>
       </section>
 

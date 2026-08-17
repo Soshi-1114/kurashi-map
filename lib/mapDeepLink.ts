@@ -17,9 +17,13 @@ export function parseMapDeepLink(search: string): MapDeepLink | null {
   return null;
 }
 
-/** 自治体コードで地図を開くリンク先（「地図で見る」導線の送り側で共通利用）。 */
-export function mapHrefForCode(code: string): string {
-  return `/?code=${code}`;
+/**
+ * 自治体コードで地図を開くリンク先（「地図で見る」導線の送り側で共通利用）。
+ * path はトップの地図に限らず、/map/foreign-ratio 等の指標別ハブでも同じ
+ * 仕組みでディープリンクできる（MapView はページによらず location.search を読む）。
+ */
+export function mapHrefForCode(code: string, path: string = "/"): string {
+  return `${path}?code=${code}`;
 }
 
 /** 都道府県 slug で地図を開くリンク先。 */

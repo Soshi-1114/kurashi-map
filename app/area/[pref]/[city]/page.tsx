@@ -596,7 +596,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
             icon={Globe2}
             tone="ad-tone-foreign"
             title="外国人住民（多様性・国際性）"
-            link={{ href: "/map/foreign-ratio", label: "地図・ランキングで見る" }}
+            link={{ href: mapHrefForCode(m.code, "/map/foreign-ratio"), label: "地図・ランキングで見る" }}
           >
             {hasForeignData(m.foreignResidents.source) ? (
               <>
@@ -631,7 +631,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
               icon={Users}
               tone="ad-tone-pop"
               title="将来人口（公的推計）"
-              link={{ href: "/map/future-population", label: "2050年推計人口を地図で見る" }}
+              link={{ href: mapHrefForCode(m.code, "/map/future-population"), label: "2050年推計人口を地図で見る" }}
             >
               {hasFuturePopulation(fp) ? (
                 <>
