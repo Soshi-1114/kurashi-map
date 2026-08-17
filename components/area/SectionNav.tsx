@@ -60,32 +60,40 @@ export default function SectionNav({
     // SP ではチップのパディングも変わる。定数で二重管理せず実測する。
     const navHeight = navRef.current?.offsetHeight ?? 0;
 
+    // 現在地の判定線はナビ帯直下ではなく、ナビ下の可視領域の上から1/3に置く。
+    // 判定線がナビ直下だと、次のセクションが画面の大半を占めていても先頭がほぼ
+    // 画面最上端を通過するまで前のチップが点いたままになり、縦に大きいカード・
+    // セクション（災害リスク〜ランキング）で「ハイライトが遅い」と感じる。
+    // アンカー着地位置（ナビ高+8px の scroll-margin-top）より必ず深い線なので、
+    // チップクリック直後の飛び先も確実に自分が現在地になる。
+    const line = navHeight + Math.round((window.innerHeight - navHeight) / 3);
+
     // IO は「境界をまたいだ」ことを知るためだけに使い、現在地はその場で測り直す。
     // entry.boundingClientRect は使えない: IO は状態が変わった要素ぶんしか entry を
     // 配らないので、キャッシュすると発火しなかったセクションの値が古いまま残り、
     // 現在地を取り違える（実際にそうなった）。発火は境界をまたいだ時だけで、
     // 1回あたり要素数ぶんの測定なので、そのまま読んで問題ない。
-    // ビューポート上端（ナビ帯の下）より上にある最後の「表示中チップの」要素が現在地。
-    // 非表示チップの id（PC での kids/foreign 等）まで含めると、同一位置の要素同士で
-    // 後者が勝ってしまい、表示中のチップが光らない。
-    // 閾値の +9 は CSS の scroll-margin-top（ナビ高 + 8px スラック）に合わせる。
-    // アンカー着地位置がちょうどナビ帯の 8px 下になるため、閾値がナビ高ぴったりだと
-    // 飛んだ直後の要素自身が現在地として拾えない。
+    // 判定線より上にある最後の「表示中チップの」要素が現在地。非表示チップの id
+    // （PC での kids/foreign 等）まで含めると、同一位置の要素同士で後者が勝って
+    // しまい、表示中のチップが光らない。
     const pick = () => {
       const sp = typeof window.matchMedia === "function" && window.matchMedia(SP_QUERY).matches;
       const visible = new Set(items.filter((i) => !i.only || i.only === (sp ? "sp" : "pc")).map((i) => i.id));
       let current = "";
       for (const el of els) {
         if (!visible.has(el.id)) continue;
-        if (!current || el.getBoundingClientRect().top <= navHeight + 9) current = el.id;
+        if (!current || el.getBoundingClientRect().top <= line + 1) current = el.id;
       }
       if (!current || Date.now() < pinnedUntil.current) return;
       setActive(current);
     };
 
-    // rootMargin も pick と同じ判定線（ナビ高+8px）に合わせる。ずらすと「境界は
-    // またいだのに閾値は未達」の帯ができ、最大その幅ぶん現在地の更新が遅れる。
-    const io = new IntersectionObserver(pick, { rootMargin: `-${navHeight + 8}px 0px 0px 0px` });
+    // 観測ボックスは判定線上の細い帯（1px）に絞る。上側だけ絞る指定だと、要素の
+    // 「上端が判定線を跨ぐ」瞬間は要素全体がまだボックスと交差したままで発火せず、
+    // 他の要素の出入り待ちになって更新が遅れる。帯にすれば各要素の上端・下端が
+    // 判定線を跨ぐたびに交差が切り替わり、必要な瞬間に必ず発火する。
+    const bandBottom = Math.max(0, window.innerHeight - line - 1);
+    const io = new IntersectionObserver(pick, { rootMargin: `-${line}px 0px -${bandBottom}px 0px` });
     els.forEach((el) => io.observe(el));
     return () => io.disconnect();
   }, [items]);
