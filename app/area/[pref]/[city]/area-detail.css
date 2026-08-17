@@ -52,27 +52,18 @@
    共有している。ここに置くのは横スクロールさせるための差分だけ。 */
 .ad-secnav a { flex: none; white-space: nowrap; }
 
+/* PC は行単位のまとめチップ（.ad-nav-pc）、SP はカード単位のチップ（.ad-nav-sp）を
+   出し分ける。2列グリッドでは同じ行のカードが同一スクロール位置になり、カード単位の
+   チップだとスクロールスパイが右列しか現在地にできないため（SectionNav.tsx 参照）。
+   ブレークポイントは .ad-metric-grid の1列化（下の 640px）と揃える。 */
+.ad-secnav .ad-nav-sp { display: none; }
+
 /* アンカー先の見出しがナビ帯の下に潜らないようにする。目次はセクションだけでなく
    詳細データ内の各カード（.ad-metric-card[id]）にも直接飛ぶため、両方に効かせる。 */
 .ad-hero[id],
 .ad-section[id],
 .ad-metric-card[id] {
   scroll-margin-top: calc(var(--ad-secnav-h) + var(--space-2));
-}
-
-/* 目次から飛んだカードを一瞬リングで示す。PC の2列グリッドでは同じ行のカード同士が
-   同一スクロール位置になり、チップを押しても画面が動かず遷移が分からないため、
-   スクロール以外のフィードバックとして必須。:target はハッシュ変更のたびに掛かり、
-   アニメは1回で消える——リングを常時表示にすると、スクロールで変わる目次ハイライト
-   （SectionNav のスクロールスパイ）と表示が食い違うため、必ずパルスで消し切る。
-   reduced-motion でも止めない（位置移動のない色フェードのみのため。下の一括無効化の
-   コメント参照）。 */
-.ad-metric-card:target {
-  animation: adTargetRing 1.2s ease-out;
-}
-@keyframes adTargetRing {
-  0%, 35% { box-shadow: 0 0 0 3px var(--accent); }
-  100% { box-shadow: 0 0 0 3px transparent; }
 }
 
 /* 控えめな fade-up（CSS のみ・必ず可視で終わる。reduced-motion で無効） */
@@ -1096,6 +1087,9 @@
   .ad-section { margin-top: 44px; }
   .ad-secnav { margin-top: var(--space-4); gap: 6px; }
   .ad-secnav a { padding: 0 12px; font-size: var(--text-xs); }
+  /* グリッドが1列になるのでカード単位のチップに切替（上の .ad-nav-sp/-pc 参照） */
+  .ad-secnav .ad-nav-sp { display: inline-flex; }
+  .ad-secnav .ad-nav-pc { display: none; }
   .ad-cta { margin-top: 44px; padding: var(--space-6); }
   .ad-hero { grid-template-columns: 1fr; }
   .ad-score { order: 2; }
@@ -1148,8 +1142,4 @@
     transition: none;
   }
   .ad-reveal { animation: none; }
-  /* adTargetRing（目次遷移先のリング）はここで止めない。位置移動を伴わない
-     box-shadow の色フェードだけで reduced-motion が抑制すべき「動き」に該当せず、
-     スムーススクロールも無効なこの環境では唯一の遷移フィードバックになる。
-     静的リングで残す案は、スクロールで変わる目次ハイライトと表示が食い違うため不採用。 */
 }

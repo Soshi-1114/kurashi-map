@@ -252,12 +252,17 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
   ] as const).find(([, present]) => present)?.[0];
   const compareAnchor = (key: string) => (key === firstCompareKey ? "compare" : undefined);
 
+  // 詳細データのチップは PC（2列グリッド）では行単位、SP（1列）ではカード単位。
+  // 同じ行のカードは同一スクロール位置のため、PC でカード単位にするとスクロール
+  // スパイが右列しか現在地にできない（SectionNav.tsx の only の経緯コメント参照）。
   const navItems: SectionNavItem[] = [
     { id: "overview", label: "概要" },
-    { id: "rent", label: "家賃" },
-    { id: "kids", label: "子育て・生活環境" },
-    { id: "hazard", label: "災害リスク" },
-    { id: "foreign", label: "外国人比率" },
+    { id: "rent", label: "環境", only: "pc" },
+    { id: "rent", label: "家賃", only: "sp" },
+    { id: "kids", label: "子育て・生活環境", only: "sp" },
+    { id: "hazard", label: "災害・外国人比率", only: "pc" },
+    { id: "hazard", label: "災害リスク", only: "sp" },
+    { id: "foreign", label: "外国人比率", only: "sp" },
     { id: "future-pop", label: "将来人口" },
     ...(firstCompareKey ? [{ id: "compare", label: "比較" }] : []),
     { id: "ranking", label: "ランキング" },

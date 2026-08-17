@@ -17,7 +17,16 @@
 import { useEffect, useRef, useState } from "react";
 import { trackSelectSection } from "@/lib/analytics";
 
-export type SectionNavItem = { id: string; label: string };
+// only: ブレークポイント限定チップ。PC の2列グリッドでは同じ行のカード同士が
+// 同一スクロール位置になり、カード単位のチップだと「閾値より上の最後の要素」を
+// 取るスクロールスパイが常に右列だけを現在地にしてしまう（左列のチップは一度も
+// 光らない）。そのため PC は行単位のまとめチップ（only:"pc"）、SP はカード単位の
+// チップ（only:"sp"）を出し分ける。表示の切替は CSS（area-detail.css の
+// .ad-nav-pc / .ad-nav-sp）、現在地判定は pick() が表示中の id だけで行う。
+export type SectionNavItem = { id: string; label: string; only?: "pc" | "sp" };
+
+// SP 判定は area-detail.css のグリッド切替（max-width: 640px で1列）と揃える
+const SP_QUERY = "(max-width: 640px)";
 
 export default function SectionNav({
   items,
@@ -41,8 +50,9 @@ export default function SectionNav({
     // 諦めるだけで、リンク自体は通常のアンカーとして動き続ける。
     if (typeof IntersectionObserver === "undefined") return;
 
-    const els = items
-      .map((i) => document.getElementById(i.id))
+    // 同じ id が pc/sp 両方のチップに現れうるので、要素は id 単位で1つに集約する
+    const els = [...new Set(items.map((i) => i.id))]
+      .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => el != null);
     if (els.length === 0) return;
 
@@ -55,20 +65,27 @@ export default function SectionNav({
     // 配らないので、キャッシュすると発火しなかったセクションの値が古いまま残り、
     // 現在地を取り違える（実際にそうなった）。発火は境界をまたいだ時だけで、
     // 1回あたり要素数ぶんの測定なので、そのまま読んで問題ない。
-    // ビューポート上端（ナビ帯の下）より上にある最後の要素が現在地。
+    // ビューポート上端（ナビ帯の下）より上にある最後の「表示中チップの」要素が現在地。
+    // 非表示チップの id（PC での kids/foreign 等）まで含めると、同一位置の要素同士で
+    // 後者が勝ってしまい、表示中のチップが光らない。
     // 閾値の +9 は CSS の scroll-margin-top（ナビ高 + 8px スラック）に合わせる。
     // アンカー着地位置がちょうどナビ帯の 8px 下になるため、閾値がナビ高ぴったりだと
     // 飛んだ直後の要素自身が現在地として拾えない。
     const pick = () => {
-      let current = els[0].id;
+      const sp = typeof window.matchMedia === "function" && window.matchMedia(SP_QUERY).matches;
+      const visible = new Set(items.filter((i) => !i.only || i.only === (sp ? "sp" : "pc")).map((i) => i.id));
+      let current = "";
       for (const el of els) {
-        if (el.getBoundingClientRect().top <= navHeight + 9) current = el.id;
+        if (!visible.has(el.id)) continue;
+        if (!current || el.getBoundingClientRect().top <= navHeight + 9) current = el.id;
       }
-      if (Date.now() < pinnedUntil.current) return;
+      if (!current || Date.now() < pinnedUntil.current) return;
       setActive(current);
     };
 
-    const io = new IntersectionObserver(pick, { rootMargin: `-${navHeight}px 0px 0px 0px` });
+    // rootMargin も pick と同じ判定線（ナビ高+8px）に合わせる。ずらすと「境界は
+    // またいだのに閾値は未達」の帯ができ、最大その幅ぶん現在地の更新が遅れる。
+    const io = new IntersectionObserver(pick, { rootMargin: `-${navHeight + 8}px 0px 0px 0px` });
     els.forEach((el) => io.observe(el));
     return () => io.disconnect();
   }, [items]);
@@ -91,7 +108,12 @@ export default function SectionNav({
       }}
     >
       {items.map((item) => (
-        <a key={item.id} href={`#${item.id}`} aria-current={item.id === active ? "true" : undefined}>
+        <a
+          key={`${item.id}:${item.only ?? "all"}`}
+          href={`#${item.id}`}
+          className={item.only === "pc" ? "ad-nav-pc" : item.only === "sp" ? "ad-nav-sp" : undefined}
+          aria-current={item.id === active ? "true" : undefined}
+        >
           {item.label}
         </a>
       ))}
