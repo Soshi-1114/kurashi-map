@@ -4,16 +4,21 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Wallet, MapIcon, BarChart3, Database, ArrowLeft, ArrowUpRight, Building2, Users } from "lucide-react";
 import { listMunicipalities, listAll } from "@/lib/metrics";
-import { RANKINGS, getRankingBySlug, rankBy } from "@/lib/rankings";
+import {
+  RANKINGS, getRankingBySlug, rankBy,
+  POPULATION_FRESHNESS, CENSUS_PERIOD, housingSurveyLabel, landPriceSurveyLabel, freshnessPrefix,
+} from "@/lib/rankings";
 import { getPrefMetricSummaries } from "@/lib/prefAggregates";
 import RankPillLinks from "@/components/RankPillLinks";
 import { PREFS, getPrefBySlug } from "@/lib/prefs";
+import { mapHrefForPref } from "@/lib/mapDeepLink";
 import { SITE, absoluteUrl } from "@/lib/site";
 import { hasRent, rentBand } from "@/lib/rentColor";
 import { hasLandPrice } from "@/lib/landPrice";
 import { isWaitlistDisclosed } from "@/lib/waitlist";
 import type { Municipality } from "@/lib/types";
 import PageShell from "@/components/PageShell";
+import { PrefMuniTable, type PrefMuniRow } from "@/components/area/PrefMuniTable";
 
 type Params = { pref: string };
 
@@ -46,6 +51,17 @@ function prefStats(muni: Municipality[]) {
     (m) => isWaitlistDisclosed(m.waitlistChildren) && m.waitlistChildren.value === 0,
   ).length;
   const floodCount = muni.filter((m) => m.hazard.hasFloodRisk).length;
+  // 基準年度の表示用。家賃は県内で単一年度、地価は地価公示・地価調査が混在しうるため
+  // 県内に現れる「年度+調査名」ラベルを重複排除して列挙する（実データの asOf 由来）。
+  // データなし県（rents が空）はデータ更新のタイミング次第で理論上ありうるため、
+  // その場合だけ調査名のみのフォールバックにする。
+  const rentAsOf = muni.find((m) => hasRent(m.rent.value))?.rent.asOf ?? null;
+  const rentSurveyLabel = rentAsOf ? housingSurveyLabel(rentAsOf) : "住宅・土地統計調査";
+  const landPriceLabels = [...new Set(
+    muni
+      .filter((m) => hasLandPrice(m.landPrice.value))
+      .map((m) => landPriceSurveyLabel(m.landPrice.source, m.landPrice.asOf)),
+  )].join("・");
   return {
     count: muni.length,
     rentMedian: median(rents),
@@ -53,6 +69,9 @@ function prefStats(muni: Municipality[]) {
     rentMax: rents.length ? Math.max(...rents) : 0,
     waitlistZero,
     floodCount,
+    rentSurveyLabel,
+    landPriceLabels,
+    rentAsOf,
   };
 }
 
@@ -61,14 +80,18 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
   const pref = getPrefBySlug(params.pref);
   if (!pref) return { title: "見つかりません | KurashiMap" };
   const muni = await listMunicipalities(params.pref);
-  const { count, rentMedian } = prefStats(muni);
-  const medPhrase = rentMedian > 0 ? `家賃の県内中央値${rentMedian.toLocaleString()}円/月、` : "";
+  const { count, rentMedian, rentSurveyLabel, rentAsOf } = prefStats(muni);
+  // description 冒頭の「更新」バッジ。description には家賃中央値の asOf しか
+  // 書かないので、それ以外の指標（地価等）は混ぜない。
+  const freshness = freshnessPrefix([rentAsOf]);
+  const medPhrase =
+    rentMedian > 0 ? `家賃の県内中央値${rentMedian.toLocaleString()}円/月（${rentSurveyLabel}）、` : "";
   // title/description には「家賃相場ランキング」等、/ranking/rent-cheap|high/{pref} と
   // 完全一致する語を含めない。2026-08 GSC分析で「{県} 相場」系クエリがこのハブページに
   // 30〜40位で着地し、平均5〜9位で走っている該当ランキングページを食っていた
   // （docs/seo/kurashimap-gsc-analysis-2026-08-10.md §9 参照）。
   const title = `${pref.nameJa}の住みやすさ・市区町村データ｜${count}市区町村を比較｜${SITE.name}`;
-  const description = `${pref.nameJa}の全${count}市区町村の${medPhrase}地価・人口・待機児童・災害リスク・外国人比率を一覧で比較。家賃・地価が安い自治体や子育て環境を、政府統計の実データでチェックできる${SITE.name}の都道府県ページ。`;
+  const description = `${freshness}${pref.nameJa}の全${count}市区町村の${medPhrase}地価・人口・待機児童・災害リスク・外国人比率を一覧で比較。家賃・地価が安い自治体や子育て環境を、政府統計の実データでチェックできる${SITE.name}の都道府県ページ。`;
   const url = absoluteUrl(`/area/${pref.slug}`);
   const ogImage = absoluteUrl(`/api/og/pref/${pref.slug}`);
   return {
@@ -109,6 +132,16 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
 
   // 全自治体一覧（行政コード順 = 行政の標準的な並び）。displayName で区はフルネーム表示。
   const listed = [...all].sort((a, b) => a.code.localeCompare(b.code));
+  // テーブル表示用の軽量な行（Municipality 全体ではなく表示に必要な値だけを
+  // クライアントコンポーネントへ渡す）。並び替えは PrefMuniTable 側で行う。
+  const listedRows: PrefMuniRow[] = listed.map((m) => ({
+    code: m.code,
+    pref: m.pref,
+    label: m.displayName ?? m.name,
+    rent: m.rent.value,
+    landPrice: m.landPrice.value,
+    population: m.population,
+  }));
 
   // 人口・人口増減の県内上位（ランキング定義の qualifies/display を流用。上位5のみの
   // コンパクト表示にとどめ、全順位は県別ランキングページへ誘導する）。
@@ -171,7 +204,7 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
         <p className="rk-lead">
           {prefName}の全<strong>{stats.count}</strong>市区町村を、家賃平均・地価・人口・待機児童・災害リスクで横断比較。
           {stats.rentMedian > 0 && (
-            <>家賃平均の県内中央値は<strong>{stats.rentMedian.toLocaleString()}</strong>円/月（{stats.rentMin.toLocaleString()}〜{stats.rentMax.toLocaleString()}円/月）、</>
+            <>家賃平均の県内中央値は<strong>{stats.rentMedian.toLocaleString()}</strong>円/月（{stats.rentMin.toLocaleString()}〜{stats.rentMax.toLocaleString()}円/月・{stats.rentSurveyLabel}）、</>
           )}
           待機児童ゼロは<strong>{stats.waitlistZero}</strong>自治体です。
         </p>
@@ -200,7 +233,7 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
         </ul>
 
         <div className="rk-hero-actions">
-          <Link href={`/?pref=${pref.slug}`} className="rk-action rk-action-primary">
+          <Link href={mapHrefForPref(pref.slug)} className="rk-action rk-action-primary">
             <MapIcon size={15} aria-hidden="true" />地図で{prefName}を見る
           </Link>
           <Link href="/ranking" className="rk-action rk-action-ghost">
@@ -308,7 +341,7 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
             <span className="rk-section-icon rk-tone-pop"><Users size={20} aria-hidden="true" /></span>
             <div className="rk-section-heading">
               <h2 className="rk-h2">人口・人口増減で見る</h2>
-              <p className="rk-section-sub">{prefName}内の人口が多い自治体と、人口増減率（2020→2025年国勢調査）が高い自治体。</p>
+              <p className="rk-section-sub">{prefName}内の人口が多い自治体と、人口増減率（{CENSUS_PERIOD}）が高い自治体。</p>
             </div>
           </div>
           <div className="rk-duo">
@@ -363,36 +396,11 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
           <span className="rk-section-icon"><Building2 size={20} aria-hidden="true" /></span>
           <div className="rk-section-heading">
             <h2 className="rk-h2">{prefName}の全市区町村一覧</h2>
-            <p className="rk-section-sub">自治体名から、家賃・地価・子育て・災害リスクの詳細ページへ。</p>
+            <p className="rk-section-sub">自治体名から、家賃・地価・子育て・災害リスクの詳細ページへ。見出しクリックで並び替えできます。</p>
           </div>
         </div>
         <div className="rk-table-wrap">
-          <div className="pref-table-wrap">
-            <table className="pref-table">
-              <thead>
-                <tr>
-                  <th scope="col">自治体</th>
-                  <th scope="col" className="num">家賃平均</th>
-                  <th scope="col" className="num">地価（住宅地）</th>
-                  <th scope="col" className="num">人口</th>
-                </tr>
-              </thead>
-              <tbody>
-                {listed.map((m) => (
-                  <tr key={m.code}>
-                    <th scope="row">
-                      <Link href={`/area/${m.pref}/${m.code}`} className="pref-table-link">
-                        {m.displayName ?? m.name}
-                      </Link>
-                    </th>
-                    <td className="num">{hasRent(m.rent.value) ? `${m.rent.value.toLocaleString()}円` : "—"}</td>
-                    <td className="num">{hasLandPrice(m.landPrice.value) ? `${m.landPrice.value.toLocaleString()}円/㎡` : "—"}</td>
-                    <td className="num">{m.population.toLocaleString()}人</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <PrefMuniTable rows={listedRows} />
         </div>
       </section>
 
@@ -402,13 +410,13 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
             <Database size={15} aria-hidden="true" />出典・データについて
           </summary>
           <p className="rk-sources-body">
-            本ページの数値は政府統計・国土数値情報の実データです。家賃は住宅・土地統計調査、人口は国勢調査（ともに e-Stat 経由）、地価は地価公示・地価調査、ハザードは不動産情報ライブラリ（reinfolib）／国土数値情報、待機児童はこども家庭庁の公表値に基づきます。データのない項目は推計で埋めず「—／データなし」と明示しています。
+            本ページの数値は政府統計・国土数値情報の実データです。家賃は{stats.rentSurveyLabel}、人口は{POPULATION_FRESHNESS}（ともに e-Stat 経由）、地価は{stats.landPriceLabels || "地価公示・地価調査"}、ハザードは不動産情報ライブラリ（reinfolib）／国土数値情報、待機児童はこども家庭庁の公表値に基づきます。データのない項目は推計で埋めず「—／データなし」と明示しています。
           </p>
         </details>
       </section>
 
       <nav className="rk-footnav" aria-label="関連リンク">
-        <Link href="/" className="rk-back"><ArrowLeft size={15} aria-hidden="true" />地図に戻る</Link>
+        <Link href={mapHrefForPref(pref.slug)} className="rk-back"><ArrowLeft size={15} aria-hidden="true" />地図で{prefName}を見る</Link>
         <Link href="/ranking" className="rk-back"><ArrowUpRight size={15} aria-hidden="true" />全国ランキング</Link>
       </nav>
     </PageShell>

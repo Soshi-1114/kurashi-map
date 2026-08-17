@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { listMunicipalities } from "@/lib/metrics";
-import { RANKINGS, getRankingBySlug, rankBy, medianOf, type RankingDef } from "@/lib/rankings";
+import { RANKINGS, getRankingBySlug, rankBy, medianOf, appendFreshness, type RankingDef } from "@/lib/rankings";
 import { getRankPositions, getNationalMedians } from "@/lib/rankingStats";
 import { PREFS, getPrefBySlug } from "@/lib/prefs";
 import { SITE, absoluteUrl } from "@/lib/site";
@@ -91,7 +91,11 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
   // スニペット切れで見えず「県全体のランキングだけ」と誤解されクリックされない例が
   // 確認できた（例: /ranking/population-most/aichi の「岡崎市 人口」3位表示・クリック0）。
   const medianText = ranked.length > 0 && !def.membershipList ? `県内中央値は${def.display(medianOf(ranked))}。` : "";
-  const description = `${pref.nameJa}の${def.title}（${pref.nameJa}内${ranked.length}市区町村を掲載）。1位は${top1}。${medianText}政府統計の実データで比較できる${SITE.name}。`;
+  // 末尾にデータの基準年度を追記（文中に同じ年が既出ならスキップ）。
+  const description = appendFreshness(
+    `${pref.nameJa}の${def.title}（${pref.nameJa}内${ranked.length}市区町村を掲載）。1位は${top1}。${medianText}政府統計の実データで比較できる${SITE.name}。`,
+    freshness,
+  );
   const url = absoluteUrl(`/ranking/${def.slug}/${pref.slug}`);
   const ogImage = absoluteUrl(`/api/og/ranking/${def.slug}`);
   return {

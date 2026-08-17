@@ -21,6 +21,7 @@ import { hasRent } from "@/lib/rentColor";
 import { getMapMetric, TREND_PROPERTY, type MapMetricKey } from "@/lib/mapMetrics";
 import { trackSelectMunicipality, trackChangeMetric, trackApplyFilter } from "@/lib/analytics";
 import { MAP_FLY_EVENT } from "@/lib/mapFly";
+import { parseMapDeepLink } from "@/lib/mapDeepLink";
 import {
   EMPTY_FILTERS, isFilterActive, matchesFilter, buildMatchExpression, type MapFilters,
 } from "@/lib/mapFilters";
@@ -34,7 +35,7 @@ import {
 } from "./map/mapConstants";
 import {
   fetchGeoJsonOrEmpty, computeBbox, collectBaseLabels, applyJapaneseLabels,
-  MUNI_FILL_OPACITY, type LabelDimState,
+  flyToPrefBbox, MUNI_FILL_OPACITY, type LabelDimState,
 } from "./map/mapHelpers";
 import { addKurashiLayers } from "./map/mapLayers";
 import { useShelterOverlay } from "./map/useShelterOverlay";
@@ -78,7 +79,8 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
   // 元の opacity を保存し、選択解除で復元する。
   const labelDimRef = useRef<LabelDimState>({ ids: [], text: new Map(), icon: new Map() });
   // 地図初期化完了前に検索確定された自治体コード（初期化後に flyTo を実行する）。
-  const pendingFlyRef = useRef<string | null>(null);
+  // instant はディープリンク（?code=）由来で、初期表示のためアニメーションなしで飛ぶ。
+  const pendingFlyRef = useRef<{ code: string; instant?: boolean } | null>(null);
   // 協調ジェスチャ設定（マウント後は不変。初期化 effect を再実行させないため ref に保持）。
   const cooperativeRef = useRef(cooperativeGestures);
 
@@ -161,7 +163,7 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
 
   // 自治体コードを画面内に収める。SP は下部シート分、PC は右パネル分の余白を確保。
   // （地図初期化 effect のクリックハンドラからも使うため、effect より前に宣言する）
-  const flyToCode = useCallback((code: string) => {
+  const flyToCode = useCallback((code: string, opts?: { instant?: boolean }) => {
     const map = mapRef.current;
     if (!map) return;
     // muniGeo にあれば muni、なければ wardsGeo を見る
@@ -184,12 +186,15 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
     // 区を選択した時は最低 z=11 まで寄せて区レイヤーが見える状態に
     const minZoom = wardFeat ? WARDS_MIN_ZOOM : 0;
     const currentZoom = map.getZoom();
-    map.fitBounds(bbox, { padding, maxZoom: 13.5, duration: 800 });
+    map.fitBounds(bbox, { padding, maxZoom: 13.5, duration: opts?.instant ? 0 : 800 });
     if (wardFeat && currentZoom < minZoom) {
-      // fitBounds の結果が minZoom 未満ならズーム引き上げ
-      setTimeout(() => {
-        if (map.getZoom() < minZoom) map.easeTo({ zoom: minZoom, duration: 400 });
-      }, 850);
+      // fitBounds の結果が minZoom 未満ならズーム引き上げ。instant（duration: 0）は
+      // fitBounds がその場で同期完了するため即座に判定でき、非 instant はアニメーション完了を待つ。
+      const raiseZoom = () => {
+        if (map.getZoom() < minZoom) map.easeTo({ zoom: minZoom, duration: opts?.instant ? 0 : 400 });
+      };
+      if (opts?.instant) raiseZoom();
+      else setTimeout(raiseZoom, 850);
     }
   }, []);
 
@@ -206,6 +211,23 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
       const { default: maplibregl } = await import("maplibre-gl");
       // 動的 import 中にアンマウントされた / 既にマップが立っていれば中断
       if (disposed || !containerRef.current || mapRef.current) return;
+
+      // ディープリンク（/?code=13104・/?pref=saitama）。「地図で見る」導線から該当の
+      // 自治体・県へ初期フォーカスして開く。code は summary に実在する場合のみ有効。
+      const deepLink = parseMapDeepLink(window.location.search);
+      const codeTarget = deepLink?.kind === "code" && byCode.has(deepLink.code) ? deepLink.code : null;
+      const prefTarget = deepLink?.kind === "pref"
+        ? deepLink.slug
+        : codeTarget
+          ? getPrefByCode(codeTarget)?.slug ?? null
+          : null;
+      if (codeTarget) {
+        // ヒーロー検索が先に保留を入れていればそちらを尊重。選択を先に立てることで
+        // 詳細取得（/api/muni）とパネル表示が地図初期化と並行して走る。
+        pendingFlyRef.current ??= { code: codeTarget, instant: true };
+        setSelectedCode(codeTarget);
+        trackSelectMunicipality(codeTarget, "link");
+      }
 
       const map = new maplibregl.Map({
         container: containerRef.current,
@@ -250,13 +272,36 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
       };
 
       map.on("load", async () => {
-        map.fitBounds(TOKYO_BAY_BBOX, { padding: 40, duration: 0 });
+        // ディープリンク時は東京湾デフォルト→目的地の二段ジャンプを避け、県 bbox へ直行する
+        if (!prefTarget) map.fitBounds(TOKYO_BAY_BBOX, { padding: 40, duration: 0 });
         // prefectures(47県の輪郭, 約369KB)だけ起動時にロード。各県の市区町村/区
         // ポリゴンは全件で22MB超あり SP 実機で破綻するため、ズームしてビューポートに
         // 入った県だけを遅延ロードする（下の ensurePrefs / checkViewport）。
         // fetch 自体は startInit 冒頭で基本地図スタイルの読み込みと並行して開始済み。
         const prefGeo = await prefGeoPromise;
         prefGeoRef.current = prefGeo;
+
+        // 県 slug → bbox（ディープリンクの初期フィットと遅延ロード判定で共用）
+        const codeToSlug = new Map(PREFS.map((p) => [p.codePrefix, p.slug]));
+        const prefBySlug = new Map(PREFS.map((p) => [p.slug, p]));
+        const prefBboxBySlug = new Map<string, [number, number, number, number]>();
+        for (const f of prefGeo.features) {
+          const slug = codeToSlug.get(String(f.properties?.code ?? "").slice(0, 2));
+          if (!slug) continue;
+          const bb = computeBbox(f.geometry);
+          if (bb) prefBboxBySlug.set(slug, [bb[0][0], bb[0][1], bb[1][0], bb[1][1]]);
+        }
+
+        if (prefTarget) {
+          const bb = prefBboxBySlug.get(prefTarget);
+          if (bb) {
+            // 都道府県クリック時の fly-in（下の pref-fill クリックハンドラ）と同じ
+            // flyToPrefBbox を使い、初期表示なので即時（duration: 0）にする。
+            flyToPrefBbox(map, [[bb[0], bb[1]], [bb[2], bb[3]]], 0);
+          } else {
+            map.fitBounds(TOKYO_BAY_BBOX, { padding: 40, duration: 0 });
+          }
+        }
         // muni / wards は空で開始し、遅延ロードのたびに features を足して setData する
         const muniGeo: GeoJSON.FeatureCollection = { type: "FeatureCollection", features: [] };
         const wardsGeo: GeoJSON.FeatureCollection = { type: "FeatureCollection", features: [] };
@@ -311,12 +356,7 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
           if (!f) return;
           const bbox = computeBbox(f.geometry);
           if (!bbox) return;
-          const sp = typeof window !== "undefined" && window.innerWidth < 768;
-          map.fitBounds(bbox, {
-            padding: sp ? { top: 80, bottom: 264, left: 24, right: 24 } : { top: 60, bottom: 60, left: 60, right: 60 },
-            maxZoom: 9.5,
-            duration: 900,
-          });
+          flyToPrefBbox(map, bbox, 900);
         });
         map.on("mousemove", "pref-fill", (e) => {
           if (map.getZoom() >= PREF_CLICK_MAX_ZOOM) return;
@@ -387,15 +427,6 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
         map.on("mouseleave", "wards-fill", onPolyLeave);
 
         // ===== 県単位の遅延ロード（ビューポートに入った県だけ取得）=====
-        const codeToSlug = new Map(PREFS.map((p) => [p.codePrefix, p.slug]));
-        const prefBySlug = new Map(PREFS.map((p) => [p.slug, p]));
-        const prefBboxBySlug = new Map<string, [number, number, number, number]>();
-        for (const f of prefGeo.features) {
-          const slug = codeToSlug.get(String(f.properties?.code ?? "").slice(0, 2));
-          if (!slug) continue;
-          const bb = computeBbox(f.geometry);
-          if (bb) prefBboxBySlug.set(slug, [bb[0][0], bb[0][1], bb[1][0], bb[1][1]]);
-        }
         const loadedPrefs = new Set<string>();
         const bboxHit = (a: number[], b: number[]) =>
           !(a[2] < b[0] || a[0] > b[2] || a[3] < b[1] || a[1] > b[3]);
@@ -446,14 +477,14 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
           map.once("idle", () => shelterRefreshRef.current?.());
         }
         ensurePrefsRef.current = ensurePrefs;
-        // 初期化前に検索確定されていた自治体があればここで fly（保留の解消）。
+        // 初期化前に検索確定・ディープリンク指定されていた自治体があればここで fly（保留の解消）。
         if (pendingFlyRef.current) {
-          const code = pendingFlyRef.current;
+          const { code, instant } = pendingFlyRef.current;
           pendingFlyRef.current = null;
           const pp = getPrefByCode(code);
           void (async () => {
             if (pp) await ensurePrefs([pp.slug]);
-            flyToCode(code);
+            flyToCode(code, { instant });
           })();
         }
 
@@ -747,7 +778,7 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
     setSelectedCode(m.code);
     trackSelectMunicipality(m.code, "search");
     // 地図初期化前（ヘッダー検索は SSR で先に操作できる）は保留し、初期化完了時に実行。
-    if (!ensurePrefsRef.current) { pendingFlyRef.current = m.code; return; }
+    if (!ensurePrefsRef.current) { pendingFlyRef.current = { code: m.code }; return; }
     // 検索で他県を選んだ場合、その県がまだ遅延ロードされていなければ先に取得
     const pref = getPrefByCode(m.code);
     if (pref) await ensurePrefsRef.current([pref.slug]);

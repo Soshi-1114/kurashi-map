@@ -6,7 +6,7 @@ import ReactDOM from "react-dom";
 import HomeShell from "@/components/HomeShell";
 import { MetricMapHubBody, hubMetadata, hubLdJson, type MetricHubConfig } from "@/components/MetricMapHub";
 import { listSummaryAcrossPrefs, listAllAcrossPrefs } from "@/lib/metrics";
-import { getRankingBySlug, rankBy, muniLevelOnly } from "@/lib/rankings";
+import { getRankingBySlug, rankBy, muniLevelOnly, POPULATION_FRESHNESS, CENSUS_PERIOD } from "@/lib/rankings";
 import { PREFS } from "@/lib/prefs";
 import { SITE, absoluteUrl } from "@/lib/site";
 
@@ -24,8 +24,8 @@ async function loadConfig(): Promise<MetricHubConfig> {
   const rateText = (m: (typeof all)[number]) => GROWTH.display(m);
   return {
     path: PATH,
-    title: `人口増減マップ｜人口が増えている街・減っている街を地図で見る【2025年国勢調査】 - ${SITE.name}`,
-    description: `全国1,918の市区町村・行政区の5年間（2020→2025年国勢調査）の人口増減を色分けした地図。人口が増えている街・減っている街をひと目で比較できます。増加率ランキングへも展開。出典: 総務省 国勢調査。`,
+    title: `人口増減マップ｜人口が増えている街・減っている街を地図で見る【${POPULATION_FRESHNESS}】 - ${SITE.name}`,
+    description: `全国1,918の市区町村・行政区の5年間（${CENSUS_PERIOD}）の人口増減を色分けした地図。人口が増えている街・減っている街をひと目で比較できます。増加率ランキングへも展開。出典: 総務省 国勢調査。`,
     ogImage: absoluteUrl("/api/og/ranking/population-growth"),
     ogAlt: "人口増減マップ",
     h1: "人口増減を地図で見る",
@@ -46,7 +46,7 @@ async function loadConfig(): Promise<MetricHubConfig> {
     prefHref: (slug) => `/ranking/population-growth/${slug}`,
     foot: "© KurashiMap — 出典: 総務省 国勢調査（e-Stat）。2020年→2025年の人口増減率を市区町村単位で比較しています。",
     dataset: {
-      name: "市区町村別 人口増減（2020→2025年国勢調査）マップ",
+      name: `市区町村別 人口増減（${CENSUS_PERIOD}）マップ`,
       description: "総務省 国勢調査に基づく全国1,918の市区町村・行政区の5年間人口増減率（%）のデータセット。地図上で増加〜減少の5段階に色分けして比較できる。推計値は含まない。",
       keywords: ["人口", "人口増減", "人口減少", "人口増加率", "地図", "マップ", "市区町村", "国勢調査"],
       temporalCoverage: "2020/2025",

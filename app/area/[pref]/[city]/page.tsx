@@ -25,7 +25,11 @@ import {
 import { getMunicipality, listAll, listAllAcrossPrefs } from "@/lib/metrics";
 import { buildSummary } from "@/lib/summary";
 import { findRelatedByRent, findSimilar, findClosePopulationInPref } from "@/lib/related";
-import { RANKINGS, formatAsOfJa, POPULATION_FRESHNESS } from "@/lib/rankings";
+import {
+  RANKINGS, formatAsOfJa, POPULATION_FRESHNESS, POPULATION_ASOF,
+  housingSurveyLabel, landPriceSurveyLabel, freshnessPrefix,
+} from "@/lib/rankings";
+import { mapHrefForCode } from "@/lib/mapDeepLink";
 import { muniLastModified } from "@/lib/dataFreshness";
 import { getRankPositions } from "@/lib/rankingStats";
 import { buildFaq } from "@/lib/faq";
@@ -109,20 +113,27 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
   // 先頭に置き、title で削った「住みやすさ」もここで補う。在留外国人割合には全国平均・
   // 全国順位という title に入らない文脈を担わせる（数値はビルド時データ由来）。
   const descRent = hasRent(m.rent.value) ? `家賃平均${m.rent.value.toLocaleString()}円/月、` : "";
+  // description 冒頭の「更新」バッジ用。本文に実際に書く指標の asOf だけを集める
+  // （地価など本文に出てこない指標を混ぜるとバッジの年と本文が食い違うため）。
+  const bodyAsOf: (string | null)[] = [
+    m.population > 0 ? POPULATION_ASOF : null,
+    hasRent(m.rent.value) ? m.rent.asOf : null,
+  ];
   let description: string;
   if (hasForeign) {
     // 比較統計が取れる場合はそれを載せ、代わりに出典表記を落とす（文字数の都合。
     // 出典はページ本文と構造化データが持つ）。
     const context = fc
-      ? `（全国平均${fc.nationalAvg.toFixed(2)}%、全国${fc.nationalRank.toLocaleString()}位）`
+      ? `（全国平均${fc.nationalAvg.toFixed(2)}%、全国${fc.nationalRank.toLocaleString()}位・${formatAsOfJa(m.foreignResidents.asOf)}時点）`
       : "";
-    const source = fc ? "" : "出典: 出入国在留管理庁「在留外国人統計」。";
-    description = `${fullName}（${prefName}）の人口は${pop}人、${descRent}在留外国人割合${foreignRatio.toFixed(2)}%${context}。地価・子育て・災害リスクなどの住環境データと住みやすさスコアを地図とランキングで比較できます。${source}`;
+    const source = fc ? "" : `出典: 出入国在留管理庁「在留外国人統計」（${formatAsOfJa(m.foreignResidents.asOf)}）。`;
+    const prefix = freshnessPrefix([...bodyAsOf, m.foreignResidents.asOf]);
+    description = `${prefix}${fullName}（${prefName}）の人口は${pop}人（${POPULATION_FRESHNESS}）、${descRent}在留外国人割合${foreignRatio.toFixed(2)}%${context}。地価・子育て・災害リスクなどの住環境データと住みやすさスコアを地図とランキングで比較できます。${source}`;
   } else {
     // このフォールバックは北方領土6村相当（在留外国人統計・人口ともに対象外）のみが
     // 到達する。上の分岐（GSC分析に基づき調整済み）と違い実質的な閲覧数が小さいため、
     // 「特徴」の先頭1件があれば1文だけ添えて差異化する（0件ならそのまま）。
-    const popPhrase = m.population > 0 ? `人口${pop}人、` : "";
+    const popPhrase = m.population > 0 ? `人口${pop}人（${POPULATION_FRESHNESS}）、` : "";
     const [areaStats, rankPositions, prefRanks] = await Promise.all([
       getAreaStats(),
       getRankPositions(),
@@ -136,7 +147,13 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
     const topics = ["地価", "待機児童", "災害リスク"]
       .filter((t) => !(t === "地価" && topHighlightKey === "landPrice") && !(t === "待機児童" && topHighlightKey === "waitlistZero"))
       .join("・");
-    description = `${fullName}（${prefName}）の住みやすさ・住環境データ。${popPhrase}${descRent}${highlightPhrase}${topics}などをまとめて地図とランキングで比較できる${SITE.name}の自治体ページ。`;
+    // highlightPhrase が待機児童ゼロの文（asOf 入り）を本文に書く場合は、そのasOfも
+    // バッジ候補に含める（本文に出てくる年をバッジが漏らさないようにする）。
+    const prefix = freshnessPrefix([
+      ...bodyAsOf,
+      topHighlightKey === "waitlistZero" ? m.waitlistChildren.asOf : null,
+    ]);
+    description = `${prefix}${fullName}（${prefName}）の住みやすさ・住環境データ。${popPhrase}${descRent}${highlightPhrase}${topics}などをまとめて地図とランキングで比較できる${SITE.name}の自治体ページ。`;
   }
   const url = absoluteUrl(`/area/${m.pref}/${m.code}`);
   const ogImage = absoluteUrl(`/api/og/${m.code}`);
@@ -376,6 +393,15 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
       ? `全国平均${areaStats.landPrice.national.toLocaleString()}円/㎡`
       : undefined;
 
+  // 主要指標の基準時点まとめ（honesty 注記に併記）。欠損している指標は列挙しない。
+  // 各カードの詳細な出典・年度は SourceLine が担うため、ここは主要4指標に絞る。
+  const asOfSummary = [
+    m.population > 0 ? `人口 ${POPULATION_FRESHNESS}` : null,
+    hasRent(m.rent.value) ? `家賃 ${housingSurveyLabel(m.rent.asOf)}` : null,
+    hasLandPrice(m.landPrice.value) ? `地価 ${landPriceSurveyLabel(m.landPrice.source, m.landPrice.asOf)}` : null,
+    hasForeignData(m.foreignResidents.source) ? `在留外国人 ${formatAsOfJa(m.foreignResidents.asOf)}時点` : null,
+  ].filter(Boolean).join("／");
+
   return (
     <PageShell
       width="wide"
@@ -490,6 +516,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
       <p className="ad-honesty">
         <Info size={16} aria-hidden="true" />
         数値は政府統計・国土数値情報の実データです。データのない項目は推計で埋めず「データなし／対象外」と明示しています。
+        {asOfSummary ? `主なデータの基準時点: ${asOfSummary}。` : ""}
       </p>
       {/* ③ 詳細情報グリッド */}
       <Section icon={Wallet} tone="ad-tone-rent" title="詳細データ" id="data">
@@ -590,7 +617,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
             icon={Globe2}
             tone="ad-tone-foreign"
             title="外国人比率"
-            link={{ href: "/map/foreign-ratio", label: "地図・ランキングで見る" }}
+            link={{ href: mapHrefForCode(m.code, "/map/foreign-ratio"), label: "地図・ランキングで見る" }}
           >
             {hasForeignData(m.foreignResidents.source) ? (
               <>
@@ -626,7 +653,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
               icon={Users}
               tone="ad-tone-pop"
               title="将来人口（公的推計）"
-              link={{ href: "/map/future-population", label: "2050年推計人口を地図で見る" }}
+              link={{ href: mapHrefForCode(m.code, "/map/future-population"), label: "2050年推計人口を地図で見る" }}
             >
               {hasFuturePopulation(fp) ? (
                 <>
@@ -867,7 +894,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
               <Link href="/map/foreign-ratio" className="ad-cta-chip"><Globe2 size={16} aria-hidden="true" />外国人比率で見る</Link>
             </li>
             <li>
-              <Link href="/" className="ad-cta-chip"><MapIcon size={16} aria-hidden="true" />地図で探す</Link>
+              <Link href={mapHrefForCode(m.code)} className="ad-cta-chip"><MapIcon size={16} aria-hidden="true" />地図で見る</Link>
             </li>
           </ul>
         </section>
@@ -875,7 +902,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
       <div className="ad-footnav">
         <Link href={`/area/${m.pref}`} className="ad-back"><ArrowLeft size={14} aria-hidden="true" />{prefName}の一覧</Link>
         <Link href="/ranking" className="ad-back"><Trophy size={14} aria-hidden="true" />ランキング</Link>
-        <Link href="/" className="ad-back"><MapIcon size={14} aria-hidden="true" />地図に戻る</Link>
+        <Link href={mapHrefForCode(m.code)} className="ad-back"><MapIcon size={14} aria-hidden="true" />地図で見る</Link>
       </div>
     </PageShell>
   );

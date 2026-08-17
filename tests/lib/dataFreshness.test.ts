@@ -4,6 +4,7 @@ import {
   parseAsOf,
   muniLastModified,
   latestLastModified,
+  latestAsOf,
   withTemplateRevision,
 } from "@/lib/dataFreshness";
 import { muni, metric, hazard } from "../_fixtures";
@@ -65,6 +66,20 @@ describe("latestLastModified", () => {
   });
   it("空配列は null", () => {
     expect(latestLastModified([])).toBeNull();
+  });
+});
+
+describe("latestAsOf", () => {
+  it("複数候補のうち最も新しい asOf を元の文字列のまま返す", () => {
+    // 月まである方（2025-12）が年のみ（2025・2023）より新しい
+    expect(latestAsOf(["2023", "2025-12", "2025"])).toBe("2025-12");
+  });
+  it("null/undefined/パース不能は無視する", () => {
+    expect(latestAsOf([null, undefined, "-", "不明", "2024"])).toBe("2024");
+  });
+  it("1つも解釈できなければ null", () => {
+    expect(latestAsOf([null, undefined, "-"])).toBeNull();
+    expect(latestAsOf([])).toBeNull();
   });
 });
 

@@ -1975,6 +1975,19 @@ button { font-family: inherit; }
   white-space: nowrap;
 }
 .pref-table th.num, .pref-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+/* 並び替え可能な見出し（PrefMuniTable）。th 自体の padding はそのまま活かし、
+   button は幅いっぱい・見た目を継承してクリック領域だけ広げる。 */
+.pref-table-sort {
+  display: flex; align-items: center; gap: 4px; width: 100%;
+  font: inherit; color: inherit; background: none; border: none; cursor: pointer; padding: 0;
+}
+.pref-table th.num .pref-table-sort { justify-content: flex-end; }
+.pref-table-sort:hover, .pref-table-sort:focus-visible { color: var(--text); }
+.pref-table-sort-icon { font-size: 10px; opacity: 0.6; }
+.pref-table th[aria-sort="ascending"] .pref-table-sort,
+.pref-table th[aria-sort="descending"] .pref-table-sort { color: var(--accent); }
+.pref-table th[aria-sort="ascending"] .pref-table-sort-icon,
+.pref-table th[aria-sort="descending"] .pref-table-sort-icon { opacity: 1; }
 .pref-table tbody tr { border-bottom: 1px solid var(--border); }
 .pref-table tbody tr:last-child { border-bottom: none; }
 .pref-table tbody tr:hover { background: var(--accent-soft); }
