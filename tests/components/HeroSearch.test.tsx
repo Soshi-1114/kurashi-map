@@ -166,6 +166,52 @@ describe("HeroSearch", () => {
     expect(screen.queryByRole("listbox")).toBeNull();
   });
 
+  it("駅名で「自治体名（駅名）」の候補が出て、地図ピンは駅座標付きでフライトを依頼する", async () => {
+    const user = userEvent.setup();
+    // 駅検索 API のモック。「品川」クエリのみ川口市（11203）の駅を返す。
+    const stationFetch = vi.fn(async (url: string) => ({
+      ok: true,
+      json: async () =>
+        url.includes("station-search")
+          ? { stations: url.includes(encodeURIComponent("品川")) ? [{ name: "品川", code: "11203", lng: 139.73, lat: 35.62 }] : [] }
+          : { towns: [] },
+    }));
+    vi.stubGlobal("fetch", stationFetch);
+    const { input } = setup();
+
+    await user.type(input, "品川");
+    const option = await screen.findByRole("option");
+    expect(within(option).getByText("川口市")).toBeInTheDocument();
+    expect(within(option).getByText("（品川駅）")).toBeInTheDocument();
+
+    const flyDetails: MapFlyDetail[] = [];
+    const onFly = (e: Event) => flyDetails.push((e as CustomEvent<MapFlyDetail>).detail);
+    window.addEventListener(MAP_FLY_EVENT, onFly);
+    try {
+      await user.click(screen.getByRole("button", { name: "品川駅を地図で表示" }));
+    } finally {
+      window.removeEventListener(MAP_FLY_EVENT, onFly);
+    }
+    expect(push).not.toHaveBeenCalled();
+    expect(flyDetails).toEqual([{ code: "11203", station: { name: "品川", lng: 139.73, lat: 35.62 } }]);
+  });
+
+  it("駅行の本体クリックはその自治体の詳細ページへ遷移する", async () => {
+    const user = userEvent.setup();
+    const stationFetch = vi.fn(async (url: string) => ({
+      ok: true,
+      json: async () =>
+        url.includes("station-search")
+          ? { stations: url.includes(encodeURIComponent("品川")) ? [{ name: "品川", code: "11203", lng: 139.73, lat: 35.62 }] : [] }
+          : { towns: [] },
+    }));
+    vi.stubGlobal("fetch", stationFetch);
+    const { input } = setup();
+    await user.type(input, "品川");
+    await user.click(await screen.findByRole("option"));
+    expect(push).toHaveBeenCalledWith("/area/saitama/11203");
+  });
+
   it("選択した自治体が「最近見た自治体」として次回フォーカス時に出る", async () => {
     const user = userEvent.setup();
     const { input } = setup();

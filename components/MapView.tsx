@@ -21,7 +21,7 @@ import { PREFS, getPrefByCode } from "@/lib/prefs";
 import { hasRent } from "@/lib/rentColor";
 import { getMapMetric, TREND_PROPERTY, type MapMetricKey } from "@/lib/mapMetrics";
 import { trackSelectMunicipality, trackChangeMetric, trackApplyFilter } from "@/lib/analytics";
-import { MAP_FLY_EVENT } from "@/lib/mapFly";
+import { MAP_FLY_EVENT, type MapFlyDetail } from "@/lib/mapFly";
 import type { ComboboxHit } from "@/lib/useMuniCombobox";
 import { parseMapDeepLink } from "@/lib/mapDeepLink";
 import {
@@ -834,9 +834,9 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
   // lib/mapFly.ts の CustomEvent 1本の疎結合ブリッジ（トップ以外では発火しないため無害）。
   useEffect(() => {
     const onFlyRequest = (e: Event) => {
-      const code = (e as CustomEvent<{ code: string }>).detail?.code;
-      const m = code ? byCode.get(code) : undefined;
-      if (m) void flyToMuni(m);
+      const detail = (e as CustomEvent<MapFlyDetail>).detail;
+      const m = detail?.code ? byCode.get(detail.code) : undefined;
+      if (m) void flyToMuni({ ...m, station: detail.station });
     };
     window.addEventListener(MAP_FLY_EVENT, onFlyRequest);
     return () => window.removeEventListener(MAP_FLY_EVENT, onFlyRequest);

@@ -7,9 +7,13 @@
 
 export const MAP_FLY_EVENT = "kurashimap:flyto";
 
-export type MapFlyDetail = { code: string };
+export type MapFlyDetail = {
+  code: string;
+  /** 駅検索由来のとき、自治体 bbox ではなく駅座標へ点フライトする（マーカー付き） */
+  station?: { name: string; lng: number; lat: number };
+};
 
-/** ページ内の地図へ「この自治体へフライトして」と依頼する（地図未マウント時は無視される）。 */
-export function requestMapFly(code: string): void {
-  window.dispatchEvent(new CustomEvent<MapFlyDetail>(MAP_FLY_EVENT, { detail: { code } }));
+/** ページ内の地図へ「この自治体（または駅）へフライトして」と依頼する（地図未マウント時は無視される）。 */
+export function requestMapFly(code: string, station?: MapFlyDetail["station"]): void {
+  window.dispatchEvent(new CustomEvent<MapFlyDetail>(MAP_FLY_EVENT, { detail: { code, station } }));
 }

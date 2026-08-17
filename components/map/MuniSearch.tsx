@@ -33,13 +33,13 @@ export default function MuniSearch({ municipalities, wards, onSelect }: Props) {
         <input
           ref={inputRef}
           type="search"
-          placeholder="自治体名で検索"
+          placeholder="自治体名・駅で検索"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={onKeyDown}
           onFocus={onFocus}
           onBlur={onBlur}
-          aria-label="自治体検索"
+          aria-label="自治体・駅の検索"
           role="combobox"
           aria-expanded={filtered.length > 0}
           aria-controls="muni-search-listbox"
