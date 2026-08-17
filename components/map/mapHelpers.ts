@@ -90,6 +90,14 @@ export function collectBaseLabels(map: MapLibreMap, ref: LabelDimState) {
   }
 }
 
+// フライト時に選択対象を画面内へ収める余白。SP は header (~60px) + half シート (~200px)、
+// PC は右サイドパネル (400px+余白) を避ける。fitBounds（自治体）と flyTo（駅）で共有。
+export function flyPadding(sp: boolean) {
+  return sp
+    ? { top: 80, bottom: 264, left: 24, right: 24 }
+    : { top: 80, bottom: 60, left: 60, right: 420 };
+}
+
 // ラベルを日本語優先に書き換え（OSMの name:ja があれば優先、無ければ name）
 export function applyJapaneseLabels(map: MapLibreMap) {
   const allLayers = map.getStyle().layers ?? [];

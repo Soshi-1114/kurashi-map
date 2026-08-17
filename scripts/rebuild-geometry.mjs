@@ -13,7 +13,7 @@
 //   unzip -o -q /tmp/N03_{code}.zip -d /tmp/N03_{code}
 // 実行:
 //   node --max-old-space-size=8192 scripts/rebuild-geometry.mjs --pref=tokyo
-//   INTERVAL=15 で簡略化間隔（m）を調整（既定 15m。build-base の旧 tolerance は約50m相当）
+//   INTERVAL で簡略化間隔（m）を調整（既定 30。build-base の旧 tolerance は約50m相当）
 import fs from "node:fs/promises";
 import { existsSync, readdirSync } from "node:fs";
 import path from "node:path";
@@ -42,10 +42,8 @@ if (!geojsonName) { console.error(`N03 geojson が無い: ${N03_DIR}`); process.
 async function main() {
   const raw = JSON.parse(await fs.readFile(path.join(N03_DIR, geojsonName), "utf8"));
 
-  const parentToWards = pref.parentToWards || {};
-  const wardCodes = new Set(Object.values(parentToWards).flat());
   const parentOf = new Map();
-  for (const [parent, wards] of Object.entries(parentToWards)) {
+  for (const [parent, wards] of Object.entries(pref.parentToWards || {})) {
     for (const w of wards) parentOf.set(w, parent);
   }
 
@@ -58,13 +56,13 @@ async function main() {
     if (!code || code.length !== 5) continue;
     if (p.N03_004 === "所属未定地" || code.endsWith("000")) continue;
     if (!f.geometry) continue;
-    const isWard = wardCodes.has(code);
+    const isWard = parentOf.has(code);
     pieces.push({
       type: "Feature",
       properties: {
         code,
-        ward: isWard ? 1 : 0,
-        // muni レイヤーの dissolve キーと名前（政令市の区は親コード・市名に集約）
+        // muni レイヤーの dissolve キーと名前（政令市の区は親コード・市名に集約）。
+        // wardName の有無が「区かどうか」を兼ねる（wards レイヤーの filter 条件）。
         muniCode: parentOf.get(code) ?? code,
         muniName: p.N03_004 || p.N03_003 || code,
         wardName: isWard ? (p.N03_005 || p.N03_004 || code) : "",
@@ -76,15 +74,21 @@ async function main() {
 
   // 1つのデータセットとして簡略化（muni と wards が同じアークを共有するため、
   // ズーム切替でも境界が一致する）。dissolve2 は簡略化後に行う。
+  // 出力精度は小数5桁（≒1.1m）。6桁だと gzip 後で 15%超膨らむ一方、30m 簡略化に
+  // 対して 1m 未満の丸めは視覚上区別できない。
+  const PRECISION = "precision=0.00001";
   const input = JSON.stringify({ type: "FeatureCollection", features: pieces });
   const commands = [
     `-i src.json name=src`,
     `-simplify ${SIMPLIFY} keep-shapes`,
-    `-filter "ward === 1" + name=wardsrc`,
-    `-dissolve2 code copy-fields=wardName target=wardsrc name=wards`,
+    // 区のない県では wards パイプライン（filter/dissolve/出力）を丸ごと省く
+    ...(pref.hasWards ? [
+      `-filter "wardName !== ''" + name=wardsrc`,
+      `-dissolve2 code copy-fields=wardName target=wardsrc name=wards`,
+    ] : []),
     `-dissolve2 muniCode copy-fields=muniName target=src name=muni`,
-    `-o out_muni.json target=muni format=geojson precision=0.000001`,
-    `-o out_wards.json target=wards format=geojson precision=0.000001`,
+    `-o out_muni.json target=muni format=geojson ${PRECISION}`,
+    ...(pref.hasWards ? [`-o out_wards.json target=wards format=geojson ${PRECISION}`] : []),
   ].join(" ");
   const out = await mapshaper.applyCommands(commands, { "src.json": input });
 

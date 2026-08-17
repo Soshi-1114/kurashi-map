@@ -59,43 +59,48 @@ async function main() {
     throw new Error(`駅グループ数が異常に少ない（${stations.length} 件）。S12 の属性・形式変更を確認してください`);
   }
 
-  // 県ごとにポリゴンをロードし、bbox で絞ってから PIP で自治体コードを割り当てる。
+  // 第1段: 県ごとにポリゴンをロードし、bbox で絞ってから PIP で自治体コードを
+  // 割り当てる。PIP は排他的なので県の処理順に依存しない。
+  // フォールバック候補用に、政令市の親（区の dissolve 済みポリゴン。最近傍判定で
+  // 区と同じ場所で競合するため除外し、より具体的な区だけ残す）以外を全県ぶん保持する。
+  const fallbackPolys = [];
   for (const pref of Object.keys(PREFS).map(getPref)) {
     const polys = await loadMuniPolys(ROOT, pref, { wardsFirst: true });
-    // 政令市の親（区の dissolve 済みポリゴン）。フォールバックの最近傍判定では
-    // 区と親が同じ場所で競合するため、より具体的な区だけを候補にする。
     const parentCodes = new Set(Object.keys(pref.parentToWards ?? {}));
     let [minX, minY, maxX, maxY] = [Infinity, Infinity, -Infinity, -Infinity];
     for (const p of polys) {
       minX = Math.min(minX, p.bbox[0]); minY = Math.min(minY, p.bbox[1]);
       maxX = Math.max(maxX, p.bbox[2]); maxY = Math.max(maxY, p.bbox[3]);
+      if (!parentCodes.has(p.code)) fallbackPolys.push(p);
     }
     for (const s of stations) {
       if (s.code) continue;
       const [x, y] = s.coords;
       if (x < minX || x > maxX || y < minY || y > maxY) continue;
       const p = findPolyForPoint(s.coords, polys);
-      if (p) {
-        s.code = p.code;
-        s.dist = 0;
-      } else {
-        // 簡略化ポリゴンのわずかな外側（海沿い・川沿いの駅）は最近傍ポリゴンへ
-        // フォールバック割当する。県境で複数県が候補になり得るため、全県走査後に
-        // 最小距離の候補が残るよう dist 付きで上書き判定する。1km 超は誤割当の
-        // 恐れがあるため割り当てない（最終的に除外）。
-        const [sx, sy] = s.coords;
-        for (const cand of polys) {
-          if (parentCodes.has(cand.code)) continue;
-          const [bx0, by0, bx1, by1] = cand.bbox;
-          if (sx < bx0 - 0.02 || sx > bx1 + 0.02 || sy < by0 - 0.02 || sy > by1 + 0.02) continue;
-          const d = turf.pointToPolygonDistance(turf.point(s.coords), cand.feat, { units: "kilometers" });
-          if (d < 1 && d < (s.dist ?? Infinity)) {
-            s.code = cand.code;
-            s.dist = d;
-          }
-        }
+      if (p) s.code = p.code;
+    }
+  }
+
+  // 第2段: PIP で決まらなかった駅（簡略化ポリゴンのわずかな外側にある海沿い・
+  // 川沿いの駅）を、全県のポリゴンを対象に最近傍へフォールバック割当する。
+  // 県境では複数県が候補になり得るため、県ループ内ではなくここで最小距離を取る。
+  // 1km 超は誤割当の恐れがあるため割り当てない（最終的に除外）。
+  for (const s of stations) {
+    if (s.code) continue;
+    const [sx, sy] = s.coords;
+    let best = null;
+    let bestD = 1;
+    for (const cand of fallbackPolys) {
+      const [bx0, by0, bx1, by1] = cand.bbox;
+      if (sx < bx0 - 0.02 || sx > bx1 + 0.02 || sy < by0 - 0.02 || sy > by1 + 0.02) continue;
+      const d = turf.pointToPolygonDistance(turf.point(s.coords), cand.feat, { units: "kilometers" });
+      if (d < bestD) {
+        best = cand.code;
+        bestD = d;
       }
     }
+    if (best) s.code = best;
   }
 
   const unassigned = stations.filter((s) => !s.code);

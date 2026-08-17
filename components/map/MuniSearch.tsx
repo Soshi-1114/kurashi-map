@@ -58,10 +58,10 @@ export default function MuniSearch({ municipalities, wards, onSelect }: Props) {
           onMouseDown={(e) => e.preventDefault()}
         >
           {isHistory && <SearchHistoryHeader onClear={clearHistory} />}
-          {/* 駅行は自治体行とコードが重複しうるため、key は駅名まで含めて一意にする
-              （id は activedescendant と揃えて行番号ベース） */}
+          {/* 駅行は自治体行とコードが重複しうるため、key/id とも行番号ベースで一意にする
+              （リストはクエリごとに全行作り直され、並べ替え・部分更新はない） */}
           {filtered.map((m, i) => (
-            <li key={m.station ? `st:${m.station.name}:${m.code}` : m.code} role="presentation">
+            <li key={i} role="presentation">
               <button
                 id={`sopt-${i}`}
                 role="option"

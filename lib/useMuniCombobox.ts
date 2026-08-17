@@ -41,9 +41,46 @@ export type ComboboxHit<T extends MuniSummary> = T & {
 
 type TownApiHit = { code: string; town: string };
 
-// 入力中の連打を抑えるデバウンス（/api/town-search を呼ぶ最小クエリ長は townSearch.ts の
-// TOWN_QUERY_MIN をサーバー側と共有する）
-const TOWN_DEBOUNCE_MS = 150;
+// 入力中の連打を抑えるデバウンス（最小クエリ長は townSearch.ts / stationSearch.ts の
+// TOWN_QUERY_MIN / STATION_QUERY_MIN をサーバー側と共有する）
+const SUGGEST_DEBOUNCE_MS = 150;
+
+// デバウンス付きサジェスト取得（町丁・駅で共用）。クエリが変わるたびに前回の
+// タイマー・リクエストを破棄するので、反映されるのは常に最新クエリの結果のみ。
+// より新しいクエリに差し替わっての中断（ctrl.abort）は無視し（次のリクエストが
+// 状態を更新する）、サーバーエラー・オフライン等の実際の失敗時のみ候補なしに戻す
+// （古いクエリの候補を残さない）。
+function useDebouncedSuggest<T>(active: boolean, q: string, url: string, pluck: (json: unknown) => T[] | undefined): T[] {
+  const [hits, setHits] = useState<T[]>([]);
+  useEffect(() => {
+    const clearHits = () => setHits((prev) => (prev.length ? [] : prev));
+    if (!active) {
+      clearHits();
+      return;
+    }
+    const ctrl = new AbortController();
+    const timer = setTimeout(async () => {
+      try {
+        const res = await fetch(`${url}?q=${encodeURIComponent(q)}`, { signal: ctrl.signal });
+        if (!res.ok) {
+          clearHits();
+          return;
+        }
+        const list = pluck((await res.json()) as unknown);
+        setHits(Array.isArray(list) ? list : []);
+      } catch {
+        if (!ctrl.signal.aborted) clearHits();
+      }
+    }, SUGGEST_DEBOUNCE_MS);
+    return () => {
+      ctrl.abort();
+      clearTimeout(timer);
+    };
+    // pluck はレスポンスキーを選ぶだけの定数関数（呼び出し側でインライン定義）のため依存に含めない
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [active, q, url]);
+  return hits;
+}
 
 export function useMuniCombobox<T extends MuniSummary>(
   candidates: T[],
@@ -58,8 +95,6 @@ export function useMuniCombobox<T extends MuniSummary>(
   const { codes: historyCodes, record: recordHistory, clear: clearHistory } = useSearchHistory();
   const [query, setQuery] = useState("");
   const [activeIndex, setActiveIndex] = useState(-1);
-  const [townHits, setTownHits] = useState<TownApiHit[]>([]);
-  const [stationHits, setStationHits] = useState<StationHit[]>([]);
   const [focused, setFocused] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -74,62 +109,17 @@ export function useMuniCombobox<T extends MuniSummary>(
       .slice(0, limit);
   }, [q, candidates, limit]);
 
-  // 町丁名での自治体検索（デバウンス付きの API 呼び出し）。クエリが変わるたびに
-  // 前回のタイマー・リクエストを破棄するので、反映されるのは常に最新クエリの結果のみ。
-  useEffect(() => {
-    if (!townSearch || q.length < TOWN_QUERY_MIN) {
-      setTownHits((prev) => (prev.length ? [] : prev));
-      return;
-    }
-    const ctrl = new AbortController();
-    const clearHits = () => setTownHits((prev) => (prev.length ? [] : prev));
-    const timer = setTimeout(async () => {
-      try {
-        const res = await fetch(`/api/town-search?q=${encodeURIComponent(q)}`, { signal: ctrl.signal });
-        if (!res.ok) {
-          clearHits(); // サーバーエラー時は古いクエリの町丁候補を残さない
-          return;
-        }
-        const json = (await res.json()) as { towns?: TownApiHit[] };
-        setTownHits(Array.isArray(json.towns) ? json.towns : []);
-      } catch {
-        // より新しいクエリに差し替わっての中断（ctrl.abort）は無視（次のリクエストが
-        // 状態を更新する）。オフライン等の実際の失敗時のみ町丁候補なしに戻す。
-        if (!ctrl.signal.aborted) clearHits();
-      }
-    }, TOWN_DEBOUNCE_MS);
-    return () => {
-      ctrl.abort();
-      clearTimeout(timer);
-    };
-  }, [q, townSearch]);
-
-  // 駅名での検索（町丁と同じデバウンス付き API 呼び出し・破棄規則）。
-  useEffect(() => {
-    if (!stationSearch || q.length < STATION_QUERY_MIN) {
-      setStationHits((prev) => (prev.length ? [] : prev));
-      return;
-    }
-    const ctrl = new AbortController();
-    const clearHits = () => setStationHits((prev) => (prev.length ? [] : prev));
-    const timer = setTimeout(async () => {
-      try {
-        const res = await fetch(`/api/station-search?q=${encodeURIComponent(q)}`, { signal: ctrl.signal });
-        if (!res.ok) {
-          clearHits();
-          return;
-        }
-        const json = (await res.json()) as { stations?: StationHit[] };
-        setStationHits(Array.isArray(json.stations) ? json.stations : []);
-      } catch {
-        if (!ctrl.signal.aborted) clearHits();
-      }
-    }, TOWN_DEBOUNCE_MS);
-    return () => {
-      ctrl.abort();
-      clearTimeout(timer);
-    };
-  }, [q, stationSearch]);
+  // 自治体名ヒットが limit を埋めた場合、町丁・駅の候補は filtered で捨てられるため
+  // 最初から取得しない（確実に無駄になる往復の抑止。表示結果は変わらない）。
+  const muniFull = muniHits.length >= limit;
+  const townHits = useDebouncedSuggest<TownApiHit>(
+    townSearch && !muniFull && q.length >= TOWN_QUERY_MIN, q, "/api/town-search",
+    (json) => (json as { towns?: TownApiHit[] }).towns,
+  );
+  const stationHits = useDebouncedSuggest<StationHit>(
+    stationSearch && !muniFull && q.length >= STATION_QUERY_MIN, q, "/api/station-search",
+    (json) => (json as { stations?: StationHit[] }).stations,
+  );
 
   const byCode = useMemo(() => new Map(candidates.map((m) => [m.code, m])), [candidates]);
 
@@ -146,16 +136,14 @@ export function useMuniCombobox<T extends MuniSummary>(
       if (!m) continue;
       out.push({ ...m, station: { name: s.name, lng: s.lng, lat: s.lat } });
     }
-    if (out.length < limit && townHits.length > 0) {
-      const seen = new Set(out.map((m) => m.code));
-      for (const t of townHits) {
-        if (out.length >= limit) break;
-        if (seen.has(t.code)) continue;
-        const m = byCode.get(t.code);
-        if (!m) continue;
-        seen.add(t.code);
-        out.push({ ...m, town: t.town });
-      }
+    const seen = new Set(out.map((m) => m.code));
+    for (const t of townHits) {
+      if (out.length >= limit) break;
+      if (seen.has(t.code)) continue;
+      const m = byCode.get(t.code);
+      if (!m) continue;
+      seen.add(t.code);
+      out.push({ ...m, town: t.town });
     }
     return out;
   }, [q, muniHits, stationHits, townHits, byCode, limit]);

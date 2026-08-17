@@ -58,6 +58,16 @@ describe("実データ（data/stations.json）", () => {
     expect(hits[0].code).toBe("13103");
   });
 
+  it("県境の駅が正しい県の自治体に割り当たっている", () => {
+    // フォールバック割当を県ループ内で行うと、先に処理した県の最近傍へ誤割当される
+    // （例: 川崎駅が多摩川対岸の大田区になる）。全県 PIP 後の最小距離で決める
+    // 2段方式の回帰テスト。
+    const codeOf = (name: string) => index.filter((e) => e[0] === name).map((e) => e[1]);
+    expect(codeOf("川崎")).toEqual(["14132"]);      // 川崎市川崎区（× 大田区 13111）
+    expect(codeOf("武蔵小杉")).toEqual(["14133"]);  // 川崎市中原区
+    expect(codeOf("登戸")).toEqual(["14135"]);      // 川崎市多摩区
+  });
+
   it("政令市の駅は親市ではなく区コードに割り当たっている", () => {
     // 政令市の親コード（区の dissolve 対象）が混入していないこと
     const parents = new Set([

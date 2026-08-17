@@ -198,6 +198,7 @@ async function main() {
     console.log(`✓ ${path.relative(ROOT, wardsGeoPath)} (${wardFeatures.length} features)`);
     console.log(`✓ ${path.relative(ROOT, paths.wards)} (${wardsJson.length} wards)`);
   }
+  console.log(`→ 次に rebuild-geometry.mjs --pref=${pref.slug} を実行してジオメトリを作り直してください（本スクリプトの簡略化は隣接境界に隙間が出る旧方式）`);
 }
 
 main().catch((e) => { console.error(e); process.exit(1); });

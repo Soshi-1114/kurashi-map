@@ -22,6 +22,7 @@ import { hasRent } from "@/lib/rentColor";
 import { getMapMetric, TREND_PROPERTY, type MapMetricKey } from "@/lib/mapMetrics";
 import { trackSelectMunicipality, trackChangeMetric, trackApplyFilter } from "@/lib/analytics";
 import { MAP_FLY_EVENT } from "@/lib/mapFly";
+import type { ComboboxHit } from "@/lib/useMuniCombobox";
 import { parseMapDeepLink } from "@/lib/mapDeepLink";
 import {
   EMPTY_FILTERS, isFilterActive, matchesFilter, buildMatchExpression, type MapFilters,
@@ -36,7 +37,7 @@ import {
 } from "./map/mapConstants";
 import {
   fetchGeoJsonOrEmpty, computeBbox, collectBaseLabels, applyJapaneseLabels,
-  flyToPrefBbox, MUNI_FILL_OPACITY, type LabelDimState,
+  flyToPrefBbox, flyPadding, MUNI_FILL_OPACITY, type LabelDimState,
 } from "./map/mapHelpers";
 import { addKurashiLayers } from "./map/mapLayers";
 import { useShelterOverlay } from "./map/useShelterOverlay";
@@ -84,11 +85,9 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
   // station は駅検索確定由来で、自治体 bbox ではなく駅座標へ点フライトする。
   const pendingFlyRef = useRef<{ code: string; instant?: boolean; station?: { lng: number; lat: number } } | null>(null);
   // 駅検索確定時に立てるマーカー（ベース地図に駅が描かれない「標準」でも位置が分かる）。
-  // Marker 生成には動的 import した maplibre モジュールが要るため参照を保持し、
-  // マーカーの属する自治体以外へ選択が移ったら外す（stationMarkerCodeRef で判定）。
-  const maplibreModRef = useRef<typeof import("maplibre-gl") | null>(null);
-  const stationMarkerRef = useRef<Marker | null>(null);
-  const stationMarkerCodeRef = useRef<string | null>(null);
+  // マーカーと所属自治体コードは常にセットで生成・破棄するため1つの ref に持ち、
+  // その自治体以外へ選択が移ったら外す。
+  const stationMarkerRef = useRef<{ marker: Marker; code: string } | null>(null);
   // 協調ジェスチャ設定（マウント後は不変。初期化 effect を再実行させないため ref に保持）。
   const cooperativeRef = useRef(cooperativeGestures);
 
@@ -185,12 +184,8 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
     if (!feat) return;
     const bbox = computeBbox(feat.geometry);
     if (!bbox) return;
-    const sp = typeof window !== "undefined" && window.innerWidth < 768;
-    // SP は header (~60px) + half シート (~200px) を避けて選択ポリゴンを画面内に収める。
-    // full は modal で地図を覆うので fit は half 基準で OK。
-    const padding = sp
-      ? { top: 80, bottom: 264, left: 24, right: 24 }
-      : { top: 80, bottom: 60, left: 60, right: 420 };
+    // full シートは modal で地図を覆うので fit は half 基準で OK。
+    const padding = flyPadding(typeof window !== "undefined" && window.innerWidth < 768);
     // 区を選択した時は最低 z=11 まで寄せて区レイヤーが見える状態に
     const minZoom = wardFeat ? WARDS_MIN_ZOOM : 0;
     const currentZoom = map.getZoom();
@@ -208,34 +203,30 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
 
   // 駅検索の確定時: 自治体 bbox（fitBounds）ではなく駅座標へ点フライトし、
   // マーカーを立てる（「標準」ベース地図は駅を描かないため、着地点を明示する）。
-  const flyToStationPoint = useCallback((code: string, station: { lng: number; lat: number }, opts?: { instant?: boolean }) => {
+  // maplibre モジュールは地図生成時に import 済みのため、ここでの動的 import は
+  // モジュールキャッシュから即時解決される（追加のネットワークなし）。
+  const flyToStationPoint = useCallback(async (code: string, station: { lng: number; lat: number }) => {
     const map = mapRef.current;
     if (!map) return;
-    const sp = typeof window !== "undefined" && window.innerWidth < 768;
-    // flyToCode と同じ余白（SP は下部シート、PC は右パネルを避ける）
-    const padding = sp
-      ? { top: 80, bottom: 264, left: 24, right: 24 }
-      : { top: 80, bottom: 60, left: 60, right: 420 };
     map.flyTo({
       center: [station.lng, station.lat],
       zoom: Math.max(map.getZoom(), 14),
-      padding,
-      duration: opts?.instant ? 0 : 800,
+      padding: flyPadding(typeof window !== "undefined" && window.innerWidth < 768),
+      duration: 800,
     });
-    stationMarkerRef.current?.remove();
-    const maplibregl = maplibreModRef.current;
-    stationMarkerRef.current = maplibregl
-      ? new maplibregl.Marker({ color: "#1d4ed8" }).setLngLat([station.lng, station.lat]).addTo(map)
-      : null;
-    stationMarkerCodeRef.current = code;
+    const { default: maplibregl } = await import("maplibre-gl");
+    stationMarkerRef.current?.marker.remove();
+    stationMarkerRef.current = {
+      marker: new maplibregl.Marker({ color: "#1d4ed8" }).setLngLat([station.lng, station.lat]).addTo(map),
+      code,
+    };
   }, []);
 
   // 駅マーカーは、その駅の自治体以外へ選択が移った・選択解除されたら外す
   useEffect(() => {
-    if (stationMarkerRef.current && selectedCode !== stationMarkerCodeRef.current) {
-      stationMarkerRef.current.remove();
+    if (stationMarkerRef.current && selectedCode !== stationMarkerRef.current.code) {
+      stationMarkerRef.current.marker.remove();
       stationMarkerRef.current = null;
-      stationMarkerCodeRef.current = null;
     }
   }, [selectedCode]);
 
@@ -252,7 +243,6 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
       const { default: maplibregl } = await import("maplibre-gl");
       // 動的 import 中にアンマウントされた / 既にマップが立っていれば中断
       if (disposed || !containerRef.current || mapRef.current) return;
-      maplibreModRef.current = maplibregl; // 駅マーカー生成（flyToStationPoint）用に保持
 
       // ディープリンク（/?code=13104・/?pref=saitama）。「地図で見る」導線から該当の
       // 自治体・県へ初期フォーカスして開く。code は summary に実在する場合のみ有効。
@@ -524,11 +514,16 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
           const { code, instant, station } = pendingFlyRef.current;
           pendingFlyRef.current = null;
           const pp = getPrefByCode(code);
-          void (async () => {
-            if (pp) await ensurePrefs([pp.slug]);
-            if (station) flyToStationPoint(code, station, { instant });
-            else flyToCode(code, { instant });
-          })();
+          if (station) {
+            // 駅は座標を持っているので県ポリゴンのロードを待たずに飛ぶ（ロードは並行）
+            void flyToStationPoint(code, station);
+            if (pp) void ensurePrefs([pp.slug]);
+          } else {
+            void (async () => {
+              if (pp) await ensurePrefs([pp.slug]);
+              flyToCode(code, { instant });
+            })();
+          }
         }
 
         function checkViewport() {
@@ -817,17 +812,22 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
       .slice(0, 3);
   }, [selectedDetail, municipalities, wards]);
 
-  const flyToMuni = useCallback(async (m: MuniSummary & { station?: { name: string; lng: number; lat: number } }) => {
+  const flyToMuni = useCallback(async (m: ComboboxHit<MuniSummary>) => {
     setSelectedCode(m.code);
     trackSelectMunicipality(m.code, "search");
     // 地図初期化前（ヘッダー検索は SSR で先に操作できる）は保留し、初期化完了時に実行。
     if (!ensurePrefsRef.current) { pendingFlyRef.current = { code: m.code, station: m.station }; return; }
-    // 検索で他県を選んだ場合、その県がまだ遅延ロードされていなければ先に取得
     const pref = getPrefByCode(m.code);
+    if (m.station) {
+      // 駅検索確定なら自治体 bbox ではなく駅座標へ（マーカー付き）。座標は検索ヒットが
+      // 持っているので県ポリゴンのロードを待たずに飛ぶ（ロードは並行して走らせる）。
+      void flyToStationPoint(m.code, m.station);
+      if (pref) void ensurePrefsRef.current([pref.slug]);
+      return;
+    }
+    // 自治体は bbox を県 geojson から引くため、未ロード県なら先に取得
     if (pref) await ensurePrefsRef.current([pref.slug]);
-    // 駅検索確定なら自治体 bbox ではなく駅座標へ（マーカー付き）
-    if (m.station) flyToStationPoint(m.code, m.station);
-    else flyToCode(m.code);
+    flyToCode(m.code);
   }, [flyToCode, flyToStationPoint]);
 
   // ページ内の別クライアント島（トップのヒーロー検索の「地図で表示」）からのフライト依頼を受ける。

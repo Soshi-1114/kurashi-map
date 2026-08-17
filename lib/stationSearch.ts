@@ -36,12 +36,15 @@ export function searchStationIndex(index: StationIndexEntry[], rawQuery: string,
   // 末尾の「駅」を除去（「駅」1文字だけの入力は全件前方一致になるため空扱い）
   const q = raw.endsWith("駅") ? raw.slice(0, -1) : raw;
   if (q.length === 0) return [];
+  // 各バケツは最終的に先頭 limit 件しか使わないため、それ以上は溜めない
+  // （「ヶ丘」等の広い部分一致で数百件の配列を作らない）。
   const buckets: StationIndexEntry[][] = [[], [], []];
+  const push = (k: number, e: StationIndexEntry) => { if (buckets[k].length < limit) buckets[k].push(e); };
   for (const e of index) {
     const name = e[0];
-    if (name === q) buckets[0].push(e);
-    else if (name.startsWith(q)) buckets[1].push(e);
-    else if (name.includes(q)) buckets[2].push(e);
+    if (name === q) push(0, e);
+    else if (name.startsWith(q)) push(1, e);
+    else if (name.includes(q)) push(2, e);
   }
   const out: StationHit[] = [];
   for (const bucket of buckets) {
