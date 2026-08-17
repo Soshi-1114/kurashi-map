@@ -19,25 +19,30 @@ export type PrefMuniRow = {
 type SortKey = "name" | "rent" | "landPrice" | "population";
 type SortState = { key: SortKey; dir: "asc" | "desc" };
 
-const COLUMNS: { key: SortKey; label: string; numeric: boolean }[] = [
-  { key: "name", label: "自治体", numeric: false },
-  { key: "rent", label: "家賃平均", numeric: true },
-  { key: "landPrice", label: "地価（住宅地）", numeric: true },
-  { key: "population", label: "人口", numeric: true },
+const COLUMNS: { key: SortKey; label: string }[] = [
+  { key: "name", label: "自治体" },
+  { key: "rent", label: "家賃平均" },
+  { key: "landPrice", label: "地価（住宅地）" },
+  { key: "population", label: "人口" },
 ];
 
-// データなしセンチネル（家賃・地価は value<=0）の行は、並び替え方向によらず常に末尾へ送る。
+// 数値列の値とデータ有無を取り出す。有無判定は表示（85〜87行目）と同じ
+// hasRent/hasLandPrice をそのまま使い、センチネル定義の重複実装を避ける。
+function numericField(m: PrefMuniRow, key: Exclude<SortKey, "name">): { value: number; hasValue: boolean } {
+  if (key === "rent") return { value: m.rent, hasValue: hasRent(m.rent) };
+  if (key === "landPrice") return { value: m.landPrice, hasValue: hasLandPrice(m.landPrice) };
+  return { value: m.population, hasValue: true };
+}
+
+// データなし（家賃・地価のセンチネル）の行は、並び替え方向によらず常に末尾へ送る。
 function compareRows(a: PrefMuniRow, b: PrefMuniRow, key: SortKey, dir: 1 | -1): number {
   if (key === "name") return dir * a.label.localeCompare(b.label, "ja");
-  const av = key === "rent" ? a.rent : key === "landPrice" ? a.landPrice : a.population;
-  const bv = key === "rent" ? b.rent : key === "landPrice" ? b.landPrice : b.population;
-  const hasValue = key === "population" ? () => true : (v: number) => v > 0;
-  const aMissing = !hasValue(av);
-  const bMissing = !hasValue(bv);
-  if (aMissing && bMissing) return 0;
-  if (aMissing) return 1;
-  if (bMissing) return -1;
-  return dir * (av - bv);
+  const av = numericField(a, key);
+  const bv = numericField(b, key);
+  if (!av.hasValue && !bv.hasValue) return 0;
+  if (!av.hasValue) return 1;
+  if (!bv.hasValue) return -1;
+  return dir * (av.value - bv.value);
 }
 
 export function PrefMuniTable({ rows }: { rows: PrefMuniRow[] }) {
@@ -59,14 +64,15 @@ export function PrefMuniTable({ rows }: { rows: PrefMuniRow[] }) {
         <thead>
           <tr>
             {COLUMNS.map((col) => {
-              const active = sort?.key === col.key;
-              const ariaSort = active ? (sort!.dir === "asc" ? "ascending" : "descending") : "none";
+              // このヘッダーが現在の並び替え対象なら "asc"/"desc"、そうでなければ null。
+              // aria-sort・矢印アイコンの両方をここから1箇所で導く（non-null assertion 不要）。
+              const activeDir = sort?.key === col.key ? sort.dir : null;
               return (
-                <th key={col.key} scope="col" className={col.numeric ? "num" : undefined} aria-sort={ariaSort}>
+                <th key={col.key} scope="col" className={col.key !== "name" ? "num" : undefined} aria-sort={activeDir ? (activeDir === "asc" ? "ascending" : "descending") : "none"}>
                   <button type="button" className="pref-table-sort" onClick={() => toggleSort(col.key)}>
                     {col.label}
                     <span className="pref-table-sort-icon" aria-hidden="true">
-                      {active ? (sort!.dir === "asc" ? "▲" : "▼") : "↕"}
+                      {activeDir === "asc" ? "▲" : activeDir === "desc" ? "▼" : "↕"}
                     </span>
                   </button>
                 </th>
