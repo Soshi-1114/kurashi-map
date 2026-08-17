@@ -26,10 +26,18 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { MuniSummary } from "./types";
 import { toHiragana } from "./kana";
 import { TOWN_QUERY_MIN } from "./townSearch";
+import { STATION_QUERY_MIN, type StationHit } from "./stationSearch";
 import { useSearchHistory } from "./useSearchHistory";
 
-/** 候補1行。town があれば「町丁名でヒットした自治体」行（例 宗像市（日の里））。 */
-export type ComboboxHit<T extends MuniSummary> = T & { town?: string };
+/**
+ * 候補1行。town があれば「町丁名でヒットした自治体」行（例 宗像市（日の里））、
+ * station があれば「駅名でヒットした自治体」行（例 港区（品川駅）。確定側は
+ * station.lng/lat で駅位置へフライトできる）。
+ */
+export type ComboboxHit<T extends MuniSummary> = T & {
+  town?: string;
+  station?: { name: string; lng: number; lat: number };
+};
 
 type TownApiHit = { code: string; town: string };
 
@@ -40,16 +48,18 @@ const TOWN_DEBOUNCE_MS = 150;
 export function useMuniCombobox<T extends MuniSummary>(
   candidates: T[],
   onPick: (m: T) => void,
-  opts?: { limit?: number; townSearch?: boolean; history?: boolean },
+  opts?: { limit?: number; townSearch?: boolean; stationSearch?: boolean; history?: boolean },
 ) {
   const limit = opts?.limit ?? 8;
   const townSearch = opts?.townSearch ?? false;
+  const stationSearch = opts?.stationSearch ?? false;
   const history = opts?.history ?? false;
   // フックの呼び出し規則上、常に呼ぶ（history 無効の呼び出し側では未使用のまま）
   const { codes: historyCodes, record: recordHistory, clear: clearHistory } = useSearchHistory();
   const [query, setQuery] = useState("");
   const [activeIndex, setActiveIndex] = useState(-1);
   const [townHits, setTownHits] = useState<TownApiHit[]>([]);
+  const [stationHits, setStationHits] = useState<StationHit[]>([]);
   const [focused, setFocused] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -94,13 +104,48 @@ export function useMuniCombobox<T extends MuniSummary>(
     };
   }, [q, townSearch]);
 
+  // 駅名での検索（町丁と同じデバウンス付き API 呼び出し・破棄規則）。
+  useEffect(() => {
+    if (!stationSearch || q.length < STATION_QUERY_MIN) {
+      setStationHits((prev) => (prev.length ? [] : prev));
+      return;
+    }
+    const ctrl = new AbortController();
+    const clearHits = () => setStationHits((prev) => (prev.length ? [] : prev));
+    const timer = setTimeout(async () => {
+      try {
+        const res = await fetch(`/api/station-search?q=${encodeURIComponent(q)}`, { signal: ctrl.signal });
+        if (!res.ok) {
+          clearHits();
+          return;
+        }
+        const json = (await res.json()) as { stations?: StationHit[] };
+        setStationHits(Array.isArray(json.stations) ? json.stations : []);
+      } catch {
+        if (!ctrl.signal.aborted) clearHits();
+      }
+    }, TOWN_DEBOUNCE_MS);
+    return () => {
+      ctrl.abort();
+      clearTimeout(timer);
+    };
+  }, [q, stationSearch]);
+
   const byCode = useMemo(() => new Map(candidates.map((m) => [m.code, m])), [candidates]);
 
-  // 自治体名ヒットを先頭に、残り枠へ町丁ヒットを「自治体名（町丁名）」行として追加。
-  // 同じ自治体は1行まで（名前ヒット済みの自治体を町丁で重複表示しない）。
+  // 自治体名ヒットを先頭に、残り枠へ駅ヒット（自治体名（〇〇駅）行）→町丁ヒット
+  // （自治体名（町丁名）行）の順で追加。駅は自治体と別の実体なので、名前ヒット済みの
+  // 自治体と重複しても行を出す（例:「品川」→ 品川区・港区（品川駅）の両方）。
+  // 町丁は従来どおり同じ自治体を重複表示しない（駅で使った自治体も除く）。
   const filtered = useMemo<ComboboxHit<T>[]>(() => {
     if (!q) return [];
     const out: ComboboxHit<T>[] = [...muniHits];
+    for (const s of stationHits) {
+      if (out.length >= limit) break;
+      const m = byCode.get(s.code);
+      if (!m) continue;
+      out.push({ ...m, station: { name: s.name, lng: s.lng, lat: s.lat } });
+    }
     if (out.length < limit && townHits.length > 0) {
       const seen = new Set(out.map((m) => m.code));
       for (const t of townHits) {
@@ -113,7 +158,7 @@ export function useMuniCombobox<T extends MuniSummary>(
       }
     }
     return out;
-  }, [q, muniHits, townHits, byCode, limit]);
+  }, [q, muniHits, stationHits, townHits, byCode, limit]);
 
   // 履歴候補（クエリ空・フォーカス中のみ使う）。コード配列から候補配列を都度解決するので、
   // 表示名の陳腐化がない。

@@ -50,7 +50,9 @@ KurashiMap の各指標データは GitHub Actions が定期/手動で取得し�
 4. `fetch-rent.mjs --all`（家賃・住宅土地統計, e-Stat）— 同上
 5. `fetch-medical.mjs --all`（医療機関・医療施設調査, e-Stat）— 全国2表を1回取得して全県へ反映
 6. `fetch-stations.mjs --all`（駅数・国土数値情報 S12）— 全国 GeoJSON を1回 DL して
-   point-in-polygon で全県へ反映（reinfolib XKT015 の約1年遅れを解消する直接取込）
+   point-in-polygon で全県へ反映（reinfolib XKT015 の約1年遅れを解消する直接取込）。
+   続けて同じ GeoJSON から `build-station-index.mjs` が駅名検索インデックス
+   `data/stations.json`（/api/station-search 用。約9,300駅）を再生成する
 7. `fetch-waitlist.mjs --all`（待機児童, CFA）— Excel を1回パースして全県へ反映
 8. 地価ループ（県別）: 各県の L01 zip を DL（3回リトライ）→ `fetch-land-price.mjs --pref=X`。
    県別の失敗は `::warning::` で記録し継続（他県は止めない）
@@ -181,6 +183,7 @@ GitHub の **Actions** タブ → 対象ワークフロー → **Run workflow**�
 | 待機児童 | こども家庭庁 保育所等関連状況取りまとめ | 年1回（4/1時点・夏〜秋公表） | `fetch-waitlist.mjs` |
 | 災害リスク | reinfolib XKT026/029 | 不定期（随時） | `fetch-hazard.mjs` |
 | 駅数 | 国土数値情報 S12 駅別乗降客数（全国 GeoJSON） | 年1回（例年4月公開） | `fetch-stations.mjs` |
+| 駅名検索インデックス | 同上（S12。駅グループ単位に名寄せし区コード優先で自治体割当） | 年1回（駅数と同時） | `build-station-index.mjs` |
 | 生活インフラ（保育） | reinfolib XKT007 | 年度更新 | `fetch-amenities.mjs` |
 | 医療機関 | 厚労省 医療施設調査（e-Stat） | 年1回（10/1時点・翌年公表。市区町村別は statsDataId が毎年変わる） | `fetch-medical.mjs` |
 | 外国人住民比率 | 出入国在留管理庁 在留外国人統計（e-Stat） | 年2回（6月末・12月末時点。各7月頃/翌年公表） | `fetch-foreign-residents.mjs`（**手動**, §7） |

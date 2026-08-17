@@ -104,6 +104,9 @@ jobs:
           if [[ -z "$GJ" || ! -s "$GJ" ]]; then echo "::warning::S12 geojson not found"; exit 0; fi
           S12_GEOJSON="$GJ" node --max-old-space-size=4096 scripts/fetch-stations.mjs ${{ steps.scope.outputs.estat }} \
             || echo "::warning::fetch-stations failed"
+          # 駅名検索インデックス（data/stations.json）も同じ S12 GeoJSON から再生成
+          S12_GEOJSON="$GJ" node --max-old-space-size=4096 scripts/build-station-index.mjs \
+            || echo "::warning::build-station-index failed"
 
       - name: 待機児童（CFA 全国一括）
         run: WAITLIST_XLSX=/tmp/cfa_waitlist.xlsx node scripts/fetch-waitlist.mjs ${{ steps.scope.outputs.estat }}
