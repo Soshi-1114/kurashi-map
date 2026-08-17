@@ -21,12 +21,10 @@ import { trackSelectSection } from "@/lib/analytics";
 // 同一スクロール位置になり、カード単位のチップだと「閾値より上の最後の要素」を
 // 取るスクロールスパイが常に右列だけを現在地にしてしまう（左列のチップは一度も
 // 光らない）。そのため PC は行単位のまとめチップ（only:"pc"）、SP はカード単位の
-// チップ（only:"sp"）を出し分ける。表示の切替は CSS（area-detail.css の
-// .ad-nav-pc / .ad-nav-sp）、現在地判定は pick() が表示中の id だけで行う。
+// チップ（only:"sp"）を出し分ける。表示の切替もどちらが表示中かの判定も CSS
+// （area-detail.css の .ad-nav-pc / .ad-nav-sp）だけが持ち、JS は描画結果
+// （offsetParent）から可視チップを読む——ブレークポイントを二重管理しない。
 export type SectionNavItem = { id: string; label: string; only?: "pc" | "sp" };
-
-// SP 判定は area-detail.css のグリッド切替（max-width: 640px で1列）と揃える
-const SP_QUERY = "(max-width: 640px)";
 
 export default function SectionNav({
   items,
@@ -50,23 +48,15 @@ export default function SectionNav({
     // 諦めるだけで、リンク自体は通常のアンカーとして動き続ける。
     if (typeof IntersectionObserver === "undefined") return;
 
+    const nav = navRef.current;
     // 同じ id が pc/sp 両方のチップに現れうるので、要素は id 単位で1つに集約する
     const els = [...new Set(items.map((i) => i.id))]
       .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => el != null);
-    if (els.length === 0) return;
+    if (!nav || els.length === 0) return;
 
-    // ナビ帯の高さは CSS 側（.ad-secnav のパディングとチップの min-height）で決まり、
-    // SP ではチップのパディングも変わる。定数で二重管理せず実測する。
-    const navHeight = navRef.current?.offsetHeight ?? 0;
-
-    // 現在地の判定線はナビ帯直下ではなく、ナビ下の可視領域の上から1/3に置く。
-    // 判定線がナビ直下だと、次のセクションが画面の大半を占めていても先頭がほぼ
-    // 画面最上端を通過するまで前のチップが点いたままになり、縦に大きいカード・
-    // セクション（災害リスク〜ランキング）で「ハイライトが遅い」と感じる。
-    // アンカー着地位置（ナビ高+8px の scroll-margin-top）より必ず深い線なので、
-    // チップクリック直後の飛び先も確実に自分が現在地になる。
-    const line = navHeight + Math.round((window.innerHeight - navHeight) / 3);
+    // 現在地の判定線。setup() がナビ下の可視領域の上から1/3に引き直す。
+    let line = 0;
 
     // IO は「境界をまたいだ」ことを知るためだけに使い、現在地はその場で測り直す。
     // entry.boundingClientRect は使えない: IO は状態が変わった要素ぶんしか entry を
@@ -75,27 +65,59 @@ export default function SectionNav({
     // 1回あたり要素数ぶんの測定なので、そのまま読んで問題ない。
     // 判定線より上にある最後の「表示中チップの」要素が現在地。非表示チップの id
     // （PC での kids/foreign 等）まで含めると、同一位置の要素同士で後者が勝って
-    // しまい、表示中のチップが光らない。
+    // しまい、表示中のチップが光らない。可視性は描画結果（display:none の <a> は
+    // offsetParent が null）から読み、ブレークポイントは CSS だけに持たせる。
     const pick = () => {
-      const sp = typeof window.matchMedia === "function" && window.matchMedia(SP_QUERY).matches;
-      const visible = new Set(items.filter((i) => !i.only || i.only === (sp ? "sp" : "pc")).map((i) => i.id));
-      let current = "";
-      for (const el of els) {
-        if (!visible.has(el.id)) continue;
-        if (!current || el.getBoundingClientRect().top <= line + 1) current = el.id;
+      const visibleIds = new Set(
+        Array.from(nav.querySelectorAll<HTMLAnchorElement>("a"))
+          .filter((a) => a.offsetParent !== null)
+          .map((a) => a.hash.slice(1)),
+      );
+      const visibleEls = els.filter((el) => visibleIds.has(el.id));
+      if (visibleEls.length === 0) return;
+      let current = visibleEls[0].id;
+      for (const el of visibleEls) {
+        if (el.getBoundingClientRect().top <= line + 1) current = el.id;
       }
-      if (!current || Date.now() < pinnedUntil.current) return;
+      if (Date.now() < pinnedUntil.current) return;
       setActive(current);
     };
 
-    // 観測ボックスは判定線上の細い帯（1px）に絞る。上側だけ絞る指定だと、要素の
-    // 「上端が判定線を跨ぐ」瞬間は要素全体がまだボックスと交差したままで発火せず、
-    // 他の要素の出入り待ちになって更新が遅れる。帯にすれば各要素の上端・下端が
-    // 判定線を跨ぐたびに交差が切り替わり、必要な瞬間に必ず発火する。
-    const bandBottom = Math.max(0, window.innerHeight - line - 1);
-    const io = new IntersectionObserver(pick, { rootMargin: `-${line}px 0px -${bandBottom}px 0px` });
-    els.forEach((el) => io.observe(el));
-    return () => io.disconnect();
+    // 判定線と観測帯を（作り直しも含めて）張る。
+    // - 判定線はナビ帯直下ではなく、ナビ下の可視領域の上から1/3。ナビ直下だと、
+    //   次のセクションが画面の大半を占めても先頭がほぼ最上端を通過するまで前の
+    //   チップが点いたままで、縦に大きいカード・セクションで「遅い」と感じる。
+    //   アンカー着地位置（ナビ高+8px の scroll-margin-top）より必ず深いので、
+    //   チップクリック直後の飛び先も確実に自分が現在地になる。
+    // - 観測ボックスは判定線上の細い帯（1px）。上側だけ絞る指定だと、要素の
+    //   「上端が判定線を跨ぐ」瞬間は要素全体がまだ交差したままで発火せず、
+    //   他要素の出入り待ちで更新が遅れる。帯なら上端・下端が跨ぐたびに必ず発火する。
+    // - ナビ高は CSS 依存（SP でパディングが変わる）なので定数にせず実測する。
+    let io: IntersectionObserver | null = null;
+    const setup = () => {
+      io?.disconnect();
+      const navHeight = nav.offsetHeight;
+      line = navHeight + Math.round((window.innerHeight - navHeight) / 3);
+      const bandBottom = Math.max(0, window.innerHeight - line - 1);
+      io = new IntersectionObserver(pick, { rootMargin: `-${line}px 0px -${bandBottom}px 0px` });
+      // observe は初回観測を必ず配信するので、setup 直後に pick が非同期で走る
+      els.forEach((el) => io!.observe(el));
+    };
+    setup();
+
+    // 判定線・帯はビューポート高依存。リサイズ（回転含む）で張り直さないと、
+    // 縮んだ画面では帯が画面外に出て一切発火しなくなり、現在地が固まる。
+    let resizeTimer = 0;
+    const onResize = () => {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(setup, 200);
+    };
+    window.addEventListener("resize", onResize);
+    return () => {
+      window.clearTimeout(resizeTimer);
+      window.removeEventListener("resize", onResize);
+      io?.disconnect();
+    };
   }, [items]);
 
   // チップ列が横スクロールしている時（主に SP）、現在地チップが見切れないよう
@@ -110,10 +132,9 @@ export default function SectionNav({
       (a) => a.offsetParent !== null,
     );
     if (!link) return;
-    const left = link.offsetLeft - (nav.clientWidth - link.offsetWidth) / 2;
-    const reduce =
-      typeof window.matchMedia === "function" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    nav.scrollTo({ left, behavior: reduce ? "auto" : "smooth" });
+    // behavior は指定しない: 滑らかさは CSS の scroll-behavior（.ad-secnav、
+    // reduced-motion 連動）に委ねる（html の scroll-behavior と同じ既存パターン）。
+    nav.scrollTo({ left: link.offsetLeft - (nav.clientWidth - link.offsetWidth) / 2 });
   }, [active]);
 
   if (items.length === 0) return null;

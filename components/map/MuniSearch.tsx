@@ -8,7 +8,6 @@
 import { useCallback, useMemo } from "react";
 import type { MuniSummary } from "@/lib/types";
 import { useMuniCombobox } from "@/lib/useMuniCombobox";
-import { useSearchHistory } from "@/lib/useSearchHistory";
 import { muniContextLabel } from "@/lib/muniLabel";
 import { hasRent } from "@/lib/rentColor";
 import { SearchHistoryHeader } from "@/components/SearchHistoryHeader";
@@ -22,16 +21,9 @@ type Props = {
 export default function MuniSearch({ municipalities, wards, onSelect }: Props) {
   // 市区町村と区を両方検索対象に
   const candidates = useMemo(() => [...municipalities, ...wards], [municipalities, wards]);
-  const { codes: historyCodes, record, clear } = useSearchHistory();
-  const onPick = useCallback(
-    (m: MuniSummary) => {
-      record(m.code);
-      void onSelect(m);
-    },
-    [onSelect, record],
-  );
-  const { query, setQuery, filtered, isHistory, activeIndex, setActiveIndex, pick, onKeyDown, onFocus, onBlur, inputRef } =
-    useMuniCombobox(candidates, onPick, { townSearch: true, historyCodes });
+  const onPick = useCallback((m: MuniSummary) => void onSelect(m), [onSelect]);
+  const { query, setQuery, filtered, isHistory, activeIndex, setActiveIndex, pick, clearHistory, onKeyDown, onFocus, onBlur, inputRef } =
+    useMuniCombobox(candidates, onPick, { townSearch: true, history: true });
 
   return (
     <div className="app-header-search">
@@ -57,8 +49,16 @@ export default function MuniSearch({ municipalities, wards, onSelect }: Props) {
         />
       </div>
       {filtered.length > 0 && (
-        <ul id="muni-search-listbox" className="search-results" role="listbox" aria-label="自治体の検索候補">
-          {isHistory && <SearchHistoryHeader onClear={clear} />}
+        <ul
+          id="muni-search-listbox"
+          className="search-results"
+          role="listbox"
+          aria-label="自治体の検索候補"
+          // 候補クリックの mousedown で input が blur してリストが閉じるのを防ぐ
+          // （各ボタンに置かず、バブリングを利用して一括で受ける）
+          onMouseDown={(e) => e.preventDefault()}
+        >
+          {isHistory && <SearchHistoryHeader onClear={clearHistory} />}
           {/* filtered は自治体コード単位に集約済みなので key/id はコードのみで一意 */}
           {filtered.map((m, i) => (
             <li key={m.code} role="presentation">
@@ -68,7 +68,6 @@ export default function MuniSearch({ municipalities, wards, onSelect }: Props) {
                 aria-selected={i === activeIndex}
                 tabIndex={-1}
                 className={i === activeIndex ? "is-active" : undefined}
-                onMouseDown={(e) => e.preventDefault()}
                 onClick={() => pick(m)}
                 onMouseEnter={() => setActiveIndex(i)}
               >

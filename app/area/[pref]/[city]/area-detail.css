@@ -55,8 +55,14 @@
 /* PC は行単位のまとめチップ（.ad-nav-pc）、SP はカード単位のチップ（.ad-nav-sp）を
    出し分ける。2列グリッドでは同じ行のカードが同一スクロール位置になり、カード単位の
    チップだとスクロールスパイが右列しか現在地にできないため（SectionNav.tsx 参照）。
-   ブレークポイントは .ad-metric-grid の1列化（下の 640px）と揃える。 */
+   ブレークポイントは .ad-metric-grid の1列化（下の 640px）と揃える。JS 側は
+   どちらが表示中かを描画結果から読むだけで、この切替がすべての単一ソース。 */
 .ad-secnav .ad-nav-sp { display: none; }
+/* 現在地チップへの追従スクロール（SectionNav の scrollTo）を滑らかに。
+   reduced-motion では自動的に即時ジャンプになる（html の scroll-behavior と同じ）。 */
+@media (prefers-reduced-motion: no-preference) {
+  .ad-secnav { scroll-behavior: smooth; }
+}
 
 /* アンカー先の見出しがナビ帯の下に潜らないようにする。目次はセクションだけでなく
    詳細データ内の各カード（.ad-metric-card[id]）にも直接飛ぶため、両方に効かせる。 */

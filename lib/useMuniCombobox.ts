@@ -10,20 +10,23 @@
 // townSearch を有効にすると、さらに /api/town-search で町丁名（大字）からも自治体を
 // 引き、候補の後ろに「自治体名（町丁名）」行として追加する（例: 日の里 → 宗像市（日の里））。
 //
-// historyCodes を渡すと、クエリが空 かつ 入力にフォーカス中は検索結果の代わりに
-// 履歴（最近選んだ自治体）を候補として返す（isHistory=true）。フォーカス管理も
-// このフックが持つ（onFocus/onBlur を返す input.ref に渡す）。
+// history を有効にすると、選択した自治体を localStorage 履歴（useSearchHistory）へ
+// 記録し、クエリが空 かつ 入力にフォーカス中は検索結果の代わりに履歴を候補として
+// 返す（isHistory=true）。フォーカス管理もこのフックが持つ（onFocus/onBlur を
+// input に、inputRef を ref に渡す）。
 //
-// 選択確定時は常に inputRef.current?.blur() で実DOMのfocusも外す。コンボボックスが
-// 選択で閉じるのは一般的な挙動として妥当だが、これが必須になる理由がもう1つある:
-// 候補クリックの mousedown を preventDefault しているため、実DOMのfocusはクリック
-// だけでは外れない。blur しないと次にこの input をクリックしても focus イベントが
-// 発火せず、`focused` state が false のまま固まる（履歴＝クエリが空でフォーカス中の
-// 一覧なので、これを怠ると選択直後に同じ履歴が再表示されてチラつく）。
+// close()（選択確定 pick でも呼ぶ）は常に inputRef.current?.blur() で実DOMのfocusも
+// 外す。コンボボックスが選択で閉じるのは一般的な挙動として妥当だが、これが必須に
+// なる理由がもう1つある: 候補クリックの mousedown を preventDefault しているため、
+// 実DOMのfocusはクリックだけでは外れない。blur しないと次にこの input をクリック
+// しても focus イベントが発火せず、`focused` state が false のまま固まる
+// （履歴＝クエリが空でフォーカス中の一覧なので、これを怠ると選択直後に同じ履歴が
+// 再表示されてチラつく）。
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { MuniSummary } from "./types";
 import { toHiragana } from "./kana";
 import { TOWN_QUERY_MIN } from "./townSearch";
+import { useSearchHistory } from "./useSearchHistory";
 
 /** 候補1行。town があれば「町丁名でヒットした自治体」行（例 宗像市（日の里））。 */
 export type ComboboxHit<T extends MuniSummary> = T & { town?: string };
@@ -37,11 +40,13 @@ const TOWN_DEBOUNCE_MS = 150;
 export function useMuniCombobox<T extends MuniSummary>(
   candidates: T[],
   onPick: (m: T) => void,
-  opts?: { limit?: number; townSearch?: boolean; historyCodes?: string[] },
+  opts?: { limit?: number; townSearch?: boolean; history?: boolean },
 ) {
   const limit = opts?.limit ?? 8;
   const townSearch = opts?.townSearch ?? false;
-  const historyCodes = opts?.historyCodes;
+  const history = opts?.history ?? false;
+  // フックの呼び出し規則上、常に呼ぶ（history 無効の呼び出し側では未使用のまま）
+  const { codes: historyCodes, record: recordHistory, clear: clearHistory } = useSearchHistory();
   const [query, setQuery] = useState("");
   const [activeIndex, setActiveIndex] = useState(-1);
   const [townHits, setTownHits] = useState<TownApiHit[]>([]);
@@ -113,14 +118,14 @@ export function useMuniCombobox<T extends MuniSummary>(
   // 履歴候補（クエリ空・フォーカス中のみ使う）。コード配列から候補配列を都度解決するので、
   // 表示名の陳腐化がない。
   const historyHits = useMemo<ComboboxHit<T>[]>(() => {
-    if (!historyCodes?.length) return [];
+    if (!history || historyCodes.length === 0) return [];
     const out: ComboboxHit<T>[] = [];
     for (const code of historyCodes) {
       const m = byCode.get(code);
       if (m) out.push(m);
     }
     return out.slice(0, limit);
-  }, [historyCodes, byCode, limit]);
+  }, [history, historyCodes, byCode, limit]);
 
   const isHistory = !q && focused && historyHits.length > 0;
   const options = isHistory ? historyHits : filtered;
@@ -130,14 +135,22 @@ export function useMuniCombobox<T extends MuniSummary>(
     setActiveIndex(-1);
   }, [query, isHistory]);
 
+  // コンボボックスを閉じる（クエリ消去＋focus解除）。確定以外の操作（HeroSearch の
+  // 「地図で表示」等）からも呼べるよう単体で公開する。setFocused(false) は blur
+  // イベントでも起きるが、未フォーカス状態で呼ばれた場合に備えて明示しておく。
+  const close = useCallback(() => {
+    setQuery("");
+    setFocused(false);
+    inputRef.current?.blur();
+  }, []);
+
   const pick = useCallback(
     (m: T) => {
-      setQuery("");
-      setFocused(false);
-      inputRef.current?.blur();
+      close();
+      if (history) recordHistory(m.code);
       onPick(m);
     },
-    [onPick],
+    [close, history, recordHistory, onPick],
   );
 
   // コンボボックスのキーボード操作（↓↑で候補移動・Enterで確定・Escで閉じる）
@@ -175,6 +188,9 @@ export function useMuniCombobox<T extends MuniSummary>(
     activeIndex,
     setActiveIndex,
     pick,
+    close,
+    recordHistory,
+    clearHistory,
     onKeyDown,
     onFocus,
     onBlur,
