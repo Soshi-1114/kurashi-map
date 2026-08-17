@@ -1,6 +1,7 @@
 // 地図のベース（下地）スタイル。スタイル切替ボタンから選ぶ。
-// - シンプル: OpenFreeMap positron（ベクタ。淡色でコロプレスが読みやすい既定）
-// - 淡色地図: 国土地理院ラスタタイル（河川・鉄道・地名が最初から描かれる）
+// - 標準: OpenFreeMap positron（ベクタ。淡色でコロプレスが読みやすい既定）
+// - 地理院地図: 国土地理院ラスタタイル（河川・鉄道・地名が最初から描かれる）
+// - 詳細: OpenFreeMap bright（positron と同一タイル源。駅・施設名・町丁名まで表示）
 //
 // 切替は MapView の setStyle + transformStyle で行い、自前レイヤー（コロプレス・
 // ハザード・実区域）は引き継ぐ。GSI ラスタの source/layer 名は "basemap" にして、
@@ -8,7 +9,7 @@
 
 import type { StyleSpecification } from "maplibre-gl";
 
-export type BasemapKey = "simple" | "pale" | "bright" | "liberty";
+export type BasemapKey = "simple" | "pale" | "bright";
 
 // 国土地理院タイルの出典表記（必須）。
 const GSI_ATTRIBUTION =
@@ -36,10 +37,8 @@ export type Basemap = { key: BasemapKey; label: string; style: string | StyleSpe
 
 export const BASEMAPS: readonly Basemap[] = [
   { key: "simple", label: "標準", style: "https://tiles.openfreemap.org/styles/positron" },
-  { key: "pale", label: "淡色", style: gsiRasterStyle("pale", 18) },
-  // プレビュー用: 駅・POI 入りの OpenFreeMap スタイル比較（positron 同一タイル源）
-  { key: "bright", label: "bright", style: "https://tiles.openfreemap.org/styles/bright" },
-  { key: "liberty", label: "liberty", style: "https://tiles.openfreemap.org/styles/liberty" },
+  { key: "bright", label: "詳細", style: "https://tiles.openfreemap.org/styles/bright" },
+  { key: "pale", label: "地理院地図", style: gsiRasterStyle("pale", 18) },
 ];
 
 export const DEFAULT_BASEMAP: BasemapKey = "simple";
