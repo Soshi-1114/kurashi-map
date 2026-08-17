@@ -23,6 +23,14 @@ KurashiMap は Google Analytics 4（gtag.js）でページビューに加えて�
 | `change_metric` | 塗り分け指標を切り替えた時 | `components/MapView.tsx` |
 | `apply_filter` | 条件フィルタ（家賃上限／地価上限／浸水なし）を変更した時 | `components/MapView.tsx` |
 | `select_section` | 自治体詳細ページの目次（セクションナビ）で移動した時 | `components/area/SectionNav.tsx` |
+| `support_link_click` | 支援（投げ銭）リンクをクリックした時 | `components/area/SupportBanner.tsx` |
+| `furusato_link_click` | ふるさと納税リンクをクリックした時 | `components/area/FurusatoLink.tsx` |
+| `denki_simulate` | 電気代シミュレーターの入力を確定した時（連続入力は 1s debounce） | `components/denki/DenkiSimulator.tsx` |
+| `denki_offer_impression` | 電気代の比較結果リストを表示した時（エリアごとに1回。掲載オファー0件の間は送らない） | `components/denki/DenkiSimulator.tsx` |
+| `denki_offer_click` | 電気プランの外部リンクをクリックした時（キーイベント候補） | `components/denki/DenkiSimulator.tsx` |
+
+※ 自治体詳細ページの電気代導線（`DenkiTeaser`、サーバコンポーネント）は専用イベントを持たない。
+流入は `/denki` の page_view（`?code=` 付き）と `denki_simulate` の `municipality_code` で見る。
 
 ### パラメータ
 
@@ -41,6 +49,23 @@ KurashiMap は Google Analytics 4（gtag.js）でページビューに加えて�
 | `apply_filter` | `rent_max` | 数値 | `0` `50000` `60000` `70000` | 家賃上限（円/月）。`0`=条件なし |
 | | `land_max` | 数値 | `0` `50000` `100000` `200000` | 地価上限（円/㎡）。`0`=条件なし |
 | | `flood_max` | 数値 | `-1` `0` `2` `3` | 浸水深ランク上限（`-1`=条件なし, `0`=浸水なし限定, `2`=〜3m, `3`=〜5m） |
+| `support_link_click` | `municipality_code` | 文字列 | `13101` | 表示中の自治体コード |
+| | `municipality_name` | 文字列 | `千代田区` | |
+| `furusato_link_click` | `municipality_code` | 文字列 | `13101` | 表示中の自治体コード |
+| | `municipality_name` | 文字列 | `千代田区` | 寄付先名（行政区は親の政令市名） |
+| `denki_simulate` | `area` | 文字列 | `tokyo` `kansai` | 供給エリア（10種） |
+| | `household_size` | 数値 | `1`〜`5` | 世帯人数 |
+| | `kwh` | 数値 | `330` | 試算に使った月間使用量 |
+| | `kwh_overridden` | 真偽 | `true` | 使用量を手入力したか（false=世帯人数からの目安） |
+| | `ampere` | 数値 | `30` `40` `50` | 契約アンペア（最低料金制エリアでは既定値のまま） |
+| | `municipality_code` | 文字列 | `22210` | `?code=` プリセット経由の時のみ |
+| `denki_offer_impression` | `area` | 文字列 | `tokyo` | |
+| | `offer_count` | 数値 | `0` `3` | baseline を除く掲載プラン数 |
+| | `has_affiliate` | 真偽 | `false` | 提携リンクを含むか |
+| `denki_offer_click` | `offer_id` | 文字列 | `baseline-tokyo` | data/denki-plans.json の offerId |
+| | `area` | 文字列 | `tokyo` | |
+| | `is_affiliate` | 真偽 | `false` | 提携リンクか公式素リンクか |
+| | `position` | 数値 | `0` | 結果リスト内の表示順（0始まり） |
 
 > **`non_interaction` の注記**: GA4 では旧 Universal Analytics のような「非インタラクション ヒット」の
 > 概念はなく、この値は効果を持ちません（エンゲージメント計算は別ロジック）。害はないため単なる
@@ -73,6 +98,9 @@ KurashiMap は Google Analytics 4（gtag.js）でページビューに加えて�
 | 選択方法 | イベント | `method` |
 | 自治体コード | イベント | `municipality_code` |
 | 塗り分け指標 | イベント | `metric_key` |
+| 自治体名 | イベント | `municipality_name` |
+| 供給エリア | イベント | `area` |
+| オファーID | イベント | `offer_id` |
 
 ### 2-3. カスタム指標（数値）を登録
 
@@ -81,12 +109,17 @@ KurashiMap は Google Analytics 4（gtag.js）でページビューに加えて�
 | 指標名（任意） | 範囲 | パラメータ | 測定単位 |
 |---|---|---|---|
 | Web Vitals値 | イベント | `value` | ミリ秒（標準） |
+| 試算kWh | イベント | `kwh` | 標準 |
+| 世帯人数 | イベント | `household_size` | 標準 |
+| 契約アンペア | イベント | `ampere` | 標準 |
+| 掲載オファー数 | イベント | `offer_count` | 標準 |
+| 表示順 | イベント | `position` | 標準 |
 
 ### 注意点
 
 - **遡及しない**: 登録後に届いたデータから適用。**過去データには反映されない**
 - **反映時間**: 標準レポートに出るまで最大 24〜48 時間。早く見たいときは「探索」かリアルタイムを使う
-- **上限**: イベント範囲のカスタム ディメンション／指標は無料枠で各 **50 個**（今回は 5＋1 個）
+- **上限**: イベント範囲のカスタム ディメンション／指標は無料枠で各 **50 個**（現在はディメンション8個＋指標6個）
 - **カーディナリティ**: `municipality_code` は最大 1,918 通り。上限内だが、高カーディナリティの
   ディメンションは一部レポートで集約表示される場合がある
 
@@ -121,6 +154,8 @@ KurashiMap は Google Analytics 4（gtag.js）でページビューに加えて�
 
 `select_municipality` をサイトの主目的とみなす場合、**管理 → イベント** で該当イベントを
 「キーイベントとしてマーク」すると、コンバージョンとして扱われ獲得レポート等に紐づく。
+`denki_offer_click`（送客の到達点）は、/denki に提携オファーを掲載した時点で
+同様にキーイベント化する。
 
 ---
 
@@ -128,5 +163,7 @@ KurashiMap は Google Analytics 4（gtag.js）でページビューに加えて�
 
 - 新しいイベントを足す場合は `lib/analytics.ts` に薄いラッパ関数を追加し、UI 側はそれを呼ぶ
   （`gtag` を直接叩かない＝no-op 保証と型を一箇所に集約するため）。
+- 命名: サイト横断の操作は `動詞_目的語`（`select_municipality` 等）、特定ページ固有の
+  イベントは `<ページ>_` 接頭辞（`denki_simulate` 等）で統一する。
 - パラメータ名を変えた／増やした場合は、本ドキュメントの一覧と GA4 のカスタム定義も更新する。
 - 測定ID を変える場合は `app/layout.tsx` の `GA_MEASUREMENT_ID` を変更する。
