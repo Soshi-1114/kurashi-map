@@ -13,6 +13,7 @@ import { hasVacancy, vacancyRateText } from "./vacancy";
 import { populationDensity, densityText } from "./populationDensity";
 import { hasFuturePopulation, futureChangeRate2050, futureRateText } from "./futurePopulation";
 import { prefNameOf } from "./site";
+import { latestAsOf } from "./dataFreshness";
 
 /** トップページ等でランキング導線をまとめるカテゴリ（URL・ページ内容には影響しない） */
 export type RankingCategory = "住まい" | "人口・まち" | "子育て・生活";
@@ -114,13 +115,59 @@ function freshnessFromAsOf(getAsOf: (m: Municipality) => string) {
 }
 const foreignFreshnessLabel = freshnessFromAsOf((m) => m.foreignResidents.asOf);
 
-// 人口の鮮度ラベル。Municipality に人口の asOf フィールドが無いため固定文字列とし、
-// 確定値公表・次回調査での更新時に NEXT_UPDATE.population と合わせて書き換える。
-// エリア詳細ページの将来人口カード（現在人口のラベル）も参照するため export。
-export const POPULATION_FRESHNESS = "2025年国勢調査";
+// 人口の基準年。Municipality に人口の asOf フィールドが無いため固定値とし、確定値公表・
+// 次回調査での更新時に NEXT_UPDATE.population と合わせて書き換える。POPULATION_FRESHNESS
+// （表示文言）・freshnessPrefix の比較対象の両方をここから導出し、二重管理を避ける。
+export const POPULATION_ASOF = "2025";
+
+// 人口の鮮度ラベル。エリア詳細ページの将来人口カード（現在人口のラベル）も参照するため export。
+export const POPULATION_FRESHNESS = `${formatAsOfJa(POPULATION_ASOF)}国勢調査`;
+
+// 人口増減率の比較期間の表記（国勢調査の5年周期）。次回調査の反映時に1箇所で更新する。
+export const CENSUS_PERIOD = "2020→2025年国勢調査";
 
 // 将来推計人口の鮮度ラベル。asOf("2023")由来の「2023年最新」は誤解を招くため推計名を明示。
-const FUTURE_FRESHNESS = "令和5(2023)年推計";
+// 地図ハブ（/map/future-population）でも参照するため export。
+export const FUTURE_FRESHNESS = "令和5(2023)年推計";
+
+// 家賃・空き家の「調査名+年度」ラベル（asOf "2023" → 「2023年住宅・土地統計調査」）。
+// 年度はデータの実 asOf から導出し、二重管理を避ける。
+export function housingSurveyLabel(asOf: string): string {
+  return `${formatAsOfJa(asOf)}住宅・土地統計調査`;
+}
+
+// 地価の「調査名+年度」ラベル。出典は地価公示（国）と地価調査（都道府県）の2系統が
+// あり、source 文字列から調査名を判定する（honesty 方針: 実際の出典と年度を表示）。
+export function landPriceSurveyLabel(source: string, asOf: string): string {
+  const survey = source.includes("地価調査") ? "地価調査" : "地価公示";
+  return `${formatAsOfJa(asOf)}${survey}`;
+}
+
+// description の末尾に鮮度ラベルを1文追記する（「…。2023年住宅・土地統計調査のデータ。」）。
+// 重複防止: ラベル中の年（YYYY年）が description に既出、またはラベルの括弧書きを除いた
+// 表記（例「令和5(2023)年推計」→「令和5年推計」）が既出の場合は追記しない。
+export function appendFreshness(description: string, freshness: string | null): string {
+  if (!freshness) return description;
+  const year = /\d{4}年/.exec(freshness)?.[0];
+  const plain = freshness.replace(/[（(][^）)]*[）)]/g, "");
+  if ((year && description.includes(year)) || description.includes(plain)) return description;
+  return `${description}${freshness}のデータ。`;
+}
+
+// description 冒頭に付ける「【2025年12月更新】」形式のバッジ。asOf が1つも無ければ空文字。
+//
+// 「〜年版」ではなく「〜更新」と表現する: ページ内の複数指標は基準時点がバラバラ
+// （例: 人口2025年・家賃2023年・外国人2025年12月）なので、ページ全体がその年の
+// データで揃っているかのような「版」表記は誤解を招く。「更新」は一部の指標が
+// その時点で更新されたという事実だけを述べるので、この状況でも成り立つ。
+//
+// 呼び出し側は「その description の本文に実際に書く指標の asOf だけ」を渡すこと。
+// 本文に出てこない指標（例: 自治体詳細で言及していない地価）を混ぜると、バッジの
+// 年と本文の内容が食い違い、実際より新しく見せているという誤解を招く。
+export function freshnessPrefix(asOfs: (string | null | undefined)[]): string {
+  const latest = latestAsOf(asOfs);
+  return latest ? `【${formatAsOfJa(latest)}更新】` : "";
+}
 
 // 外国人住民比率ランキングの導入文（薄ページ対策・中立フレーミング）。high/low で傾向解説を分岐。
 function foreignIntro(highLow: "高い" | "低い"): string[] {
@@ -305,6 +352,7 @@ export const RANKINGS: RankingDef[] = [
     columnLabel: "家賃平均",
     order: "asc",
     nextUpdate: NEXT_UPDATE.rent,
+    freshnessLabel: (top1) => (top1 ? housingSurveyLabel(top1.rent.asOf) : null),
     qualifies: (m) => hasRent(m.rent.value),
     sortValue: (m) => m.rent.value,
     display: (m) => `${m.rent.value.toLocaleString()}円/月`,
@@ -323,6 +371,7 @@ export const RANKINGS: RankingDef[] = [
     columnLabel: "家賃平均",
     order: "desc",
     nextUpdate: NEXT_UPDATE.rent,
+    freshnessLabel: (top1) => (top1 ? housingSurveyLabel(top1.rent.asOf) : null),
     qualifies: (m) => hasRent(m.rent.value),
     sortValue: (m) => m.rent.value,
     display: (m) => `${m.rent.value.toLocaleString()}円/月`,
@@ -481,8 +530,8 @@ export const RANKINGS: RankingDef[] = [
     title: "人口増加率が高い市区町村ランキング",
     shortLabel: "人口増加率",
     description:
-      "全国の市区町村を5年間（2020→2025年国勢調査）の人口増減率が高い順にランキング。最も人口増加率が高いのは{top1}。国勢調査の実データで人口が増えている自治体を比較できます。",
-    lead: "全国の市区町村を、5年間（2020→2025年国勢調査）の人口増減率が高い順に並べたランキングです。",
+      `全国の市区町村を5年間（${CENSUS_PERIOD}）の人口増減率が高い順にランキング。最も人口増加率が高いのは{top1}。国勢調査の実データで人口が増えている自治体を比較できます。`,
+    lead: `全国の市区町村を、5年間（${CENSUS_PERIOD}）の人口増減率が高い順に並べたランキングです。`,
     note: "人口増減率は2020年と2025年の国勢調査人口の比較（%）で、転入・出生などの内訳は含みません。人口規模が小さい自治体や、震災からの帰還が進む自治体（福島県大熊町など）では率が大きく出ることがあります。",
     prefSummary: true,
     columnLabel: "人口増減率（2020→2025）",
@@ -502,8 +551,8 @@ export const RANKINGS: RankingDef[] = [
     title: "人口減少率が高い市区町村ランキング",
     shortLabel: "人口減少率",
     description:
-      "全国の市区町村を5年間（2020→2025年国勢調査）の人口減少率が高い順にランキング。最も人口が減っているのは{top1}。国勢調査の実データで人口が減っている自治体を比較できます。",
-    lead: "全国の市区町村を、5年間（2020→2025年国勢調査）の人口減少率が大きい順に並べたランキングです。",
+      `全国の市区町村を5年間（${CENSUS_PERIOD}）の人口減少率が高い順にランキング。最も人口が減っているのは{top1}。国勢調査の実データで人口が減っている自治体を比較できます。`,
+    lead: `全国の市区町村を、5年間（${CENSUS_PERIOD}）の人口減少率が大きい順に並べたランキングです。`,
     note: "人口増減率は2020年と2025年の国勢調査人口の比較（%）で、転出・自然減などの内訳は含みません。人口規模が小さい自治体や、原発事故の避難区域を抱える自治体（福島県双葉町など）では減少率が大きく出ることがあります。人口が増えている自治体は表の下位（増加側）に並びます。",
     columnLabel: "人口増減率（2020→2025）",
     order: "asc",

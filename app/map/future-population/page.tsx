@@ -10,7 +10,7 @@ import ReactDOM from "react-dom";
 import HomeShell from "@/components/HomeShell";
 import { MetricMapHubBody, hubMetadata, hubLdJson, type MetricHubConfig } from "@/components/MetricMapHub";
 import { listSummaryAcrossPrefs, listAllAcrossPrefs } from "@/lib/metrics";
-import { getRankingBySlug, rankBy, muniLevelOnly } from "@/lib/rankings";
+import { getRankingBySlug, rankBy, muniLevelOnly, FUTURE_FRESHNESS } from "@/lib/rankings";
 import { PREFS } from "@/lib/prefs";
 import { SITE, absoluteUrl } from "@/lib/site";
 
@@ -28,13 +28,13 @@ async function loadConfig(): Promise<MetricHubConfig> {
     path: PATH,
     title: `2050年将来推計人口マップ｜市区町村の人口増減の見込みを地図で見る - ${SITE.name}`,
     description:
-      "全国の市区町村・行政区の2050年将来推計人口の増減率（2020年比）を色分けした地図（コロプレス）。人口を維持する見込みの地域・減少が見込まれる地域をひと目で比較できます。出典: 国立社会保障・人口問題研究所（令和5(2023)年推計）。公的推計であり将来を保証するものではありません。",
+      `全国の市区町村・行政区の2050年将来推計人口の増減率（2020年比）を色分けした地図（コロプレス）。人口を維持する見込みの地域・減少が見込まれる地域をひと目で比較できます。出典: 国立社会保障・人口問題研究所（${FUTURE_FRESHNESS}）。公的推計であり将来を保証するものではありません。`,
     ogImage: absoluteUrl("/api/og/ranking/future-population-decline"),
     ogAlt: "2050年将来推計人口マップ",
     h1: "2050年の将来推計人口を地図で見る",
     leads: [
       "全国の市区町村・行政区について、2050年の将来推計人口が2020年比でどれだけ増減する見込みかを、色の濃淡で表したコロプレスマップです（紫=減少、緑=増加）。地図の自治体をクリックすると、現在の人口・家賃・子育て・災害リスクなどの住環境データとあわせて確認できます。",
-      "数値は国立社会保障・人口問題研究所（IPSS）「日本の地域別将来推計人口」（令和5(2023)年推計・2020年国勢調査基準）の公表値をそのまま用いており、独自の推計・補間はしていません。一定の仮定に基づく公的推計であり、将来の人口を保証するものではありません。福島県浜通りの13市町村（一括推計）・北方領土などは市区町村別の推計がないため「データなし」として灰色で表示します。",
+      `数値は国立社会保障・人口問題研究所（IPSS）「日本の地域別将来推計人口」（${FUTURE_FRESHNESS}・2020年国勢調査基準）の公表値をそのまま用いており、独自の推計・補間はしていません。一定の仮定に基づく公的推計であり、将来の人口を保証するものではありません。福島県浜通りの13市町村（一括推計）・北方領土などは市区町村別の推計がないため「データなし」として灰色で表示します。`,
     ],
     nextUpdate: DECLINE.nextUpdate,
     rankingLinks: [
@@ -53,11 +53,11 @@ async function loadConfig(): Promise<MetricHubConfig> {
     ],
     prefsWithData: PREFS.filter((p) => all.some((m) => m.pref === p.slug && DECLINE.qualifies(m))),
     prefHref: (slug) => `/ranking/future-population-decline/${slug}`,
-    foot: "© KurashiMap — 出典: 国立社会保障・人口問題研究所「日本の地域別将来推計人口」（令和5(2023)年推計）。公表値を市区町村単位で比較しています（独自推計はしません）。",
+    foot: `© KurashiMap — 出典: 国立社会保障・人口問題研究所「日本の地域別将来推計人口」（${FUTURE_FRESHNESS}）。公表値を市区町村単位で比較しています（独自推計はしません）。`,
     dataset: {
       name: "市区町村別 2050年将来推計人口（増減率）コロプレスマップ",
       description:
-        "国立社会保障・人口問題研究所「日本の地域別将来推計人口」（令和5(2023)年推計）に基づく全国の市区町村・行政区の2050年推計人口と2020年比増減率のデータセット。地図上で色分け（コロプレス）して比較できる。公的推計の公表値のみで独自推計は含まない。",
+        `国立社会保障・人口問題研究所「日本の地域別将来推計人口」（${FUTURE_FRESHNESS}）に基づく全国の市区町村・行政区の2050年推計人口と2020年比増減率のデータセット。地図上で色分け（コロプレス）して比較できる。公的推計の公表値のみで独自推計は含まない。`,
       keywords: ["将来推計人口", "2050年", "人口予測", "人口減少", "地図", "マップ", "コロプレス", "市区町村"],
       temporalCoverage: "2020/2050",
     },

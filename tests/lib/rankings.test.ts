@@ -1,5 +1,8 @@
 import { describe, it, expect } from "vitest";
-import { getRankingBySlug, muniLevelOnly, rankBy, RANKINGS } from "@/lib/rankings";
+import {
+  getRankingBySlug, muniLevelOnly, rankBy, RANKINGS,
+  housingSurveyLabel, landPriceSurveyLabel, appendFreshness, freshnessPrefix,
+} from "@/lib/rankings";
 import { muni, metric } from "../_fixtures";
 
 describe("muniLevelOnly", () => {
@@ -267,5 +270,59 @@ describe("将来推計人口ランキング（IPSS 令和5年推計）", () => {
       expect(def.note).toContain("浜通り");
       expect(`${def.title}${def.lead}${def.note}`).not.toMatch(/消滅|消える/);
     }
+  });
+});
+
+describe("年度ラベルヘルパー", () => {
+  it("housingSurveyLabel は asOf から調査名+年度を組む", () => {
+    expect(housingSurveyLabel("2023")).toBe("2023年住宅・土地統計調査");
+  });
+
+  it("landPriceSurveyLabel は source から地価公示/地価調査を判定する", () => {
+    expect(landPriceSurveyLabel("地価公示（住宅地平均）", "2026")).toBe("2026年地価公示");
+    expect(landPriceSurveyLabel("地価調査（住宅地平均）", "2025")).toBe("2025年地価調査");
+  });
+
+  it("rent 系 def の freshnessLabel は調査名+年度を返す（title の【…】に入る）", () => {
+    const top1 = muni({ code: "11100", rent: metric({ value: 60000, asOf: "2023" }) });
+    expect(getRankingBySlug("rent-cheap")!.freshnessLabel?.(top1)).toBe("2023年住宅・土地統計調査");
+    expect(getRankingBySlug("rent-high")!.freshnessLabel?.(top1)).toBe("2023年住宅・土地統計調査");
+    expect(getRankingBySlug("rent-cheap")!.freshnessLabel?.(null)).toBeNull();
+  });
+});
+
+describe("appendFreshness", () => {
+  it("description 末尾に鮮度ラベルを1文追記する", () => {
+    expect(appendFreshness("家賃が安い順のランキング。", "2023年住宅・土地統計調査"))
+      .toBe("家賃が安い順のランキング。2023年住宅・土地統計調査のデータ。");
+  });
+
+  it("同じ年（YYYY年）が既出なら追記しない", () => {
+    const desc = "2023年調査に基づくランキング。";
+    expect(appendFreshness(desc, "2023年住宅・土地統計調査")).toBe(desc);
+  });
+
+  it("括弧書きを除いた表記が既出なら追記しない（令和5(2023)年推計 → 令和5年推計）", () => {
+    const desc = "国立社会保障・人口問題研究所（令和5年推計）の公表値で比較。";
+    expect(appendFreshness(desc, "令和5(2023)年推計")).toBe(desc);
+  });
+
+  it("freshness が null なら素通しする", () => {
+    expect(appendFreshness("説明文。", null)).toBe("説明文。");
+  });
+});
+
+describe("freshnessPrefix", () => {
+  it("複数候補のうち最も新しい asOf を「【…更新】」の形で返す", () => {
+    expect(freshnessPrefix(["2023", "2025-12", "2025"])).toBe("【2025年12月更新】");
+  });
+
+  it("null/undefined/データなしセンチネルは無視する", () => {
+    expect(freshnessPrefix([null, undefined, "-", "2024"])).toBe("【2024年更新】");
+  });
+
+  it("候補が1つも解釈できなければ空文字（description に何も付けない）", () => {
+    expect(freshnessPrefix([null, undefined])).toBe("");
+    expect(freshnessPrefix([])).toBe("");
   });
 });

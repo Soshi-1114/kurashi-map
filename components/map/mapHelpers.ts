@@ -46,6 +46,21 @@ export function computeBbox(geom: GeoJSON.Geometry): [[number, number], [number,
   return [[minX, minY], [maxX, maxY]];
 }
 
+// 都道府県 bbox への fly-in。都道府県クリック（インタラクティブ）と地図ディープリンクの
+// 初期フォーカス（duration: 0 で即時）の両方から使う共通の余白・maxZoom。
+export function flyToPrefBbox(
+  map: MapLibreMap,
+  bbox: [[number, number], [number, number]],
+  duration: number,
+): void {
+  const sp = typeof window !== "undefined" && window.innerWidth < 768;
+  map.fitBounds(bbox, {
+    padding: sp ? { top: 80, bottom: 264, left: 24, right: 24 } : { top: 60, bottom: 60, left: 60, right: 60 },
+    maxZoom: 9.5,
+    duration,
+  });
+}
+
 // コロプレス塗りの不透明度（選択0.85 / ホバー0.7 / 既定0.55）。塗り分け「なし」では
 // 0 に差し替えて非表示にする（visibility:none と違いクリック判定は残すため opacity で制御）。
 export const MUNI_FILL_OPACITY = [
