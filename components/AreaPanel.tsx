@@ -4,7 +4,7 @@ import Link from "next/link";
 import type { Municipality, MuniSummary } from "@/lib/types";
 import { formatAsOfJa } from "@/lib/rankings";
 import { buildSummary } from "@/lib/summary";
-import { hasRent } from "@/lib/rentColor";
+import { hasRent, formatRentRange } from "@/lib/rentColor";
 import { isWaitlistDisclosed } from "@/lib/waitlist";
 import { hasLandPrice } from "@/lib/landPrice";
 import { isHazardEvaluated } from "@/lib/coverage";
@@ -104,9 +104,7 @@ export function MetricCards({ m }: { m: Municipality }) {
   // 型ガードの否定分岐では source/asOf を参照できない（センチネルも同型のため）ので先に取り出す。
   const fpSource = futurePopSource(m.futurePopulation);
   const fpAsOf = futurePopAsOf(m.futurePopulation);
-  const rentRangeText = m.rentRange
-    ? `目安レンジ ${m.rentRange.min.toLocaleString()}〜${m.rentRange.max != null ? m.rentRange.max.toLocaleString() : "200,000"}円/月${m.rentRange.max == null ? "以上" : ""}`
-    : undefined;
+  const rentRangeText = m.rentRange ? `目安レンジ ${formatRentRange(m.rentRange)}` : undefined;
   const cards = [
     rentHasData
       ? { label: "家賃平均", value: `${m.rent.value.toLocaleString()} ${m.rent.unit}`, sub: rentRangeText, source: m.rent.source, asOf: m.rent.asOf, est: m.rent.isEstimated }

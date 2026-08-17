@@ -33,7 +33,7 @@ import { buildFaq } from "@/lib/faq";
 import { SITE, prefNameOf, absoluteUrl } from "@/lib/site";
 import { getAmbiguousNames } from "@/lib/muniLabel";
 import { buildMuniTitle } from "@/lib/muniMeta";
-import { hasRent, rentBand } from "@/lib/rentColor";
+import { hasRent, rentBand, formatRentRange } from "@/lib/rentColor";
 import { isWaitlistDisclosed } from "@/lib/waitlist";
 import { hasLandPrice } from "@/lib/landPrice";
 import { hasVacancy, vacancyRateText } from "@/lib/vacancy";
@@ -500,11 +500,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
             link={{ href: "/ranking/rent-high", label: "家賃ランキングで比較" }}
           >
             <MetricPrimary value={hasRent(m.rent.value) ? m.rent.value.toLocaleString() : null} unit="円/月" />
-            {m.rentRange && (
-              <p className="ad-note">
-                目安レンジ: {yen(m.rentRange.min)}〜{m.rentRange.max != null ? yen(m.rentRange.max) : "200,000円以上"}
-              </p>
-            )}
+            {m.rentRange && <p className="ad-note">目安レンジ: {formatRentRange(m.rentRange)}</p>}
             {rentRows.length > 0 ? (
               <CompareBar rows={rentRows} format={yen} caption="家賃平均の比較（自治体・県平均・全国平均）" />
             ) : (

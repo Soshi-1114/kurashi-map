@@ -10,12 +10,12 @@
 // （useSearchHistory / useMuniCombobox の historyCodes 連携）。
 import { useCallback } from "react";
 import { useRouter } from "next/navigation";
-import { History, X } from "lucide-react";
 import type { MuniSummary } from "@/lib/types";
 import { useMuniCombobox } from "@/lib/useMuniCombobox";
 import { useSearchHistory } from "@/lib/useSearchHistory";
 import { muniContextLabel } from "@/lib/muniLabel";
 import { requestMapFly } from "@/lib/mapFly";
+import { SearchHistoryHeader } from "@/components/SearchHistoryHeader";
 
 export default function HeroSearch({ munis }: { munis: MuniSummary[] }) {
   const router = useRouter();
@@ -74,19 +74,7 @@ export default function HeroSearch({ munis }: { munis: MuniSummary[] }) {
       </div>
       {filtered.length > 0 && (
         <ul id="home-search-listbox" className="search-results" role="listbox" aria-label="自治体の検索候補">
-          {isHistory && (
-            <li className="search-history-head" role="presentation">
-              <span><History size={13} aria-hidden="true" /> 最近見た自治体</span>
-              <button
-                type="button"
-                className="search-history-clear"
-                onMouseDown={(e) => e.preventDefault()}
-                onClick={clear}
-              >
-                <X size={12} aria-hidden="true" /> クリア
-              </button>
-            </li>
-          )}
+          {isHistory && <SearchHistoryHeader onClear={clear} />}
           {/* filtered は自治体コード単位に集約済み（同じ自治体が名前ヒットと町丁ヒットの
               両方で重複することはない）ので、key/id はコードのみで一意 */}
           {filtered.map((m, i) => (

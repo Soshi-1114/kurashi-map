@@ -12,12 +12,14 @@
 //
 // historyCodes を渡すと、クエリが空 かつ 入力にフォーカス中は検索結果の代わりに
 // 履歴（最近選んだ自治体）を候補として返す（isHistory=true）。フォーカス管理も
-// このフックが持つ（onFocus/onBlur を返す input.ref に渡す）。選択確定時は
-// inputRef.current?.blur() で実DOMのfocusも外す（pick 直後に履歴が同じ内容で
-// 再表示されるチラつきを防ぐだけでなく、候補クリックの mousedown を
-// preventDefault している都合上、実DOMのfocusはクリックだけでは外れない
-// ——blur しないと次のクリックで再び focus イベントが発火せず、`focused` state が
-// false のまま固まる）。
+// このフックが持つ（onFocus/onBlur を返す input.ref に渡す）。
+//
+// 選択確定時は常に inputRef.current?.blur() で実DOMのfocusも外す。コンボボックスが
+// 選択で閉じるのは一般的な挙動として妥当だが、これが必須になる理由がもう1つある:
+// 候補クリックの mousedown を preventDefault しているため、実DOMのfocusはクリック
+// だけでは外れない。blur しないと次にこの input をクリックしても focus イベントが
+// 発火せず、`focused` state が false のまま固まる（履歴＝クエリが空でフォーカス中の
+// 一覧なので、これを怠ると選択直後に同じ履歴が再表示されてチラつく）。
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { MuniSummary } from "./types";
 import { toHiragana } from "./kana";

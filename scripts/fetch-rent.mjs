@@ -19,21 +19,22 @@ const ROOT = path.resolve(__dirname, "..");
 const APP_ID = requireEstatAppId();
 
 const STATS_DATA_ID = "0004021470";
-const RENT_BIN_MIDPOINT = {
-  "02": 5000, "03": 15000, "04": 30000, "05": 50000, "06": 70000,
-  "07": 90000, "08": 125000, "09": 175000, "10": 220000,
-};
-// cat01 -> [下限, 上限)。上限 null は最上位区分（上限なし）。RENT_BIN_MIDPOINT と
-// 同じ区分集合・同じ順序（低い順）を対象にする。
-const RENT_BIN_RANGE = {
-  "02": [0, 10000], "03": [10000, 20000], "04": [20000, 40000], "05": [40000, 60000],
-  "06": [60000, 80000], "07": [80000, 100000], "08": [100000, 150000], "09": [150000, 200000],
-  "10": [200000, null],
-};
-// Object.keys(RENT_BIN_RANGE) は使わない: "10" は正準な整数インデックスキーとして
-// 先頭に並び替えられてしまい（"02" 等は先頭ゼロで整数キー扱いされない）、
-// 低い順にならない。順序が rentRange() の正しさに直結するため配列で明示する。
-const RENT_BIN_ORDER = ["02", "03", "04", "05", "06", "07", "08", "09", "10"];
+// cat01 区分（家賃階級。e-Stat CLASS_INF で実データ確認済み）。lo/hi は加重平均・
+// レンジ算出の両方が使う下限・上限（上限 null は最上位区分＝上限なし）、mid は
+// weightedMean() 用の階級中点。低い順の配列にする: オブジェクトの Object.keys() だと
+// "10" が正準な整数インデックスキーとして先頭に並び替えられてしまい
+// （"02" 等は先頭ゼロで整数キー扱いされない）、rentRange() の正しさが崩れるため。
+const RENT_BINS = [
+  { cat: "02", lo: 0, hi: 10000, mid: 5000 },
+  { cat: "03", lo: 10000, hi: 20000, mid: 15000 },
+  { cat: "04", lo: 20000, hi: 40000, mid: 30000 },
+  { cat: "05", lo: 40000, hi: 60000, mid: 50000 },
+  { cat: "06", lo: 60000, hi: 80000, mid: 70000 },
+  { cat: "07", lo: 80000, hi: 100000, mid: 90000 },
+  { cat: "08", lo: 100000, hi: 150000, mid: 125000 },
+  { cat: "09", lo: 150000, hi: 200000, mid: 175000 },
+  { cat: "10", lo: 200000, hi: null, mid: 220000 },
+];
 
 // area -> (家賃区分 cat01 -> 借家数) の分布 Map。加重平均の材料。
 async function fetchDistribution(codes) {
@@ -51,9 +52,9 @@ async function fetchDistribution(codes) {
 
 function weightedMean(distribution) {
   let weighted = 0, total = 0;
-  for (const [cat, count] of distribution) {
-    const mid = RENT_BIN_MIDPOINT[cat];
-    if (mid == null) continue;
+  for (const { cat, mid } of RENT_BINS) {
+    const count = distribution.get(cat);
+    if (!count) continue;
     weighted += mid * count;
     total += count;
   }
@@ -66,10 +67,9 @@ function rentRange(distribution) {
   let min = null;
   let max;
   let hasAny = false;
-  for (const cat of RENT_BIN_ORDER) {
+  for (const { cat, lo, hi } of RENT_BINS) {
     const count = distribution.get(cat);
     if (!count) continue;
-    const [lo, hi] = RENT_BIN_RANGE[cat];
     if (min == null) min = lo;
     max = hi;
     hasAny = true;
