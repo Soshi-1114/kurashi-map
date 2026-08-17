@@ -6,8 +6,14 @@
 // （「品川駅」でも「品川」でもヒット）。S12 に読み仮名は無いため、かな検索は
 // 自治体名検索（MuniSummary.kana）と異なり非対応。
 
-/** 検索1件。lng/lat は地図フライト用の駅代表点。 */
-export type StationHit = { name: string; code: string; lng: number; lat: number };
+/**
+ * 地図フライト用の駅代表点。検索ヒット（ComboboxHit.station）・フライト依頼
+ * （MapFlyDetail.station）・MapView の点フライトが共有する唯一の形。
+ */
+export type StationPoint = { name: string; lng: number; lat: number };
+
+/** 検索1件（駅代表点 + 所属自治体コード）。 */
+export type StationHit = StationPoint & { code: string };
 
 type StationIndexEntry = [name: string, code: string, lng: number, lat: number];
 

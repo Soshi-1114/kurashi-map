@@ -13,9 +13,10 @@ import { useCallback } from "react";
 import { useRouter } from "next/navigation";
 import type { MuniSummary } from "@/lib/types";
 import { useMuniCombobox, type ComboboxHit } from "@/lib/useMuniCombobox";
-import { muniContextLabel } from "@/lib/muniLabel";
+import { comboboxHitSuffix } from "@/lib/muniLabel";
 import { requestMapFly } from "@/lib/mapFly";
 import { SearchHistoryHeader } from "@/components/SearchHistoryHeader";
+import { SearchHitLabel } from "@/components/SearchHitLabel";
 
 export default function HeroSearch({ munis }: { munis: MuniSummary[] }) {
   const router = useRouter();
@@ -32,7 +33,7 @@ export default function HeroSearch({ munis }: { munis: MuniSummary[] }) {
       close();
       recordHistory(m.code);
       document.querySelector(".home-map")?.scrollIntoView({ behavior: "smooth" });
-      requestMapFly(m.code, m.station);
+      requestMapFly({ code: m.code, station: m.station });
     },
     [close, recordHistory],
   );
@@ -85,17 +86,12 @@ export default function HeroSearch({ munis }: { munis: MuniSummary[] }) {
                 onClick={() => pick(m)}
                 onMouseEnter={() => setActiveIndex(i)}
               >
-                <span className="search-place">
-                  {muniContextLabel(m) && <span className="search-pref">{muniContextLabel(m)}</span>}
-                  <span className="search-name">{m.name}</span>
-                  {m.town && <span className="search-town">（{m.town}）</span>}
-                  {m.station && <span className="search-town">（{m.station.name}駅）</span>}
-                </span>
+                <SearchHitLabel m={m} />
               </button>
               <button
                 type="button"
                 className="search-mapbtn"
-                aria-label={`${m.station ? `${m.station.name}駅` : (m.displayName ?? m.name)}を地図で表示`}
+                aria-label={`${m.station ? comboboxHitSuffix(m) : (m.displayName ?? m.name)}を地図で表示`}
                 title="地図で表示"
                 onClick={() => showOnMap(m)}
               >

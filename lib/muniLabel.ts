@@ -1,6 +1,16 @@
 import type { Municipality, MuniSummary } from "./types";
 import { getPrefByCode } from "./prefs";
 
+/**
+ * 検索候補行の補足ラベル（町丁ヒットは町丁名、駅ヒットは「〇〇駅」）。
+ * S12 の駅名は「駅」なしのため、表示側でサフィックスを付ける規則をここに一元化する
+ * （候補行の表示と地図ピンの aria-label が同じ規則を共有し、ずれない）。
+ */
+export function comboboxHitSuffix(m: { town?: string; station?: { name: string } }): string | null {
+  if (m.station) return `${m.station.name}駅`;
+  return m.town ?? null;
+}
+
 // 検索候補に添える所属コンテキスト（都道府県名。政令市の区は「県名 市名」）。
 // 同名自治体（府中市=東京/広島、北区=東京/大阪市/さいたま市…）の誤選択を防ぐ。
 // 地図ヘッダー検索・トップのヒーロー検索・比較ページのピッカーが共有する。

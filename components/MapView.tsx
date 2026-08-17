@@ -22,7 +22,7 @@ import { hasRent } from "@/lib/rentColor";
 import { getMapMetric, TREND_PROPERTY, type MapMetricKey } from "@/lib/mapMetrics";
 import { trackSelectMunicipality, trackChangeMetric, trackApplyFilter } from "@/lib/analytics";
 import { MAP_FLY_EVENT, type MapFlyDetail } from "@/lib/mapFly";
-import type { ComboboxHit } from "@/lib/useMuniCombobox";
+import type { StationPoint } from "@/lib/stationSearch";
 import { parseMapDeepLink } from "@/lib/mapDeepLink";
 import {
   EMPTY_FILTERS, isFilterActive, matchesFilter, buildMatchExpression, type MapFilters,
@@ -80,10 +80,9 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
   // 選択時に減光するベース地図ラベル（道路名・水系名等。place=地名は残す）。
   // 元の opacity を保存し、選択解除で復元する。
   const labelDimRef = useRef<LabelDimState>({ ids: [], text: new Map(), icon: new Map() });
-  // 地図初期化完了前に検索確定された自治体コード（初期化後に flyTo を実行する）。
+  // 地図初期化完了前に検索確定されたフライト依頼（初期化後に実行する）。
   // instant はディープリンク（?code=）由来で、初期表示のためアニメーションなしで飛ぶ。
-  // station は駅検索確定由来で、自治体 bbox ではなく駅座標へ点フライトする。
-  const pendingFlyRef = useRef<{ code: string; instant?: boolean; station?: { lng: number; lat: number } } | null>(null);
+  const pendingFlyRef = useRef<(MapFlyDetail & { instant?: boolean }) | null>(null);
   // 駅検索確定時に立てるマーカー（ベース地図に駅が描かれない「標準」でも位置が分かる）。
   // マーカーと所属自治体コードは常にセットで生成・破棄するため1つの ref に持ち、
   // その自治体以外へ選択が移ったら外す。
@@ -205,7 +204,7 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
   // マーカーを立てる（「標準」ベース地図は駅を描かないため、着地点を明示する）。
   // maplibre モジュールは地図生成時に import 済みのため、ここでの動的 import は
   // モジュールキャッシュから即時解決される（追加のネットワークなし）。
-  const flyToStationPoint = useCallback(async (code: string, station: { lng: number; lat: number }) => {
+  const flyToStationPoint = useCallback(async (code: string, station: StationPoint) => {
     const map = mapRef.current;
     if (!map) return;
     map.flyTo({
@@ -812,22 +811,24 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
       .slice(0, 3);
   }, [selectedDetail, municipalities, wards]);
 
-  const flyToMuni = useCallback(async (m: ComboboxHit<MuniSummary>) => {
-    setSelectedCode(m.code);
-    trackSelectMunicipality(m.code, "search");
+  // 検索確定・フライト依頼の受け口。入力は「自治体コード + 任意の駅点」（MapFlyDetail）
+  // だけで、検索候補行（ComboboxHit）の他フィールドには依存しない。
+  const flyToMuni = useCallback(async (t: MapFlyDetail) => {
+    setSelectedCode(t.code);
+    trackSelectMunicipality(t.code, "search");
     // 地図初期化前（ヘッダー検索は SSR で先に操作できる）は保留し、初期化完了時に実行。
-    if (!ensurePrefsRef.current) { pendingFlyRef.current = { code: m.code, station: m.station }; return; }
-    const pref = getPrefByCode(m.code);
-    if (m.station) {
-      // 駅検索確定なら自治体 bbox ではなく駅座標へ（マーカー付き）。座標は検索ヒットが
+    if (!ensurePrefsRef.current) { pendingFlyRef.current = { code: t.code, station: t.station }; return; }
+    const pref = getPrefByCode(t.code);
+    if (t.station) {
+      // 駅検索確定なら自治体 bbox ではなく駅座標へ（マーカー付き）。座標は依頼が
       // 持っているので県ポリゴンのロードを待たずに飛ぶ（ロードは並行して走らせる）。
-      void flyToStationPoint(m.code, m.station);
+      void flyToStationPoint(t.code, t.station);
       if (pref) void ensurePrefsRef.current([pref.slug]);
       return;
     }
     // 自治体は bbox を県 geojson から引くため、未ロード県なら先に取得
     if (pref) await ensurePrefsRef.current([pref.slug]);
-    flyToCode(m.code);
+    flyToCode(t.code);
   }, [flyToCode, flyToStationPoint]);
 
   // ページ内の別クライアント島（トップのヒーロー検索の「地図で表示」）からのフライト依頼を受ける。
@@ -835,8 +836,8 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
   useEffect(() => {
     const onFlyRequest = (e: Event) => {
       const detail = (e as CustomEvent<MapFlyDetail>).detail;
-      const m = detail?.code ? byCode.get(detail.code) : undefined;
-      if (m) void flyToMuni({ ...m, station: detail.station });
+      // byCode は「summary に実在するコードか」の検証のみ（未知コードの依頼を弾く）
+      if (detail?.code && byCode.has(detail.code)) void flyToMuni(detail);
     };
     window.addEventListener(MAP_FLY_EVENT, onFlyRequest);
     return () => window.removeEventListener(MAP_FLY_EVENT, onFlyRequest);
@@ -908,7 +909,12 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
             <div className="brand-name">KurashiMap</div>
           </div>
           {showSearch ? (
-            <MuniSearch municipalities={municipalities} wards={wards} onSelect={flyToMuni} />
+            <MuniSearch
+              municipalities={municipalities}
+              wards={wards}
+              // 検索行（ComboboxHit）→ フライト依頼（MapFlyDetail）への変換はここだけ
+              onSelect={(m) => flyToMuni({ code: m.code, station: m.station })}
+            />
           ) : (
             <div className="app-header-spacer" aria-hidden="true" />
           )}

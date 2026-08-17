@@ -12,11 +12,14 @@ vi.mock("next/navigation", () => ({
   useRouter: () => ({ push }),
 }));
 
-// 町丁検索 API（/api/town-search）のモック。「日の里」クエリのみヒットを返す。
+// サジェスト API のモック（town-search / station-search 共通）。useDebouncedSuggest は
+// レスポンスから自分のキーだけを pluck するため、両キーを常に返す1本で足りる。
+// 「日の里」クエリのみ町丁ヒット、「品川」クエリのみ駅ヒットを返す。
 const fetchMock = vi.fn(async (url: string) => ({
   ok: true,
   json: async () => ({
     towns: url.includes(encodeURIComponent("日の里")) ? [{ code: "40220", town: "日の里" }] : [],
+    stations: url.includes(encodeURIComponent("品川")) ? [{ name: "品川", code: "11203", lng: 139.73, lat: 35.62 }] : [],
   }),
 }));
 
@@ -168,15 +171,6 @@ describe("HeroSearch", () => {
 
   it("駅名で「自治体名（駅名）」の候補が出て、地図ピンは駅座標付きでフライトを依頼する", async () => {
     const user = userEvent.setup();
-    // 駅検索 API のモック。「品川」クエリのみ川口市（11203）の駅を返す。
-    const stationFetch = vi.fn(async (url: string) => ({
-      ok: true,
-      json: async () =>
-        url.includes("station-search")
-          ? { stations: url.includes(encodeURIComponent("品川")) ? [{ name: "品川", code: "11203", lng: 139.73, lat: 35.62 }] : [] }
-          : { towns: [] },
-    }));
-    vi.stubGlobal("fetch", stationFetch);
     const { input } = setup();
 
     await user.type(input, "品川");
@@ -198,14 +192,6 @@ describe("HeroSearch", () => {
 
   it("駅行の本体クリックはその自治体の詳細ページへ遷移する", async () => {
     const user = userEvent.setup();
-    const stationFetch = vi.fn(async (url: string) => ({
-      ok: true,
-      json: async () =>
-        url.includes("station-search")
-          ? { stations: url.includes(encodeURIComponent("品川")) ? [{ name: "品川", code: "11203", lng: 139.73, lat: 35.62 }] : [] }
-          : { towns: [] },
-    }));
-    vi.stubGlobal("fetch", stationFetch);
     const { input } = setup();
     await user.type(input, "品川");
     await user.click(await screen.findByRole("option"));
