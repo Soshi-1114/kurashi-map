@@ -1,9 +1,5 @@
 // 令和5年住宅・土地統計調査 (statsDataId 0004021470) の家賃区分別借家数を
 // 取得し、bin midpoints の加重平均で平均家賃を計算、data/{pref}.json に反映。
-// 併せて、件数のある区分の下限〜上限から「目安レンジ」(rentRange) も算出する
-// （区分境界は e-Stat CLASS_INF(cat01) で実データを確認済み。cat01 "01"=0円 と
-// "99"=不詳 は平均計算と同じく対象外。最上位区分「200,000円以上」は上限を
-// 定義できないため rentRange.max=null とし、UI 側で「以上」表記にする）。
 //
 // 実行: node --env-file=.env.local scripts/fetch-rent.mjs --pref=saitama
 
@@ -19,22 +15,10 @@ const ROOT = path.resolve(__dirname, "..");
 const APP_ID = requireEstatAppId();
 
 const STATS_DATA_ID = "0004021470";
-// cat01 区分（家賃階級。e-Stat CLASS_INF で実データ確認済み）。lo/hi は加重平均・
-// レンジ算出の両方が使う下限・上限（上限 null は最上位区分＝上限なし）、mid は
-// weightedMean() 用の階級中点。低い順の配列にする: オブジェクトの Object.keys() だと
-// "10" が正準な整数インデックスキーとして先頭に並び替えられてしまい
-// （"02" 等は先頭ゼロで整数キー扱いされない）、rentRange() の正しさが崩れるため。
-const RENT_BINS = [
-  { cat: "02", lo: 0, hi: 10000, mid: 5000 },
-  { cat: "03", lo: 10000, hi: 20000, mid: 15000 },
-  { cat: "04", lo: 20000, hi: 40000, mid: 30000 },
-  { cat: "05", lo: 40000, hi: 60000, mid: 50000 },
-  { cat: "06", lo: 60000, hi: 80000, mid: 70000 },
-  { cat: "07", lo: 80000, hi: 100000, mid: 90000 },
-  { cat: "08", lo: 100000, hi: 150000, mid: 125000 },
-  { cat: "09", lo: 150000, hi: 200000, mid: 175000 },
-  { cat: "10", lo: 200000, hi: null, mid: 220000 },
-];
+const RENT_BIN_MIDPOINT = {
+  "02": 5000, "03": 15000, "04": 30000, "05": 50000, "06": 70000,
+  "07": 90000, "08": 125000, "09": 175000, "10": 220000,
+};
 
 // area -> (家賃区分 cat01 -> 借家数) の分布 Map。加重平均の材料。
 async function fetchDistribution(codes) {
@@ -52,29 +36,13 @@ async function fetchDistribution(codes) {
 
 function weightedMean(distribution) {
   let weighted = 0, total = 0;
-  for (const { cat, mid } of RENT_BINS) {
-    const count = distribution.get(cat);
-    if (!count) continue;
+  for (const [cat, count] of distribution) {
+    const mid = RENT_BIN_MIDPOINT[cat];
+    if (mid == null) continue;
     weighted += mid * count;
     total += count;
   }
   return total === 0 ? null : Math.round(weighted / total);
-}
-
-// 件数が1件以上ある最小区分の下限 〜 最大区分の上限を「目安レンジ」として返す。
-// 該当区分が1つもなければ null（weightedMean が null になるケースと同じ）。
-function rentRange(distribution) {
-  let min = null;
-  let max;
-  let hasAny = false;
-  for (const { cat, lo, hi } of RENT_BINS) {
-    const count = distribution.get(cat);
-    if (!count) continue;
-    if (min == null) min = lo;
-    max = hi;
-    hasAny = true;
-  }
-  return hasAny ? { min, max } : null;
 }
 
 async function main() {
@@ -97,9 +65,6 @@ async function main() {
       asOf: "2023",
       isEstimated: false,
     };
-    const range = rentRange(dist);
-    if (range) m.rentRange = range;
-    else delete m.rentRange;
   }
   if (missing.length) console.warn(`Missing ${missing.length}:`, missing.join(", "));
 

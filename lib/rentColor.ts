@@ -8,8 +8,6 @@
 // linear-gradient がベタ書きされていて二重管理になっていた。凡例など色帯を
 // 描く必要がある場合は、MetricLegend.tsx と同じく本定数からインライン style で
 // 流し込む。CSS への複製は tests/lib/designTokens.test.ts が検出して失敗させる。
-import { yen } from "./format";
-
 export const RENT_THRESHOLDS = [50000, 55000, 60000, 65000] as const;
 
 // Tailwind blue 系の5段階。淡→濃でしっかり差が出る視認性重視。
@@ -38,12 +36,6 @@ export function rentBand(value: number): string {
   let i = 0;
   while (i < RENT_THRESHOLDS.length && value >= RENT_THRESHOLDS[i]) i++;
   return RENT_BAND_LABELS[i];
-}
-
-// 家賃階級の分布から算出した目安レンジの表示文字列（fetch-rent.mjs rentRange 参照）。
-// max=null は最上位区分「20万円以上」で上限なし。詳細ページ・地図サイドパネルが共有する。
-export function formatRentRange(range: { min: number; max: number | null }): string {
-  return `${yen(range.min)}〜${range.max != null ? yen(range.max) : `${yen(200000)}以上`}`;
 }
 
 export function rentColor(value: number): string {

@@ -10,7 +10,6 @@ import {
   Baby,
   Wallet,
   ShieldAlert,
-  Building2,
   Globe2,
   TrainFront,
   Stethoscope,
@@ -33,7 +32,7 @@ import { buildFaq } from "@/lib/faq";
 import { SITE, prefNameOf, absoluteUrl } from "@/lib/site";
 import { getAmbiguousNames } from "@/lib/muniLabel";
 import { buildMuniTitle } from "@/lib/muniMeta";
-import { hasRent, rentBand, formatRentRange } from "@/lib/rentColor";
+import { hasRent, rentBand } from "@/lib/rentColor";
 import { isWaitlistDisclosed } from "@/lib/waitlist";
 import { hasLandPrice } from "@/lib/landPrice";
 import { hasVacancy, vacancyRateText } from "@/lib/vacancy";
@@ -256,10 +255,9 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
   const navItems: SectionNavItem[] = [
     { id: "overview", label: "概要" },
     { id: "rent", label: "家賃" },
-    { id: "kids", label: "子育て" },
+    { id: "kids", label: "子育て・生活環境" },
     { id: "hazard", label: "災害リスク" },
-    ...(m.amenities ? [{ id: "amenities", label: "生活インフラ" }] : []),
-    { id: "foreign", label: "外国人住民" },
+    { id: "foreign", label: "外国人比率" },
     { id: "future-pop", label: "将来人口" },
     ...(firstCompareKey ? [{ id: "compare", label: "比較" }] : []),
     { id: "ranking", label: "ランキング" },
@@ -500,7 +498,6 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
             link={{ href: "/ranking/rent-high", label: "家賃ランキングで比較" }}
           >
             <MetricPrimary value={hasRent(m.rent.value) ? m.rent.value.toLocaleString() : null} unit="円/月" />
-            {m.rentRange && <p className="ad-note">目安レンジ: {formatRentRange(m.rentRange)}</p>}
             {rentRows.length > 0 ? (
               <CompareBar rows={rentRows} format={yen} caption="家賃平均の比較（自治体・県平均・全国平均）" />
             ) : (
@@ -523,19 +520,19 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
                 <Info size={15} aria-hidden="true" />
                 <span>
                   家賃は住宅・土地統計調査の家賃階級別の借家数から、階級の中点で加重平均した算出値です（
-                  <Link href="/about#calc" className="ad-note-link">算出方法</Link>）。目安レンジは、件数のある家賃階級のうち最も低い階級の下限〜最も高い階級の上限です。
+                  <Link href="/about#calc" className="ad-note-link">算出方法</Link>）。
                 </span>
               </p>
             )}
             {hasRent(m.rent.value) && <SourceLine source={m.rent.source} asOf={m.rent.asOf} estimated={m.rent.isEstimated} />}
           </MetricCard>
 
-          {/* 子育て */}
+          {/* 子育て・生活環境（待機児童＋生活インフラを1カードに統合） */}
           <MetricCard
             id="kids"
             icon={Baby}
             tone="ad-tone-kids"
-            title="子育て環境"
+            title="子育て・生活環境"
             badge={
               isWaitlistDisclosed(m.waitlistChildren) && m.waitlistChildren.value === 0
                 ? { text: "待機児童ゼロ", tone: "is-good" }
@@ -552,19 +549,8 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
             ) : (
               <NoData text="区別非公表です。" reason={m.waitlistChildren.source.replace("区別非公表（", "").replace(/）.*$/, "")} />
             )}
-          </MetricCard>
-
-          {/* 災害リスク（横長） */}
-          <div className="ad-span-2">
-            <MetricCard id="hazard" icon={ShieldAlert} tone="ad-tone-hazard" title="災害リスク">
-              <DisasterCard m={m} />
-            </MetricCard>
-          </div>
-
-          {/* 生活インフラ */}
-          {m.amenities && (
-            <MetricCard id="amenities" icon={Building2} tone="ad-tone-infra" title="生活インフラ">
-              {isAmenitiesCounted(m.amenities.source) ? (
+            {m.amenities &&
+              (isAmenitiesCounted(m.amenities.source) ? (
                 <>
                   <div className="ad-statline">
                     <span className="ad-stat">
@@ -583,17 +569,21 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
                   <SourceLine source={m.amenities.source} asOf={m.amenities.asOf} />
                 </>
               ) : (
-                <NoData text="集計対象外です。" reason={coverageReason(m.amenities.source)} />
-              )}
-            </MetricCard>
-          )}
+                <NoData text="生活インフラは集計対象外です。" reason={coverageReason(m.amenities.source)} />
+              ))}
+          </MetricCard>
+
+          {/* 災害リスク */}
+          <MetricCard id="hazard" icon={ShieldAlert} tone="ad-tone-hazard" title="災害リスク">
+            <DisasterCard m={m} />
+          </MetricCard>
 
           {/* 外国人比率 */}
           <MetricCard
             id="foreign"
             icon={Globe2}
             tone="ad-tone-foreign"
-            title="外国人住民（多様性・国際性）"
+            title="外国人比率"
             link={{ href: "/map/foreign-ratio", label: "地図・ランキングで見る" }}
           >
             {hasForeignData(m.foreignResidents.source) ? (

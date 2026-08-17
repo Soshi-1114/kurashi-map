@@ -1638,7 +1638,6 @@ button { font-family: inherit; }
   letter-spacing: -0.015em;
   font-variant-numeric: tabular-nums;
 }
-.metric-sub { font-size: var(--text-3xs); color: var(--text-muted); margin-top: 3px; font-variant-numeric: tabular-nums; }
 .metric-meta { font-size: var(--text-3xs); color: var(--text-faint); margin-top: 6px; }
 .metric-est {
   display: inline-block;

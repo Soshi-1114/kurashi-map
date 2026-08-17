@@ -20,7 +20,8 @@
   --ad-shadow-hover: var(--shadow-card-hover);
   --ad-gap: var(--space-6); /* 24px */
   /* セクションナビ帯の高さ（10 + 40 + 10 + 1px border）。
-     アンカー先の scroll-margin-top と SectionNav.tsx の NAV_OFFSET と揃える。 */
+     アンカー先の scroll-margin-top がこの値+8px。SectionNav.tsx 側は offsetHeight を
+     実測し、現在地判定の閾値をこの +8px スラックに合わせている。 */
   --ad-secnav-h: 61px;
   color: var(--text);
 }
@@ -51,9 +52,11 @@
    共有している。ここに置くのは横スクロールさせるための差分だけ。 */
 .ad-secnav a { flex: none; white-space: nowrap; }
 
-/* アンカー先の見出しがナビ帯の下に潜らないようにする */
+/* アンカー先の見出しがナビ帯の下に潜らないようにする。目次はセクションだけでなく
+   詳細データ内の各カード（.ad-metric-card[id]）にも直接飛ぶため、両方に効かせる。 */
 .ad-hero[id],
-.ad-section[id] {
+.ad-section[id],
+.ad-metric-card[id] {
   scroll-margin-top: calc(var(--ad-secnav-h) + var(--space-2));
 }
 

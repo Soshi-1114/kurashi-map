@@ -71,11 +71,6 @@ function checkMuni(file, slug, m, level) {
   for (const key of ["rent", "landPrice", "waitlistChildren", "foreignResidents"]) {
     checkMetric(file, code, key, m[key]);
   }
-  if (m.rentRange !== undefined) {
-    if (!isNum(m.rentRange.min) || m.rentRange.min < 0) err(file, code, "rentRange.min が非負数値でない");
-    if (m.rentRange.max !== null && !isNum(m.rentRange.max)) err(file, code, "rentRange.max が数値でも null でもない");
-    if (isNum(m.rentRange.max) && m.rentRange.max < m.rentRange.min) err(file, code, "rentRange.max が min を下回る");
-  }
   checkHazard(file, code, m.hazard);
   if (level === "ward") {
     if (m.level !== "ward") err(file, code, 'wards ファイルなのに level が "ward" でない');

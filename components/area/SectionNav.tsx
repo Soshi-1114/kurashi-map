@@ -56,10 +56,13 @@ export default function SectionNav({
     // 現在地を取り違える（実際にそうなった）。発火は境界をまたいだ時だけで、
     // 1回あたり要素数ぶんの測定なので、そのまま読んで問題ない。
     // ビューポート上端（ナビ帯の下）より上にある最後の要素が現在地。
+    // 閾値の +9 は CSS の scroll-margin-top（ナビ高 + 8px スラック）に合わせる。
+    // アンカー着地位置がちょうどナビ帯の 8px 下になるため、閾値がナビ高ぴったりだと
+    // 飛んだ直後の要素自身が現在地として拾えない。
     const pick = () => {
       let current = els[0].id;
       for (const el of els) {
-        if (el.getBoundingClientRect().top <= navHeight + 1) current = el.id;
+        if (el.getBoundingClientRect().top <= navHeight + 9) current = el.id;
       }
       if (Date.now() < pinnedUntil.current) return;
       setActive(current);
