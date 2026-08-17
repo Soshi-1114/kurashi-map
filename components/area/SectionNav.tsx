@@ -98,6 +98,24 @@ export default function SectionNav({
     return () => io.disconnect();
   }, [items]);
 
+  // チップ列が横スクロールしている時（主に SP）、現在地チップが見切れないよう
+  // 中央へ追従させる。チップが全部収まっていれば scrollWidth 超過がなく何もしない。
+  // scrollIntoView は使わない（ブラウザによってページ側の縦スクロールまで動かすため、
+  // ナビ内の scrollLeft だけを操作する）。
+  useEffect(() => {
+    const nav = navRef.current;
+    if (!nav || nav.scrollWidth <= nav.clientWidth) return;
+    // 同じ id のチップが pc/sp 両方に存在しうるので、表示中(display:none でない)の方を選ぶ
+    const link = Array.from(nav.querySelectorAll<HTMLAnchorElement>('a[aria-current="true"]')).find(
+      (a) => a.offsetParent !== null,
+    );
+    if (!link) return;
+    const left = link.offsetLeft - (nav.clientWidth - link.offsetWidth) / 2;
+    const reduce =
+      typeof window.matchMedia === "function" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    nav.scrollTo({ left, behavior: reduce ? "auto" : "smooth" });
+  }, [active]);
+
   if (items.length === 0) return null;
 
   return (
