@@ -115,14 +115,13 @@ function freshnessFromAsOf(getAsOf: (m: Municipality) => string) {
 }
 const foreignFreshnessLabel = freshnessFromAsOf((m) => m.foreignResidents.asOf);
 
-// 人口の鮮度ラベル。Municipality に人口の asOf フィールドが無いため固定文字列とし、
-// 確定値公表・次回調査での更新時に NEXT_UPDATE.population と合わせて書き換える。
-// エリア詳細ページの将来人口カード（現在人口のラベル）も参照するため export。
-export const POPULATION_FRESHNESS = "2025年国勢調査";
-
-// POPULATION_FRESHNESS と同じ基準時点の「生の年」（asOf 形式の比較・整形に使う）。
-// 表示文言を変えたら合わせてこちらも更新する。
+// 人口の基準年。Municipality に人口の asOf フィールドが無いため固定値とし、確定値公表・
+// 次回調査での更新時に NEXT_UPDATE.population と合わせて書き換える。POPULATION_FRESHNESS
+// （表示文言）・freshnessPrefix の比較対象の両方をここから導出し、二重管理を避ける。
 export const POPULATION_ASOF = "2025";
+
+// 人口の鮮度ラベル。エリア詳細ページの将来人口カード（現在人口のラベル）も参照するため export。
+export const POPULATION_FRESHNESS = `${formatAsOfJa(POPULATION_ASOF)}国勢調査`;
 
 // 人口増減率の比較期間の表記（国勢調査の5年周期）。次回調査の反映時に1箇所で更新する。
 export const CENSUS_PERIOD = "2020→2025年国勢調査";

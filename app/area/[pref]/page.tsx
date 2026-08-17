@@ -57,7 +57,6 @@ function prefStats(muni: Municipality[]) {
   // その場合だけ調査名のみのフォールバックにする。
   const rentAsOf = muni.find((m) => hasRent(m.rent.value))?.rent.asOf ?? null;
   const rentSurveyLabel = rentAsOf ? housingSurveyLabel(rentAsOf) : "住宅・土地統計調査";
-  const freshness = freshnessPrefix([rentAsOf]);
   const landPriceLabels = [...new Set(
     muni
       .filter((m) => hasLandPrice(m.landPrice.value))
@@ -72,9 +71,7 @@ function prefStats(muni: Municipality[]) {
     floodCount,
     rentSurveyLabel,
     landPriceLabels,
-    // description 冒頭の「更新」バッジ。description には家賃中央値の asOf しか
-    // 書かないので、それ以外の指標（地価等）は混ぜない。
-    freshness,
+    rentAsOf,
   };
 }
 
@@ -83,7 +80,10 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
   const pref = getPrefBySlug(params.pref);
   if (!pref) return { title: "見つかりません | KurashiMap" };
   const muni = await listMunicipalities(params.pref);
-  const { count, rentMedian, rentSurveyLabel, freshness } = prefStats(muni);
+  const { count, rentMedian, rentSurveyLabel, rentAsOf } = prefStats(muni);
+  // description 冒頭の「更新」バッジ。description には家賃中央値の asOf しか
+  // 書かないので、それ以外の指標（地価等）は混ぜない。
+  const freshness = freshnessPrefix([rentAsOf]);
   const medPhrase =
     rentMedian > 0 ? `家賃の県内中央値${rentMedian.toLocaleString()}円/月（${rentSurveyLabel}）、` : "";
   // title/description には「家賃相場ランキング」等、/ranking/rent-cheap|high/{pref} と

@@ -148,7 +148,12 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
     const topics = ["地価", "待機児童", "災害リスク"]
       .filter((t) => !(t === "地価" && topHighlightKey === "landPrice") && !(t === "待機児童" && topHighlightKey === "waitlistZero"))
       .join("・");
-    const prefix = freshnessPrefix(bodyAsOf);
+    // highlightPhrase が待機児童ゼロの文（asOf 入り）を本文に書く場合は、そのasOfも
+    // バッジ候補に含める（本文に出てくる年をバッジが漏らさないようにする）。
+    const prefix = freshnessPrefix([
+      ...bodyAsOf,
+      topHighlightKey === "waitlistZero" ? m.waitlistChildren.asOf : null,
+    ]);
     description = `${prefix}${fullName}（${prefName}）の住みやすさ・住環境データ。${popPhrase}${descRent}${highlightPhrase}${topics}などをまとめて地図とランキングで比較できる${SITE.name}の自治体ページ。`;
   }
   const url = absoluteUrl(`/area/${m.pref}/${m.code}`);
