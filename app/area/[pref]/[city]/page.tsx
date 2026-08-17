@@ -266,7 +266,8 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
     { id: "future-pop", label: "将来人口" },
     ...(firstCompareKey ? [{ id: "compare", label: "比較" }] : []),
     { id: "ranking", label: "ランキング" },
-    { id: "details", label: "詳細情報" },
+    // 飛び先はFAQセクション（「◯◯市のよくある質問」）。id はリンク互換のため据え置き
+    { id: "details", label: "Q&A" },
   ];
 
   // Dataset 構造化データ（政府統計の実データを地理単位で提示する性質に適合）。
