@@ -1829,23 +1829,6 @@ button { font-family: inherit; }
   border-left: 3px solid var(--accent);
   padding-left: 9px;
 }
-/* 導入文（リード）カード。本文の黒文字ブロックと視覚的に分け、補足情報として読ませる。 */
-.detail-intro {
-  margin-top: var(--space-5);
-  padding: var(--space-5);
-  background: var(--surface-subtle);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.detail-intro .detail-p {
-  font-size: var(--text-sm);
-  color: var(--text-muted);
-  line-height: var(--leading-relaxed);
-}
-
 .detail-p {
   font-size: var(--text-md);
   line-height: var(--leading-relaxed);
@@ -1854,16 +1837,6 @@ button { font-family: inherit; }
 }
 .detail-p strong { color: var(--accent); font-weight: 700; font-variant-numeric: tabular-nums; }
 .detail-p-muted { font-size: var(--text-sm); color: var(--text-muted); }
-.detail-note {
-  display: flex;
-  gap: 8px;
-  align-items: flex-start;
-  margin-top: 12px;
-  font-size: var(--text-sm);
-  color: var(--text-muted);
-  line-height: var(--leading-normal);
-}
-.detail-note svg { flex-shrink: 0; margin-top: 2px; color: var(--warn); }
 
 
 /* 子育て・インフラ: ミニカード */
@@ -1930,9 +1903,6 @@ button { font-family: inherit; }
 .detail-footnav { margin-top: var(--space-8); display: flex; gap: var(--space-4); flex-wrap: wrap; }
 /* 見出し h3（/about など。h2 クラスを流用して font-size を上書きするのをやめる） */
 .detail-h3 { margin-top: var(--space-5); }
-/* 見出し直下に置く小さなインラインリンク列 */
-.detail-inline-links { margin-top: var(--space-3); display: flex; gap: 10px; flex-wrap: wrap; }
-.related-card--inline { display: inline-flex; width: auto; padding: 8px 14px; }
 .pref-table-link--muted { font-weight: 500; }
 .detail-back { min-height: 40px; padding: 8px 0; font-size: var(--text-sm); font-weight: 600; }
 .detail-back:hover { color: var(--accent-hover); }
@@ -1942,23 +1912,6 @@ button { font-family: inherit; }
      ここで上書きすると他ページとリズムがずれるので、固有の微調整だけ残す。 */
   .detail-title-sub { font-size: var(--text-md); }
 }
-
-/* 県ページ: 家賃ランキング */
-.pref-rank { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
-.pref-rank-item {
-  display: grid;
-  grid-template-columns: 28px 1fr auto;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 14px;
-  background: var(--surface-strong);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-}
-.pref-rank-item:hover { border-color: var(--accent); background: var(--accent-soft); text-decoration: none; }
-.pref-rank-no { font-size: var(--text-sm); font-weight: 800; color: var(--accent); text-align: center; font-variant-numeric: tabular-nums; }
-.pref-rank-name { font-size: var(--text-md); font-weight: 700; color: var(--text); display: inline-flex; flex-direction: column; gap: 1px; min-width: 0; }
-.pref-rank-value { font-size: var(--text-sm); font-weight: 700; color: var(--text-muted); display: inline-flex; align-items: center; gap: 8px; font-variant-numeric: tabular-nums; }
 
 /* 県ページ: 全自治体テーブル */
 .pref-table-wrap { margin-top: 12px; overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius-md); }
@@ -2025,19 +1978,6 @@ button { font-family: inherit; }
 /* グループ内のグリッド/チップ行は親のラベルからの間隔で十分なので上マージンを消す。 */
 .pref-region-group .pref-chip-grid,
 .pref-region-group .home-pref-grid { margin-top: 0; }
-
-/* 詳細ページ: よくある質問（FAQ） */
-.faq-list { margin: 12px 0 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
-.faq-item {
-  padding: 14px 16px;
-  background: var(--surface-strong);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-}
-.faq-q { font-size: var(--text-md); font-weight: 700; color: var(--text); margin: 0; }
-.faq-q::before { content: "Q. "; color: var(--accent); font-weight: 800; }
-.faq-a { font-size: var(--text-base); line-height: var(--leading-normal); color: var(--text-muted); margin: 8px 0 0; }
-.faq-a::before { content: "A. "; color: var(--text-faint); font-weight: 800; }
 
 /* 検索ページ */
 .search-form { margin-top: 18px; display: flex; gap: 10px; flex-wrap: wrap; }

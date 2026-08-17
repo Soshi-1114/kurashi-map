@@ -337,6 +337,31 @@
 .rk-champ-value { font-size: var(--text-xs); font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
 
 /* ---- ほかのランキング（簡易ピル一覧） ---- */
+/* トップ10の下に11位以下を畳むエクスパンド（都道府県別ランキング）。
+   native details で JS 不要（rk-sources・rk-faq と同じ流儀）。開いた後も
+   同じボタンで閉じられるよう、開閉でラベルを CSS で切り替える。 */
+.rk-more { margin-top: 12px; }
+.rk-more-summary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--surface-strong);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--text-muted);
+  cursor: pointer;
+  list-style: none;
+}
+.rk-more-summary::-webkit-details-marker { display: none; }
+.rk-more-summary:hover { border-color: var(--accent); color: var(--accent); }
+.rk-more[open] .rk-more-open { display: none; }
+.rk-more:not([open]) .rk-more-close { display: none; }
+/* 展開されたラダーはボタンの下に続ける（.rk-ladder 既定の margin-top を使う） */
+
 /* ランキング導線のリスト（RankLinkList）。ピルのグリッドではなく、1枚の面に区切り線で
    並ぶ行。面（background/border/radius/shadow）は globals.css の共有サーフェスグループが
    供給する。強調（太字）は指標フレーズの <b> だけに絞り、行全体は通常ウェイトにする。
