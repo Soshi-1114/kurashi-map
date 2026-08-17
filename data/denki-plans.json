@@ -1,0 +1,201 @@
+{
+  "asOf": "2026-08",
+  "plans": [
+    {
+      "offerId": "baseline-hokkaido",
+      "company": "北海道電力",
+      "planName": "従量電灯B",
+      "kind": "baseline",
+      "areas": {
+        "hokkaido": {
+          "basic": { "type": "ampere", "yenPerMonth": { "30": 1254.0, "40": 1672.0, "50": 2090.0 } },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 35.69 },
+            { "upTo": 280, "yenPerKwh": 41.98 },
+            { "upTo": null, "yenPerKwh": 45.7 }
+          ]
+        }
+      },
+      "officialUrl": "https://www.hepco.co.jp/home/price/ratemenu/meterratelight.html",
+      "sourceUrl": "https://www.hepco.co.jp/home/price/ratemenu/meterratelight.html",
+      "sourceAsOf": "2026-08-16",
+      "notes": ["第2段階の区切りは280kWh（多くの社の300kWhと異なる）"]
+    },
+    {
+      "offerId": "baseline-tohoku",
+      "company": "東北電力",
+      "planName": "従量電灯B",
+      "kind": "baseline",
+      "areas": {
+        "tohoku": {
+          "basic": { "type": "ampere", "yenPerMonth": { "30": 1108.8, "40": 1478.4, "50": 1848.0 } },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 29.62 },
+            { "upTo": 300, "yenPerKwh": 36.37 },
+            { "upTo": null, "yenPerKwh": 40.32 }
+          ]
+        }
+      },
+      "officialUrl": "https://www.tohoku-epco.co.jp/dprivate/plan/home/lightb/",
+      "sourceUrl": "https://www.tohoku-epco.co.jp/dprivate/plan/home/lightb/",
+      "sourceAsOf": "2026-08-16"
+    },
+    {
+      "offerId": "baseline-tokyo",
+      "company": "東京電力エナジーパートナー",
+      "planName": "従量電灯B",
+      "kind": "baseline",
+      "areas": {
+        "tokyo": {
+          "basic": { "type": "ampere", "yenPerMonth": { "30": 935.25, "40": 1247.0, "50": 1558.75 } },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 29.8 },
+            { "upTo": 300, "yenPerKwh": 36.4 },
+            { "upTo": null, "yenPerKwh": 40.49 }
+          ]
+        }
+      },
+      "officialUrl": "https://www.tepco.co.jp/ep/private/plan/chargelist01.html",
+      "sourceUrl": "https://www.tepco.co.jp/ep/private/plan/chargelist01.html",
+      "sourceAsOf": "2026-08-16",
+      "notes": ["2024年4月1日改定の単価"]
+    },
+    {
+      "offerId": "baseline-chubu",
+      "company": "中部電力ミライズ",
+      "planName": "従量電灯B",
+      "kind": "baseline",
+      "areas": {
+        "chubu": {
+          "basic": { "type": "ampere", "yenPerMonth": { "30": 963.42, "40": 1284.56, "50": 1605.7 } },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 21.2 },
+            { "upTo": 300, "yenPerKwh": 25.67 },
+            { "upTo": null, "yenPerKwh": 28.62 }
+          ]
+        }
+      },
+      "officialUrl": "https://miraiz.chuden.co.jp/home/electric/menu/basic/meterrate_hba/",
+      "sourceUrl": "https://miraiz.chuden.co.jp/home/electric/menu/pricelist/basic/",
+      "sourceAsOf": "2026-08-16"
+    },
+    {
+      "offerId": "baseline-hokuriku",
+      "company": "北陸電力",
+      "planName": "従量電灯B",
+      "kind": "baseline",
+      "areas": {
+        "hokuriku": {
+          "basic": { "type": "ampere", "yenPerMonth": { "30": 907.5, "40": 1210.0, "50": 1512.5 } },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 30.86 },
+            { "upTo": 300, "yenPerKwh": 34.75 },
+            { "upTo": null, "yenPerKwh": 36.46 }
+          ]
+        }
+      },
+      "officialUrl": "https://www.rikuden.co.jp/ryokinmenu/jyuryo.html",
+      "sourceUrl": "https://www.rikuden.co.jp/ryokin/minsei.html",
+      "sourceAsOf": "2026-08-16"
+    },
+    {
+      "offerId": "baseline-kansai",
+      "company": "関西電力",
+      "planName": "従量電灯A",
+      "kind": "baseline",
+      "areas": {
+        "kansai": {
+          "basic": { "type": "minimum", "yenPerMonth": 522.58, "includedKwh": 15 },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 20.21 },
+            { "upTo": 300, "yenPerKwh": 25.61 },
+            { "upTo": null, "yenPerKwh": 28.59 }
+          ]
+        }
+      },
+      "officialUrl": "https://kepco.jp/ryokin/menu/dento_a/",
+      "sourceUrl": "https://www.kepco.co.jp/corporate/pr/2024/pdf/20240206_1j.pdf",
+      "sourceAsOf": "2026-08-16",
+      "notes": ["2024年4月1日改定の単価"]
+    },
+    {
+      "offerId": "baseline-chugoku",
+      "company": "中国電力",
+      "planName": "従量電灯A",
+      "kind": "baseline",
+      "areas": {
+        "chugoku": {
+          "basic": { "type": "minimum", "yenPerMonth": 759.68, "includedKwh": 15 },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 32.75 },
+            { "upTo": 300, "yenPerKwh": 39.43 },
+            { "upTo": null, "yenPerKwh": 41.55 }
+          ]
+        }
+      },
+      "officialUrl": "https://www.energia.co.jp/elec/h_menu/pricelist/pricelist1.html",
+      "sourceUrl": "https://www.energia.co.jp/elec/h_menu/pricelist/pricelist1.html",
+      "sourceAsOf": "2026-08-16"
+    },
+    {
+      "offerId": "baseline-shikoku",
+      "company": "四国電力",
+      "planName": "従量電灯A",
+      "kind": "baseline",
+      "areas": {
+        "shikoku": {
+          "basic": { "type": "minimum", "yenPerMonth": 666.89, "includedKwh": 11 },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 30.65 },
+            { "upTo": 300, "yenPerKwh": 37.27 },
+            { "upTo": null, "yenPerKwh": 40.78 }
+          ]
+        }
+      },
+      "officialUrl": "https://www.yonden.co.jp/customer/price/plan/juryo_a.html",
+      "sourceUrl": "https://www.yonden.co.jp/customer/price/plan/juryo_a.html",
+      "sourceAsOf": "2026-08-16",
+      "notes": ["最低料金に含まれるのは最初の11kWh"]
+    },
+    {
+      "offerId": "baseline-kyushu",
+      "company": "九州電力",
+      "planName": "従量電灯B",
+      "kind": "baseline",
+      "areas": {
+        "kyushu": {
+          "basic": { "type": "ampere", "yenPerMonth": { "30": 948.72, "40": 1264.96, "50": 1581.2 } },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 18.37 },
+            { "upTo": 300, "yenPerKwh": 23.97 },
+            { "upTo": null, "yenPerKwh": 26.97 }
+          ]
+        }
+      },
+      "officialUrl": "https://customer.kyuden.co.jp/ja/electricity/home-plan/jyuryo-b.html",
+      "sourceUrl": "https://customer.kyuden.co.jp/ja/electricity/home-plan/jyuryo-b.html",
+      "sourceAsOf": "2026-08-16",
+      "notes": ["2024年4月1日改定の単価"]
+    },
+    {
+      "offerId": "baseline-okinawa",
+      "company": "沖縄電力",
+      "planName": "従量電灯",
+      "kind": "baseline",
+      "areas": {
+        "okinawa": {
+          "basic": { "type": "minimum", "yenPerMonth": 643.05, "includedKwh": 10 },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 40.2 },
+            { "upTo": 300, "yenPerKwh": 45.74 },
+            { "upTo": null, "yenPerKwh": 47.72 }
+          ]
+        }
+      },
+      "officialUrl": "https://www.okiden.co.jp/individual/price-menu/specific/",
+      "sourceUrl": "https://www.okiden.co.jp/individual/price-menu/specific/",
+      "sourceAsOf": "2026-08-16",
+      "notes": ["最低料金に含まれるのは最初の10kWh"]
+    }
+  ]
+}

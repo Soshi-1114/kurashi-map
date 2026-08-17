@@ -14,7 +14,7 @@ npm run typecheck    # tsc --noEmit
 npm run test         # vitest run（全テストを1回実行）
 npm run test:watch   # vitest ウォッチモード
 npx vitest run tests/lib/rentColor.test.ts   # 単一テストファイルの実行
-node scripts/validate-data.mjs               # data/*.json のスキーマ検証（CI でも実行）
+node scripts/validate-data.mjs               # 県別 data/*.json のスキーマ検証（CI でも実行。denki-plans.json は npm run test 側で検証）
 ```
 
 push / PR ごとに CI（`.github/workflows/test.yml`）が typecheck・test・lint・データ検証を実行します。

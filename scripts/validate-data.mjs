@@ -3,6 +3,9 @@
 // 依存なしの手書きバリデータ。ルールは lib/types.ts の Municipality / 実データの
 // 現状に合わせる（値の意味の検証はしない — 欠損センチネル等は honesty 方針でアプリ側が扱う）。
 //
+// 対象は県別の自治体 JSON（+ wards / shelters）のみ。data/denki-plans.json は
+// 型と一緒に lib/denkiPlans.ts の validateDenkiPlans で検証する（npm run test 経由）。
+//
 // 使い方: node scripts/validate-data.mjs [--pref=saitama]
 import fs from "node:fs";
 import path from "node:path";
@@ -195,4 +198,4 @@ if (errors.length > 0) {
   console.error(`\ndata 検証 NG: ${errors.length} 件のエラー`);
   process.exit(1);
 }
-console.log(`data 検証 OK: ${slugs.length} 県 ${muniTotal} 自治体`);
+console.log(`data 検証 OK: ${slugs.length} 県 ${muniTotal} 自治体（denki-plans.json は npm run test で検証）`);

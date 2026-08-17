@@ -1,4 +1,5 @@
 import type { Municipality, MuniSummary, Metric, HazardInfo } from "@/lib/types";
+import type { DenkiAreaPricing, DenkiPlan, DenkiPlansFile } from "@/lib/denkiPlans";
 
 export function metric(partial: Partial<Metric> = {}): Metric {
   return {
@@ -74,4 +75,36 @@ export function futurePop(
     asOf: "2023",
     ...partial,
   };
+}
+
+// 電気料金プラン（/denki）。既定はアンペア制・3段階従量のダミー値。
+// 最低料金制は denkiPricing({ basic: { type: "minimum", ... } }) で上書きする。
+export function denkiPricing(partial: Partial<DenkiAreaPricing> = {}): DenkiAreaPricing {
+  return {
+    basic: { type: "ampere", yenPerMonth: { "30": 900, "40": 1200, "50": 1500 } },
+    tiers: [
+      { upTo: 120, yenPerKwh: 20 },
+      { upTo: 300, yenPerKwh: 25 },
+      { upTo: null, yenPerKwh: 28 },
+    ],
+    ...partial,
+  };
+}
+
+export function denkiPlan(partial: Partial<DenkiPlan> = {}): DenkiPlan {
+  return {
+    offerId: "baseline-test",
+    company: "大手電力",
+    planName: "従量電灯B",
+    kind: "baseline",
+    areas: { tokyo: denkiPricing() },
+    officialUrl: "https://example.com/",
+    sourceUrl: "https://example.com/",
+    sourceAsOf: "2026-08",
+    ...partial,
+  };
+}
+
+export function denkiPlansFile(partial: Partial<DenkiPlansFile> = {}): DenkiPlansFile {
+  return { asOf: "2026-08", plans: [denkiPlan()], ...partial };
 }
