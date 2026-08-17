@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest";
 import {
   getRankingBySlug, muniLevelOnly, rankBy, RANKINGS,
   housingSurveyLabel, landPriceSurveyLabel, appendFreshness, freshnessPrefix,
+  splitRankingTitle,
 } from "@/lib/rankings";
 import { muni, metric } from "../_fixtures";
 
@@ -324,5 +325,22 @@ describe("freshnessPrefix", () => {
   it("候補が1つも解釈できなければ空文字（description に何も付けない）", () => {
     expect(freshnessPrefix([null, undefined])).toBe("");
     expect(freshnessPrefix([])).toBe("");
+  });
+});
+
+describe("splitRankingTitle", () => {
+  it("全ランキングの title が既知の語尾で分割できる（強調フレーズが全文に落ちない）", () => {
+    // 破ると RankLinkList のリンクが全文太字になる。title を追加・変更する時は
+    // 「◯◯市区町村ランキング」か「◯◯の市区町村」で終わらせること。
+    for (const r of RANKINGS) {
+      const { em, rest } = splitRankingTitle(r.title);
+      expect(rest, r.title).not.toBe("");
+      expect(em.length, r.title).toBeGreaterThan(0);
+      expect(em + rest).toBe(r.title);
+    }
+  });
+
+  it("未知の語尾はフォールバックで全文を強調フレーズとして返す", () => {
+    expect(splitRankingTitle("独自タイトル")).toEqual({ em: "独自タイトル", rest: "" });
   });
 });

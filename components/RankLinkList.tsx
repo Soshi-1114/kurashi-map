@@ -6,18 +6,7 @@
 
 import Link from "next/link";
 import { ArrowUpRight, Trophy } from "lucide-react";
-import type { RankingDef } from "@/lib/rankings";
-
-// タイトルを「強調する指標フレーズ」と「共通の語尾」に分ける。ランキングの title は
-// すべて「◯◯市区町村ランキング」か「◯◯の市区町村」で終わる（lib/rankings.ts）。
-// リンク全文を太字にすると視線の置き所がなくなるため、指標フレーズだけを太字にする
-// （例:「埼玉県の家賃が安い市区町村ランキング」→ 太字は「家賃が安い」のみ）。
-function splitTitle(title: string): { em: string; rest: string } {
-  for (const suffix of ["市区町村ランキング", "の市区町村"]) {
-    if (title.endsWith(suffix)) return { em: title.slice(0, -suffix.length), rest: suffix };
-  }
-  return { em: title, rest: "" };
-}
+import { splitRankingTitle, type RankingDef } from "@/lib/rankings";
 
 export default function RankLinkList({
   title,
@@ -49,11 +38,13 @@ export default function RankLinkList({
       </div>
       <ul className="rk-rank-list">
         {rankings.map((r) => {
-          const { em, rest } = splitTitle(r.title);
+          // リンク全文を太字にすると視線の置き所がなくなるため、指標フレーズだけ太字
+          // （例:「埼玉県の家賃が安い市区町村ランキング」→ 太字は「家賃が安い」のみ）。
+          const { em, rest } = splitRankingTitle(r.title);
           return (
             <li key={r.slug}>
               <Link href={href(r)} className="rk-rank-row">
-                <span className="rk-rank-row-label">
+                <span>
                   {labelPrefix}
                   <b>{em}</b>
                   {rest}
