@@ -2,14 +2,15 @@ import "../../league.css";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Wallet, MapIcon, BarChart3, Database, ArrowLeft, ArrowUpRight, Building2, Users } from "lucide-react";
+import { Wallet, MapIcon, BarChart3, ArrowLeft, ArrowUpRight, Building2, Users } from "lucide-react";
 import { listMunicipalities, listAll } from "@/lib/metrics";
 import {
   RANKINGS, getRankingBySlug, rankBy,
   POPULATION_FRESHNESS, CENSUS_PERIOD, housingSurveyLabel, landPriceSurveyLabel, freshnessPrefix,
 } from "@/lib/rankings";
 import { getPrefMetricSummaries } from "@/lib/prefAggregates";
-import RankPillLinks from "@/components/RankPillLinks";
+import RankLinkList from "@/components/RankLinkList";
+import RankSources from "@/components/RankSources";
 import { PREFS, getPrefBySlug } from "@/lib/prefs";
 import { mapHrefForPref } from "@/lib/mapDeepLink";
 import { SITE, absoluteUrl } from "@/lib/site";
@@ -383,12 +384,12 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
         </section>
       )}
 
-      <RankPillLinks
+      <RankLinkList
         title={`${prefName}のランキングで比べる`}
         sub={`${prefName}内の市区町村を、指標ごとに並べて比較できます。`}
         rankings={prefRankings}
         href={(r) => `/ranking/${r.slug}/${pref.slug}`}
-        label={(r) => `${prefName}の${r.title}`}
+        labelPrefix={`${prefName}の`}
       />
 
       <section className="rk-section">
@@ -404,16 +405,9 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
         </div>
       </section>
 
-      <section className="rk-section">
-        <details className="rk-sources">
-          <summary className="rk-sources-summary">
-            <Database size={15} aria-hidden="true" />出典・データについて
-          </summary>
-          <p className="rk-sources-body">
-            本ページの数値は政府統計・国土数値情報の実データです。家賃は{stats.rentSurveyLabel}、人口は{POPULATION_FRESHNESS}（ともに e-Stat 経由）、地価は{stats.landPriceLabels || "地価公示・地価調査"}、ハザードは不動産情報ライブラリ（reinfolib）／国土数値情報、待機児童はこども家庭庁の公表値に基づきます。データのない項目は推計で埋めず「—／データなし」と明示しています。
-          </p>
-        </details>
-      </section>
+      <RankSources>
+        本ページの数値は政府統計・国土数値情報の実データです。家賃は{stats.rentSurveyLabel}、人口は{POPULATION_FRESHNESS}（ともに e-Stat 経由）、地価は{stats.landPriceLabels || "地価公示・地価調査"}、ハザードは不動産情報ライブラリ（reinfolib）／国土数値情報、待機児童はこども家庭庁の公表値に基づきます。データのない項目は推計で埋めず「—／データなし」と明示しています。
+      </RankSources>
 
       <nav className="rk-footnav" aria-label="関連リンク">
         <Link href={mapHrefForPref(pref.slug)} className="rk-back"><ArrowLeft size={15} aria-hidden="true" />地図で{prefName}を見る</Link>

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
-import { ArrowRight, ChevronRight, MinusCircle, MapPin } from "lucide-react";
+import { ArrowRight, ChevronRight, MinusCircle } from "lucide-react";
 import { formatAsOfJa } from "@/lib/rankings";
 
 // ---- KPI カード（家賃・人口・地価・待機児童などの横長タイル）----
@@ -104,22 +104,40 @@ export function MetricPrimary({
   );
 }
 
-// ---- 回遊カード（家賃が近い・主要自治体・兄弟区）----
-export function AreaLinkCard({
+// ---- 回遊リスト（家賃が近い・似ているエリア・主要自治体・兄弟区など）----
+// カードのグリッドではなく、1枚の面の中に区切り線で並ぶコンパクトな行。
+// 面と行の区切り線は .ad-arearow-list（親 ul）側の CSS が前提なので、
+// ul と li をセットでここに置いて対にする。
+export function AreaLinkList({ children }: { children: ReactNode }) {
+  return <ul className="ad-arearow-list">{children}</ul>;
+}
+
+// 1行。compareHref があれば行の右端に「＋比較する」を添える
+// （行本体が既にリンクのため別 <a> にする）。
+export function AreaLinkRow({
   href,
   name,
   meta,
+  compareHref,
 }: {
   href: string;
   name: string;
   meta: string;
+  compareHref?: string;
 }) {
   return (
-    <Link href={href} className="ad-arealink">
-      <span className="ad-arealink-name">{name}</span>
-      <span className="ad-arealink-meta">{meta}</span>
-      <ChevronRight size={16} aria-hidden="true" />
-    </Link>
+    <li className="ad-arearow">
+      <Link href={href} className="ad-arearow-link">
+        <span className="ad-arearow-name">{name}</span>
+        <span className="ad-arearow-meta">{meta}</span>
+        <ChevronRight size={16} aria-hidden="true" />
+      </Link>
+      {compareHref && (
+        <Link href={compareHref} className="ad-compare-add">
+          ＋比較する
+        </Link>
+      )}
+    </li>
   );
 }
 
@@ -145,46 +163,6 @@ export function RankingCard({
         {rankText && <span className="ad-rankcard-rank">{rankText}</span>}
       </span>
       <ArrowRight size={18} aria-hidden="true" className="ad-rankcard-arrow" />
-    </Link>
-  );
-}
-
-// ---- 類似エリアカード（写真は使わず、似ている根拠を実データ数値で見せる）----
-export function SimilarAreaCard({
-  href,
-  name,
-  comment,
-  rent,
-  population,
-}: {
-  href: string;
-  name: string;
-  comment: string;
-  /** 家賃平均の表示文字列。データなしは null */
-  rent: string | null;
-  /** 人口の表示文字列 */
-  population: string;
-}) {
-  return (
-    <Link href={href} className="ad-similar">
-      <span className="ad-similar-head">
-        <span className="ad-similar-icon" aria-hidden="true">
-          <MapPin size={16} />
-        </span>
-        <span className="ad-similar-name">{name}</span>
-        <ChevronRight size={16} aria-hidden="true" className="ad-similar-arrow" />
-      </span>
-      <span className="ad-similar-comment">{comment}</span>
-      <span className="ad-similar-stats">
-        <span className="ad-similar-stat">
-          <b>{rent ?? "—"}</b>
-          <small>家賃/月</small>
-        </span>
-        <span className="ad-similar-stat">
-          <b>{population}</b>
-          <small>人口</small>
-        </span>
-      </span>
     </Link>
   );
 }
