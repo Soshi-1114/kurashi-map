@@ -2,12 +2,13 @@
 
 // ヘッダーの自治体検索コンボボックス。確定時は onSelect に自治体を渡す
 // （地図側は選択とフライトだけ担当）。状態機械は useMuniCombobox を共有し、
-// 名前・ひらがな読み・町丁名（例: 日の里 → 宗像市（日の里））で検索できる。
+// 名前・ひらがな読み・町丁名（例: 日の里 → 宗像市（日の里））・駅名
+// （例: 品川駅 → 港区（品川駅）。確定で駅位置へフライト）で検索できる。
 // クエリが空でフォーカス中は、検索結果の代わりに「最近見た自治体」履歴を出す
 // （useSearchHistory / useMuniCombobox の historyCodes 連携）。
 import { useCallback, useMemo } from "react";
 import type { MuniSummary } from "@/lib/types";
-import { useMuniCombobox } from "@/lib/useMuniCombobox";
+import { useMuniCombobox, type ComboboxHit } from "@/lib/useMuniCombobox";
 import { muniContextLabel } from "@/lib/muniLabel";
 import { hasRent } from "@/lib/rentColor";
 import { SearchHistoryHeader } from "@/components/SearchHistoryHeader";
@@ -15,15 +16,15 @@ import { SearchHistoryHeader } from "@/components/SearchHistoryHeader";
 type Props = {
   municipalities: MuniSummary[];
   wards: MuniSummary[];
-  onSelect: (m: MuniSummary) => void | Promise<void>;
+  onSelect: (m: ComboboxHit<MuniSummary>) => void | Promise<void>;
 };
 
 export default function MuniSearch({ municipalities, wards, onSelect }: Props) {
   // 市区町村と区を両方検索対象に
   const candidates = useMemo(() => [...municipalities, ...wards], [municipalities, wards]);
-  const onPick = useCallback((m: MuniSummary) => void onSelect(m), [onSelect]);
+  const onPick = useCallback((m: ComboboxHit<MuniSummary>) => void onSelect(m), [onSelect]);
   const { query, setQuery, filtered, isHistory, activeIndex, setActiveIndex, pick, clearHistory, onKeyDown, onFocus, onBlur, inputRef } =
-    useMuniCombobox(candidates, onPick, { townSearch: true, history: true });
+    useMuniCombobox(candidates, onPick, { townSearch: true, stationSearch: true, history: true });
 
   return (
     <div className="app-header-search">
@@ -43,9 +44,7 @@ export default function MuniSearch({ municipalities, wards, onSelect }: Props) {
           aria-expanded={filtered.length > 0}
           aria-controls="muni-search-listbox"
           aria-autocomplete="list"
-          aria-activedescendant={
-            activeIndex >= 0 && filtered[activeIndex] ? `sopt-${filtered[activeIndex].code}` : undefined
-          }
+          aria-activedescendant={activeIndex >= 0 && filtered[activeIndex] ? `sopt-${activeIndex}` : undefined}
         />
       </div>
       {filtered.length > 0 && (
@@ -59,11 +58,12 @@ export default function MuniSearch({ municipalities, wards, onSelect }: Props) {
           onMouseDown={(e) => e.preventDefault()}
         >
           {isHistory && <SearchHistoryHeader onClear={clearHistory} />}
-          {/* filtered は自治体コード単位に集約済みなので key/id はコードのみで一意 */}
+          {/* 駅行は自治体行とコードが重複しうるため、key/id とも行番号ベースで一意にする
+              （リストはクエリごとに全行作り直され、並べ替え・部分更新はない） */}
           {filtered.map((m, i) => (
-            <li key={m.code} role="presentation">
+            <li key={i} role="presentation">
               <button
-                id={`sopt-${m.code}`}
+                id={`sopt-${i}`}
                 role="option"
                 aria-selected={i === activeIndex}
                 tabIndex={-1}
@@ -77,6 +77,7 @@ export default function MuniSearch({ municipalities, wards, onSelect }: Props) {
                   )}
                   <span className="search-name">{m.name}</span>
                   {m.town && <span className="search-town">（{m.town}）</span>}
+                  {m.station && <span className="search-town">（{m.station.name}駅）</span>}
                 </span>
                 <span className="search-rent">{hasRent(m.rent) ? `${m.rent.toLocaleString()}円` : "—"}</span>
               </button>

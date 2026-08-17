@@ -26,30 +26,75 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { MuniSummary } from "./types";
 import { toHiragana } from "./kana";
 import { TOWN_QUERY_MIN } from "./townSearch";
+import { STATION_QUERY_MIN, type StationHit } from "./stationSearch";
 import { useSearchHistory } from "./useSearchHistory";
 
-/** 候補1行。town があれば「町丁名でヒットした自治体」行（例 宗像市（日の里））。 */
-export type ComboboxHit<T extends MuniSummary> = T & { town?: string };
+/**
+ * 候補1行。town があれば「町丁名でヒットした自治体」行（例 宗像市（日の里））、
+ * station があれば「駅名でヒットした自治体」行（例 港区（品川駅）。確定側は
+ * station.lng/lat で駅位置へフライトできる）。
+ */
+export type ComboboxHit<T extends MuniSummary> = T & {
+  town?: string;
+  station?: { name: string; lng: number; lat: number };
+};
 
 type TownApiHit = { code: string; town: string };
 
-// 入力中の連打を抑えるデバウンス（/api/town-search を呼ぶ最小クエリ長は townSearch.ts の
-// TOWN_QUERY_MIN をサーバー側と共有する）
-const TOWN_DEBOUNCE_MS = 150;
+// 入力中の連打を抑えるデバウンス（最小クエリ長は townSearch.ts / stationSearch.ts の
+// TOWN_QUERY_MIN / STATION_QUERY_MIN をサーバー側と共有する）
+const SUGGEST_DEBOUNCE_MS = 150;
+
+// デバウンス付きサジェスト取得（町丁・駅で共用）。クエリが変わるたびに前回の
+// タイマー・リクエストを破棄するので、反映されるのは常に最新クエリの結果のみ。
+// より新しいクエリに差し替わっての中断（ctrl.abort）は無視し（次のリクエストが
+// 状態を更新する）、サーバーエラー・オフライン等の実際の失敗時のみ候補なしに戻す
+// （古いクエリの候補を残さない）。
+function useDebouncedSuggest<T>(active: boolean, q: string, url: string, pluck: (json: unknown) => T[] | undefined): T[] {
+  const [hits, setHits] = useState<T[]>([]);
+  useEffect(() => {
+    const clearHits = () => setHits((prev) => (prev.length ? [] : prev));
+    if (!active) {
+      clearHits();
+      return;
+    }
+    const ctrl = new AbortController();
+    const timer = setTimeout(async () => {
+      try {
+        const res = await fetch(`${url}?q=${encodeURIComponent(q)}`, { signal: ctrl.signal });
+        if (!res.ok) {
+          clearHits();
+          return;
+        }
+        const list = pluck((await res.json()) as unknown);
+        setHits(Array.isArray(list) ? list : []);
+      } catch {
+        if (!ctrl.signal.aborted) clearHits();
+      }
+    }, SUGGEST_DEBOUNCE_MS);
+    return () => {
+      ctrl.abort();
+      clearTimeout(timer);
+    };
+    // pluck はレスポンスキーを選ぶだけの定数関数（呼び出し側でインライン定義）のため依存に含めない
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [active, q, url]);
+  return hits;
+}
 
 export function useMuniCombobox<T extends MuniSummary>(
   candidates: T[],
   onPick: (m: T) => void,
-  opts?: { limit?: number; townSearch?: boolean; history?: boolean },
+  opts?: { limit?: number; townSearch?: boolean; stationSearch?: boolean; history?: boolean },
 ) {
   const limit = opts?.limit ?? 8;
   const townSearch = opts?.townSearch ?? false;
+  const stationSearch = opts?.stationSearch ?? false;
   const history = opts?.history ?? false;
   // フックの呼び出し規則上、常に呼ぶ（history 無効の呼び出し側では未使用のまま）
   const { codes: historyCodes, record: recordHistory, clear: clearHistory } = useSearchHistory();
   const [query, setQuery] = useState("");
   const [activeIndex, setActiveIndex] = useState(-1);
-  const [townHits, setTownHits] = useState<TownApiHit[]>([]);
   const [focused, setFocused] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -64,56 +109,44 @@ export function useMuniCombobox<T extends MuniSummary>(
       .slice(0, limit);
   }, [q, candidates, limit]);
 
-  // 町丁名での自治体検索（デバウンス付きの API 呼び出し）。クエリが変わるたびに
-  // 前回のタイマー・リクエストを破棄するので、反映されるのは常に最新クエリの結果のみ。
-  useEffect(() => {
-    if (!townSearch || q.length < TOWN_QUERY_MIN) {
-      setTownHits((prev) => (prev.length ? [] : prev));
-      return;
-    }
-    const ctrl = new AbortController();
-    const clearHits = () => setTownHits((prev) => (prev.length ? [] : prev));
-    const timer = setTimeout(async () => {
-      try {
-        const res = await fetch(`/api/town-search?q=${encodeURIComponent(q)}`, { signal: ctrl.signal });
-        if (!res.ok) {
-          clearHits(); // サーバーエラー時は古いクエリの町丁候補を残さない
-          return;
-        }
-        const json = (await res.json()) as { towns?: TownApiHit[] };
-        setTownHits(Array.isArray(json.towns) ? json.towns : []);
-      } catch {
-        // より新しいクエリに差し替わっての中断（ctrl.abort）は無視（次のリクエストが
-        // 状態を更新する）。オフライン等の実際の失敗時のみ町丁候補なしに戻す。
-        if (!ctrl.signal.aborted) clearHits();
-      }
-    }, TOWN_DEBOUNCE_MS);
-    return () => {
-      ctrl.abort();
-      clearTimeout(timer);
-    };
-  }, [q, townSearch]);
+  // 自治体名ヒットが limit を埋めた場合、町丁・駅の候補は filtered で捨てられるため
+  // 最初から取得しない（確実に無駄になる往復の抑止。表示結果は変わらない）。
+  const muniFull = muniHits.length >= limit;
+  const townHits = useDebouncedSuggest<TownApiHit>(
+    townSearch && !muniFull && q.length >= TOWN_QUERY_MIN, q, "/api/town-search",
+    (json) => (json as { towns?: TownApiHit[] }).towns,
+  );
+  const stationHits = useDebouncedSuggest<StationHit>(
+    stationSearch && !muniFull && q.length >= STATION_QUERY_MIN, q, "/api/station-search",
+    (json) => (json as { stations?: StationHit[] }).stations,
+  );
 
   const byCode = useMemo(() => new Map(candidates.map((m) => [m.code, m])), [candidates]);
 
-  // 自治体名ヒットを先頭に、残り枠へ町丁ヒットを「自治体名（町丁名）」行として追加。
-  // 同じ自治体は1行まで（名前ヒット済みの自治体を町丁で重複表示しない）。
+  // 自治体名ヒットを先頭に、残り枠へ駅ヒット（自治体名（〇〇駅）行）→町丁ヒット
+  // （自治体名（町丁名）行）の順で追加。駅は自治体と別の実体なので、名前ヒット済みの
+  // 自治体と重複しても行を出す（例:「品川」→ 品川区・港区（品川駅）の両方）。
+  // 町丁は従来どおり同じ自治体を重複表示しない（駅で使った自治体も除く）。
   const filtered = useMemo<ComboboxHit<T>[]>(() => {
     if (!q) return [];
     const out: ComboboxHit<T>[] = [...muniHits];
-    if (out.length < limit && townHits.length > 0) {
-      const seen = new Set(out.map((m) => m.code));
-      for (const t of townHits) {
-        if (out.length >= limit) break;
-        if (seen.has(t.code)) continue;
-        const m = byCode.get(t.code);
-        if (!m) continue;
-        seen.add(t.code);
-        out.push({ ...m, town: t.town });
-      }
+    for (const s of stationHits) {
+      if (out.length >= limit) break;
+      const m = byCode.get(s.code);
+      if (!m) continue;
+      out.push({ ...m, station: { name: s.name, lng: s.lng, lat: s.lat } });
+    }
+    const seen = new Set(out.map((m) => m.code));
+    for (const t of townHits) {
+      if (out.length >= limit) break;
+      if (seen.has(t.code)) continue;
+      const m = byCode.get(t.code);
+      if (!m) continue;
+      seen.add(t.code);
+      out.push({ ...m, town: t.town });
     }
     return out;
-  }, [q, muniHits, townHits, byCode, limit]);
+  }, [q, muniHits, stationHits, townHits, byCode, limit]);
 
   // 履歴候補（クエリ空・フォーカス中のみ使う）。コード配列から候補配列を都度解決するので、
   // 表示名の陳腐化がない。

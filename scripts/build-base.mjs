@@ -7,6 +7,11 @@
 // isEstimated:true / source:"サンプル" のプレースホルダを入れておく
 // （fetch が欠落した自治体はこのサンプル値のまま残る＝既存 pref と同じ運用）。
 //
+// 注意: 既存県の「ジオメトリだけ」を作り直す場合は rebuild-geometry.mjs を使うこと。
+// このスクリプトは data/*.json をプレースホルダで上書きするため、既存県への再実行は
+// 実データを壊す。また本スクリプトの turf.simplify は自治体ごとに独立簡略化のため
+// 隣接境界に隙間が出る（rebuild-geometry.mjs はトポロジー保存簡略化で解消済み）。
+//
 // 事前:
 //   curl -sL -o /tmp/N03_{code}.zip "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2024/N03-20240101_{code}_GML.zip"
 //   unzip -o -q /tmp/N03_{code}.zip -d /tmp/N03_{code}
@@ -193,6 +198,7 @@ async function main() {
     console.log(`✓ ${path.relative(ROOT, wardsGeoPath)} (${wardFeatures.length} features)`);
     console.log(`✓ ${path.relative(ROOT, paths.wards)} (${wardsJson.length} wards)`);
   }
+  console.log(`→ 次に rebuild-geometry.mjs --pref=${pref.slug} を実行してジオメトリを作り直してください（本スクリプトの簡略化は隣接境界に隙間が出る旧方式）`);
 }
 
 main().catch((e) => { console.error(e); process.exit(1); });
