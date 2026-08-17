@@ -18,8 +18,8 @@ export function track(eventName: string, params?: Record<string, unknown>): void
   window.gtag("event", eventName, params);
 }
 
-/** 自治体の選択（地図クリック／検索）。method で導線を区別する。 */
-export function trackSelectMunicipality(code: string, method: "map" | "search"): void {
+/** 自治体の選択（地図クリック／検索／ディープリンク）。method で導線を区別する。 */
+export function trackSelectMunicipality(code: string, method: "map" | "search" | "link"): void {
   track("select_municipality", { municipality_code: code, method });
 }
 

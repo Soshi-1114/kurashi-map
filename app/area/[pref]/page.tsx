@@ -408,7 +408,7 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
       </section>
 
       <nav className="rk-footnav" aria-label="関連リンク">
-        <Link href="/" className="rk-back"><ArrowLeft size={15} aria-hidden="true" />地図に戻る</Link>
+        <Link href={`/?pref=${pref.slug}`} className="rk-back"><ArrowLeft size={15} aria-hidden="true" />地図で{prefName}を見る</Link>
         <Link href="/ranking" className="rk-back"><ArrowUpRight size={15} aria-hidden="true" />全国ランキング</Link>
       </nav>
     </PageShell>
