@@ -179,6 +179,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
   const prefName = prefNameOf(m.pref);
   const parent = m.parentCode ? all.find((x) => x.code === m.parentCode) ?? null : null;
   const heading = m.displayName ?? m.name;
+  const support = supportUrl();
   // 将来人口カードの派生値。const に取れば型ガードの絞り込みが JSX 内へ伝播する。
   const fp = m.futurePopulation;
   const fp2050 = futureTotal(fp, "2050");
@@ -830,9 +831,9 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
       <Reveal>
         <section className="ad-support-section" aria-label="生活関連の参考リンク">
           {/* 供給エリア名（自治体固有情報）を添えて /denki にプリセット遷移 */}
-          <DenkiTeaser code={m.code} name={m.name} />
-          {supportUrl() && (
-            <SupportBanner url={supportUrl()!} municipalityCode={m.code} municipalityName={m.name} />
+          <DenkiTeaser municipalityCode={m.code} municipalityName={m.name} />
+          {support && (
+            <SupportBanner url={support} municipalityCode={m.code} municipalityName={m.name} />
           )}
           {/* 政令市の行政区は寄付先が親の政令市になるため、寄付先名は親市名を使う */}
           {furusatoUrlTemplate() && (

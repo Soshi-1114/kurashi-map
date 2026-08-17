@@ -2,7 +2,7 @@
 // 毎ビルド now を入れると『常に全更新』のノイズ信号になるため、データが実際に
 // 更新された時だけ日付が動くよう、各指標の asOf を日付化して最大値を採る。
 //
-// asOf のフォーマットは混在する: "2024" / "2023" / "令和5年度" / "2025-04-01" / "-"。
+// asOf のフォーマットは混在する: "2024" / "2023" / "令和5年度" / "2025-04-01" / "2026-08" / "-"。
 
 import type { Municipality } from "./types";
 
@@ -13,6 +13,9 @@ export function parseAsOf(asOf: string): Date | null {
   // 完全な ISO 日付 "YYYY-MM-DD"（地価・待機児童などの基準日）
   const iso = s.match(/^(\d{4})-(\d{2})-(\d{2})/);
   if (iso) return new Date(`${iso[1]}-${iso[2]}-${iso[3]}T00:00:00Z`);
+  // 年月 "YYYY-MM"（電気料金プランの確認時点など）。月初に丸める。
+  const ym = s.match(/^(\d{4})-(\d{2})$/);
+  if (ym) return new Date(`${ym[1]}-${ym[2]}-01T00:00:00Z`);
   // 西暦年（"2024" / "2023年" 等）。年のみは 1/1 に丸める。
   const yr = s.match(/(\d{4})/);
   if (yr) return new Date(`${yr[1]}-01-01T00:00:00Z`);
@@ -78,6 +81,9 @@ export const TEMPLATE_REVISED_AT = {
   ranking: "2026-08-10",
   /** /ranking/{slug}/{pref} 県別ランキング。2026-08-10: description の掲載件数を文頭へ（PR #126） */
   rankingPref: "2026-08-10",
+  /** /denki 電気代シミュレーター。2026-08-16: 新規公開。
+   *  注: areaMuni と denki の 2026-08-16 は想定デプロイ日。実デプロイがずれたら実反映日に直すこと */
+  denki: "2026-08-16",
 } as const;
 
 /**

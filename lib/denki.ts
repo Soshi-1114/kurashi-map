@@ -197,3 +197,11 @@ export function areaForMuni(code: string): AreaResult | null {
   const area = PREF_TO_AREA[code.slice(0, 2)];
   return area ? { area } : null;
 }
+
+/**
+ * 自治体プリセット付きの /denki URL。受け側は app/denki の DenkiSimulator が
+ * `?code=` として読む（URL 契約の生成側をここに一元化）。
+ */
+export function denkiUrlForMuni(code: string): string {
+  return `/denki?code=${code}`;
+}

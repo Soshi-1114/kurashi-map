@@ -4,6 +4,7 @@
 // データ可視化エリアとは視覚的に分離した位置に置く。支援先URLは環境変数で管理。
 import { Heart } from "lucide-react";
 import { track } from "@/lib/analytics";
+import { AdLinkRow } from "./AdLinkRow";
 
 export function SupportBanner({
   url,
@@ -16,28 +17,26 @@ export function SupportBanner({
   municipalityName: string;
 }) {
   return (
-    <div className="ad-support">
-      <div className="ad-support-text">
-        <Heart size={18} aria-hidden="true" className="ad-support-icon" />
-        <p className="ad-support-copy">
-          このデータが役に立ったら
-          <span className="ad-support-sub">KurashiMap は無料で運営しています。任意のご支援が更新の励みになります。</span>
-        </p>
-      </div>
-      <a
-        href={url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="ad-support-btn"
-        onClick={() =>
-          track("support_link_click", {
-            municipality_code: municipalityCode,
-            municipality_name: municipalityName,
-          })
-        }
-      >
-        支援する
-      </a>
-    </div>
+    <AdLinkRow
+      icon={<Heart size={18} aria-hidden="true" className="ad-linkrow-icon ad-linkrow-icon--support" />}
+      copy="このデータが役に立ったら"
+      sub="KurashiMap は無料で運営しています。任意のご支援が更新の励みになります。"
+      action={
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="ad-linkrow-btn"
+          onClick={() =>
+            track("support_link_click", {
+              municipality_code: municipalityCode,
+              municipality_name: municipalityName,
+            })
+          }
+        >
+          支援する
+        </a>
+      }
+    />
   );
 }

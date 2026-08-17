@@ -7,6 +7,7 @@
 import { Gift, ExternalLink } from "lucide-react";
 import { track } from "@/lib/analytics";
 import { generateFurusatoUrl } from "@/lib/monetization";
+import { AdLinkRow } from "./AdLinkRow";
 
 export function FurusatoLink({
   targetName,
@@ -20,29 +21,27 @@ export function FurusatoLink({
 }) {
   const url = generateFurusatoUrl(targetName, prefName);
   return (
-    <div className="ad-furusato">
-      <div className="ad-furusato-text">
-        <Gift size={18} aria-hidden="true" className="ad-furusato-icon" />
-        <p className="ad-furusato-copy">
-          {targetName}のふるさと納税を見る
-          <span className="ad-furusato-sub">※外部サイト（ふるさと納税ポータル）へ移動します</span>
-        </p>
-      </div>
-      <a
-        href={url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="ad-furusato-btn"
-        onClick={() =>
-          track("furusato_link_click", {
-            municipality_code: municipalityCode,
-            municipality_name: targetName,
-          })
-        }
-      >
-        ふるさと納税を見る
-        <ExternalLink size={15} aria-hidden="true" />
-      </a>
-    </div>
+    <AdLinkRow
+      icon={<Gift size={18} aria-hidden="true" className="ad-linkrow-icon" />}
+      copy={`${targetName}のふるさと納税を見る`}
+      sub="※外部サイト（ふるさと納税ポータル）へ移動します"
+      action={
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="ad-linkrow-btn ad-linkrow-btn--solid"
+          onClick={() =>
+            track("furusato_link_click", {
+              municipality_code: municipalityCode,
+              municipality_name: targetName,
+            })
+          }
+        >
+          ふるさと納税を見る
+          <ExternalLink size={15} aria-hidden="true" />
+        </a>
+      }
+    />
   );
 }

@@ -14,6 +14,9 @@ describe("parseAsOf", () => {
   it("完全な ISO 日付はそのまま採用", () => {
     expect(iso(parseAsOf("2025-04-01"))).toBe("2025-04-01");
   });
+  it("年月 YYYY-MM は月初に丸める（denki-plans の asOf）", () => {
+    expect(iso(parseAsOf("2026-08"))).toBe("2026-08-01");
+  });
   it("西暦年のみは 1/1 に丸める", () => {
     expect(iso(parseAsOf("2024"))).toBe("2024-01-01");
     expect(iso(parseAsOf("2023年"))).toBe("2023-01-01");

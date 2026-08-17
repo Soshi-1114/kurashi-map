@@ -65,10 +65,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     },
     // 電気代シミュレーター（横断ツール。?code= プリセットは同一ページの状態なので URL は1件）。
-    // lastModified は料金プランデータの確認時点（data/denki-plans.json の asOf）から導く。
+    // lastModified は料金プランデータの確認時点（data/denki-plans.json の asOf）と
+    // テンプレート改訂日の新しい方。priority は全自治体詳細から導線が張られる
+    // ツールピラーとして /map/* と同格の 0.8。
     {
       url: absoluteUrl("/denki"),
-      lastModified: denkiPlansLastModified(),
+      lastModified: withTemplateRevision(denkiPlansLastModified(), TEMPLATE_REVISED_AT.denki),
       changeFrequency: "monthly",
       priority: 0.8,
     },

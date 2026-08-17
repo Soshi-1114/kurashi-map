@@ -8,6 +8,7 @@
 
 import plansJson from "../data/denki-plans.json";
 import { DENKI_AREAS, type DenkiArea } from "./denki";
+import { parseAsOf } from "./dataFreshness";
 
 /** 対応する契約アンペア（アンペア制プランの基本料金表のキー）。追加はここ1箇所。 */
 export const AMPERES = [30, 40, 50] as const;
@@ -44,9 +45,11 @@ export type DenkiPlansFile = { asOf: string; plans: DenkiPlan[] };
 /** 料金プランデータ（検証はテストで実施済みの前提で型キャストする）。 */
 export const DENKI_PLANS = plansJson as DenkiPlansFile;
 
-/** プランデータの確認時点（asOf: YYYY-MM）を Date に変換する。sitemap の lastModified 用。 */
+/** プランデータの確認時点（asOf: YYYY-MM）を Date に変換する。sitemap の lastModified 用。
+ *  asOf の日付化は parseAsOf に一元化（形式は validateDenkiPlans が YYYY-MM を強制。
+ *  万一パース不能でも sitemap 側の withTemplateRevision がテンプレ改訂日で下支えする）。 */
 export function denkiPlansLastModified(file: DenkiPlansFile = DENKI_PLANS): Date {
-  return new Date(`${file.asOf}-01T00:00:00Z`);
+  return parseAsOf(file.asOf) ?? new Date(0);
 }
 
 /**
