@@ -6,7 +6,7 @@ import {
   Trophy, BarChart3, MapPin, Info, Database, ArrowLeft, Map as MapIcon, ShieldCheck,
 } from "lucide-react";
 import { listAllAcrossPrefs } from "@/lib/metrics";
-import { RANKINGS, getRankingBySlug, muniLevelOnly, rankBy, type RankingDef } from "@/lib/rankings";
+import { RANKINGS, getRankingBySlug, muniLevelOnly, rankBy, appendFreshness, type RankingDef } from "@/lib/rankings";
 import { PREFS } from "@/lib/prefs";
 import { SITE, prefNameOf, absoluteUrl } from "@/lib/site";
 import PrefRegionLinks from "@/components/PrefRegionLinks";
@@ -37,9 +37,11 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
   const top1 = top[0] ? `${prefNameOf(top[0].pref)}${top[0].displayName ?? top[0].name}` : "—";
   const freshness = def.freshnessLabel?.(top[0] ?? null) ?? null;
   const title = `${def.seoTitle ?? def.title}${freshness ? `【${freshness}】` : "【全国】"}｜${SITE.name}`;
-  const description = def.metaDescription
-    ? def.metaDescription(top[0] ?? null)
-    : def.description.replace("{top1}", top1);
+  // description 末尾にデータの基準年度を追記（文中に同じ年が既出ならスキップ）。
+  const description = appendFreshness(
+    def.metaDescription ? def.metaDescription(top[0] ?? null) : def.description.replace("{top1}", top1),
+    freshness,
+  );
   const url = absoluteUrl(`/ranking/${def.slug}`);
   const ogImage = absoluteUrl(`/api/og/ranking/${def.slug}`);
   return {

@@ -119,8 +119,36 @@ const foreignFreshnessLabel = freshnessFromAsOf((m) => m.foreignResidents.asOf);
 // エリア詳細ページの将来人口カード（現在人口のラベル）も参照するため export。
 export const POPULATION_FRESHNESS = "2025年国勢調査";
 
+// 人口増減率の比較期間の表記（国勢調査の5年周期）。次回調査の反映時に1箇所で更新する。
+export const CENSUS_PERIOD = "2020→2025年国勢調査";
+
 // 将来推計人口の鮮度ラベル。asOf("2023")由来の「2023年最新」は誤解を招くため推計名を明示。
-const FUTURE_FRESHNESS = "令和5(2023)年推計";
+// 地図ハブ（/map/future-population）でも参照するため export。
+export const FUTURE_FRESHNESS = "令和5(2023)年推計";
+
+// 家賃・空き家の「調査名+年度」ラベル（asOf "2023" → 「2023年住宅・土地統計調査」）。
+// 年度はデータの実 asOf から導出し、二重管理を避ける。
+export function housingSurveyLabel(asOf: string): string {
+  return `${formatAsOfJa(asOf)}住宅・土地統計調査`;
+}
+
+// 地価の「調査名+年度」ラベル。出典は地価公示（国）と地価調査（都道府県）の2系統が
+// あり、source 文字列から調査名を判定する（honesty 方針: 実際の出典と年度を表示）。
+export function landPriceSurveyLabel(source: string, asOf: string): string {
+  const survey = source.includes("地価調査") ? "地価調査" : "地価公示";
+  return `${formatAsOfJa(asOf)}${survey}`;
+}
+
+// description の末尾に鮮度ラベルを1文追記する（「…。2023年住宅・土地統計調査のデータ。」）。
+// 重複防止: ラベル中の年（YYYY年）が description に既出、またはラベルの括弧書きを除いた
+// 表記（例「令和5(2023)年推計」→「令和5年推計」）が既出の場合は追記しない。
+export function appendFreshness(description: string, freshness: string | null): string {
+  if (!freshness) return description;
+  const year = /\d{4}年/.exec(freshness)?.[0];
+  const plain = freshness.replace(/[（(][^）)]*[）)]/g, "");
+  if ((year && description.includes(year)) || description.includes(plain)) return description;
+  return `${description}${freshness}のデータ。`;
+}
 
 // 外国人住民比率ランキングの導入文（薄ページ対策・中立フレーミング）。high/low で傾向解説を分岐。
 function foreignIntro(highLow: "高い" | "低い"): string[] {
@@ -305,6 +333,7 @@ export const RANKINGS: RankingDef[] = [
     columnLabel: "家賃平均",
     order: "asc",
     nextUpdate: NEXT_UPDATE.rent,
+    freshnessLabel: (top1) => (top1 ? housingSurveyLabel(top1.rent.asOf) : null),
     qualifies: (m) => hasRent(m.rent.value),
     sortValue: (m) => m.rent.value,
     display: (m) => `${m.rent.value.toLocaleString()}円/月`,
@@ -323,6 +352,7 @@ export const RANKINGS: RankingDef[] = [
     columnLabel: "家賃平均",
     order: "desc",
     nextUpdate: NEXT_UPDATE.rent,
+    freshnessLabel: (top1) => (top1 ? housingSurveyLabel(top1.rent.asOf) : null),
     qualifies: (m) => hasRent(m.rent.value),
     sortValue: (m) => m.rent.value,
     display: (m) => `${m.rent.value.toLocaleString()}円/月`,

@@ -71,16 +71,21 @@ export function latestLastModified(munis: Municipality[]): Date | null {
 // なお docs/seo/url-sets.json の since（効果計測の起点）とは目的が違うので値がずれてよい:
 // lastModified は「いつ変わったか」、since は「新しい内容が丸一日配信された最初の日」。
 export const TEMPLATE_REVISED_AT = {
-  /** /area/{pref}/{code} 自治体詳細。2026-08-17: 電気代シミュレーター導線（供給エリア名表示）を追加（PR #142）。
+  /** /area/{pref}/{code} 自治体詳細。2026-08-17: description・本文にデータ基準年度を追記＋地図ディープリンク導線、
+   *  電気代シミュレーター導線（供給エリア名表示）を追加（PR #142）。
    *  2026-08-11: 将来人口（IPSS 2050年推計）カードを追加（PR #138）。
-   *  2026-08-10: title を人口・家賃・外国人割合の実数値並びに刷新（PR #129） */
+   *  2026-08-10: title を人口・家賃・外国人割合の実数値並びに刷新（PR #129）
+   *  注: 2026-08-17 は本番反映日。デプロイがずれたら実反映日に直すこと */
   areaMuni: "2026-08-17",
-  /** /area/{pref} 県ハブ。2026-08-10: title の重複解消＋データ概況表・全ランキング導線を追加（PR #127/#130） */
-  areaPref: "2026-08-10",
-  /** /ranking/{slug} 全国ランキング。2026-08-10: population 系に実数値入り description を追加（PR #126） */
-  ranking: "2026-08-10",
-  /** /ranking/{slug}/{pref} 県別ランキング。2026-08-10: description の掲載件数を文頭へ（PR #126） */
-  rankingPref: "2026-08-10",
+  /** /area/{pref} 県ハブ。2026-08-17: description・lead・出典にデータ基準年度を追記。
+   *  2026-08-10: title の重複解消＋データ概況表・全ランキング導線を追加（PR #127/#130） */
+  areaPref: "2026-08-17",
+  /** /ranking/{slug} 全国ランキング。2026-08-17: description に基準年度追記＋家賃系 title に調査年度（freshnessLabel）。
+   *  2026-08-10: population 系に実数値入り description を追加（PR #126） */
+  ranking: "2026-08-17",
+  /** /ranking/{slug}/{pref} 県別ランキング。2026-08-17: description に基準年度を追記。
+   *  2026-08-10: description の掲載件数を文頭へ（PR #126） */
+  rankingPref: "2026-08-17",
   /** /denki 電気代シミュレーター。2026-08-17: 新規公開（PR #140-#142）。
    *  注: 2026-08-17 は本番反映日。デプロイがずれたら実反映日に直すこと */
   denki: "2026-08-17",
