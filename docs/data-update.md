@@ -184,6 +184,7 @@ GitHub の **Actions** タブ → 対象ワークフロー → **Run workflow**�
 | 災害リスク | reinfolib XKT026/029 | 不定期（随時） | `fetch-hazard.mjs` |
 | 駅数 | 国土数値情報 S12 駅別乗降客数（全国 GeoJSON） | 年1回（例年4月公開） | `fetch-stations.mjs` |
 | 駅名検索インデックス | 同上（S12。駅グループ単位に名寄せし区コード優先で自治体割当） | 年1回（駅数と同時） | `build-station-index.mjs` |
+| 自治体ポリゴン | 国土数値情報 N03 行政区域 | 手動・不定期（市町村合併時など） | `rebuild-geometry.mjs`（トポロジー保存簡略化。public/*.geojson のみ再生成し data/*.json には触れない） |
 | 生活インフラ（保育） | reinfolib XKT007 | 年度更新 | `fetch-amenities.mjs` |
 | 医療機関 | 厚労省 医療施設調査（e-Stat） | 年1回（10/1時点・翌年公表。市区町村別は statsDataId が毎年変わる） | `fetch-medical.mjs` |
 | 外国人住民比率 | 出入国在留管理庁 在留外国人統計（e-Stat） | 年2回（6月末・12月末時点。各7月頃/翌年公表） | `fetch-foreign-residents.mjs`（**手動**, §7） |
