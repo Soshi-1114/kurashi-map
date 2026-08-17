@@ -659,6 +659,20 @@ export function getRankingBySlug(slug: string): RankingDef | null {
   return BY_SLUG.get(slug) ?? null;
 }
 
+/**
+ * title を「強調する指標フレーズ」と「共通の語尾」に分ける（リンクラベルで指標
+ * フレーズだけ太字にする用。RankLinkList 参照）。RANKINGS の title はすべて
+ * 「◯◯市区町村ランキング」か「◯◯の市区町村」で終わる想定で、この不変条件は
+ * tests/lib/rankings.test.ts が検証する（破ると rest が空になり全文太字に落ちる）。
+ * タイトル定義と同じファイルに置き、title を増やす時に目に入るようにしている。
+ */
+export function splitRankingTitle(title: string): { em: string; rest: string } {
+  for (const suffix of ["市区町村ランキング", "の市区町村"]) {
+    if (title.endsWith(suffix)) return { em: title.slice(0, -suffix.length), rest: suffix };
+  }
+  return { em: title, rest: "" };
+}
+
 /** 市区町村のみ（政令市の行政区を除外）。ランキングは market-level の1自治体1エントリ。 */
 export function muniLevelOnly(all: Municipality[]): Municipality[] {
   return all.filter((m) => (m.level ?? "muni") !== "ward");

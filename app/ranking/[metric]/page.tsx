@@ -3,14 +3,16 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import {
-  Trophy, BarChart3, MapPin, Info, Database, ArrowLeft, Map as MapIcon, ShieldCheck,
+  Trophy, BarChart3, MapPin, Database, ArrowLeft, Map as MapIcon, ShieldCheck,
 } from "lucide-react";
 import { listAllAcrossPrefs } from "@/lib/metrics";
 import { RANKINGS, getRankingBySlug, muniLevelOnly, rankBy, appendFreshness, type RankingDef } from "@/lib/rankings";
 import { PREFS } from "@/lib/prefs";
 import { SITE, prefNameOf, absoluteUrl } from "@/lib/site";
 import PrefRegionLinks from "@/components/PrefRegionLinks";
-import RankPillLinks from "@/components/RankPillLinks";
+import RankLinkList from "@/components/RankLinkList";
+import RankFaq from "@/components/RankFaq";
+import RankSources, { RANKING_SOURCES_TEXT } from "@/components/RankSources";
 import { RankBadge } from "@/components/RankBadge";
 import PageShell from "@/components/PageShell";
 
@@ -297,43 +299,16 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
         </section>
       )}
 
-      <RankPillLinks
+      <RankLinkList
         title="ほかのランキング"
         sub="同じ実データで、別の指標でも比べてみましょう。"
         rankings={others}
         href={(r) => `/ranking/${r.slug}`}
-        label={(r) => r.title}
       />
 
-      {faq.length > 0 && (
-        <section className="rk-section">
-          <div className="rk-section-head">
-            <span className="rk-section-icon"><Info size={20} aria-hidden="true" /></span>
-            <div className="rk-section-heading">
-              <h2 className="rk-h2">よくある質問</h2>
-            </div>
-          </div>
-          <div className="rk-faq">
-            {faq.map(({ q, a }, i) => (
-              <details key={i} className="rk-faq-item">
-                <summary className="rk-faq-q">{q}</summary>
-                <p className="rk-faq-a">{a}</p>
-              </details>
-            ))}
-          </div>
-        </section>
-      )}
+      <RankFaq faq={faq} />
 
-      <section className="rk-section">
-        <details className="rk-sources">
-          <summary className="rk-sources-summary">
-            <Database size={15} aria-hidden="true" />出典・データについて
-          </summary>
-          <p className="rk-sources-body">
-            家賃は住宅・土地統計調査、地価は地価公示・地価調査、待機児童はこども家庭庁の公表値、人口は国勢調査、外国人住民比率は出入国在留管理庁「在留外国人統計」に基づきます（e-Stat ほか）。政令指定都市の行政区は親市との重複を避けるため集計から除外しています。データのない自治体はランキングの対象外です。
-          </p>
-        </details>
-      </section>
+      <RankSources>{RANKING_SOURCES_TEXT}</RankSources>
 
       <nav className="rk-footnav" aria-label="関連リンク">
         <Link href="/ranking" className="rk-back"><ArrowLeft size={15} aria-hidden="true" />ランキング一覧</Link>

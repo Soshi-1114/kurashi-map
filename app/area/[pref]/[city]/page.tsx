@@ -67,12 +67,13 @@ import {
   KpiCard,
   MetricCard,
   MetricPrimary,
-  AreaLinkCard,
+  AreaLinkList,
+  AreaLinkRow,
   RankingCard,
-  SimilarAreaCard,
   NoData,
   SourceLine,
 } from "@/components/area/cards";
+import { compactYen, compactPopulation } from "@/lib/format";
 import { SupportBanner } from "@/components/area/SupportBanner";
 import { FurusatoLink } from "@/components/area/FurusatoLink";
 import { DenkiTeaser } from "@/components/area/DenkiTeaser";
@@ -369,6 +370,9 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
 
   const yen = (v: number) => `${v.toLocaleString()}円`;
   const pct = (v: number) => `${v.toFixed(2)}%`;
+  // 回遊リストの家賃メタ。「データなし」表記（honesty 方針）をここに一元化する
+  const rentMeta = (x: { rent: { value: number } }) =>
+    hasRent(x.rent.value) ? `${x.rent.value.toLocaleString()}円/月` : "データなし";
 
   // KPI カードの比較文脈（全国順位・県内順位・全国平均）。取れない部分は省略する。
   // 家賃は全国平均との高低で「安い順」「高い順」のどちらのランキングを見せるか切り替える
@@ -699,37 +703,37 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
       {/* 家賃が近い自治体 */}
       {related.length > 0 && (
         <Section icon={Home} tone="ad-tone-rent" title="家賃水準が近い自治体" sub={`${m.name}と家賃平均が近い${prefName}の自治体`} id={compareAnchor("related")}>
-          <ul className="ad-arealink-grid">
+          <AreaLinkList>
             {related.map((r) => (
-              <li key={r.code}>
-                <AreaLinkCard
-                  href={`/area/${r.pref}/${r.code}`}
-                  name={r.displayName ?? r.name}
-                  meta={hasRent(r.rent.value) ? `${r.rent.value.toLocaleString()}円/月` : "データなし"}
-                />
-                <Link href={`/compare?codes=${m.code},${r.code}`} className="ad-compare-add">＋比較する</Link>
-              </li>
+              <AreaLinkRow
+                key={r.code}
+                href={`/area/${r.pref}/${r.code}`}
+                name={r.displayName ?? r.name}
+                meta={rentMeta(r)}
+                compareHref={`/compare?codes=${m.code},${r.code}`}
+              />
             ))}
-          </ul>
+          </AreaLinkList>
         </Section>
       )}
       {/* 似ているエリア */}
       {similar.length > 0 && (
-        <Section icon={Search} tone="ad-tone-pop" title="似ているエリアを探す" sub={`${m.name}と特徴が似ているエリア`} id={compareAnchor("similar")}>
-          <ul className="ad-similar-grid">
+        <Section icon={Search} tone="ad-tone-pop" title="似ているエリアを探す" sub={`${m.name}と家賃・人口規模が近いエリア`} id={compareAnchor("similar")}>
+          <AreaLinkList>
             {similar.map((s) => (
-              <li key={s.code}>
-                <SimilarAreaCard
-                  href={`/area/${s.pref}/${s.code}`}
-                  name={s.displayName ?? s.name}
-                  comment="家賃・人口規模が近い"
-                  rent={hasRent(s.rent.value) ? `${s.rent.value.toLocaleString()}円` : null}
-                  population={`${s.population.toLocaleString()}人`}
-                />
-                <Link href={`/compare?codes=${m.code},${s.code}`} className="ad-compare-add">＋比較する</Link>
-              </li>
+              <AreaLinkRow
+                key={s.code}
+                href={`/area/${s.pref}/${s.code}`}
+                name={s.displayName ?? s.name}
+                meta={
+                  hasRent(s.rent.value)
+                    ? `家賃${compactYen(s.rent.value)}・人口${compactPopulation(s.population)}`
+                    : `人口${compactPopulation(s.population)}`
+                }
+                compareHref={`/compare?codes=${m.code},${s.code}`}
+              />
             ))}
-          </ul>
+          </AreaLinkList>
         </Section>
       )}
       {/* 人口規模が近い同県内の自治体 */}
@@ -741,50 +745,47 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
           sub={`${m.name}（人口${m.population.toLocaleString()}人）と規模が近い自治体`}
           id={compareAnchor("closePop")}
         >
-          <ul className="ad-arealink-grid">
+          <AreaLinkList>
             {closePop.map((p) => (
-              <li key={p.code}>
-                <AreaLinkCard
-                  href={`/area/${p.pref}/${p.code}`}
-                  name={p.displayName ?? p.name}
-                  meta={`人口 ${p.population.toLocaleString()}人`}
-                />
-                <Link href={`/compare?codes=${m.code},${p.code}`} className="ad-compare-add">＋比較する</Link>
-              </li>
+              <AreaLinkRow
+                key={p.code}
+                href={`/area/${p.pref}/${p.code}`}
+                name={p.displayName ?? p.name}
+                meta={`人口 ${p.population.toLocaleString()}人`}
+                compareHref={`/compare?codes=${m.code},${p.code}`}
+              />
             ))}
-          </ul>
+          </AreaLinkList>
         </Section>
       )}
       {/* 政令市の親ページ → 区一覧（下りリンク） */}
       {childWards.length > 0 && (
         <Section icon={MapIcon} tone="ad-tone-infra" title={`${m.name}の行政区（${childWards.length}区）`} sub="区ごとの家賃・人口・住環境データを見る" id={compareAnchor("childWards")}>
-          <ul className="ad-arealink-grid">
+          <AreaLinkList>
             {childWards.map((w) => (
-              <li key={w.code}>
-                <AreaLinkCard
-                  href={`/area/${w.pref}/${w.code}`}
-                  name={w.name}
-                  meta={hasRent(w.rent.value) ? `${w.rent.value.toLocaleString()}円/月` : "データなし"}
-                />
-              </li>
+              <AreaLinkRow
+                key={w.code}
+                href={`/area/${w.pref}/${w.code}`}
+                name={w.name}
+                meta={rentMeta(w)}
+              />
             ))}
-          </ul>
+          </AreaLinkList>
         </Section>
       )}
       {/* 兄弟区 */}
       {siblings.length > 0 && parent && (
         <Section icon={MapIcon} tone="ad-tone-infra" title={`${parent.name}のほかの区`} id={compareAnchor("siblings")}>
-          <ul className="ad-arealink-grid">
+          <AreaLinkList>
             {siblings.map((s) => (
-              <li key={s.code}>
-                <AreaLinkCard
-                  href={`/area/${s.pref}/${s.code}`}
-                  name={s.name}
-                  meta={hasRent(s.rent.value) ? `${s.rent.value.toLocaleString()}円/月` : "データなし"}
-                />
-              </li>
+              <AreaLinkRow
+                key={s.code}
+                href={`/area/${s.pref}/${s.code}`}
+                name={s.name}
+                meta={rentMeta(s)}
+              />
             ))}
-          </ul>
+          </AreaLinkList>
         </Section>
       )}
       {/* 主要自治体 */}
@@ -797,17 +798,16 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
           link={{ href: `/area/${m.pref}`, label: `全${prefName}の一覧` }}
           id={compareAnchor("majorPeers")}
         >
-          <ul className="ad-arealink-grid">
+          <AreaLinkList>
             {majorPeers.map((p) => (
-              <li key={p.code}>
-                <AreaLinkCard
-                  href={`/area/${p.pref}/${p.code}`}
-                  name={p.displayName ?? p.name}
-                  meta={`人口 ${p.population.toLocaleString()}人`}
-                />
-              </li>
+              <AreaLinkRow
+                key={p.code}
+                href={`/area/${p.pref}/${p.code}`}
+                name={p.displayName ?? p.name}
+                meta={`人口 ${p.population.toLocaleString()}人`}
+              />
             ))}
-          </ul>
+          </AreaLinkList>
         </Section>
       )}
       {/* ランキング */}
