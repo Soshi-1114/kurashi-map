@@ -60,6 +60,18 @@
   scroll-margin-top: calc(var(--ad-secnav-h) + var(--space-2));
 }
 
+/* 目次から飛んだカードを一瞬リングで示す。PC の2列グリッドでは同じ行のカード同士が
+   同一スクロール位置になり、チップを押しても画面が動かず遷移が分からないため、
+   スクロール以外のフィードバックとして必須（:target はハッシュ変更のたびに掛かり、
+   アニメは1回で消える。reduced-motion では下の一括無効化で止まる）。 */
+.ad-metric-card:target {
+  animation: adTargetRing 1.2s ease-out;
+}
+@keyframes adTargetRing {
+  0%, 35% { box-shadow: 0 0 0 3px var(--accent); }
+  100% { box-shadow: 0 0 0 3px transparent; }
+}
+
 /* 控えめな fade-up（CSS のみ・必ず可視で終わる。reduced-motion で無効） */
 .ad-reveal {
   animation: adFadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -1133,4 +1145,11 @@
     transition: none;
   }
   .ad-reveal { animation: none; }
+  /* リングのフェードは止めるが、フィードバック自体は静的リングとして残す
+     （reduced-motion で消すべきは「動き」であって「どこに飛んだかの表示」ではない。
+     スムーススクロールも無効な環境ではこれが唯一の遷移フィードバックになる）。 */
+  .ad-metric-card:target {
+    animation: none;
+    box-shadow: 0 0 0 3px var(--accent);
+  }
 }
