@@ -14,12 +14,9 @@ import { denkiPlansLastModified } from "@/lib/denkiPlans";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const all = await listAllAcrossPrefs();
-  // lastModified はデータの実 vintage（asOf）から導く。毎ビルド now を入れると
-  // 「常に全更新」のノイズ信号になるため、データ更新時だけ日付が動くようにする。
-  // テンプレート改訂（title 刷新・セクション追加など）は URL 数の少ないページ種別
-  // （/denki・/map/*）に限り TEMPLATE_REVISED_AT との新しい方を採る。大量ページ種別
-  // （自治体・県ハブ・ランキング系）に適用すると全 URL が同一日付に潰れて
-  // 鮮度シグナル自体を毀損するため適用しない（lib/dataFreshness.ts 参照）。
+  // lastModified はデータの実 vintage（asOf）から導く。テンプレート改訂日
+  // （TEMPLATE_REVISED_AT）を効かせるのは URL 数の少ない /denki・/map/* のみ。
+  // 理由と運用は lib/dataFreshness.ts のコメントが正典。
   const fallback = new Date();
   const siteLatest = latestLastModified(all) ?? fallback;
 
@@ -34,6 +31,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   for (const [slug, munis] of byPref) {
     prefLatest.set(slug, latestLastModified(munis) ?? siteLatest);
   }
+  // prefLatest は byPref の全キーに値を入れているので、既知 slug では必ずヒットする。
+  // ?? siteLatest は型を Date に絞るためのフォールバック。
+  const prefDate = (slug: string): Date => prefLatest.get(slug) ?? siteLatest;
 
   const entries: MetadataRoute.Sitemap = [
     {
@@ -44,19 +44,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly",
       priority: 1,
     },
-    // ピラーページ（「外国人 割合 地図」「在留外国人 ヒートマップ」の入口・トピッククラスタのハブ）。
-    {
-      url: absoluteUrl("/map/foreign-ratio"),
-      lastModified: withTemplateRevision(siteLatest, TEMPLATE_REVISED_AT.mapHub),
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-    // 指標別 地図ハブ（家賃・地価・人口増減・将来人口。/map/foreign-ratio と同構成のピラー群）。
-    ...["/map/rent", "/map/land-price", "/map/population-trend", "/map/future-population"].map((path) => ({
+    // 指標別 地図ハブ（ピラーページ群）。foreign-ratio は「外国人 割合 地図」等の
+    // 主力クエリの入口なので priority だけ高い。
+    ...([
+      ["/map/foreign-ratio", 0.9],
+      ["/map/rent", 0.8],
+      ["/map/land-price", 0.8],
+      ["/map/population-trend", 0.8],
+      ["/map/future-population", 0.8],
+    ] as const).map(([path, priority]) => ({
       url: absoluteUrl(path),
       lastModified: withTemplateRevision(siteLatest, TEMPLATE_REVISED_AT.mapHub),
       changeFrequency: "monthly" as const,
-      priority: 0.8,
+      priority,
     })),
     // 自治体比較ページ（選択状態はクエリなので URL はベースの1件のみ）。
     {
@@ -107,7 +107,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       const munis = muniLevelOnly(byPref.get(p.slug) ?? []);
       return RANKINGS.filter((r) => munis.some((m) => r.qualifies(m))).map((r) => ({
         url: absoluteUrl(`/ranking/${r.slug}/${p.slug}`),
-        lastModified: prefLatest.get(p.slug) ?? siteLatest,
+        lastModified: prefDate(p.slug),
         changeFrequency: "monthly" as const,
         priority: 0.6,
       }));
@@ -115,13 +115,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // 県別ハブページ（全自治体への内部リンク集約・検索の入口）
     ...PREFS.map((p) => ({
       url: absoluteUrl(`/area/${p.slug}`),
-      lastModified: prefLatest.get(p.slug) ?? siteLatest,
+      lastModified: prefDate(p.slug),
       changeFrequency: "monthly" as const,
       priority: 0.8,
     })),
     ...all.map((m) => ({
       url: absoluteUrl(`/area/${m.pref}/${m.code}`),
-      lastModified: muniLastModified(m) ?? prefLatest.get(m.pref) ?? siteLatest,
+      lastModified: muniLastModified(m) ?? prefDate(m.pref),
       changeFrequency: "monthly" as const,
       priority: 0.7,
     })),

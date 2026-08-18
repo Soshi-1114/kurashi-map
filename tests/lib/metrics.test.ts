@@ -61,6 +61,13 @@ describe("getMunicipality", () => {
     expect(mockLoadPrefData).not.toHaveBeenCalled();
   });
 
+  it("getMunicipalityIn は pref スラッグ一致時のみ返す（/area/{pref}/{code} の重複URL対策）", async () => {
+    const { getMunicipalityIn } = await freshMetrics();
+    expect((await getMunicipalityIn("saitama", "11203"))?.name).toBe("川口市");
+    expect(await getMunicipalityIn("chiba", "11203")).toBeNull();
+    expect(await getMunicipalityIn("saitama", "99999")).toBeNull();
+  });
+
   it("県は合っているが存在しない code は null", async () => {
     const { getMunicipality } = await freshMetrics();
     expect(await getMunicipality("11999")).toBeNull();
