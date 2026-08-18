@@ -16,7 +16,8 @@ export default function SiteHeader() {
         <nav className="site-header-nav" aria-label="サイト内メニュー">
           <Link href="/ranking">ランキング</Link>
           <Link href="/compare">自治体を比較</Link>
-          {/* SP では横幅が足りないため隠す。トップのフッターリンクに同じ導線がある */}
+          <Link href="/denki" prefetch={false}>電気代</Link>
+          {/* SP では横幅が足りないため隠す。共通フッター（SiteFooter）に同じ導線がある */}
           <Link href="/about" className="site-header-nav-optional">このサイトについて</Link>
         </nav>
       </div>

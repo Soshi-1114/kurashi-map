@@ -4,6 +4,7 @@
 
 import Link from "next/link";
 import { RANKINGS, type RankingCategory } from "@/lib/rankings";
+import { MAP_HUBS } from "@/lib/siteNav";
 import PrefRegionPicker from "@/components/home/PrefRegionPicker";
 
 export type PopularMuni = { pref: string; code: string; name: string };
@@ -47,11 +48,12 @@ export default function HomeLinks({ popular }: { popular: PopularMuni[] }) {
 
       <section className="home-links-block">
         <h2 className="home-links-h">地図で見る</h2>
+        {/* ハブ一覧は lib/siteNav.ts が単一ソース。prefetch 無効はハブ1本 ~78KB gzip の
+            viewport 先読みを避けるため（SiteFooter と同方針） */}
         <ul className="home-chip-row">
-          <li><Link href="/map/rent" className="home-chip">家賃相場マップ</Link></li>
-          <li><Link href="/map/land-price" className="home-chip">地価マップ</Link></li>
-          <li><Link href="/map/population-trend" className="home-chip">人口増減マップ</Link></li>
-          <li><Link href="/map/foreign-ratio" className="home-chip">外国人住民の割合マップ</Link></li>
+          {MAP_HUBS.map(({ href, label }) => (
+            <li key={href}><Link href={href} prefetch={false} className="home-chip">{label}</Link></li>
+          ))}
         </ul>
       </section>
 
@@ -92,10 +94,9 @@ export default function HomeLinks({ popular }: { popular: PopularMuni[] }) {
         </section>
       )}
 
+      {/* about / privacy への導線と © は直下の共通フッター（SiteFooter）が持つ */}
       <p className="home-links-foot">
-        © KurashiMap — 出典: e-Stat（住宅・土地統計調査／国勢調査）・地価公示／地価調査・不動産情報ライブラリ・こども家庭庁・出入国在留管理庁 在留外国人統計（e-Stat）
-        ／ <Link href="/about">このサイトについて（データの出典と更新方針）</Link>
-        ／ <Link href="/privacy">プライバシーポリシー</Link>
+        出典: e-Stat（住宅・土地統計調査／国勢調査）・地価公示／地価調査・不動産情報ライブラリ・こども家庭庁・出入国在留管理庁 在留外国人統計（e-Stat）
       </p>
     </div>
   );
