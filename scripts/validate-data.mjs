@@ -10,7 +10,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { PREFS } from "./_lib/prefs.mjs";
+import { PREFS, JP_BOUNDS as JP } from "./_lib/prefs.mjs";
 import { IPSS_YEARS } from "./_lib/ipss.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -18,8 +18,6 @@ const prefArg = process.argv.find((a) => a.startsWith("--pref="))?.slice(7);
 const slugs = prefArg ? [prefArg] : Object.keys(PREFS);
 
 const TRENDS = new Set(["増加", "微増", "横ばい", "微減", "減少"]);
-// 日本の領域を大きめに囲む座標範囲（避難場所の座標打ち間違い検出用）
-const JP = { west: 122, east: 154, south: 20, north: 46 };
 
 const errors = [];
 function err(file, code, msg) {

@@ -17,7 +17,7 @@ import type {
 } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import type { Municipality, MuniSummary } from "@/lib/types";
-import { PREFS, getPrefByCode } from "@/lib/prefs";
+import { PREFS, getPrefByCode, getPrefBySlug } from "@/lib/prefs";
 import { hasRent } from "@/lib/rentColor";
 import { getMapMetric, TREND_PROPERTY, type MapMetricKey } from "@/lib/mapMetrics";
 import { trackSelectMunicipality, trackChangeMetric, trackApplyFilter } from "@/lib/analytics";
@@ -117,7 +117,9 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
   const [mapReady, setMapReady] = useState(false);
   // 初回ビューのポリゴンが描画され切るまで true にしない（凡例先行・白地図対策）
   const [firstPaintReady, setFirstPaintReady] = useState(false);
-  const [tooltip, setTooltip] = useState<{ x: number; y: number; name: string; label: string; value: string; flip: boolean } | null>(null);
+  // kind: "hover" はポリゴンホバー由来（タッチ端末では出さない）、"shelter" は避難場所の
+  // クリック/タップ由来（モバイルでも表示する。タップの結果が何も出ないと機能が死ぬため）。
+  const [tooltip, setTooltip] = useState<{ x: number; y: number; name: string; label: string; value: string; flip: boolean; kind: "hover" | "shelter" } | null>(null);
   // レイヤーパネルの初期開閉。モバイルは地図を覆わないよう閉、PCは従来どおり開。
   // パネル自体は firstPaintReady（クライアント側）まで描画されないため hydration 不整合はない。
   const [layersOpen, setLayersOpen] = useState(() => typeof window === "undefined" || window.innerWidth >= 768);
@@ -303,8 +305,17 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
       };
 
       map.on("load", async () => {
-        // ディープリンク時は東京湾デフォルト→目的地の二段ジャンプを避け、県 bbox へ直行する
-        if (!prefTarget) map.fitBounds(TOKYO_BAY_BBOX, { padding: 40, duration: 0 });
+        // ディープリンク時は東京湾デフォルト→目的地の二段ジャンプを避け、県 bbox
+        // （PREFS の本土中心 bbox。島嶼込みにしない理由は lib/prefs.ts 参照）へ直行する。
+        // 静的定数なので prefectures.geojson の取得完了を待たずに即フィットできる。
+        const deepBbox = prefTarget ? getPrefBySlug(prefTarget)?.bbox : undefined;
+        if (deepBbox) {
+          // 都道府県クリック時の fly-in（下の pref-fill クリックハンドラ）と同じ
+          // flyToPrefBbox を使い、初期表示なので即時（duration: 0）にする。
+          flyToPrefBbox(map, deepBbox, 0);
+        } else {
+          map.fitBounds(TOKYO_BAY_BBOX, { padding: 40, duration: 0 });
+        }
         // prefectures(47県の輪郭, 約369KB)だけ起動時にロード。各県の市区町村/区
         // ポリゴンは全件で22MB超あり SP 実機で破綻するため、ズームしてビューポートに
         // 入った県だけを遅延ロードする（下の ensurePrefs / checkViewport）。
@@ -312,7 +323,8 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
         const prefGeo = await prefGeoPromise;
         prefGeoRef.current = prefGeo;
 
-        // 県 slug → bbox（ディープリンクの初期フィットと遅延ロード判定で共用）
+        // 県 slug → bbox（遅延ロード判定で使用）。PREFS の本土中心 bbox と違い、
+        // 島嶼の自治体ポリゴンもロードできるようジオメトリ全体（島嶼込み）の bbox を使う。
         const codeToSlug = new Map(PREFS.map((p) => [p.codePrefix, p.slug]));
         const prefBySlug = new Map(PREFS.map((p) => [p.slug, p]));
         const prefBboxBySlug = new Map<string, [number, number, number, number]>();
@@ -321,17 +333,6 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
           if (!slug) continue;
           const bb = computeBbox(f.geometry);
           if (bb) prefBboxBySlug.set(slug, [bb[0][0], bb[0][1], bb[1][0], bb[1][1]]);
-        }
-
-        if (prefTarget) {
-          const bb = prefBboxBySlug.get(prefTarget);
-          if (bb) {
-            // 都道府県クリック時の fly-in（下の pref-fill クリックハンドラ）と同じ
-            // flyToPrefBbox を使い、初期表示なので即時（duration: 0）にする。
-            flyToPrefBbox(map, [[bb[0], bb[1]], [bb[2], bb[3]]], 0);
-          } else {
-            map.fitBounds(TOKYO_BAY_BBOX, { padding: 40, duration: 0 });
-          }
         }
         // muni / wards は空で開始し、遅延ロードのたびに features を足して setData する
         const muniGeo: GeoJSON.FeatureCollection = { type: "FeatureCollection", features: [] };
@@ -353,7 +354,12 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
         // 選択・計測・fly が二重実行される。避難所の点クリック抑止フラグも不要になる）。
         map.on("mouseenter", "shelter-points", () => { map.getCanvas().style.cursor = "pointer"; });
         map.on("mouseleave", "shelter-points", () => { map.getCanvas().style.cursor = ""; });
+        // ツールチップはスクリーン座標固定なので、パン/ズーム開始で閉じて取り残しを防ぐ。
+        map.on("movestart", () => setTooltip(null));
         map.on("click", (e) => {
+          // クリック/タップはまずツールチップを閉じ、避難場所ヒット時だけ出し直す
+          // （タッチにはホバー消去がないため、明示的に消さないと出しっぱなしになる）。
+          setTooltip(null);
           const layers = ["shelter-points", "wards-fill", "muni-fill"].filter((id) => map.getLayer(id));
           if (!layers.length) return;
           // queryRenderedFeatures は描画順の最前面から返る（点 > 区 > 親市）。
@@ -369,6 +375,7 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
               label: "指定緊急避難場所",
               value: String(f.properties?.address ?? ""),
               flip: e.point.x > canvasW - 200,
+              kind: "shelter",
             });
             return;
           }
@@ -385,7 +392,9 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
           if (map.getZoom() >= PREF_CLICK_MAX_ZOOM) return; // 高ズームでは pref クリックを無視
           const f = e.features?.[0];
           if (!f) return;
-          const bbox = computeBbox(f.geometry);
+          // ディープリンクと同じ本土中心 bbox を優先（geometry 由来は code 不明時の保険）。
+          const bbox =
+            getPrefByCode(String(f.properties?.code ?? ""))?.bbox ?? computeBbox(f.geometry);
           if (!bbox) return;
           flyToPrefBbox(map, bbox, 900);
         });
@@ -438,6 +447,7 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
               label: metric ? metric.label : "",
               value: metric && propKey ? metric.formatValue(f.properties?.[propKey]) : "",
               flip: e.point.x > canvasW - 200,
+              kind: "hover",
             });
           };
         map.on("mousemove", "muni-fill", onPolyMove("muni"));
@@ -886,7 +896,7 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
       )}
 
       {/* ホバーツールチップ */}
-      {tooltip && !isMobile && (
+      {tooltip && (!isMobile || tooltip.kind === "shelter") && (
         <div
           className={`map-tooltip ${tooltip.flip ? "is-flipped" : ""}`}
           style={{ left: tooltip.x, top: tooltip.y }}
