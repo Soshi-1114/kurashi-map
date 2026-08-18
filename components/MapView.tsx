@@ -17,7 +17,7 @@ import type {
 } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import type { Municipality, MuniSummary } from "@/lib/types";
-import { PREFS, getPrefByCode } from "@/lib/prefs";
+import { PREFS, getPrefByCode, getPrefBySlug } from "@/lib/prefs";
 import { hasRent } from "@/lib/rentColor";
 import { getMapMetric, TREND_PROPERTY, type MapMetricKey } from "@/lib/mapMetrics";
 import { trackSelectMunicipality, trackChangeMetric, trackApplyFilter } from "@/lib/analytics";
@@ -40,7 +40,6 @@ import {
   flyToPrefBbox, flyPadding, MUNI_FILL_OPACITY, type LabelDimState,
 } from "./map/mapHelpers";
 import { addKurashiLayers } from "./map/mapLayers";
-import { PREF_BBOXES } from "./map/prefBboxes";
 import { useShelterOverlay } from "./map/useShelterOverlay";
 import MetricLegend from "./map/MetricLegend";
 import LayersPanel from "./map/LayersPanel";
@@ -306,15 +305,14 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
       };
 
       map.on("load", async () => {
-        // ディープリンク時は東京湾デフォルト→目的地の二段ジャンプを避け、県 bbox へ直行する。
-        // bbox は事前計算テーブル（prefBboxes.ts）。ジオメトリ由来だと島嶼まで含んで
-        // 引きすぎる（東京→小笠原、鹿児島→奄美）ため本土中心の値を使う。静的テーブル
-        // なので prefectures.geojson の取得完了を待たずに即フィットできる。
-        const deepBbox = prefTarget ? PREF_BBOXES[prefTarget] : undefined;
+        // ディープリンク時は東京湾デフォルト→目的地の二段ジャンプを避け、県 bbox
+        // （PREFS の本土中心 bbox。島嶼込みにしない理由は lib/prefs.ts 参照）へ直行する。
+        // 静的定数なので prefectures.geojson の取得完了を待たずに即フィットできる。
+        const deepBbox = prefTarget ? getPrefBySlug(prefTarget)?.bbox : undefined;
         if (deepBbox) {
           // 都道府県クリック時の fly-in（下の pref-fill クリックハンドラ）と同じ
           // flyToPrefBbox を使い、初期表示なので即時（duration: 0）にする。
-          flyToPrefBbox(map, [[deepBbox[0], deepBbox[1]], [deepBbox[2], deepBbox[3]]], 0);
+          flyToPrefBbox(map, deepBbox, 0);
         } else {
           map.fitBounds(TOKYO_BAY_BBOX, { padding: 40, duration: 0 });
         }
@@ -325,9 +323,8 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
         const prefGeo = await prefGeoPromise;
         prefGeoRef.current = prefGeo;
 
-        // 県 slug → bbox（遅延ロード判定で使用）。ビューポート交差はジオメトリ全体で
-        // 判定したいので、こちらは prefBboxes.ts と違い島嶼込みの bbox を使う
-        // （本土中心 bbox にすると島嶼の自治体ポリゴンがロードされなくなる）。
+        // 県 slug → bbox（遅延ロード判定で使用）。PREFS の本土中心 bbox と違い、
+        // 島嶼の自治体ポリゴンもロードできるようジオメトリ全体（島嶼込み）の bbox を使う。
         const codeToSlug = new Map(PREFS.map((p) => [p.codePrefix, p.slug]));
         const prefBySlug = new Map(PREFS.map((p) => [p.slug, p]));
         const prefBboxBySlug = new Map<string, [number, number, number, number]>();
@@ -360,14 +357,14 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
         // ツールチップはスクリーン座標固定なので、パン/ズーム開始で閉じて取り残しを防ぐ。
         map.on("movestart", () => setTooltip(null));
         map.on("click", (e) => {
+          // クリック/タップはまずツールチップを閉じ、避難場所ヒット時だけ出し直す
+          // （タッチにはホバー消去がないため、明示的に消さないと出しっぱなしになる）。
+          setTooltip(null);
           const layers = ["shelter-points", "wards-fill", "muni-fill"].filter((id) => map.getLayer(id));
           if (!layers.length) return;
           // queryRenderedFeatures は描画順の最前面から返る（点 > 区 > 親市）。
           const f = map.queryRenderedFeatures(e.point, { layers })[0];
-          if (!f) {
-            setTooltip(null); // 何もない場所のタップでも避難場所ツールチップを閉じる
-            return;
-          }
+          if (!f) return;
           if (f.layer.id === "shelter-points") {
             // 避難場所クリックで名称をツールチップ表示（指標ツールチップを流用）。
             const canvasW = map.getCanvas().clientWidth;
@@ -382,9 +379,6 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
             });
             return;
           }
-          // 避難場所以外のクリック/タップで避難場所ツールチップを閉じる。PC はホバー移動で
-          // 消えるが、タッチにはホバーがないため明示的に消さないと出しっぱなしになる。
-          setTooltip(null);
           const code = String(f.properties?.code ?? "");
           if (!code) return;
           setSelectedCode(code);
@@ -398,12 +392,9 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
           if (map.getZoom() >= PREF_CLICK_MAX_ZOOM) return; // 高ズームでは pref クリックを無視
           const f = e.features?.[0];
           if (!f) return;
-          // ディープリンクと同じ本土中心 bbox を優先（東京・鹿児島で離島まで引かない）。
-          const slug = codeToSlug.get(String(f.properties?.code ?? "").slice(0, 2));
-          const pre = slug ? PREF_BBOXES[slug] : undefined;
-          const bbox = pre
-            ? ([[pre[0], pre[1]], [pre[2], pre[3]]] as [[number, number], [number, number]])
-            : computeBbox(f.geometry);
+          // ディープリンクと同じ本土中心 bbox を優先（geometry 由来は code 不明時の保険）。
+          const bbox =
+            getPrefByCode(String(f.properties?.code ?? ""))?.bbox ?? computeBbox(f.geometry);
           if (!bbox) return;
           flyToPrefBbox(map, bbox, 900);
         });

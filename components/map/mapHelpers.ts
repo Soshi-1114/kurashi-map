@@ -1,6 +1,6 @@
 // MapView の純関数ヘルパー（React 非依存）。geojson 取得・bbox 計算・
 // ベース地図ラベルの制御など、地図初期化と操作系 effect の両方から使う。
-import type { Map as MapLibreMap, DataDrivenPropertyValueSpecification } from "maplibre-gl";
+import type { Map as MapLibreMap, DataDrivenPropertyValueSpecification, LngLatBoundsLike } from "maplibre-gl";
 import { EMPTY_FC } from "./mapConstants";
 
 // 起動時 geojson の取得。失敗（オフライン・CDN障害）で map.on("load") ハンドラごと
@@ -48,9 +48,11 @@ export function computeBbox(geom: GeoJSON.Geometry): [[number, number], [number,
 
 // 都道府県 bbox への fly-in。都道府県クリック（インタラクティブ）と地図ディープリンクの
 // 初期フォーカス（duration: 0 で即時）の両方から使う共通の余白・maxZoom。
+// bbox は LngLatBoundsLike なので PREFS のフラットな [w,s,e,n] も computeBbox の
+// [[w,s],[e,n]] もそのまま渡せる。
 export function flyToPrefBbox(
   map: MapLibreMap,
-  bbox: [[number, number], [number, number]],
+  bbox: LngLatBoundsLike,
   duration: number,
 ): void {
   const sp = typeof window !== "undefined" && window.innerWidth < 768;

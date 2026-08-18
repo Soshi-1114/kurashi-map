@@ -7,6 +7,9 @@ export const NORTHERN_TERRITORIES_CODES = new Set([
   "01695", "01696", "01697", "01698", "01699", "01700",
 ]);
 
+// 日本の領域を大きめに囲む座標範囲（座標打ち間違い検出用）。各所で重複定義しない。
+export const JP_BOUNDS = { west: 122, east: 154, south: 20, north: 46 };
+
 export const PREFS = {
   saitama: {
     code: "11",

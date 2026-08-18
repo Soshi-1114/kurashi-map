@@ -29,7 +29,7 @@ push / PR ごとに CI（`.github/workflows/test.yml`）が typecheck・test・l
 
 **県別のコード分割。** `lib/prefs.ts` に `PREFS`（県ごとの slug・codePrefix・hasWards）と `loadPrefData` があり、テンプレートリテラルの動的 `import()` で `data/{slug}.json`（および `data/{slug}_wards.json`）を読み込みます。Next が県ごとに chunk を分割するため、必要な県だけがロードされます。`lib/metrics.ts` がこのアクセス層で、`code` の先頭2桁（=codePrefix）から `getPrefByCode` で県を引き、ロード済み県をキャッシュして検索します。
 
-**`prefs` マニフェストが2つあり**、同期を保つ必要があります: `lib/prefs.ts`（アプリ用の TypeScript）と `scripts/_lib/prefs.mjs`（データスクリプトと CI マトリクス用）。県を追加する時は両方を変更します。
+**`prefs` マニフェストが2つあり**、同期を保つ必要があります: `lib/prefs.ts`（アプリ用の TypeScript。地図初期フォーカス用の本土中心 `bbox` 含む）と `scripts/_lib/prefs.mjs`（データスクリプトと CI マトリクス用）。県を追加する時は両方を変更します。共通フィールドのズレは `tests/lib/prefs.test.ts` が検出します。
 
 **地図の指標はデータ駆動。** `lib/mapMetrics.ts` が切替可能なコロプレス指標（`rent`・`landPrice`・`populationTrend`）を、MapLibre の `fill-color` 式・凡例・値整形をまとめた単一の `MapMetric` 型として定義します。`MapView.tsx` はこの定義から色・凡例・ツールチップを読み、ハードコードしません。家賃のしきい値と配色は `lib/rentColor.ts` にあり、固定の契約として扱います。
 
