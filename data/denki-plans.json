@@ -196,6 +196,437 @@
       "sourceUrl": "https://www.okiden.co.jp/individual/price-menu/specific/",
       "sourceAsOf": "2026-08-16",
       "notes": ["最低料金に含まれるのは最初の10kWh"]
+    },
+    {
+      "offerId": "eneos-v",
+      "company": "ENEOSでんき",
+      "planName": "Vプラン（関西・中国・四国はAプラン）",
+      "kind": "offer",
+      "areas": {
+        "hokkaido": {
+          "basic": { "type": "ampere", "yenPerMonth": { "30": 1254.0, "40": 1672.0, "50": 2090.0 } },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 35.51 },
+            { "upTo": 280, "yenPerKwh": 40.47 },
+            { "upTo": null, "yenPerKwh": 42.86 }
+          ]
+        },
+        "tohoku": {
+          "basic": { "type": "ampere", "yenPerMonth": { "30": 1108.8, "40": 1478.4, "50": 1848.0 } },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 29.47 },
+            { "upTo": 300, "yenPerKwh": 35.66 },
+            { "upTo": null, "yenPerKwh": 38.46 }
+          ]
+        },
+        "tokyo": {
+          "basic": { "type": "ampere", "yenPerMonth": { "30": 935.25, "40": 1247.0, "50": 1558.75 } },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 29.8 },
+            { "upTo": 300, "yenPerKwh": 34.85 },
+            { "upTo": null, "yenPerKwh": 36.9 }
+          ]
+        },
+        "chubu": {
+          "basic": { "type": "ampere", "yenPerMonth": { "30": 962.34, "40": 1283.12, "50": 1603.9 } },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 20.99 },
+            { "upTo": 300, "yenPerKwh": 24.91 },
+            { "upTo": null, "yenPerKwh": 26.63 }
+          ]
+        },
+        "hokuriku": {
+          "basic": { "type": "ampere", "yenPerMonth": { "30": 907.5, "40": 1210.0, "50": 1512.5 } },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 30.7 },
+            { "upTo": 300, "yenPerKwh": 34.2 },
+            { "upTo": null, "yenPerKwh": 34.93 }
+          ]
+        },
+        "kansai": {
+          "basic": { "type": "minimum", "yenPerMonth": 467.46, "includedKwh": 15 },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 20.21 },
+            { "upTo": 300, "yenPerKwh": 23.9 },
+            { "upTo": null, "yenPerKwh": 26.7 }
+          ]
+        },
+        "chugoku": {
+          "basic": { "type": "minimum", "yenPerMonth": 759.68, "includedKwh": 15 },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 32.58 },
+            { "upTo": 300, "yenPerKwh": 38.71 },
+            { "upTo": null, "yenPerKwh": 39.72 }
+          ]
+        },
+        "shikoku": {
+          "basic": { "type": "minimum", "yenPerMonth": 666.89, "includedKwh": 11 },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 30.64 },
+            { "upTo": 300, "yenPerKwh": 36.62 },
+            { "upTo": null, "yenPerKwh": 38.61 }
+          ]
+        },
+        "kyushu": {
+          "basic": { "type": "ampere", "yenPerMonth": { "30": 947.37, "40": 1263.16, "50": 1578.95 } },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 18.3 },
+            { "upTo": 300, "yenPerKwh": 23.27 },
+            { "upTo": null, "yenPerKwh": 24.99 }
+          ]
+        }
+      },
+      "officialUrl": "https://www.eneos-power.co.jp/denki/plan/v/",
+      "sourceUrl": "https://www.eneos-power.co.jp/denki/plan/v/",
+      "sourceAsOf": "2026-08-18",
+      "notes": ["にねん とく割等の割引・特典は試算に含まない"],
+      "sourceNotes": ["公式料金表の表記は2025年4月時点（2026-08-18確認）"]
+    },
+    {
+      "offerId": "idemitsu-s",
+      "company": "idemitsuでんき",
+      "planName": "Sプラン",
+      "kind": "offer",
+      "areas": {
+        "hokkaido": {
+          "basic": { "type": "ampere", "yenPerMonth": { "30": 1254.0, "40": 1672.0, "50": 2090.0 } },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 35.69 },
+            { "upTo": 280, "yenPerKwh": 40.74 },
+            { "upTo": null, "yenPerKwh": 42.27 }
+          ]
+        },
+        "tohoku": {
+          "basic": { "type": "ampere", "yenPerMonth": { "30": 1108.8, "40": 1478.4, "50": 1848.0 } },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 29.62 },
+            { "upTo": 300, "yenPerKwh": 35.69 },
+            { "upTo": null, "yenPerKwh": 37.92 }
+          ]
+        },
+        "tokyo": {
+          "basic": { "type": "ampere", "yenPerMonth": { "30": 935.25, "40": 1247.0, "50": 1558.75 } },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 29.8 },
+            { "upTo": 300, "yenPerKwh": 34.76 },
+            { "upTo": null, "yenPerKwh": 37.1 }
+          ]
+        },
+        "chubu": {
+          "basic": { "type": "ampere", "yenPerMonth": { "30": 963.42, "40": 1284.56, "50": 1605.7 } },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 21.2 },
+            { "upTo": 300, "yenPerKwh": 25.09 },
+            { "upTo": null, "yenPerKwh": 26.45 }
+          ]
+        },
+        "hokuriku": {
+          "basic": { "type": "ampere", "yenPerMonth": { "30": 907.5, "40": 1210.0, "50": 1512.5 } },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 30.86 },
+            { "upTo": 300, "yenPerKwh": 33.92 },
+            { "upTo": null, "yenPerKwh": 34.4 }
+          ]
+        },
+        "kansai": {
+          "basic": { "type": "minimum", "yenPerMonth": 522.58, "includedKwh": 15 },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 20.21 },
+            { "upTo": 300, "yenPerKwh": 24.24 },
+            { "upTo": null, "yenPerKwh": 26.58 }
+          ]
+        },
+        "chugoku": {
+          "basic": { "type": "minimum", "yenPerMonth": 649.68, "includedKwh": 15 },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 32.75 },
+            { "upTo": 300, "yenPerKwh": 38.49 },
+            { "upTo": null, "yenPerKwh": 39.5 }
+          ]
+        },
+        "shikoku": {
+          "basic": { "type": "minimum", "yenPerMonth": 666.89, "includedKwh": 11 },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 30.65 },
+            { "upTo": 300, "yenPerKwh": 36.19 },
+            { "upTo": null, "yenPerKwh": 38.18 }
+          ]
+        },
+        "kyushu": {
+          "basic": { "type": "ampere", "yenPerMonth": { "30": 948.72, "40": 1264.96, "50": 1581.2 } },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 18.37 },
+            { "upTo": 300, "yenPerKwh": 23.26 },
+            { "upTo": null, "yenPerKwh": 24.46 }
+          ]
+        }
+      },
+      "officialUrl": "https://denki.idemitsu.com/sp/",
+      "sourceUrl": "https://denki.idemitsu.com/terms/list.html",
+      "sourceAsOf": "2026-08-18",
+      "notes": ["ガソリン・EV割引等の「選べる特典」は試算に含まない"],
+      "sourceNotes": ["出典は公式の電気料金要綱PDF（北海道は2025-11-01実施、他エリアは2025-07-22実施）"]
+    },
+    {
+      "offerId": "terasel-b",
+      "company": "TERASELでんき",
+      "planName": "TERASELプラン（関西・中国・四国はA）",
+      "kind": "offer",
+      "areas": {
+        "hokkaido": {
+          "basic": { "type": "ampere", "yenPerMonth": { "30": 1213.08, "40": 1617.44, "50": 2021.8 } },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 34.74 },
+            { "upTo": 280, "yenPerKwh": 40.78 },
+            { "upTo": null, "yenPerKwh": 44.35 }
+          ]
+        },
+        "tohoku": {
+          "basic": { "type": "ampere", "yenPerMonth": { "30": 1069.2, "40": 1425.6, "50": 1782.0 } },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 28.96 },
+            { "upTo": 300, "yenPerKwh": 35.44 },
+            { "upTo": null, "yenPerKwh": 39.23 }
+          ]
+        },
+        "tokyo": {
+          "basic": { "type": "ampere", "yenPerMonth": { "30": 900.93, "40": 1201.24, "50": 1501.55 } },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 29.0 },
+            { "upTo": 300, "yenPerKwh": 35.34 },
+            { "upTo": null, "yenPerKwh": 39.26 }
+          ]
+        },
+        "chubu": {
+          "basic": { "type": "ampere", "yenPerMonth": { "30": 950.55, "40": 1267.4, "50": 1584.25 } },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 20.88 },
+            { "upTo": 300, "yenPerKwh": 25.29 },
+            { "upTo": null, "yenPerKwh": 28.19 }
+          ]
+        },
+        "hokuriku": {
+          "basic": { "type": "ampere", "yenPerMonth": { "30": 878.46, "40": 1171.28, "50": 1464.1 } },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 30.12 },
+            { "upTo": 300, "yenPerKwh": 33.85 },
+            { "upTo": null, "yenPerKwh": 35.49 }
+          ]
+        },
+        "kansai": {
+          "basic": { "type": "minimum", "yenPerMonth": 505.53, "includedKwh": 15 },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 19.19 },
+            { "upTo": 300, "yenPerKwh": 24.32 },
+            { "upTo": null, "yenPerKwh": 27.16 }
+          ]
+        },
+        "chugoku": {
+          "basic": { "type": "minimum", "yenPerMonth": 742.84, "includedKwh": 15 },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 31.71 },
+            { "upTo": 300, "yenPerKwh": 38.06 },
+            { "upTo": null, "yenPerKwh": 40.07 }
+          ]
+        },
+        "shikoku": {
+          "basic": { "type": "minimum", "yenPerMonth": 646.43, "includedKwh": 11 },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 29.64 },
+            { "upTo": 300, "yenPerKwh": 35.93 },
+            { "upTo": null, "yenPerKwh": 39.26 }
+          ]
+        },
+        "kyushu": {
+          "basic": { "type": "ampere", "yenPerMonth": { "30": 904.17, "40": 1205.56, "50": 1506.95 } },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 17.49 },
+            { "upTo": 300, "yenPerKwh": 22.81 },
+            { "upTo": null, "yenPerKwh": 25.66 }
+          ]
+        }
+      },
+      "officialUrl": "https://www.terasel.jp/charge/terasel-plan/",
+      "sourceUrl": "https://www.terasel.jp/charge/terasel-plan/",
+      "sourceAsOf": "2026-08-18",
+      "notes": [
+        "楽天ポイント等の特典は試算に含まない",
+        "燃料費調整額に上限なし（燃料高騰時は大手の従量電灯より高くなる場合がある）"
+      ],
+      "sourceNotes": ["基本料金は公式記載の10Aあたり単価×(契約A÷10)で算出（公式ページに「10Aごとの料金」と明記）"]
+    },
+    {
+      "offerId": "terasel-cho",
+      "company": "TERASELでんき",
+      "planName": "超TERASELプラン（関西・中国・四国はA）",
+      "kind": "offer",
+      "areas": {
+        "hokkaido": {
+          "basic": { "type": "ampere", "yenPerMonth": { "30": 1254.0, "40": 1672.0, "50": 2090.0 } },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 35.69 },
+            { "upTo": 280, "yenPerKwh": 39.66 },
+            { "upTo": null, "yenPerKwh": 42.35 }
+          ]
+        },
+        "tohoku": {
+          "basic": { "type": "ampere", "yenPerMonth": { "30": 1108.8, "40": 1478.4, "50": 1848.0 } },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 29.51 },
+            { "upTo": 300, "yenPerKwh": 35.36 },
+            { "upTo": null, "yenPerKwh": 37.03 }
+          ]
+        },
+        "tokyo": {
+          "basic": { "type": "ampere", "yenPerMonth": { "30": 935.25, "40": 1247.0, "50": 1558.75 } },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 29.8 },
+            { "upTo": 300, "yenPerKwh": 34.26 },
+            { "upTo": null, "yenPerKwh": 35.64 }
+          ]
+        },
+        "chubu": {
+          "basic": { "type": "ampere", "yenPerMonth": { "30": 963.42, "40": 1284.56, "50": 1605.7 } },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 21.01 },
+            { "upTo": 300, "yenPerKwh": 24.88 },
+            { "upTo": null, "yenPerKwh": 26.35 }
+          ]
+        },
+        "hokuriku": {
+          "basic": { "type": "ampere", "yenPerMonth": { "30": 907.5, "40": 1210.0, "50": 1512.5 } },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 30.66 },
+            { "upTo": 300, "yenPerKwh": 33.9 },
+            { "upTo": null, "yenPerKwh": 34.38 }
+          ]
+        },
+        "kansai": {
+          "basic": { "type": "minimum", "yenPerMonth": 522.58, "includedKwh": 15 },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 20.21 },
+            { "upTo": 300, "yenPerKwh": 24.41 },
+            { "upTo": null, "yenPerKwh": 23.79 }
+          ]
+        },
+        "chugoku": {
+          "basic": { "type": "minimum", "yenPerMonth": 759.68, "includedKwh": 15 },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 32.75 },
+            { "upTo": 300, "yenPerKwh": 38.23 },
+            { "upTo": null, "yenPerKwh": 36.6 }
+          ]
+        },
+        "shikoku": {
+          "basic": { "type": "minimum", "yenPerMonth": 667.0, "includedKwh": 11 },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 30.66 },
+            { "upTo": 300, "yenPerKwh": 36.08 },
+            { "upTo": null, "yenPerKwh": 35.3 }
+          ]
+        },
+        "kyushu": {
+          "basic": { "type": "ampere", "yenPerMonth": { "30": 948.72, "40": 1264.96, "50": 1581.2 } },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 18.19 },
+            { "upTo": 300, "yenPerKwh": 22.96 },
+            { "upTo": null, "yenPerKwh": 24.38 }
+          ]
+        }
+      },
+      "officialUrl": "https://www.terasel.jp/charge/terasel-plan/",
+      "sourceUrl": "https://www.terasel.jp/charge/terasel-plan/",
+      "sourceAsOf": "2026-08-18",
+      "notes": [
+        "使用量が多い世帯向けの設計（関西・中国・四国は第3段階が第2段階より安い）",
+        "燃料費調整額に上限なし（燃料高騰時は大手の従量電灯より高くなる場合がある）"
+      ],
+      "sourceNotes": ["基本料金は公式記載の10Aあたり単価×(契約A÷10)で算出（公式ページに「10Aごとの料金」と明記）"]
+    },
+    {
+      "offerId": "mitsuuroko-juryo",
+      "company": "ミツウロコでんき",
+      "planName": "従量電灯B（関西・中国・四国はA）",
+      "kind": "offer",
+      "areas": {
+        "hokkaido": {
+          "basic": { "type": "ampere", "yenPerMonth": { "30": 1254.0, "40": 1672.0, "50": 2090.0 } },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 35.69 },
+            { "upTo": 280, "yenPerKwh": 37.28 },
+            { "upTo": null, "yenPerKwh": 40.25 }
+          ]
+        },
+        "tohoku": {
+          "basic": { "type": "ampere", "yenPerMonth": { "30": 1108.8, "40": 1478.4, "50": 1848.0 } },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 31.65 },
+            { "upTo": 300, "yenPerKwh": 34.26 },
+            { "upTo": null, "yenPerKwh": 37.84 }
+          ]
+        },
+        "tokyo": {
+          "basic": { "type": "ampere", "yenPerMonth": { "30": 935.25, "40": 1247.0, "50": 1558.75 } },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 31.91 },
+            { "upTo": 300, "yenPerKwh": 33.13 },
+            { "upTo": null, "yenPerKwh": 35.79 }
+          ]
+        },
+        "chubu": {
+          "basic": { "type": "ampere", "yenPerMonth": { "30": 963.42, "40": 1284.56, "50": 1605.7 } },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 23.26 },
+            { "upTo": 300, "yenPerKwh": 23.56 },
+            { "upTo": null, "yenPerKwh": 26.15 }
+          ]
+        },
+        "hokuriku": {
+          "basic": { "type": "ampere", "yenPerMonth": { "30": 907.5, "40": 1210.0, "50": 1512.5 } },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 31.88 },
+            { "upTo": 300, "yenPerKwh": 33.39 },
+            { "upTo": null, "yenPerKwh": 34.39 }
+          ]
+        },
+        "kansai": {
+          "basic": { "type": "minimum", "yenPerMonth": 515.29, "includedKwh": 15 },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 22.06 },
+            { "upTo": 300, "yenPerKwh": 24.23 },
+            { "upTo": null, "yenPerKwh": 25.61 }
+          ]
+        },
+        "chugoku": {
+          "basic": { "type": "minimum", "yenPerMonth": 669.92, "includedKwh": 15 },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 34.8 },
+            { "upTo": 300, "yenPerKwh": 36.57 },
+            { "upTo": null, "yenPerKwh": 38.23 }
+          ]
+        },
+        "shikoku": {
+          "basic": { "type": "minimum", "yenPerMonth": 666.89, "includedKwh": 11 },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 33.16 },
+            { "upTo": 300, "yenPerKwh": 35.72 },
+            { "upTo": null, "yenPerKwh": 37.39 }
+          ]
+        },
+        "kyushu": {
+          "basic": { "type": "ampere", "yenPerMonth": { "30": 948.72, "40": 1264.96, "50": 1581.2 } },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 20.39 },
+            { "upTo": 300, "yenPerKwh": 20.52 },
+            { "upTo": null, "yenPerKwh": 24.24 }
+          ]
+        }
+      },
+      "officialUrl": "https://mitsuurokogreenenergy.jp/ryokin/tanka.html",
+      "sourceUrl": "https://mitsuurokogreenenergy.jp/ryokin/tanka.html",
+      "sourceAsOf": "2026-08-18",
+      "notes": ["燃料費調整相当額に上限なし（燃料高騰時は大手の従量電灯より高くなる場合がある）"],
+      "sourceNotes": ["適用時期の公式表記は北海道が2025年11月検針日から、他エリアは2024年4月検針日から"]
     }
   ]
 }

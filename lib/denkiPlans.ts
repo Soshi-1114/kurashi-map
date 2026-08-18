@@ -37,7 +37,10 @@ export type DenkiPlan = {
   sourceUrl: string;
   /** 料金表を確認した時点（YYYY-MM-DD または YYYY-MM） */
   sourceAsOf: string;
+  /** ユーザー向けの注記（試算に含まない割引・燃調上限なし等）。UI がそのまま描画する */
   notes?: string[];
+  /** 整備者向けメモ（出典の表記時点・単価の導出方法等）。UI では描画しない */
+  sourceNotes?: string[];
 };
 
 export type DenkiPlansFile = { asOf: string; plans: DenkiPlan[] };
@@ -63,6 +66,11 @@ export function validateDenkiPlans(file: DenkiPlansFile): string[] {
 
   const ids = new Set<string>();
   const baselineAreas = new Set<DenkiArea>();
+  // アンペア制/最低料金制はエリアの属性（送配電エリアの契約制度）であって
+  // プランの属性ではない。混在すると UI（DenkiSimulator の isAmpereArea）が
+  // baseline の型からアンペア入力の有無を決めるため、最低料金制エリアで
+  // ユーザーが変更できない既定アンペアのまま offer の基本料金が計算されてしまう。
+  const areaTypes = new Map<DenkiArea, string>();
 
   for (const plan of file.plans) {
     const p = `plans[${plan.offerId}]`;
@@ -96,6 +104,13 @@ export function validateDenkiPlans(file: DenkiPlansFile): string[] {
         if (!(basic.includedKwh >= 0)) errors.push(`${pa}: includedKwh が不正`);
       } else {
         errors.push(`${pa}: basic.type が不正`);
+      }
+      if (basic.type === "ampere" || basic.type === "minimum") {
+        const seen = areaTypes.get(area);
+        if (seen && seen !== basic.type) {
+          errors.push(`エリア ${area} で basic.type が混在（${seen} と ${basic.type}）`);
+        }
+        areaTypes.set(area, basic.type);
       }
       if (pricing.tiers.length === 0) errors.push(`${pa}: tiers が空`);
       let prev = 0;
