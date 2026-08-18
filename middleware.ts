@@ -7,9 +7,12 @@ const ALLOWED_COUNTRIES = ['JP'];
 
 // 検索エンジンや SNS のカード生成クローラーは国外 IP から来るため UA で通す。
 // UA は偽装可能だが、一般トラフィックの地域制限としては十分
-// （Google系 / Bing / Apple / DuckDuckGo / Naver(yeti) / LINE / X / Facebook / Slack / Discord / LinkedIn）
+// （Google系 / Bing / Apple / DuckDuckGo / Naver(yeti) / LINE / X / Facebook / Slack / Discord / LinkedIn）。
+// GoogleOther（発見・調査用）・Google-Extended・Storebot-Google も許可
+// （403 を返すとインデックス評価に不利）。
+// AI 検索系（OpenAI / Anthropic / Perplexity / Amazon）は AIO 経由の流入元として許可。
 const ALLOWED_BOT_UA =
-  /googlebot|google-inspectiontool|adsbot-google|apis-google|mediapartners-google|bingbot|bingpreview|msnbot|applebot|duckduckbot|yeti|linespider|twitterbot|facebookexternalhit|slackbot|discordbot|linkedinbot/i;
+  /googlebot|google-inspectiontool|google-extended|googleother|adsbot-google|apis-google|mediapartners-google|storebot-google|bingbot|bingpreview|msnbot|applebot|duckduckbot|yeti|linespider|twitterbot|facebookexternalhit|slackbot|discordbot|linkedinbot|gptbot|oai-searchbot|chatgpt-user|claudebot|claude-web|perplexitybot|amazonbot/i;
 
 // クロールの起点となるファイルは国・UA を問わず公開
 const PUBLIC_PATHS = ['/robots.txt', '/sitemap.xml'];

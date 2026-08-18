@@ -35,8 +35,11 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - id: set
+        # inputs は env 経由で渡す（`${{ }}` をシェルへ直接補間するとコマンドインジェクション面になる）
+        env:
+          PREF_INPUT: ${{ inputs.pref }}
         run: |
-          input="${{ inputs.pref }}"
+          input="$PREF_INPUT"
           if [[ -n "$input" ]]; then
             # カンマ区切りで複数 slug を受け付け、既知の slug か検証して JSON 配列にする
             # （失敗県のリカバリ時に複数県をまとめて再実行できるように）。

@@ -57,10 +57,15 @@ jobs:
 
       - name: スコープ決定（pref 入力 or 全県）
         id: scope
+        # inputs は env 経由で渡し（`${{ }}` をシェルへ直接補間するとコマンドインジェクション面になる）、
+        # slug は PREFS の allowlist で検証する（data-update-quarterly.yml と同じ流儀）
+        env:
+          PREF_INPUT: ${{ inputs.pref }}
         run: |
-          if [[ -n "${{ inputs.pref }}" ]]; then
-            echo "estat=--pref=${{ inputs.pref }}" >> "$GITHUB_OUTPUT"
-            echo "prefs=${{ inputs.pref }}" >> "$GITHUB_OUTPUT"
+          if [[ -n "$PREF_INPUT" ]]; then
+            node -e 'import("./scripts/_lib/prefs.mjs").then((m) => { if (!m.PREFS[process.argv[1]]) { console.error(`未知の pref slug: ${process.argv[1]}`); process.exit(1); } })' "$PREF_INPUT"
+            echo "estat=--pref=$PREF_INPUT" >> "$GITHUB_OUTPUT"
+            echo "prefs=$PREF_INPUT" >> "$GITHUB_OUTPUT"
           else
             echo "estat=--all" >> "$GITHUB_OUTPUT"
             echo "prefs=$(node -e 'import("./scripts/_lib/prefs.mjs").then(m=>console.log(Object.keys(m.PREFS).join(" ")))')" >> "$GITHUB_OUTPUT"
