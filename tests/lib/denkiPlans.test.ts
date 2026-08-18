@@ -97,4 +97,54 @@ describe("data/denki-plans.json", () => {
     const hokkaido = DENKI_PLANS.plans.find((p) => p.offerId === "baseline-hokkaido")!.areas.hokkaido!;
     expect(hokkaido.tiers[1].upTo).toBe(280);
   });
+
+  // ===== offer（新電力）の収録状態 =====
+
+  it("沖縄以外の全エリアに offer が1社以上ある（リンク0本=比較不能への退行防止）", () => {
+    for (const area of DENKI_AREAS) {
+      const offers = DENKI_PLANS.plans.filter((p) => p.kind === "offer" && p.areas[area]);
+      if (area === "okinawa") {
+        // 沖縄は調査時点（2026-08）で固定単価公表の新電力提供なし。提供が始まったらこの分岐を外す。
+        expect(offers.length, area).toBe(0);
+      } else {
+        expect(offers.length, area).toBeGreaterThanOrEqual(1);
+      }
+    }
+  });
+
+  it("最低料金制エリアの offer も minimum 型（UI がアンペアを聞かないエリアで ampere 型を混ぜない）", () => {
+    for (const area of ["kansai", "chugoku", "shikoku"] as const) {
+      for (const p of DENKI_PLANS.plans.filter((p) => p.kind === "offer" && p.areas[area])) {
+        expect(p.areas[area]!.basic.type, `${p.offerId}/${area}`).toBe("minimum");
+      }
+    }
+  });
+
+  // offer のスポットチェック。期待値は各社公式の料金表（2026-08-18 確認、税込・燃調/賦課金含まず）
+  // から手計算。転記ミス（桁・段階境界・エリア取り違え）の検出が目的。
+  it("スポットチェック: ENEOSでんき 東京Vプラン 30A・260kWh", () => {
+    const p = DENKI_PLANS.plans.find((p) => p.offerId === "eneos-v")!.areas.tokyo!;
+    // 935.25 + 120×29.80 + 140×34.85 = 9,390.25 → 9,390
+    expect(estimateMonthly(p, 260, 30)).toBe(9390);
+  });
+  it("スポットチェック: idemitsuでんき Sプラン 関西・260kWh", () => {
+    const p = DENKI_PLANS.plans.find((p) => p.offerId === "idemitsu-s")!.areas.kansai!;
+    // 522.58 + 105×20.21 + 140×24.24 = 6,038.23 → 6,038
+    expect(estimateMonthly(p, 260, 30)).toBe(6038);
+  });
+  it("スポットチェック: TERASELプラン 北海道 40A・300kWh", () => {
+    const p = DENKI_PLANS.plans.find((p) => p.offerId === "terasel-b")!.areas.hokkaido!;
+    // 1,617.44 + 120×34.74 + 160×40.78 + 20×44.35 = 13,198.04 → 13,198
+    expect(estimateMonthly(p, 300, 40)).toBe(13198);
+  });
+  it("スポットチェック: 超TERASELプラン 四国・260kWh", () => {
+    const p = DENKI_PLANS.plans.find((p) => p.offerId === "terasel-cho")!.areas.shikoku!;
+    // 667.00 + 109×30.66 + 140×36.08 = 9,060.14 → 9,060
+    expect(estimateMonthly(p, 260, 30)).toBe(9060);
+  });
+  it("スポットチェック: ミツウロコでんき 九州 50A・430kWh", () => {
+    const p = DENKI_PLANS.plans.find((p) => p.offerId === "mitsuuroko-juryo")!.areas.kyushu!;
+    // 1,581.20 + 120×20.39 + 180×20.52 + 130×24.24 = 10,872.80 → 10,873
+    expect(estimateMonthly(p, 430, 50)).toBe(10873);
+  });
 });
