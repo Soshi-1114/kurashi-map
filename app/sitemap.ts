@@ -10,6 +10,7 @@ import {
   withTemplateRevision,
 } from "@/lib/dataFreshness";
 import { absoluteUrl } from "@/lib/site";
+import { MAP_HUBS } from "@/lib/siteNav";
 import { denkiPlansLastModified } from "@/lib/denkiPlans";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -44,19 +45,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly",
       priority: 1,
     },
-    // 指標別 地図ハブ（ピラーページ群）。foreign-ratio は「外国人 割合 地図」等の
-    // 主力クエリの入口なので priority だけ高い。
-    ...([
-      ["/map/foreign-ratio", 0.9],
-      ["/map/rent", 0.8],
-      ["/map/land-price", 0.8],
-      ["/map/population-trend", 0.8],
-      ["/map/future-population", 0.8],
-    ] as const).map(([path, priority]) => ({
-      url: absoluteUrl(path),
+    // 指標別 地図ハブ（ピラーページ群）。一覧は lib/siteNav.ts が単一ソース。
+    ...MAP_HUBS.map((hub) => ({
+      url: absoluteUrl(hub.href),
       lastModified: withTemplateRevision(siteLatest, TEMPLATE_REVISED_AT.mapHub),
       changeFrequency: "monthly" as const,
-      priority,
+      priority: hub.sitemapPriority,
     })),
     // 自治体比較ページ（選択状態はクエリなので URL はベースの1件のみ）。
     {

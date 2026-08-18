@@ -4,6 +4,7 @@
 
 import Link from "next/link";
 import { RANKINGS, type RankingCategory } from "@/lib/rankings";
+import { MAP_HUBS } from "@/lib/siteNav";
 import PrefRegionPicker from "@/components/home/PrefRegionPicker";
 
 export type PopularMuni = { pref: string; code: string; name: string };
@@ -47,12 +48,12 @@ export default function HomeLinks({ popular }: { popular: PopularMuni[] }) {
 
       <section className="home-links-block">
         <h2 className="home-links-h">地図で見る</h2>
+        {/* ハブ一覧は lib/siteNav.ts が単一ソース。prefetch 無効はハブ1本 ~78KB gzip の
+            viewport 先読みを避けるため（SiteFooter と同方針） */}
         <ul className="home-chip-row">
-          <li><Link href="/map/rent" className="home-chip">家賃相場マップ</Link></li>
-          <li><Link href="/map/land-price" className="home-chip">地価マップ</Link></li>
-          <li><Link href="/map/population-trend" className="home-chip">人口増減マップ</Link></li>
-          <li><Link href="/map/future-population" className="home-chip">将来人口マップ（2050年推計）</Link></li>
-          <li><Link href="/map/foreign-ratio" className="home-chip">外国人住民の割合マップ</Link></li>
+          {MAP_HUBS.map(({ href, label }) => (
+            <li key={href}><Link href={href} prefetch={false} className="home-chip">{label}</Link></li>
+          ))}
         </ul>
       </section>
 

@@ -5,6 +5,11 @@ import { fileURLToPath } from "node:url";
 
 // Content-Security-Policy。全ページに付与する。
 //
+// セキュリティヘッダの分担: CSP はここ（アプリ層・コメントで理由を管理したい）、
+// nosniff / X-Frame-Options / Referrer-Policy / Permissions-Policy / HSTS の
+// 静的5本は vercel.json（プラットフォーム層。JSON なのでコメント不可）。
+// ヘッダを追加・変更する時は両方を確認すること。
+//
 // 本サイトは SSG（静的HTML）なので nonce 方式（リクエスト毎の nonce を HTML と
 // ヘッダの双方に入れる）は使えない。Next のハイドレーション用インラインスクリプトは
 // ページごとに内容が変わりグローバルなハッシュ列にもできないため、script-src は

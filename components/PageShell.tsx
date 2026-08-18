@@ -26,8 +26,7 @@ export default function PageShell({
 }) {
   return (
     <>
-      {/* キーボード/SR 利用者がヘッダーナビを毎ページ通過しなくて済むように。
-          自治体詳細は縦 6,000px 超あるため特に効く。 */}
+      {/* キーボード/SR 利用者がヘッダーナビを毎ページ通過しなくて済むように */}
       <a className="skip-link" href="#main-content">本文へスキップ</a>
       <SiteHeader />
       <main id="main-content" className={`page-root${WIDTH_CLASS[width]}${innerClassName ? ` ${innerClassName}` : ""}`}>

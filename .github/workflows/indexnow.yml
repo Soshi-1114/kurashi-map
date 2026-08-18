@@ -28,7 +28,7 @@ jobs:
           cache: npm
       - run: npm ci
       - name: IndexNow 送信
-        # inputs は env 経由で渡す（`${{ }}` をシェルへ直接補間するとコマンドインジェクション面になる）
+        # inputs は env 経由（シェルへの直接補間を避ける）
         env:
           TARGET_URL: ${{ inputs.url }}
         run: |

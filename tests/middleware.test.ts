@@ -40,6 +40,16 @@ describe('middleware (geo block)', () => {
     ).toBe(200);
   });
 
+  it('国外からでも Google 派生・AI 検索クローラーは通す', () => {
+    expect(middleware(requestOf({ country: 'US', ua: 'GoogleOther' })).status).toBe(200);
+    expect(
+      middleware(requestOf({ country: 'US', ua: 'Mozilla/5.0 (compatible; GPTBot/1.2; +https://openai.com/gptbot)' })).status,
+    ).toBe(200);
+    expect(
+      middleware(requestOf({ country: 'US', ua: 'Mozilla/5.0 (compatible; ClaudeBot/1.0; +claudebot@anthropic.com)' })).status,
+    ).toBe(200);
+  });
+
   it('robots.txt と sitemap.xml は国・UA を問わず公開', () => {
     expect(middleware(requestOf({ country: 'US', path: '/robots.txt' })).status).toBe(200);
     expect(middleware(requestOf({ country: 'US', path: '/sitemap.xml' })).status).toBe(200);

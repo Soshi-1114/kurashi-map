@@ -614,11 +614,22 @@ html, body {
 }
 
 /* キーボード操作時だけ現れる「本文へスキップ」リンク（PageShell の先頭）。
-   非表示は display:none でなく画面外配置にする（フォーカス可能なまま保つ）。 */
+   非表示は .sr-only と同じレシピ（フォーカス可能なまま視覚的に隠す）。 */
 .skip-link {
   position: absolute;
-  left: -9999px;
-  top: 0;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.skip-link:focus {
+  width: auto; height: auto;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  left: 8px; top: 8px;
   z-index: 100;
   padding: 10px 16px;
   background: var(--surface-strong);
@@ -627,13 +638,10 @@ html, body {
   border-radius: var(--radius-sm);
   font-size: var(--text-sm);
   font-weight: 600;
-  text-decoration: none;
 }
-.skip-link:focus { left: 8px; top: 8px; }
 
 /* ============================================================
-   共通フッター（SiteFooter）。PageShell を使う全ページ＋トップに表示。
-   内部リンクグラフの底上げが目的（全画面地図の /map/* はレイアウト上対象外）。
+   共通フッター（SiteFooter）。設置場所・目的は components/SiteFooter.tsx 参照。
    ============================================================ */
 .site-footer {
   margin-top: 56px;
@@ -668,7 +676,6 @@ html, body {
   min-height: 40px; /* タップ目標 */
   font-size: var(--text-sm);
   color: var(--text-muted);
-  text-decoration: none;
 }
 .site-footer-col a:hover,
 .site-footer-col a:focus-visible { color: var(--accent); text-decoration: underline; }
@@ -679,7 +686,6 @@ html, body {
 }
 @media (max-width: 560px) {
   .site-footer-inner { padding: 24px 16px 28px; }
-  .site-footer-nav { gap: 16px 32px; }
 }
 
 /* ============================================================

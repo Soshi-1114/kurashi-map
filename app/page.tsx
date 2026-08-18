@@ -55,7 +55,8 @@ export default async function HomePage() {
   const summary = await listSummaryAcrossPrefs();
   const popular = await getPopularMunis();
   return (
-    <main className="home-main">
+    <>
+      <main className="home-main">
       {/* ページヘッダー。スクロールするページなので、地図内のフローティングヘッダー
           ではなくページ最上部に置く（地図の面積を削らず、検索候補とも重ならない）。 */}
       <SiteHeader />
@@ -88,7 +89,10 @@ export default async function HomePage() {
       <div className="home-content" id="home-explore">
         <HomeLinks popular={popular} />
       </div>
+      </main>
+      {/* main の外＝body スコープに置く（PageShell と同じ階層。footer が
+          contentinfo ランドマークとして公開されるのは body スコープのときだけ） */}
       <SiteFooter />
-    </main>
+    </>
   );
 }
