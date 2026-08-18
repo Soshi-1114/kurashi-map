@@ -41,7 +41,6 @@ kurashi-map/
 │  ├ area/[pref]/[city]/page.tsx   # 自治体詳細ページ（SEO・構造化データ付き）
 │  ├ api/og/[code]/route.tsx       # OG画像を動的生成
 │  ├ api/muni/[code]/route.ts      # 自治体フルデータの取得API
-│  ├ api/tile/[z]/[x]/[y]/route.ts # 地理院タイルの同一originプロキシ（OpenFreeMap fallback、現状未使用）
 │  ├ sitemap.ts / robots.ts        # 全自治体URLのサイトマップ
 ├ components/
 │  ├ MapView.tsx                   # MapLibreラッパ。県geojsonをビューポート遅延ロード

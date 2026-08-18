@@ -35,6 +35,16 @@ export async function getMunicipality(code: string): Promise<Municipality | null
   return muni.find((m) => m.code === code) ?? wards.find((m) => m.code === code) ?? null;
 }
 
+/**
+ * pref スラッグの検証つき取得。code の自治体が指定 pref に属さない場合は null。
+ * /area/{pref}/{code} のように pref と code を両方受ける URL で、誤った組
+ * （/area/tokyo/11203 等）が 200 を返して重複 URL 空間にならないようにする。
+ */
+export async function getMunicipalityIn(prefSlug: string, code: string): Promise<Municipality | null> {
+  const m = await getMunicipality(code);
+  return m && m.pref === prefSlug ? m : null;
+}
+
 export async function listMunicipalities(pref: string): Promise<Municipality[]> {
   return (await loadPref(pref)).muni;
 }

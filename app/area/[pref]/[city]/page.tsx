@@ -22,7 +22,7 @@ import {
   BarChart3,
   Sparkles,
 } from "lucide-react";
-import { getMunicipality, listAll, listAllAcrossPrefs } from "@/lib/metrics";
+import { getMunicipalityIn, listAll, listAllAcrossPrefs } from "@/lib/metrics";
 import { buildSummary } from "@/lib/summary";
 import { findRelatedByRent, findSimilar, findClosePopulationInPref } from "@/lib/related";
 import {
@@ -90,7 +90,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata(props: { params: Promise<Params> }): Promise<Metadata> {
   const params = await props.params;
-  const m = await getMunicipality(params.city);
+  const m = await getMunicipalityIn(params.pref, params.city);
   if (!m) return { title: "見つかりません | KurashiMap" };
   const prefName = prefNameOf(m.pref);
   const fullName = m.displayName ?? m.name;
@@ -183,7 +183,7 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
 
 export default async function AreaPage(props: { params: Promise<Params> }) {
   const params = await props.params;
-  const m = await getMunicipality(params.city);
+  const m = await getMunicipalityIn(params.pref, params.city);
   if (!m) notFound();
 
   const all = await listAll(m.pref);
