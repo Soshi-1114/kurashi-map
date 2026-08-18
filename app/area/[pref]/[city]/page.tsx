@@ -91,7 +91,10 @@ export async function generateStaticParams() {
 export async function generateMetadata(props: { params: Promise<Params> }): Promise<Metadata> {
   const params = await props.params;
   const m = await getMunicipality(params.city);
-  if (!m) return { title: "見つかりません | KurashiMap" };
+  // pref スラッグ不一致（/area/tokyo/11203 等）も 404 に。放置すると同一内容が
+  // 47 通りの pref パスで 200 を返し、重複 URL 空間になる（canonical はあるが
+  // 誤リンク経由でクロールバジェットを浪費する）。
+  if (!m || m.pref !== params.pref) return { title: "見つかりません | KurashiMap" };
   const prefName = prefNameOf(m.pref);
   const fullName = m.displayName ?? m.name;
   const pop = m.population.toLocaleString();
@@ -184,7 +187,8 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
 export default async function AreaPage(props: { params: Promise<Params> }) {
   const params = await props.params;
   const m = await getMunicipality(params.city);
-  if (!m) notFound();
+  // pref スラッグ不一致は 404（generateMetadata 側の注記参照）。
+  if (!m || m.pref !== params.pref) notFound();
 
   const all = await listAll(m.pref);
   // 同じ階層（市区町村なら市区町村、区なら区）の中から類似自治体を選ぶ
