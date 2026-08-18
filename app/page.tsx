@@ -5,6 +5,7 @@ import MapView from "@/components/MapView";
 import HomeLinks, { type PopularMuni } from "@/components/HomeLinks";
 import HeroSearch from "@/components/home/HeroSearch";
 import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
 import { listSummaryAcrossPrefs, listAllAcrossPrefs } from "@/lib/metrics";
 import { muniLevelOnly } from "@/lib/rankings";
 import { SITE, absoluteUrl } from "@/lib/site";
@@ -87,6 +88,7 @@ export default async function HomePage() {
       <div className="home-content" id="home-explore">
         <HomeLinks popular={popular} />
       </div>
+      <SiteFooter />
     </main>
   );
 }

@@ -1,4 +1,5 @@
 import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
 import Breadcrumb, { type Crumb } from "@/components/Breadcrumb";
 
 type Width = "default" | "narrow" | "wide";
@@ -25,11 +26,15 @@ export default function PageShell({
 }) {
   return (
     <>
+      {/* キーボード/SR 利用者がヘッダーナビを毎ページ通過しなくて済むように。
+          自治体詳細は縦 6,000px 超あるため特に効く。 */}
+      <a className="skip-link" href="#main-content">本文へスキップ</a>
       <SiteHeader />
-      <div className={`page-root${WIDTH_CLASS[width]}${innerClassName ? ` ${innerClassName}` : ""}`}>
+      <main id="main-content" className={`page-root${WIDTH_CLASS[width]}${innerClassName ? ` ${innerClassName}` : ""}`}>
         <Breadcrumb items={trail} />
         {children}
-      </div>
+      </main>
+      <SiteFooter />
     </>
   );
 }
