@@ -5,6 +5,14 @@ import type { NextRequest } from 'next/server';
 // ヘッダーが付かないローカル/セルフホスト環境では素通し
 const ALLOWED_COUNTRIES = ['JP'];
 
+// UA・パスによる例外を一切適用せず、常に 403 を返す国。
+// 一般トラフィックは ALLOWED_COUNTRIES だけで弾けるが、下の ALLOWED_BOT_UA は
+// UA 文字列を見るだけなので「Googlebot を名乗る一般クライアント」は通ってしまう。
+// ここに挙げた国からの正規クローラー（Googlebot / Bingbot 等）は存在しないため、
+// クローラーを名乗るリクエストは UA 偽装とみなして一律で拒否する。
+// 中国向け検索エンジン（Baidu / Sogou / 360）にもインデックスさせない方針。
+const DENIED_COUNTRIES = ['CN'];
+
 // 検索エンジンや SNS のカード生成クローラーは国外 IP から来るため UA で通す。
 // UA は偽装可能だが、一般トラフィックの地域制限としては十分
 // （Google系 / Bing / Apple / DuckDuckGo / Naver(yeti) / LINE / X / Facebook / Slack / Discord / LinkedIn）。
@@ -14,11 +22,22 @@ const ALLOWED_COUNTRIES = ['JP'];
 const ALLOWED_BOT_UA =
   /googlebot|google-inspectiontool|google-extended|googleother|adsbot-google|apis-google|mediapartners-google|storebot-google|bingbot|bingpreview|msnbot|applebot|duckduckbot|yeti|linespider|twitterbot|facebookexternalhit|slackbot|discordbot|linkedinbot|gptbot|oai-searchbot|chatgpt-user|claudebot|claude-web|perplexitybot|amazonbot/i;
 
-// クロールの起点となるファイルは国・UA を問わず公開
+// クロールの起点となるファイルは国・UA を問わず公開（DENIED_COUNTRIES は除く）
 const PUBLIC_PATHS = ['/robots.txt', '/sitemap.xml'];
+
+function forbidden(): NextResponse {
+  return new NextResponse('403 Forbidden: Access from your region is not available.', {
+    status: 403,
+    headers: { 'content-type': 'text/plain; charset=utf-8' },
+  });
+}
 
 export function middleware(request: NextRequest) {
   const country = request.headers.get('x-vercel-ip-country');
+  if (country && DENIED_COUNTRIES.includes(country)) {
+    return forbidden();
+  }
+
   if (!country || ALLOWED_COUNTRIES.includes(country)) {
     return NextResponse.next();
   }
@@ -32,10 +51,7 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  return new NextResponse('403 Forbidden: Access from your region is not available.', {
-    status: 403,
-    headers: { 'content-type': 'text/plain; charset=utf-8' },
-  });
+  return forbidden();
 }
 
 export const config = {
