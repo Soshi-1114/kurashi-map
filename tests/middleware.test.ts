@@ -50,6 +50,22 @@ describe('middleware (geo block)', () => {
     ).toBe(200);
   });
 
+  it('中国(CN)からは UA を問わず 403（クローラーを名乗っても通さない）', () => {
+    expect(middleware(requestOf({ country: 'CN', ua: 'Mozilla/5.0' })).status).toBe(403);
+    const googlebot =
+      'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)';
+    expect(middleware(requestOf({ country: 'CN', ua: googlebot })).status).toBe(403);
+    expect(
+      middleware(requestOf({ country: 'CN', ua: 'Mozilla/5.0 (compatible; Baiduspider/2.0)' })).status,
+    ).toBe(403);
+    expect(middleware(requestOf({ country: 'CN', ua: 'Twitterbot/1.0' })).status).toBe(403);
+  });
+
+  it('中国(CN)からは robots.txt / sitemap.xml も 403', () => {
+    expect(middleware(requestOf({ country: 'CN', path: '/robots.txt' })).status).toBe(403);
+    expect(middleware(requestOf({ country: 'CN', path: '/sitemap.xml' })).status).toBe(403);
+  });
+
   it('robots.txt と sitemap.xml は国・UA を問わず公開', () => {
     expect(middleware(requestOf({ country: 'US', path: '/robots.txt' })).status).toBe(200);
     expect(middleware(requestOf({ country: 'US', path: '/sitemap.xml' })).status).toBe(200);
