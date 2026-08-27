@@ -86,6 +86,17 @@
     ]
   },
   {
+    "name": "pr-167-170-map-migration",
+    "pr": 170,
+    "since": "2026-08-29",
+    "note": "地図体験の移設一式（#167-#170）: /map/hazard 新設・汎用 /map 新設・トップのポータル化（埋め込み地図撤去）。/map と /map/hazard は新規URLなのでゼロベース成長で見る。トップは title/description 不変で構成のみ変更。since は想定デプロイ翌日 — 実デプロイがずれたら修正すること",
+    "include": [
+      "/map",
+      "/map/hazard",
+      "/"
+    ]
+  },
+  {
     "name": "pr-142-denki",
     "pr": 142,
     "since": "2026-08-18",

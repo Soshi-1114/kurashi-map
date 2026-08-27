@@ -23,7 +23,7 @@ export default function NotFound() {
           地図から市区町村を探すか、エリア検索をお試しください。
         </p>
         <div className="status-actions">
-          <Link href="/" className="btn btn-primary">地図で探す</Link>
+          <Link href="/map" className="btn btn-primary">地図で探す</Link>
           <Link href="/search" className="btn btn-secondary">エリア検索</Link>
         </div>
       </main>

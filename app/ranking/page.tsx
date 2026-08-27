@@ -148,7 +148,7 @@ export default async function RankingIndexPage() {
       </section>
 
       <nav className="rk-footnav" aria-label="関連リンク">
-        <Link href="/" className="rk-back">← 地図に戻る</Link>
+        <Link href="/map" className="rk-back">← 地図で探す</Link>
       </nav>
     </PageShell>
   );

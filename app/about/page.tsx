@@ -269,7 +269,7 @@ export default async function AboutPage() {
       </section>
 
       <div className="detail-footnav">
-        <Link href="/" className="detail-back">地図で見る</Link>
+        <Link href="/map" className="detail-back">地図で見る</Link>
         <Link href="/ranking" className="detail-back">ランキング一覧</Link>
         <Link href="/privacy" className="detail-back">プライバシーポリシー</Link>
       </div>

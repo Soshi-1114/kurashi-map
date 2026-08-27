@@ -143,7 +143,7 @@ PageShell
 ### 4-4. CSS とオフセット
 
 - `.ad-secnav`: `position: sticky; top: 0; z-index: 5`。詳細ページには他に z-index を使う要素が無く、
-  30/31（トップのドロワー）と 60/61（モバイルのレイヤーシート）は他UIの予約帯。
+  30/31（地図ページ /map 系のドロワー）と 60/61（モバイルのレイヤーシート）は他UIの予約帯。
   `.site-header` は非 sticky なので競合しない。SP はチップが入り切らない時だけ `overflow-x: auto`。
 - チップの見た目は `globals.css` の `.home-region-tab` に揃えた（`aria-current="true"` で塗り）。
 - ナビ帯の高さ 61px を `--ad-secnav-h` / `SectionNav.tsx` の `NAV_OFFSET` /

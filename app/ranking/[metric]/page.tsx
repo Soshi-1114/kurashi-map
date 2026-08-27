@@ -327,7 +327,7 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
 
       <nav className="rk-footnav" aria-label="関連リンク">
         <Link href="/ranking" className="rk-back"><ArrowLeft size={15} aria-hidden="true" />ランキング一覧</Link>
-        <Link href="/" className="rk-back"><MapIcon size={15} aria-hidden="true" />地図に戻る</Link>
+        <Link href="/map" className="rk-back"><MapIcon size={15} aria-hidden="true" />地図で探す</Link>
       </nav>
     </PageShell>
   );

@@ -25,7 +25,7 @@ push / PR ごとに CI（`.github/workflows/test.yml`）が typecheck・test・l
 
 ## アーキテクチャ
 
-**2段階のデータ配信（中心的な設計）。** トップ地図は全 ~1,918 自治体ぶんの軽量な `MuniSummary[]`（検索・地図の色付け・行政区の分割に必要な最小フィールドのみ）を配信します。フルの `Municipality`（合計 ~1.8MB）はホームページには一切載せず、自治体を選択した時に `/api/muni/[code]` から1件だけ取得します。両方の型は `lib/types.ts`、ローダは `lib/metrics.ts`（`listSummaryAcrossPrefs` と `getMunicipality`）を参照。
+**2段階のデータ配信（中心的な設計）。** 地図ページ（汎用 `/map`・指標別 `/map/*`）とトップのヒーロー検索は、全 ~1,918 自治体ぶんの軽量な `MuniSummary[]`（検索・地図の色付け・行政区の分割に必要な最小フィールドのみ）を配信します。フルの `Municipality`（合計 ~1.8MB）はこれらのページには一切載せず、自治体を選択した時に `/api/muni/[code]` から1件だけ取得します。両方の型は `lib/types.ts`、ローダは `lib/metrics.ts`（`listSummaryAcrossPrefs` と `getMunicipality`）を参照。
 
 **県別のコード分割。** `lib/prefs.ts` に `PREFS`（県ごとの slug・codePrefix・hasWards）と `loadPrefData` があり、テンプレートリテラルの動的 `import()` で `data/{slug}.json`（および `data/{slug}_wards.json`）を読み込みます。Next が県ごとに chunk を分割するため、必要な県だけがロードされます。`lib/metrics.ts` がこのアクセス層で、`code` の先頭2桁（=codePrefix）から `getPrefByCode` で県を引き、ロード済み県をキャッシュして検索します。
 
@@ -35,7 +35,7 @@ push / PR ごとに CI（`.github/workflows/test.yml`）が typecheck・test・l
 
 **ジオメトリ。** `public/prefectures.geojson`（全国の輪郭）は起動時にロード。`MapView.tsx` がビューポートに応じて県別ポリゴン geojson（`public/{slug}.geojson`、`{slug}_wards.geojson`）を遅延ロードします。
 
-**UI 面。** `components/MapView.tsx`（MapLibre ラッパ）、`AreaPanel.tsx`（PC サイドパネル + MetricCards）、`MobileSheet.tsx`（モバイルの3段階ボトムシート）。詳細ページ: `app/area/[pref]/[city]/page.tsx`（SEO + 構造化データ）。OG画像の動的生成: `app/api/og/[code]/route.tsx`。指標別の地図ハブ（ピラーページ）: `/map/{rent,land-price,population-trend,foreign-ratio}`（共通テンプレは `components/MetricMapHub.tsx`）。サイト・データ方針の説明は `/about`。
+**UI 面。** `components/MapView.tsx`（MapLibre ラッパ）、`AreaPanel.tsx`（PC サイドパネル + MetricCards）、`MobileSheet.tsx`（モバイルの3段階ボトムシート）。詳細ページ: `app/area/[pref]/[city]/page.tsx`（SEO + 構造化データ）。OG画像の動的生成: `app/api/og/[code]/route.tsx`。地図ページ: 汎用の全画面地図 `/map`（「地図で見る」ディープリンクの既定の行き先）と指標別ハブ `/map/{rent,land-price,population-trend,future-population,foreign-ratio,hazard}`（一覧は `lib/siteNav.ts` の `MAP_HUBS` が単一ソース）。トップ（`/`）はポータル（ヒーロー検索＋地図導線カード＋リンク帯）で地図は埋め込まない。サイト・データ方針の説明は `/about`。
 
 ## データの扱い（honesty 方針・厳守）
 
