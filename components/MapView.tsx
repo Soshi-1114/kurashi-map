@@ -23,7 +23,7 @@ import { getMapMetric, TREND_PROPERTY, type MapMetricKey } from "@/lib/mapMetric
 import { trackSelectMunicipality, trackChangeMetric, trackApplyFilter } from "@/lib/analytics";
 import { MAP_FLY_EVENT, type MapFlyDetail } from "@/lib/mapFly";
 import type { StationPoint } from "@/lib/stationSearch";
-import { parseMapDeepLink, parseHazardDeepLink } from "@/lib/mapDeepLink";
+import { parseMapDeepLink } from "@/lib/mapDeepLink";
 import {
   EMPTY_FILTERS, isFilterActive, matchesFilter, buildMatchExpression, type MapFilters,
 } from "@/lib/mapFilters";
@@ -51,6 +51,8 @@ type Props = {
   summary: MuniSummary[];
   onMenuClick?: () => void;
   initialMetric?: MapMetricKey | "none";
+  /** 初期表示で点灯する災害等オーバーレイ（ハザードのピラーページで指定）。既定はなし。 */
+  initialOverlays?: readonly OverlayKey[];
   /** スクロールするページに埋め込む場合 true（1本指パン/ホイールを奪わない協調ジェスチャ）。 */
   cooperativeGestures?: boolean;
   /** ヘッダーの自治体検索を表示するか。トップページはヒーロー検索と重複するため false。 */
@@ -63,7 +65,7 @@ type Props = {
   showHeader?: boolean;
 };
 
-export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_MAP_METRIC, cooperativeGestures = false, showSearch = true, showHeader = true }: Props) {
+export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_MAP_METRIC, initialOverlays, cooperativeGestures = false, showSearch = true, showHeader = true }: Props) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<MapLibreMap | null>(null);
   const muniGeoRef = useRef<GeoJSON.FeatureCollection | null>(null);
@@ -97,7 +99,7 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
 
   const [selectedCode, setSelectedCode] = useState<string | null>(null);
   // 災害オーバーレイ（複数選択）。空集合＝何も重ねない。
-  const [overlays, setOverlays] = useState<Set<OverlayKey>>(() => new Set());
+  const [overlays, setOverlays] = useState<Set<OverlayKey>>(() => new Set(initialOverlays));
   const toggleOverlay = useCallback((key: OverlayKey) => {
     setOverlays((prev) => {
       const next = new Set(prev);
@@ -261,10 +263,6 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
         setSelectedCode(codeTarget);
         trackSelectMunicipality(codeTarget, "link");
       }
-      // ?hazard=flood,landslide があれば該当の災害オーバーレイを点灯して開く
-      // （エリア詳細の災害リスクカード導線。HAZARD_ZONE_ZOOM 未満では凡例がズーム誘導を出す）。
-      const hazardTargets = parseHazardDeepLink(window.location.search);
-      if (hazardTargets.length > 0) setOverlays(new Set(hazardTargets));
 
       const map = new maplibregl.Map({
         container: containerRef.current,

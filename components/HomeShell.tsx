@@ -8,7 +8,7 @@
 // SP で閉じている間も display:none にはせず、画面外に退避させるだけにする。
 
 import { useState } from "react";
-import type { ReactNode } from "react";
+import type { ComponentProps, ReactNode } from "react";
 import MapView from "@/components/MapView";
 import type { MuniSummary } from "@/lib/types";
 import type { MapMetricKey } from "@/lib/mapMetrics";
@@ -17,12 +17,15 @@ export default function HomeShell({
   summary,
   children,
   initialMetric,
+  initialOverlays,
   navLabel = "エリア・ランキングから探す",
 }: {
   summary: MuniSummary[];
   children: ReactNode;
   /** 地図の初期コロプレス指標（ピラーページで "foreignRatio" を指定）。既定は未塗り。 */
   initialMetric?: MapMetricKey | "none";
+  /** 初期表示で点灯するオーバーレイ（ハザードのピラーページで指定）。 */
+  initialOverlays?: ComponentProps<typeof MapView>["initialOverlays"];
   navLabel?: string;
 }) {
   const [navOpen, setNavOpen] = useState(false);
@@ -30,7 +33,7 @@ export default function HomeShell({
   return (
     <div className={`home-root ${navOpen ? "is-nav-open" : ""}`}>
       <div className="home-map">
-        <MapView summary={summary} onMenuClick={() => setNavOpen(true)} initialMetric={initialMetric} />
+        <MapView summary={summary} onMenuClick={() => setNavOpen(true)} initialMetric={initialMetric} initialOverlays={initialOverlays} />
       </div>
 
       <div

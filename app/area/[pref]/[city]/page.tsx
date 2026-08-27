@@ -29,7 +29,7 @@ import {
   RANKINGS, formatAsOfJa, POPULATION_FRESHNESS, POPULATION_ASOF,
   housingSurveyLabel, landPriceSurveyLabel, freshnessPrefix,
 } from "@/lib/rankings";
-import { mapHrefForCode, mapHrefForHazards } from "@/lib/mapDeepLink";
+import { mapHrefForCode } from "@/lib/mapDeepLink";
 import { muniLastModified } from "@/lib/dataFreshness";
 import { getRankPositions } from "@/lib/rankingStats";
 import { buildFaq } from "@/lib/faq";
@@ -615,14 +615,15 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
               ))}
           </MetricCard>
 
-          {/* 災害リスク。リンクは常設2種（洪水・土砂）のハザード区域を重ねて当該自治体を
-              開く（区域タイルは GSI 全国配信のため、集計対象外の自治体でも地図では見られる）。 */}
+          {/* 災害リスク。リンク先の /map/hazard は洪水・土砂の区域を初期点灯した地図ハブで、
+              当該自治体へフォーカスして開く（区域タイルは GSI 全国配信のため、
+              集計対象外の自治体でも地図では見られる）。 */}
           <MetricCard
             id="hazard"
             icon={ShieldAlert}
             tone="ad-tone-hazard"
             title="災害リスク"
-            link={{ href: mapHrefForHazards(m.code, ["flood", "landslide"]), label: "ハザードマップを地図で見る" }}
+            link={{ href: mapHrefForCode(m.code, "/map/hazard"), label: "ハザードマップを地図で見る" }}
           >
             <DisasterCard m={m} />
           </MetricCard>

@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import type { MetadataRoute } from "next";
 import sitemap from "@/app/sitemap";
 import { TEMPLATE_REVISED_AT, parseAsOf } from "@/lib/dataFreshness";
+import { MAP_HUBS } from "@/lib/siteNav";
 import { absoluteUrl } from "@/lib/site";
 
 // lastmod の同一日付潰れ（2026-08 に 2,744 URL 中 2,734 件が揃った退行）の再発防止。
@@ -27,7 +28,7 @@ describe("sitemap の lastModified", () => {
   it("/map/* はテンプレ改訂日（mapHub）以降になる", async () => {
     const entries = await entriesP;
     const hubs = entries.filter((e) => e.url.startsWith(absoluteUrl("/map/")));
-    expect(hubs.length).toBe(5);
+    expect(hubs.length).toBe(MAP_HUBS.length);
     const revised = parseAsOf(TEMPLATE_REVISED_AT.mapHub)!.getTime();
     for (const e of hubs) {
       expect((e.lastModified as Date).getTime()).toBeGreaterThanOrEqual(revised);
