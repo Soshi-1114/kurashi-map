@@ -183,6 +183,8 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
   // 対応する地図ハブがある指標のみ「地図で見る」CTA を出す。?pref= ディープリンクで
   // 当該県へ初期フォーカスする（lib/mapDeepLink.ts）。
   const mapHub = mapHubForRanking(def.slug);
+  // 関連ランキング導線は、リンク先の県別ページにデータがある場合のみ（0件ページは存在しない）。
+  const related = def.related && otherMetrics.some((r) => r.slug === def.related!.slug) ? def.related : null;
 
   const ldJson = {
     "@context": "https://schema.org",
@@ -257,6 +259,11 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
           {mapHub && (
             <Link href={`${mapHub.href}?pref=${pref.slug}`} className="rk-action rk-action-ghost">
               <MapIcon size={15} aria-hidden="true" />{mapHub.label}
+            </Link>
+          )}
+          {related && (
+            <Link href={`/ranking/${related.slug}/${pref.slug}`} className="rk-action rk-action-ghost">
+              <BarChart3 size={15} aria-hidden="true" />{prefName}の{related.label}
             </Link>
           )}
         </div>

@@ -57,6 +57,35 @@
     ]
   },
   {
+    "name": "pr-166-population-answer-titles",
+    "pr": 166,
+    "since": "2026-08-29",
+    "note": "population-most/density 全国版 title に「日本一は{1位}」を動的挿入（質問型クエリへの答え先出し）。since は想定デプロイ翌日 — 実デプロイがずれたら修正すること",
+    "include": [
+      "/ranking/population-most",
+      "/ranking/population-density"
+    ]
+  },
+  {
+    "name": "pr-166-population-most-pref-titles",
+    "pr": 166,
+    "since": "2026-08-29",
+    "note": "population-most 県別 title を「{県}の市区町村 人口ランキング（人口が多い順）」へ（連続語「人口ランキング」を作る）。since は想定デプロイ翌日 — 実デプロイがずれたら修正すること",
+    "include": [
+      "/ranking/population-most/*"
+    ]
+  },
+  {
+    "name": "pr-166-future-resilient-title",
+    "pr": 166,
+    "since": "2026-08-29",
+    "note": "seoTitle を「2050年の将来人口ランキング｜…」へ変更＋population-growth/decline（全国・県別）から related 導線で内部リンク追加。同PRの地図CTAは全ランキング共通の本文変更として既存セットにも乗る。since は想定デプロイ翌日 — 実デプロイがずれたら修正すること",
+    "include": [
+      "/ranking/future-population-resilient",
+      "/ranking/future-population-resilient/*"
+    ]
+  },
+  {
     "name": "pr-142-denki",
     "pr": 142,
     "since": "2026-08-18",

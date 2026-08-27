@@ -168,11 +168,18 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
             📅 次回更新予定: {def.nextUpdate}
           </p>
         )}
-        {mapHub && (
+        {(mapHub || def.related) && (
           <div className="rk-hero-actions">
-            <Link href={mapHub.href} className="rk-action rk-action-primary">
-              <MapIcon size={15} aria-hidden="true" />{mapHub.label}で全国を見る
-            </Link>
+            {mapHub && (
+              <Link href={mapHub.href} className="rk-action rk-action-primary">
+                <MapIcon size={15} aria-hidden="true" />{mapHub.label}で全国を見る
+              </Link>
+            )}
+            {def.related && (
+              <Link href={`/ranking/${def.related.slug}`} className="rk-action rk-action-ghost">
+                <BarChart3 size={15} aria-hidden="true" />{def.related.label}
+              </Link>
+            )}
           </div>
         )}
       </header>

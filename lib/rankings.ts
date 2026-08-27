@@ -44,6 +44,13 @@ export type RankingDef = {
    * 「人口が多い市区町村ランキング」で連続語を含まず CTR 0〜1.8%）。
    */
   prefSeoTitle?: string;
+  /**
+   * 関連ランキングへの導線（任意）。全国版・県別版のヒーロー action ボタンとして表示する。
+   * リンク先が新規ページ群のとき、検索流入の強いページからの内部リンクで
+   * インデックス・順位の立ち上がりを助ける用途（2026-08 GSC分析: future-population 系が
+   * 2ページ目に滞留）。県別版はリンク先の県別ページにデータがある場合のみ表示。
+   */
+  related?: { slug: string; label: string };
   /** ランキング一覧・パンくず用の短いラベル */
   shortLabel: string;
   /** meta description のひな型（{top1} を1位自治体名に置換） */
@@ -552,6 +559,7 @@ export const RANKINGS: RankingDef[] = [
       `全国の市区町村を5年間（${CENSUS_PERIOD}）の人口増減率が高い順にランキング。最も人口増加率が高いのは{top1}。国勢調査の実データで人口が増えている自治体を比較できます。`,
     lead: `全国の市区町村を、5年間（${CENSUS_PERIOD}）の人口増減率が高い順に並べたランキングです。`,
     note: "人口増減率は2020年と2025年の国勢調査人口の比較（%）で、転入・出生などの内訳は含みません。人口規模が小さい自治体や、震災からの帰還が進む自治体（福島県大熊町など）では率が大きく出ることがあります。",
+    related: { slug: "future-population-resilient", label: "2050年も人口を維持する見込みの自治体" },
     prefSummary: true,
     columnLabel: "人口増減率（2020→2025）",
     order: "desc",
@@ -573,6 +581,7 @@ export const RANKINGS: RankingDef[] = [
       `全国の市区町村を5年間（${CENSUS_PERIOD}）の人口減少率が高い順にランキング。最も人口が減っているのは{top1}。国勢調査の実データで人口が減っている自治体を比較できます。`,
     lead: `全国の市区町村を、5年間（${CENSUS_PERIOD}）の人口減少率が大きい順に並べたランキングです。`,
     note: "人口増減率は2020年と2025年の国勢調査人口の比較（%）で、転出・自然減などの内訳は含みません。人口規模が小さい自治体や、原発事故の避難区域を抱える自治体（福島県双葉町など）では減少率が大きく出ることがあります。人口が増えている自治体は表の下位（増加側）に並びます。",
+    related: { slug: "future-population-decline", label: "2050年の将来推計人口ランキング" },
     columnLabel: "人口増減率（2020→2025）",
     order: "asc",
     freshnessLabel: () => POPULATION_FRESHNESS,
@@ -608,7 +617,9 @@ export const RANKINGS: RankingDef[] = [
     slug: "future-population-resilient",
     category: "人口・まち",
     title: "2050年推計人口の減少率が小さい市区町村ランキング",
-    seoTitle: "2050年も人口を維持する見込みの市区町村ランキング【将来推計人口】",
+    // 連続語「人口ランキング」を title 先頭側に作る（2026-08 GSC分析: 表示クエリは
+    // 「2050年 人口 ランキング 市町村」系だが、旧 title は連続語を含まず 129imp/0click/11位）。
+    seoTitle: "2050年の将来人口ランキング｜人口を維持する見込みの市区町村",
     shortLabel: "2050年人口維持",
     description:
       "全国の市区町村を2050年将来推計人口の減少率が小さい順（増加を含む）にランキング。国立社会保障・人口問題研究所（令和5年推計）の公表値で比較できます。",

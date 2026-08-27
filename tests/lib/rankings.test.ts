@@ -223,6 +223,27 @@ describe("population 系の seoTitleFn / prefSeoTitle", () => {
   });
 });
 
+describe("related 導線と将来人口の seoTitle", () => {
+  it("related.slug はすべて実在するランキングを指す", () => {
+    for (const r of RANKINGS) {
+      if (r.related) {
+        expect(getRankingBySlug(r.related.slug), `${r.slug} → ${r.related.slug}`).toBeTruthy();
+      }
+    }
+  });
+
+  it("現在の人口増減ランキングから2050年将来推計へ導線を張る", () => {
+    expect(getRankingBySlug("population-decline")!.related?.slug).toBe("future-population-decline");
+    expect(getRankingBySlug("population-growth")!.related?.slug).toBe("future-population-resilient");
+  });
+
+  it("future-population-resilient の seoTitle は連続語「人口ランキング」と「2050年」を含む", () => {
+    const t = getRankingBySlug("future-population-resilient")!.seoTitle!;
+    expect(t).toContain("人口ランキング");
+    expect(t).toContain("2050年");
+  });
+});
+
 describe("land-price-low ランキング", () => {
   const def = getRankingBySlug("land-price-low")!;
 
