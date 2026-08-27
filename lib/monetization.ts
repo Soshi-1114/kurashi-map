@@ -60,12 +60,15 @@ export function denkiOfferUrl(
 /**
  * ふるさと納税リンクの URL テンプレート。未設定・不正なら null。
  *
- * `{keyword}` を自治体名（県名前置）で置換する検索ディープリンク用。ASP が
- * リンク先URL自由型のリンク（商品リンク等）を許可している場合に設定する。
+ * ASP がリンク先URL自由型のリンク（商品リンク等）を許可している場合に設定する。
+ * プレースホルダは2種:
+ * - `{url}`: リンク先URL（URLエンコード済み）で置換。ふるなびの自治体ページへの
+ *   ディープリンク用（アクセストレードの商品リンク形式を想定。こちらを推奨）
+ * - `{keyword}`: 自治体名（県名前置・URLエンコード済み）で置換。検索URL直指定用
  */
 export function furusatoUrlTemplate(): string | null {
   const t = process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE?.trim();
-  return t && t.includes("{keyword}") ? t : null;
+  return t && (t.includes("{url}") || t.includes("{keyword}")) ? t : null;
 }
 
 /**
@@ -96,20 +99,42 @@ function isAspLink(url: string): boolean {
 
 export type FurusatoLinkInfo = {
   url: string;
-  /** search = 自治体名で絞った検索結果へ / portal = ポータルの固定ページへ（寄付先は移動先で選ぶ） */
-  kind: "search" | "portal";
+  /**
+   * municipal = ふるなびの自治体ページへ / search = 自治体名の検索結果へ /
+   * portal = ポータルの固定ページへ（寄付先は移動先で選ぶ）
+   */
+  kind: "municipal" | "search" | "portal";
 };
 
+/** ふるなびの自治体ページ（寄付先ページ）。municipalId は lib/furunaviMunicipals.ts で引く。 */
+function furunaviMunicipalUrl(municipalId: number): string {
+  return `https://furunavi.jp/Municipal/Product/Search?municipalid=${municipalId}`;
+}
+
 /**
- * ふるさと納税導線のリンクを返す。env 未設定なら null（導線は表示しない）。
+ * ふるさと納税導線のリンクを返す。null なら導線は表示しない。
  *
- * テンプレート（自治体で絞った結果に着地でき成果に繋がりやすい）＞ 固定リンクの順で採用。
+ * 非表示になるのは (a) env 未設定、(b) ふるなび未掲載の自治体（municipalId が null）。
+ * 未掲載自治体に導線を出すと、移動先で寄付先が見つからない誤誘導になるため出さない。
+ *
+ * テンプレート（{url} = 自治体ページへのディープリンク ＞ {keyword} = 検索URL）＞
+ * 固定リンクの順で採用。ASP リンクには UTM を付けない（計測を壊さない）。
  *
  * @param cityName 寄付先自治体名（政令市の行政区の場合は親の政令市名を渡すこと）
  * @param prefName 都道府県名（「府中市」など同名自治体の曖昧さ回避のため keyword に前置する）
+ * @param municipalId ふるなびの自治体ID（行政区は親の政令市で引いた値を渡すこと）
  */
-export function furusatoLink(cityName: string, prefName?: string): FurusatoLinkInfo | null {
+export function furusatoLink(
+  cityName: string,
+  prefName: string | undefined,
+  municipalId: number | null,
+): FurusatoLinkInfo | null {
+  if (municipalId == null) return null;
   const template = furusatoUrlTemplate();
+  if (template?.includes("{url}")) {
+    const url = template.replaceAll("{url}", encodeURIComponent(furunaviMunicipalUrl(municipalId)));
+    return { url: isAspLink(url) ? url : withUtm(url, "furusato"), kind: "municipal" };
+  }
   if (template) {
     const keyword = encodeURIComponent(prefName ? `${prefName}${cityName}` : cityName);
     const base = template.replaceAll("{keyword}", keyword);

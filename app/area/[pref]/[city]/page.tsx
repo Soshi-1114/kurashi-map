@@ -78,6 +78,7 @@ import { SupportBanner } from "@/components/area/SupportBanner";
 import { FurusatoLink } from "@/components/area/FurusatoLink";
 import { DenkiTeaser } from "@/components/area/DenkiTeaser";
 import { supportUrl, hasFurusatoLink } from "@/lib/monetization";
+import { furunaviMunicipalId } from "@/lib/furunaviMunicipals";
 import PageShell from "@/components/PageShell";
 import SectionNav, { type SectionNavItem } from "@/components/area/SectionNav";
 
@@ -869,12 +870,16 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
           {support && (
             <SupportBanner url={support} municipalityCode={m.code} municipalityName={m.name} />
           )}
-          {/* 政令市の行政区は寄付先が親の政令市になるため、寄付先名は親市名を使う */}
+          {/* 政令市の行政区は寄付先が親の政令市になるため、寄付先名・ふるなびIDは親市で引く。
+              ふるなび未掲載の自治体（furunaviId=null）はコンポーネント側で非表示になる */}
           {hasFurusatoLink() && (
             <FurusatoLink
               targetName={m.level === "ward" && parent ? parent.name : m.name}
               prefName={prefName}
               municipalityCode={m.code}
+              furunaviId={furunaviMunicipalId(
+                m.level === "ward" && m.parentCode ? m.parentCode : m.code,
+              )}
             />
           )}
         </section>

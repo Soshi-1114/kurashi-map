@@ -71,14 +71,42 @@ describe("furusatoAffUrl / hasFurusatoLink", () => {
 });
 
 describe("furusatoLink", () => {
+  // 札幌市のふるなびID（テスト用の任意値）
+  const ID = 1;
+
   it("env 未設定なら null（導線非表示）", () => {
-    expect(furusatoLink("札幌市", "北海道")).toBeNull();
+    expect(furusatoLink("札幌市", "北海道", ID)).toBeNull();
   });
 
-  it("テンプレートの {keyword} を県名+自治体名で置換し UTM を付与する", () => {
+  it("ふるなび未掲載（municipalId=null）なら env があっても null（誤誘導しない）", () => {
+    process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "https://furunavi.example/search?q={keyword}";
+    process.env.NEXT_PUBLIC_FURUSATO_AFF_URL = "https://h.accesstrade.net/sp/cc?rk=abc";
+    expect(furusatoLink("北方村", "北海道", null)).toBeNull();
+  });
+
+  it("{url} テンプレート: ふるなび自治体ページをエンコードして埋め、municipal 種別になる", () => {
+    process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "https://h.accesstrade.net/sp/ic?rk=abc&url={url}";
+    const link = furusatoLink("札幌市", "北海道", ID);
+    expect(link?.kind).toBe("municipal");
+    expect(link?.url).toBe(
+      "https://h.accesstrade.net/sp/ic?rk=abc&url=" +
+        encodeURIComponent("https://furunavi.jp/Municipal/Product/Search?municipalid=1"),
+    );
+    // ASP リンクなので UTM は付けない
+    expect(link?.url).not.toContain("utm_source");
+  });
+
+  it("{url} テンプレートが ASP 経由でなければ UTM を付与する", () => {
+    process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "https://redirect.example/?to={url}";
+    const link = furusatoLink("札幌市", "北海道", ID);
+    expect(link?.kind).toBe("municipal");
+    expect(link?.url).toContain("utm_campaign=furusato");
+  });
+
+  it("{keyword} テンプレート: 県名+自治体名で置換し UTM を付与、search 種別になる", () => {
     process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE =
       "https://furunavi.example/search?q={keyword}&aid=123";
-    const link = furusatoLink("府中市", "東京都");
+    const link = furusatoLink("府中市", "東京都", ID);
     expect(link?.kind).toBe("search");
     expect(link?.url).toContain("https://furunavi.example/search?q=");
     expect(link?.url).toContain(encodeURIComponent("東京都府中市"));
@@ -90,20 +118,15 @@ describe("furusatoLink", () => {
 
   it("県名なしなら自治体名のみを keyword にする", () => {
     process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "https://furunavi.example/search?q={keyword}";
-    const url = furusatoLink("横浜市")?.url;
+    const url = furusatoLink("横浜市", undefined, ID)?.url;
     expect(url).toContain(encodeURIComponent("横浜市"));
     expect(url).not.toContain(encodeURIComponent("神奈川県"));
   });
 
-  it("同名自治体は県名前置で区別される", () => {
-    process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "https://furunavi.example/search?q={keyword}";
-    expect(furusatoLink("府中市", "東京都")?.url).not.toBe(furusatoLink("府中市", "広島県")?.url);
-  });
-
-  it("ASP経由のテンプレートには UTM を付けない（計測を壊さない）", () => {
+  it("ASP経由の {keyword} テンプレートには UTM を付けない（計測を壊さない）", () => {
     process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE =
       "https://h.accesstrade.net/sp/ic?rk=abc&url=https%3A%2F%2Ffurunavi.jp%2Fsearch%3Fq%3D{keyword}";
-    const link = furusatoLink("札幌市", "北海道");
+    const link = furusatoLink("札幌市", "北海道", ID);
     expect(link?.kind).toBe("search");
     expect(link?.url).toContain(encodeURIComponent("北海道札幌市"));
     expect(link?.url).not.toContain("utm_source");
@@ -111,21 +134,21 @@ describe("furusatoLink", () => {
 
   it("固定リンクはそのまま返し（UTMなし）、portal 種別になる", () => {
     process.env.NEXT_PUBLIC_FURUSATO_AFF_URL = "https://h.accesstrade.net/sp/cc?rk=abc";
-    const link = furusatoLink("札幌市", "北海道");
+    const link = furusatoLink("札幌市", "北海道", ID);
     expect(link?.kind).toBe("portal");
     expect(link?.url).toBe("https://h.accesstrade.net/sp/cc?rk=abc");
   });
 
   it("テンプレートと固定リンクの両方があればテンプレートを優先する", () => {
-    process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "https://furunavi.example/search?q={keyword}";
+    process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "https://h.accesstrade.net/sp/ic?rk=abc&url={url}";
     process.env.NEXT_PUBLIC_FURUSATO_AFF_URL = "https://h.accesstrade.net/sp/cc?rk=abc";
-    expect(furusatoLink("札幌市", "北海道")?.kind).toBe("search");
+    expect(furusatoLink("札幌市", "北海道", ID)?.kind).toBe("municipal");
   });
 
-  it("{keyword} を含まない不正テンプレートは無視され、固定リンクにフォールバック", () => {
+  it("プレースホルダのない不正テンプレートは無視され、固定リンクにフォールバック", () => {
     process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "https://broken.example/";
     process.env.NEXT_PUBLIC_FURUSATO_AFF_URL = "https://h.accesstrade.net/sp/cc?rk=abc";
-    expect(furusatoLink("札幌市", "北海道")?.kind).toBe("portal");
+    expect(furusatoLink("札幌市", "北海道", ID)?.kind).toBe("portal");
   });
 });
 

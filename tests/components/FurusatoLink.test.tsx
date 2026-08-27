@@ -14,28 +14,36 @@ afterEach(() => {
 describe("FurusatoLink", () => {
   it("env 未設定なら何も描画しない", () => {
     const { container } = render(
-      <FurusatoLink targetName="札幌市" prefName="北海道" municipalityCode="01100" />,
+      <FurusatoLink targetName="札幌市" prefName="北海道" municipalityCode="01100" furunaviId={1} />,
     );
     expect(container).toBeEmptyDOMElement();
   });
 
-  it("検索テンプレート: 自治体名入りの文言・広告表記・rel=sponsored", () => {
-    process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "https://furunavi.example/search?q={keyword}";
+  it("ふるなび未掲載（furunaviId=null）なら env があっても描画しない", () => {
+    process.env.NEXT_PUBLIC_FURUSATO_AFF_URL = "https://h.accesstrade.net/sp/cc?rk=abc";
+    const { container } = render(
+      <FurusatoLink targetName="留別村" prefName="北海道" municipalityCode="01696" furunaviId={null} />,
+    );
+    expect(container).toBeEmptyDOMElement();
+  });
+
+  it("{url} テンプレート: 自治体名入りの文言・広告表記・rel=sponsored", () => {
+    process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "https://h.accesstrade.net/sp/ic?rk=abc&url={url}";
     const { container, getByText } = render(
-      <FurusatoLink targetName="札幌市" prefName="北海道" municipalityCode="01100" />,
+      <FurusatoLink targetName="札幌市" prefName="北海道" municipalityCode="01100" furunaviId={1} />,
     );
     getByText("札幌市のふるさと納税を見る");
     expect(container.textContent).toContain("広告");
     const a = container.querySelector("a");
     expect(a?.getAttribute("rel")).toContain("sponsored");
     expect(a?.getAttribute("rel")).toContain("noopener");
-    expect(a?.getAttribute("href")).toContain(encodeURIComponent("北海道札幌市"));
+    expect(a?.getAttribute("href")).toContain(encodeURIComponent("municipalid=1"));
   });
 
   it("固定リンク: 応援文言になり、ASPリンクへそのまま張る", () => {
     process.env.NEXT_PUBLIC_FURUSATO_AFF_URL = "https://h.accesstrade.net/sp/cc?rk=abc";
     const { container, getByText } = render(
-      <FurusatoLink targetName="札幌市" prefName="北海道" municipalityCode="01100" />,
+      <FurusatoLink targetName="札幌市" prefName="北海道" municipalityCode="01100" furunaviId={1} />,
     );
     getByText("ふるさと納税で札幌市を応援する");
     expect(container.textContent).toContain("広告");

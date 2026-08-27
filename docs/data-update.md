@@ -487,3 +487,32 @@ npx vitest run tests/lib/futurePopulation.test.ts
 - 関西電力の個人向けページ（kepco.jp）は bot 遮断があり、公式プレスリリース PDF で確認した経緯あり。
 - 世帯人数別の使用量目安（`lib/denkiSim.ts` の `HOUSEHOLD_KWH`）の出典は環境省・家庭CO2統計の
   確報（隔年化。次回は令和7年度調査分）。新しい確報が出たら GJ→kWh 換算（1kWh=3.6MJ）で更新する。
+
+## 13. ふるなび掲載自治体ID（ふるさと納税導線・手動）
+
+自治体詳細ページのふるさと納税導線（アクセストレード×ふるなび提携）が、ふるなび側の
+自治体ページ `/Municipal/Product/Search?municipalid={id}` へディープリンクするための
+JISコード→ふるなび内部ID対応表。**統計値ではない**ため honesty 方針の対象外だが、
+未掲載の自治体では導線自体を非表示にする（掲載のない寄付先へ誤誘導しない）。
+
+- 出典: ふるなび 自治体一覧（`furunavi.jp/Municipal/List/`）。全掲載自治体（約1,600件）が
+  Vue 用の埋め込み JSON としてサーバーレンダリングされており、1リクエストで取れる。
+  `CityCode` フィールドは常に null のため、都道府県ID（=JIS都道府県番号）+ 自治体名で突合する
+  （「梼原町/檮原町」「ヶ/ケ」の表記ゆれはスクリプト内で正規化）。
+- 生成物: `data/furunavi-municipals.json` … `{source, fetchedAt, byCode: {JISコード: municipalid}}`。
+  政令市は親市コードのみ（区は載せない。アプリ側が親市で引く）。検証は
+  `tests/lib/furunaviMunicipals.test.ts`（npm run test 経由。validate-data.mjs の対象外）。
+
+### 手動実行
+
+```bash
+node scripts/fetch-furunavi-municipals.mjs   # APIキー不要
+```
+
+### 既知の注意点
+
+- 掲載自治体は増減するため**年1回程度の再実行**を想定（ワークフロー未登録）。
+- 突合できなかった掲載自治体はスクリプトが一覧で出力する。名称ゆれなら
+  スクリプトの `normalizeName` に変換を足す。
+- 導線の env 設定・文言規制（返礼品訴求NG等）は `.env.example` と
+  `components/area/FurusatoLink.tsx` のコメントを参照。
