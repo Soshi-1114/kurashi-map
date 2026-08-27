@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import ReactDOM from "react-dom";
-import MapView from "@/components/MapView";
 import HomeLinks, { getPopularMunis } from "@/components/HomeLinks";
 import HeroSearch from "@/components/home/HeroSearch";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import { listSummaryAcrossPrefs } from "@/lib/metrics";
+import { GENERAL_MAP, MAP_HUBS } from "@/lib/siteNav";
 import { SITE, absoluteUrl } from "@/lib/site";
 
 const HOME_TITLE = "市区町村の住みやすさを地図で比較｜家賃・地価・子育て・災害リスク｜KurashiMap";
@@ -31,14 +31,11 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
-  // リソースヒント（ホームのみ）。地図の基盤タイル(OpenFreeMap)へ早期に接続を張り、
-  // LCP 要素である初期スケルトン画像を最優先で取得させ、初期描画を前倒しする。
-  // 基盤タイルは CORS(fetch) 取得なので preconnect は crossOrigin 付き。
-  ReactDOM.preconnect("https://tiles.openfreemap.org", { crossOrigin: "anonymous" });
+  // リソースヒント: 地図カードのプレビュー画像（ファーストビュー直下＝LCP候補）を先読み。
+  // 地図本体は /map へ移設したため、基盤タイルへの preconnect は /map 側で行う。
   ReactDOM.preload("/initial-view.svg", { as: "image", type: "image/svg+xml" });
 
-  // 初期配信は軽量サマリのみ（検索・地図色付け用）。各自治体の詳細は
-  // 選択時に /api/muni/[code] で取得する。
+  // 軽量サマリはヒーロー検索（自治体コンボボックス）用。
   const summary = await listSummaryAcrossPrefs();
   const popular = await getPopularMunis();
   return (
@@ -49,7 +46,7 @@ export default async function HomePage() {
       <SiteHeader />
 
       {/* ファーストビュー: 何のサービスかを5秒で伝えるコピー＋詳細ページへ遷移する検索。
-          地図（プロダクトの中核）はその直下に据える。 */}
+          その直下に地図（/map へ移設）への導線カードを据える。 */}
       <section className="home-hero">
         <div className="home-hero-inner">
           <h1 className="home-hero-title">データで、暮らす場所を考える。</h1>
@@ -65,12 +62,28 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 地図。スクロールするページへの埋め込みなので協調ジェスチャを有効化
-          （SP: 2本指パン / PC: Ctrl+ホイールでズーム）。検索はFVのヒーロー検索に、
-          ロゴ・ナビはページヘッダーに一本化するため、地図内ヘッダーは出さない。 */}
-      <div className="home-map home-map--embedded">
-        <MapView summary={summary} cooperativeGestures showSearch={false} showHeader={false} />
-      </div>
+      {/* 地図への導線。地図本体は /map へ移設（操作性の悪い埋め込み協調ジェスチャ地図を
+          廃止。docs/home-renewal-plan-2026-08.md PR-2）。プレビュー画像＋大きなタップ領域の
+          カードで全画面地図へ、指標別ハブへはチップで直行できるようにする。 */}
+      <section className="home-mapcta" aria-label="地図から探す">
+        <Link href={GENERAL_MAP.href} className="home-mapcta-card">
+          {/* eslint-disable-next-line @next/next/no-img-element -- ビルド時生成の静的SVG（最適化不要） */}
+          <img src="/initial-view.svg" alt="" className="home-mapcta-img" />
+          <span className="home-mapcta-body">
+            <span className="home-mapcta-title">住みやすさマップを開く</span>
+            <span className="home-mapcta-sub">
+              家賃・地価・人口増減を色分け表示。災害リスクの重ね合わせや、自治体クリックで詳細データも。
+            </span>
+          </span>
+        </Link>
+        <ul className="home-chip-row home-mapcta-hubs">
+          {MAP_HUBS.map((hub) => (
+            <li key={hub.href}>
+              <Link href={hub.href} className="home-chip">{hub.label}</Link>
+            </li>
+          ))}
+        </ul>
+      </section>
 
       {/* できること・回遊リンク帯（サーバーレンダリング＝クロール可能） */}
       <div className="home-content" id="home-explore">
