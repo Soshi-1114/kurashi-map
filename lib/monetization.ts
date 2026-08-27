@@ -60,67 +60,35 @@ export function denkiOfferUrl(
 /**
  * ふるさと納税リンクの URL テンプレート。未設定・不正なら null。
  *
- * ASP がリンク先URL自由型のリンク（商品リンク等）を許可している場合に設定する。
- * プレースホルダは2種:
- * - `{url}`: リンク先URL（URLエンコード済み）で置換。ふるなびの自治体ページへの
- *   ディープリンク用（アクセストレードの商品リンク形式を想定。こちらを推奨）
- * - `{keyword}`: 自治体名（県名前置・URLエンコード済み）で置換。検索URL直指定用
+ * ASP のリンク先URL自由型リンク（アクセストレードの商品リンク等）を設定する。
+ * `{url}` プレースホルダをリンク先URL（URLエンコード済み）で置換する。
+ * 例: https://h.accesstrade.net/sp/cc?rk=xxxx&url={url}
  */
 export function furusatoUrlTemplate(): string | null {
   const t = process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE?.trim();
-  return t && (t.includes("{url}") || t.includes("{keyword}")) ? t : null;
+  return t && t.includes("{url}") ? t : null;
 }
 
 /**
  * ASP発行の固定アフィリエイトリンク（例: アクセストレードのテキストリンク）。
- * キーワード差し込みができない標準リンク用。未設定なら null。
+ * 商品リンク（テンプレート）が使えなくなった場合の運用フォールバック。未設定なら null。
  */
 export function furusatoAffUrl(): string | null {
   const u = process.env.NEXT_PUBLIC_FURUSATO_AFF_URL?.trim();
   return u ? u : null;
 }
 
-/** ふるさと納税導線を表示するか。テンプレート・固定リンクのどちらかの env 設定で点灯。 */
-export function hasFurusatoLink(): boolean {
-  return furusatoUrlTemplate() != null || furusatoAffUrl() != null;
-}
-
-// ASP のリダイレクトドメイン。UTM を付けると計測を壊しうるため付与しない判定に使う
-// （denkiOfferUrl と同方針）。提携 ASP を増やす時はここに足す。
-const ASP_HOSTS = ["accesstrade.net", "a8.net", "valuecommerce.com"];
-function isAspLink(url: string): boolean {
-  try {
-    const host = new URL(url).hostname;
-    return ASP_HOSTS.some((d) => host === d || host.endsWith(`.${d}`));
-  } catch {
-    return false;
-  }
-}
-
 export type FurusatoLinkInfo = {
   url: string;
-  /**
-   * municipal = ふるなびの自治体ページへ / search = 自治体名の検索結果へ /
-   * portal = ポータルの固定ページへ（寄付先は移動先で選ぶ）
-   */
-  kind: "municipal" | "search" | "portal";
+  /** municipal = 自治体ページへのディープリンク / portal = ポータルの固定ページへ（寄付先は移動先で選ぶ） */
+  kind: "municipal" | "portal";
+  /** AT のインプレッション計測ピクセル（sp/rr）。クリックリンクと対で描画する。AT 以外は null */
+  impressionPixel: string | null;
 };
 
-/**
- * ふるなびの自治体ページ（寄付先ページ）。municipalId は lib/furunaviMunicipals.ts で引く。
- * utm はふるなびが AT 向け既定リンクに付けているもの（AT 商品リンク一括作成の
- * 生成結果と同一のリンク先になるよう合わせる。2026-08 確認）。
- */
-function furunaviMunicipalUrl(municipalId: number): string {
-  return `https://furunavi.jp/Municipal/Product/Search?municipalid=${municipalId}&utm_source=at&utm_medium=affiliate&utm_campaign=default`;
-}
-
-/**
- * アクセストレードのインプレッション計測ピクセル URL。AT の生成リンクコードは
- * クリック URL（sp/cc）と対で 1x1 の計測画像（sp/rr）を持つため、リンクと併せて
- * 描画する。AT 以外のリンク・rk なしは null（何も描画しない）。
- */
-export function atImpressionPixel(url: string): string | null {
+// アクセストレードの生成リンクコードはクリック URL（sp/cc）と対で 1x1 の計測画像
+// （sp/rr）を持つ。リンクだけ張ると imp が計上されないため、対の URL をここで導出する。
+function atImpressionPixel(url: string): string | null {
   try {
     const u = new URL(url);
     if (u.hostname !== "h.accesstrade.net") return null;
@@ -134,33 +102,24 @@ export function atImpressionPixel(url: string): string | null {
 /**
  * ふるさと納税導線のリンクを返す。null なら導線は表示しない。
  *
- * 非表示になるのは (a) env 未設定、(b) ふるなび未掲載の自治体（municipalId が null）。
- * 未掲載自治体に導線を出すと、移動先で寄付先が見つからない誤誘導になるため出さない。
+ * 非表示になるのは (a) env 未設定、(b) リンク先がない＝ふるなび未掲載の自治体
+ * （destUrl が null）。未掲載自治体に導線を出すと、移動先で寄付先が見つからない
+ * 誤誘導になるため出さない。
  *
- * テンプレート（{url} = 自治体ページへのディープリンク ＞ {keyword} = 検索URL）＞
- * 固定リンクの順で採用。ASP リンクには UTM を付けない（計測を壊さない）。
+ * テンプレート（自治体ページへのディープリンク）＞ 固定リンクの順で採用。
+ * env に設定されるのは ASP 発行のリンクなので、denkiOfferUrl と同じ契約で
+ * 一切加工せずそのまま使う（UTM を足すと ASP 計測を壊す）。
  *
- * @param cityName 寄付先自治体名（政令市の行政区の場合は親の政令市名を渡すこと）
- * @param prefName 都道府県名（「府中市」など同名自治体の曖昧さ回避のため keyword に前置する）
- * @param municipalId ふるなびの自治体ID（行政区は親の政令市で引いた値を渡すこと）
+ * @param destUrl リンク先URL（lib/furunaviMunicipals.ts の furunaviMunicipalPageUrl で解決。未掲載は null）
  */
-export function furusatoLink(
-  cityName: string,
-  prefName: string | undefined,
-  municipalId: number | null,
-): FurusatoLinkInfo | null {
-  if (municipalId == null) return null;
+export function furusatoLink(destUrl: string | null): FurusatoLinkInfo | null {
+  if (destUrl == null) return null;
   const template = furusatoUrlTemplate();
-  if (template?.includes("{url}")) {
-    const url = template.replaceAll("{url}", encodeURIComponent(furunaviMunicipalUrl(municipalId)));
-    return { url: isAspLink(url) ? url : withUtm(url, "furusato"), kind: "municipal" };
-  }
   if (template) {
-    const keyword = encodeURIComponent(prefName ? `${prefName}${cityName}` : cityName);
-    const base = template.replaceAll("{keyword}", keyword);
-    return { url: isAspLink(base) ? base : withUtm(base, "furusato"), kind: "search" };
+    const url = template.replaceAll("{url}", encodeURIComponent(destUrl));
+    return { url, kind: "municipal", impressionPixel: atImpressionPixel(url) };
   }
   const aff = furusatoAffUrl();
-  if (aff) return { url: aff, kind: "portal" };
+  if (aff) return { url: aff, kind: "portal", impressionPixel: atImpressionPixel(aff) };
   return null;
 }

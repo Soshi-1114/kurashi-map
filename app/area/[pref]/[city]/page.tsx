@@ -77,8 +77,8 @@ import { compactYen, compactPopulation } from "@/lib/format";
 import { SupportBanner } from "@/components/area/SupportBanner";
 import { FurusatoLink } from "@/components/area/FurusatoLink";
 import { DenkiTeaser } from "@/components/area/DenkiTeaser";
-import { supportUrl, hasFurusatoLink } from "@/lib/monetization";
-import { furunaviMunicipalId } from "@/lib/furunaviMunicipals";
+import { supportUrl, furusatoLink } from "@/lib/monetization";
+import { furunaviMunicipalPageUrl } from "@/lib/furunaviMunicipals";
 import PageShell from "@/components/PageShell";
 import SectionNav, { type SectionNavItem } from "@/components/area/SectionNav";
 
@@ -198,6 +198,10 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
   const parent = m.parentCode ? all.find((x) => x.code === m.parentCode) ?? null : null;
   const heading = m.displayName ?? m.name;
   const support = supportUrl();
+  // ふるさと納税の寄付先。政令市の行政区は親の政令市（名前・ふるなびID とも donee で引く）。
+  // ふるなび未掲載の自治体は furusatoLink が null を返し、導線ごと非表示になる。
+  const donee = m.level === "ward" && parent ? parent : m;
+  const furusato = furusatoLink(furunaviMunicipalPageUrl(donee.code));
   // 将来人口カードの派生値。const に取れば型ガードの絞り込みが JSX 内へ伝播する。
   const fp = m.futurePopulation;
   const fp2050 = futureTotal(fp, "2050");
@@ -862,7 +866,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
       {/* 生活関連の導線（データ可視化エリアとは視覚的に分離）。
           電気代シミュレーターは内部リンクで常時表示。
           ふるさと納税はアクセストレード×ふるなび提携済み（2026-08）。
-          env（検索テンプレート or 固定リンク）の設定で点灯する */}
+          env（商品リンクテンプレート or 固定リンク）の設定で点灯する */}
       <Reveal>
         <section className="ad-support-section" aria-label="生活関連の参考リンク">
           {/* 供給エリア名（自治体固有情報）を添えて /denki にプリセット遷移 */}
@@ -870,17 +874,8 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
           {support && (
             <SupportBanner url={support} municipalityCode={m.code} municipalityName={m.name} />
           )}
-          {/* 政令市の行政区は寄付先が親の政令市になるため、寄付先名・ふるなびIDは親市で引く。
-              ふるなび未掲載の自治体（furunaviId=null）はコンポーネント側で非表示になる */}
-          {hasFurusatoLink() && (
-            <FurusatoLink
-              targetName={m.level === "ward" && parent ? parent.name : m.name}
-              prefName={prefName}
-              municipalityCode={m.code}
-              furunaviId={furunaviMunicipalId(
-                m.level === "ward" && m.parentCode ? m.parentCode : m.code,
-              )}
-            />
+          {furusato && (
+            <FurusatoLink link={furusato} targetName={donee.name} municipalityCode={m.code} />
           )}
         </section>
       </Reveal>

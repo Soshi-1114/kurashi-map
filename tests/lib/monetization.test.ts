@@ -2,11 +2,9 @@ import { describe, it, expect, afterEach } from "vitest";
 import {
   furusatoLink,
   furusatoAffUrl,
-  hasFurusatoLink,
   supportUrl,
   furusatoUrlTemplate,
   denkiOfferUrl,
-  atImpressionPixel,
 } from "@/lib/monetization";
 
 // process.env を書き換えるテストは毎回クリーンアップする。
@@ -33,139 +31,73 @@ describe("supportUrl", () => {
   });
 });
 
-describe("furusatoUrlTemplate", () => {
-  it("未設定なら null（導線非表示）", () => {
+describe("furusatoUrlTemplate / furusatoAffUrl", () => {
+  it("未設定・空白のみは null（導線非表示）", () => {
     expect(furusatoUrlTemplate()).toBeNull();
-  });
-  it("空白のみも null", () => {
+    expect(furusatoAffUrl()).toBeNull();
     process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "  ";
+    process.env.NEXT_PUBLIC_FURUSATO_AFF_URL = "  ";
     expect(furusatoUrlTemplate()).toBeNull();
+    expect(furusatoAffUrl()).toBeNull();
   });
-  it("{keyword} を含まない不正テンプレートは null", () => {
+  it("{url} を含まない不正テンプレートは null", () => {
     process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "https://broken.example/";
     expect(furusatoUrlTemplate()).toBeNull();
   });
-  it("{keyword} を含むテンプレートはそのまま返す", () => {
-    process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "https://furunavi.example/search?q={keyword}";
-    expect(furusatoUrlTemplate()).toBe("https://furunavi.example/search?q={keyword}");
-  });
-});
-
-describe("furusatoAffUrl / hasFurusatoLink", () => {
-  it("未設定なら null / false（導線非表示）", () => {
-    expect(furusatoAffUrl()).toBeNull();
-    expect(hasFurusatoLink()).toBe(false);
-  });
-  it("空白のみも null", () => {
-    process.env.NEXT_PUBLIC_FURUSATO_AFF_URL = "  ";
-    expect(furusatoAffUrl()).toBeNull();
-    expect(hasFurusatoLink()).toBe(false);
-  });
-  it("固定リンクだけでも点灯する", () => {
-    process.env.NEXT_PUBLIC_FURUSATO_AFF_URL = "https://h.accesstrade.net/sp/cc?rk=abc";
-    expect(hasFurusatoLink()).toBe(true);
-  });
-  it("テンプレートだけでも点灯する", () => {
-    process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "https://furunavi.example/search?q={keyword}";
-    expect(hasFurusatoLink()).toBe(true);
+  it("{url} を含むテンプレートはそのまま返す", () => {
+    process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "https://h.accesstrade.net/sp/cc?rk=abc&url={url}";
+    expect(furusatoUrlTemplate()).toBe("https://h.accesstrade.net/sp/cc?rk=abc&url={url}");
   });
 });
 
 describe("furusatoLink", () => {
-  // 札幌市のふるなびID（テスト用の任意値）
-  const ID = 1;
+  // ふるなび自治体ページ（lib/furunaviMunicipals.furunaviMunicipalPageUrl の戻り値相当）
+  const DEST = "https://furunavi.jp/Municipal/Product/Search?municipalid=1&utm_source=at&utm_medium=affiliate&utm_campaign=default";
 
   it("env 未設定なら null（導線非表示）", () => {
-    expect(furusatoLink("札幌市", "北海道", ID)).toBeNull();
+    expect(furusatoLink(DEST)).toBeNull();
   });
 
-  it("ふるなび未掲載（municipalId=null）なら env があっても null（誤誘導しない）", () => {
-    process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "https://furunavi.example/search?q={keyword}";
-    process.env.NEXT_PUBLIC_FURUSATO_AFF_URL = "https://h.accesstrade.net/sp/cc?rk=abc";
-    expect(furusatoLink("北方村", "北海道", null)).toBeNull();
-  });
-
-  it("{url} テンプレート: ふるなび自治体ページ（AT向けutm付き）をエンコードして埋め、municipal 種別になる", () => {
+  it("リンク先なし（ふるなび未掲載）なら env があっても null（誤誘導しない）", () => {
     process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "https://h.accesstrade.net/sp/cc?rk=abc&url={url}";
-    const link = furusatoLink("札幌市", "北海道", ID);
-    expect(link?.kind).toBe("municipal");
-    // AT 商品リンク一括作成の生成結果と同一のリンク先（ふるなびのAT向けutm込み）になる
-    expect(link?.url).toBe(
-      "https://h.accesstrade.net/sp/cc?rk=abc&url=" +
-        encodeURIComponent(
-          "https://furunavi.jp/Municipal/Product/Search?municipalid=1&utm_source=at&utm_medium=affiliate&utm_campaign=default",
-        ),
-    );
-    // ASP リンク自体には UTM を付けない（kurashimap の utm が先頭に来ない）
-    expect(link?.url).not.toContain("utm_source=kurashimap");
-  });
-
-  it("{url} テンプレートが ASP 経由でなければ UTM を付与する", () => {
-    process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "https://redirect.example/?to={url}";
-    const link = furusatoLink("札幌市", "北海道", ID);
-    expect(link?.kind).toBe("municipal");
-    expect(link?.url).toContain("utm_campaign=furusato");
-  });
-
-  it("{keyword} テンプレート: 県名+自治体名で置換し UTM を付与、search 種別になる", () => {
-    process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE =
-      "https://furunavi.example/search?q={keyword}&aid=123";
-    const link = furusatoLink("府中市", "東京都", ID);
-    expect(link?.kind).toBe("search");
-    expect(link?.url).toContain("https://furunavi.example/search?q=");
-    expect(link?.url).toContain(encodeURIComponent("東京都府中市"));
-    expect(link?.url).toContain("aid=123");
-    // 既に ? があるので UTM は & で連結
-    expect(link?.url).toContain("&utm_source=kurashimap");
-    expect(link?.url).toContain("utm_campaign=furusato");
-  });
-
-  it("県名なしなら自治体名のみを keyword にする", () => {
-    process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "https://furunavi.example/search?q={keyword}";
-    const url = furusatoLink("横浜市", undefined, ID)?.url;
-    expect(url).toContain(encodeURIComponent("横浜市"));
-    expect(url).not.toContain(encodeURIComponent("神奈川県"));
-  });
-
-  it("ASP経由の {keyword} テンプレートには UTM を付けない（計測を壊さない）", () => {
-    process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE =
-      "https://h.accesstrade.net/sp/ic?rk=abc&url=https%3A%2F%2Ffurunavi.jp%2Fsearch%3Fq%3D{keyword}";
-    const link = furusatoLink("札幌市", "北海道", ID);
-    expect(link?.kind).toBe("search");
-    expect(link?.url).toContain(encodeURIComponent("北海道札幌市"));
-    expect(link?.url).not.toContain("utm_source");
-  });
-
-  it("固定リンクはそのまま返し（UTMなし）、portal 種別になる", () => {
     process.env.NEXT_PUBLIC_FURUSATO_AFF_URL = "https://h.accesstrade.net/sp/cc?rk=abc";
-    const link = furusatoLink("札幌市", "北海道", ID);
+    expect(furusatoLink(null)).toBeNull();
+  });
+
+  it("テンプレート: リンク先をエンコードして埋め、無加工のURLと計測ピクセルを返す", () => {
+    process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "https://h.accesstrade.net/sp/cc?rk=abc&url={url}";
+    const link = furusatoLink(DEST);
+    expect(link?.kind).toBe("municipal");
+    // AT 商品リンク一括作成の生成結果と同一のURLになる（UTM 等の加工なし）
+    expect(link?.url).toBe("https://h.accesstrade.net/sp/cc?rk=abc&url=" + encodeURIComponent(DEST));
+    expect(link?.url).not.toContain("utm_source=kurashimap");
+    // クリックリンク（sp/cc）と対のインプレッションピクセル（sp/rr）
+    expect(link?.impressionPixel).toBe("https://h.accesstrade.net/sp/rr?rk=abc");
+  });
+
+  it("AT 以外のリンクでは計測ピクセルは null", () => {
+    process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "https://redirect.example/?to={url}";
+    expect(furusatoLink(DEST)?.impressionPixel).toBeNull();
+  });
+
+  it("固定リンクはそのまま返し、portal 種別になる", () => {
+    process.env.NEXT_PUBLIC_FURUSATO_AFF_URL = "https://h.accesstrade.net/sp/cc?rk=abc";
+    const link = furusatoLink(DEST);
     expect(link?.kind).toBe("portal");
     expect(link?.url).toBe("https://h.accesstrade.net/sp/cc?rk=abc");
+    expect(link?.impressionPixel).toBe("https://h.accesstrade.net/sp/rr?rk=abc");
   });
 
   it("テンプレートと固定リンクの両方があればテンプレートを優先する", () => {
-    process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "https://h.accesstrade.net/sp/ic?rk=abc&url={url}";
-    process.env.NEXT_PUBLIC_FURUSATO_AFF_URL = "https://h.accesstrade.net/sp/cc?rk=abc";
-    expect(furusatoLink("札幌市", "北海道", ID)?.kind).toBe("municipal");
+    process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "https://h.accesstrade.net/sp/cc?rk=abc&url={url}";
+    process.env.NEXT_PUBLIC_FURUSATO_AFF_URL = "https://h.accesstrade.net/sp/cc?rk=xyz";
+    expect(furusatoLink(DEST)?.kind).toBe("municipal");
   });
 
-  it("プレースホルダのない不正テンプレートは無視され、固定リンクにフォールバック", () => {
+  it("不正テンプレートは無視され、固定リンクにフォールバック", () => {
     process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "https://broken.example/";
     process.env.NEXT_PUBLIC_FURUSATO_AFF_URL = "https://h.accesstrade.net/sp/cc?rk=abc";
-    expect(furusatoLink("札幌市", "北海道", ID)?.kind).toBe("portal");
-  });
-});
-
-describe("atImpressionPixel", () => {
-  it("AT リンクから rk を取り出し sp/rr のピクセルURLを返す", () => {
-    expect(
-      atImpressionPixel("https://h.accesstrade.net/sp/cc?rk=0100knrl00owcf&url=x"),
-    ).toBe("https://h.accesstrade.net/sp/rr?rk=0100knrl00owcf");
-  });
-  it("AT 以外・rk なし・不正URLは null", () => {
-    expect(atImpressionPixel("https://furunavi.jp/?rk=abc")).toBeNull();
-    expect(atImpressionPixel("https://h.accesstrade.net/sp/cc?url=x")).toBeNull();
-    expect(atImpressionPixel("not-a-url")).toBeNull();
+    expect(furusatoLink(DEST)?.kind).toBe("portal");
   });
 });
 

@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import data from "@/data/furunavi-municipals.json";
-import { furunaviMunicipalId } from "@/lib/furunaviMunicipals";
+import { furunaviMunicipalId, furunaviMunicipalPageUrl } from "@/lib/furunaviMunicipals";
 
 // scripts/fetch-furunavi-municipals.mjs の出力破損（空データ・キー形式崩れ）を検出する。
 // 掲載自治体の増減があるため件数は幅で守る。
@@ -31,5 +31,12 @@ describe("data/furunavi-municipals.json", () => {
 
   it("未掲載・未知のコードは null", () => {
     expect(furunaviMunicipalId("99999")).toBeNull();
+  });
+
+  it("furunaviMunicipalPageUrl は自治体ページURL（AT向けutm付き）を返し、未掲載は null", () => {
+    const url = furunaviMunicipalPageUrl("01100");
+    expect(url).toContain("https://furunavi.jp/Municipal/Product/Search?municipalid=");
+    expect(url).toContain("utm_source=at&utm_medium=affiliate&utm_campaign=default");
+    expect(furunaviMunicipalPageUrl("99999")).toBeNull();
   });
 });

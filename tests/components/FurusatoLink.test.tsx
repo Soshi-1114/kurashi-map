@@ -2,58 +2,44 @@
 import { describe, it, expect, afterEach } from "vitest";
 import { render, cleanup } from "@testing-library/react";
 import { FurusatoLink } from "@/components/area/FurusatoLink";
+import type { FurusatoLinkInfo } from "@/lib/monetization";
 
-const KEYS = ["NEXT_PUBLIC_FURUSATO_URL_TEMPLATE", "NEXT_PUBLIC_FURUSATO_AFF_URL"] as const;
-afterEach(() => {
-  cleanup();
-  for (const k of KEYS) delete process.env[k];
-});
+afterEach(cleanup);
 
-// アフィリエイト導線のコンプライアンス（広告明示 + rel="sponsored"）と、
-// リンク形式（search / portal）に応じた文言の切り替えを守る。
+// アフィリエイト導線のコンプライアンス（広告明示 + rel="sponsored" + AT計測ピクセル）と、
+// リンク種別（municipal / portal）に応じた文言の切り替えを守る。
+// 表示可否（env・ふるなび未掲載）はサーバー側 furusatoLink の担当（lib テストで担保）。
 describe("FurusatoLink", () => {
-  it("env 未設定なら何も描画しない", () => {
-    const { container } = render(
-      <FurusatoLink targetName="札幌市" prefName="北海道" municipalityCode="01100" furunaviId={1} />,
-    );
-    expect(container).toBeEmptyDOMElement();
-  });
+  const municipal: FurusatoLinkInfo = {
+    url: "https://h.accesstrade.net/sp/cc?rk=abc&url=x",
+    kind: "municipal",
+    impressionPixel: "https://h.accesstrade.net/sp/rr?rk=abc",
+  };
 
-  it("ふるなび未掲載（furunaviId=null）なら env があっても描画しない", () => {
-    process.env.NEXT_PUBLIC_FURUSATO_AFF_URL = "https://h.accesstrade.net/sp/cc?rk=abc";
-    const { container } = render(
-      <FurusatoLink targetName="留別村" prefName="北海道" municipalityCode="01696" furunaviId={null} />,
-    );
-    expect(container).toBeEmptyDOMElement();
-  });
-
-  it("{url} テンプレート: 自治体名入りの文言・広告表記・rel=sponsored・計測ピクセル", () => {
-    process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "https://h.accesstrade.net/sp/cc?rk=abc&url={url}";
+  it("municipal: 自治体名入りの文言・広告表記・rel=sponsored・計測ピクセル", () => {
     const { container, getByText } = render(
-      <FurusatoLink targetName="札幌市" prefName="北海道" municipalityCode="01100" furunaviId={1} />,
+      <FurusatoLink link={municipal} targetName="札幌市" municipalityCode="01100" />,
     );
     getByText("札幌市のふるさと納税を見る");
     expect(container.textContent).toContain("広告");
     const a = container.querySelector("a");
+    expect(a?.getAttribute("href")).toBe(municipal.url);
     expect(a?.getAttribute("rel")).toContain("sponsored");
     expect(a?.getAttribute("rel")).toContain("noopener");
     // AT はリファラで掲載サイトを確認するため noreferrer は付けない
     expect(a?.getAttribute("rel")).not.toContain("noreferrer");
     expect(a?.getAttribute("referrerpolicy")).toBe("no-referrer-when-downgrade");
-    expect(a?.getAttribute("href")).toContain(encodeURIComponent("municipalid=1"));
     // AT のインプレッション計測ピクセル（sp/rr）をリンクと対で描画する
     expect(container.querySelector('img[src="https://h.accesstrade.net/sp/rr?rk=abc"]')).not.toBeNull();
   });
 
-  it("固定リンク: 応援文言になり、ASPリンクへそのまま張る", () => {
-    process.env.NEXT_PUBLIC_FURUSATO_AFF_URL = "https://h.accesstrade.net/sp/cc?rk=abc";
+  it("portal: 応援文言に切り替わり、ピクセル null なら計測画像を描画しない", () => {
+    const portal: FurusatoLinkInfo = { url: "https://example.com/", kind: "portal", impressionPixel: null };
     const { container, getByText } = render(
-      <FurusatoLink targetName="札幌市" prefName="北海道" municipalityCode="01100" furunaviId={1} />,
+      <FurusatoLink link={portal} targetName="札幌市" municipalityCode="01100" />,
     );
     getByText("ふるさと納税で札幌市を応援する");
-    expect(container.textContent).toContain("広告");
-    expect(container.querySelector("a")?.getAttribute("href")).toBe(
-      "https://h.accesstrade.net/sp/cc?rk=abc",
-    );
+    expect(container.textContent).toContain("寄付先は移動先で選択できます");
+    expect(container.querySelector("img[width='1']")).toBeNull();
   });
 });
