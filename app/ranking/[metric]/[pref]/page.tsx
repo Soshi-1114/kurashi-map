@@ -10,6 +10,8 @@ import { RANKINGS, getRankingBySlug, rankBy, medianOf, appendFreshness, type Ran
 import { getRankPositions, getNationalMedians } from "@/lib/rankingStats";
 import { PREFS, getPrefBySlug } from "@/lib/prefs";
 import { SITE, absoluteUrl } from "@/lib/site";
+import { mapHubByHref } from "@/lib/siteNav";
+import { mapHrefForPref } from "@/lib/mapDeepLink";
 import { getForeignStats } from "@/lib/foreignStats";
 import { countWaitlistDisclosed } from "@/lib/waitlist";
 import RankLinkList from "@/components/RankLinkList";
@@ -91,7 +93,7 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
   const top1 = ranked[0] ? (ranked[0].displayName ?? ranked[0].name) : "—";
   const freshness = def.freshnessLabel?.(ranked[0] ?? null) ?? null;
   const fresh = freshness ? `【${freshness}】` : "";
-  const title = `${pref.nameJa}の${def.seoTitle ?? def.title}${fresh}｜市区町村を比較｜${SITE.name}`;
+  const title = `${pref.nameJa}の${def.prefSeoTitle ?? def.seoTitle ?? def.title}${fresh}｜市区町村を比較｜${SITE.name}`;
   // description にも県固有の実数値（県内中央値）を含め、検索結果スニペットで即答する。
   // 「{pref}内○○市区町村を掲載」は先頭付近に置く: 2026-08 GSC分析で、県別ページには
   // 「{市} 人口」のような特定1市を探す検索が着地するが、この情報が末尾だと検索結果の
@@ -179,6 +181,12 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
   const otherMetrics = RANKINGS.filter(
     (r) => r.slug !== def.slug && rankBy(r, munis, 1).length > 0,
   );
+  // 対応する地図ハブがある指標のみ「地図で見る」CTA を出す。?pref= ディープリンクで
+  // 当該県へ初期フォーカスする（lib/mapDeepLink.ts）。
+  const mapHub = mapHubByHref(def.mapHub);
+  // 関連ランキング導線は、リンク先の県別ページにデータがある場合のみ（0件ページは存在しない）。
+  const relatedDef = def.related;
+  const related = relatedDef && otherMetrics.some((r) => r.slug === relatedDef.slug) ? relatedDef : null;
 
   const ldJson = {
     "@context": "https://schema.org",
@@ -250,6 +258,16 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
           <Link href={`/area/${pref.slug}`} className="rk-action rk-action-ghost">
             <MapIcon size={15} aria-hidden="true" />{prefName}の全自治体
           </Link>
+          {mapHub && (
+            <Link href={mapHrefForPref(pref.slug, mapHub.href)} className="rk-action rk-action-ghost">
+              <MapIcon size={15} aria-hidden="true" />{mapHub.label}
+            </Link>
+          )}
+          {related && (
+            <Link href={`/ranking/${related.slug}/${pref.slug}`} className="rk-action rk-action-ghost">
+              <BarChart3 size={15} aria-hidden="true" />{prefName}の{related.label}
+            </Link>
+          )}
         </div>
       </header>
 

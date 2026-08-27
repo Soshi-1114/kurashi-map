@@ -13,3 +13,8 @@ export const MAP_HUBS: ReadonlyArray<NavLink & { sitemapPriority: number }> = [
   // 「外国人 割合 地図」系の主力クエリの入口なので priority だけ高い
   { href: "/map/foreign-ratio", label: "外国人住民の割合マップ", sitemapPriority: 0.9 },
 ];
+
+/** href から地図ハブを引く（RankingDef.mapHub の解決用。未知・未設定は null）。 */
+export function mapHubByHref(href: string | undefined): NavLink | null {
+  return MAP_HUBS.find((h) => h.href === href) ?? null;
+}

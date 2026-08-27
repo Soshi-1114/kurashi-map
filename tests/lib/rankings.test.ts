@@ -197,6 +197,48 @@ describe("population-most / population-density の metaDescription", () => {
   });
 });
 
+describe("population 系の seoTitleAnswer / prefSeoTitle", () => {
+  // 2026-08 GSC分析:「日本の市として人口が最も多いのはどこ」等の質問型クエリ
+  // （305imp/0click）に title で即答するため、1位自治体名の答えフレーズを title に足す。
+  it("population-most の seoTitleAnswer は1位の自治体名で答えを先出しする", () => {
+    const def = getRankingBySlug("population-most")!;
+    const top1 = muni({ pref: "kanagawa", name: "横浜市", population: 3770000 });
+    expect(def.seoTitleAnswer!(top1)).toBe("日本一は横浜市");
+  });
+
+  it("population-density の seoTitleAnswer は displayName を優先する", () => {
+    const def = getRankingBySlug("population-density")!;
+    const top1 = muni({ pref: "tokyo", name: "豊島区", displayName: "東京都豊島区", population: 300000, areaKm2: 13 });
+    expect(def.seoTitleAnswer!(top1)).toBe("日本一は東京都豊島区");
+  });
+
+  it("population-most の prefSeoTitle は連続語「人口ランキング」を含む", () => {
+    const def = getRankingBySlug("population-most")!;
+    expect(def.prefSeoTitle).toContain("人口ランキング");
+  });
+});
+
+describe("related 導線と将来人口の seoTitle", () => {
+  it("related.slug はすべて実在するランキングを指す", () => {
+    for (const r of RANKINGS) {
+      if (r.related) {
+        expect(getRankingBySlug(r.related.slug), `${r.slug} → ${r.related.slug}`).toBeTruthy();
+      }
+    }
+  });
+
+  it("現在の人口増減ランキングから2050年将来推計へ導線を張る", () => {
+    expect(getRankingBySlug("population-decline")!.related?.slug).toBe("future-population-decline");
+    expect(getRankingBySlug("population-growth")!.related?.slug).toBe("future-population-resilient");
+  });
+
+  it("future-population-resilient の seoTitle は連続語「人口ランキング」と「2050年」を含む", () => {
+    const t = getRankingBySlug("future-population-resilient")!.seoTitle!;
+    expect(t).toContain("人口ランキング");
+    expect(t).toContain("2050年");
+  });
+});
+
 describe("land-price-low ランキング", () => {
   const def = getRankingBySlug("land-price-low")!;
 

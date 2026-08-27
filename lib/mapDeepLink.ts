@@ -26,7 +26,7 @@ export function mapHrefForCode(code: string, path: string = "/"): string {
   return `${path}?code=${code}`;
 }
 
-/** 都道府県 slug で地図を開くリンク先。 */
-export function mapHrefForPref(slug: string): string {
-  return `/?pref=${slug}`;
+/** 都道府県 slug で地図を開くリンク先（mapHrefForCode と同じく指標別ハブも path で指定可）。 */
+export function mapHrefForPref(slug: string, path: string = "/"): string {
+  return `${path}?pref=${slug}`;
 }
