@@ -108,6 +108,7 @@ export function isInundationKey(key: string): boolean {
   return (INUNDATION_KEYS as readonly string[]).includes(key);
 }
 
-export function getHazardOverlay(key: HazardOverlayKey): HazardOverlay | null {
+// isInundationKey と同じく string を受ける（URL 由来の未検証文字列でもキャスト不要にする）。
+export function getHazardOverlay(key: string): HazardOverlay | null {
   return HAZARD_OVERLAYS.find((h) => h.key === key) ?? null;
 }

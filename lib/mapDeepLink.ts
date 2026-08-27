@@ -1,5 +1,5 @@
 import { getPrefBySlug } from "@/lib/prefs";
-import { getHazardOverlay, isInundationKey, type HazardOverlayKey } from "@/lib/mapHazards";
+import { getHazardOverlay, isInundationKey, type HazardOverlay } from "@/lib/mapHazards";
 
 // 地図ページのディープリンク（?code=13104 / ?pref=saitama）のパース。
 // 「地図で見る」導線（自治体詳細・県ハブ）から、該当自治体・県へ初期フォーカスした
@@ -32,8 +32,11 @@ export function mapHrefForPref(slug: string, path: string = "/"): string {
   return `${path}?pref=${slug}`;
 }
 
-/** ?hazard= で指定できる災害オーバーレイ種別（オーバーレイ非対応の液状化は含まない）。 */
-export type HazardDeepLinkKey = Exclude<HazardOverlayKey, "none">;
+/**
+ * ?hazard= で指定できる災害オーバーレイ種別。型は HazardOverlay["key"] から導出し、
+ * 実在チェック（オーバーレイ非対応の液状化の除外を含む）は parse 時の getHazardOverlay が担う。
+ */
+export type HazardDeepLinkKey = HazardOverlay["key"];
 
 /**
  * ?hazard=flood,landslide の災害オーバーレイ指定を読み取る。実在するオーバーレイ種別のみ
@@ -43,18 +46,10 @@ export type HazardDeepLinkKey = Exclude<HazardOverlayKey, "none">;
 export function parseHazardDeepLink(search: string): HazardDeepLinkKey[] {
   const raw = new URLSearchParams(search).get("hazard");
   if (!raw) return [];
-  const out: HazardDeepLinkKey[] = [];
-  let hasInundation = false;
-  for (const part of raw.split(",")) {
-    const overlay = getHazardOverlay(part.trim() as HazardOverlayKey);
-    if (!overlay || out.includes(overlay.key)) continue;
-    if (isInundationKey(overlay.key)) {
-      if (hasInundation) continue;
-      hasInundation = true;
-    }
-    out.push(overlay.key);
-  }
-  return out;
+  // Set は挿入順を保つため、重複除去後も URL の指定順のまま
+  const keys = [...new Set(raw.split(",").flatMap((p) => getHazardOverlay(p.trim())?.key ?? []))];
+  const firstInundation = keys.find(isInundationKey);
+  return keys.filter((k) => !isInundationKey(k) || k === firstInundation);
 }
 
 /**
