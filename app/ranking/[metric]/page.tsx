@@ -9,6 +9,7 @@ import { listAllAcrossPrefs } from "@/lib/metrics";
 import { RANKINGS, getRankingBySlug, muniLevelOnly, rankBy, appendFreshness, type RankingDef } from "@/lib/rankings";
 import { PREFS } from "@/lib/prefs";
 import { SITE, prefNameOf, absoluteUrl } from "@/lib/site";
+import { mapHubForRanking } from "@/lib/siteNav";
 import PrefRegionLinks from "@/components/PrefRegionLinks";
 import RankLinkList from "@/components/RankLinkList";
 import RankFaq from "@/components/RankFaq";
@@ -85,6 +86,9 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
   const qualifiedCount = isList ? fullRanked.length : ranked.length;
 
   const others = RANKINGS.filter((r) => r.slug !== def.slug);
+  // 対応する地図ハブがある指標のみ「地図で見る」CTA を出す（GA4 分析 2026-08:
+  // ランキング流入が地図体験まで届いていないため、ヒーローに共通導線を置く）。
+  const mapHub = mapHubForRanking(def.slug);
   // この指標に該当データがある都道府県（県別ランキングへの導線）
   const prefsWithData = PREFS.filter((p) => allMunis.some((m) => m.pref === p.slug && def.qualifies(m)));
 
@@ -164,6 +168,13 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
             📅 次回更新予定: {def.nextUpdate}
           </p>
         )}
+        {mapHub && (
+          <div className="rk-hero-actions">
+            <Link href={mapHub.href} className="rk-action rk-action-primary">
+              <MapIcon size={15} aria-hidden="true" />{mapHub.label}で全国を見る
+            </Link>
+          </div>
+        )}
       </header>
 
       {intro.length > 0 && (
@@ -172,11 +183,6 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
             {intro.map((p, i) => (
               <p key={i}>{p}</p>
             ))}
-            {def.compareForeignAvg && (
-              <p>
-                <Link href="/map/foreign-ratio">🗺 全国の外国人住民の割合を地図（コロプレス）で見る →</Link>
-              </p>
-            )}
           </div>
         </section>
       )}

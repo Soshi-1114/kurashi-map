@@ -10,6 +10,7 @@ import { RANKINGS, getRankingBySlug, rankBy, medianOf, appendFreshness, type Ran
 import { getRankPositions, getNationalMedians } from "@/lib/rankingStats";
 import { PREFS, getPrefBySlug } from "@/lib/prefs";
 import { SITE, absoluteUrl } from "@/lib/site";
+import { mapHubForRanking } from "@/lib/siteNav";
 import { getForeignStats } from "@/lib/foreignStats";
 import { countWaitlistDisclosed } from "@/lib/waitlist";
 import RankLinkList from "@/components/RankLinkList";
@@ -179,6 +180,9 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
   const otherMetrics = RANKINGS.filter(
     (r) => r.slug !== def.slug && rankBy(r, munis, 1).length > 0,
   );
+  // 対応する地図ハブがある指標のみ「地図で見る」CTA を出す。?pref= ディープリンクで
+  // 当該県へ初期フォーカスする（lib/mapDeepLink.ts）。
+  const mapHub = mapHubForRanking(def.slug);
 
   const ldJson = {
     "@context": "https://schema.org",
@@ -250,6 +254,11 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
           <Link href={`/area/${pref.slug}`} className="rk-action rk-action-ghost">
             <MapIcon size={15} aria-hidden="true" />{prefName}の全自治体
           </Link>
+          {mapHub && (
+            <Link href={`${mapHub.href}?pref=${pref.slug}`} className="rk-action rk-action-ghost">
+              <MapIcon size={15} aria-hidden="true" />{mapHub.label}
+            </Link>
+          )}
         </div>
       </header>
 
