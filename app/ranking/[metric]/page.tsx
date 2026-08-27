@@ -9,7 +9,7 @@ import { listAllAcrossPrefs } from "@/lib/metrics";
 import { RANKINGS, getRankingBySlug, muniLevelOnly, rankBy, appendFreshness, type RankingDef } from "@/lib/rankings";
 import { PREFS } from "@/lib/prefs";
 import { SITE, prefNameOf, absoluteUrl } from "@/lib/site";
-import { mapHubForRanking } from "@/lib/siteNav";
+import { mapHubByHref } from "@/lib/siteNav";
 import PrefRegionLinks from "@/components/PrefRegionLinks";
 import RankLinkList from "@/components/RankLinkList";
 import RankFaq from "@/components/RankFaq";
@@ -39,7 +39,9 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
   const top = await rankedFor(def, 1);
   const top1 = top[0] ? `${prefNameOf(top[0].pref)}${top[0].displayName ?? top[0].name}` : "—";
   const freshness = def.freshnessLabel?.(top[0] ?? null) ?? null;
-  const title = `${def.seoTitleFn?.(top[0] ?? null) ?? def.seoTitle ?? def.title}${freshness ? `【${freshness}】` : "【全国】"}｜${SITE.name}`;
+  // 「｜日本一は{1位}」のような答えフレーズは 1位が実在するときだけ title 末尾に足す。
+  const answer = top[0] && def.seoTitleAnswer ? `｜${def.seoTitleAnswer(top[0])}` : "";
+  const title = `${def.seoTitle ?? def.title}${answer}${freshness ? `【${freshness}】` : "【全国】"}｜${SITE.name}`;
   // description 末尾にデータの基準年度を追記（文中に同じ年が既出ならスキップ）。
   const description = appendFreshness(
     def.metaDescription ? def.metaDescription(top[0] ?? null) : def.description.replace("{top1}", top1),
@@ -88,7 +90,7 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
   const others = RANKINGS.filter((r) => r.slug !== def.slug);
   // 対応する地図ハブがある指標のみ「地図で見る」CTA を出す（GA4 分析 2026-08:
   // ランキング流入が地図体験まで届いていないため、ヒーローに共通導線を置く）。
-  const mapHub = mapHubForRanking(def.slug);
+  const mapHub = mapHubByHref(def.mapHub);
   // この指標に該当データがある都道府県（県別ランキングへの導線）
   const prefsWithData = PREFS.filter((p) => allMunis.some((m) => m.pref === p.slug && def.qualifies(m)));
 

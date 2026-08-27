@@ -31,12 +31,12 @@ export type RankingDef = {
    */
   seoTitle?: string;
   /**
-   * meta title を1位自治体（null=該当なし）から動的に組み立てる任意フック（seoTitle より優先）。
-   * 「日本の市として人口が最も多いのはどこ」のような答えを探す質問型クエリに title で
-   * 即答する用途（2026-08 GSC分析: population-most で同クエリが 305imp/0click）。
-   * seoTitle と同じく title タグ専用で、H1・リンクラベル・構造化データには使わない。
+   * meta title の末尾に「｜」区切りで添える答えフレーズ（例:「日本一は横浜市」）を
+   * 1位自治体から組み立てる任意フック。「日本の市として人口が最も多いのはどこ」のような
+   * 質問型クエリに title で即答する用途（2026-08 GSC分析: population-most で同クエリが
+   * 305imp/0click）。seoTitle と同じく title タグ専用で、H1・構造化データには使わない。
    */
-  seoTitleFn?: (top1: Municipality | null) => string;
+  seoTitleAnswer?: (top1: Municipality) => string;
   /**
    * 県別ページの meta title 用の言い換え（任意）。「{県}の◯◯」の◯◯部分に入る。
    * 検索クエリの連続語（例:「人口ランキング」）を title に作るのが目的
@@ -51,6 +51,12 @@ export type RankingDef = {
    * 2ページ目に滞留）。県別版はリンク先の県別ページにデータがある場合のみ表示。
    */
   related?: { slug: string; label: string };
+  /**
+   * 対応する指標別地図ハブ（/map/*）の href（任意）。ランキングページ（全国・県別）の
+   * 「地図で見る」CTA がここから MAP_HUBS のラベルを引いて表示する。対応ハブが無い指標
+   * （population-most・vacancy 等）は未設定にし、CTA 自体を出さない。
+   */
+  mapHub?: string;
   /** ランキング一覧・パンくず用の短いラベル */
   shortLabel: string;
   /** meta description のひな型（{top1} を1位自治体名に置換） */
@@ -336,6 +342,9 @@ const POPULATION_METRIC_TEXT: Record<
   densityLow: { noun: "人口密度", verb: "低い", valueOf: (m) => densityText(populationDensity(m) ?? 0) },
 };
 
+// 「日本一は{1位}」。population-most / population-density の seoTitleAnswer で共用する。
+const nihonichiTop1 = (top1: Municipality): string => `日本一は${top1.displayName ?? top1.name}`;
+
 function populationMetaDescription(metric: keyof typeof POPULATION_METRIC_TEXT) {
   const { noun, verb, valueOf } = POPULATION_METRIC_TEXT[metric];
   return (top1: Municipality | null): string => {
@@ -370,6 +379,7 @@ export const RANKINGS: RankingDef[] = [
       "全国の市区町村を民営借家の家賃平均が安い順にランキング。最も家賃が安いのは{top1}。家賃相場の低い自治体を政府統計（住宅・土地統計調査）の実データで比較できます。",
     lead: "全国の市区町村を民営借家の家賃平均が安い順に並べたランキングです。",
     note: RENT_NOTE,
+    mapHub: "/map/rent",
     columnLabel: "家賃平均",
     order: "asc",
     nextUpdate: NEXT_UPDATE.rent,
@@ -389,6 +399,7 @@ export const RANKINGS: RankingDef[] = [
     lead: "全国の市区町村を民営借家の家賃平均が高い順に並べたランキングです。",
     note: RENT_NOTE,
     prefSummary: true,
+    mapHub: "/map/rent",
     columnLabel: "家賃平均",
     order: "desc",
     nextUpdate: NEXT_UPDATE.rent,
@@ -443,6 +454,7 @@ export const RANKINGS: RankingDef[] = [
       "全国の市区町村を住宅地の地価が高い順にランキング。最も地価が高いのは{top1}。地価公示・地価調査の実データで自治体を比較できます。",
     lead: "全国の市区町村を住宅地の地価（円/㎡）が高い順に並べたランキングです。",
     prefSummary: true,
+    mapHub: "/map/land-price",
     columnLabel: "地価（住宅地）",
     order: "desc",
     freshnessLabel: freshnessFromAsOf((m) => m.landPrice.asOf),
@@ -459,6 +471,7 @@ export const RANKINGS: RankingDef[] = [
     description:
       "全国の市区町村を住宅地の地価が安い順にランキング。最も地価が安いのは{top1}。地価公示・地価調査の実データで、土地が手頃な自治体を比較できます。",
     lead: "全国の市区町村を住宅地の地価（円/㎡）が安い順に並べたランキングです。",
+    mapHub: "/map/land-price",
     columnLabel: "地価（住宅地）",
     order: "asc",
     freshnessLabel: freshnessFromAsOf((m) => m.landPrice.asOf),
@@ -489,8 +502,7 @@ export const RANKINGS: RankingDef[] = [
     slug: "population-most",
     category: "人口・まち",
     title: "人口が多い市区町村ランキング",
-    seoTitleFn: (top1) =>
-      `人口が多い市区町村ランキング${top1 ? `｜日本一は${top1.displayName ?? top1.name}` : ""}`,
+    seoTitleAnswer: nihonichiTop1,
     prefSeoTitle: "市区町村 人口ランキング（人口が多い順）",
     shortLabel: "人口が多い",
     description:
@@ -509,8 +521,7 @@ export const RANKINGS: RankingDef[] = [
     slug: "population-density",
     category: "人口・まち",
     title: "人口密度が高い市区町村ランキング",
-    seoTitleFn: (top1) =>
-      `人口密度が高い市区町村ランキング${top1 ? `｜日本一は${top1.displayName ?? top1.name}` : ""}`,
+    seoTitleAnswer: nihonichiTop1,
     shortLabel: "人口密度が高い",
     description:
       "全国の市区町村を人口密度（人/km²）が高い順にランキング。最も人口密度が高いのは{top1}。国勢調査人口と国土地理院の面積データで比較できます。",
@@ -560,6 +571,7 @@ export const RANKINGS: RankingDef[] = [
     lead: `全国の市区町村を、5年間（${CENSUS_PERIOD}）の人口増減率が高い順に並べたランキングです。`,
     note: "人口増減率は2020年と2025年の国勢調査人口の比較（%）で、転入・出生などの内訳は含みません。人口規模が小さい自治体や、震災からの帰還が進む自治体（福島県大熊町など）では率が大きく出ることがあります。",
     related: { slug: "future-population-resilient", label: "2050年も人口を維持する見込みの自治体" },
+    mapHub: "/map/population-trend",
     prefSummary: true,
     columnLabel: "人口増減率（2020→2025）",
     order: "desc",
@@ -582,6 +594,7 @@ export const RANKINGS: RankingDef[] = [
     lead: `全国の市区町村を、5年間（${CENSUS_PERIOD}）の人口減少率が大きい順に並べたランキングです。`,
     note: "人口増減率は2020年と2025年の国勢調査人口の比較（%）で、転出・自然減などの内訳は含みません。人口規模が小さい自治体や、原発事故の避難区域を抱える自治体（福島県双葉町など）では減少率が大きく出ることがあります。人口が増えている自治体は表の下位（増加側）に並びます。",
     related: { slug: "future-population-decline", label: "2050年の将来推計人口ランキング" },
+    mapHub: "/map/population-trend",
     columnLabel: "人口増減率（2020→2025）",
     order: "asc",
     freshnessLabel: () => POPULATION_FRESHNESS,
@@ -605,6 +618,7 @@ export const RANKINGS: RankingDef[] = [
     lead: "全国の市区町村を、2050年の将来推計人口の減少率（2020年国勢調査基準）が大きい順に並べたランキングです。",
     note: FUTURE_NOTE,
     faq: FUTURE_FAQ,
+    mapHub: "/map/future-population",
     columnLabel: "人口増減率（2020→2050・推計）",
     order: "asc",
     freshnessLabel: () => FUTURE_FRESHNESS,
@@ -627,6 +641,7 @@ export const RANKINGS: RankingDef[] = [
     lead: "全国の市区町村を、2050年の将来推計人口の減少率（2020年国勢調査基準）が小さい順に並べたランキングです。推計上、人口が増える見込みの自治体が上位に入ります。",
     note: FUTURE_NOTE,
     faq: FUTURE_FAQ,
+    mapHub: "/map/future-population",
     columnLabel: "人口増減率（2020→2050・推計）",
     order: "desc",
     freshnessLabel: () => FUTURE_FRESHNESS,
@@ -652,6 +667,7 @@ export const RANKINGS: RankingDef[] = [
     freshnessLabel: foreignFreshnessLabel,
     nextUpdate: NEXT_UPDATE.foreign,
     prefSummary: true,
+    mapHub: "/map/foreign-ratio",
     columnLabel: "外国人住民比率",
     order: "desc",
     // 在留外国人統計の対象かつ人口が有効（比率を算出できる）自治体のみ。
@@ -675,6 +691,7 @@ export const RANKINGS: RankingDef[] = [
     compareForeignAvg: true,
     freshnessLabel: foreignFreshnessLabel,
     nextUpdate: NEXT_UPDATE.foreign,
+    mapHub: "/map/foreign-ratio",
     columnLabel: "外国人住民比率",
     order: "asc",
     qualifies: (m) => hasForeignData(m.foreignResidents.source) && m.population > 0,

@@ -14,24 +14,7 @@ export const MAP_HUBS: ReadonlyArray<NavLink & { sitemapPriority: number }> = [
   { href: "/map/foreign-ratio", label: "外国人住民の割合マップ", sitemapPriority: 0.9 },
 ];
 
-// ランキング slug → 対応する地図ハブ。ランキングページ（全国・県別）の「地図で見る」
-// CTA が参照する。対応ハブが無い指標（population-most・vacancy 等）はここに載せず、
-// CTA 自体を出さない。ラベル・href は MAP_HUBS を単一ソースとして引く。
-const RANKING_TO_HUB: Readonly<Record<string, string>> = {
-  "rent-cheap": "/map/rent",
-  "rent-high": "/map/rent",
-  "land-price-high": "/map/land-price",
-  "land-price-low": "/map/land-price",
-  "population-growth": "/map/population-trend",
-  "population-decline": "/map/population-trend",
-  "future-population-decline": "/map/future-population",
-  "future-population-resilient": "/map/future-population",
-  "foreign-ratio-high": "/map/foreign-ratio",
-  "foreign-ratio-low": "/map/foreign-ratio",
-};
-
-/** ランキング slug に対応する地図ハブ（無い指標は null）。 */
-export function mapHubForRanking(slug: string): NavLink | null {
-  const href = RANKING_TO_HUB[slug];
+/** href から地図ハブを引く（RankingDef.mapHub の解決用。未知・未設定は null）。 */
+export function mapHubByHref(href: string | undefined): NavLink | null {
   return MAP_HUBS.find((h) => h.href === href) ?? null;
 }
