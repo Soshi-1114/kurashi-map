@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { parseMapDeepLink } from "@/lib/mapDeepLink";
+import { parseMapDeepLink, parseHazardDeepLink, mapHrefForHazards } from "@/lib/mapDeepLink";
 
 describe("parseMapDeepLink", () => {
   it("?code= の5桁コードを code リンクとして返す", () => {
@@ -31,5 +31,34 @@ describe("parseMapDeepLink", () => {
     expect(parseMapDeepLink("?pref=")).toBeNull();
     expect(parseMapDeepLink("")).toBeNull();
     expect(parseMapDeepLink("?other=1")).toBeNull();
+  });
+});
+
+describe("parseHazardDeepLink", () => {
+  it("有効なオーバーレイ種別をカンマ区切りで返す", () => {
+    expect(parseHazardDeepLink("?hazard=flood")).toEqual(["flood"]);
+    expect(parseHazardDeepLink("?code=13104&hazard=flood,landslide")).toEqual(["flood", "landslide"]);
+  });
+
+  it("浸水系（洪水・津波・高潮）は排他選択なので最初の1件だけ残す", () => {
+    expect(parseHazardDeepLink("?hazard=flood,tsunami,landslide")).toEqual(["flood", "landslide"]);
+    expect(parseHazardDeepLink("?hazard=tsunami,stormSurge")).toEqual(["tsunami"]);
+  });
+
+  it("不正値・重複・オーバーレイ非対応の液状化は捨てる", () => {
+    expect(parseHazardDeepLink("?hazard=liquefaction,foo,flood,flood")).toEqual(["flood"]);
+    expect(parseHazardDeepLink("?hazard=none")).toEqual([]);
+  });
+
+  it("指定なし・空は空配列", () => {
+    expect(parseHazardDeepLink("")).toEqual([]);
+    expect(parseHazardDeepLink("?code=13104")).toEqual([]);
+    expect(parseHazardDeepLink("?hazard=")).toEqual([]);
+  });
+});
+
+describe("mapHrefForHazards", () => {
+  it("code と hazard を組み合わせたトップ地図の URL を返す", () => {
+    expect(mapHrefForHazards("13104", ["flood", "landslide"])).toBe("/?code=13104&hazard=flood,landslide");
   });
 });
