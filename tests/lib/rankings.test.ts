@@ -197,6 +197,32 @@ describe("population-most / population-density の metaDescription", () => {
   });
 });
 
+describe("population 系の seoTitleFn / prefSeoTitle", () => {
+  // 2026-08 GSC分析:「日本の市として人口が最も多いのはどこ」等の質問型クエリ
+  // （305imp/0click）に title で即答するため、1位自治体名を title に含める。
+  it("population-most の seoTitleFn は1位の自治体名で答えを先出しする", () => {
+    const def = getRankingBySlug("population-most")!;
+    const top1 = muni({ pref: "kanagawa", name: "横浜市", population: 3770000 });
+    expect(def.seoTitleFn!(top1)).toBe("人口が多い市区町村ランキング｜日本一は横浜市");
+  });
+
+  it("population-density の seoTitleFn は displayName を優先する", () => {
+    const def = getRankingBySlug("population-density")!;
+    const top1 = muni({ pref: "tokyo", name: "豊島区", displayName: "東京都豊島区", population: 300000, areaKm2: 13 });
+    expect(def.seoTitleFn!(top1)).toBe("人口密度が高い市区町村ランキング｜日本一は東京都豊島区");
+  });
+
+  it("top1 が null なら「日本一は」を付けない", () => {
+    const def = getRankingBySlug("population-most")!;
+    expect(def.seoTitleFn!(null)).toBe("人口が多い市区町村ランキング");
+  });
+
+  it("population-most の prefSeoTitle は連続語「人口ランキング」を含む", () => {
+    const def = getRankingBySlug("population-most")!;
+    expect(def.prefSeoTitle).toContain("人口ランキング");
+  });
+});
+
 describe("land-price-low ランキング", () => {
   const def = getRankingBySlug("land-price-low")!;
 

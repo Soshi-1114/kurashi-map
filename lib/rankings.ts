@@ -30,6 +30,20 @@ export type RankingDef = {
    * 背景: GSC で「埼玉 相場」「家賃相場 岡山市」等が多数表示・0クリック（2026-07 分析）。
    */
   seoTitle?: string;
+  /**
+   * meta title を1位自治体（null=該当なし）から動的に組み立てる任意フック（seoTitle より優先）。
+   * 「日本の市として人口が最も多いのはどこ」のような答えを探す質問型クエリに title で
+   * 即答する用途（2026-08 GSC分析: population-most で同クエリが 305imp/0click）。
+   * seoTitle と同じく title タグ専用で、H1・リンクラベル・構造化データには使わない。
+   */
+  seoTitleFn?: (top1: Municipality | null) => string;
+  /**
+   * 県別ページの meta title 用の言い換え（任意）。「{県}の◯◯」の◯◯部分に入る。
+   * 検索クエリの連続語（例:「人口ランキング」）を title に作るのが目的
+   * （2026-08 GSC分析:「兵庫県 市町村 人口ランキング」等に対し既定 title は
+   * 「人口が多い市区町村ランキング」で連続語を含まず CTR 0〜1.8%）。
+   */
+  prefSeoTitle?: string;
   /** ランキング一覧・パンくず用の短いラベル */
   shortLabel: string;
   /** meta description のひな型（{top1} を1位自治体名に置換） */
@@ -468,6 +482,9 @@ export const RANKINGS: RankingDef[] = [
     slug: "population-most",
     category: "人口・まち",
     title: "人口が多い市区町村ランキング",
+    seoTitleFn: (top1) =>
+      `人口が多い市区町村ランキング${top1 ? `｜日本一は${top1.displayName ?? top1.name}` : ""}`,
+    prefSeoTitle: "市区町村 人口ランキング（人口が多い順）",
     shortLabel: "人口が多い",
     description:
       "全国の市区町村を人口が多い順にランキング。最も人口が多いのは{top1}。国勢調査の人口（実データ）で自治体規模を比較できます。",
@@ -485,6 +502,8 @@ export const RANKINGS: RankingDef[] = [
     slug: "population-density",
     category: "人口・まち",
     title: "人口密度が高い市区町村ランキング",
+    seoTitleFn: (top1) =>
+      `人口密度が高い市区町村ランキング${top1 ? `｜日本一は${top1.displayName ?? top1.name}` : ""}`,
     shortLabel: "人口密度が高い",
     description:
       "全国の市区町村を人口密度（人/km²）が高い順にランキング。最も人口密度が高いのは{top1}。国勢調査人口と国土地理院の面積データで比較できます。",

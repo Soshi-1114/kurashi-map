@@ -91,7 +91,7 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
   const top1 = ranked[0] ? (ranked[0].displayName ?? ranked[0].name) : "—";
   const freshness = def.freshnessLabel?.(ranked[0] ?? null) ?? null;
   const fresh = freshness ? `【${freshness}】` : "";
-  const title = `${pref.nameJa}の${def.seoTitle ?? def.title}${fresh}｜市区町村を比較｜${SITE.name}`;
+  const title = `${pref.nameJa}の${def.prefSeoTitle ?? def.seoTitle ?? def.title}${fresh}｜市区町村を比較｜${SITE.name}`;
   // description にも県固有の実数値（県内中央値）を含め、検索結果スニペットで即答する。
   // 「{pref}内○○市区町村を掲載」は先頭付近に置く: 2026-08 GSC分析で、県別ページには
   // 「{市} 人口」のような特定1市を探す検索が着地するが、この情報が末尾だと検索結果の
