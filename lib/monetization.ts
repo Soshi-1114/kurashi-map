@@ -106,9 +106,29 @@ export type FurusatoLinkInfo = {
   kind: "municipal" | "search" | "portal";
 };
 
-/** ふるなびの自治体ページ（寄付先ページ）。municipalId は lib/furunaviMunicipals.ts で引く。 */
+/**
+ * ふるなびの自治体ページ（寄付先ページ）。municipalId は lib/furunaviMunicipals.ts で引く。
+ * utm はふるなびが AT 向け既定リンクに付けているもの（AT 商品リンク一括作成の
+ * 生成結果と同一のリンク先になるよう合わせる。2026-08 確認）。
+ */
 function furunaviMunicipalUrl(municipalId: number): string {
-  return `https://furunavi.jp/Municipal/Product/Search?municipalid=${municipalId}`;
+  return `https://furunavi.jp/Municipal/Product/Search?municipalid=${municipalId}&utm_source=at&utm_medium=affiliate&utm_campaign=default`;
+}
+
+/**
+ * アクセストレードのインプレッション計測ピクセル URL。AT の生成リンクコードは
+ * クリック URL（sp/cc）と対で 1x1 の計測画像（sp/rr）を持つため、リンクと併せて
+ * 描画する。AT 以外のリンク・rk なしは null（何も描画しない）。
+ */
+export function atImpressionPixel(url: string): string | null {
+  try {
+    const u = new URL(url);
+    if (u.hostname !== "h.accesstrade.net") return null;
+    const rk = u.searchParams.get("rk");
+    return rk ? `https://h.accesstrade.net/sp/rr?rk=${rk}` : null;
+  } catch {
+    return null;
+  }
 }
 
 /**

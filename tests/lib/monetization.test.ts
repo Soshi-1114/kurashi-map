@@ -6,6 +6,7 @@ import {
   supportUrl,
   furusatoUrlTemplate,
   denkiOfferUrl,
+  atImpressionPixel,
 } from "@/lib/monetization";
 
 // process.env を書き換えるテストは毎回クリーンアップする。
@@ -84,16 +85,19 @@ describe("furusatoLink", () => {
     expect(furusatoLink("北方村", "北海道", null)).toBeNull();
   });
 
-  it("{url} テンプレート: ふるなび自治体ページをエンコードして埋め、municipal 種別になる", () => {
-    process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "https://h.accesstrade.net/sp/ic?rk=abc&url={url}";
+  it("{url} テンプレート: ふるなび自治体ページ（AT向けutm付き）をエンコードして埋め、municipal 種別になる", () => {
+    process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "https://h.accesstrade.net/sp/cc?rk=abc&url={url}";
     const link = furusatoLink("札幌市", "北海道", ID);
     expect(link?.kind).toBe("municipal");
+    // AT 商品リンク一括作成の生成結果と同一のリンク先（ふるなびのAT向けutm込み）になる
     expect(link?.url).toBe(
-      "https://h.accesstrade.net/sp/ic?rk=abc&url=" +
-        encodeURIComponent("https://furunavi.jp/Municipal/Product/Search?municipalid=1"),
+      "https://h.accesstrade.net/sp/cc?rk=abc&url=" +
+        encodeURIComponent(
+          "https://furunavi.jp/Municipal/Product/Search?municipalid=1&utm_source=at&utm_medium=affiliate&utm_campaign=default",
+        ),
     );
-    // ASP リンクなので UTM は付けない
-    expect(link?.url).not.toContain("utm_source");
+    // ASP リンク自体には UTM を付けない（kurashimap の utm が先頭に来ない）
+    expect(link?.url).not.toContain("utm_source=kurashimap");
   });
 
   it("{url} テンプレートが ASP 経由でなければ UTM を付与する", () => {
@@ -149,6 +153,19 @@ describe("furusatoLink", () => {
     process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "https://broken.example/";
     process.env.NEXT_PUBLIC_FURUSATO_AFF_URL = "https://h.accesstrade.net/sp/cc?rk=abc";
     expect(furusatoLink("札幌市", "北海道", ID)?.kind).toBe("portal");
+  });
+});
+
+describe("atImpressionPixel", () => {
+  it("AT リンクから rk を取り出し sp/rr のピクセルURLを返す", () => {
+    expect(
+      atImpressionPixel("https://h.accesstrade.net/sp/cc?rk=0100knrl00owcf&url=x"),
+    ).toBe("https://h.accesstrade.net/sp/rr?rk=0100knrl00owcf");
+  });
+  it("AT 以外・rk なし・不正URLは null", () => {
+    expect(atImpressionPixel("https://furunavi.jp/?rk=abc")).toBeNull();
+    expect(atImpressionPixel("https://h.accesstrade.net/sp/cc?url=x")).toBeNull();
+    expect(atImpressionPixel("not-a-url")).toBeNull();
   });
 });
 

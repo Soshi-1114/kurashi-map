@@ -27,8 +27,8 @@ describe("FurusatoLink", () => {
     expect(container).toBeEmptyDOMElement();
   });
 
-  it("{url} テンプレート: 自治体名入りの文言・広告表記・rel=sponsored", () => {
-    process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "https://h.accesstrade.net/sp/ic?rk=abc&url={url}";
+  it("{url} テンプレート: 自治体名入りの文言・広告表記・rel=sponsored・計測ピクセル", () => {
+    process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "https://h.accesstrade.net/sp/cc?rk=abc&url={url}";
     const { container, getByText } = render(
       <FurusatoLink targetName="札幌市" prefName="北海道" municipalityCode="01100" furunaviId={1} />,
     );
@@ -37,7 +37,12 @@ describe("FurusatoLink", () => {
     const a = container.querySelector("a");
     expect(a?.getAttribute("rel")).toContain("sponsored");
     expect(a?.getAttribute("rel")).toContain("noopener");
+    // AT はリファラで掲載サイトを確認するため noreferrer は付けない
+    expect(a?.getAttribute("rel")).not.toContain("noreferrer");
+    expect(a?.getAttribute("referrerpolicy")).toBe("no-referrer-when-downgrade");
     expect(a?.getAttribute("href")).toContain(encodeURIComponent("municipalid=1"));
+    // AT のインプレッション計測ピクセル（sp/rr）をリンクと対で描画する
+    expect(container.querySelector('img[src="https://h.accesstrade.net/sp/rr?rk=abc"]')).not.toBeNull();
   });
 
   it("固定リンク: 応援文言になり、ASPリンクへそのまま張る", () => {

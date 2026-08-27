@@ -10,7 +10,7 @@
 // - 広告であることを明示する（「広告」表記 + rel="sponsored"）
 import { Gift, ExternalLink } from "lucide-react";
 import { track } from "@/lib/analytics";
-import { furusatoLink } from "@/lib/monetization";
+import { furusatoLink, atImpressionPixel } from "@/lib/monetization";
 import { AdLinkRow } from "./AdLinkRow";
 
 export function FurusatoLink({
@@ -28,6 +28,7 @@ export function FurusatoLink({
 }) {
   const link = furusatoLink(targetName, prefName, furunaviId);
   if (!link) return null;
+  const pixel = atImpressionPixel(link.url);
   // portal（固定リンク）は着地がポータルのトップ等になるため、
   // 自治体のページに着くと誤解させない文言にする。
   const copy =
@@ -44,10 +45,14 @@ export function FurusatoLink({
       copy={copy}
       sub={sub}
       action={
+        // rel: 広告リンクなので sponsored（+旧来の nofollow）。noreferrer は付けない
+        // —— AT の生成コードは referrerpolicy で参照元を送る指定で、掲載サイトの
+        // 確認（ガイドラインの開示義務）にリファラが使われるため。
         <a
           href={link.url}
           target="_blank"
-          rel="sponsored noopener noreferrer"
+          rel="sponsored nofollow noopener"
+          referrerPolicy="no-referrer-when-downgrade"
           className="ad-linkrow-btn ad-linkrow-btn--solid"
           onClick={() =>
             track("furusato_link_click", {
@@ -58,6 +63,11 @@ export function FurusatoLink({
         >
           ふるさと納税を見る
           <ExternalLink size={15} aria-hidden="true" />
+          {/* AT のインプレッション計測ピクセル（生成リンクコードと同じ対で描画） */}
+          {pixel && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={pixel} width={1} height={1} alt="" aria-hidden="true" />
+          )}
         </a>
       }
     />
