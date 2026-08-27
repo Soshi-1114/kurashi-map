@@ -2,12 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import ReactDOM from "react-dom";
 import MapView from "@/components/MapView";
-import HomeLinks, { type PopularMuni } from "@/components/HomeLinks";
+import HomeLinks, { getPopularMunis } from "@/components/HomeLinks";
 import HeroSearch from "@/components/home/HeroSearch";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import { listSummaryAcrossPrefs, listAllAcrossPrefs } from "@/lib/metrics";
-import { muniLevelOnly } from "@/lib/rankings";
+import { listSummaryAcrossPrefs } from "@/lib/metrics";
 import { SITE, absoluteUrl } from "@/lib/site";
 
 const HOME_TITLE = "市区町村の住みやすさを地図で比較｜家賃・地価・子育て・災害リスク｜KurashiMap";
@@ -30,18 +29,6 @@ export const metadata: Metadata = {
   },
   twitter: { card: "summary_large_image", title: HOME_TITLE, description: HOME_DESC, images: [HOME_OG] },
 };
-
-// 「人気の自治体」= 人口上位（市区町村のみ、政令市の区は除外）。トップからの
-// 内部リンクを主要都市に集約する。ビルド時のみフルデータを使い、クライアントには
-// 軽量サマリと小さな popular 配列だけを渡す。
-async function getPopularMunis(limit = 12): Promise<PopularMuni[]> {
-  const munis = muniLevelOnly(await listAllAcrossPrefs());
-  return munis
-    .slice()
-    .sort((a, b) => b.population - a.population)
-    .slice(0, limit)
-    .map((m) => ({ pref: m.pref, code: m.code, name: m.name }));
-}
 
 export default async function HomePage() {
   // リソースヒント（ホームのみ）。地図の基盤タイル(OpenFreeMap)へ早期に接続を張り、

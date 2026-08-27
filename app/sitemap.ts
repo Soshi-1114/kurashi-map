@@ -10,7 +10,7 @@ import {
   withTemplateRevision,
 } from "@/lib/dataFreshness";
 import { absoluteUrl } from "@/lib/site";
-import { MAP_HUBS } from "@/lib/siteNav";
+import { GENERAL_MAP, MAP_HUBS } from "@/lib/siteNav";
 import { denkiPlansLastModified } from "@/lib/denkiPlans";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -44,6 +44,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: siteLatest,
       changeFrequency: "weekly",
       priority: 1,
+    },
+    // 汎用の全画面地図（「地図で見る」ディープリンクの既定の行き先）。
+    {
+      url: absoluteUrl(GENERAL_MAP.href),
+      lastModified: withTemplateRevision(siteLatest, TEMPLATE_REVISED_AT.mapHub),
+      changeFrequency: "monthly" as const,
+      priority: 0.9,
     },
     // 指標別 地図ハブ（ピラーページ群）。一覧は lib/siteNav.ts が単一ソース。
     ...MAP_HUBS.map((hub) => ({

@@ -5,6 +5,11 @@
 // 全ページのフッターから import するとサーバーモジュールグラフに重い定義を引き込むため。
 export type NavLink = { href: string; label: string };
 
+// 汎用の全画面地図（指標切替・災害オーバーレイを備えた地図体験の本体）。
+// 「地図で見る」ディープリンクの既定の行き先（lib/mapDeepLink.ts）。指標別ハブと
+// 役割が違うため MAP_HUBS には含めず、フッター・sitemap では筆頭に別掲する。
+export const GENERAL_MAP: NavLink = { href: "/map", label: "住みやすさマップ（総合）" };
+
 export const MAP_HUBS: ReadonlyArray<NavLink & { sitemapPriority: number }> = [
   { href: "/map/rent", label: "家賃相場マップ", sitemapPriority: 0.8 },
   { href: "/map/land-price", label: "地価マップ", sitemapPriority: 0.8 },
