@@ -1,12 +1,15 @@
 "use client";
 
-// ふるさと納税導線（自治体別）。そのページが扱う自治体専用の検索リンクを生成する。
-// URL 生成は lib/monetization.generateFurusatoUrl に一元化（提携先ASP変更に1箇所で追従）。
+// ふるさと納税導線（自治体別）。リンク生成・表示可否は lib/monetization.furusatoLink に
+// 一元化（提携先ASP・リンク形式の変更に1箇所で追従）。
 //
-// 2025年10月以降、ふるさと納税でのポイント還元は禁止のため、還元・ポイント訴求はしない。
+// 文言の制約（アクセストレード×ふるなびガイドライン + 景表法ステマ規制）:
+// - 返礼品の紹介・強調をしない（特定自治体を対象とした返礼品誘引広告は成果却下）
+// - 「お得」「還元」「セール」等の訴求をしない（2025年10月以降ポイント還元も制度上禁止）
+// - 広告であることを明示する（「広告」表記 + rel="sponsored"）
 import { Gift, ExternalLink } from "lucide-react";
 import { track } from "@/lib/analytics";
-import { generateFurusatoUrl } from "@/lib/monetization";
+import { furusatoLink } from "@/lib/monetization";
 import { AdLinkRow } from "./AdLinkRow";
 
 export function FurusatoLink({
@@ -19,17 +22,28 @@ export function FurusatoLink({
   prefName: string;
   municipalityCode: string;
 }) {
-  const url = generateFurusatoUrl(targetName, prefName);
+  const link = furusatoLink(targetName, prefName);
+  if (!link) return null;
+  // portal（固定リンク）は着地がポータルのトップ等になるため、
+  // 自治体の検索結果に着くと誤解させない文言にする。
+  const copy =
+    link.kind === "search"
+      ? `${targetName}のふるさと納税を見る`
+      : `ふるさと納税で${targetName}を応援する`;
+  const sub =
+    link.kind === "search"
+      ? "※広告・外部サイト（ふるさと納税ポータル）へ移動します"
+      : "※広告・外部サイト（ふるさと納税ポータル）へ移動します。寄付先は移動先で選択できます";
   return (
     <AdLinkRow
       icon={<Gift size={18} aria-hidden="true" className="ad-linkrow-icon" />}
-      copy={`${targetName}のふるさと納税を見る`}
-      sub="※外部サイト（ふるさと納税ポータル）へ移動します"
+      copy={copy}
+      sub={sub}
       action={
         <a
-          href={url}
+          href={link.url}
           target="_blank"
-          rel="noopener noreferrer"
+          rel="sponsored noopener noreferrer"
           className="ad-linkrow-btn ad-linkrow-btn--solid"
           onClick={() =>
             track("furusato_link_click", {

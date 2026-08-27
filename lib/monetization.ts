@@ -58,10 +58,10 @@ export function denkiOfferUrl(
 }
 
 /**
- * ふるさと納税リンクの URL テンプレート。未設定・不正なら null（導線は表示しない）。
+ * ふるさと納税リンクの URL テンプレート。未設定・不正なら null。
  *
- * 提携先ASP（さとふる／ふるなび等）の審査完了までは env を空にして導線ごと非表示にする
- * （さとふる検索URLへの素リンクは 404 になるため。2026-07 確認）。
+ * `{keyword}` を自治体名（県名前置）で置換する検索ディープリンク用。ASP が
+ * リンク先URL自由型のリンク（商品リンク等）を許可している場合に設定する。
  */
 export function furusatoUrlTemplate(): string | null {
   const t = process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE?.trim();
@@ -69,28 +69,53 @@ export function furusatoUrlTemplate(): string | null {
 }
 
 /**
- * ふるさと納税の検索リンク生成。
+ * ASP発行の固定アフィリエイトリンク（例: アクセストレードのテキストリンク）。
+ * キーワード差し込みができない標準リンク用。未設定なら null。
+ */
+export function furusatoAffUrl(): string | null {
+  const u = process.env.NEXT_PUBLIC_FURUSATO_AFF_URL?.trim();
+  return u ? u : null;
+}
+
+/** ふるさと納税導線を表示するか。テンプレート・固定リンクのどちらかの env 設定で点灯。 */
+export function hasFurusatoLink(): boolean {
+  return furusatoUrlTemplate() != null || furusatoAffUrl() != null;
+}
+
+// ASP のリダイレクトドメイン。UTM を付けると計測を壊しうるため付与しない判定に使う
+// （denkiOfferUrl と同方針）。提携 ASP を増やす時はここに足す。
+const ASP_HOSTS = ["accesstrade.net", "a8.net", "valuecommerce.com"];
+function isAspLink(url: string): boolean {
+  try {
+    const host = new URL(url).hostname;
+    return ASP_HOSTS.some((d) => host === d || host.endsWith(`.${d}`));
+  } catch {
+    return false;
+  }
+}
+
+export type FurusatoLinkInfo = {
+  url: string;
+  /** search = 自治体名で絞った検索結果へ / portal = ポータルの固定ページへ（寄付先は移動先で選ぶ） */
+  kind: "search" | "portal";
+};
+
+/**
+ * ふるさと納税導線のリンクを返す。env 未設定なら null（導線は表示しない）。
  *
- * 環境変数 NEXT_PUBLIC_FURUSATO_URL_TEMPLATE の `{keyword}` を自治体名で置換する。
- * 表示の可否は呼び出し側が furusatoUrlTemplate() で判定する前提（未設定時の
- * さとふる検索URLフォールバックは後方互換のために残している）。
+ * テンプレート（自治体で絞った結果に着地でき成果に繋がりやすい）＞ 固定リンクの順で採用。
  *
  * @param cityName 寄付先自治体名（政令市の行政区の場合は親の政令市名を渡すこと）
- * @param prefName 都道府県名（同名自治体の曖昧さ回避のため keyword に前置する）
+ * @param prefName 都道府県名（「府中市」など同名自治体の曖昧さ回避のため keyword に前置する）
  */
-export function generateFurusatoUrl(cityName: string, prefName?: string): string {
-  // 「府中市」など同名自治体があるため、県名を前置して一意性を上げる。
-  const keyword = prefName ? `${prefName}${cityName}` : cityName;
-  const encoded = encodeURIComponent(keyword);
-
+export function furusatoLink(cityName: string, prefName?: string): FurusatoLinkInfo | null {
   const template = furusatoUrlTemplate();
-  let base: string;
   if (template) {
-    base = template.replaceAll("{keyword}", encoded);
-  } else {
-    // デフォルト: さとふるのキーワード検索（提携確定まではアフィリエイトIDなしの素のURL）。
-    base = `https://www.satofull.jp/search/?keyword=${encoded}`;
+    const keyword = encodeURIComponent(prefName ? `${prefName}${cityName}` : cityName);
+    const base = template.replaceAll("{keyword}", keyword);
+    return { url: isAspLink(base) ? base : withUtm(base, "furusato"), kind: "search" };
   }
-
-  return withUtm(base, "furusato");
+  const aff = furusatoAffUrl();
+  if (aff) return { url: aff, kind: "portal" };
+  return null;
 }

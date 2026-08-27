@@ -1,8 +1,19 @@
 import { describe, it, expect, afterEach } from "vitest";
-import { generateFurusatoUrl, supportUrl, furusatoUrlTemplate, denkiOfferUrl } from "@/lib/monetization";
+import {
+  furusatoLink,
+  furusatoAffUrl,
+  hasFurusatoLink,
+  supportUrl,
+  furusatoUrlTemplate,
+  denkiOfferUrl,
+} from "@/lib/monetization";
 
 // process.env を書き換えるテストは毎回クリーンアップする。
-const KEYS = ["NEXT_PUBLIC_SUPPORT_URL", "NEXT_PUBLIC_FURUSATO_URL_TEMPLATE"] as const;
+const KEYS = [
+  "NEXT_PUBLIC_SUPPORT_URL",
+  "NEXT_PUBLIC_FURUSATO_URL_TEMPLATE",
+  "NEXT_PUBLIC_FURUSATO_AFF_URL",
+] as const;
 afterEach(() => {
   for (const k of KEYS) delete process.env[k];
 });
@@ -39,44 +50,82 @@ describe("furusatoUrlTemplate", () => {
   });
 });
 
-describe("generateFurusatoUrl", () => {
-  it("デフォルトはさとふる検索URL・県名前置・UTM付与", () => {
-    const url = generateFurusatoUrl("府中市", "東京都");
-    expect(url).toContain("https://www.satofull.jp/search/?keyword=");
-    // keyword は「東京都府中市」をURLエンコードしたもの
-    expect(url).toContain(encodeURIComponent("東京都府中市"));
-    expect(url).toContain("utm_source=kurashimap");
-    expect(url).toContain("utm_medium=referral");
-    expect(url).toContain("utm_campaign=furusato");
+describe("furusatoAffUrl / hasFurusatoLink", () => {
+  it("未設定なら null / false（導線非表示）", () => {
+    expect(furusatoAffUrl()).toBeNull();
+    expect(hasFurusatoLink()).toBe(false);
+  });
+  it("空白のみも null", () => {
+    process.env.NEXT_PUBLIC_FURUSATO_AFF_URL = "  ";
+    expect(furusatoAffUrl()).toBeNull();
+    expect(hasFurusatoLink()).toBe(false);
+  });
+  it("固定リンクだけでも点灯する", () => {
+    process.env.NEXT_PUBLIC_FURUSATO_AFF_URL = "https://h.accesstrade.net/sp/cc?rk=abc";
+    expect(hasFurusatoLink()).toBe(true);
+  });
+  it("テンプレートだけでも点灯する", () => {
+    process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "https://furunavi.example/search?q={keyword}";
+    expect(hasFurusatoLink()).toBe(true);
+  });
+});
+
+describe("furusatoLink", () => {
+  it("env 未設定なら null（導線非表示）", () => {
+    expect(furusatoLink("札幌市", "北海道")).toBeNull();
+  });
+
+  it("テンプレートの {keyword} を県名+自治体名で置換し UTM を付与する", () => {
+    process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE =
+      "https://furunavi.example/search?q={keyword}&aid=123";
+    const link = furusatoLink("府中市", "東京都");
+    expect(link?.kind).toBe("search");
+    expect(link?.url).toContain("https://furunavi.example/search?q=");
+    expect(link?.url).toContain(encodeURIComponent("東京都府中市"));
+    expect(link?.url).toContain("aid=123");
+    // 既に ? があるので UTM は & で連結
+    expect(link?.url).toContain("&utm_source=kurashimap");
+    expect(link?.url).toContain("utm_campaign=furusato");
   });
 
   it("県名なしなら自治体名のみを keyword にする", () => {
-    const url = generateFurusatoUrl("横浜市");
+    process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "https://furunavi.example/search?q={keyword}";
+    const url = furusatoLink("横浜市")?.url;
     expect(url).toContain(encodeURIComponent("横浜市"));
     expect(url).not.toContain(encodeURIComponent("神奈川県"));
   });
 
   it("同名自治体は県名前置で区別される", () => {
-    const tokyo = generateFurusatoUrl("府中市", "東京都");
-    const hiroshima = generateFurusatoUrl("府中市", "広島県");
-    expect(tokyo).not.toBe(hiroshima);
+    process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "https://furunavi.example/search?q={keyword}";
+    expect(furusatoLink("府中市", "東京都")?.url).not.toBe(furusatoLink("府中市", "広島県")?.url);
   });
 
-  it("テンプレート env の {keyword} を置換する", () => {
+  it("ASP経由のテンプレートには UTM を付けない（計測を壊さない）", () => {
     process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE =
-      "https://furunavi.example/search?q={keyword}&aid=123";
-    const url = generateFurusatoUrl("札幌市", "北海道");
-    expect(url).toContain("https://furunavi.example/search?q=");
-    expect(url).toContain(encodeURIComponent("北海道札幌市"));
-    expect(url).toContain("aid=123");
-    // 既に ? があるので UTM は & で連結
-    expect(url).toContain("&utm_source=kurashimap");
+      "https://h.accesstrade.net/sp/ic?rk=abc&url=https%3A%2F%2Ffurunavi.jp%2Fsearch%3Fq%3D{keyword}";
+    const link = furusatoLink("札幌市", "北海道");
+    expect(link?.kind).toBe("search");
+    expect(link?.url).toContain(encodeURIComponent("北海道札幌市"));
+    expect(link?.url).not.toContain("utm_source");
   });
 
-  it("{keyword} を含まない不正テンプレートはデフォルトにフォールバック", () => {
+  it("固定リンクはそのまま返し（UTMなし）、portal 種別になる", () => {
+    process.env.NEXT_PUBLIC_FURUSATO_AFF_URL = "https://h.accesstrade.net/sp/cc?rk=abc";
+    const link = furusatoLink("札幌市", "北海道");
+    expect(link?.kind).toBe("portal");
+    expect(link?.url).toBe("https://h.accesstrade.net/sp/cc?rk=abc");
+  });
+
+  it("テンプレートと固定リンクの両方があればテンプレートを優先する", () => {
+    process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "https://furunavi.example/search?q={keyword}";
+    process.env.NEXT_PUBLIC_FURUSATO_AFF_URL = "https://h.accesstrade.net/sp/cc?rk=abc";
+    expect(furusatoLink("札幌市", "北海道")?.kind).toBe("search");
+  });
+
+  it("{keyword} を含まない不正テンプレートは無視され、固定リンクにフォールバック", () => {
     process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "https://broken.example/";
-    const url = generateFurusatoUrl("札幌市", "北海道");
-    expect(url).toContain("https://www.satofull.jp/search/?keyword=");
+    process.env.NEXT_PUBLIC_FURUSATO_AFF_URL = "https://h.accesstrade.net/sp/cc?rk=abc";
+    expect(furusatoLink("札幌市", "北海道")?.kind).toBe("portal");
   });
 });
 
