@@ -1,4 +1,5 @@
 import { getPrefBySlug } from "@/lib/prefs";
+import { GENERAL_MAP } from "@/lib/siteNav";
 
 // 地図ページのディープリンク（?code=13104 / ?pref=saitama）のパース。
 // 「地図で見る」導線（自治体詳細・県ハブ）から、該当自治体・県へ初期フォーカスした
@@ -22,11 +23,11 @@ export function parseMapDeepLink(search: string): MapDeepLink | null {
  * 既定の行き先は汎用の全画面地図 /map。path 指定で /map/foreign-ratio 等の指標別
  * ハブへも同じ仕組みでディープリンクできる（MapView はページによらず location.search を読む）。
  */
-export function mapHrefForCode(code: string, path: string = "/map"): string {
+export function mapHrefForCode(code: string, path: string = GENERAL_MAP.href): string {
   return `${path}?code=${code}`;
 }
 
 /** 都道府県 slug で地図を開くリンク先（mapHrefForCode と同じく指標別ハブも path で指定可）。 */
-export function mapHrefForPref(slug: string, path: string = "/map"): string {
+export function mapHrefForPref(slug: string, path: string = GENERAL_MAP.href): string {
   return `${path}?pref=${slug}`;
 }
