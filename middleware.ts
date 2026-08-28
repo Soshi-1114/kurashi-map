@@ -38,16 +38,6 @@ export function middleware(request: NextRequest) {
     return forbidden();
   }
 
-  // 旧トップ地図のディープリンク互換（/?code=13104・/?pref=saitama）。地図は /map へ
-  // 移設したため恒久リダイレクトで引き継ぐ（外部サイト・ブックマークに残った旧URL対策。
-  // ページ側で searchParams を読むとトップが動的レンダリングに落ちるため middleware で行う）。
-  const { pathname, searchParams } = request.nextUrl;
-  if (pathname === '/' && (searchParams.has('code') || searchParams.has('pref'))) {
-    const url = request.nextUrl.clone();
-    url.pathname = '/map';
-    return NextResponse.redirect(url, 308);
-  }
-
   if (!country || ALLOWED_COUNTRIES.includes(country)) {
     return NextResponse.next();
   }

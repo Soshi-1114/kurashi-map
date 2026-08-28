@@ -34,7 +34,9 @@ export type MetricHubConfig = {
   dataset: { name: string; description: string; keywords: string[]; temporalCoverage?: string };
 };
 
-export function hubMetadata(cfg: MetricHubConfig): Metadata {
+// metadata に使うのは5フィールドのみなので Pick で受ける（フル構成を持たない
+// 汎用地図 /map からも使えるようにする。ハブページは MetricHubConfig をそのまま渡せる）。
+export function hubMetadata(cfg: Pick<MetricHubConfig, "path" | "title" | "description" | "ogImage" | "ogAlt">): Metadata {
   return {
     title: cfg.title,
     description: cfg.description,

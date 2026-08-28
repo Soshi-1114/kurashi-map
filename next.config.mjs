@@ -57,6 +57,16 @@ const nextConfig = {
       },
     ];
   },
+  // 旧トップ地図のディープリンク互換（/?code=13104・/?pref=saitama）。地図は /map へ
+  // 移設したため恒久（308）リダイレクトで引き継ぐ（外部サイト・ブックマークに残った
+  // 旧URL対策）。クエリは宛先に自動で引き継がれる。middleware（国別アクセス制御専用）
+  // には混ぜず、宣言的なルーティングはこの層に置く。
+  async redirects() {
+    return [
+      { source: "/", has: [{ type: "query", key: "code" }], destination: "/map", permanent: true },
+      { source: "/", has: [{ type: "query", key: "pref" }], destination: "/map", permanent: true },
+    ];
+  },
 };
 
 export default nextConfig;

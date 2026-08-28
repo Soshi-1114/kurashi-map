@@ -74,8 +74,8 @@ function roundRatio(r: number): number {
 }
 
 /**
- * 全 pref 横断の軽量サマリ。トップ地図の初期配信用（検索・色付け・分割に必要な
- * 最小フィールドのみ）。フル Municipality（約1.8MB）を積まずに済む。
+ * 全 pref 横断の軽量サマリ。地図ページ（/map・/map/*）の初期配信用（検索・色付け・分割に
+ * 必要な最小フィールドのみ）。フル Municipality（約1.8MB）を積まずに済む。
  */
 export async function listSummaryAcrossPrefs(): Promise<MuniSummary[]> {
   const out: MuniSummary[] = [];
