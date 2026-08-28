@@ -164,6 +164,38 @@ describe("population-decline ランキング", () => {
   });
 });
 
+describe("childcare-capacity ランキング", () => {
+  const def = getRankingBySlug("childcare-capacity")!;
+  const cc = (capacity: number, enrolled: number) => ({
+    capacity, enrolled,
+    capacityAge0: 0, enrolledAge0: 0, capacityAge12: 0, enrolledAge12: 0, hiddenWaitlist: 0,
+    source: "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）",
+    asOf: "2026-04-01",
+  });
+
+  it("定員余裕率の降順、定員100人未満・未収録は対象外", () => {
+    const list = [
+      muni({ code: "A", childcare: cc(1000, 900) }), // 10%
+      muni({ code: "B", childcare: cc(500, 400) }),  // 20%
+      muni({ code: "C", childcare: cc(50, 10) }),    // 80% だが定員<100 → 除外
+      muni({ code: "D" }),                            // 未収録 → 除外
+    ];
+    expect(rankBy(def, list).map((m) => m.code)).toEqual(["B", "A"]);
+  });
+
+  it("display は小数1桁%、定員の弾力運用（利用>定員）は負値のまま出す", () => {
+    expect(def.display(muni({ childcare: cc(1000, 800) }))).toBe("20.0%");
+    expect(def.display(muni({ childcare: cc(1000, 1050) }))).toBe("-5.0%");
+  });
+
+  it("metaDescription は1位の余裕率と基準時点を含む（実データ算出）", () => {
+    const desc = def.metaDescription!(muni({ pref: "saitama", name: "戸田市", childcare: cc(1000, 800) }));
+    expect(desc).toContain("20.0%");
+    expect(desc).toContain("2026年4月");
+    expect(desc).toContain("戸田市");
+  });
+});
+
 describe("population-most / population-density の metaDescription", () => {
   // 2026-08 GSC分析: 「{市} 人口」のような特定1市を探す検索でも表示されるため、
   // 都道府県別ページで全市区町村を掲載していることを明記する（rankings.ts 参照）。

@@ -11,6 +11,8 @@ import type { Municipality } from "./types";
 import { hasRent, rentBand } from "./rentColor";
 import { hasLandPrice } from "./landPrice";
 import { isWaitlistDisclosed } from "./waitlist";
+import { hasChildcareData, childcareOpenRatioText, isChildcareCityAggregate } from "./childcare";
+import { formatAsOfJa } from "./rankings";
 import { isHazardEvaluated, isAmenitiesCounted, coverageReason } from "./coverage";
 import { buildSummary } from "./summary";
 import { hasForeignData, foreignRatioPct } from "./foreignResidents";
@@ -68,6 +70,16 @@ export function buildFaq(m: Municipality, prefName: string): QA[] {
         : `${name}の待機児童数は${m.waitlistChildren.value}人です（出典: こども家庭庁）。`
       : `${name}は政令指定都市の区のため、待機児童数は区別に公表されていません（市単位での公表）。`,
   });
+
+  // 保育所等の入りやすさ（定員余裕率）。政令市の区は市全体の集計値なので出典の断りを添える。
+  if (hasChildcareData(m.childcare) && m.childcare.capacity > 0) {
+    const ratio = childcareOpenRatioText(m.childcare);
+    const cityNote = isChildcareCityAggregate(m.childcare.source) ? "（政令指定都市のため市全体の集計）" : "";
+    qa.push({
+      q: `${name}の保育所には入りやすいですか？`,
+      a: `${name}の保育所等は定員${m.childcare.capacity.toLocaleString()}人に対し利用児童数${m.childcare.enrolled.toLocaleString()}人で、定員余裕率は${ratio}です${cityNote}（こども家庭庁、${formatAsOfJa(m.childcare.asOf)}時点）。余裕率は目安であり、年齢（特に0〜2歳）や地域によって状況は異なります。`,
+    });
+  }
 
   // 災害リスク（浸水・土砂）
   qa.push({

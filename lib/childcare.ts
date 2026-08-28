@@ -11,8 +11,11 @@ export function hasChildcareData(c: Municipality["childcare"]): c is Childcare {
   return c != null;
 }
 
-/** 保育所等の定員があるか（capacity=0 は「保育所等の定員なし」の小規模町村）。 */
-export function hasChildcareCapacity(c: Municipality["childcare"]): c is Childcare {
+/**
+ * 保育所等の定員があるか（capacity=0 は「保育所等の定員なし」の小規模町村）。
+ * hasChildcareData で絞った後の else 分岐が never にならないよう、型述語にはしない。
+ */
+export function hasChildcareCapacity(c: Municipality["childcare"]): boolean {
   return c != null && c.capacity > 0;
 }
 
@@ -22,13 +25,13 @@ export function hasChildcareCapacity(c: Municipality["childcare"]): c is Childca
  * 定員 0 は算出不能のため null。
  */
 export function childcareOpenRatioPct(c: Municipality["childcare"]): number | null {
-  if (!hasChildcareCapacity(c)) return null;
+  if (!hasChildcareData(c) || c.capacity <= 0) return null;
   return ((c.capacity - c.enrolled) / c.capacity) * 100;
 }
 
 /** 定員の空き数（定員 − 利用児童数。負値=定員超過受け入れ）。定員 0 は null。 */
 export function childcareOpenSlots(c: Municipality["childcare"]): number | null {
-  if (!hasChildcareCapacity(c)) return null;
+  if (!hasChildcareData(c) || c.capacity <= 0) return null;
   return c.capacity - c.enrolled;
 }
 
