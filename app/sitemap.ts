@@ -49,7 +49,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: absoluteUrl(GENERAL_MAP.href),
       lastModified: withTemplateRevision(siteLatest, TEMPLATE_REVISED_AT.mapHub),
-      changeFrequency: "monthly" as const,
+      changeFrequency: "monthly",
       priority: 0.9,
     },
     // 指標別 地図ハブ（ピラーページ群）。一覧は lib/siteNav.ts が単一ソース。
