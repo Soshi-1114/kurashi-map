@@ -615,8 +615,16 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
               ))}
           </MetricCard>
 
-          {/* 災害リスク */}
-          <MetricCard id="hazard" icon={ShieldAlert} tone="ad-tone-hazard" title="災害リスク">
+          {/* 災害リスク。リンク先の /map/hazard は洪水・土砂の区域を初期点灯した地図ハブで、
+              当該自治体へフォーカスして開く（区域タイルは GSI 全国配信のため、
+              集計対象外の自治体でも地図では見られる）。 */}
+          <MetricCard
+            id="hazard"
+            icon={ShieldAlert}
+            tone="ad-tone-hazard"
+            title="災害リスク"
+            link={{ href: mapHrefForCode(m.code, "/map/hazard"), label: "ハザードマップを地図で見る" }}
+          >
             <DisasterCard m={m} />
           </MetricCard>
 
@@ -626,7 +634,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
             icon={Globe2}
             tone="ad-tone-foreign"
             title="外国人比率"
-            link={{ href: mapHrefForCode(m.code, "/map/foreign-ratio"), label: "地図・ランキングで見る" }}
+            link={{ href: mapHrefForCode(m.code, "/map/foreign-ratio"), label: "外国人比率を地図で見る" }}
           >
             {hasForeignData(m.foreignResidents.source) ? (
               <>

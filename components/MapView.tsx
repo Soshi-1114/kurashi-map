@@ -51,6 +51,8 @@ type Props = {
   summary: MuniSummary[];
   onMenuClick?: () => void;
   initialMetric?: MapMetricKey | "none";
+  /** 初期表示で点灯する災害等オーバーレイ（ハザードのピラーページで指定）。既定はなし。 */
+  initialOverlays?: readonly OverlayKey[];
   /** スクロールするページに埋め込む場合 true（1本指パン/ホイールを奪わない協調ジェスチャ）。 */
   cooperativeGestures?: boolean;
   /** ヘッダーの自治体検索を表示するか。トップページはヒーロー検索と重複するため false。 */
@@ -63,7 +65,7 @@ type Props = {
   showHeader?: boolean;
 };
 
-export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_MAP_METRIC, cooperativeGestures = false, showSearch = true, showHeader = true }: Props) {
+export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_MAP_METRIC, initialOverlays, cooperativeGestures = false, showSearch = true, showHeader = true }: Props) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<MapLibreMap | null>(null);
   const muniGeoRef = useRef<GeoJSON.FeatureCollection | null>(null);
@@ -97,7 +99,7 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
 
   const [selectedCode, setSelectedCode] = useState<string | null>(null);
   // 災害オーバーレイ（複数選択）。空集合＝何も重ねない。
-  const [overlays, setOverlays] = useState<Set<OverlayKey>>(() => new Set());
+  const [overlays, setOverlays] = useState<Set<OverlayKey>>(() => new Set(initialOverlays));
   const toggleOverlay = useCallback((key: OverlayKey) => {
     setOverlays((prev) => {
       const next = new Set(prev);
