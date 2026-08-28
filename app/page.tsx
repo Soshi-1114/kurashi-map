@@ -6,6 +6,7 @@ import HeroSearch from "@/components/home/HeroSearch";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import { listSummaryAcrossPrefs } from "@/lib/metrics";
+import type { MuniSearchItem } from "@/lib/useMuniCombobox";
 import { GENERAL_MAP, MAP_HUBS } from "@/lib/siteNav";
 import { SITE, absoluteUrl } from "@/lib/site";
 
@@ -35,8 +36,12 @@ export default async function HomePage() {
   // 地図本体は /map へ移設したため、基盤タイルへの preconnect は /map 側で行う。
   ReactDOM.preload("/initial-view.svg", { as: "image", type: "image/svg+xml" });
 
-  // 軽量サマリはヒーロー検索（自治体コンボボックス）用。
-  const summary = await listSummaryAcrossPrefs();
+  // ヒーロー検索（自治体コンボボックス）用。検索が読むフィールドだけに射影して
+  // クライアントへ渡す（地図色付け用フィールド込みのフル MuniSummary は raw ~540KB で、
+  // 地図の /map 移設後のトップには過剰。射影後は raw ~180KB）。
+  const searchMunis: MuniSearchItem[] = (await listSummaryAcrossPrefs()).map(
+    ({ code, pref, name, displayName, kana, level }) => ({ code, pref, name, displayName, kana, level }),
+  );
   const popular = await getPopularMunis();
   return (
     <>
@@ -53,7 +58,7 @@ export default async function HomePage() {
           <p className="home-hero-sub">
             全国1,918エリア（市区町村と政令指定都市の行政区）を、家賃相場・地価・人口増減・待機児童・災害リスク・空き家率・外国人住民比率の公的データで調べて比較できます。推計値は使いません。
           </p>
-          <HeroSearch munis={summary} />
+          <HeroSearch munis={searchMunis} />
           <p className="home-hero-actions">
             <a href="#home-explore" className="home-hero-action">都道府県から探す</a>
             <Link href="/ranking" className="home-hero-action">ランキングから探す</Link>

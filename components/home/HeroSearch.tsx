@@ -3,39 +3,37 @@
 // トップのファーストビュー用・自治体検索コンボボックス。
 // 行タップ（主動作）＝自治体詳細ページへ遷移（「調べる」意図のメインアクション。
 // 駅行はその駅がある自治体の詳細ページへ）。
-// 行右端の地図ピン（副動作）＝ページ内の地図へスクロールしてその自治体へフライト
-//（「地図で周辺を見たい」意図。駅行は自治体 bbox ではなく駅座標へマーカー付きで飛ぶ）。
+// 行右端の地図ピン（副動作）＝全画面地図（/map）でその自治体を開く
+//（「地図で周辺を見たい」意図。地図のトップ埋め込み廃止に伴い、ページ内フライトから
+// ディープリンク遷移に変更。駅行も自治体単位で開く）。
 // ドロップダウンの見た目は既存の .search-results 系クラスを再利用する。
 // コンボボックスの状態機械（絞り込み・キーボード操作）は useMuniCombobox を共有する。
 // クエリが空でフォーカス中は、検索結果の代わりに「最近見た自治体」履歴を出す
 // （useSearchHistory / useMuniCombobox の historyCodes 連携）。
 import { useCallback } from "react";
 import { useRouter } from "next/navigation";
-import type { MuniSummary } from "@/lib/types";
-import { useMuniCombobox, type ComboboxHit } from "@/lib/useMuniCombobox";
+import { useMuniCombobox, type ComboboxHit, type MuniSearchItem } from "@/lib/useMuniCombobox";
 import { comboboxHitSuffix } from "@/lib/muniLabel";
-import { requestMapFly } from "@/lib/mapFly";
+import { mapHrefForCode } from "@/lib/mapDeepLink";
 import { SearchHistoryHeader } from "@/components/SearchHistoryHeader";
 import { SearchHitLabel } from "@/components/SearchHitLabel";
 
-export default function HeroSearch({ munis }: { munis: MuniSummary[] }) {
+export default function HeroSearch({ munis }: { munis: MuniSearchItem[] }) {
   const router = useRouter();
-  const onPick = useCallback((m: MuniSummary) => router.push(`/area/${m.pref}/${m.code}`), [router]);
+  const onPick = useCallback((m: MuniSearchItem) => router.push(`/area/${m.pref}/${m.code}`), [router]);
   // townSearch: 町丁名（例: 日の里）やひらがな、stationSearch: 駅名（例: 品川駅）でも
   // 自治体を引けるようにする
   const { query, setQuery, filtered, isHistory, activeIndex, setActiveIndex, pick, close, recordHistory, clearHistory, onKeyDown, onFocus, onBlur, inputRef } =
     useMuniCombobox(munis, onPick, { townSearch: true, stationSearch: true, history: true });
 
-  // 副動作: ページ内の地図へスクロールし、その自治体（駅行なら駅座標）へフライトさせる
-  // （遷移しない）。確定扱いなので履歴にも記録する。閉じ方はフックの close() に委ねる。
+  // 副動作: 全画面地図（/map）でその自治体へフォーカスして開く。確定扱いなので履歴にも記録する。
   const showOnMap = useCallback(
-    (m: ComboboxHit<MuniSummary>) => {
+    (m: ComboboxHit<MuniSearchItem>) => {
       close();
       recordHistory(m.code);
-      document.querySelector(".home-map")?.scrollIntoView({ behavior: "smooth" });
-      requestMapFly({ code: m.code, station: m.station });
+      router.push(mapHrefForCode(m.code));
     },
-    [close, recordHistory],
+    [close, recordHistory, router],
   );
 
   return (
