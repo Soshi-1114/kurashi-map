@@ -14,7 +14,7 @@ export const PREF_CLICK_MAX_ZOOM = 8;  // この zoom 以下で pref クリッ�
 // 収まる枠。よくある地図のように湾が画面中央に来る。bbox は固定値（島嶼部は含めない）。
 export const TOKYO_BAY_BBOX: [number, number, number, number] = [139.45, 35.1, 140.2, 35.78];
 
-// 地図の初期既定: 家賃で塗り分ける。指標を明示しないページ（トップの埋め込み地図）は
+// 地図の初期既定: 家賃で塗り分ける。指標を明示しないページ（汎用の全画面地図 /map）は
 // 初期表示が素の灰色地図になり「データを見る場所」だと伝わらないため、既定で色と凡例を出す。
 // 指標別のピラーページはそれぞれ initialMetric を明示するので、この既定は使わない。
 export const DEFAULT_MAP_METRIC: MapMetricKey | "none" = "rent";

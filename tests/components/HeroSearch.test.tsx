@@ -3,7 +3,6 @@ import { describe, it, expect, vi, afterEach, beforeEach } from "vitest";
 import { render, screen, cleanup, within, waitFor, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import HeroSearch from "@/components/home/HeroSearch";
-import { MAP_FLY_EVENT, type MapFlyDetail } from "@/lib/mapFly";
 import { muniSummary } from "../_fixtures";
 
 // トップのヒーロー検索。MuniSearch と違い、確定で詳細ページへ遷移する。
@@ -152,24 +151,16 @@ describe("HeroSearch", () => {
     expect(screen.queryByText("宗像市")).toBeNull();
   });
 
-  it("地図ピンのクリックは詳細ページへ遷移せず、MAP_FLY_EVENT を dispatch して候補を閉じる", async () => {
+  it("地図ピンのクリックは詳細ページではなく全画面地図（/map?code=）へ遷移し、候補を閉じる", async () => {
     const user = userEvent.setup();
     const { input } = setup();
     await user.type(input, "川口");
-    const flyCodes: string[] = [];
-    const onFly = (e: Event) => flyCodes.push((e as CustomEvent<MapFlyDetail>).detail.code);
-    window.addEventListener(MAP_FLY_EVENT, onFly);
-    try {
-      await user.click(screen.getByRole("button", { name: "川口市を地図で表示" }));
-    } finally {
-      window.removeEventListener(MAP_FLY_EVENT, onFly);
-    }
-    expect(push).not.toHaveBeenCalled();
-    expect(flyCodes).toEqual(["11203"]);
+    await user.click(screen.getByRole("button", { name: "川口市を地図で表示" }));
+    expect(push).toHaveBeenCalledExactlyOnceWith("/map?code=11203");
     expect(screen.queryByRole("listbox")).toBeNull();
   });
 
-  it("駅名で「自治体名（駅名）」の候補が出て、地図ピンは駅座標付きでフライトを依頼する", async () => {
+  it("駅名で「自治体名（駅名）」の候補が出て、地図ピンはその自治体の全画面地図へ遷移する", async () => {
     const user = userEvent.setup();
     const { input } = setup();
 
@@ -178,16 +169,8 @@ describe("HeroSearch", () => {
     expect(within(option).getByText("川口市")).toBeInTheDocument();
     expect(within(option).getByText("（品川駅）")).toBeInTheDocument();
 
-    const flyDetails: MapFlyDetail[] = [];
-    const onFly = (e: Event) => flyDetails.push((e as CustomEvent<MapFlyDetail>).detail);
-    window.addEventListener(MAP_FLY_EVENT, onFly);
-    try {
-      await user.click(screen.getByRole("button", { name: "品川駅を地図で表示" }));
-    } finally {
-      window.removeEventListener(MAP_FLY_EVENT, onFly);
-    }
-    expect(push).not.toHaveBeenCalled();
-    expect(flyDetails).toEqual([{ code: "11203", station: { name: "品川", lng: 139.73, lat: 35.62 } }]);
+    await user.click(screen.getByRole("button", { name: "品川駅を地図で表示" }));
+    expect(push).toHaveBeenCalledExactlyOnceWith("/map?code=11203");
   });
 
   it("駅行の本体クリックはその自治体の詳細ページへ遷移する", async () => {

@@ -1,21 +1,13 @@
 "use client";
 
-// トップページの2つの独立したクライアント島（ヒーロー検索と地図）を疎結合につなぐ
-// 最小限のブリッジ。ヒーロー検索の「地図で表示」ボタンが CustomEvent を投げ、
-// MapView 側がマウント中だけ listen して既存の flyToMuni を呼ぶ。
-// 状態管理ライブラリや context の持ち回りを避けるための window イベント1本のみ。
+// 地図へのフライト依頼の型。かつてはトップの埋め込み地図へ CustomEvent で依頼を送る
+// ブリッジ（requestMapFly）を持っていたが、地図の /map 移設で送り手が消えたため型だけ残す
+// （MapView 内の検索確定（MuniSearch → flyToMuni）と保留フライトが引き続き使う）。
 
 import type { StationPoint } from "./stationSearch";
-
-export const MAP_FLY_EVENT = "kurashimap:flyto";
 
 /** 地図へのフライト依頼。station 付きは自治体 bbox ではなく駅座標へ点フライト（マーカー付き）。 */
 export type MapFlyDetail = {
   code: string;
   station?: StationPoint;
 };
-
-/** ページ内の地図へフライトを依頼する（地図未マウント時は無視される）。 */
-export function requestMapFly(detail: MapFlyDetail): void {
-  window.dispatchEvent(new CustomEvent<MapFlyDetail>(MAP_FLY_EVENT, { detail }));
-}

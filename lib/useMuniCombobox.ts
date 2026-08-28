@@ -30,11 +30,18 @@ import { STATION_QUERY_MIN, type StationHit, type StationPoint } from "./station
 import { useSearchHistory } from "./useSearchHistory";
 
 /**
+ * コンボボックス（と候補ラベル表示）が実際に読む最小フィールド。トップのヒーロー検索は
+ * フル MuniSummary（地図色付け用フィールド込み・raw ~540KB）を配信せず、このサブセット
+ * へ射影して渡す（app/page.tsx）。地図ページの MuniSearch はフル MuniSummary のまま渡せる。
+ */
+export type MuniSearchItem = Pick<MuniSummary, "code" | "pref" | "name" | "displayName" | "kana" | "level">;
+
+/**
  * 候補1行。town があれば「町丁名でヒットした自治体」行（例 宗像市（日の里））、
  * station があれば「駅名でヒットした自治体」行（例 港区（品川駅）。確定側は
  * station.lng/lat で駅位置へフライトできる）。
  */
-export type ComboboxHit<T extends MuniSummary> = T & {
+export type ComboboxHit<T extends MuniSearchItem> = T & {
   town?: string;
   station?: StationPoint;
 };
@@ -82,7 +89,7 @@ function useDebouncedSuggest<T>(active: boolean, q: string, url: string, pluck: 
   return hits;
 }
 
-export function useMuniCombobox<T extends MuniSummary>(
+export function useMuniCombobox<T extends MuniSearchItem>(
   candidates: T[],
   onPick: (m: T) => void,
   opts?: { limit?: number; townSearch?: boolean; stationSearch?: boolean; history?: boolean },
