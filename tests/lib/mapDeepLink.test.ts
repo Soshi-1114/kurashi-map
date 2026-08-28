@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { parseMapDeepLink } from "@/lib/mapDeepLink";
+import { parseMapDeepLink, mapHrefForCode, mapHrefForPref } from "@/lib/mapDeepLink";
 
 describe("parseMapDeepLink", () => {
   it("?code= の5桁コードを code リンクとして返す", () => {
@@ -31,5 +31,17 @@ describe("parseMapDeepLink", () => {
     expect(parseMapDeepLink("?pref=")).toBeNull();
     expect(parseMapDeepLink("")).toBeNull();
     expect(parseMapDeepLink("?other=1")).toBeNull();
+  });
+});
+
+describe("mapHrefForCode / mapHrefForPref", () => {
+  it("既定の行き先は汎用の全画面地図 /map", () => {
+    expect(mapHrefForCode("13104")).toBe("/map?code=13104");
+    expect(mapHrefForPref("saitama")).toBe("/map?pref=saitama");
+  });
+
+  it("path 指定で指標別ハブへもディープリンクできる", () => {
+    expect(mapHrefForCode("13104", "/map/foreign-ratio")).toBe("/map/foreign-ratio?code=13104");
+    expect(mapHrefForPref("saitama", "/map/rent")).toBe("/map/rent?pref=saitama");
   });
 });

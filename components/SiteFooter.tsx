@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { MAP_HUBS, type NavLink } from "@/lib/siteNav";
+import { GENERAL_MAP, MAP_HUBS, type NavLink } from "@/lib/siteNav";
 
 // 全ページ共通フッター（サーバーコンポーネント＝リンクは初期HTMLに載る）。
 // 内部リンクグラフの底上げが目的。設置は PageShell が担い、PageShell を使わない
@@ -8,7 +8,7 @@ import { MAP_HUBS, type NavLink } from "@/lib/siteNav";
 // 全ページに載るリンク集なので prefetch は無効（viewport prefetch でハブ群を
 // 毎ページ先読みさせない）。
 const COLUMNS: Array<{ heading: string; links: readonly NavLink[] }> = [
-  { heading: "地図で見る", links: MAP_HUBS },
+  { heading: "地図で見る", links: [GENERAL_MAP, ...MAP_HUBS] },
   {
     heading: "調べる・比べる",
     links: [
