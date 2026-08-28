@@ -26,7 +26,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -87,6 +87,17 @@
       "elderly2050": 76347,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 15978,
+      "capacityAge0": 1813,
+      "capacityAge12": 5218,
+      "enrolled": 13441,
+      "hiddenWaitlist": 179,
+      "enrolledAge0": 652,
+      "enrolledAge12": 4830,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（静岡市全体の集計）",
+      "asOf": "2026-04-01"
     }
   },
   {
@@ -116,7 +127,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -177,6 +188,17 @@
       "elderly2050": 66177,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 15978,
+      "capacityAge0": 1813,
+      "capacityAge12": 5218,
+      "enrolled": 13441,
+      "hiddenWaitlist": 179,
+      "enrolledAge0": 652,
+      "enrolledAge12": 4830,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（静岡市全体の集計）",
+      "asOf": "2026-04-01"
     }
   },
   {
@@ -206,7 +228,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -267,6 +289,17 @@
       "elderly2050": 67907,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 15978,
+      "capacityAge0": 1813,
+      "capacityAge12": 5218,
+      "enrolled": 13441,
+      "hiddenWaitlist": 179,
+      "enrolledAge0": 652,
+      "enrolledAge12": 4830,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（静岡市全体の集計）",
+      "asOf": "2026-04-01"
     }
   },
   {
@@ -296,7 +329,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -350,6 +383,17 @@
       "elderly2050": 0,
       "source": "対象外（2024年の区再編前の旧区単位で推計されているため現行区のデータなし）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 18703,
+      "capacityAge0": 2215,
+      "capacityAge12": 6855,
+      "enrolled": 14806,
+      "hiddenWaitlist": 255,
+      "enrolledAge0": 705,
+      "enrolledAge12": 5643,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（浜松市全体の集計）",
+      "asOf": "2026-04-01"
     }
   },
   {
@@ -379,7 +423,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -433,6 +477,17 @@
       "elderly2050": 0,
       "source": "対象外（2024年の区再編前の旧区単位で推計されているため現行区のデータなし）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 18703,
+      "capacityAge0": 2215,
+      "capacityAge12": 6855,
+      "enrolled": 14806,
+      "hiddenWaitlist": 255,
+      "enrolledAge0": 705,
+      "enrolledAge12": 5643,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（浜松市全体の集計）",
+      "asOf": "2026-04-01"
     }
   },
   {
@@ -462,7 +517,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -523,6 +578,17 @@
       "elderly2050": 6721,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 18703,
+      "capacityAge0": 2215,
+      "capacityAge12": 6855,
+      "enrolled": 14806,
+      "hiddenWaitlist": 255,
+      "enrolledAge0": 705,
+      "enrolledAge12": 5643,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（浜松市全体の集計）",
+      "asOf": "2026-04-01"
     }
   }
 ]

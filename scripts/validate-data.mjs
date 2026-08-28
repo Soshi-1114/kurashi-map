@@ -86,6 +86,19 @@ function checkMuni(file, slug, m, level) {
     if (!isStr(m.shelters.source)) err(file, code, "shelters.source が空");
     if (!isStr(m.shelters.asOf)) err(file, code, "shelters.asOf が空");
   }
+  if (m.childcare !== undefined) {
+    // 保育所等の定員・利用状況。capacity=0 は「定員なし」の実データ。enrolled は
+    // 定員の弾力運用で capacity を超えうるため上限は検証しない。
+    for (const k of ["capacity", "enrolled", "capacityAge0", "enrolledAge0", "capacityAge12", "enrolledAge12", "hiddenWaitlist"]) {
+      if (!isNum(m.childcare[k]) || m.childcare[k] < 0) err(file, code, `childcare.${k} が非負数値でない`);
+    }
+    if (isNum(m.childcare.capacity) && isNum(m.childcare.capacityAge0) && isNum(m.childcare.capacityAge12) &&
+        m.childcare.capacityAge0 + m.childcare.capacityAge12 > m.childcare.capacity) {
+      err(file, code, "childcare の年齢別定員が合計定員を超えている");
+    }
+    if (!isStr(m.childcare.source)) err(file, code, "childcare.source が空");
+    if (!isStr(m.childcare.asOf)) err(file, code, "childcare.asOf が空");
+  }
   if (m.vacancy !== undefined) {
     // rate=-1 は対象外センチネル（人口1.5万人未満の町村）。実データは 0〜100 の率。
     if (!isNum(m.vacancy.rate) || (m.vacancy.rate !== -1 && (m.vacancy.rate < 0 || m.vacancy.rate > 100))) {
