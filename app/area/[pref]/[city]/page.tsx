@@ -38,6 +38,10 @@ import { getAmbiguousNames } from "@/lib/muniLabel";
 import { buildMuniTitle } from "@/lib/muniMeta";
 import { hasRent, rentBand } from "@/lib/rentColor";
 import { isWaitlistDisclosed } from "@/lib/waitlist";
+import {
+  hasChildcareData, hasChildcareCapacity, childcareOpenRatioText,
+  childcareOpenRatioAge0Pct, childcareOpenRatioAge12Pct,
+} from "@/lib/childcare";
 import { hasLandPrice } from "@/lib/landPrice";
 import { hasVacancy, vacancyRateText } from "@/lib/vacancy";
 import { isAmenitiesCounted, coverageReason } from "@/lib/coverage";
@@ -580,7 +584,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
                 ? { text: "待機児童ゼロ", tone: "is-good" }
                 : undefined
             }
-            link={{ href: "/ranking/waitlist-zero", label: "待機児童ゼロの自治体" }}
+            link={{ href: "/ranking/childcare-capacity", label: "保育の余裕をランキングで見る" }}
           >
             {isWaitlistDisclosed(m.waitlistChildren) ? (
               <>
@@ -591,6 +595,39 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
             ) : (
               <NoData text="区別非公表です。" reason={m.waitlistChildren.source.replace("区別非公表（", "").replace(/）.*$/, "")} />
             )}
+            {/* 保育所等の受け入れ状況（定員・利用・余裕率）。政令市の区は市全体の集計
+                （source に明示され SourceLine に出る）。capacity=0 は「定員なし」の実データ。 */}
+            {hasChildcareData(m.childcare) &&
+              (hasChildcareCapacity(m.childcare) ? (
+                <>
+                  <div className="ad-statline">
+                    <span className="ad-stat">
+                      <span className="ad-stat-value">{m.childcare.capacity.toLocaleString()}</span>
+                      <span className="ad-stat-label">保育定員</span>
+                    </span>
+                    <span className="ad-stat">
+                      <span className="ad-stat-value">{m.childcare.enrolled.toLocaleString()}</span>
+                      <span className="ad-stat-label">利用児童数</span>
+                    </span>
+                    <span className="ad-stat">
+                      <span className="ad-stat-value">{childcareOpenRatioText(m.childcare)}</span>
+                      <span className="ad-stat-label">定員余裕率</span>
+                    </span>
+                  </div>
+                  <p className="ad-note">
+                    年齢別の定員余裕率:
+                    0歳児 {childcareOpenRatioAge0Pct(m.childcare) != null ? `${childcareOpenRatioAge0Pct(m.childcare)!.toFixed(1)}%` : "—"} /
+                    1,2歳児 {childcareOpenRatioAge12Pct(m.childcare) != null ? `${childcareOpenRatioAge12Pct(m.childcare)!.toFixed(1)}%` : "—"}。
+                    {m.childcare.hiddenWaitlist > 0 &&
+                      `待機児童のほかに、育児休業中などで待機児童に含まれない申込者が${m.childcare.hiddenWaitlist.toLocaleString()}人います。`}
+                  </p>
+                  <SourceLine source={m.childcare.source} asOf={m.childcare.asOf} />
+                </>
+              ) : (
+                <p className="ad-note">
+                  保育所等の定員はありません（{formatAsOfJa(m.childcare.asOf)}時点・こども家庭庁の公表値）。
+                </p>
+              ))}
             {m.amenities &&
               (isAmenitiesCounted(m.amenities.source) ? (
                 <>

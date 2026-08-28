@@ -38,6 +38,7 @@ const RANK_VISUAL: Record<string, { Icon: typeof Wallet; tone: string }> = {
   "land-price-high": { Icon: JapaneseYen, tone: "rk-tone-land" },
   "land-price-low": { Icon: JapaneseYen, tone: "rk-tone-land" },
   "waitlist-zero": { Icon: Baby, tone: "rk-tone-kids" },
+  "childcare-capacity": { Icon: Baby, tone: "rk-tone-kids" },
   "population-most": { Icon: Users, tone: "rk-tone-pop" },
   "population-growth": { Icon: TrendingUp, tone: "rk-tone-pop" },
   "population-decline": { Icon: TrendingDown, tone: "rk-tone-pop" },

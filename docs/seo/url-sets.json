@@ -97,6 +97,18 @@
     ]
   },
   {
+    "name": "pr-173-174-childcare",
+    "pr": 174,
+    "since": "2026-08-30",
+    "note": "保活余力（保育所等の定員余裕率）新設: ランキング全国+県別は新規URL（ゼロベース成長で見る）。自治体詳細への定員・余裕率カード追加とFAQ 1問は /area/*/* の既存セットにも乗る。待機児童も令和8年版へ同時更新。since は想定デプロイ翌日 — 実デプロイがずれたら修正すること",
+    "include": [
+      "/ranking/childcare-capacity",
+      "/ranking/childcare-capacity/*",
+      "/ranking/waitlist-zero",
+      "/ranking/waitlist-zero/*"
+    ]
+  },
+  {
     "name": "pr-142-denki",
     "pr": 142,
     "since": "2026-08-18",

@@ -10,6 +10,7 @@ import { hasLandPrice } from "./landPrice";
 import { isWaitlistDisclosed } from "./waitlist";
 import { hasForeignData, foreignRatioPct } from "./foreignResidents";
 import { hasVacancy, vacancyRateText } from "./vacancy";
+import { hasChildcareCapacity, childcareOpenRatioPct, childcareOpenRatioText } from "./childcare";
 import { populationDensity, densityText } from "./populationDensity";
 import { hasFuturePopulation, futureChangeRate2050, futureRateText } from "./futurePopulation";
 import { prefNameOf } from "./site";
@@ -248,7 +249,8 @@ const FOREIGN_FAQ: { q: string; a: string }[] = [
 export const NEXT_UPDATE = {
   rent: "出典（住宅・土地統計調査）は5年周期のため、現在の2023年調査が最新の公表データです。次回は2028年調査（結果公表は2029年以降）の見込みです。",
   landPrice: "地価公示は毎年3月公表です。次回（2027年地価公示）の公表後に更新予定です。",
-  waitlist: "こども家庭庁の次回取りまとめ（2026年4月1日時点）は例年8月末〜9月に公表され、公表後に更新予定です。",
+  waitlist: "こども家庭庁の次回取りまとめ（2027年4月1日時点）は例年8月末〜9月に公表され、公表後に更新予定です。",
+  childcare: "こども家庭庁の次回取りまとめ（2027年4月1日時点）は例年8月末〜9月に公表され、公表後に更新予定です。",
   population: "令和7年（2025年）国勢調査の確定値（人口等基本集計）が2026年9月までに公表予定で、公表後に更新予定です。",
   foreign: "在留外国人統計は年2回公表です。次回は2026年6月末時点の市区町村別データが2026年12月中旬に公表見込みで、公表後すみやかに更新予定です。",
   vacancy:
@@ -311,6 +313,36 @@ const FUTURE_FAQ: { q: string; a: string }[] = [
     a: "本サイトの現在人口は2025年国勢調査（速報）、将来推計の基準人口は2020年国勢調査です。調査基準が異なるため、増減率は推計内部の2020年値を分母に算出しています。",
   },
 ];
+
+// 保育定員余裕率ランキングの注記・FAQ（可視テキストと構造化データの単一ソース）。
+// しきい値（定員100人以上）を変える時は qualifies・note・FAQ を必ず同時に更新する。
+const CHILDCARE_NOTE =
+  "定員余裕率は（定員 − 利用児童数）÷ 定員で、こども家庭庁「保育所等関連状況取りまとめ」の公表実数（毎年4月1日時点）から算出しています。入りやすさの目安であり、年齢（特に0〜2歳）・地域・時期によって状況は大きく異なります。定員100人未満の自治体は率が振れやすいためランキングの対象外です。政令指定都市は市単位の集計です。";
+
+const CHILDCARE_FAQ: { q: string; a: string }[] = [
+  {
+    q: "定員余裕率とは何ですか？",
+    a: "保育所・認定こども園・地域型保育事業などの定員合計から利用児童数を引いた「空き」の割合です。こども家庭庁「保育所等関連状況取りまとめ」（毎年4月1日時点）の市区町村別の公表実数のみから算出しており、推計は行っていません。率が高いほど受け皿に余裕がある目安になりますが、年齢別・地域別の偏りは含まれます。",
+  },
+  {
+    q: "待機児童ゼロなのに入りにくい地域があるのはなぜですか？",
+    a: "待機児童の集計には、育児休業中の方・特定の保育園のみを希望している方・求職活動を休止している方が含まれません（いわゆる隠れ待機）。また0〜2歳児は定員が少なく、自治体全体では余裕があっても年齢や地域によっては入りにくいことがあります。各自治体ページでは待機児童数とあわせて、待機児童に含まれない申込者数も表示しています。",
+  },
+  {
+    q: "掲載されていない自治体があるのはなぜですか？",
+    a: "定員100人未満の自治体は保育所1園の開設・閉鎖で率が大きく動くため、ランキングの対象外としています（自治体ページでは定員・利用児童数を確認できます）。市区町村別データが公表されていない北方領土の村も対象外です。",
+  },
+];
+
+// 1位自治体（実データ）から余裕率・基準時点を含む meta description を組み立てる。
+function childcareMetaDescription(top1: Municipality | null): string {
+  const head = "全国の市区町村を保育所等の定員余裕率（(定員−利用児童数)÷定員）が高い順にランキング。";
+  const tail =
+    "こども家庭庁「保育所等関連状況取りまとめ」の公表実数で、保育の入りやすさの目安を比較できます（定員100人以上の自治体が対象）。";
+  if (!top1?.childcare) return `${head}${tail}`;
+  const name = `${prefNameOf(top1.pref)}${top1.displayName ?? top1.name}`;
+  return `${head}1位は${name}（余裕率${childcareOpenRatioText(top1.childcare)}、${formatAsOfJa(top1.childcare.asOf)}時点）。${tail}`;
+}
 
 // 1位自治体（実データ）から増減率・基準年を含む meta description を組み立てる。
 function futureMetaDescription(direction: "decline" | "resilient") {
@@ -497,6 +529,31 @@ export const RANKINGS: RankingDef[] = [
     qualifies: (m) => isWaitlistDisclosed(m.waitlistChildren) && m.waitlistChildren.value === 0,
     sortValue: (m) => m.population,
     display: (m) => `${m.population.toLocaleString()}人`,
+    related: { slug: "childcare-capacity", label: "保育の定員に余裕がある市区町村" },
+  },
+  {
+    slug: "childcare-capacity",
+    category: "子育て・生活",
+    title: "保育の定員に余裕がある市区町村ランキング",
+    seoTitle: "保育園に入りやすい市区町村ランキング（保育所等の定員余裕率）",
+    shortLabel: "保育に余裕",
+    description:
+      "全国の市区町村を保育所等の定員余裕率（(定員−利用児童数)÷定員）が高い順にランキング。最も余裕があるのは{top1}。こども家庭庁の公表実数で保育の入りやすさの目安を比較できます。",
+    metaDescription: childcareMetaDescription,
+    lead: "全国の市区町村を、保育所等の定員余裕率（(定員 − 利用児童数) ÷ 定員）が高い順に並べたランキングです。",
+    note: CHILDCARE_NOTE,
+    faq: CHILDCARE_FAQ,
+    prefSummary: true,
+    columnLabel: "定員余裕率",
+    order: "desc",
+    freshnessLabel: freshnessFromAsOf((m) => m.childcare?.asOf ?? ""),
+    nextUpdate: NEXT_UPDATE.childcare,
+    // 定員100人未満は分母が小さく率が振れやすい（保育所1園の増減で数十ptが動く）ため
+    // ランキング対象外にする。しきい値は note・FAQ にも明記して整合させること。
+    qualifies: (m) => hasChildcareCapacity(m.childcare) && m.childcare!.capacity >= 100,
+    sortValue: (m) => childcareOpenRatioPct(m.childcare) ?? 0,
+    display: (m) => childcareOpenRatioText(m.childcare),
+    related: { slug: "waitlist-zero", label: "待機児童ゼロの市区町村" },
   },
   {
     slug: "population-most",
