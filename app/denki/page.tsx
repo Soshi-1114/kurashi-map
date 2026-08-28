@@ -5,9 +5,11 @@ import { Suspense } from "react";
 import Link from "next/link";
 import { Database } from "lucide-react";
 import { SITE, absoluteUrl } from "@/lib/site";
-import { DENKI_AREAS } from "@/lib/denki";
+import { DENKI_AREAS, DENKI_AREA_LABELS } from "@/lib/denki";
 import { DENKI_PLANS } from "@/lib/denkiPlans";
-import { HOUSEHOLD_KWH, HOUSEHOLD_KWH_SOURCE } from "@/lib/denkiSim";
+import {
+  HOUSEHOLD_KWH, HOUSEHOLD_KWH_SOURCE, HOUSEHOLD_SIZES, compareOffers, defaultAmpere,
+} from "@/lib/denkiSim";
 import type { QA } from "@/lib/faq";
 import DenkiSimulator from "@/components/denki/DenkiSimulator";
 import PageShell from "@/components/PageShell";
@@ -19,9 +21,26 @@ import PageShell from "@/components/PageShell";
 // honesty 方針: 試算は「目安」であり、燃料費調整額・再エネ賦課金・各種割引を
 // 含まないことをページ内で必ず明示する。断定表現（「安くなります」）は使わない。
 
-const TITLE = `電気代シミュレーション｜世帯人数から電力エリア別に料金目安を比較 - ${SITE.name}`;
+const TITLE = `電気代シミュレーション｜従量電灯の月額目安を世帯人数・エリア別に試算 - ${SITE.name}`;
 const DESC =
-  "世帯人数（または月間使用量kWh）から、全国10の電力エリア別に大手電力の従量電灯プランの月額目安を試算できます。単価は各社公式の料金表、使用量の目安は環境省の統計に基づき、燃料費調整額・再エネ賦課金は含みません。";
+  "世帯人数（または月間使用量kWh）から、全国10の電力エリア別に大手電力の従量電灯B/Aの月額目安を試算。一人暮らし〜5人世帯×全エリアの電気代目安の早見表つき。単価は各社公式の料金表、使用量の目安は環境省の統計に基づき、燃料費調整額・再エネ賦課金は含みません。";
+
+// 世帯人数×エリアの従量電灯（規制料金 baseline）月額目安の早見表。ビルド時に
+// シミュレーターと同じ単価・使用量目安から計算した静的コンテンツで、クライアント
+// JS なしで読める比較表を検索エンジン・読者に提供する（シミュレーターは client island）。
+const QUICK_TABLE = DENKI_AREAS.map((area) => ({
+  area,
+  label: DENKI_AREA_LABELS[area],
+  cells: HOUSEHOLD_SIZES.map(
+    (size) =>
+      compareOffers(DENKI_PLANS, area, HOUSEHOLD_KWH[size], defaultAmpere(size)).find(
+        (o) => o.kind === "baseline",
+      )?.monthlyYen ?? null,
+  ),
+}));
+
+// FAQ で使う代表値（東京電力エリア・2人世帯の従量電灯目安）。早見表と同一ロジック。
+const TOKYO_2P_YEN = QUICK_TABLE.find((r) => r.area === "tokyo")?.cells[1] ?? null;
 
 // 可視 FAQ と FAQPage 構造化データの単一ソース（ranking ページと同じ規約）。
 const FAQ: QA[] = [
@@ -40,6 +59,14 @@ const FAQ: QA[] = [
   {
     q: "掲載しているプランの選定基準は？",
     a: "比較の基準として各エリアの大手電力の従量電灯（規制料金）を掲載しています。今後掲載するプランも、公式の料金表で単価を確認できるものに限ります。",
+  },
+  {
+    q: "従量電灯とは何ですか？",
+    a: "大手電力会社が国の認可を受けて提供する規制料金プランです（東日本は従量電灯B、中部以西は従量電灯A/Bなど地域で名称が異なります）。基本料金（または最低料金）に、使うほど単価が上がる3段階の電力量料金を加えた構成で、多くの家庭の標準的な契約です。単価が公式の料金表で公開されているため、本ページでは比較の基準にしています。",
+  },
+  {
+    q: "2人暮らしの電気代の目安はいくらですか？",
+    a: `${HOUSEHOLD_KWH_SOURCE.label}によると2人世帯の電気使用量は月${HOUSEHOLD_KWH[2]}kWh程度で、${TOKYO_2P_YEN != null ? `東京電力エリアの従量電灯Bならおおむね月${TOKYO_2P_YEN.toLocaleString()}円（燃料費調整額・再エネ賦課金を除く）` : "エリアごとの従量電灯の単価で月額を試算できます"}。ページ下部の早見表で全10エリアの目安を、シミュレーターで実際の使用量に合わせた金額を確認できます。`,
   },
 ];
 
@@ -103,6 +130,36 @@ export default function DenkiPage() {
       <Suspense fallback={<p>読み込み中…</p>}>
         <DenkiSimulator />
       </Suspense>
+
+      <section>
+        <h2 className="h2 dnk-h2">世帯人数別・エリア別の電気代目安（従量電灯）</h2>
+        <p className="dnk-lead">
+          {HOUSEHOLD_KWH_SOURCE.label}の世帯人数別の使用量目安（月{HOUSEHOLD_KWH[1]}〜{HOUSEHOLD_KWH[5]}kWh）を、各エリアの大手電力の従量電灯（規制料金）で試算した月額の早見表です。
+          燃料費調整額・再エネ賦課金は含みません。契約アンペアは1〜2人=30A、3人以上=40Aで計算しています（最低料金制のエリアはアンペアに依存しません）。
+        </p>
+        <div className="pref-table-wrap">
+          <table className="pref-table">
+            <thead>
+              <tr>
+                <th scope="col">エリア</th>
+                {HOUSEHOLD_SIZES.map((size) => (
+                  <th key={size} scope="col" className="num">{size}人世帯</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {QUICK_TABLE.map((row) => (
+                <tr key={row.area}>
+                  <th scope="row">{row.label}</th>
+                  {row.cells.map((yen, i) => (
+                    <td key={i} className="num">{yen != null ? `${yen.toLocaleString()}円` : "—"}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
 
       <section>
         <h2 className="h2 dnk-h2">試算の前提条件</h2>
