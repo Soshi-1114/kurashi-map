@@ -46,13 +46,22 @@ describe("VERSIONS 単一ソース", () => {
     expect(VERSIONS.S12_ASOF).toBe(`20${m![1]}年度`);
   });
 
-  it("CFA_XLSX_URL の年度採番と CFA_ASOF が整合する（r7 ⇔ 2025）", () => {
+  it("CFA_XLSX_URL / CFA_CAPACITY_XLSX_URL の年度採番と CFA_ASOF が整合する", () => {
     // URL の _rN_ は令和N年。CFA_ASOF は西暦の年度開始日（令和N年 = 西暦 2018+N）。
-    const m = VERSIONS.CFA_XLSX_URL.match(/_r(\d+)_/);
-    expect(m, "URL に _rN_ 採番が見つからない").not.toBeNull();
-    const reiwa = Number(m![1]);
+    // R8 以降のファイル名は全角数字（％エンコード）を含むため、デコード＋全角→半角の
+    // 正規化をかけてから採番を読む。
+    const reiwaOf = (url: string) => {
+      const normalized = decodeURIComponent(url).replace(/[０-９]/g, (c) =>
+        String.fromCharCode(c.charCodeAt(0) - 0xfee0),
+      );
+      const m = normalized.match(/_r(\d+)_/);
+      expect(m, `URL に _rN_ 採番が見つからない: ${url}`).not.toBeNull();
+      return Number(m![1]);
+    };
     const asOfYear = Number(VERSIONS.CFA_ASOF.slice(0, 4));
-    expect(asOfYear).toBe(2018 + reiwa);
+    expect(asOfYear).toBe(2018 + reiwaOf(VERSIONS.CFA_XLSX_URL));
+    // 定員・申込者 Excel は CFA_ASOF を共用するため、同じ年度採番であること
+    expect(asOfYear).toBe(2018 + reiwaOf(VERSIONS.CFA_CAPACITY_XLSX_URL));
   });
 });
 

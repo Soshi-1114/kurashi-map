@@ -74,6 +74,9 @@ jobs:
       - name: 待機児童 Excel を取得（全国1回）
         run: curl -sL -o /tmp/cfa_waitlist.xlsx "${{ env.CFA_XLSX_URL }}"
 
+      - name: 保育所等の定員・申込者 Excel を取得（全国1回）
+        run: curl -sL -o /tmp/cfa_childcare.xlsx "${{ env.CFA_CAPACITY_XLSX_URL }}"
+
       - name: 人口（e-Stat 全国一括）
         run: node scripts/fetch-population-2025.mjs ${{ steps.scope.outputs.estat }}
         env:
@@ -115,6 +118,9 @@ jobs:
 
       - name: 待機児童（CFA 全国一括）
         run: WAITLIST_XLSX=/tmp/cfa_waitlist.xlsx node scripts/fetch-waitlist.mjs ${{ steps.scope.outputs.estat }}
+
+      - name: 保育所等の定員・利用状況（CFA 全国一括）
+        run: CHILDCARE_XLSX=/tmp/cfa_childcare.xlsx node scripts/fetch-childcare.mjs ${{ steps.scope.outputs.estat }}
 
       - name: 地価（L01 県別 zip・逐次, DL リトライ＋県別失敗は警告で継続）
         timeout-minutes: 180

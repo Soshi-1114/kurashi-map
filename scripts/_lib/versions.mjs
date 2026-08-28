@@ -17,12 +17,21 @@ export const VERSIONS = {
   L01_VERSION: "26",
   L01_ASOF: "2026",
 
-  // こども家庭庁「保育所等関連状況取りまとめ」待機児童 Excel。
-  // URL 末尾の採番（_r7_02）は年度で変わり自動推測できないため、公表ページで確認して
-  // 手動更新する（docs/data-update.md §待機児童）。CFA_ASOF（令和7年=2025-04-01）と必ず同期。
+  // こども家庭庁「保育所等関連状況取りまとめ」待機児童 Excel（資料６－１/６－２）。
+  // URL 末尾の採番は年度で変わり自動推測できない（R7 は _02、R8 は _01 と入れ替わった。
+  // R8 のファイル名は全角「８」とスペースを含むためパーセントエンコード済み文字列で持つ）。
+  // 公表ページで確認して手動更新する（docs/data-update.md §待機児童）。
+  // CFA_ASOF（令和8年=2026-04-01）と必ず同期。
   CFA_XLSX_URL:
-    "https://www.cfa.go.jp/assets/contents/node/basic_page/field_ref_resources/b0a8057b-34bf-4c20-84fb-ae592708ca9b/1a728dcc/20250828_policies_hoiku_torimatome_r7_02.xlsx",
-  CFA_ASOF: "2025-04-01",
+    "https://www.cfa.go.jp/assets/contents/node/basic_page/field_ref_resources/68234dca-5d01-4ec2-ac2f-86f598c55b5c/947707bb/20260825_%20policies_hoiku_torimatome_r%EF%BC%98_01.xlsx",
+  CFA_ASOF: "2026-04-01",
+
+  // 同取りまとめの別添「（参考）定員・申込者の状況」Excel（定員の状況/申込者の状況の2シート、
+  // R8 は _02）。保活余力（childcare: fetch-childcare.mjs）の出典で、基準時点は CFA_ASOF を共用。
+  // 市区町村別の別添は令和6年分から存在（それ以前に戻すことはない）。年度更新は
+  // CFA_XLSX_URL と同時に公表ページで確認して手動更新する。
+  CFA_CAPACITY_XLSX_URL:
+    "https://www.cfa.go.jp/assets/contents/node/basic_page/field_ref_resources/68234dca-5d01-4ec2-ac2f-86f598c55b5c/3e3cd95a/20260826_%20policies_hoiku_torimatome_r%EF%BC%98_02.xlsx",
 
   // 国土地理院「指定緊急避難場所データ」全国版 CSV（mergeFromCity_2 = 指定緊急避難場所）。
   // 空文字にすると annual ワークフローの避難場所ステップはスキップ（警告のみ）。

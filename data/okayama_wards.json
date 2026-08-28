@@ -26,7 +26,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -87,6 +87,17 @@
       "elderly2050": 94443,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 21550,
+      "capacityAge0": 2027,
+      "capacityAge12": 7198,
+      "enrolled": 18340,
+      "hiddenWaitlist": 335,
+      "enrolledAge0": 1042,
+      "enrolledAge12": 6447,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（岡山市全体の集計）",
+      "asOf": "2026-04-01"
     }
   },
   {
@@ -116,7 +127,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -177,6 +188,17 @@
       "elderly2050": 47764,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 21550,
+      "capacityAge0": 2027,
+      "capacityAge12": 7198,
+      "enrolled": 18340,
+      "hiddenWaitlist": 335,
+      "enrolledAge0": 1042,
+      "enrolledAge12": 6447,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（岡山市全体の集計）",
+      "asOf": "2026-04-01"
     }
   },
   {
@@ -206,7 +228,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -267,6 +289,17 @@
       "elderly2050": 29231,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 21550,
+      "capacityAge0": 2027,
+      "capacityAge12": 7198,
+      "enrolled": 18340,
+      "hiddenWaitlist": 335,
+      "enrolledAge0": 1042,
+      "enrolledAge12": 6447,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（岡山市全体の集計）",
+      "asOf": "2026-04-01"
     }
   },
   {
@@ -296,7 +329,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -357,6 +390,17 @@
       "elderly2050": 51480,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 21550,
+      "capacityAge0": 2027,
+      "capacityAge12": 7198,
+      "enrolled": 18340,
+      "hiddenWaitlist": 335,
+      "enrolledAge0": 1042,
+      "enrolledAge12": 6447,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（岡山市全体の集計）",
+      "asOf": "2026-04-01"
     }
   }
 ]

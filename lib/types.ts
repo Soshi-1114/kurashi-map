@@ -50,6 +50,23 @@ export type Municipality = {
   rent: Metric;          // 民営借家の家賃平均
   landPrice: Metric;     // 住宅地地価
   waitlistChildren: Metric; // 待機児童（value=人数）
+  // 保育所等の受け入れ状況（こども家庭庁「保育所等関連状況取りまとめ」別添
+  // 「（参考）定員・申込者の状況」。待機児童と同一公表物・同一基準日）。
+  // 政令市は市単位集計のため、区には市全体の値を source「（○○市全体の集計）」付きで持たせる
+  // （lib/childcare.ts isChildcareCityAggregate）。定員余裕率などの派生値は保存せず実行時算出。
+  // capacity=0 は「保育所等の定員なし」の実データ（小規模町村）。enrolled が capacity を
+  // 超えることがある（定員の弾力運用）。
+  childcare?: {
+    capacity: number;      // 定員合計（全施設類型）
+    enrolled: number;      // 利用児童数合計
+    capacityAge0: number;  // 0歳児の定員
+    enrolledAge0: number;  // 0歳児の利用児童数
+    capacityAge12: number; // 1,2歳児の定員
+    enrolledAge12: number; // 1,2歳児の利用児童数（出典の1歳児+2歳児）
+    hiddenWaitlist: number; // 待機児童に含まれない申込者（育児休業中+特定園のみ希望+求職活動休止）
+    source: string;
+    asOf: string;
+  };
   // 在留外国人総数（value=人数）。出入国在留管理庁 在留外国人統計。北方領土等は
   // source に「対象外」を持つ（lib/foreignResidents.ts hasForeignData 参照）。
   // 人口比（%）は保存せず population と突き合わせて実行時に算出する。

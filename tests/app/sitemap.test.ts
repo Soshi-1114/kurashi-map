@@ -13,7 +13,7 @@ const day = (e: MetadataRoute.Sitemap[number]) =>
 describe("sitemap の lastModified", () => {
   const entriesP = sitemap();
 
-  it("同一日付への潰れがない（最多日付のシェアが 9 割未満・日付が複数種）", async () => {
+  it("同一日付への潰れがない（テンプレ改訂日での全一致を検出）", async () => {
     const entries = await entriesP;
     expect(entries.length).toBeGreaterThan(2000);
     const byDay = new Map<string, number>();
@@ -22,7 +22,15 @@ describe("sitemap の lastModified", () => {
     }
     const top = Math.max(...byDay.values());
     expect(byDay.size).toBeGreaterThanOrEqual(3);
-    expect(top / entries.length).toBeLessThan(0.9);
+    // ガード対象はテンプレ改訂日が全URLに漏れる退行（2026-08 実績: 2,734/2,744 = 99.64%）。
+    // 一方、全国一斉の年次データ更新（例: CFA 令和8年版）では自治体ページの大半が
+    // 新しい実 vintage に「正当に」揃う（実測 ~99.4%）。境界 0.996 で両者を区別しつつ、
+    // 最多日付がテンプレ改訂日そのものでないことも確認する。
+    expect(top / entries.length).toBeLessThan(0.996);
+    const topDay = [...byDay.entries()].sort((a, b) => b[1] - a[1])[0][0];
+    for (const revised of Object.values(TEMPLATE_REVISED_AT)) {
+      expect(topDay).not.toBe(parseAsOf(revised)!.toISOString().slice(0, 10));
+    }
   });
 
   it("/map/* はテンプレ改訂日（mapHub）以降になる", async () => {
