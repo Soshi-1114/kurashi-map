@@ -155,7 +155,7 @@ export default function DenkiPage() {
           <a href={HOUSEHOLD_KWH_SOURCE.url} target="_blank" rel="noopener noreferrer">
             {HOUSEHOLD_KWH_SOURCE.label}
           </a>
-          。エリア・自治体ごとの住みやすさデータは<Link href="/">トップの地図</Link>から確認できます。
+          。エリア・自治体ごとの住みやすさデータは<Link href="/map">住みやすさマップ</Link>から確認できます。
         </p>
       </details>
     </PageShell>

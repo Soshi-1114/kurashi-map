@@ -134,7 +134,7 @@ export default function PrivacyPage() {
       </section>
 
       <div style={{ marginTop: 28, display: "flex", gap: 16, flexWrap: "wrap" }}>
-        <Link href="/" className="detail-back">地図で見る</Link>
+        <Link href="/map" className="detail-back">地図で見る</Link>
         <Link href="/about" className="detail-back">このサイトについて</Link>
       </div>
     </PageShell>

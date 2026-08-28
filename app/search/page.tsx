@@ -97,14 +97,14 @@ export default async function SearchPage(props: { searchParams: Promise<SearchPa
         ) : (
           <p className="detail-p detail-p-muted">
             市区町村名を入力して検索してください。地図から探す場合は{" "}
-            <Link href="/" className="breadcrumb-link">トップの地図</Link> もご利用いただけます。
+            <Link href="/map" className="breadcrumb-link">住みやすさマップ</Link> もご利用いただけます。
           </p>
         )}
       </section>
 
       <div className="detail-footnav">
         <Link href="/ranking" className="detail-back">ランキング</Link>
-        <Link href="/" className="detail-back">地図に戻る</Link>
+        <Link href="/map" className="detail-back">地図で探す</Link>
       </div>
     </PageShell>
   );
