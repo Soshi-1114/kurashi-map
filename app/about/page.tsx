@@ -69,6 +69,13 @@ async function loadRows(): Promise<SourceRow[]> {
       next: NEXT_UPDATE.population,
     },
     {
+      label: "年齢構成（高齢化率・年少人口比）",
+      source: "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      asOf: formatAsOfJa(m.ageStats?.asOf ?? "-"),
+      cycle: "年1回（1月1日時点・夏公表）",
+      next: NEXT_UPDATE.aging,
+    },
+    {
       label: "待機児童数",
       source: "こども家庭庁 保育所等関連状況取りまとめ",
       asOf: formatAsOfJa(m.waitlistChildren.asOf),

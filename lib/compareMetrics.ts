@@ -14,6 +14,7 @@ import { hasForeignData, foreignRatioPct } from "./foreignResidents";
 import { isAmenitiesCounted, isHazardEvaluated } from "./coverage";
 import { hasShelterData } from "./shelters";
 import { populationDensity, densityText } from "./populationDensity";
+import { elderlyRatioPct, youngRatioPct } from "./ageStats";
 import { signedPct } from "./format";
 import {
   floodGraded,
@@ -40,6 +41,7 @@ export type NationalAverages = {
   vacancyRate: number | null;
   density: number | null;
   foreignRatio: number | null;
+  agingRate: number | null;
 };
 
 export type CompareRowDef = {
@@ -142,6 +144,21 @@ export const COMPARE_ROWS: CompareRowDef[] = [
     group: "基本",
     raw: (m) => (m.areaKm2 != null && m.areaKm2 > 0 ? m.areaKm2 : null),
     format: (v) => `${v.toLocaleString()}km²`,
+  }),
+  numericRow({
+    key: "agingRate",
+    label: "高齢化率（65歳以上）",
+    group: "基本",
+    raw: (m) => elderlyRatioPct(m.ageStats),
+    format: (v) => `${v.toFixed(1)}%`,
+    nationalAvg: { raw: (n) => n.agingRate },
+  }),
+  numericRow({
+    key: "youngRatio",
+    label: "年少人口比（0〜14歳）",
+    group: "基本",
+    raw: (m) => youngRatioPct(m.ageStats),
+    format: (v) => `${v.toFixed(1)}%`,
   }),
   numericRow({
     key: "foreignRatio",

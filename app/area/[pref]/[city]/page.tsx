@@ -61,6 +61,7 @@ import { buildHighlights } from "@/lib/highlights";
 import { buildInsights } from "@/lib/insights";
 import { computeLivability } from "@/lib/livabilityScore";
 import { populationDensity, densityText } from "@/lib/populationDensity";
+import { hasAgeData, elderlyRatioPct, elderlyRatioText } from "@/lib/ageStats";
 import { Reveal } from "@/components/area/Reveal";
 import { Section } from "@/components/area/Section";
 import { ScorePanel } from "@/components/area/ScorePanel";
@@ -307,6 +308,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
     { "@type": "PropertyValue", name: "人口", unitText: "人", value: m.population },
     isWaitlistDisclosed(m.waitlistChildren) && { "@type": "PropertyValue", name: "待機児童数", unitText: "人", value: m.waitlistChildren.value },
     hasForeignData(m.foreignResidents.source) && { "@type": "PropertyValue", name: "外国人住民比率", unitText: "%", value: Number(foreignRatioPct(m).toFixed(2)) },
+    hasAgeData(m.ageStats) && { "@type": "PropertyValue", name: "高齢化率（65歳以上人口の割合）", unitText: "%", value: Number((elderlyRatioPct(m.ageStats) ?? 0).toFixed(1)) },
   ].filter(Boolean);
 
   const lastModified = muniLastModified(m);
@@ -513,7 +515,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
             label="人口"
             value={m.population.toLocaleString()}
             unit="人"
-            sub={`人口トレンド: ${m.populationTrend}${density != null ? `・人口密度 ${densityText(density)}` : ""}`}
+            sub={`人口トレンド: ${m.populationTrend}${density != null ? `・人口密度 ${densityText(density)}` : ""}${hasAgeData(m.ageStats) ? `・高齢化率 ${elderlyRatioText(m.ageStats)}` : ""}`}
             compare={popCompare}
           />
           <KpiCard
@@ -748,6 +750,15 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
                       2050年の年齢構成（推計）: 年少（0-14歳）{fp.young2050.toLocaleString()}人（{fpAges.young.toFixed(1)}%）・
                       生産年齢（15-64歳）{fp.working2050.toLocaleString()}人（{fpAges.working.toFixed(1)}%）・
                       高齢（65歳以上）{fp.elderly2050.toLocaleString()}人（{fpAges.elderly.toFixed(1)}%）
+                    </p>
+                  )}
+                  {/* 「今と将来」の高齢化率並記（2050暮らしビューの土台）。基準の異なる値
+                      （住基台帳の登録人口 vs 2020年国調基準の推計）のため、差分の演算表示は
+                      せず参考比較であることを明示する。 */}
+                  {hasAgeData(m.ageStats) && fpAges && (
+                    <p className="ad-note">
+                      高齢化率の今とこれから: 現在 {elderlyRatioText(m.ageStats)}（{formatAsOfJa(m.ageStats.asOf)}・住民基本台帳）／
+                      2050年 {fpAges.elderly.toFixed(1)}%（推計）。基準・人口の定義が異なる参考比較です。
                     </p>
                   )}
                   <p className="ad-note">

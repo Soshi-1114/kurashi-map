@@ -420,6 +420,45 @@ describe("splitRankingTitle", () => {
   });
 });
 
+describe("高齢化率ランキング", () => {
+  const ageStats = (elderly: number, total = 100_000, young = 10_000) => ({
+    young, elderly, total,
+    source: "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+    asOf: "2026-01-01",
+  });
+
+  it("aging-high は高齢化率の降順、住民登録なし（total=0）・未収録は除外", () => {
+    const def = getRankingBySlug("aging-high")!;
+    const list = [
+      muni({ code: "A", ageStats: ageStats(30_000) }),
+      muni({ code: "B", ageStats: ageStats(60_000) }),
+      muni({ code: "C", ageStats: { young: 0, elderly: 0, total: 0, source: "データなし（住民登録なし）", asOf: "-" } }),
+      muni({ code: "D" }), // 未収録
+    ];
+    expect(rankBy(def, list).map((m) => m.code)).toEqual(["B", "A"]);
+    expect(def.display(list[1])).toBe("60.0%");
+  });
+
+  it("aging-low は昇順、freshnessLabel は住基台帳の基準月", () => {
+    const def = getRankingBySlug("aging-low")!;
+    const list = [
+      muni({ code: "A", ageStats: ageStats(30_000) }),
+      muni({ code: "B", ageStats: ageStats(60_000) }),
+    ];
+    expect(rankBy(def, list).map((m) => m.code)).toEqual(["A", "B"]);
+    expect(def.freshnessLabel!(list[0])).toBe("2026年1月住民基本台帳");
+  });
+
+  it("metaDescription は1位の比率と基準時点を含む（実データ算出）", () => {
+    const def = getRankingBySlug("aging-high")!;
+    const top1 = muni({ pref: "gunma", name: "南牧村", ageStats: ageStats(68_100, 100_000) });
+    const desc = def.metaDescription!(top1);
+    expect(desc).toContain("68.1%");
+    expect(desc).toContain("2026年1月");
+    expect(def.metaDescription!(null)).toContain("住民基本台帳");
+  });
+});
+
 describe("生活インフラ（駅・医療機関・保育施設）ランキング", () => {
   const AMENITIES_ASOF = "駅 2025年度／保育 令和5年度／医療機関 2024年10月";
   const amenities = (partial: Partial<NonNullable<Municipality["amenities"]>> = {}) => ({
