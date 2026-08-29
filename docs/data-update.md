@@ -14,7 +14,7 @@ KurashiMap の各指標データは GitHub Actions が定期/手動で取得し�
 
 | ワークフロー | 取得元 | 対象指標 | 更新頻度（cron） | 必要 Secret |
 |---|---|---|---|---|
-| **annual** (`data-update-annual.yml`) | e-Stat / 国土数値情報 L01・S12 / こども家庭庁 Excel / 総務省 住基台帳 Excel | 人口・家賃・医療機関・駅数・地価・待機児童・保育所等定員・年齢構成 | 年1回 3/15 04:00 JST | `ESTAT_APP_ID` |
+| **annual** (`data-update-annual.yml`) | e-Stat / 国土数値情報 L01・S12 / こども家庭庁 Excel / 総務省 Excel | 人口・家賃・医療機関・駅数・地価・待機児童・保育所等定員・年齢構成・財政力指数 | 年1回 3/15 04:00 JST | `ESTAT_APP_ID` |
 | **quarterly** (`data-update-quarterly.yml`) | 不動産情報ライブラリ reinfolib | 災害リスク・生活インフラ（保育） | 四半期 1/1・4/1・7/1・10/1 04:00 JST | `REINFOLIB_API_KEY` |
 
 どちらも `main` へは直接 push せず、**単一 PR を自動作成**して反映する（PR をマージで反映）。
@@ -58,9 +58,11 @@ KurashiMap の各指標データは GitHub Actions が定期/手動で取得し�
 9. `fetch-age-stats.mjs --all`（年齢構成, 総務省 住基台帳）— 市区町村別年齢階級別人口 Excel を
    1回 DL・パースして全県へ反映（0-14歳・65歳以上・総人口。高齢化率は実行時算出）。
    区別データが出典にあるため政令市の合算は不要。DL 失敗・パース失敗は `::warning::` で継続
-10. 地価ループ（県別）: 各県の L01 zip を DL（3回リトライ）→ `fetch-land-price.mjs --pref=X`。
+10. `fetch-fiscal.mjs --all`（財政力指数, 総務省 主要財政指標一覧）— 全市町村 Excel を
+   1回 DL・パースして全県へ反映。DL 失敗・パース失敗は `::warning::` で継続
+11. 地価ループ（県別）: 各県の L01 zip を DL（3回リトライ）→ `fetch-land-price.mjs --pref=X`。
    県別の失敗は `::warning::` で記録し継続（他県は止めない）
-9. `data/` に差分があれば単一 PR（ブランチ `data/annual-{run_id}`）を `gh` CLI で作成
+12. `data/` に差分があれば単一 PR（ブランチ `data/annual-{run_id}`）を `gh` CLI で作成
 
 > e-Stat/CFA は全国まとめ取得なので接続回数が激減し、`estat.mjs` のリトライ＋タイムアウトと
 > 併せて接続タイムアウトはほぼ起きない。地価のみ県別 zip のため逐次。
@@ -81,6 +83,8 @@ annual ワークフローは「バージョン設定を読み込み」ステッ�
 | `CFA_ASOF` | 待機児童・保育所等定員の出典表示の基準時点（現在 `"2026-04-01"`） | **`CFA_XLSX_URL`・`CFA_CAPACITY_XLSX_URL` の年度と必ず同期**（`fetch-waitlist.mjs` / `fetch-childcare.mjs` の `asOf` に入る） |
 | `JUKI_AGE_STATINFID` | 住基台帳 市区町村別年齢階級別人口【総計】の e-Stat statInfId（現在 2026-01-01 版 `000040479050`） | 例年7月末〜8月の公表後、e-Stat 統計表一覧（`toukei=00200241`）で新年版の表IDを確認して差し替え |
 | `JUKI_ASOF` | 年齢構成の基準日（現在 `"2026-01-01"`） | **`JUKI_AGE_STATINFID` と必ず同期**（`fetch-age-stats.mjs` の `asOf` に入る） |
+| `FISCAL_XLSX_URL` | 総務省 主要財政指標一覧の全市町村 Excel URL（現在 令和6年度版） | 年度ページ（`soumu.go.jp/iken/shihyo_ichiran.html` から辿る）で新年度の main_content URL を確認して差し替え |
+| `FISCAL_ASOF` | 財政力指数の年度表示（現在 `"2024年度"`。3か年平均） | **`FISCAL_XLSX_URL` と必ず同期**（`fetch-fiscal.mjs` の `asOf` に入る） |
 | `CFA_CAPACITY_XLSX_URL` | 同取りまとめの別添「（参考）定員・申込者の状況」Excel の URL（現在 令和8年版 `_r8_02.xlsx`。保活余力 `childcare` の出典） | `CFA_XLSX_URL` と同時に公表ページで確認して差し替え。市区町村別の別添は令和6年分から存在 |
 | `MEDICAL_HOSP_STATSDATAID` / `MEDICAL_CLINIC_STATSDATAID` | 医療施設調査 市区町村別の第1表（病院）/第2表（診療所・歯科）の statsDataId（現在 令和6年/2024） | 毎年**新しい表IDが追加**される（同一IDの更新ではない）。e-Stat 統計コード 00450021 で最新年の両表を確認して差し替え |
 | `MEDICAL_ASOF` | 医療機関の基準時点（現在 `"2024年10月"`。調査は毎年10/1時点） | 表IDと必ず同期。**`AMENITIES_ASOF` の医療機関部分も同時に更新**（`versions.test.ts` が同期を検査） |
@@ -201,6 +205,7 @@ GitHub の **Actions** タブ → 対象ワークフロー → **Run workflow**�
 | 生活インフラ（保育） | reinfolib XKT007 | 年度更新 | `fetch-amenities.mjs` |
 | 医療機関 | 厚労省 医療施設調査（e-Stat） | 年1回（10/1時点・翌年公表。市区町村別は statsDataId が毎年変わる） | `fetch-medical.mjs` |
 | 年齢構成（高齢化率） | 総務省 住民基本台帳に基づく人口・世帯数調査 市区町村別年齢階級別人口【総計】（e-Stat Excel。API の DB 提供なし） | 年1回（1/1時点・例年7月末〜8月公表。**statInfId が毎年変わる**） | `fetch-age-stats.mjs`（`--all` 全国一括。区別データが出典にあり政令市合算不要。北方領土6村は total=0 センチネル） |
+| 財政力指数 | 総務省 地方公共団体の主要財政指標一覧（全市町村 Excel。main_content の採番が年度で変わる） | 年1回（3か年平均・例年夏〜冬公表） | `fetch-fiscal.mjs`（`--all` 全国一括。政令市の区は市の値を展開・特別区は都区財政調整の注記付きでランキング対象外・北方領土6村は index=-1 センチネル） |
 | 外国人住民比率 | 出入国在留管理庁 在留外国人統計（e-Stat） | 年2回（6月末・12月末時点。各7月頃/翌年公表） | `fetch-foreign-residents.mjs`（**手動**, §7） |
 | 空き家率 | 総務省 住宅・土地統計調査「居住世帯の有無(8区分)別住宅数」（e-Stat statsDataId 0004021421） | 5年ごと（次回2028年調査） | `fetch-vacancy.mjs`（`--all` 全国一括。家賃と同じ調査のため対象制約も同じ＝人口1.5万人未満の町村は rate=-1 センチネル） |
 

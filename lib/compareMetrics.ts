@@ -15,6 +15,7 @@ import { isAmenitiesCounted, isHazardEvaluated } from "./coverage";
 import { hasShelterData } from "./shelters";
 import { populationDensity, densityText } from "./populationDensity";
 import { elderlyRatioPct, youngRatioPct } from "./ageStats";
+import { hasFiscal } from "./fiscal";
 import { signedPct } from "./format";
 import {
   floodGraded,
@@ -42,6 +43,8 @@ export type NationalAverages = {
   density: number | null;
   foreignRatio: number | null;
   agingRate: number | null;
+  /** 財政力指数の全国平均（特別区除外。areaStats.fiscalIndex）。 */
+  fiscalIndex: number | null;
 };
 
 export type CompareRowDef = {
@@ -159,6 +162,15 @@ export const COMPARE_ROWS: CompareRowDef[] = [
     group: "基本",
     raw: (m) => youngRatioPct(m.ageStats),
     format: (v) => `${v.toFixed(1)}%`,
+  }),
+  numericRow({
+    key: "fiscalIndex",
+    label: "財政力指数",
+    group: "基本",
+    raw: (m) => (hasFiscal(m.fiscal) ? m.fiscal.index : null),
+    format: (v) => v.toFixed(2),
+    fallback: "対象外",
+    nationalAvg: { raw: (n) => n.fiscalIndex },
   }),
   numericRow({
     key: "foreignRatio",

@@ -67,6 +67,7 @@ export default async function ComparePage() {
     density: areaStats.density.national,
     foreignRatio: nationalForeignAvg(foreignStats),
     agingRate: areaStats.agingRate.national,
+    fiscalIndex: areaStats.fiscalIndex.national,
   };
 
   // 県平均（選択自治体が同一県のときだけクライアント側で切替表示に使う）。
@@ -83,6 +84,7 @@ export default async function ComparePage() {
       density: areaStats.density.byPref.get(p.slug) ?? null,
       foreignRatio: foreignByPref.get(p.slug) ?? null,
       agingRate: areaStats.agingRate.byPref.get(p.slug) ?? null,
+      fiscalIndex: areaStats.fiscalIndex.byPref.get(p.slug) ?? null,
     };
   }
 

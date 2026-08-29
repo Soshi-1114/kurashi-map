@@ -16,6 +16,7 @@ import {
   Info,
   Trophy,
   Map as MapIcon,
+  Landmark,
   ArrowLeft,
   ArrowUpRight,
   Search,
@@ -62,6 +63,7 @@ import { buildInsights } from "@/lib/insights";
 import { computeLivability } from "@/lib/livabilityScore";
 import { populationDensity, densityText } from "@/lib/populationDensity";
 import { hasAgeData, elderlyRatioPct, elderlyRatioText } from "@/lib/ageStats";
+import { hasFiscal, isFiscalSpecialWard, fiscalIndexText, fiscalSource } from "@/lib/fiscal";
 import { Reveal } from "@/components/area/Reveal";
 import { Section } from "@/components/area/Section";
 import { ScorePanel } from "@/components/area/ScorePanel";
@@ -295,6 +297,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
     { id: "hazard", label: "災害・外国人比率", only: "pc" },
     { id: "hazard", label: "災害リスク", only: "sp" },
     { id: "foreign", label: "外国人比率", only: "sp" },
+    { id: "fiscal", label: "財政" },
     { id: "future-pop", label: "将来人口" },
     ...(firstCompareKey ? [{ id: "compare", label: "比較" }] : []),
     { id: "ranking", label: "ランキング" },
@@ -373,6 +376,21 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
     if (pa != null) rentRows.push({ label: `${prefName}平均`, value: pa });
     if (areaStats.rent.national != null) rentRows.push({ label: "全国平均", value: areaStats.rent.national });
   }
+
+  // 財政力指数の比較バー。特別区は都区財政調整制度下の算定で市町村平均との比較が
+  // 誤解を生むため、バーを出さず注記に切り替える（カード側で分岐）。
+  const fiscalRows: CompareRow[] =
+    hasFiscal(m.fiscal) && !isFiscalSpecialWard(m.fiscal)
+      ? [
+          { label: m.name, value: m.fiscal.index, self: true },
+          ...(areaStats.fiscalIndex.byPref.get(m.pref) != null
+            ? [{ label: `${prefName}平均`, value: areaStats.fiscalIndex.byPref.get(m.pref)! }]
+            : []),
+          ...(areaStats.fiscalIndex.national != null
+            ? [{ label: "全国平均", value: areaStats.fiscalIndex.national }]
+            : []),
+        ]
+      : [];
 
   // 外国人住民比率の比較バー（fc がある＝対象かつ比較可能なときのみ）。
   const foreignRows: CompareRow[] = fc
@@ -713,6 +731,42 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
               </>
             ) : (
               <NoData text="在留外国人統計の対象外です。" reason={coverageReason(m.foreignResidents.source)} />
+            )}
+          </MetricCard>
+
+          {/* 財政（財政力指数）。低い=悪いという誤読を防ぐ中立注記を必ず添える。
+              特別区は都区財政調整制度下の算定のため平均比較バーを出さず注記に切り替える。 */}
+          <MetricCard
+            id="fiscal"
+            icon={Landmark}
+            tone="ad-tone-infra"
+            title="財政（財政力指数）"
+            link={{ href: "/ranking/fiscal-strong", label: "財政力指数ランキングで比較" }}
+          >
+            {hasFiscal(m.fiscal) ? (
+              <>
+                <MetricPrimary value={fiscalIndexText(m.fiscal)} />
+                {fiscalRows.length > 0 && (
+                  <CompareBar rows={fiscalRows} format={(v) => v.toFixed(2)} caption="財政力指数の比較（自治体・県平均・全国平均）" />
+                )}
+                {isFiscalSpecialWard(m.fiscal) && (
+                  <p className="ad-note">
+                    <Info size={15} aria-hidden="true" />
+                    <span>
+                      特別区は都区財政調整制度のもとで算定され、固定資産税などの大都市税源が都に帰属するため、市町村の指数と同一基準では比較できません（ランキング・平均比較の対象外）。
+                    </span>
+                  </p>
+                )}
+                <p className="ad-note">
+                  <Info size={15} aria-hidden="true" />
+                  <span>
+                    財政力指数は税収による財源の余裕度を示す指標（3か年平均。1超で普通交付税の不交付団体）です。指数が低い自治体には地方交付税で標準的な行政サービスの財源が保障されるため、低さは行政サービスの質や優劣を意味しません。
+                  </span>
+                </p>
+                <SourceLine source={m.fiscal.source} asOf={m.fiscal.asOf} />
+              </>
+            ) : (
+              <NoData text="財政力指数のデータはありません。" reason={coverageReason(fiscalSource(m.fiscal))} />
             )}
           </MetricCard>
 

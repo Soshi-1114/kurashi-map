@@ -111,6 +111,15 @@ function checkMuni(file, slug, m, level) {
     if (!isStr(m.ageStats.source)) err(file, code, "ageStats.source が空");
     if (!isStr(m.ageStats.asOf)) err(file, code, "ageStats.asOf が空");
   }
+  if (m.fiscal !== undefined) {
+    // index=-1 は対象外センチネル（北方領土6村）。実データの財政力指数は概ね 0〜1.5 台
+    // （不交付団体でも 2 未満が通例。3 以上は取り違えの疑い）。
+    if (!isNum(m.fiscal.index) || (m.fiscal.index !== -1 && (m.fiscal.index <= 0 || m.fiscal.index >= 3))) {
+      err(file, code, `fiscal.index が不正 (${m.fiscal.index})`);
+    }
+    if (!isStr(m.fiscal.source)) err(file, code, "fiscal.source が空");
+    if (!isStr(m.fiscal.asOf)) err(file, code, "fiscal.asOf が空");
+  }
   if (m.vacancy !== undefined) {
     // rate=-1 は対象外センチネル（人口1.5万人未満の町村）。実データは 0〜100 の率。
     if (!isNum(m.vacancy.rate) || (m.vacancy.rate !== -1 && (m.vacancy.rate < 0 || m.vacancy.rate > 100))) {

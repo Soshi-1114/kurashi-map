@@ -11,6 +11,7 @@ describe("VERSIONS 単一ソース", () => {
       "GSI_SHELTER_URL", "GSI_SHELTER_ASOF",
       "FOREIGN_ASOF",
       "JUKI_AGE_STATINFID", "JUKI_ASOF",
+      "FISCAL_XLSX_URL", "FISCAL_ASOF",
       "MEDICAL_HOSP_STATSDATAID", "MEDICAL_CLINIC_STATSDATAID", "MEDICAL_ASOF",
       "S12_URL", "S12_ASOF",
       "AMENITIES_SOURCE", "AMENITIES_ASOF",
@@ -37,6 +38,13 @@ describe("VERSIONS 単一ソース", () => {
     // ASOF をセットで差し替える運用は versions.mjs のコメントに明記している。
     expect(VERSIONS.JUKI_ASOF).toMatch(/^\d{4}-01-01$/);
     expect(VERSIONS.JUKI_AGE_STATINFID).toMatch(/^\d{12}$/);
+  });
+
+  it("FISCAL_ASOF は年度形式・URL は総務省の main_content 配下", () => {
+    // main_content の採番は年度から導出できないため相関テスト不可。年度更新時に
+    // URL と ASOF をセットで差し替える運用は versions.mjs のコメントに明記している。
+    expect(VERSIONS.FISCAL_ASOF).toMatch(/^\d{4}年度$/);
+    expect(VERSIONS.FISCAL_XLSX_URL).toMatch(/^https:\/\/www\.soumu\.go\.jp\/main_content\/\d+\.xlsx$/);
   });
 
   it("AMENITIES_ASOF の医療機関部分が MEDICAL_ASOF と同期している", () => {

@@ -10,6 +10,7 @@ import { hasLandPrice } from "./landPrice";
 import { isWaitlistDisclosed } from "./waitlist";
 import { isAmenitiesCounted } from "./coverage";
 import { hasAgeData, elderlyRatioPct, elderlyRatioText, AGE_FRESHNESS_SUFFIX } from "./ageStats";
+import { isFiscalRankable, fiscalIndexText } from "./fiscal";
 import { formatAsOfJa } from "./format";
 import { hasForeignData, foreignRatioPct } from "./foreignResidents";
 import { hasVacancy, vacancyRateText } from "./vacancy";
@@ -256,6 +257,7 @@ export const NEXT_UPDATE = {
   future:
     "地域別将来推計人口は約5年周期で改定されます。現在の令和5(2023)年推計が最新で、次回（2028年頃見込み）の公表後に更新予定です。",
   aging: "住民基本台帳の年齢階級別人口は毎年1月1日時点で、例年7月末〜8月に公表されます。公表後すみやかに更新予定です。",
+  fiscal: "主要財政指標一覧は年1回、総務省から公表されます（例年夏〜冬）。次年度版の公表後に更新予定です。",
   stations: "駅データ（国土数値情報 S12）は年度ごとに更新されます。新年度版の公表後に更新予定です。",
   medical: "医療施設調査は毎年10月1日時点で実施されます。市区町村別データの公表後に更新予定です。",
   preschools: "施設データは年度ごとに更新されます。新年度データの公表・反映後に更新予定です。",
@@ -430,6 +432,50 @@ const agingFreshnessLabel = (top1: Municipality | null): string | null =>
   top1 && hasAgeData(top1.ageStats)
     ? `${formatAsOfJa(top1.ageStats.asOf)}${AGE_FRESHNESS_SUFFIX}`
     : null;
+
+// ---- 財政力指数ランキング ----
+
+// 交付税制度の中立説明。「低い=悪い自治体」という誤読を必ず防ぐ（honesty 方針の
+// 中立フレーミング。フッター注記と FAQ の両方で繰り返す）。
+const FISCAL_NOTE =
+  "財政力指数は基準財政収入額÷基準財政需要額の3か年平均で、1を超えると普通交付税の不交付団体になります。指数が低い自治体には地方交付税により標準的な行政サービスの財源が国から保障されるため、指数の低さは行政サービスの質や自治体の優劣を意味しません。税収構造・人口規模を反映した客観指標として中立にご覧ください。東京23特別区は都区財政調整制度下の算定のためランキングには含めていません（各区の詳細ページでは指数を確認できます）。";
+
+const FISCAL_FAQ: { q: string; a: string }[] = [
+  {
+    q: "財政力指数とは何ですか？",
+    a: "地方交付税の算定に使う基準財政収入額を基準財政需要額で割った値の3か年平均で、自治体の税収による財源の余裕度を示す指標です。1を超えると普通交付税の不交付団体になります。出典は総務省「地方公共団体の主要財政指標一覧」の公表値で、推計値は使用していません。",
+  },
+  {
+    q: "財政力指数が低いと生活に影響がありますか？",
+    a: "指数が低い自治体には地方交付税により標準的な行政サービスの財源が国から保障される制度になっているため、指数の低さがそのまま行政サービスの質の低さを意味するわけではありません。税収構造や人口規模を反映した客観指標として中立にご覧ください。",
+  },
+  {
+    q: "東京23区が載っていないのはなぜですか？",
+    a: "特別区は都区財政調整制度のもとで算定され、固定資産税などの大都市税源が都に帰属するため、市町村の財政力指数と同じ土俵で比較できません（総務省の全国市町村平均も特別区を除いて算出されています）。各区の指数は詳細ページ・比較ページで注記付きで確認できます。",
+  },
+  {
+    q: "政令指定都市の区はどう扱っていますか？",
+    a: "財政力指数は市単位で算定されるため、政令指定都市の区のページには市全体の値を「（○○市全体の値）」と明示して表示しています。ランキングは市単位で集計しています。",
+  },
+  {
+    q: "データはいつ更新されますか？",
+    a: "総務省「地方公共団体の主要財政指標一覧」は年1回公表されます。財政力指数は直近3か年度の平均値で、本サイトは新年度版の公表後に更新します。",
+  },
+];
+
+// 1位自治体（実データ）から指数・年度を含む meta description を組み立てる。
+function fiscalMetaDescription(strongWeak: "高い" | "低い") {
+  return (top1: Municipality | null): string => {
+    const head = `全国の市町村を財政力指数が${strongWeak}順にランキング。`;
+    const tail = "総務省「地方公共団体の主要財政指標一覧」の公表値で、自治体の税収による財源の余裕度を比較できます。";
+    if (!top1 || !isFiscalRankable(top1.fiscal)) return `${head}${tail}`;
+    const name = `${prefNameOf(top1.pref)}${top1.displayName ?? top1.name}`;
+    return `${head}${strongWeak === "高い" ? "最も高い" : "最も低い"}のは${name}（${fiscalIndexText(top1.fiscal)}・${top1.fiscal.asOf}）。${tail}`;
+  };
+}
+
+const fiscalFreshnessLabel = (top1: Municipality | null): string | null =>
+  top1 && isFiscalRankable(top1.fiscal) ? `${top1.fiscal.asOf}（3か年平均）` : null;
 
 // ---- 生活インフラ（駅・医療機関・保育施設）ランキング ----
 
@@ -889,6 +935,47 @@ export const RANKINGS: RankingDef[] = [
     qualifies: (m) => hasAgeData(m.ageStats),
     sortValue: (m) => elderlyRatioPct(m.ageStats) ?? 0,
     display: (m) => elderlyRatioText(m.ageStats),
+  },
+  {
+    slug: "fiscal-strong",
+    category: "人口・まち",
+    title: "財政力指数が高い市区町村ランキング",
+    shortLabel: "財政力指数が高い",
+    description:
+      "全国の市町村を財政力指数が高い順にランキング。総務省「地方公共団体の主要財政指標一覧」の公表値で、税収による財源の余裕度を比較できます。",
+    metaDescription: fiscalMetaDescription("高い"),
+    lead: "全国の市町村を、財政力指数（基準財政収入額 ÷ 基準財政需要額の3か年平均）が高い順に並べたランキングです。",
+    note: FISCAL_NOTE,
+    faq: FISCAL_FAQ,
+    related: { slug: "fiscal-weak", label: "財政力指数が低い市区町村" },
+    prefSummary: true,
+    columnLabel: "財政力指数",
+    order: "desc",
+    freshnessLabel: fiscalFreshnessLabel,
+    nextUpdate: NEXT_UPDATE.fiscal,
+    qualifies: (m) => isFiscalRankable(m.fiscal),
+    sortValue: (m) => m.fiscal?.index ?? 0,
+    display: (m) => fiscalIndexText(m.fiscal),
+  },
+  {
+    slug: "fiscal-weak",
+    category: "人口・まち",
+    title: "財政力指数が低い市区町村ランキング",
+    shortLabel: "財政力指数が低い",
+    description:
+      "全国の市町村を財政力指数が低い順にランキング。地方交付税による財源保障の仕組みとあわせて、総務省の公表値で自治体の税収構造を比較できます。",
+    metaDescription: fiscalMetaDescription("低い"),
+    lead: "全国の市町村を、財政力指数（基準財政収入額 ÷ 基準財政需要額の3か年平均）が低い順に並べたランキングです。指数が低い自治体には地方交付税で標準的な行政サービスの財源が保障されます。",
+    note: FISCAL_NOTE,
+    faq: FISCAL_FAQ,
+    related: { slug: "fiscal-strong", label: "財政力指数が高い市区町村" },
+    columnLabel: "財政力指数",
+    order: "asc",
+    freshnessLabel: fiscalFreshnessLabel,
+    nextUpdate: NEXT_UPDATE.fiscal,
+    qualifies: (m) => isFiscalRankable(m.fiscal),
+    sortValue: (m) => m.fiscal?.index ?? 0,
+    display: (m) => fiscalIndexText(m.fiscal),
   },
   {
     slug: "future-population-decline",
