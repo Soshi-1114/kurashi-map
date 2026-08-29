@@ -19,13 +19,8 @@
 
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { existsSync } from "node:fs";
-import * as fs from "node:fs";
-import XLSX from "xlsx";
-import { resolvePrefs } from "./_lib/prefs.mjs";
-
-// xlsx の ESM ビルド（xlsx.mjs）は fs を自動注入しないため、readFile 前に明示的に渡す。
-XLSX.set_fs?.(fs);
+import { resolvePrefs, PREF_NAMES } from "./_lib/prefs.mjs";
+import { resolveXlsxPath, readWorkbook, sheetRows } from "./_lib/xlsx.mjs";
 import { loadMuni, saveMuni } from "./_lib/data.mjs";
 import { version } from "./_lib/versions.mjs";
 
@@ -37,13 +32,7 @@ const SOURCE = "こども家庭庁 保育所等関連状況取りまとめ（定
 
 const prefs = resolvePrefs(process.argv.slice(2));
 
-const XLSX_PATH = process.env.CHILDCARE_XLSX ||
-  process.argv.find((a) => a.endsWith(".xlsx")) ||
-  "/tmp/cfa_childcare.xlsx";
-if (!existsSync(XLSX_PATH)) {
-  console.error(`Excel not found: ${XLSX_PATH}`);
-  process.exit(1);
-}
+const XLSX_PATH = resolveXlsxPath("CHILDCARE_XLSX", "/tmp/cfa_childcare.xlsx");
 
 // 範囲 [from, to] の数値セルを合計（空欄は 0 扱い。文字列等は数値でないので無視）。
 function sumCols(row, from, to) {
@@ -53,16 +42,7 @@ function sumCols(row, from, to) {
 }
 
 // 「都道府県名|市区町村名」→ 抽出値。県計行が無いことは実ファイルで確認済みだが、
-// 念のため県名列が正規の都道府県名である行だけを拾う（fetch-waitlist.mjs と同じ方針）。
-const PREF_NAMES = new Set([
-  "北海道","青森県","岩手県","宮城県","秋田県","山形県","福島県",
-  "茨城県","栃木県","群馬県","埼玉県","千葉県","東京都","神奈川県",
-  "新潟県","富山県","石川県","福井県","山梨県","長野県","岐阜県","静岡県","愛知県",
-  "三重県","滋賀県","京都府","大阪府","兵庫県","奈良県","和歌山県",
-  "鳥取県","島根県","岡山県","広島県","山口県","徳島県","香川県","愛媛県","高知県",
-  "福岡県","佐賀県","長崎県","熊本県","大分県","宮崎県","鹿児島県","沖縄県",
-]);
-
+// 念のため県名列が正規の都道府県名（PREF_NAMES: prefs.mjs から導出）である行だけを拾う。
 function keyOf(row) {
   const pref = row[2];
   const muni = row[3];
@@ -72,7 +52,7 @@ function keyOf(row) {
 }
 
 function extractCapacity(ws) {
-  const rows = XLSX.utils.sheet_to_json(ws, { header: 1, blankrows: false, raw: true });
+  const rows = sheetRows(ws);
   const out = new Map();
   for (const r of rows) {
     const key = keyOf(r);
@@ -87,7 +67,7 @@ function extractCapacity(ws) {
 }
 
 function extractApplicants(ws) {
-  const rows = XLSX.utils.sheet_to_json(ws, { header: 1, blankrows: false, raw: true });
+  const rows = sheetRows(ws);
   const out = new Map();
   for (const r of rows) {
     const key = keyOf(r);
@@ -132,7 +112,7 @@ async function applyPref(pref, capacity, applicants) {
 }
 
 async function main() {
-  const wb = XLSX.readFile(XLSX_PATH);
+  const wb = readWorkbook(XLSX_PATH);
   const capWs = wb.Sheets["定員の状況"];
   const appWs = wb.Sheets["申込者の状況"];
   if (!capWs || !appWs) {

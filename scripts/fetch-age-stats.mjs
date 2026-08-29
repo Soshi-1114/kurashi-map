@@ -19,13 +19,8 @@
 
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { existsSync } from "node:fs";
-import * as fs from "node:fs";
-import XLSX from "xlsx";
 import { resolvePrefs } from "./_lib/prefs.mjs";
-
-// xlsx の ESM ビルド（xlsx.mjs）は fs を自動注入しないため、readFile 前に明示的に渡す。
-XLSX.set_fs?.(fs);
+import { resolveXlsxPath, readWorkbook, sheetRows } from "./_lib/xlsx.mjs";
 import { loadMuni, saveMuni } from "./_lib/data.mjs";
 import { version } from "./_lib/versions.mjs";
 
@@ -39,13 +34,7 @@ const NODATA = { young: 0, elderly: 0, total: 0, source: "データなし（住�
 
 const prefs = resolvePrefs(process.argv.slice(2));
 
-const XLSX_PATH = process.env.JUKI_XLSX ||
-  process.argv.find((a) => a.endsWith(".xlsx")) ||
-  "/tmp/juki_age.xlsx";
-if (!existsSync(XLSX_PATH)) {
-  console.error(`Excel not found: ${XLSX_PATH}`);
-  process.exit(1);
-}
+const XLSX_PATH = resolveXlsxPath("JUKI_XLSX", "/tmp/juki_age.xlsx");
 
 // 年齢階級見出し行から列インデックスを解決する。「NN歳～NN歳」「100歳以上」の
 // 先頭数値で年少（<=14）・高齢（>=65）を判定し、様式変更（列の増減）に耐える。
@@ -79,9 +68,8 @@ function sumCols(row, cols) {
 
 // Excel 全体を「5桁コード → {young, elderly, total}」に読み込む。
 function extract() {
-  const wb = XLSX.readFile(XLSX_PATH);
-  const ws = wb.Sheets[wb.SheetNames[0]];
-  const rows = XLSX.utils.sheet_to_json(ws, { header: 1, blankrows: false, raw: true });
+  const wb = readWorkbook(XLSX_PATH);
+  const rows = sheetRows(wb.Sheets[wb.SheetNames[0]]);
 
   // 見出し行を探す: 「団体コード」で始まる行の1つ上が年齢階級見出し。
   const unitRowIdx = rows.findIndex((r) => String(r?.[0] ?? "").trim() === "団体コード");
