@@ -10,6 +10,7 @@ import { hasRent } from "./rentColor";
 import { hasLandPrice } from "./landPrice";
 import { hasVacancy } from "./vacancy";
 import { populationDensity } from "./populationDensity";
+import { elderlyRatioPct } from "./ageStats";
 import { isFiscalRankable } from "./fiscal";
 
 export type MetricAvg = {
@@ -28,6 +29,8 @@ export type AreaStats = {
   vacancyRate: MetricAvg;
   /** 人口密度（人/km²）の平均（整数）。 */
   density: MetricAvg;
+  /** 高齢化率（%・住基台帳）の平均（小数1桁）。 */
+  agingRate: MetricAvg;
   /** 財政力指数の平均（小数2桁）。特別区（都区財政調整）は出典の全国平均と同様に除外。 */
   fiscalIndex: MetricAvg;
 };
@@ -74,6 +77,7 @@ export function buildAreaStats(all: Municipality[]): AreaStats {
     ),
     vacancyRate: buildMetricAvg(munis, (m) => (hasVacancy(m.vacancy) ? m.vacancy.rate : null), 1),
     density: buildMetricAvg(munis, (m) => populationDensity(m)),
+    agingRate: buildMetricAvg(munis, (m) => elderlyRatioPct(m.ageStats), 1),
     fiscalIndex: buildMetricAvg(munis, (m) => (isFiscalRankable(m.fiscal) ? m.fiscal.index : null), 2),
   };
 }

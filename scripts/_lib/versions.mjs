@@ -52,6 +52,14 @@ export const VERSIONS = {
   IPSS_BASE_URL: "https://www.ipss.go.jp/pp-shicyoson/j/shicyoson23/2gaiyo_hyo",
   IPSS_ASOF: "2023",
 
+  // 総務省「住民基本台帳に基づく人口、人口動態及び世帯数調査」の
+  // 市区町村別年齢階級別人口【総計】Excel（e-Stat 表26-04相当）。年齢構成（ageStats:
+  // fetch-age-stats.mjs）の出典。毎年1月1日時点・例年7月末〜8月に公表され、年度ごとに
+  // **新しい statInfId** が採番される（同一IDの更新ではない）。公表後に e-Stat の
+  // 統計表一覧（toukei=00200241）で新IDを確認し、JUKI_ASOF とセットで差し替える。
+  JUKI_AGE_STATINFID: "000040479050",
+  JUKI_ASOF: "2026-01-01",
+
   // 総務省「地方公共団体の主要財政指標一覧」の全市町村 Excel（財政力指数の出典:
   // fetch-fiscal.mjs）。main_content の採番は年度ごとに変わり自動推測できないため、
   // 公表ページ（soumu.go.jp/iken/shihyo_ichiran.html から年度ページへ）で確認して

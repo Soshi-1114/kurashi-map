@@ -1,54 +1,27 @@
-// 地図の「条件フィルタ」定義。家賃上限・地価上限・浸水リスクなしで自治体を絞り込み、
-// 非該当を減光する（非表示にはしない＝地理的文脈を残す）。
+// 地図の「条件フィルタ」定義。家賃上限・地価上限・浸水リスク・空き家率上限・
+// 2050年人口の下限で自治体を絞り込み、非該当を減光する（非表示にはしない＝地理的文脈を残す）。
 //
 // 件数カウント（JS）と地図描画（MapLibre 式）で同じ判定が要るが、両者を別々に
 // 手書きすると条件がずれる（件数と表示が食い違うのが本機能の致命傷）。そこで
 // 各条件を FILTER_SPECS の1エントリに集約し、matchesFilter / buildMatchExpression /
-// isFilterActive をそこから機械的に導出する（条件の単一ソース）。
+// isFilterActive / URL コーデックをそこから機械的に導出する（条件の単一ソース）。
 
 import type { MuniSummary } from "./types";
 
 export type MapFilters = {
-  rentMax: number | null;   // 家賃上限（円/月）。null=条件なし
-  landMax: number | null;   // 地価上限（円/㎡）。null=条件なし
-  floodMax: number | null;  // 許容する最大浸水深ランク（0..6）。null=条件なし。0=浸水なしに限定
+  rentMax: number | null;    // 家賃上限（円/月）。null=条件なし
+  landMax: number | null;    // 地価上限（円/㎡）。null=条件なし
+  floodMax: number | null;   // 許容する最大浸水深ランク（0..6）。null=条件なし。0=浸水なしに限定
+  vacancyMax: number | null; // 空き家率上限（%）。null=条件なし
+  futureMin: number | null;  // 2050年推計人口の増減率の下限（%）。null=条件なし。0=増加見込みに限定
 };
 
-export const EMPTY_FILTERS: MapFilters = { rentMax: null, landMax: null, floodMax: null };
-
-// 数値プロパティで「下限 op floor かつ 値 <= 上限」を判定する条件の仕様。
-// prop は MuniSummary のフィールド名であり、地図側の geojson プロパティ名とも一致する。
-type FilterSpec = {
-  /** MapFilters の上限フィールド */
-  max: keyof MapFilters;
-  /** MuniSummary の数値フィールド ＝ geojson プロパティ名 */
-  prop: "rent" | "landPrice" | "floodLevel";
-  /** 下限の比較演算子（rent/land は正値=`>` 0、flood は評価済み=`>=` 0）*/
-  floorOp: ">" | ">=";
-  /** 下限の基準値 */
-  floor: number;
-  /** 地図式で geojson プロパティ欠損時に使う既定値（下限を満たさない値にする） */
-  missingDefault: number;
+export const EMPTY_FILTERS: MapFilters = {
+  rentMax: null, landMax: null, floodMax: null, vacancyMax: null, futureMin: null,
 };
 
-// 家賃/地価は「正値（欠損 rent/land<=0 は非該当）」。浸水は「評価済み floodLevel>=0
-// （reinfolib 圏外の未評価 -1 は“安全”扱いしない=honesty）」かつ上限以下。
-const FILTER_SPECS: readonly FilterSpec[] = [
-  { max: "rentMax", prop: "rent", floorOp: ">", floor: 0, missingDefault: 0 },
-  { max: "landMax", prop: "landPrice", floorOp: ">", floor: 0, missingDefault: 0 },
-  { max: "floodMax", prop: "floodLevel", floorOp: ">=", floor: 0, missingDefault: -1 },
-];
-
-const floorOk = (op: ">" | ">=", v: number, floor: number) => (op === ">" ? v > floor : v >= floor);
-
-// 浸水深の上限セグメント。値は lib/hazardScale.ts の浸水深ランク（0=なし, 2=0.5〜3m, 3=3〜5m）。
-export const FLOOD_MAX_OPTIONS = [
-  { label: "浸水なし", value: 0 },
-  { label: "〜3m", value: 2 },
-  { label: "〜5m", value: 3 },
-] as const;
-
-// セグメント選択肢（離散値の方がスライダーよりデータスケールに合い操作も明確）
+// セグメント選択肢（離散値の方がスライダーよりデータスケールに合い操作も明確）。
+// FILTER_SPECS が spec.options として参照し、URL コーデックの許容値検証にも使う。
 export const RENT_MAX_OPTIONS = [
   { label: "5万", value: 50000 },
   { label: "6万", value: 60000 },
@@ -61,20 +34,75 @@ export const LAND_MAX_OPTIONS = [
   { label: "20万", value: 200000 },
 ] as const;
 
+// 浸水深の上限セグメント。値は lib/hazardScale.ts の浸水深ランク（0=なし, 2=0.5〜3m, 3=3〜5m）。
+export const FLOOD_MAX_OPTIONS = [
+  { label: "浸水なし", value: 0 },
+  { label: "〜3m", value: 2 },
+  { label: "〜5m", value: 3 },
+] as const;
+
+// 空き家率上限（%）。しきい値は地図コロプレス（lib/mapMetrics.ts）の下位側と揃える
+// （全国平均13.8%が「〜15%」に収まる）。
+export const VACANCY_MAX_OPTIONS = [
+  { label: "〜10%", value: 10 },
+  { label: "〜15%", value: 15 },
+  { label: "〜20%", value: 20 },
+] as const;
+
+// 2050年推計人口の増減率の下限（%）。0=増加見込みに限定。IPSS 公的推計の公表値による
+// 絞り込みで、対象外（浜通り13市町村・北方領土等）はデータなしとして非該当。
+export const FUTURE_MIN_OPTIONS = [
+  { label: "増加見込み", value: 0 },
+  { label: "-10%まで", value: -10 },
+  { label: "-20%まで", value: -20 },
+] as const;
+
+// 1条件の仕様。条件は「有効値である（floorOp/floor を満たす）かつ 選択値と dir 方向で
+// 比較して満たす」。prop は MuniSummary のフィールド名であり、geojson プロパティ名とも一致。
+type FilterSpec = {
+  /** MapFilters のフィールド ＝ URL クエリキー */
+  key: keyof MapFilters;
+  /** MuniSummary の数値フィールド ＝ geojson プロパティ名 */
+  prop: "rent" | "landPrice" | "floodLevel" | "vacancyRate" | "futureChangeRate";
+  /** 比較の向き。max=選択値以下が該当 / min=選択値以上が該当 */
+  dir: "max" | "min";
+  /** 有効値の下限判定（欠損・センチネルを非該当に落とす）。 */
+  floorOp: ">" | ">=";
+  floor: number;
+  /** 地図式で geojson プロパティ欠損時に使う既定値（floor を満たさない値にする） */
+  missingDefault: number;
+  /** UI セグメントの選択肢 ＝ URL クエリの許容値（選択肢に無い値は条件なしに落とす） */
+  options: readonly { label: string; value: number }[];
+};
+
+// 家賃/地価は「正値（欠損 rent/land<=0 は非該当）」。浸水は「評価済み floodLevel>=0
+// （reinfolib 圏外の未評価 -1 を“安全”扱いしない=honesty）」。空き家率・将来人口増減率は
+// フィールド欠落=データなし（集計対象外を「条件を満たす」と見せない）。増減率は負値が
+// 正常値のため floor は実データの下限を十分下回るダミー（floor 節は min 方向では
+// limit 判定に含意されるが、機構を max/min で一様に保つため残している）。
+const FILTER_SPECS: readonly FilterSpec[] = [
+  { key: "rentMax", prop: "rent", dir: "max", floorOp: ">", floor: 0, missingDefault: 0, options: RENT_MAX_OPTIONS },
+  { key: "landMax", prop: "landPrice", dir: "max", floorOp: ">", floor: 0, missingDefault: 0, options: LAND_MAX_OPTIONS },
+  { key: "floodMax", prop: "floodLevel", dir: "max", floorOp: ">=", floor: 0, missingDefault: -1, options: FLOOD_MAX_OPTIONS },
+  { key: "vacancyMax", prop: "vacancyRate", dir: "max", floorOp: ">=", floor: 0, missingDefault: -1, options: VACANCY_MAX_OPTIONS },
+  { key: "futureMin", prop: "futureChangeRate", dir: "min", floorOp: ">=", floor: -1000, missingDefault: -9999, options: FUTURE_MIN_OPTIONS },
+];
+
+const floorOk = (op: ">" | ">=", v: number, floor: number) => (op === ">" ? v > floor : v >= floor);
+const limitOk = (dir: "max" | "min", v: number, limit: number) => (dir === "max" ? v <= limit : v >= limit);
+
 export function isFilterActive(f: MapFilters): boolean {
-  return FILTER_SPECS.some((s) => f[s.max] != null);
+  return FILTER_SPECS.some((s) => f[s.key] != null);
 }
 
-// 件数カウント用の JS 判定。欠損（rent/landPrice<=0）は「条件を満たすと確認できない」
-// ため、その指標で絞り込み中なら非該当扱い。floodMax は「評価済み（floodLevel>=0）かつ
-// 浸水深ランクが上限以下」のみ該当とし、reinfolib 圏外で未評価（-1）の自治体を“安全”扱い
-// しない（honesty）。floodMax=0 は浸水なしに限定（旧 noFlood 相当）。
+// 件数カウント用の JS 判定。欠損・センチネルは「条件を満たすと確認できない」ため、
+// その指標で絞り込み中なら非該当扱い（honesty: 未評価・対象外を“安全/該当”扱いしない）。
 export function matchesFilter(m: MuniSummary, f: MapFilters): boolean {
   for (const spec of FILTER_SPECS) {
-    const max = f[spec.max];
-    if (max == null) continue;
-    const v = m[spec.prop];
-    if (!(floorOk(spec.floorOp, v, spec.floor) && v <= max)) return false;
+    const limit = f[spec.key];
+    if (limit == null) continue;
+    const v = m[spec.prop] ?? spec.missingDefault;
+    if (!(floorOk(spec.floorOp, v, spec.floor) && limitOk(spec.dir, v, limit))) return false;
   }
   return true;
 }
@@ -85,13 +113,42 @@ export function buildMatchExpression(f: MapFilters): unknown | null {
   if (!isFilterActive(f)) return null;
   const clauses: unknown[] = [];
   for (const spec of FILTER_SPECS) {
-    const max = f[spec.max];
-    if (max == null) continue;
-    // 未評価/欠損は missingDefault（下限を満たさない値）に落とし、非該当として減光側へ。
+    const limit = f[spec.key];
+    if (limit == null) continue;
+    // 未評価/欠損は missingDefault（floor を満たさない値）に落とし、非該当として減光側へ。
     // ["to-number", x, fallback] は null→0 を「正常変換」するため欠損検出に使えない。
     // ["has"] でプロパティ欠損を明示的に missingDefault へ落とす。
     const v = ["case", ["has", spec.prop], ["to-number", ["get", spec.prop]], spec.missingDefault];
-    clauses.push(["all", [spec.floorOp, v, spec.floor], ["<=", v, max]]);
+    clauses.push(["all", [spec.floorOp, v, spec.floor], [spec.dir === "max" ? "<=" : ">=", v, limit]]);
   }
   return ["all", ...clauses];
+}
+
+// ---- URL 同期（?rentMax=60000&futureMin=0 のような共有可能なクエリ） ----
+// クエリキーは MapFilters のフィールド名そのもの。値は spec.options にある場合のみ
+// 採用し、それ以外は条件なしに落とす（不正値で件数0の地図を共有させない）。
+
+/** location.search からフィルタ状態を復元する。未指定・不正値は null（条件なし）。 */
+export function parseFilters(search: string): MapFilters {
+  const params = new URLSearchParams(search);
+  const out: MapFilters = { ...EMPTY_FILTERS };
+  for (const spec of FILTER_SPECS) {
+    const raw = params.get(spec.key);
+    if (raw == null) continue;
+    const v = Number(raw);
+    if (spec.options.some((o) => o.value === v)) out[spec.key] = v;
+  }
+  return out;
+}
+
+/**
+ * フィルタ状態を URLSearchParams に反映する（既存の他パラメータ ?code=/?pref= 等は
+ * 触らない）。null の条件はキーごと削除し、クエリを最小に保つ。
+ */
+export function applyFiltersToParams(f: MapFilters, params: URLSearchParams): void {
+  for (const spec of FILTER_SPECS) {
+    const v = f[spec.key];
+    if (v == null) params.delete(spec.key);
+    else params.set(spec.key, String(v));
+  }
 }

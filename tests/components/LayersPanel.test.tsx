@@ -24,7 +24,8 @@ function setup(overrides: Partial<React.ComponentProps<typeof LayersPanel>> = {}
     onChangeFilters: vi.fn(),
     onClearFilters: vi.fn(),
     filterActive: false,
-    matchedCount: 0,
+    matchedMunis: [],
+    onSelectMatch: vi.fn(),
     ...overrides,
   };
   const utils = render(<LayersPanel {...props} />);
@@ -95,7 +96,15 @@ describe("LayersPanel", () => {
 
   it("filterActive のとき該当件数とクリアボタンを出し、クリアで onClearFilters を呼ぶ", async () => {
     const user = userEvent.setup();
-    const props = setup({ filterActive: true, matchedCount: 1234 });
+    const dummy = (code: string) => ({
+      code, pref: "saitama", name: `市${code}`, rent: 50000, landPrice: 100000,
+      populationTrend: "横ばい" as const, floodLevel: 0, landslideLevel: -1,
+      tsunamiLevel: -1, stormSurgeLevel: -1, liquefactionLevel: -1,
+    });
+    const props = setup({
+      filterActive: true,
+      matchedMunis: Array.from({ length: 1234 }, (_, i) => dummy(String(11000 + i))),
+    });
     expect(screen.getByText("1,234")).toBeInTheDocument();
     await user.click(screen.getByRole("button", { name: "クリア" }));
     expect(props.onClearFilters).toHaveBeenCalledTimes(1);
@@ -104,6 +113,35 @@ describe("LayersPanel", () => {
   it("filterActive でないとき該当件数を出さない", () => {
     setup({ filterActive: false });
     expect(screen.queryByText(/全国該当/)).toBeNull();
+  });
+
+  it("空き家率上限・2050年人口のセグメントを描画し、選択で onChangeFilters を呼ぶ", async () => {
+    const user = userEvent.setup();
+    const props = setup();
+    await user.click(screen.getByRole("button", { name: "〜15%" }));
+    expect(props.onChangeFilters).toHaveBeenCalledWith({ ...EMPTY_FILTERS, vacancyMax: 15 });
+    await user.click(screen.getByRole("button", { name: "増加見込み" }));
+    expect(props.onChangeFilters).toHaveBeenCalledWith({ ...EMPTY_FILTERS, futureMin: 0 });
+  });
+
+  it("「一覧を見る」で該当自治体を県ごとに表示し、行クリックで onSelectMatch を呼ぶ", async () => {
+    const user = userEvent.setup();
+    const munis = [
+      { code: "11203", pref: "saitama", name: "川口市", rent: 55000, landPrice: 200000, populationTrend: "横ばい" as const, floodLevel: 0, landslideLevel: -1, tsunamiLevel: -1, stormSurgeLevel: -1, liquefactionLevel: -1 },
+      { code: "01100", pref: "hokkaido", name: "札幌市", rent: 50000, landPrice: 100000, populationTrend: "横ばい" as const, floodLevel: 0, landslideLevel: -1, tsunamiLevel: -1, stormSurgeLevel: -1, liquefactionLevel: -1 },
+    ];
+    const props = setup({ filterActive: true, matchedMunis: munis });
+    await user.click(screen.getByRole("button", { name: "一覧を見る" }));
+    // PREFS の並び順（北→南）でグループ化される
+    expect(screen.getByText("北海道")).toBeInTheDocument();
+    expect(screen.getByText("埼玉県")).toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: "川口市" }));
+    expect(props.onSelectMatch).toHaveBeenCalledWith("11203");
+  });
+
+  it("該当0件のときは「一覧を見る」を出さない", () => {
+    setup({ filterActive: true, matchedMunis: [] });
+    expect(screen.queryByRole("button", { name: "一覧を見る" })).toBeNull();
   });
 
   it("activeCount>0 のときトグルボタンに件数バッジと「設定N件適用中」を出す", () => {

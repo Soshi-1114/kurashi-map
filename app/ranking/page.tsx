@@ -42,6 +42,8 @@ const RANK_VISUAL: Record<string, { Icon: typeof Wallet; tone: string }> = {
   "population-most": { Icon: Users, tone: "rk-tone-pop" },
   "population-growth": { Icon: TrendingUp, tone: "rk-tone-pop" },
   "population-decline": { Icon: TrendingDown, tone: "rk-tone-pop" },
+  "aging-high": { Icon: Users, tone: "rk-tone-pop" },
+  "aging-low": { Icon: Users, tone: "rk-tone-pop" },
   "foreign-ratio-high": { Icon: Globe2, tone: "rk-tone-foreign" },
   "foreign-ratio-low": { Icon: Globe2, tone: "rk-tone-foreign" },
   "fiscal-strong": { Icon: Landmark, tone: "rk-tone-infra" },

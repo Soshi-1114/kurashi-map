@@ -62,6 +62,7 @@ import { buildHighlights } from "@/lib/highlights";
 import { buildInsights } from "@/lib/insights";
 import { computeLivability } from "@/lib/livabilityScore";
 import { populationDensity, densityText } from "@/lib/populationDensity";
+import { hasAgeData, elderlyRatioPct, elderlyRatioText } from "@/lib/ageStats";
 import { hasFiscal, isFiscalSpecialWard, fiscalIndexText, fiscalSource } from "@/lib/fiscal";
 import { Reveal } from "@/components/area/Reveal";
 import { Section } from "@/components/area/Section";
@@ -84,7 +85,8 @@ import { compactYen, compactPopulation } from "@/lib/format";
 import { SupportBanner } from "@/components/area/SupportBanner";
 import { FurusatoLink } from "@/components/monetization/FurusatoLink";
 import { DenkiTeaser } from "@/components/area/DenkiTeaser";
-import { supportUrl, furusatoLink } from "@/lib/monetization";
+import { supportUrl, furusatoLink, kasaiHokenLink } from "@/lib/monetization";
+import { KasaiLink } from "@/components/monetization/KasaiLink";
 import { furunaviMunicipalPageUrl } from "@/lib/furunaviMunicipals";
 import PageShell from "@/components/PageShell";
 import SectionNav, { type SectionNavItem } from "@/components/area/SectionNav";
@@ -206,6 +208,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
   const parent = m.parentCode ? all.find((x) => x.code === m.parentCode) ?? null : null;
   const heading = m.displayName ?? m.name;
   const support = supportUrl();
+  const kasai = kasaiHokenLink();
   // ふるさと納税の寄付先。政令市の行政区は親の政令市（名前・ふるなびID とも donee で引く）。
   // ふるなび未掲載の自治体は furusatoLink が null を返し、導線ごと非表示になる。
   const donee = m.level === "ward" && parent ? parent : m;
@@ -310,6 +313,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
     { "@type": "PropertyValue", name: "人口", unitText: "人", value: m.population },
     isWaitlistDisclosed(m.waitlistChildren) && { "@type": "PropertyValue", name: "待機児童数", unitText: "人", value: m.waitlistChildren.value },
     hasForeignData(m.foreignResidents.source) && { "@type": "PropertyValue", name: "外国人住民比率", unitText: "%", value: Number(foreignRatioPct(m).toFixed(2)) },
+    hasAgeData(m.ageStats) && { "@type": "PropertyValue", name: "高齢化率（65歳以上人口の割合）", unitText: "%", value: Number((elderlyRatioPct(m.ageStats) ?? 0).toFixed(1)) },
   ].filter(Boolean);
 
   const lastModified = muniLastModified(m);
@@ -531,7 +535,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
             label="人口"
             value={m.population.toLocaleString()}
             unit="人"
-            sub={`人口トレンド: ${m.populationTrend}${density != null ? `・人口密度 ${densityText(density)}` : ""}`}
+            sub={`人口トレンド: ${m.populationTrend}${density != null ? `・人口密度 ${densityText(density)}` : ""}${hasAgeData(m.ageStats) ? `・高齢化率 ${elderlyRatioText(m.ageStats)}` : ""}`}
             compare={popCompare}
           />
           <KpiCard
@@ -804,6 +808,15 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
                       高齢（65歳以上）{fp.elderly2050.toLocaleString()}人（{fpAges.elderly.toFixed(1)}%）
                     </p>
                   )}
+                  {/* 「今と将来」の高齢化率並記（2050暮らしビューの土台）。基準の異なる値
+                      （住基台帳の登録人口 vs 2020年国調基準の推計）のため、差分の演算表示は
+                      せず参考比較であることを明示する。 */}
+                  {hasAgeData(m.ageStats) && fpAges && (
+                    <p className="ad-note">
+                      高齢化率の今とこれから: 現在 {elderlyRatioText(m.ageStats)}（{formatAsOfJa(m.ageStats.asOf)}・住民基本台帳）／
+                      2050年 {fpAges.elderly.toFixed(1)}%（推計）。基準・人口の定義が異なる参考比較です。
+                    </p>
+                  )}
                   <p className="ad-note">
                     <Info size={15} aria-hidden="true" />
                     <span>
@@ -973,6 +986,9 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
           {furusato && (
             <FurusatoLink link={furusato} targetName={donee.name} municipalityCode={m.code} />
           )}
+          {/* 火災保険（水災補償）。ハザード情報を持つサイトならではの文脈一致導線。
+              env 未設定なら kasai が null で導線ごと出ない */}
+          {kasai && <KasaiLink link={kasai} municipalityCode={m.code} placement="area" />}
         </section>
       </Reveal>
       {/* FAQ（Accordion・デフォルト閉じる） */}

@@ -12,6 +12,7 @@ import type { Metadata } from "next";
 import ReactDOM from "react-dom";
 import HomeShell from "@/components/HomeShell";
 import PrefRegionLinks from "@/components/PrefRegionLinks";
+import { KasaiBand } from "@/components/monetization/KasaiBand";
 import { listSummaryAcrossPrefs, listAllAcrossPrefs } from "@/lib/metrics";
 import { muniLevelOnly } from "@/lib/rankings";
 import { isHazardEvaluated } from "@/lib/coverage";
@@ -152,6 +153,9 @@ function HazardHub({ popular, prefsWithData }: { popular: Municipality[]; prefsW
           prefs={prefsWithData}
         />
       </section>
+
+      {/* 火災保険（水災補償）。ハザード情報と文脈一致する収益導線（env 未設定なら非表示） */}
+      <KasaiBand placement="hazard-map" />
 
       <p className="home-links-foot">
         © KurashiMap — 区域表示: 国土地理院 ハザードマップポータルサイト。自治体単位の評価: 不動産情報ライブラリ（reinfolib）。避難場所: 国土地理院 指定緊急避難場所データ。数値・区分はすべて公表値で、推計値は含みません。

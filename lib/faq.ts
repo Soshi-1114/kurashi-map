@@ -16,6 +16,7 @@ import { formatAsOfJa } from "./rankings";
 import { isHazardEvaluated, isAmenitiesCounted, coverageReason } from "./coverage";
 import { buildSummary } from "./summary";
 import { hasForeignData, foreignRatioPct } from "./foreignResidents";
+import { hasAgeData, elderlyRatioText, youngRatioText } from "./ageStats";
 import {
   floodLevelOf,
   landslideLevelOf,
@@ -60,6 +61,14 @@ export function buildFaq(m: Municipality, prefName: string): QA[] {
     q: `${name}の人口は何人ですか？`,
     a: `${name}の人口は${m.population.toLocaleString()}人で、最近の人口トレンドは「${m.populationTrend}」です（国勢調査）。`,
   });
+
+  // 高齢化率（住基台帳の実データがある自治体のみ。北方領土6村は出さない）
+  if (hasAgeData(m.ageStats)) {
+    qa.push({
+      q: `${name}の高齢化率はどのくらいですか？`,
+      a: `${name}の高齢化率（65歳以上人口の割合）は${elderlyRatioText(m.ageStats)}、年少人口比（0〜14歳）は${youngRatioText(m.ageStats)}です（総務省 住民基本台帳・${formatAsOfJa(m.ageStats.asOf)}時点）。`,
+    });
+  }
 
   // 待機児童
   qa.push({

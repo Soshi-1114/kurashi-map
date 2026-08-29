@@ -66,6 +66,7 @@ export default async function ComparePage() {
     vacancyRate: areaStats.vacancyRate.national,
     density: areaStats.density.national,
     foreignRatio: nationalForeignAvg(foreignStats),
+    agingRate: areaStats.agingRate.national,
     fiscalIndex: areaStats.fiscalIndex.national,
   };
 
@@ -82,6 +83,7 @@ export default async function ComparePage() {
       vacancyRate: areaStats.vacancyRate.byPref.get(p.slug) ?? null,
       density: areaStats.density.byPref.get(p.slug) ?? null,
       foreignRatio: foreignByPref.get(p.slug) ?? null,
+      agingRate: areaStats.agingRate.byPref.get(p.slug) ?? null,
       fiscalIndex: areaStats.fiscalIndex.byPref.get(p.slug) ?? null,
     };
   }

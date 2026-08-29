@@ -122,6 +122,17 @@ jobs:
       - name: 保育所等の定員・利用状況（CFA 全国一括）
         run: CHILDCARE_XLSX=/tmp/cfa_childcare.xlsx node scripts/fetch-childcare.mjs ${{ steps.scope.outputs.estat }}
 
+      - name: 年齢構成（住民基本台帳 Excel 全国一括）
+        run: |
+          ok=""
+          for i in 1 2 3; do
+            if curl -fsSL -o /tmp/juki_age.xlsx "https://www.e-stat.go.jp/stat-search/file-download?statInfId=${JUKI_AGE_STATINFID}&fileKind=0"; then ok=1; break; fi
+            echo "juki DL retry $i"; sleep 3
+          done
+          if [[ -z "$ok" ]]; then echo "::warning::住基台帳 Excel download failed"; exit 0; fi
+          JUKI_XLSX=/tmp/juki_age.xlsx node scripts/fetch-age-stats.mjs ${{ steps.scope.outputs.estat }} \
+            || echo "::warning::fetch-age-stats failed"
+
       - name: 財政力指数（総務省 主要財政指標一覧 全国一括）
         run: |
           ok=""

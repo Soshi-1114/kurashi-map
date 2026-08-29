@@ -1360,6 +1360,50 @@ button { font-family: inherit; }
 }
 .filter-clear:hover { text-decoration: underline; }
 
+/* フィルタ該当自治体の一覧（LayersPanel 内・都道府県ごとにグループ化）。
+   件数が多くてもパネルを溢れさせないよう固定高でスクロールさせる */
+.filter-matches {
+  margin-top: 8px;
+  max-height: 240px;
+  overflow-y: auto;
+  border-top: 1px solid var(--border);
+  padding-top: 8px;
+  display: grid;
+  gap: 8px;
+}
+.filter-matches-pref {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--text-muted);
+}
+.filter-matches-count {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+}
+.filter-matches-list {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.filter-matches-item {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  padding: 3px 10px;
+  font-size: var(--text-xs);
+  font-family: inherit;
+  color: var(--text);
+  cursor: pointer;
+}
+.filter-matches-item:hover { border-color: var(--accent); color: var(--accent); }
+
 /* 凡例 — シートに隠れないよう sheet open 時は繰り上げる */
 .legend {
   position: absolute;
