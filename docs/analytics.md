@@ -25,6 +25,8 @@ KurashiMap は Google Analytics 4（gtag.js）でページビューに加えて�
 | `select_section` | 自治体詳細ページの目次（セクションナビ）で移動した時 | `components/area/SectionNav.tsx` |
 | `support_link_click` | 支援（投げ銭）リンクをクリックした時 | `components/area/SupportBanner.tsx` |
 | `furusato_link_click` | ふるさと納税リンクをクリックした時 | `components/area/FurusatoLink.tsx` |
+| `kasai_link_impression` | 火災保険導線が50%視認された時（1要素1回） | `components/monetization/KasaiLink.tsx` |
+| `kasai_link_click` | 火災保険の外部リンクをクリックした時（キーイベント候補） | `components/monetization/KasaiLink.tsx` |
 | `denki_simulate` | 電気代シミュレーターの入力を確定した時（連続入力は 1s debounce） | `components/denki/DenkiSimulator.tsx` |
 | `denki_offer_impression` | 電気代の比較結果リストを表示した時（エリアごとに1回。掲載オファー0件の間は送らない） | `components/denki/DenkiSimulator.tsx` |
 | `denki_offer_click` | 電気プランの外部リンクをクリックした時（キーイベント候補） | `components/denki/DenkiSimulator.tsx` |
@@ -52,6 +54,8 @@ KurashiMap は Google Analytics 4（gtag.js）でページビューに加えて�
 | `support_link_click` | `municipality_code` | 文字列 | `13101` | 表示中の自治体コード |
 | | `municipality_name` | 文字列 | `千代田区` | |
 | `furusato_link_click` | `municipality_code` | 文字列 | `13101` | 表示中の自治体コード |
+| `kasai_link_impression` / `kasai_link_click` | `placement` | 文字列 | `area` / `hazard-map` | 掲載面（面ごとのCTR分析用） |
+| `kasai_link_impression` / `kasai_link_click` | `municipality_code` | 文字列 | `13101` | 表示中の自治体コード（自治体面のみ） |
 | | `municipality_name` | 文字列 | `千代田区` | 寄付先名（行政区は親の政令市名） |
 | `denki_simulate` | `area` | 文字列 | `tokyo` `kansai` | 供給エリア（10種） |
 | | `household_size` | 数値 | `1`〜`5` | 世帯人数 |
