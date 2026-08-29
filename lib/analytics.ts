@@ -42,6 +42,7 @@ export function trackApplyFilter(params: MapFilters): void {
     land_max: params.landMax ?? 0,
     flood_max: params.floodMax ?? -1, // -1=条件なし（0=浸水なしに限定と区別）
     vacancy_max: params.vacancyMax ?? 0, // 0=条件なし（選択肢は10/15/20のみ）
+    aging_max: params.agingMax ?? 0, // 0=条件なし（選択肢は30/35/40のみ）
     future_min: params.futureMin ?? -999, // -999=条件なし（0=増加見込みに限定と区別）
   });
 }

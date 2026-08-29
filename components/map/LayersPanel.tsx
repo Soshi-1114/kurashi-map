@@ -9,7 +9,7 @@ import { createPortal } from "react-dom";
 import { MAP_METRICS, getMapMetric, type MapMetricKey } from "@/lib/mapMetrics";
 import {
   RENT_MAX_OPTIONS, LAND_MAX_OPTIONS, FLOOD_MAX_OPTIONS,
-  VACANCY_MAX_OPTIONS, FUTURE_MIN_OPTIONS, type MapFilters,
+  VACANCY_MAX_OPTIONS, AGING_MAX_OPTIONS, FUTURE_MIN_OPTIONS, type MapFilters,
 } from "@/lib/mapFilters";
 import { HAZARD_OVERLAYS } from "@/lib/mapHazards";
 import { BASEMAPS, type BasemapKey } from "@/lib/mapBasemaps";
@@ -255,6 +255,12 @@ export default function LayersPanel({
             options={VACANCY_MAX_OPTIONS}
             value={filters.vacancyMax}
             onChange={(v) => onChangeFilters({ ...filters, vacancyMax: v })}
+          />
+          <SegmentedFilter
+            label="高齢化率上限"
+            options={AGING_MAX_OPTIONS}
+            value={filters.agingMax}
+            onChange={(v) => onChangeFilters({ ...filters, agingMax: v })}
           />
           <SegmentedFilter
             label="2050年人口（推計）"

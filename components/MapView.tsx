@@ -288,6 +288,7 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
             ...(m.futureChangeRate !== undefined ? { futureChangeRate: m.futureChangeRate } : {}),
             // 空き家率も同方式（集計対象外はプロパティ欠落 → ["has"] で欠損判定）。
             ...(m.vacancyRate !== undefined ? { vacancyRate: m.vacancyRate } : {}),
+            ...(m.agingRate !== undefined ? { agingRate: m.agingRate } : {}),
             name: m.name,
             floodLevel: m.floodLevel, // -1=対象外, 0=なし, 1..6
             landslideLevel: m.landslideLevel,

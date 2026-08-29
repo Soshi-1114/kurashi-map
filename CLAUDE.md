@@ -31,11 +31,11 @@ push / PR ごとに CI（`.github/workflows/test.yml`）が typecheck・test・l
 
 **`prefs` マニフェストが2つあり**、同期を保つ必要があります: `lib/prefs.ts`（アプリ用の TypeScript。地図初期フォーカス用の本土中心 `bbox` 含む）と `scripts/_lib/prefs.mjs`（データスクリプトと CI マトリクス用）。県を追加する時は両方を変更します。共通フィールドのズレは `tests/lib/prefs.test.ts` が検出します。
 
-**地図の指標はデータ駆動。** `lib/mapMetrics.ts` が切替可能なコロプレス指標（`rent`・`landPrice`・`populationTrend`・`foreignRatio`・`vacancy`・`futurePopulation`）を、MapLibre の `fill-color` 式・凡例・値整形をまとめた単一の `MapMetric` 型として定義します。`MapView.tsx` はこの定義から色・凡例・ツールチップを読み、ハードコードしません。家賃のしきい値と配色は `lib/rentColor.ts` にあり、固定の契約として扱います。
+**地図の指標はデータ駆動。** `lib/mapMetrics.ts` が切替可能なコロプレス指標（`rent`・`landPrice`・`populationTrend`・`foreignRatio`・`vacancy`・`aging`・`futurePopulation`）を、MapLibre の `fill-color` 式・凡例・値整形をまとめた単一の `MapMetric` 型として定義します。`MapView.tsx` はこの定義から色・凡例・ツールチップを読み、ハードコードしません。家賃のしきい値と配色は `lib/rentColor.ts` にあり、固定の契約として扱います。
 
 **ジオメトリ。** `public/prefectures.geojson`（全国の輪郭）は起動時にロード。`MapView.tsx` がビューポートに応じて県別ポリゴン geojson（`public/{slug}.geojson`、`{slug}_wards.geojson`）を遅延ロードします。
 
-**UI 面。** `components/MapView.tsx`（MapLibre ラッパ）、`AreaPanel.tsx`（PC サイドパネル + MetricCards）、`MobileSheet.tsx`（モバイルの3段階ボトムシート）。詳細ページ: `app/area/[pref]/[city]/page.tsx`（SEO + 構造化データ）。OG画像の動的生成: `app/api/og/[code]/route.tsx`。地図ページ: 汎用の全画面地図 `/map`（「地図で見る」ディープリンクの既定の行き先）と指標別ハブ `/map/{rent,land-price,population-trend,future-population,vacancy,foreign-ratio,hazard}`（一覧は `lib/siteNav.ts` の `MAP_HUBS` が単一ソース）。トップ（`/`）はポータル（ヒーロー検索＋地図導線カード＋リンク帯）で地図は埋め込まない。サイト・データ方針の説明は `/about`。
+**UI 面。** `components/MapView.tsx`（MapLibre ラッパ）、`AreaPanel.tsx`（PC サイドパネル + MetricCards）、`MobileSheet.tsx`（モバイルの3段階ボトムシート）。詳細ページ: `app/area/[pref]/[city]/page.tsx`（SEO + 構造化データ）。OG画像の動的生成: `app/api/og/[code]/route.tsx`。地図ページ: 汎用の全画面地図 `/map`（「地図で見る」ディープリンクの既定の行き先）と指標別ハブ `/map/{rent,land-price,population-trend,future-population,vacancy,aging,foreign-ratio,hazard}`（一覧は `lib/siteNav.ts` の `MAP_HUBS` が単一ソース）。トップ（`/`）はポータル（ヒーロー検索＋地図導線カード＋リンク帯）で地図は埋め込まない。サイト・データ方針の説明は `/about`。
 
 ## データの扱い（honesty 方針・厳守）
 
