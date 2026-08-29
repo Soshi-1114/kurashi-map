@@ -10,6 +10,7 @@ describe("VERSIONS 単一ソース", () => {
       "CFA_XLSX_URL", "CFA_ASOF",
       "GSI_SHELTER_URL", "GSI_SHELTER_ASOF",
       "FOREIGN_ASOF",
+      "JUKI_AGE_STATINFID", "JUKI_ASOF",
       "MEDICAL_HOSP_STATSDATAID", "MEDICAL_CLINIC_STATSDATAID", "MEDICAL_ASOF",
       "S12_URL", "S12_ASOF",
       "AMENITIES_SOURCE", "AMENITIES_ASOF",
@@ -29,6 +30,13 @@ describe("VERSIONS 単一ソース", () => {
   it("L01_VERSION と L01_ASOF が同期している（例 26 ⇔ 2026）", () => {
     // zip 版番号 NN は令和(NN-8)年＝西暦 20NN。ASOF 末尾2桁が VERSION と一致する。
     expect(VERSIONS.L01_ASOF).toBe(`20${VERSIONS.L01_VERSION}`);
+  });
+
+  it("JUKI_ASOF が1月1日時点の日付形式（住基台帳は毎年1月1日基準）", () => {
+    // statInfId は年から導出できないため相関テスト不可。年度更新時に statInfId と
+    // ASOF をセットで差し替える運用は versions.mjs のコメントに明記している。
+    expect(VERSIONS.JUKI_ASOF).toMatch(/^\d{4}-01-01$/);
+    expect(VERSIONS.JUKI_AGE_STATINFID).toMatch(/^\d{12}$/);
   });
 
   it("AMENITIES_ASOF の医療機関部分が MEDICAL_ASOF と同期している", () => {
