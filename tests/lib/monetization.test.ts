@@ -5,6 +5,7 @@ import {
   supportUrl,
   furusatoUrlTemplate,
   denkiOfferUrl,
+  kasaiHokenLink,
 } from "@/lib/monetization";
 
 // process.env を書き換えるテストは毎回クリーンアップする。
@@ -12,6 +13,7 @@ const KEYS = [
   "NEXT_PUBLIC_SUPPORT_URL",
   "NEXT_PUBLIC_FURUSATO_URL_TEMPLATE",
   "NEXT_PUBLIC_FURUSATO_AFF_URL",
+  "NEXT_PUBLIC_KASAI_HOKEN_URL",
 ] as const;
 afterEach(() => {
   for (const k of KEYS) delete process.env[k];
@@ -141,5 +143,27 @@ describe("denkiOfferUrl", () => {
   it("提携リンクが空白のみならフォールバック", () => {
     const { isAffiliate } = denkiOfferUrl("looop", "https://example.com/plan", { looop: "  " });
     expect(isAffiliate).toBe(false);
+  });
+});
+
+describe("kasaiHokenLink", () => {
+  it("env 未設定・空白のみなら null（導線ごと非表示。素リンクのフォールバックなし）", () => {
+    expect(kasaiHokenLink()).toBeNull();
+    process.env.NEXT_PUBLIC_KASAI_HOKEN_URL = "  ";
+    expect(kasaiHokenLink()).toBeNull();
+  });
+
+  it("AT リンクなら URL を加工せず返し、計測ピクセル（sp/rr）を対で導出する", () => {
+    process.env.NEXT_PUBLIC_KASAI_HOKEN_URL = "https://h.accesstrade.net/sp/cc?rk=xyz&url=x";
+    const link = kasaiHokenLink()!;
+    expect(link.url).toBe("https://h.accesstrade.net/sp/cc?rk=xyz&url=x");
+    expect(link.url).not.toContain("utm_source"); // ASP 計測を壊さない
+    expect(link.impressionPixel).toBe("https://h.accesstrade.net/sp/rr?rk=xyz");
+  });
+
+  it("AT 以外の ASP リンクは計測ピクセル null", () => {
+    process.env.NEXT_PUBLIC_KASAI_HOKEN_URL = "https://px.a8.net/svt/ejp?a8mat=abc";
+    const link = kasaiHokenLink()!;
+    expect(link.impressionPixel).toBeNull();
   });
 });

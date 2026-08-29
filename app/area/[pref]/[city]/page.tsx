@@ -83,7 +83,8 @@ import { compactYen, compactPopulation } from "@/lib/format";
 import { SupportBanner } from "@/components/area/SupportBanner";
 import { FurusatoLink } from "@/components/monetization/FurusatoLink";
 import { DenkiTeaser } from "@/components/area/DenkiTeaser";
-import { supportUrl, furusatoLink } from "@/lib/monetization";
+import { supportUrl, furusatoLink, kasaiHokenLink } from "@/lib/monetization";
+import { KasaiLink } from "@/components/monetization/KasaiLink";
 import { furunaviMunicipalPageUrl } from "@/lib/furunaviMunicipals";
 import PageShell from "@/components/PageShell";
 import SectionNav, { type SectionNavItem } from "@/components/area/SectionNav";
@@ -205,6 +206,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
   const parent = m.parentCode ? all.find((x) => x.code === m.parentCode) ?? null : null;
   const heading = m.displayName ?? m.name;
   const support = supportUrl();
+  const kasai = kasaiHokenLink();
   // ふるさと納税の寄付先。政令市の行政区は親の政令市（名前・ふるなびID とも donee で引く）。
   // ふるなび未掲載の自治体は furusatoLink が null を返し、導線ごと非表示になる。
   const donee = m.level === "ward" && parent ? parent : m;
@@ -930,6 +932,9 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
           {furusato && (
             <FurusatoLink link={furusato} targetName={donee.name} municipalityCode={m.code} />
           )}
+          {/* 火災保険（水災補償）。ハザード情報を持つサイトならではの文脈一致導線。
+              env 未設定なら kasai が null で導線ごと出ない */}
+          {kasai && <KasaiLink link={kasai} municipalityCode={m.code} placement="area" />}
         </section>
       </Reveal>
       {/* FAQ（Accordion・デフォルト閉じる） */}

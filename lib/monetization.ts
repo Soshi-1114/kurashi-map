@@ -78,6 +78,26 @@ export function furusatoAffUrl(): string | null {
   return u ? u : null;
 }
 
+export type KasaiLinkInfo = {
+  url: string;
+  /** AT のインプレッション計測ピクセル（sp/rr）。AT 以外の ASP は null */
+  impressionPixel: string | null;
+};
+
+/**
+ * 火災保険（一括見積もり等）導線のリンク。null なら導線は表示しない。
+ *
+ * ハザード情報（災害リスクカード・/map/hazard）と文脈が一致する唯一の収益導線として、
+ * ASP 提携確定後に env を設定して点灯する。素リンクのフォールバックは持たない
+ * （中立に案内できる公式サイトが存在しないため、未提携時は導線ごと出さない）。
+ * env には ASP 発行のリンクをそのまま設定し、加工しない（UTM を足すと ASP 計測を壊す）。
+ */
+export function kasaiHokenLink(): KasaiLinkInfo | null {
+  const u = process.env.NEXT_PUBLIC_KASAI_HOKEN_URL?.trim();
+  if (!u) return null;
+  return { url: u, impressionPixel: atImpressionPixel(u) };
+}
+
 export type FurusatoLinkInfo = {
   url: string;
   /** municipal = 自治体ページへのディープリンク / portal = ポータルの固定ページへ（寄付先は移動先で選ぶ） */
