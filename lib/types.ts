@@ -107,6 +107,18 @@ export type Municipality = {
     source: string;
     asOf: string;
   };
+  // 財政力指数（総務省「地方公共団体の主要財政指標一覧」・3か年平均・小数2桁）。
+  // 経常収支比率等は制度説明なしに誤読リスクが高いため収録しない（1指標に絞る。
+  // 出典の同一行にあるため後日の拡張コストはほぼゼロ）。
+  // センチネル: 出典に行がない北方領土6村は index=-1（指数は正値のみなので安全。
+  // lib/fiscal.ts hasFiscal 参照）。政令市の区は市単位の値を source「（○○市全体の値）」
+  // 付きで展開（childcare と同方式）。東京23特別区は都区財政調整制度下の算定のため
+  // source に明記し、ランキング対象外（lib/fiscal.ts isFiscalRankable）。
+  fiscal?: {
+    index: number;   // 財政力指数
+    source: string;
+    asOf: string;    // "2024年度"（令和6年度。R4-R6の3か年平均）
+  };
   // 指定緊急避難場所の件数サマリ（点の座標は別ファイル data/{slug}_shelters.json に置き
   // 地図選択時に /api/shelters/[code] で取得する）。未収録は source にセンチネルを持つ
   // （lib/shelters.ts hasShelterData 参照）。詳細パネルの件数表示用。

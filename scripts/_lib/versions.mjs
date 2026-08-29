@@ -52,6 +52,13 @@ export const VERSIONS = {
   IPSS_BASE_URL: "https://www.ipss.go.jp/pp-shicyoson/j/shicyoson23/2gaiyo_hyo",
   IPSS_ASOF: "2023",
 
+  // 総務省「地方公共団体の主要財政指標一覧」の全市町村 Excel（財政力指数の出典:
+  // fetch-fiscal.mjs）。main_content の採番は年度ごとに変わり自動推測できないため、
+  // 公表ページ（soumu.go.jp/iken/shihyo_ichiran.html から年度ページへ）で確認して
+  // 手動更新する。FISCAL_ASOF（年度・財政力指数は3か年平均）と必ず同期。
+  FISCAL_XLSX_URL: "https://www.soumu.go.jp/main_content/001044529.xlsx",
+  FISCAL_ASOF: "2024年度",
+
   // 出入国在留管理庁「在留外国人統計」の基準時点（半期公表・手動更新）。
   // 期を更新したら statInfId とセットで合わせる（docs/data-update.md §在留外国人）。
   FOREIGN_ASOF: "2025-12",

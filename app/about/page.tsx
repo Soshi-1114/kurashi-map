@@ -83,6 +83,13 @@ async function loadRows(): Promise<SourceRow[]> {
       next: NEXT_UPDATE.childcare,
     },
     {
+      label: "財政力指数",
+      source: "総務省 地方公共団体の主要財政指標一覧",
+      asOf: m.fiscal?.asOf ?? "-",
+      cycle: "年1回（3か年平均）",
+      next: NEXT_UPDATE.fiscal,
+    },
+    {
       label: "在留外国人数・比率",
       source: "出入国在留管理庁 在留外国人統計（e-Stat）",
       asOf: formatAsOfJa(m.foreignResidents.asOf),

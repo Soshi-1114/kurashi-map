@@ -122,6 +122,17 @@ jobs:
       - name: 保育所等の定員・利用状況（CFA 全国一括）
         run: CHILDCARE_XLSX=/tmp/cfa_childcare.xlsx node scripts/fetch-childcare.mjs ${{ steps.scope.outputs.estat }}
 
+      - name: 財政力指数（総務省 主要財政指標一覧 全国一括）
+        run: |
+          ok=""
+          for i in 1 2 3; do
+            if curl -fsSL -o /tmp/fiscal.xlsx "${FISCAL_XLSX_URL}"; then ok=1; break; fi
+            echo "fiscal DL retry $i"; sleep 3
+          done
+          if [[ -z "$ok" ]]; then echo "::warning::財政指標 Excel download failed"; exit 0; fi
+          FISCAL_XLSX=/tmp/fiscal.xlsx node scripts/fetch-fiscal.mjs ${{ steps.scope.outputs.estat }} \
+            || echo "::warning::fetch-fiscal failed"
+
       - name: 地価（L01 県別 zip・逐次, DL リトライ＋県別失敗は警告で継続）
         timeout-minutes: 180
         run: |

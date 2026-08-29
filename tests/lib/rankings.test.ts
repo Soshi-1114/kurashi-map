@@ -420,6 +420,41 @@ describe("splitRankingTitle", () => {
   });
 });
 
+describe("財政力指数ランキング", () => {
+  const fiscal = (index: number, source = "総務省 地方公共団体の主要財政指標一覧") => ({
+    index, source, asOf: "2024年度",
+  });
+
+  it("fiscal-strong は指数の降順、特別区（都区財政調整）・センチネルは除外", () => {
+    const def = getRankingBySlug("fiscal-strong")!;
+    const list = [
+      muni({ code: "A", fiscal: fiscal(0.49) }),
+      muni({ code: "B", fiscal: fiscal(1.99) }),
+      muni({ code: "C", fiscal: fiscal(0.85, "総務省 地方公共団体の主要財政指標一覧（特別区・都区財政調整制度下の算定）") }),
+      muni({ code: "D", fiscal: fiscal(-1, "データなし（対象外）") }),
+      muni({ code: "E" }), // 未収録
+    ];
+    expect(rankBy(def, list).map((m) => m.code)).toEqual(["B", "A"]);
+    expect(def.display(list[1])).toBe("1.99");
+  });
+
+  it("fiscal-weak は昇順、freshnessLabel は年度+3か年平均", () => {
+    const def = getRankingBySlug("fiscal-weak")!;
+    const list = [muni({ code: "A", fiscal: fiscal(0.06) }), muni({ code: "B", fiscal: fiscal(0.49) })];
+    expect(rankBy(def, list).map((m) => m.code)).toEqual(["A", "B"]);
+    expect(def.freshnessLabel!(list[0])).toBe("2024年度（3か年平均）");
+  });
+
+  it("metaDescription は1位の指数と年度を含む（実データ算出）", () => {
+    const def = getRankingBySlug("fiscal-strong")!;
+    const top1 = muni({ pref: "aichi", name: "飛島村", fiscal: fiscal(1.99) });
+    const desc = def.metaDescription!(top1);
+    expect(desc).toContain("1.99");
+    expect(desc).toContain("2024年度");
+    expect(def.metaDescription!(null)).toContain("主要財政指標一覧");
+  });
+});
+
 describe("生活インフラ（駅・医療機関・保育施設）ランキング", () => {
   const AMENITIES_ASOF = "駅 2025年度／保育 令和5年度／医療機関 2024年10月";
   const amenities = (partial: Partial<NonNullable<Municipality["amenities"]>> = {}) => ({
