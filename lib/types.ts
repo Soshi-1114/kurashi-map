@@ -107,6 +107,20 @@ export type Municipality = {
     source: string;
     asOf: string;
   };
+  // 年齢構成（住民基本台帳・総計＝外国人住民含む、毎年1月1日時点）。
+  // 高齢化率・年少人口比は保存せず実行時算出（派生値は保存しない方針。lib/ageStats.ts）。
+  // 分母 total は国勢調査の population ではなく住基台帳の総人口を使う: 分子（住基・
+  // 登録人口）と調査・基準日・人口概念を揃えないと比率が歪む（futurePopulation が
+  // base2020 を分母にするのと同じ流儀）。15-64歳は total - young - elderly で導出可能
+  // なので保存しない。北方領土6村は住民登録がなく全列0 → total=0 センチネル
+  // （hasAgeData 参照）。政令市は区別データがそのまま出典にある（合算・展開なし）。
+  ageStats?: {
+    young: number;    // 0〜14歳人口
+    elderly: number;  // 65歳以上人口
+    total: number;    // 住基台帳の総人口（比率の分母）
+    source: string;
+    asOf: string;     // "2026-01-01"
+  };
   // 指定緊急避難場所の件数サマリ（点の座標は別ファイル data/{slug}_shelters.json に置き
   // 地図選択時に /api/shelters/[code] で取得する）。未収録は source にセンチネルを持つ
   // （lib/shelters.ts hasShelterData 参照）。詳細パネルの件数表示用。

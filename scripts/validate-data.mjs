@@ -99,6 +99,18 @@ function checkMuni(file, slug, m, level) {
     if (!isStr(m.childcare.source)) err(file, code, "childcare.source が空");
     if (!isStr(m.childcare.asOf)) err(file, code, "childcare.asOf が空");
   }
+  if (m.ageStats !== undefined) {
+    // 年齢構成（住基台帳）。total=0 は住民登録なし（北方領土6村）のセンチネル。
+    // 実データは young+elderly ≦ total（15-64歳を保存しない設計の整合条件）。
+    for (const k of ["young", "elderly", "total"]) {
+      if (!isNum(m.ageStats[k]) || m.ageStats[k] < 0) err(file, code, `ageStats.${k} が非負数値でない`);
+    }
+    if (isNum(m.ageStats.total) && m.ageStats.young + m.ageStats.elderly > m.ageStats.total) {
+      err(file, code, "ageStats の年少+高齢が総人口を超えている");
+    }
+    if (!isStr(m.ageStats.source)) err(file, code, "ageStats.source が空");
+    if (!isStr(m.ageStats.asOf)) err(file, code, "ageStats.asOf が空");
+  }
   if (m.vacancy !== undefined) {
     // rate=-1 は対象外センチネル（人口1.5万人未満の町村）。実データは 0〜100 の率。
     if (!isNum(m.vacancy.rate) || (m.vacancy.rate !== -1 && (m.vacancy.rate < 0 || m.vacancy.rate > 100))) {
