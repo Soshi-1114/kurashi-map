@@ -85,6 +85,7 @@ import { supportUrl, furusatoLink } from "@/lib/monetization";
 import { furunaviMunicipalPageUrl } from "@/lib/furunaviMunicipals";
 import PageShell from "@/components/PageShell";
 import SectionNav, { type SectionNavItem } from "@/components/area/SectionNav";
+import { ShareButton } from "@/components/ShareButton";
 
 type Params = { pref: string; city: string };
 
@@ -439,9 +440,19 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
             <span className="ad-title-sub">の住みやすさ</span>
           </h1>
           <p className="ad-lead">{buildSummary(m)}</p>
-          <Link href={`/compare?codes=${m.code}`} className="ad-compare-add ad-compare-add-hero">
-            この自治体を比較ページで見る<ArrowUpRight size={13} aria-hidden="true" />
-          </Link>
+          <div className="ad-hero-actions">
+            <Link href={`/compare?codes=${m.code}`} className="ad-compare-add ad-compare-add-hero">
+              この自治体を比較ページで見る<ArrowUpRight size={13} aria-hidden="true" />
+            </Link>
+            <ShareButton
+              className="ad-share-hero"
+              title={`${prefName}${heading}の住みやすさ｜${SITE.name}`}
+              path={`/area/${m.pref}/${m.code}`}
+              contentType="area"
+              itemId={m.code}
+              label="このページを共有"
+            />
+          </div>
         </div>
 
         <ScorePanel liv={liv} />

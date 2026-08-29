@@ -801,6 +801,29 @@
   color: var(--accent);
 }
 .ad-compare-add-hero:hover { text-decoration: underline; }
+/* ヒーロー下の行動リンク行（比較・共有）。個別リンクの margin は行側に寄せる */
+.ad-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 16px;
+  margin-top: 10px;
+}
+.ad-hero-actions .ad-compare-add-hero { margin: 0; }
+.ad-share-hero {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+.ad-share-hero:hover { color: var(--accent); }
 
 .ad-rank-grid {
   display: grid;

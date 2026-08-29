@@ -42,6 +42,15 @@ export function trackApplyFilter(params: { rentMax: number | null; landMax: numb
   });
 }
 
+/** ページ共有（GA4 推奨イベント）。method はOS共有シートかURLコピーか。 */
+export function trackShare(params: { method: "web_share" | "copy"; contentType: string; itemId: string }): void {
+  track("share", {
+    method: params.method,
+    content_type: params.contentType,
+    item_id: params.itemId,
+  });
+}
+
 /** 電気料金シミュレーション実行（/denki）。入力確定ごとに1回（連続入力は呼び出し側で debounce）。 */
 export function trackDenkiSimulate(params: {
   area: string;

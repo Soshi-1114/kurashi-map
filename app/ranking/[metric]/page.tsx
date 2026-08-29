@@ -17,6 +17,7 @@ import RankSources, { RANKING_SOURCES_TEXT } from "@/components/RankSources";
 import { RankBadge } from "@/components/RankBadge";
 import PageShell from "@/components/PageShell";
 import { FurusatoBand } from "@/components/monetization/FurusatoBand";
+import { ShareButton } from "@/components/ShareButton";
 
 type Params = { metric: string };
 
@@ -171,20 +172,26 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
             📅 次回更新予定: {def.nextUpdate}
           </p>
         )}
-        {(mapHub || def.related) && (
-          <div className="rk-hero-actions">
-            {mapHub && (
-              <Link href={mapHub.href} className="rk-action rk-action-primary">
-                <MapIcon size={15} aria-hidden="true" />{mapHub.label}で全国を見る
-              </Link>
-            )}
-            {def.related && (
-              <Link href={`/ranking/${def.related.slug}`} className="rk-action rk-action-ghost">
-                <BarChart3 size={15} aria-hidden="true" />{def.related.label}
-              </Link>
-            )}
-          </div>
-        )}
+        <div className="rk-hero-actions">
+          {mapHub && (
+            <Link href={mapHub.href} className="rk-action rk-action-primary">
+              <MapIcon size={15} aria-hidden="true" />{mapHub.label}で全国を見る
+            </Link>
+          )}
+          {def.related && (
+            <Link href={`/ranking/${def.related.slug}`} className="rk-action rk-action-ghost">
+              <BarChart3 size={15} aria-hidden="true" />{def.related.label}
+            </Link>
+          )}
+          <ShareButton
+            className="rk-action rk-action-ghost"
+            title={`${def.title}【全国】｜${SITE.name}`}
+            path={`/ranking/${def.slug}`}
+            contentType="ranking"
+            itemId={def.slug}
+            label="共有する"
+          />
+        </div>
       </header>
 
       {intro.length > 0 && (
