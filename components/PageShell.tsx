@@ -26,10 +26,8 @@ export default function PageShell({
 }) {
   return (
     <>
-      {/* キーボード/SR 利用者がヘッダーナビを毎ページ通過しなくて済むように */}
-      <a className="skip-link" href="#main-content">本文へスキップ</a>
       <SiteHeader />
-      <main id="main-content" className={`page-root${WIDTH_CLASS[width]}${innerClassName ? ` ${innerClassName}` : ""}`}>
+      <main className={`page-root${WIDTH_CLASS[width]}${innerClassName ? ` ${innerClassName}` : ""}`}>
         <Breadcrumb items={trail} />
         {children}
       </main>
