@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import type { Municipality, MuniSummary } from "@/lib/types";
-import { formatAsOfJa } from "@/lib/rankings";
+import { formatAsOfJa } from "@/lib/format";
 import { buildSummary } from "@/lib/summary";
 import { hasRent } from "@/lib/rentColor";
 import { isWaitlistDisclosed } from "@/lib/waitlist";

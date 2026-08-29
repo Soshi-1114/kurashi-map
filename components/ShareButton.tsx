@@ -34,6 +34,8 @@ export function ShareButton({
   }, []);
 
   const onClick = async () => {
+    // 意図的に absoluteUrl（本番 baseUrl 固定）ではなく現在のオリジンを使う:
+    // プレビュー/ローカルで押したとき、見ているオリジンのURLを共有するのが正しい。
     const url = path ? new URL(path, window.location.origin).toString() : window.location.href;
     if (typeof navigator.share === "function") {
       try {

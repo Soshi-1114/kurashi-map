@@ -5,7 +5,7 @@ import type { LucideIcon } from "lucide-react";
 import type { Municipality } from "@/lib/types";
 import { isHazardEvaluated, coverageReason } from "@/lib/coverage";
 import { hasShelterData } from "@/lib/shelters";
-import { formatAsOfJa } from "@/lib/rankings";
+import { formatAsOfJa } from "@/lib/format";
 import {
   floodLevelOf,
   floodGraded,
@@ -131,7 +131,7 @@ export function DisasterCard({ m }: { m: Municipality }) {
           <MapPin size={15} aria-hidden="true" />
           {hasShelterData(m.shelters.source) ? (
             <span>
-              指定緊急避難場所は{m.shelters.count.toLocaleString()}か所です（国土地理院・{formatAsOfJa(m.shelters.asOf)}時点）。場所は「ハザードマップを地図で見る」の避難所レイヤーで確認できます。
+              指定緊急避難場所は{m.shelters.count.toLocaleString()}か所です（{m.shelters.source}・{formatAsOfJa(m.shelters.asOf)}時点）。場所は「ハザードマップを地図で見る」の避難所レイヤーで確認できます。
             </span>
           ) : (
             <span>指定緊急避難場所は未収録です（出典データに掲載のない自治体。0か所とは異なります）。</span>

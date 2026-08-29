@@ -65,6 +65,18 @@ function formatYen(raw: unknown, unit: string): string {
   return `${v.toLocaleString()} ${unit}`;
 }
 
+// %系指標の共通フォーマッタ（外国人比率・空き家率・将来人口増減率で共用）。
+// 欠損の表現が指標ごとに違うためオプションで吸収する:
+// - negIsNodata: 負値センチネル（外国人比率の -1）をデータなしにする。
+//   将来人口増減率・空き家率は「フィールド欠落=データなし」方式（負値/0%が正常値）。
+// - signed: 正値に "+" を付ける（増減率）。
+function formatPercent(raw: unknown, opts: { negIsNodata?: boolean; signed?: boolean } = {}): string {
+  const v = Number(raw);
+  if (raw == null || raw === "" || !Number.isFinite(v)) return "データなし";
+  if (opts.negIsNodata && v < 0) return "データなし";
+  return `${opts.signed && v > 0 ? "+" : ""}${v.toFixed(1)}%`;
+}
+
 // 人口トレンドの5カテゴリ（減少→増加）を紫→緑の発散配色で。
 // 赤緑ダイバージングは P/D 型色覚で識別困難なため、色覚多様性に配慮した
 // ColorBrewer PRGn（紫⇔緑）を採用。「増加=緑」の直感は維持しつつ減少側を紫に。
@@ -168,11 +180,7 @@ export const MAP_METRICS: readonly MapMetric[] = [
     },
     colorExpression: () =>
       numericStepExpression("foreignRatio", FOREIGN_RATIO_THRESHOLDS, FOREIGN_COLORS, FOREIGN_NODATA_RATIO),
-    formatValue: (raw) => {
-      const v = Number(raw);
-      if (!Number.isFinite(v) || v < 0) return "データなし";
-      return `${v.toFixed(1)}%`;
-    },
+    formatValue: (raw) => formatPercent(raw, { negIsNodata: true }),
   },
   {
     key: "vacancy",
@@ -188,12 +196,8 @@ export const MAP_METRICS: readonly MapMetric[] = [
     },
     colorExpression: () =>
       numericStepExpression("vacancyRate", VACANCY_THRESHOLDS, VACANCY_COLORS, null),
-    formatValue: (raw) => {
-      // データなしはプロパティ欠落。0% は実データなので「負=データなし」判定はしない。
-      const v = Number(raw);
-      if (raw == null || raw === "" || !Number.isFinite(v) || v < 0) return "データなし";
-      return `${v.toFixed(1)}%`;
-    },
+    // データなしはプロパティ欠落。0% は実データなので負値センチネル判定はしない。
+    formatValue: (raw) => formatPercent(raw),
   },
   {
     key: "futurePopulation",
@@ -209,13 +213,8 @@ export const MAP_METRICS: readonly MapMetric[] = [
     },
     colorExpression: () =>
       numericStepExpression("futureChangeRate", FUTURE_CHANGE_THRESHOLDS, FUTURE_CHANGE_COLORS, null),
-    formatValue: (raw) => {
-      // データなしはプロパティ欠落（null/undefined）。負値は正常値（減少）なので
-      // 他指標のような「負=データなし」判定はしない。
-      const v = Number(raw);
-      if (raw == null || raw === "" || !Number.isFinite(v)) return "データなし";
-      return `${v > 0 ? "+" : ""}${v.toFixed(1)}%`;
-    },
+    // データなしはプロパティ欠落。負値は正常値（減少）なので負値センチネル判定はしない。
+    formatValue: (raw) => formatPercent(raw, { signed: true }),
   },
 ];
 

@@ -4,7 +4,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
 import { ArrowRight, ChevronRight, MinusCircle } from "lucide-react";
-import { formatAsOfJa } from "@/lib/rankings";
+import { formatAsOfJa } from "@/lib/format";
 
 // ---- KPI カード（家賃・人口・地価・待機児童などの横長タイル）----
 export function KpiCard({

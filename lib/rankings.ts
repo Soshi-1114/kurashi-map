@@ -9,6 +9,7 @@ import { hasRent } from "./rentColor";
 import { hasLandPrice } from "./landPrice";
 import { isWaitlistDisclosed } from "./waitlist";
 import { isAmenitiesCounted } from "./coverage";
+import { formatAsOfJa } from "./format";
 import { hasForeignData, foreignRatioPct } from "./foreignResidents";
 import { hasVacancy, vacancyRateText } from "./vacancy";
 import { hasChildcareCapacity, childcareOpenRatioPct, childcareOpenRatioText } from "./childcare";
@@ -127,15 +128,10 @@ const RENT_NOTE =
 const FOREIGN_NOTE =
   "外国人住民比率は多様性・国際性の目安です（出典: 出入国在留管理庁「在留外国人統計」）。比率の高い／低いという事実を示すもので、住みやすさ等の価値判断とは無関係です。";
 
-// "2024-12"・"2025-04-01" → "2024年12月"・"2025年4月"。データ asOf を見出し・出典表示の
-// 鮮度ラベルへ整形する（日付は月に丸める）。整形できない形式（和暦・複合ラベル等）はそのまま返す。
-export function formatAsOfJa(asOf: string): string {
-  const m = /^(\d{4})-(\d{1,2})(?:-\d{1,2})?$/.exec(asOf ?? "");
-  if (m) return `${m[1]}年${Number(m[2])}月`;
-  const y = /^(\d{4})$/.exec(asOf ?? "");
-  if (y) return `${y[1]}年`;
-  return asOf ?? "";
-}
+// formatAsOfJa の実体は lib/format.ts（クライアントコンポーネントが本モジュールを
+// import すると RANKINGS の生テキストごとバンドルされるため移設）。サーバー側の
+// 既存呼び出し（多数）の互換のためここから再exportする。
+export { formatAsOfJa };
 
 // 指標の asOf から H1 用の鮮度ラベル（例「2025年6月最新」）を導出する汎用フック。
 function freshnessFromAsOf(getAsOf: (m: Municipality) => string) {
@@ -258,6 +254,9 @@ export const NEXT_UPDATE = {
     "出典（住宅・土地統計調査）は5年周期のため、現在の2023年調査が最新の公表データです。次回は2028年調査（結果公表は2029年以降）の見込みです。",
   future:
     "地域別将来推計人口は約5年周期で改定されます。現在の令和5(2023)年推計が最新で、次回（2028年頃見込み）の公表後に更新予定です。",
+  stations: "駅データ（国土数値情報 S12）は年度ごとに更新されます。新年度版の公表後に更新予定です。",
+  medical: "医療施設調査は毎年10月1日時点で実施されます。市区町村別データの公表後に更新予定です。",
+  preschools: "施設データは年度ごとに更新されます。新年度データの公表・反映後に更新予定です。",
 } as const;
 
 // 空き家率の鮮度ラベル。asOf 由来の「2023年最新」は誤解を招くため、調査名を明示する固定文字列。
@@ -395,8 +394,15 @@ function populationMetaDescription(metric: keyof typeof POPULATION_METRIC_TEXT) 
 // （scripts/_lib/versions.mjs の AMENITIES_ASOF）。指標ごとの鮮度ラベルには
 // 該当部分だけを取り出して使う。キーが見つからない形式はそのまま返す。
 export function amenityAsOfPart(asOf: string, key: "駅" | "保育" | "医療機関"): string {
-  const m = new RegExp(`${key} ([^／]+)`).exec(asOf ?? "");
-  return m ? m[1] : (asOf ?? "");
+  const m = new RegExp(`${key} ([^／]+)`).exec(asOf);
+  return m ? m[1] : asOf;
+}
+
+// amenity 系の freshnessLabel（複合 asOf の部分抽出＋指標ごとのサフィックス）。
+// freshnessFromAsOf は「◯◯最新」固定＋単一 asOf 前提のためここでは使えない。
+function amenityFreshness(key: "駅" | "保育" | "医療機関", suffix: string) {
+  return (top1: Municipality | null): string | null =>
+    top1?.amenities ? `${amenityAsOfPart(top1.amenities.asOf, key)}${suffix}` : null;
 }
 
 // 生活インフラの集計対象か（北方領土など対象外センチネルの自治体を除外）。
@@ -638,9 +644,8 @@ export const RANKINGS: RankingDef[] = [
     related: { slug: "medical-facilities", label: "医療機関が多い市区町村" },
     columnLabel: "駅数",
     order: "desc",
-    freshnessLabel: (top1) =>
-      top1?.amenities ? `${amenityAsOfPart(top1.amenities.asOf, "駅")}時点` : null,
-    nextUpdate: "駅データ（国土数値情報 S12）は年度ごとに更新されます。新年度版の公表後に更新予定です。",
+    freshnessLabel: amenityFreshness("駅", "時点"),
+    nextUpdate: NEXT_UPDATE.stations,
     qualifies: hasAmenities,
     sortValue: (m) => m.amenities?.stations ?? 0,
     display: (m) => `${(m.amenities?.stations ?? 0).toLocaleString()}駅`,
@@ -663,9 +668,8 @@ export const RANKINGS: RankingDef[] = [
     related: { slug: "preschools", label: "保育園・幼稚園が多い市区町村" },
     columnLabel: "医療機関数",
     order: "desc",
-    freshnessLabel: (top1) =>
-      top1?.amenities ? `${amenityAsOfPart(top1.amenities.asOf, "医療機関")}医療施設調査` : null,
-    nextUpdate: "医療施設調査は毎年10月1日時点で実施されます。市区町村別データの公表後に更新予定です。",
+    freshnessLabel: amenityFreshness("医療機関", "医療施設調査"),
+    nextUpdate: NEXT_UPDATE.medical,
     qualifies: hasAmenities,
     sortValue: (m) => m.amenities?.medicalFacilities ?? 0,
     display: (m) => `${(m.amenities?.medicalFacilities ?? 0).toLocaleString()}件`,
@@ -687,9 +691,8 @@ export const RANKINGS: RankingDef[] = [
     related: { slug: "childcare-capacity", label: "保育の定員に余裕がある市区町村" },
     columnLabel: "保育・幼稚園等",
     order: "desc",
-    freshnessLabel: (top1) =>
-      top1?.amenities ? `${amenityAsOfPart(top1.amenities.asOf, "保育")}時点` : null,
-    nextUpdate: "施設データは年度ごとに更新されます。新年度データの公表・反映後に更新予定です。",
+    freshnessLabel: amenityFreshness("保育", "時点"),
+    nextUpdate: NEXT_UPDATE.preschools,
     qualifies: hasAmenities,
     sortValue: (m) => m.amenities?.preschools ?? 0,
     display: (m) => `${(m.amenities?.preschools ?? 0).toLocaleString()}施設`,

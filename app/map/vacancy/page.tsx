@@ -9,7 +9,6 @@ import HomeShell from "@/components/HomeShell";
 import { MetricMapHubBody, hubMetadata, hubLdJson, type MetricHubConfig } from "@/components/MetricMapHub";
 import { listSummaryAcrossPrefs, listAllAcrossPrefs } from "@/lib/metrics";
 import { getRankingBySlug, rankBy, muniLevelOnly } from "@/lib/rankings";
-import { vacancyRateText } from "@/lib/vacancy";
 import { PREFS } from "@/lib/prefs";
 import { SITE, absoluteUrl } from "@/lib/site";
 
@@ -21,7 +20,8 @@ async function loadConfig(): Promise<MetricHubConfig> {
   const all = muniLevelOnly(await listAllAcrossPrefs());
   const high = rankBy(HIGH, all, 12);
   const low = rankBy(LOW, all, 8);
-  const rateText = (m: (typeof all)[number]) => (m.vacancy ? vacancyRateText(m.vacancy) : "—");
+  // 値の整形はランキング定義に委譲する（/map/future-population と同じ共通パターン）
+  const rateText = (m: (typeof all)[number]) => HIGH.display(m);
   return {
     path: PATH,
     title: `空き家率マップ｜市区町村別の空き家率を地図で見る - ${SITE.name}`,
