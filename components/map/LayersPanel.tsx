@@ -4,7 +4,7 @@
 // 状態は持たず、すべて props 経由（状態の単一ソースは MapView）。
 // 表示形態は2通り: PC は地図右上のポップオーバー、モバイル（isMobile）は
 // 画面下から開くモーダルの Bottom Sheet（scrim・ESC・スクロールロック・フォーカス移動つき）。
-import { useEffect, useRef, useState } from "react";
+import { memo, useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { MAP_METRICS, getMapMetric, type MapMetricKey } from "@/lib/mapMetrics";
 import {
@@ -31,8 +31,7 @@ type Props = {
   onChangeFilters: (next: MapFilters) => void;
   onClearFilters: () => void;
   filterActive: boolean;
-  matchedCount: number;
-  /** フィルタ該当の自治体（matchesFilter と同一条件で MapView が算出）。一覧表示用 */
+  /** フィルタ該当の自治体（matchesFilter と同一条件で MapView が算出）。件数＝.length */
   matchedMunis: MuniSummary[];
   /** 該当一覧から自治体を選んだ時（地図フライト＋詳細パネル表示は MapView 側） */
   onSelectMatch: (code: string) => void;
@@ -48,15 +47,22 @@ export default function LayersPanel({
   basemap, onChangeBasemap,
   overlays, onClearOverlays, onToggleOverlay,
   filters, onChangeFilters, onClearFilters,
-  filterActive, matchedCount, matchedMunis, onSelectMatch,
+  filterActive, matchedMunis, onSelectMatch,
   isMobile = false,
   activeCount = 0,
 }: Props) {
+  const matchedCount = matchedMunis.length;
   const panelRef = useRef<HTMLDivElement | null>(null);
   const closeBtnRef = useRef<HTMLButtonElement | null>(null);
   // 該当一覧の開閉（パネル内のビュー状態なのでローカルに持つ）。
   // フィルタを全解除すると filter-summary ごと消えるため、明示リセットは不要。
   const [showMatches, setShowMatches] = useState(false);
+  // MatchedList の memo を活かすため参照を安定させる（モバイルはシートが地図を覆うため、
+  // 選択したら閉じて結果を見せる）。
+  const selectMatch = useCallback((code: string) => {
+    onSelectMatch(code);
+    if (isMobile) onToggleOpen();
+  }, [onSelectMatch, isMobile, onToggleOpen]);
 
   // Escape で閉じる（PC/モバイル共通）。モバイルはモーダルなので加えて
   // body スクロールをロックし、開いた直後に閉じるボタンへフォーカスを移す。
@@ -275,14 +281,7 @@ export default function LayersPanel({
                 <button className="filter-clear" onClick={onClearFilters}>クリア</button>
               </div>
               {showMatches && matchedCount > 0 && (
-                <MatchedList
-                  munis={matchedMunis}
-                  onSelect={(code) => {
-                    onSelectMatch(code);
-                    // モバイルはシートが地図を覆うため、選択したら閉じて結果を見せる
-                    if (isMobile) onToggleOpen();
-                  }}
-                />
+                <MatchedList munis={matchedMunis} onSelect={selectMatch} />
               )}
             </>
           )}
@@ -327,7 +326,9 @@ function LayersIcon() {
 
 // フィルタ該当自治体の一覧（都道府県ごとにグループ化。PREFS の並び順＝北→南）。
 // 行クリックで地図フライト＋詳細パネル表示（MapView の検索確定と同じ経路）。
-function MatchedList({ munis, onSelect }: { munis: MuniSummary[]; onSelect: (code: string) => void }) {
+// munis は MapView 側で useMemo 済み＝参照安定なので、memo でフィルタ非変更時の
+// 全再グループ化・チップ再生成（最大~1,900個）を止める。
+const MatchedList = memo(function MatchedList({ munis, onSelect }: { munis: MuniSummary[]; onSelect: (code: string) => void }) {
   const byPref = new Map<string, MuniSummary[]>();
   for (const m of munis) {
     const list = byPref.get(m.pref);
@@ -359,7 +360,7 @@ function MatchedList({ munis, onSelect }: { munis: MuniSummary[]; onSelect: (cod
       })}
     </div>
   );
-}
+});
 
 function SegmentedFilter({
   label,

@@ -24,7 +24,6 @@ function setup(overrides: Partial<React.ComponentProps<typeof LayersPanel>> = {}
     onChangeFilters: vi.fn(),
     onClearFilters: vi.fn(),
     filterActive: false,
-    matchedCount: 0,
     matchedMunis: [],
     onSelectMatch: vi.fn(),
     ...overrides,
@@ -97,7 +96,15 @@ describe("LayersPanel", () => {
 
   it("filterActive のとき該当件数とクリアボタンを出し、クリアで onClearFilters を呼ぶ", async () => {
     const user = userEvent.setup();
-    const props = setup({ filterActive: true, matchedCount: 1234 });
+    const dummy = (code: string) => ({
+      code, pref: "saitama", name: `市${code}`, rent: 50000, landPrice: 100000,
+      populationTrend: "横ばい" as const, floodLevel: 0, landslideLevel: -1,
+      tsunamiLevel: -1, stormSurgeLevel: -1, liquefactionLevel: -1,
+    });
+    const props = setup({
+      filterActive: true,
+      matchedMunis: Array.from({ length: 1234 }, (_, i) => dummy(String(11000 + i))),
+    });
     expect(screen.getByText("1,234")).toBeInTheDocument();
     await user.click(screen.getByRole("button", { name: "クリア" }));
     expect(props.onClearFilters).toHaveBeenCalledTimes(1);
@@ -123,7 +130,7 @@ describe("LayersPanel", () => {
       { code: "11203", pref: "saitama", name: "川口市", rent: 55000, landPrice: 200000, populationTrend: "横ばい" as const, floodLevel: 0, landslideLevel: -1, tsunamiLevel: -1, stormSurgeLevel: -1, liquefactionLevel: -1 },
       { code: "01100", pref: "hokkaido", name: "札幌市", rent: 50000, landPrice: 100000, populationTrend: "横ばい" as const, floodLevel: 0, landslideLevel: -1, tsunamiLevel: -1, stormSurgeLevel: -1, liquefactionLevel: -1 },
     ];
-    const props = setup({ filterActive: true, matchedCount: 2, matchedMunis: munis });
+    const props = setup({ filterActive: true, matchedMunis: munis });
     await user.click(screen.getByRole("button", { name: "一覧を見る" }));
     // PREFS の並び順（北→南）でグループ化される
     expect(screen.getByText("北海道")).toBeInTheDocument();
@@ -133,7 +140,7 @@ describe("LayersPanel", () => {
   });
 
   it("該当0件のときは「一覧を見る」を出さない", () => {
-    setup({ filterActive: true, matchedCount: 0, matchedMunis: [] });
+    setup({ filterActive: true, matchedMunis: [] });
     expect(screen.queryByRole("button", { name: "一覧を見る" })).toBeNull();
   });
 

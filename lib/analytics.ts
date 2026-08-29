@@ -4,6 +4,8 @@
 //
 // honesty 方針と同様、計測も「実際に起きたこと」だけを送る。推測値や水増しはしない。
 
+import type { MapFilters } from "./mapFilters";
+
 type GtagFn = (command: "event", eventName: string, params?: Record<string, unknown>) => void;
 
 declare global {
@@ -34,13 +36,7 @@ export function trackChangeMetric(metricKey: string): void {
 }
 
 /** 条件フィルタの適用。どの条件が有効かを送る。 */
-export function trackApplyFilter(params: {
-  rentMax: number | null;
-  landMax: number | null;
-  floodMax: number | null;
-  vacancyMax: number | null;
-  futureMin: number | null;
-}): void {
+export function trackApplyFilter(params: MapFilters): void {
   track("apply_filter", {
     rent_max: params.rentMax ?? 0,
     land_max: params.landMax ?? 0,

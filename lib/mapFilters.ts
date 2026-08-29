@@ -20,45 +20,8 @@ export const EMPTY_FILTERS: MapFilters = {
   rentMax: null, landMax: null, floodMax: null, vacancyMax: null, futureMin: null,
 };
 
-// 1条件の仕様。条件は「有効値である（floorOp/floor を満たす）かつ 選択値と dir 方向で
-// 比較して満たす」。prop は MuniSummary のフィールド名であり、geojson プロパティ名とも一致。
-type FilterSpec = {
-  /** MapFilters のフィールド ＝ URL クエリキー */
-  key: keyof MapFilters;
-  /** MuniSummary の数値フィールド ＝ geojson プロパティ名 */
-  prop: "rent" | "landPrice" | "floodLevel" | "vacancyRate" | "futureChangeRate";
-  /** 比較の向き。max=選択値以下が該当 / min=選択値以上が該当 */
-  dir: "max" | "min";
-  /** 有効値の下限判定（欠損・センチネルを非該当に落とす）。 */
-  floorOp: ">" | ">=";
-  floor: number;
-  /** 地図式で geojson プロパティ欠損時に使う既定値（floor を満たさない値にする） */
-  missingDefault: number;
-};
-
-// 家賃/地価は「正値（欠損 rent/land<=0 は非該当）」。浸水は「評価済み floodLevel>=0
-// （reinfolib 圏外の未評価 -1 を“安全”扱いしない=honesty）」。空き家率・将来人口増減率は
-// フィールド欠落=データなし（集計対象外を「条件を満たす」と見せない）。増減率は負値が
-// 正常値のため、有効判定は「実データの下限を十分下回る floor 以上」で表現する。
-const FILTER_SPECS: readonly FilterSpec[] = [
-  { key: "rentMax", prop: "rent", dir: "max", floorOp: ">", floor: 0, missingDefault: 0 },
-  { key: "landMax", prop: "landPrice", dir: "max", floorOp: ">", floor: 0, missingDefault: 0 },
-  { key: "floodMax", prop: "floodLevel", dir: "max", floorOp: ">=", floor: 0, missingDefault: -1 },
-  { key: "vacancyMax", prop: "vacancyRate", dir: "max", floorOp: ">=", floor: 0, missingDefault: -1 },
-  { key: "futureMin", prop: "futureChangeRate", dir: "min", floorOp: ">=", floor: -1000, missingDefault: -9999 },
-];
-
-const floorOk = (op: ">" | ">=", v: number, floor: number) => (op === ">" ? v > floor : v >= floor);
-const limitOk = (dir: "max" | "min", v: number, limit: number) => (dir === "max" ? v <= limit : v >= limit);
-
-// 浸水深の上限セグメント。値は lib/hazardScale.ts の浸水深ランク（0=なし, 2=0.5〜3m, 3=3〜5m）。
-export const FLOOD_MAX_OPTIONS = [
-  { label: "浸水なし", value: 0 },
-  { label: "〜3m", value: 2 },
-  { label: "〜5m", value: 3 },
-] as const;
-
-// セグメント選択肢（離散値の方がスライダーよりデータスケールに合い操作も明確）
+// セグメント選択肢（離散値の方がスライダーよりデータスケールに合い操作も明確）。
+// FILTER_SPECS が spec.options として参照し、URL コーデックの許容値検証にも使う。
 export const RENT_MAX_OPTIONS = [
   { label: "5万", value: 50000 },
   { label: "6万", value: 60000 },
@@ -69,6 +32,13 @@ export const LAND_MAX_OPTIONS = [
   { label: "5万", value: 50000 },
   { label: "10万", value: 100000 },
   { label: "20万", value: 200000 },
+] as const;
+
+// 浸水深の上限セグメント。値は lib/hazardScale.ts の浸水深ランク（0=なし, 2=0.5〜3m, 3=3〜5m）。
+export const FLOOD_MAX_OPTIONS = [
+  { label: "浸水なし", value: 0 },
+  { label: "〜3m", value: 2 },
+  { label: "〜5m", value: 3 },
 ] as const;
 
 // 空き家率上限（%）。しきい値は地図コロプレス（lib/mapMetrics.ts）の下位側と揃える
@@ -87,14 +57,39 @@ export const FUTURE_MIN_OPTIONS = [
   { label: "-20%まで", value: -20 },
 ] as const;
 
-// URL コーデックの検証用: キー → 許容値（選択肢に無い値のクエリは条件なしに落とす）。
-const OPTIONS_BY_KEY: Record<keyof MapFilters, readonly { label: string; value: number }[]> = {
-  rentMax: RENT_MAX_OPTIONS,
-  landMax: LAND_MAX_OPTIONS,
-  floodMax: FLOOD_MAX_OPTIONS,
-  vacancyMax: VACANCY_MAX_OPTIONS,
-  futureMin: FUTURE_MIN_OPTIONS,
+// 1条件の仕様。条件は「有効値である（floorOp/floor を満たす）かつ 選択値と dir 方向で
+// 比較して満たす」。prop は MuniSummary のフィールド名であり、geojson プロパティ名とも一致。
+type FilterSpec = {
+  /** MapFilters のフィールド ＝ URL クエリキー */
+  key: keyof MapFilters;
+  /** MuniSummary の数値フィールド ＝ geojson プロパティ名 */
+  prop: "rent" | "landPrice" | "floodLevel" | "vacancyRate" | "futureChangeRate";
+  /** 比較の向き。max=選択値以下が該当 / min=選択値以上が該当 */
+  dir: "max" | "min";
+  /** 有効値の下限判定（欠損・センチネルを非該当に落とす）。 */
+  floorOp: ">" | ">=";
+  floor: number;
+  /** 地図式で geojson プロパティ欠損時に使う既定値（floor を満たさない値にする） */
+  missingDefault: number;
+  /** UI セグメントの選択肢 ＝ URL クエリの許容値（選択肢に無い値は条件なしに落とす） */
+  options: readonly { label: string; value: number }[];
 };
+
+// 家賃/地価は「正値（欠損 rent/land<=0 は非該当）」。浸水は「評価済み floodLevel>=0
+// （reinfolib 圏外の未評価 -1 を“安全”扱いしない=honesty）」。空き家率・将来人口増減率は
+// フィールド欠落=データなし（集計対象外を「条件を満たす」と見せない）。増減率は負値が
+// 正常値のため floor は実データの下限を十分下回るダミー（floor 節は min 方向では
+// limit 判定に含意されるが、機構を max/min で一様に保つため残している）。
+const FILTER_SPECS: readonly FilterSpec[] = [
+  { key: "rentMax", prop: "rent", dir: "max", floorOp: ">", floor: 0, missingDefault: 0, options: RENT_MAX_OPTIONS },
+  { key: "landMax", prop: "landPrice", dir: "max", floorOp: ">", floor: 0, missingDefault: 0, options: LAND_MAX_OPTIONS },
+  { key: "floodMax", prop: "floodLevel", dir: "max", floorOp: ">=", floor: 0, missingDefault: -1, options: FLOOD_MAX_OPTIONS },
+  { key: "vacancyMax", prop: "vacancyRate", dir: "max", floorOp: ">=", floor: 0, missingDefault: -1, options: VACANCY_MAX_OPTIONS },
+  { key: "futureMin", prop: "futureChangeRate", dir: "min", floorOp: ">=", floor: -1000, missingDefault: -9999, options: FUTURE_MIN_OPTIONS },
+];
+
+const floorOk = (op: ">" | ">=", v: number, floor: number) => (op === ">" ? v > floor : v >= floor);
+const limitOk = (dir: "max" | "min", v: number, limit: number) => (dir === "max" ? v <= limit : v >= limit);
 
 export function isFilterActive(f: MapFilters): boolean {
   return FILTER_SPECS.some((s) => f[s.key] != null);
@@ -130,8 +125,8 @@ export function buildMatchExpression(f: MapFilters): unknown | null {
 }
 
 // ---- URL 同期（?rentMax=60000&futureMin=0 のような共有可能なクエリ） ----
-// クエリキーは MapFilters のフィールド名そのもの。値は選択肢（OPTIONS_BY_KEY）に
-// ある場合のみ採用し、それ以外は条件なしに落とす（不正値で件数0の地図を共有させない）。
+// クエリキーは MapFilters のフィールド名そのもの。値は spec.options にある場合のみ
+// 採用し、それ以外は条件なしに落とす（不正値で件数0の地図を共有させない）。
 
 /** location.search からフィルタ状態を復元する。未指定・不正値は null（条件なし）。 */
 export function parseFilters(search: string): MapFilters {
@@ -141,7 +136,7 @@ export function parseFilters(search: string): MapFilters {
     const raw = params.get(spec.key);
     if (raw == null) continue;
     const v = Number(raw);
-    if (OPTIONS_BY_KEY[spec.key].some((o) => o.value === v)) out[spec.key] = v;
+    if (spec.options.some((o) => o.value === v)) out[spec.key] = v;
   }
   return out;
 }

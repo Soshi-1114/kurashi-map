@@ -103,11 +103,17 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
     });
   }, []);
   const [activeMetric, setActiveMetric] = useState<MapMetricKey | "none">(initialMetric);
-  // フィルタ状態は URL クエリ（?rentMax= 等）と同期する: 初期値はクエリから復元し、
-  // 変更時は updateFilters が replaceState で書き戻す（条件付き地図URLを共有可能にする）。
-  const [filters, setFilters] = useState<MapFilters>(() =>
-    typeof window === "undefined" ? EMPTY_FILTERS : parseFilters(window.location.search),
-  );
+  // フィルタ状態は URL クエリ（?rentMax= 等）と同期する: 初期値はマウント後にクエリから
+  // 復元し（SSGプリレンダーとの hydration 不整合を避けるため初期レンダーでは読まない。
+  // isMobile と同じパターン）、変更時は updateFilters が replaceState で書き戻す。
+  const [filters, setFilters] = useState<MapFilters>(EMPTY_FILTERS);
+  useEffect(() => {
+    const parsed = parseFilters(window.location.search);
+    // マウント直後の1回だけ、URL にフィルタがある場合のみ復元する（SSG の初期HTMLは
+    // 常に EMPTY_FILTERS で描画し、hydration 後に実状態へ寄せる意図的なパターン）。
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (isFilterActive(parsed)) setFilters(parsed);
+  }, []);
   const [isMobile, setIsMobile] = useState(false);
   const [mapReady, setMapReady] = useState(false);
   // 初回ビューのポリゴンが描画され切るまで true にしない（凡例先行・白地図対策）
@@ -729,13 +735,12 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
   }, [selectedCode, byCode]);
 
   // 条件フィルタの全国該当（JS判定。地図の減光と必ず同一条件）。一覧表示にも使うため
-  // 件数でなく該当自治体そのものを持つ。
+  // 件数でなく該当自治体そのものを持つ（件数は受け手が .length で導出）。
   const filterActive = isFilterActive(filters);
   const matchedMunis = useMemo(
     () => (filterActive ? summary.filter((m) => matchesFilter(m, filters)) : []),
     [filterActive, filters, summary],
   );
-  const matchedCount = matchedMunis.length;
   // レイヤーボタンのバッジ用: 既定値から変更されている設定の数
   // （塗り分け指標・ハザードオーバーレイ・絞り込み。ベース地図は見た目のみのため含めない）。
   const layerActiveCount =
@@ -836,6 +841,9 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
     flyToCode(t.code);
   }, [flyToCode, flyToStationPoint]);
 
+  // 該当一覧からの選択（検索確定と同じ経路）。LayersPanel 側の memo を活かすため安定参照。
+  const selectMatch = useCallback((code: string) => flyToMuni({ code }), [flyToMuni]);
+
   // パネル開閉はフル詳細の取得完了で判定（取得中の一瞬は閉のまま）
   const rootClass = [
     "map-root",
@@ -934,9 +942,8 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
           onChangeFilters={updateFilters}
           onClearFilters={() => updateFilters(EMPTY_FILTERS)}
           filterActive={filterActive}
-          matchedCount={matchedCount}
           matchedMunis={matchedMunis}
-          onSelectMatch={(code) => flyToMuni({ code })}
+          onSelectMatch={selectMatch}
           isMobile={isMobile}
           activeCount={layerActiveCount}
         />
