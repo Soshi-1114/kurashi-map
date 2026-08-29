@@ -26,7 +26,7 @@ export async function getPopularMunis(limit = 12): Promise<PopularMuni[]> {
 // slug は lib/rankings.ts の定義に一致させる（URLは変更しない）。
 const RANKING_PICKS: Array<{ category: RankingCategory; slugs: string[] }> = [
   { category: "住まい", slugs: ["rent-cheap", "land-price-high", "vacancy-high"] },
-  { category: "人口・まち", slugs: ["population-most", "population-growth", "population-density"] },
+  { category: "人口・まち", slugs: ["population-most", "population-growth", "population-density", "aging-high"] },
   { category: "子育て・生活", slugs: ["waitlist-zero", "childcare-capacity"] },
 ];
 

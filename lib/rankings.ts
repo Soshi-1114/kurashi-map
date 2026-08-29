@@ -9,6 +9,7 @@ import { hasRent } from "./rentColor";
 import { hasLandPrice } from "./landPrice";
 import { isWaitlistDisclosed } from "./waitlist";
 import { isAmenitiesCounted } from "./coverage";
+import { hasAgeData, elderlyRatioPct, elderlyRatioText, AGE_FRESHNESS_SUFFIX } from "./ageStats";
 import { formatAsOfJa } from "./format";
 import { hasForeignData, foreignRatioPct } from "./foreignResidents";
 import { hasVacancy, vacancyRateText } from "./vacancy";
@@ -254,6 +255,7 @@ export const NEXT_UPDATE = {
     "出典（住宅・土地統計調査）は5年周期のため、現在の2023年調査が最新の公表データです。次回は2028年調査（結果公表は2029年以降）の見込みです。",
   future:
     "地域別将来推計人口は約5年周期で改定されます。現在の令和5(2023)年推計が最新で、次回（2028年頃見込み）の公表後に更新予定です。",
+  aging: "住民基本台帳の年齢階級別人口は毎年1月1日時点で、例年7月末〜8月に公表されます。公表後すみやかに更新予定です。",
   stations: "駅データ（国土数値情報 S12）は年度ごとに更新されます。新年度版の公表後に更新予定です。",
   medical: "医療施設調査は毎年10月1日時点で実施されます。市区町村別データの公表後に更新予定です。",
   preschools: "施設データは年度ごとに更新されます。新年度データの公表・反映後に更新予定です。",
@@ -387,6 +389,47 @@ function populationMetaDescription(metric: keyof typeof POPULATION_METRIC_TEXT) 
     return `${head}最も${noun}が${verb}のは${name}（${valueOf(top1)}、${POPULATION_FRESHNESS}）。${tail}`;
   };
 }
+
+// ---- 高齢化率（住民基本台帳）ランキング ----
+
+// 中立フレーミング注記。国勢調査ベースとの基準差も明示する（出典を混同させない）。
+const AGING_NOTE =
+  "高齢化率は65歳以上人口を総人口で割った割合です（住民基本台帳・総計＝外国人住民を含む、毎年1月1日時点）。年齢構成という地域の事実を示す指標であり、住みやすさ等の優劣を意味しません。国勢調査ベースの高齢化率とは基準日・人口の定義が異なるため、数値がわずかに異なることがあります。";
+
+const AGING_FAQ: { q: string; a: string }[] = [
+  {
+    q: "高齢化率はどうやって計算していますか？",
+    a: "総務省「住民基本台帳に基づく人口、人口動態及び世帯数調査」の市区町村別年齢階級別人口（総計＝外国人住民を含む）から、65歳以上人口を総人口で割った割合です。分子・分母とも同じ調査の公表実数で、推計値は使用していません。",
+  },
+  {
+    q: "国勢調査の高齢化率と数値が違うのはなぜですか？",
+    a: "本サイトの高齢化率は住民基本台帳（毎年1月1日時点の登録人口）に基づきます。国勢調査（5年ごと・常住人口）とは基準日と人口の定義が異なるため、数値がわずかに異なることがあります。毎年更新できる鮮度を優先して住民基本台帳を採用しています。",
+  },
+  {
+    q: "高齢化率が高い・低いことに良し悪しはありますか？",
+    a: "ありません。年齢構成は地域の歴史や産業構造を反映した事実であり、住みやすさや行政サービスの質とは別のものです。本サイトは事実として中立に提示しています。",
+  },
+  {
+    q: "掲載されていない自治体があるのはなぜですか？",
+    a: "北方領土の6村は住民登録がないため、高齢化率を算出できず対象外としています。それ以外の全市区町村を収録しています。",
+  },
+];
+
+// 1位自治体（実データ）から比率・基準日を含む meta description を組み立てる。
+function agingMetaDescription(highLow: "高い" | "低い") {
+  return (top1: Municipality | null): string => {
+    const head = `全国の市区町村を高齢化率（65歳以上人口の割合）が${highLow}順にランキング。`;
+    const tail = "総務省 住民基本台帳（毎年1月1日時点）の実データで、地域の年齢構成を比較できます。";
+    if (!top1 || !hasAgeData(top1.ageStats)) return `${head}${tail}`;
+    const name = `${prefNameOf(top1.pref)}${top1.displayName ?? top1.name}`;
+    return `${head}最も${highLow}のは${name}（${elderlyRatioText(top1.ageStats)}、${formatAsOfJa(top1.ageStats.asOf)}時点）。${tail}`;
+  };
+}
+
+const agingFreshnessLabel = (top1: Municipality | null): string | null =>
+  top1 && hasAgeData(top1.ageStats)
+    ? `${formatAsOfJa(top1.ageStats.asOf)}${AGE_FRESHNESS_SUFFIX}`
+    : null;
 
 // ---- 生活インフラ（駅・医療機関・保育施設）ランキング ----
 
@@ -804,6 +847,48 @@ export const RANKINGS: RankingDef[] = [
       const r = m.populationChangeRate ?? 0;
       return `${r > 0 ? "+" : ""}${r.toFixed(1)}%`;
     },
+  },
+  {
+    slug: "aging-high",
+    category: "人口・まち",
+    title: "高齢化率が高い市区町村ランキング",
+    seoTitleAnswer: nihonichiTop1,
+    shortLabel: "高齢化率が高い",
+    description:
+      "全国の市区町村を高齢化率（65歳以上人口の割合）が高い順にランキング。総務省 住民基本台帳の実データで地域の年齢構成を比較できます。",
+    metaDescription: agingMetaDescription("高い"),
+    lead: "全国の市区町村を、高齢化率（65歳以上人口 ÷ 総人口）が高い順に並べたランキングです（住民基本台帳・毎年1月1日時点）。",
+    note: AGING_NOTE,
+    faq: AGING_FAQ,
+    related: { slug: "future-population-decline", label: "2050年の将来推計人口ランキング" },
+    prefSummary: true,
+    columnLabel: "高齢化率",
+    order: "desc",
+    freshnessLabel: agingFreshnessLabel,
+    nextUpdate: NEXT_UPDATE.aging,
+    qualifies: (m) => hasAgeData(m.ageStats),
+    sortValue: (m) => elderlyRatioPct(m.ageStats) ?? 0,
+    display: (m) => elderlyRatioText(m.ageStats),
+  },
+  {
+    slug: "aging-low",
+    category: "人口・まち",
+    title: "高齢化率が低い市区町村ランキング",
+    shortLabel: "高齢化率が低い",
+    description:
+      "全国の市区町村を高齢化率（65歳以上人口の割合）が低い順にランキング。若い世代が多い自治体を総務省 住民基本台帳の実データで比較できます。",
+    metaDescription: agingMetaDescription("低い"),
+    lead: "全国の市区町村を、高齢化率（65歳以上人口 ÷ 総人口）が低い順に並べたランキングです（住民基本台帳・毎年1月1日時点）。",
+    note: AGING_NOTE,
+    faq: AGING_FAQ,
+    related: { slug: "population-growth", label: "人口増加率ランキング" },
+    columnLabel: "高齢化率",
+    order: "asc",
+    freshnessLabel: agingFreshnessLabel,
+    nextUpdate: NEXT_UPDATE.aging,
+    qualifies: (m) => hasAgeData(m.ageStats),
+    sortValue: (m) => elderlyRatioPct(m.ageStats) ?? 0,
+    display: (m) => elderlyRatioText(m.ageStats),
   },
   {
     slug: "future-population-decline",
