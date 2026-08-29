@@ -18,13 +18,8 @@
 
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { existsSync } from "node:fs";
-import * as fs from "node:fs";
-import XLSX from "xlsx";
 import { resolvePrefs } from "./_lib/prefs.mjs";
-
-// xlsx の ESM ビルド（xlsx.mjs）は fs を自動注入しないため、readFile 前に明示的に渡す。
-XLSX.set_fs?.(fs);
+import { resolveXlsxPath, readWorkbook, sheetRows } from "./_lib/xlsx.mjs";
 import { loadMuni, saveMuni } from "./_lib/data.mjs";
 import { version } from "./_lib/versions.mjs";
 
@@ -41,13 +36,7 @@ const NODATA = { index: -1, source: "データなし（対象外）", asOf: "-" 
 
 const prefs = resolvePrefs(process.argv.slice(2));
 
-const XLSX_PATH = process.env.FISCAL_XLSX ||
-  process.argv.find((a) => a.endsWith(".xlsx")) ||
-  "/tmp/fiscal.xlsx";
-if (!existsSync(XLSX_PATH)) {
-  console.error(`Excel not found: ${XLSX_PATH}`);
-  process.exit(1);
-}
+const XLSX_PATH = resolveXlsxPath("FISCAL_XLSX", "/tmp/fiscal.xlsx");
 
 function isSpecialWard(code5) {
   const n = Number(code5);
@@ -56,9 +45,8 @@ function isSpecialWard(code5) {
 
 // Excel 全体を「5桁コード → 財政力指数」と全国平均に読み込む。
 function extract() {
-  const wb = XLSX.readFile(XLSX_PATH);
-  const ws = wb.Sheets[wb.SheetNames[0]];
-  const rows = XLSX.utils.sheet_to_json(ws, { header: 1, blankrows: false, raw: true });
+  const wb = readWorkbook(XLSX_PATH);
+  const rows = sheetRows(wb.Sheets[wb.SheetNames[0]]);
 
   const headerIdx = rows.findIndex((r) => String(r?.[0] ?? "").trim() === "団体コード");
   if (headerIdx < 0) throw new Error("「団体コード」ヘッダ行が見つかりません（様式変更?）");
