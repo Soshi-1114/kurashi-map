@@ -35,8 +35,11 @@ export default function ShindanClient({ entries }: { entries: ShindanEntry[] }) 
     if (r.length > 0) setRegions(r);
   }, []);
 
-  // 状態変更を URL に反映（他パラメータは保持）。
-  const syncUrl = (w: ShindanWeights, r: string[]) => {
+  // 状態・URL・計測を1箇所で更新する（復元時は通らないため、shindan_run は
+  // ユーザー操作と1対1で発火する）。他の URL パラメータは保持する。
+  const apply = (w: ShindanWeights, r: string[]) => {
+    setWeights(w);
+    setRegions(r);
     const params = new URLSearchParams(window.location.search);
     if (hasAnyWeight(w)) params.set("w", encodeWeights(w));
     else params.delete("w");
@@ -44,35 +47,23 @@ export default function ShindanClient({ entries }: { entries: ShindanEntry[] }) 
     else params.delete("r");
     const qs = params.toString();
     window.history.replaceState(null, "", qs ? `?${qs}` : window.location.pathname);
-  };
-
-  const setWeight = (key: (typeof SHINDAN_AXES)[number]["key"], value: ShindanWeight) => {
-    const next = { ...weights, [key]: value };
-    setWeights(next);
-    syncUrl(next, regions);
-  };
-
-  const toggleRegion = (key: string) => {
-    const next = regions.includes(key) ? regions.filter((k) => k !== key) : [...regions, key];
-    setRegions(next);
-    syncUrl(weights, next);
+    if (hasAnyWeight(w)) {
+      trackShindanRun({
+        weights: encodeWeights(w),
+        regions: r.join(","),
+        resultCount: runShindan(entries, w, r).eligibleCount,
+      });
+    }
   };
 
   const { results, eligibleCount } = useMemo(
     () => runShindan(entries, weights, regions),
     [entries, weights, regions],
   );
-
-  // 診断実行の計測（重み・地方の組み合わせが変わるたびに1回。apply_filter と同方針）。
   const active = hasAnyWeight(weights);
-  useEffect(() => {
-    if (!active) return;
-    trackShindanRun({ weights: encodeWeights(weights), regions: regions.join(","), resultCount: eligibleCount });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [weights, regions]);
 
   return (
-    <div className="sd-root">
+    <div>
       <section className="sd-questions" aria-label="重視する条件">
         {SHINDAN_AXES.map((axis) => (
           <div key={axis.key} className="sd-question">
@@ -87,7 +78,7 @@ export default function ShindanClient({ entries }: { entries: ShindanEntry[] }) 
                   type="button"
                   className={`filter-seg ${weights[axis.key] === w.value ? "is-active" : ""}`}
                   aria-pressed={weights[axis.key] === w.value}
-                  onClick={() => setWeight(axis.key, w.value)}
+                  onClick={() => apply({ ...weights, [axis.key]: w.value }, regions)}
                 >
                   {w.label}
                 </button>
@@ -106,7 +97,12 @@ export default function ShindanClient({ entries }: { entries: ShindanEntry[] }) 
                 type="button"
                 className={`filter-seg ${regions.includes(r.key) ? "is-active" : ""}`}
                 aria-pressed={regions.includes(r.key)}
-                onClick={() => toggleRegion(r.key)}
+                onClick={() =>
+                  apply(
+                    weights,
+                    regions.includes(r.key) ? regions.filter((k) => k !== r.key) : [...regions, r.key],
+                  )
+                }
               >
                 {r.nameJa}
               </button>
@@ -129,23 +125,24 @@ export default function ShindanClient({ entries }: { entries: ShindanEntry[] }) 
           </h2>
           <ol className="sd-list">
             {results.map((r, i) => {
-              const prefName = getPrefByCode(r.entry.code)?.nameJa ?? "";
+              const pref = getPrefByCode(r.entry.code);
               return (
                 <li key={r.entry.code} className="sd-row">
                   <span className="sd-rank">{i + 1}</span>
                   <div className="sd-row-main">
                     <Link
-                      href={`/area/${r.entry.pref}/${r.entry.code}`}
+                      href={`/area/${pref?.slug}/${r.entry.code}`}
                       className="sd-town"
                       onClick={() => trackShindanResultClick(r.entry.code, i)}
                     >
                       {r.entry.name}
-                      <small className="sd-pref"><MapPin size={12} aria-hidden="true" />{prefName}</small>
+                      <small className="sd-pref"><MapPin size={12} aria-hidden="true" />{pref?.nameJa}</small>
                     </Link>
                     <p className="sd-axes">
                       {r.axisStars.map((a) => (
-                        <span key={a.key} className="sd-axis">
-                          {a.label} {"★".repeat(a.stars)}
+                        <span key={a.key} className="sd-axis" role="img" aria-label={`${a.label} 5段階中${a.stars}`}>
+                          {a.label}{" "}
+                          <span aria-hidden="true">{"★".repeat(a.stars) + "☆".repeat(5 - a.stars)}</span>
                         </span>
                       ))}
                     </p>

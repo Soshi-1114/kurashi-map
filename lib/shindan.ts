@@ -11,6 +11,7 @@
 import type { Municipality } from "./types";
 import { computeLivability, type AxisKey } from "./livabilityScore";
 import { futureChangeRate2050 } from "./futurePopulation";
+import { FUTURE_CHANGE_THRESHOLDS } from "./mapMetrics";
 import { REGIONS } from "./prefs";
 
 export type ShindanAxisKey = AxisKey | "future";
@@ -43,21 +44,19 @@ export const EMPTY_WEIGHTS: ShindanWeights = {
 export type ShindanEntry = {
   code: string;
   name: string;
-  pref: string;
-  /**
-   * SHINDAN_AXES と同順の星（1..5）を1文字ずつ並べた文字列。0=データなし。
-   * 例 "453120"。数値配列より配信ペイロードが小さい。
-   */
-  s: string;
+  /** SHINDAN_AXES と同順の星（1..5）。0=データなし。pref は code から導出できるため持たない。 */
+  s: number[];
 };
 
-// 将来性の星: 2050年推計人口の増減率（2020年比%）を5段階へ。しきい値は地図
-// （FUTURE_CHANGE_THRESHOLDS: -50/-30/-10/0）と同じ発想で「0以上=増加」を最上位に置く。
+// 将来性の星: 2050年推計人口の増減率（2020年比%）を、地図コロプレスと同じしきい値
+// （FUTURE_CHANGE_THRESHOLDS）で5段階へ。地図の色ランクと診断の星が必ず一致する。
 // データなし（浜通り13市町村・北方領土等）は null。
 function futureStar(m: Municipality): number | null {
   const r = futureChangeRate2050(m.futurePopulation);
   if (r == null) return null;
-  return r >= 0 ? 5 : r >= -10 ? 4 : r >= -25 ? 3 : r >= -40 ? 2 : 1;
+  let star = 1;
+  for (const t of FUTURE_CHANGE_THRESHOLDS) if (r >= t) star++;
+  return star;
 }
 
 /** サーバー側: 全自治体の軸スコアを前計算する（ランキングと同じ market-level 前提で呼ぶ）。 */
@@ -66,8 +65,8 @@ export function buildShindanEntries(munis: Municipality[]): ShindanEntry[] {
     const liv = computeLivability(m);
     const byKey = new Map(liv.axes.map((a) => [a.key as ShindanAxisKey, a.stars]));
     byKey.set("future", futureStar(m));
-    const s = SHINDAN_AXES.map((axis) => String(byKey.get(axis.key) ?? 0)).join("");
-    return { code: m.code, name: m.displayName ?? m.name, pref: m.pref, s };
+    const s = SHINDAN_AXES.map((axis) => byKey.get(axis.key) ?? 0);
+    return { code: m.code, name: m.displayName ?? m.name, s };
   });
 }
 
@@ -76,7 +75,7 @@ export type ShindanResult = {
   /** 適合スコア（0..100。重み付き平均の星を20倍） */
   score: number;
   /** 重視した軸の星（表示用。SHINDAN_AXES の並び順で、重み0の軸は含まない） */
-  axisStars: { key: ShindanAxisKey; label: string; stars: number; weight: ShindanWeight }[];
+  axisStars: { key: ShindanAxisKey; label: string; stars: number }[];
 };
 
 /** 重みが1つ以上あるか（無ければ診断結果は出さない）。 */
@@ -103,26 +102,30 @@ export function runShindan(
       ? new Set(REGIONS.filter((r) => regionKeys.includes(r.key)).flatMap((r) => r.prefixes))
       : null;
 
-  const weighted = SHINDAN_AXES.map((a, i) => ({ ...a, i, weight: weights[a.key] })).filter(
-    (a) => a.weight > 0,
+  const weighted = SHINDAN_AXES.flatMap((a, i) =>
+    weights[a.key] > 0 ? [{ key: a.key, label: a.label, i, weight: weights[a.key] }] : [],
   );
+  // 重みの合計は全 entry 共通（重視軸が欠損の entry は除外されるため補正不要）。
+  const wsum = weighted.reduce((s, a) => s + a.weight, 0);
+
+  // 1件のスコア化。重視軸のデータなし（星0）は null = 結果から除外。
+  const scoreEntry = (entry: ShindanEntry): ShindanResult | null => {
+    let sum = 0;
+    const axisStars: ShindanResult["axisStars"] = [];
+    for (const a of weighted) {
+      const stars = entry.s[a.i];
+      if (stars === 0) return null;
+      sum += stars * a.weight;
+      axisStars.push({ key: a.key, label: a.label, stars });
+    }
+    return { entry, score: Math.round((sum / wsum) * 20), axisStars };
+  };
 
   const scored: ShindanResult[] = [];
   for (const entry of entries) {
     if (prefixes && !prefixes.has(entry.code.slice(0, 2))) continue;
-    let sum = 0;
-    let wsum = 0;
-    const axisStars: ShindanResult["axisStars"] = [];
-    let missing = false;
-    for (const a of weighted) {
-      const stars = Number(entry.s[a.i]);
-      if (stars === 0) { missing = true; break; } // 重視軸のデータなし → 除外
-      sum += stars * a.weight;
-      wsum += a.weight;
-      axisStars.push({ key: a.key, label: a.label, stars, weight: a.weight });
-    }
-    if (missing) continue;
-    scored.push({ entry, score: Math.round((sum / wsum) * 20), axisStars });
+    const r = scoreEntry(entry);
+    if (r) scored.push(r);
   }
 
   scored.sort((x, y) => y.score - x.score || (x.entry.code < y.entry.code ? -1 : 1));

@@ -92,7 +92,9 @@ const TREND_ITEMS = [
 // 2050年将来推計人口の増減率（%）。人口トレンドと同じ PRGn（紫=減少⇔緑=増加）を
 // 連続値5段階に割り当てる（色覚多様性への配慮も同じ理由）。しきい値は実分布から:
 // 中央値 -33% / p90 -5% / 増加は107自治体（5.6%）。「0以上=増加=緑」を独立セルにする。
-const FUTURE_CHANGE_THRESHOLDS = [-50, -30, -10, 0] as const;
+// export するのは街診断（lib/shindan.ts）が同じ5区分から将来性の星を導出するため
+// （地図の色ランクと診断の星で同じ自治体が別の段階に落ちる不整合を防ぐ）。
+export const FUTURE_CHANGE_THRESHOLDS = [-50, -30, -10, 0] as const;
 const FUTURE_CHANGE_COLORS = ["#762a83", "#9970ab", "#c2a5cf", "#e7d4e8", "#1b7837"] as const;
 
 // 空き家率（%）。高いほど濃い暖色（YlOrRd 5段階。高率=住宅ストックの余剰に注意を促す

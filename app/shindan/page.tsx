@@ -89,15 +89,15 @@ export default async function ShindanPage() {
     <PageShell trail={[{ name: SITE.name, href: "/" }, { name: "住む街診断" }]}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }} />
 
-      <header className="sd-hero">
+      <header>
         <h1 className="sd-title">住む街診断</h1>
         <p className="sd-lead">
-          重視する条件を選ぶと、全国{"1,747"}市区町村（政令指定都市は市単位）から条件に合う街トップ10を表示します。
-          診断に使うのは{SHINDAN_AXES.map((a) => a.label).join("・")}の6軸で、すべて政府統計の実データから算出した目安です。主観のアンケートや推計のスコアは使いません。
+          重視する条件を選ぶと、全国{entries.length.toLocaleString("ja-JP")}市区町村（政令指定都市は市単位）から条件に合う街トップ10を表示します。
+          診断に使うのは{SHINDAN_AXES.map((a) => a.label).join("・")}の6軸。将来性のみ公的推計（国立社会保障・人口問題研究所の2050年推計）で、ほかの5軸は政府統計の実データから算出した目安です。主観のアンケートは使いません。
         </p>
         {/* path を渡さず現在のURL（?w=&r= の回答状態込み）を共有する */}
         <ShareButton
-          className="cmp-share"
+          className="sd-share"
           title={`住む街診断｜${SITE.name}`}
           contentType="shindan"
           itemId="shindan"
@@ -120,9 +120,9 @@ export default async function ShindanPage() {
       </section>
 
       <p className="sd-foot">
-        軸の算出方法（しきい値）は
+        住みやすさ5軸の算出方法（しきい値）は
         <Link href="/about#score">「このサイトについて」</Link>
-        で公開しています。診断結果は住みやすさを保証するものではなく、実データに基づく比較の目安です。気になった街は
+        で公開しています。将来性は2050年推計人口の増減率を、地図の塗り分けと同じ区分（0％以上／-10％まで／-30％まで／-50％まで／それ未満）で5段階にしたものです。診断結果は住みやすさを保証するものではなく、実データに基づく比較の目安です。気になった街は
         <Link href="/compare">比較ページ</Link>
         や<Link href="/map">地図</Link>でさらに詳しく確認できます。
       </p>
