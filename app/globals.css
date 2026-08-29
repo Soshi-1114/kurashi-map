@@ -614,33 +614,6 @@ html, body {
   .site-header-nav a.site-header-nav-optional { display: none; }
 }
 
-/* キーボード操作時だけ現れる「本文へスキップ」リンク（PageShell の先頭）。
-   非表示は .sr-only と同じレシピ（フォーカス可能なまま視覚的に隠す）。 */
-.skip-link {
-  position: absolute;
-  width: 1px; height: 1px;
-  padding: 0; margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-.skip-link:focus {
-  width: auto; height: auto;
-  margin: 0;
-  overflow: visible;
-  clip: auto;
-  left: 8px; top: 8px;
-  z-index: 100;
-  padding: 10px 16px;
-  background: var(--surface-strong);
-  color: var(--text);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  font-size: var(--text-sm);
-  font-weight: 600;
-}
-
 /* ============================================================
    共通フッター（SiteFooter）。設置場所・目的は components/SiteFooter.tsx 参照。
    ============================================================ */
