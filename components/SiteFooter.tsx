@@ -14,6 +14,7 @@ const COLUMNS: Array<{ heading: string; links: readonly NavLink[] }> = [
     links: [
       { href: "/ranking", label: "住みやすさランキング" },
       { href: "/compare", label: "自治体を比較" },
+      { href: "/shindan", label: "住む街診断" },
       { href: "/denki", label: "電気代シミュレーション" },
     ],
   },

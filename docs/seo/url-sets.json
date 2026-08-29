@@ -1,5 +1,13 @@
 [
   {
+    "name": "pr-shindan",
+    "since": "2026-08-31",
+    "note": "住む街診断 /shindan 新設（livabilityScore6軸の重み付け診断・AIO耐性ツール資産）。新規URLなのでゼロベース成長で見る。since は想定デプロイ翌日 — 実デプロイがずれたら修正すること",
+    "include": [
+      "/shindan"
+    ]
+  },
+  {
     "name": "pr-aging-map",
     "since": "2026-08-31",
     "note": "高齢化率マップ /map/aging 新設＋地図フィルタに高齢化率上限（ランキング aging-high/low に地図CTAも点灯）。新規URLなのでゼロベース成長で見る。since は想定デプロイ翌日 — 実デプロイがずれたら修正すること",

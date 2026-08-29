@@ -47,6 +47,20 @@ export function trackApplyFilter(params: MapFilters): void {
   });
 }
 
+/** 街診断の実行（重み・地方の組み合わせ変更ごとに1回）。 */
+export function trackShindanRun(params: { weights: string; regions: string; resultCount: number }): void {
+  track("shindan_run", {
+    weights: params.weights,       // SHINDAN_AXES 順の6桁（例 "210120"）
+    regions: params.regions,       // 地方キーのカンマ区切り（空=全国）
+    result_count: params.resultCount,
+  });
+}
+
+/** 街診断の結果から自治体詳細への遷移。 */
+export function trackShindanResultClick(code: string, position: number): void {
+  track("shindan_result_click", { municipality_code: code, position });
+}
+
 /** ページ共有（GA4 推奨イベント）。method はOS共有シートかURLコピーか。 */
 export function trackShare(params: { method: "web_share" | "copy"; contentType: string; itemId: string }): void {
   track("share", {
