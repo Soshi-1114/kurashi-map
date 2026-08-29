@@ -110,14 +110,21 @@ function atImpressionPixel(url: string): string | null {
  * env に設定されるのは ASP 発行のリンクなので、denkiOfferUrl と同じ契約で
  * 一切加工せずそのまま使う（UTM を足すと ASP 計測を壊す）。
  *
- * @param destUrl リンク先URL（lib/furunaviMunicipals.ts の furunaviMunicipalPageUrl で解決。未掲載は null）
+ * @param destUrl リンク先URL（lib/furunaviMunicipals.ts の furunaviMunicipalPageUrl /
+ *   FURUNAVI_TOP_PAGE_URL で解決。未掲載は null）
+ * @param destKind destUrl の着地の種類。自治体ページなら "municipal"（既定）、
+ *   ふるなびトップ等なら "portal"。固定リンクへのフォールバック時は着地が
+ *   ポータル側になるため destKind に関わらず "portal" を返す
  */
-export function furusatoLink(destUrl: string | null): FurusatoLinkInfo | null {
+export function furusatoLink(
+  destUrl: string | null,
+  destKind: "municipal" | "portal" = "municipal",
+): FurusatoLinkInfo | null {
   if (destUrl == null) return null;
   const template = furusatoUrlTemplate();
   if (template) {
     const url = template.replaceAll("{url}", encodeURIComponent(destUrl));
-    return { url, kind: "municipal", impressionPixel: atImpressionPixel(url) };
+    return { url, kind: destKind, impressionPixel: atImpressionPixel(url) };
   }
   const aff = furusatoAffUrl();
   if (aff) return { url: aff, kind: "portal", impressionPixel: atImpressionPixel(aff) };

@@ -4,7 +4,7 @@
 import Link from "next/link";
 import { Zap, ArrowRight } from "lucide-react";
 import { DENKI_AREA_LABELS, areaForMuni, denkiUrlForMuni } from "@/lib/denki";
-import { AdLinkRow } from "./AdLinkRow";
+import { AdLinkRow } from "@/components/monetization/AdLinkRow";
 
 export function DenkiTeaser({
   municipalityCode,

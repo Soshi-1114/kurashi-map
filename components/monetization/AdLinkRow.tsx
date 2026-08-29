@@ -3,9 +3,10 @@
 // 計測・文言は呼び出し側が担う。"use client" を付けないことで、server
 // （DenkiTeaser）と client（SupportBanner / FurusatoLink）のどちらの文脈でも使える。
 //
-// 見た目は area-detail.css の .ad-linkrow* 一式。導線を増やすときは
-// このコンポーネントを使えば CSS の追加は不要（アイコン色などの差分だけ
-// modifier クラスを足す）。
+// 見た目は app/support-links.css の .ad-linkrow* 一式。ここで import しているので
+// 掲載ページ側での CSS import は不要。導線を増やすときはこのコンポーネントを
+// 使えば CSS の追加も不要（アイコン色などの差分だけ modifier クラスを足す）。
+import "@/app/support-links.css";
 import type { ReactNode } from "react";
 
 export function AdLinkRow({
