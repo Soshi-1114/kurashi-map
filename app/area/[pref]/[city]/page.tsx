@@ -423,10 +423,11 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
   const density = populationDensity(m);
   // 「2050年の暮らし」ビュー（将来人口カード拡張）の派生テキスト。
   const future2050Insights = buildFuture2050Insights(m);
-  const capacityItems = buildCapacityItems(m, {
-    fiscalIndex: areaStats.fiscalIndex.national,
-    vacancyRate: areaStats.vacancyRate.national,
-  });
+  const capacityItems = buildCapacityItems(m, areaStats);
+  // 体力の注記には値を再掲せず、比較文脈（全国平均）だけを添える。
+  const capacityContexts = capacityItems
+    .filter((c) => c.context)
+    .map((c) => `${c.label}の${c.context}`);
   const popNatPos = rankPositions.get("population-most")?.get(m.code);
   const popPrefPos = prefRanks.get("population-most")?.get(m.code);
   const popCompare =
@@ -847,8 +848,8 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
                         ))}
                       </div>
                       <p className="ad-note">
-                        人口構成の変化を受け止める現在の備えとして、財政・保育・住宅ストックの現況（すべて現在の公表実データ）を並べています。
-                        {capacityItems.map((c) => `${c.label}は${c.value}（${c.note}）`).join("、")}。
+                        人口構成の変化を受け止める現在の備えとして、財政・保育・住宅ストックの現況（すべて現在の公表実データ）を並べています
+                        {capacityContexts.length > 0 ? `（参考: ${capacityContexts.join("・")}）。` : "。"}
                       </p>
                     </>
                   )}

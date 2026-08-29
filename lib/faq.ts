@@ -15,7 +15,7 @@ import { hasChildcareData, childcareOpenRatioText, isChildcareCityAggregate } fr
 import { formatAsOfJa } from "./rankings";
 import { isHazardEvaluated, isAmenitiesCounted, coverageReason } from "./coverage";
 import { buildSummary } from "./summary";
-import { hasFuturePopulation, futureTotal, futureRateText, ageComposition2050 } from "./futurePopulation";
+import { hasFuturePopulation, futureTotal, futureRateText, elderlyRatio2050 } from "./futurePopulation";
 import { hasForeignData, foreignRatioPct } from "./foreignResidents";
 import { hasAgeData, elderlyRatioText, youngRatioText } from "./ageStats";
 import {
@@ -127,14 +127,14 @@ export function buildFaq(m: Municipality, prefName: string): QA[] {
   // 系の検索意図の受け皿。推計であることと出典を必ず明記する。
   if (hasFuturePopulation(m.futurePopulation)) {
     const t2050 = futureTotal(m.futurePopulation, "2050");
-    const ages = ageComposition2050(m.futurePopulation);
+    const elderly2050 = elderlyRatio2050(m.futurePopulation);
     if (t2050 != null) {
       qa.push({
         q: `${name}の2050年の人口はどうなる見込みですか？`,
         a:
-          `国立社会保障・人口問題研究所の推計（令和5年推計）では、${name}の2050年の人口は${t2050.toLocaleString()}人（2020年比${futureRateText(m.futurePopulation)}）です` +
-          (ages ? `。65歳以上の割合は${ages.elderly.toFixed(1)}%になる見込みです` : "") +
-          "。一定の仮定に基づく公的推計であり、将来を保証するものではありません。",
+          `${name}の2050年の人口は${t2050.toLocaleString()}人（2020年比${futureRateText(m.futurePopulation)}）と推計されています` +
+          (elderly2050 != null ? `。65歳以上の割合は${elderly2050.toFixed(1)}%になる見込みです` : "") +
+          `。一定の仮定に基づく公的推計であり、将来を保証するものではありません（出典: ${m.futurePopulation.source}）。`,
       });
     }
   }

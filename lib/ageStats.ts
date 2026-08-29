@@ -35,6 +35,12 @@ export function youngRatioPct(a: Municipality["ageStats"]): number | null {
   return (a.young / a.total) * 100;
 }
 
+/** 生産年齢人口比（15〜64歳 = total - young - elderly、%）。データなしは null。 */
+export function workingRatioPct(a: Municipality["ageStats"]): number | null {
+  if (!hasAgeData(a)) return null;
+  return ((a.total - a.young - a.elderly) / a.total) * 100;
+}
+
 /** 表示用: "36.2%"（小数1桁）。データなしは "—"。 */
 export function elderlyRatioText(a: Municipality["ageStats"]): string {
   const v = elderlyRatioPct(a);

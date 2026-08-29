@@ -9,15 +9,17 @@
 // 差分の演算表示はしない（詳細ページの高齢化率並記と同じ判断）。
 
 import type { Municipality } from "./types";
+import type { AreaStats } from "./areaStats";
 import { hasFuturePopulation, ageComposition2050 } from "./futurePopulation";
-import { hasAgeData, elderlyRatioPct, youngRatioPct } from "./ageStats";
+import { workingRatioPct } from "./ageStats";
 import { hasFiscal, isFiscalSpecialWard, fiscalIndexText } from "./fiscal";
 import { hasChildcareCapacity, childcareOpenRatioText } from "./childcare";
 import { hasVacancy, vacancyRateText } from "./vacancy";
 
 /**
- * 2050年の年齢構成に関する決定論インサイト（0〜3文）。将来人口カードの推移バー・
- * 年齢構成行と重複しない「読み解き」だけを返す（人口総数・増減率はカード本体が表示済み）。
+ * 2050年の年齢構成に関する決定論インサイト（0〜2文）。カード既表示の値の再掲は
+ * 避け、「翻訳」（N人に1人）と「今との並記」（働き手世代の現在値）という
+ * 読み解きだけを返す（総数・増減率・年齢構成の素の比率はカード本体が表示済み）。
  */
 export function buildFuture2050Insights(m: Municipality): string[] {
   const fp = m.futurePopulation;
@@ -35,18 +37,14 @@ export function buildFuture2050Insights(m: Municipality): string[] {
     );
   }
 
-  // 生産年齢（働き手世代）の比率。現在の住基ベース比率が取れる場合は基準を明記して並記する。
-  const workingNow = hasAgeData(m.ageStats)
-    ? 100 - (elderlyRatioPct(m.ageStats) ?? 0) - (youngRatioPct(m.ageStats) ?? 0)
-    : null;
-  out.push(
-    `働き手世代（15〜64歳）は2050年に総人口の${ages.working.toFixed(1)}%となる推計です` +
-      (workingNow != null
-        ? `（現在は${workingNow.toFixed(1)}%・住民基本台帳。調査基準が異なる参考比較）。`
-        : "。"),
-  );
-
-  out.push(`子ども（0〜14歳）は総人口の${ages.young.toFixed(1)}%となる推計です。`);
+  // 生産年齢（働き手世代）の今とこれから。現在の住基ベース比率が取れる場合のみ、
+  // 基準の違いを明記して並記する（比較の文脈では2050年値の再掲が必要）。
+  const workingNow = workingRatioPct(m.ageStats);
+  if (workingNow != null) {
+    out.push(
+      `働き手世代（15〜64歳）は現在の${workingNow.toFixed(1)}%（住民基本台帳）から2050年には総人口の${ages.working.toFixed(1)}%となる推計です（調査基準が異なる参考比較）。`,
+    );
+  }
 
   return out;
 }
@@ -54,8 +52,8 @@ export function buildFuture2050Insights(m: Municipality): string[] {
 export type CapacityItem = {
   label: string;
   value: string;
-  /** 値の位置づけの短い補足（出典・全国平均など）。 */
-  note: string;
+  /** 全国平均などの比較文脈（注記の文章に使う）。比較情報が無い指標は省略。 */
+  context?: string;
 };
 
 /**
@@ -63,19 +61,18 @@ export type CapacityItem = {
  * 収録済みの現況指標（財政・保育・住宅ストック）を将来文脈で束ねる。
  * すべて現在の公表実データの再掲であり、新しい評価・スコアは作らない。
  * データのない指標は行ごと出さない（欠損を推計しない honesty 方針）。
+ * 全国平均は既存の集計レイヤー（getAreaStats）をそのまま受ける。
  */
-export function buildCapacityItems(
-  m: Municipality,
-  averages: { fiscalIndex: number | null; vacancyRate: number | null },
-): CapacityItem[] {
+export function buildCapacityItems(m: Municipality, stats: AreaStats): CapacityItem[] {
   const out: CapacityItem[] = [];
 
   // 財政力指数（特別区は算定制度が異なるため財政カード側の注記に委ね、ここでは出さない）
   if (hasFiscal(m.fiscal) && !isFiscalSpecialWard(m.fiscal)) {
+    const avg = stats.fiscalIndex.national;
     out.push({
       label: "財政力指数",
       value: fiscalIndexText(m.fiscal),
-      note: averages.fiscalIndex != null ? `全国市町村平均 ${averages.fiscalIndex.toFixed(2)}` : m.fiscal.asOf,
+      ...(avg != null ? { context: `全国市町村平均は${avg.toFixed(2)}` } : {}),
     });
   }
 
@@ -84,16 +81,16 @@ export function buildCapacityItems(
     out.push({
       label: "保育の定員余裕率",
       value: childcareOpenRatioText(m.childcare),
-      note: "定員に対する空きの割合",
     });
   }
 
   // 空き家率（住宅ストックの余剰。集計対象外の町村は出さない）
   if (hasVacancy(m.vacancy)) {
+    const avg = stats.vacancyRate.national;
     out.push({
       label: "空き家率",
       value: vacancyRateText(m.vacancy),
-      note: averages.vacancyRate != null ? `全国平均 ${averages.vacancyRate.toFixed(1)}%` : m.vacancy.asOf,
+      ...(avg != null ? { context: `全国平均は${avg.toFixed(1)}%` } : {}),
     });
   }
 
