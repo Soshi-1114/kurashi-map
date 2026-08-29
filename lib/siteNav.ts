@@ -15,6 +15,7 @@ export const MAP_HUBS: ReadonlyArray<NavLink & { sitemapPriority: number }> = [
   { href: "/map/land-price", label: "地価マップ", sitemapPriority: 0.8 },
   { href: "/map/population-trend", label: "人口増減マップ", sitemapPriority: 0.8 },
   { href: "/map/future-population", label: "将来人口マップ（2050年推計）", sitemapPriority: 0.8 },
+  { href: "/map/vacancy", label: "空き家率マップ", sitemapPriority: 0.8 },
   { href: "/map/hazard", label: "ハザードマップ", sitemapPriority: 0.8 },
   // 「外国人 割合 地図」系の主力クエリの入口なので priority だけ高い
   { href: "/map/foreign-ratio", label: "外国人住民の割合マップ", sitemapPriority: 0.9 },

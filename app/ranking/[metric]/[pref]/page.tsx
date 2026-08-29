@@ -21,6 +21,7 @@ import { RankBadge } from "@/components/RankBadge";
 import type { Municipality } from "@/lib/types";
 import PageShell from "@/components/PageShell";
 import { FurusatoBand } from "@/components/monetization/FurusatoBand";
+import { ShareButton } from "@/components/ShareButton";
 
 type Params = { metric: string; pref: string };
 
@@ -269,6 +270,14 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
               <BarChart3 size={15} aria-hidden="true" />{prefName}の{related.label}
             </Link>
           )}
+          <ShareButton
+            className="rk-action rk-action-ghost"
+            title={`${prefName}の${def.title}｜${SITE.name}`}
+            path={`/ranking/${def.slug}/${pref.slug}`}
+            contentType="ranking"
+            itemId={`${def.slug}/${pref.slug}`}
+            label="共有する"
+          />
         </div>
       </header>
 

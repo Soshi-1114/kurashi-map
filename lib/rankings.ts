@@ -8,6 +8,8 @@ import type { Municipality } from "./types";
 import { hasRent } from "./rentColor";
 import { hasLandPrice } from "./landPrice";
 import { isWaitlistDisclosed } from "./waitlist";
+import { isAmenitiesCounted } from "./coverage";
+import { formatAsOfJa } from "./format";
 import { hasForeignData, foreignRatioPct } from "./foreignResidents";
 import { hasVacancy, vacancyRateText } from "./vacancy";
 import { hasChildcareCapacity, childcareOpenRatioPct, childcareOpenRatioText } from "./childcare";
@@ -126,15 +128,10 @@ const RENT_NOTE =
 const FOREIGN_NOTE =
   "外国人住民比率は多様性・国際性の目安です（出典: 出入国在留管理庁「在留外国人統計」）。比率の高い／低いという事実を示すもので、住みやすさ等の価値判断とは無関係です。";
 
-// "2024-12"・"2025-04-01" → "2024年12月"・"2025年4月"。データ asOf を見出し・出典表示の
-// 鮮度ラベルへ整形する（日付は月に丸める）。整形できない形式（和暦・複合ラベル等）はそのまま返す。
-export function formatAsOfJa(asOf: string): string {
-  const m = /^(\d{4})-(\d{1,2})(?:-\d{1,2})?$/.exec(asOf ?? "");
-  if (m) return `${m[1]}年${Number(m[2])}月`;
-  const y = /^(\d{4})$/.exec(asOf ?? "");
-  if (y) return `${y[1]}年`;
-  return asOf ?? "";
-}
+// formatAsOfJa の実体は lib/format.ts（クライアントコンポーネントが本モジュールを
+// import すると RANKINGS の生テキストごとバンドルされるため移設）。サーバー側の
+// 既存呼び出し（多数）の互換のためここから再exportする。
+export { formatAsOfJa };
 
 // 指標の asOf から H1 用の鮮度ラベル（例「2025年6月最新」）を導出する汎用フック。
 function freshnessFromAsOf(getAsOf: (m: Municipality) => string) {
@@ -257,6 +254,9 @@ export const NEXT_UPDATE = {
     "出典（住宅・土地統計調査）は5年周期のため、現在の2023年調査が最新の公表データです。次回は2028年調査（結果公表は2029年以降）の見込みです。",
   future:
     "地域別将来推計人口は約5年周期で改定されます。現在の令和5(2023)年推計が最新で、次回（2028年頃見込み）の公表後に更新予定です。",
+  stations: "駅データ（国土数値情報 S12）は年度ごとに更新されます。新年度版の公表後に更新予定です。",
+  medical: "医療施設調査は毎年10月1日時点で実施されます。市区町村別データの公表後に更新予定です。",
+  preschools: "施設データは年度ごとに更新されます。新年度データの公表・反映後に更新予定です。",
 } as const;
 
 // 空き家率の鮮度ラベル。asOf 由来の「2023年最新」は誤解を招くため、調査名を明示する固定文字列。
@@ -388,6 +388,76 @@ function populationMetaDescription(metric: keyof typeof POPULATION_METRIC_TEXT) 
   };
 }
 
+// ---- 生活インフラ（駅・医療機関・保育施設）ランキング ----
+
+// amenities.asOf は「駅 2025年度／保育 令和5年度／医療機関 2024年10月」の複合形式
+// （scripts/_lib/versions.mjs の AMENITIES_ASOF）。指標ごとの鮮度ラベルには
+// 該当部分だけを取り出して使う。キーが見つからない形式はそのまま返す。
+export function amenityAsOfPart(asOf: string, key: "駅" | "保育" | "医療機関"): string {
+  const m = new RegExp(`${key} ([^／]+)`).exec(asOf);
+  return m ? m[1] : asOf;
+}
+
+// amenity 系の freshnessLabel（複合 asOf の部分抽出＋指標ごとのサフィックス）。
+// freshnessFromAsOf は「◯◯最新」固定＋単一 asOf 前提のためここでは使えない。
+function amenityFreshness(key: "駅" | "保育" | "医療機関", suffix: string) {
+  return (top1: Municipality | null): string | null =>
+    top1?.amenities ? `${amenityAsOfPart(top1.amenities.asOf, key)}${suffix}` : null;
+}
+
+// 生活インフラの集計対象か（北方領土など対象外センチネルの自治体を除外）。
+const hasAmenities = (m: Municipality): boolean =>
+  m.amenities != null && isAmenitiesCounted(m.amenities.source);
+
+// 施設数ランキング共通の注意書き（実数＝規模に比例しやすいことの明示）。
+const AMENITY_COUNT_CAVEAT =
+  "面積や人口規模が大きい自治体ほど施設数は多くなりやすい実数であり、人口あたりの多さや利用のしやすさを直接示すものではありません。";
+
+const STATIONS_FAQ: { q: string; a: string }[] = [
+  {
+    q: "駅数はどうやって数えていますか？",
+    a: "国土数値情報「駅別乗降客数（S12）」の駅データを市区町村ごとに数えた実数です。複数路線が乗り入れる駅は駅コードで名寄せして1駅と数え、政令指定都市は区の駅の重複を除いて集計しています。",
+  },
+  {
+    q: "駅が多いと住みやすいのですか？",
+    a: "駅数は鉄道網の集積を示す客観的な指標のひとつで、住みやすさそのものを示すものではありません。駅までの距離・運行本数・行き先は駅数には含まれないため、あくまで目安としてご覧ください。",
+  },
+  {
+    q: "データはいつ更新されますか？",
+    a: "国土数値情報の駅データ（S12）は年度ごとに更新されます。新年度版の公表後、本サイトのデータも更新します。",
+  },
+];
+
+const MEDICAL_FAQ: { q: string; a: string }[] = [
+  {
+    q: "医療機関数には何が含まれますか？",
+    a: "厚生労働省「医療施設調査」の病院・一般診療所・歯科診療所の合計です。政府統計の公表実数のみで、推計値は使用していません。診療科別（小児科・産婦人科など）の内訳は含みません。",
+  },
+  {
+    q: "医療機関が多いと医療に困らないのですか？",
+    a: "医療機関数は医療資源の集積を示す客観的な指標のひとつですが、人口あたりの多さ・診療科の構成・救急対応などは含まれません。あくまで目安としてご覧ください。",
+  },
+  {
+    q: "データはいつ更新されますか？",
+    a: "医療施設調査は毎年10月1日時点で実施されます。市区町村別データの公表後、本サイトのデータも更新します。",
+  },
+];
+
+const PRESCHOOLS_FAQ: { q: string; a: string }[] = [
+  {
+    q: "保育・幼稚園の施設数には何が含まれますか？",
+    a: "保育所・幼稚園・認定こども園などの施設数の合計です（国土数値情報／不動産情報ライブラリの施設データ）。施設の実数であり、定員や空き状況は含みません。",
+  },
+  {
+    q: "施設が多ければ保育園に入りやすいのですか？",
+    a: "必ずしもそうではありません。施設数は人口規模に比例しやすいため、入りやすさの目安には定員に対する空きの割合（定員余裕率）をご覧ください。本サイトでは「保育の定員に余裕がある市区町村ランキング」として別に掲載しています。",
+  },
+  {
+    q: "データはいつ更新されますか？",
+    a: "施設データは年度ごとに更新されます。新年度データの公表・反映後、本サイトのデータも更新します。",
+  },
+];
+
 // 1位自治体（実データ）から「名前・比率・基準年」を含む meta description を組み立てる。
 function foreignMetaDescription(highLow: "高い" | "低い") {
   return (top1: Municipality | null): string => {
@@ -451,6 +521,7 @@ export const RANKINGS: RankingDef[] = [
     intro: vacancyIntro("高い"),
     faq: VACANCY_FAQ,
     prefSummary: true,
+    mapHub: "/map/vacancy",
     columnLabel: "空き家率",
     order: "desc",
     freshnessLabel: () => VACANCY_FRESHNESS,
@@ -469,6 +540,7 @@ export const RANKINGS: RankingDef[] = [
     lead: "全国の市区町村を、空き家率（空き家数 ÷ 住宅総数）が低い順に並べたランキングです（住宅・土地統計調査 2023年）。",
     intro: vacancyIntro("低い"),
     faq: VACANCY_FAQ,
+    mapHub: "/map/vacancy",
     columnLabel: "空き家率",
     order: "asc",
     freshnessLabel: () => VACANCY_FRESHNESS,
@@ -554,6 +626,76 @@ export const RANKINGS: RankingDef[] = [
     sortValue: (m) => childcareOpenRatioPct(m.childcare) ?? 0,
     display: (m) => childcareOpenRatioText(m.childcare),
     related: { slug: "waitlist-zero", label: "待機児童ゼロの市区町村" },
+  },
+  {
+    slug: "stations",
+    category: "子育て・生活",
+    title: "駅が多い市区町村ランキング",
+    shortLabel: "駅が多い",
+    description:
+      "全国の市区町村を鉄道駅の数が多い順にランキング。最も駅が多いのは{top1}。国土数値情報（S12 駅データ）の実データで、鉄道網の集積を比較できます。",
+    lead: "全国の市区町村を、鉄道駅の数が多い順に並べたランキングです。",
+    note: `駅数は国土数値情報「駅別乗降客数（S12）」の駅を市区町村ごとに数えた実数です（複数路線が乗り入れる駅は駅コードで名寄せして1駅と数えます）。${AMENITY_COUNT_CAVEAT}`,
+    intro: [
+      "このページは、全国の市区町村を鉄道駅の数が多い順に並べたランキングです。上位には、面積が広く複数の路線が乗り入れる大都市や、鉄道網の結節点となる自治体が並ぶ傾向があります。",
+      "駅数は鉄道アクセスの集積を示す客観的な指標のひとつです。ただし駅までの距離・運行本数・行き先の情報は含まれないため、住みやすさの判断材料としては、家賃・人口・子育てなど他の指標とあわせてご覧ください。各順位の自治体名から、その地域の住環境データをまとめて確認できます。",
+    ],
+    faq: STATIONS_FAQ,
+    related: { slug: "medical-facilities", label: "医療機関が多い市区町村" },
+    columnLabel: "駅数",
+    order: "desc",
+    freshnessLabel: amenityFreshness("駅", "時点"),
+    nextUpdate: NEXT_UPDATE.stations,
+    qualifies: hasAmenities,
+    sortValue: (m) => m.amenities?.stations ?? 0,
+    display: (m) => `${(m.amenities?.stations ?? 0).toLocaleString()}駅`,
+  },
+  {
+    slug: "medical-facilities",
+    category: "子育て・生活",
+    title: "医療機関が多い市区町村ランキング",
+    seoTitle: "病院・診療所が多い市区町村ランキング（医療機関数）",
+    shortLabel: "医療機関が多い",
+    description:
+      "全国の市区町村を医療機関数（病院・一般診療所・歯科診療所の合計）が多い順にランキング。最も多いのは{top1}。厚生労働省「医療施設調査」の実データで比較できます。",
+    lead: "全国の市区町村を、医療機関数（病院・一般診療所・歯科診療所の合計）が多い順に並べたランキングです。",
+    note: `医療機関数は厚生労働省「医療施設調査」の病院・一般診療所・歯科診療所の合計（公表実数）です。${AMENITY_COUNT_CAVEAT}診療科別の内訳や救急対応の有無は含みません。`,
+    intro: [
+      "このページは、全国の市区町村を医療機関の数が多い順に並べたランキングです。医療機関数は病院・一般診療所・歯科診療所の合計で、上位には人口規模の大きい大都市が並ぶ傾向があります。",
+      "医療機関数は地域の医療資源の集積を示す客観的な指標のひとつです。人口あたりの多さや診療科の構成は含まれないため、あくまで目安として、家賃・子育て・災害リスクなど他の住環境データとあわせてご覧ください。",
+    ],
+    faq: MEDICAL_FAQ,
+    related: { slug: "preschools", label: "保育園・幼稚園が多い市区町村" },
+    columnLabel: "医療機関数",
+    order: "desc",
+    freshnessLabel: amenityFreshness("医療機関", "医療施設調査"),
+    nextUpdate: NEXT_UPDATE.medical,
+    qualifies: hasAmenities,
+    sortValue: (m) => m.amenities?.medicalFacilities ?? 0,
+    display: (m) => `${(m.amenities?.medicalFacilities ?? 0).toLocaleString()}件`,
+  },
+  {
+    slug: "preschools",
+    category: "子育て・生活",
+    title: "保育園・幼稚園が多い市区町村ランキング",
+    shortLabel: "保育・幼稚園が多い",
+    description:
+      "全国の市区町村を保育所・幼稚園・認定こども園の施設数が多い順にランキング。最も多いのは{top1}。施設の実数で子育てインフラの集積を比較できます。",
+    lead: "全国の市区町村を、保育所・幼稚園・認定こども園などの施設数が多い順に並べたランキングです。",
+    note: `施設数は保育所・幼稚園・認定こども園などの合計（国土数値情報／不動産情報ライブラリの施設データ）の実数です。${AMENITY_COUNT_CAVEAT}保育の入りやすさの目安には定員余裕率のランキングをご覧ください。`,
+    intro: [
+      "このページは、全国の市区町村を保育所・幼稚園・認定こども園などの施設数が多い順に並べたランキングです。施設数は人口規模に比例しやすいため、上位には子育て世帯の多い大都市が並ぶ傾向があります。",
+      "「施設が多い」ことと「入りやすい」ことは別です。入りやすさの目安には、定員に対する空きの割合で比較する「保育の定員に余裕がある市区町村ランキング」をあわせてご覧ください。各順位の自治体名から、待機児童数・定員余裕率などの子育てデータをまとめて確認できます。",
+    ],
+    faq: PRESCHOOLS_FAQ,
+    related: { slug: "childcare-capacity", label: "保育の定員に余裕がある市区町村" },
+    columnLabel: "保育・幼稚園等",
+    order: "desc",
+    freshnessLabel: amenityFreshness("保育", "時点"),
+    nextUpdate: NEXT_UPDATE.preschools,
+    qualifies: hasAmenities,
+    sortValue: (m) => m.amenities?.preschools ?? 0,
+    display: (m) => `${(m.amenities?.preschools ?? 0).toLocaleString()}施設`,
   },
   {
     slug: "population-most",

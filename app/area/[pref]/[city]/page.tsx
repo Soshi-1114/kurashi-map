@@ -60,6 +60,7 @@ import { getPrefRanks } from "@/lib/prefRanks";
 import { buildHighlights } from "@/lib/highlights";
 import { buildInsights } from "@/lib/insights";
 import { computeLivability } from "@/lib/livabilityScore";
+import { populationDensity, densityText } from "@/lib/populationDensity";
 import { Reveal } from "@/components/area/Reveal";
 import { Section } from "@/components/area/Section";
 import { ScorePanel } from "@/components/area/ScorePanel";
@@ -85,6 +86,7 @@ import { supportUrl, furusatoLink } from "@/lib/monetization";
 import { furunaviMunicipalPageUrl } from "@/lib/furunaviMunicipals";
 import PageShell from "@/components/PageShell";
 import SectionNav, { type SectionNavItem } from "@/components/area/SectionNav";
+import { ShareButton } from "@/components/ShareButton";
 
 type Params = { pref: string; city: string };
 
@@ -394,6 +396,8 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
         areaStats.rent.national != null ? `全国平均${areaStats.rent.national.toLocaleString()}円` : null,
       ].filter(Boolean).join("・") || undefined
     : undefined;
+  // 人口密度（実行時算出。面積未収録・人口0は null → 表示しない）。
+  const density = populationDensity(m);
   const popNatPos = rankPositions.get("population-most")?.get(m.code);
   const popPrefPos = prefRanks.get("population-most")?.get(m.code);
   const popCompare =
@@ -439,9 +443,19 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
             <span className="ad-title-sub">の住みやすさ</span>
           </h1>
           <p className="ad-lead">{buildSummary(m)}</p>
-          <Link href={`/compare?codes=${m.code}`} className="ad-compare-add ad-compare-add-hero">
-            この自治体を比較ページで見る<ArrowUpRight size={13} aria-hidden="true" />
-          </Link>
+          <div className="ad-hero-actions">
+            <Link href={`/compare?codes=${m.code}`} className="ad-compare-add ad-compare-add-hero">
+              この自治体を比較ページで見る<ArrowUpRight size={13} aria-hidden="true" />
+            </Link>
+            <ShareButton
+              className="ad-share-hero"
+              title={`${prefName}${heading}の住みやすさ｜${SITE.name}`}
+              path={`/area/${m.pref}/${m.code}`}
+              contentType="area"
+              itemId={m.code}
+              label="このページを共有"
+            />
+          </div>
         </div>
 
         <ScorePanel liv={liv} />
@@ -499,7 +513,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
             label="人口"
             value={m.population.toLocaleString()}
             unit="人"
-            sub={`人口トレンド: ${m.populationTrend}`}
+            sub={`人口トレンド: ${m.populationTrend}${density != null ? `・人口密度 ${densityText(density)}` : ""}`}
             compare={popCompare}
           />
           <KpiCard
@@ -715,15 +729,19 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
                   {fpRate != null && (
                     <p className="ad-note">2020年（推計の基準年）比 {futureRateText(fp)}</p>
                   )}
+                  {/* 推計は5年刻み（2025〜2050）を収録しているが、2025年推計は現在人口
+                      （2025年国勢調査・調査基準が異なる）と並ぶと混乱するため出さない。 */}
                   <CompareBar
                     rows={[
                       { label: `現在（${POPULATION_FRESHNESS}）`, value: m.population, self: true },
                       { label: "2030年（推計）", value: futureTotal(fp, "2030") ?? 0 },
+                      { label: "2035年（推計）", value: futureTotal(fp, "2035") ?? 0 },
                       { label: "2040年（推計）", value: futureTotal(fp, "2040") ?? 0 },
+                      { label: "2045年（推計）", value: futureTotal(fp, "2045") ?? 0 },
                       { label: "2050年（推計）", value: fp2050 ?? 0 },
                     ]}
                     format={(v) => `${v.toLocaleString()}人`}
-                    caption="現在人口と将来推計人口の推移"
+                    caption="現在人口と将来推計人口の推移（5年刻み）"
                   />
                   {fpAges && (
                     <p className="ad-note">

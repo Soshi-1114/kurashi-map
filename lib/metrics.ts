@@ -8,6 +8,7 @@ import { PREFS, getPrefBySlug, getPrefByCode, loadPrefData } from "./prefs";
 import { floodLevelOf, landslideLevelOf, tsunamiLevelOf, stormSurgeLevelOf, liquefactionLevelOf } from "./hazardScale";
 import { foreignRatioPct } from "./foreignResidents";
 import { futureChangeRate2050 } from "./futurePopulation";
+import { hasVacancy } from "./vacancy";
 import muniKana from "@/data/muni-kana.json";
 
 // 自治体のひらがな読み（検索のかな一致用）。scripts/fetch-towns.mjs が生成。
@@ -98,6 +99,8 @@ export async function listSummaryAcrossPrefs(): Promise<MuniSummary[]> {
         foreignRatio: roundRatio(foreignRatioPct(m)),
         // 2050年増減率は小数1桁で十分（データなしはフィールドごと省いてペイロードを増やさない）。
         ...(futureRate != null ? { futureChangeRate: Math.round(futureRate * 10) / 10 } : {}),
+        // 空き家率も同方式（集計対象外の町村はフィールド欠落）。元データが小数1桁。
+        ...(hasVacancy(m.vacancy) ? { vacancyRate: m.vacancy.rate } : {}),
         floodLevel: floodLevelOf(m.hazard),
         landslideLevel: landslideLevelOf(m.hazard),
         tsunamiLevel: tsunamiLevelOf(m.hazard),

@@ -2,8 +2,9 @@ import { describe, it, expect } from "vitest";
 import {
   getRankingBySlug, muniLevelOnly, rankBy, RANKINGS,
   housingSurveyLabel, landPriceSurveyLabel, appendFreshness, freshnessPrefix,
-  splitRankingTitle,
+  splitRankingTitle, amenityAsOfPart,
 } from "@/lib/rankings";
+import type { Municipality } from "@/lib/types";
 import { muni, metric } from "../_fixtures";
 
 describe("muniLevelOnly", () => {
@@ -416,5 +417,53 @@ describe("splitRankingTitle", () => {
 
   it("未知の語尾はフォールバックで全文を強調フレーズとして返す", () => {
     expect(splitRankingTitle("独自タイトル")).toEqual({ em: "独自タイトル", rest: "" });
+  });
+});
+
+describe("生活インフラ（駅・医療機関・保育施設）ランキング", () => {
+  const AMENITIES_ASOF = "駅 2025年度／保育 令和5年度／医療機関 2024年10月";
+  const amenities = (partial: Partial<NonNullable<Municipality["amenities"]>> = {}) => ({
+    stations: 10,
+    preschools: 100,
+    medicalFacilities: 500,
+    source: "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
+    asOf: AMENITIES_ASOF,
+    ...partial,
+  });
+
+  it("amenityAsOfPart は複合 asOf から指標ごとの時点を取り出す", () => {
+    expect(amenityAsOfPart(AMENITIES_ASOF, "駅")).toBe("2025年度");
+    expect(amenityAsOfPart(AMENITIES_ASOF, "保育")).toBe("令和5年度");
+    expect(amenityAsOfPart(AMENITIES_ASOF, "医療機関")).toBe("2024年10月");
+    // 未知の形式はそのまま返す（ラベルが空にならない）
+    expect(amenityAsOfPart("2025", "駅")).toBe("2025");
+  });
+
+  it("stations は駅数の降順、集計対象外・amenities なしは除外", () => {
+    const def = getRankingBySlug("stations")!;
+    const list = [
+      muni({ code: "A", amenities: amenities({ stations: 3 }) }),
+      muni({ code: "B", amenities: amenities({ stations: 40 }) }),
+      muni({ code: "C", amenities: amenities({ stations: 5, source: "対象外（北方領土）" }) }),
+      muni({ code: "D" }), // amenities なし → 除外
+    ];
+    expect(rankBy(def, list).map((m) => m.code)).toEqual(["B", "A"]);
+    expect(def.display(list[1])).toBe("40駅");
+  });
+
+  it("medical-facilities / preschools も同様に降順・件数表示", () => {
+    const medical = getRankingBySlug("medical-facilities")!;
+    const pre = getRankingBySlug("preschools")!;
+    const m = muni({ amenities: amenities({ medicalFacilities: 1796, preschools: 733 }) });
+    expect(medical.qualifies(m)).toBe(true);
+    expect(medical.display(m)).toBe("1,796件");
+    expect(pre.display(m)).toBe("733施設");
+  });
+
+  it("freshnessLabel は指標ごとの時点だけを使う（複合 asOf をそのまま出さない）", () => {
+    const m = muni({ amenities: amenities() });
+    expect(getRankingBySlug("stations")!.freshnessLabel!(m)).toBe("2025年度時点");
+    expect(getRankingBySlug("medical-facilities")!.freshnessLabel!(m)).toBe("2024年10月医療施設調査");
+    expect(getRankingBySlug("preschools")!.freshnessLabel!(m)).toBe("令和5年度時点");
   });
 });

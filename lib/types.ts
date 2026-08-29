@@ -140,6 +140,10 @@ export type MuniSummary = {
   // 減少（負値）が正常値のため負のセンチネルは使えず、データなし（対象外）は
   // フィールド欠落で表現する（lib/futurePopulation.ts futureChangeRate2050 で算出）。
   futureChangeRate?: number;
+  // 空き家率（%・住宅・土地統計調査）。地図の塗り分け用。データなし（人口1.5万人
+  // 未満の町村など集計対象外）はフィールド欠落で表現する（futureChangeRate と同方式。
+  // 0% が理論上実データになり得るため 0 センチネルは使わない）。
+  vacancyRate?: number;
   // 浸水深ランク。-1=評価対象外（reinfolib圏外）, 0=なし, 1..6（lib/hazardScale.ts）。
   // 旧 hasFloodRisk(>0)・hazardEvaluated(>=0) を1フィールドに集約。地図の濃淡と
   // 「浸水深◯m以下」フィルタの単一ソース。
