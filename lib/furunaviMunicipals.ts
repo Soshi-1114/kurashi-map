@@ -24,3 +24,11 @@ export function furunaviMunicipalPageUrl(code: string): string | null {
   if (id == null) return null;
   return `https://furunavi.jp/Municipal/Product/Search?municipalid=${id}&utm_source=at&utm_medium=affiliate&utm_campaign=default`;
 }
+
+/**
+ * ふるなびトップページ URL（特定自治体に紐付かない面＝ランキング等の導線用。
+ * 寄付先は移動先で選ぶ）。utm は自治体ページと同じ AT 既定のもの。
+ */
+export function furunaviTopPageUrl(): string {
+  return "https://furunavi.jp/?utm_source=at&utm_medium=affiliate&utm_campaign=default";
+}

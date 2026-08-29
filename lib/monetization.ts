@@ -123,3 +123,15 @@ export function furusatoLink(destUrl: string | null): FurusatoLinkInfo | null {
   if (aff) return { url: aff, kind: "portal", impressionPixel: atImpressionPixel(aff) };
   return null;
 }
+
+/**
+ * 特定の自治体に紐付かない面（ランキング等）向けのふるさと納税導線。
+ * リンク解決は furusatoLink と同じだが、リンク先が自治体ページではないため
+ * kind は常に "portal"（＝「寄付先は移動先で選ぶ」文言）に固定する。
+ *
+ * @param destUrl リンク先URL（lib/furunaviMunicipals.ts の furunaviTopPageUrl）
+ */
+export function furusatoPortalLink(destUrl: string | null): FurusatoLinkInfo | null {
+  const info = furusatoLink(destUrl);
+  return info && { ...info, kind: "portal" };
+}

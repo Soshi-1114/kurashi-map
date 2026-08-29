@@ -1,4 +1,5 @@
 import "../../../league.css";
+import "../../../support-links.css";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -20,6 +21,9 @@ import RankSources, { RANKING_SOURCES_TEXT } from "@/components/RankSources";
 import { RankBadge } from "@/components/RankBadge";
 import type { Municipality } from "@/lib/types";
 import PageShell from "@/components/PageShell";
+import { FurusatoLink } from "@/components/area/FurusatoLink";
+import { furusatoPortalLink } from "@/lib/monetization";
+import { furunaviTopPageUrl } from "@/lib/furunaviMunicipals";
 
 type Params = { metric: string; pref: string };
 
@@ -136,6 +140,9 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
   if (ranked.length === 0) notFound();
   const prefName = pref.nameJa;
   const isList = Boolean(def.membershipList);
+
+  // ふるさと納税の固定導線（ふるなびトップへ。特定自治体に紐付かないため portal）
+  const furusato = furusatoPortalLink(furunaviTopPageUrl());
 
   // データ鮮度ラベル・導入文・FAQ（定義のある指標のみ）。
   const freshness = def.freshnessLabel?.(ranked[0] ?? null) ?? null;
@@ -413,6 +420,14 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
       <RankFaq faq={faq} />
 
       <RankSources>{RANKING_SOURCES_TEXT}</RankSources>
+
+      {/* ふるさと納税の導線（検索流入の主戦場に置く固定リンク）。特定自治体に
+          紐付かない面なので portal 固定＝中立文言。env 設定で点灯（未設定なら非表示） */}
+      {furusato && (
+        <section className="ad-support-section" aria-label="生活関連の参考リンク">
+          <FurusatoLink link={furusato} placement="ranking" />
+        </section>
+      )}
 
       <nav className="rk-footnav" aria-label="関連リンク">
         <Link href={`/ranking/${def.slug}`} className="rk-back"><ArrowLeft size={15} aria-hidden="true" />全国版</Link>

@@ -1,6 +1,7 @@
 import { describe, it, expect, afterEach } from "vitest";
 import {
   furusatoLink,
+  furusatoPortalLink,
   furusatoAffUrl,
   supportUrl,
   furusatoUrlTemplate,
@@ -98,6 +99,28 @@ describe("furusatoLink", () => {
     process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "https://broken.example/";
     process.env.NEXT_PUBLIC_FURUSATO_AFF_URL = "https://h.accesstrade.net/sp/cc?rk=abc";
     expect(furusatoLink(DEST)?.kind).toBe("portal");
+  });
+});
+
+describe("furusatoPortalLink", () => {
+  // ふるなびトップ（lib/furunaviMunicipals.furunaviTopPageUrl の戻り値相当）
+  const TOP = "https://furunavi.jp/?utm_source=at&utm_medium=affiliate&utm_campaign=default";
+
+  it("env 未設定なら null（導線非表示）", () => {
+    expect(furusatoPortalLink(TOP)).toBeNull();
+  });
+
+  it("テンプレート採用時も kind は portal に固定（着地は自治体ページではない）", () => {
+    process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE = "https://h.accesstrade.net/sp/cc?rk=abc&url={url}";
+    const link = furusatoPortalLink(TOP);
+    expect(link?.kind).toBe("portal");
+    expect(link?.url).toBe("https://h.accesstrade.net/sp/cc?rk=abc&url=" + encodeURIComponent(TOP));
+    expect(link?.impressionPixel).toBe("https://h.accesstrade.net/sp/rr?rk=abc");
+  });
+
+  it("固定リンクへのフォールバックも furusatoLink と同じ", () => {
+    process.env.NEXT_PUBLIC_FURUSATO_AFF_URL = "https://h.accesstrade.net/sp/cc?rk=abc";
+    expect(furusatoPortalLink(TOP)?.url).toBe("https://h.accesstrade.net/sp/cc?rk=abc");
   });
 });
 

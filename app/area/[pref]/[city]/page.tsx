@@ -1,4 +1,5 @@
 import "./area-detail.css";
+import "../../../support-links.css";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -885,6 +886,24 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
           })}
         </ul>
       </Section>
+      {/* 生活関連の導線（データ可視化エリアとは視覚的に分離）。
+          ページ最下部では到達率が低いため、ランキング直後・FAQ の手前に置く
+          （到達・クリックは GA4 の furusato_link_impression / _click で計測）。
+          電気代シミュレーターは内部リンクで常時表示。
+          ふるさと納税はアクセストレード×ふるなび提携済み（2026-08）。
+          env（商品リンクテンプレート or 固定リンク）の設定で点灯する */}
+      <Reveal>
+        <section className="ad-support-section" aria-label="生活関連の参考リンク">
+          {/* 供給エリア名（自治体固有情報）を添えて /denki にプリセット遷移 */}
+          <DenkiTeaser municipalityCode={m.code} municipalityName={m.name} />
+          {support && (
+            <SupportBanner url={support} municipalityCode={m.code} municipalityName={m.name} />
+          )}
+          {furusato && (
+            <FurusatoLink link={furusato} targetName={donee.name} municipalityCode={m.code} />
+          )}
+        </section>
+      </Reveal>
       {/* FAQ（Accordion・デフォルト閉じる） */}
       <Section icon={Info} tone="ad-tone-infra" title={`${m.name}のよくある質問`} id="details">
         <div className="ad-faq">
@@ -907,22 +926,6 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
             本ページの数値は政府統計・国土数値情報の実データです。家賃は住宅・土地統計調査、人口は国勢調査（ともに e-Stat 経由）、地価は地価公示・地価調査、ハザード・生活インフラは不動産情報ライブラリ（reinfolib）／国土数値情報、待機児童はこども家庭庁、外国人住民は出入国在留管理庁「在留外国人統計」（e-Stat）の公表値に基づきます。総合スコアは公表値のみから算出した目安で、データのない指標は除外しています。データのない項目は推計で埋めず「データなし／対象外」と明示しています。
           </p>
         </details>
-      </Reveal>
-      {/* 生活関連の導線（データ可視化エリアとは視覚的に分離）。
-          電気代シミュレーターは内部リンクで常時表示。
-          ふるさと納税はアクセストレード×ふるなび提携済み（2026-08）。
-          env（商品リンクテンプレート or 固定リンク）の設定で点灯する */}
-      <Reveal>
-        <section className="ad-support-section" aria-label="生活関連の参考リンク">
-          {/* 供給エリア名（自治体固有情報）を添えて /denki にプリセット遷移 */}
-          <DenkiTeaser municipalityCode={m.code} municipalityName={m.name} />
-          {support && (
-            <SupportBanner url={support} municipalityCode={m.code} municipalityName={m.name} />
-          )}
-          {furusato && (
-            <FurusatoLink link={furusato} targetName={donee.name} municipalityCode={m.code} />
-          )}
-        </section>
       </Reveal>
       {/* ページ下部 CTA */}
       <Reveal>
