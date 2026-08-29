@@ -15,6 +15,7 @@ import { hasChildcareData, childcareOpenRatioText, isChildcareCityAggregate } fr
 import { formatAsOfJa } from "./rankings";
 import { isHazardEvaluated, isAmenitiesCounted, coverageReason } from "./coverage";
 import { buildSummary } from "./summary";
+import { hasFuturePopulation, futureTotal, futureRateText, elderlyRatio2050 } from "./futurePopulation";
 import { hasForeignData, foreignRatioPct } from "./foreignResidents";
 import { hasAgeData, elderlyRatioText, youngRatioText } from "./ageStats";
 import {
@@ -120,6 +121,22 @@ export function buildFaq(m: Municipality, prefName: string): QA[] {
       q: `${name}の医療・子育て施設はどのくらいありますか？`,
       a: `${name}の医療機関数は${m.amenities.medicalFacilities.toLocaleString()}件、保育・幼稚園・認定こども園は${m.amenities.preschools.toLocaleString()}施設です（出典: ${m.amenities.source}）。`,
     });
+  }
+
+  // 2050年の見通し（IPSS 公的推計のある自治体のみ）。「{市} 2050年 人口」「{市} 将来」
+  // 系の検索意図の受け皿。推計であることと出典を必ず明記する。
+  if (hasFuturePopulation(m.futurePopulation)) {
+    const t2050 = futureTotal(m.futurePopulation, "2050");
+    const elderly2050 = elderlyRatio2050(m.futurePopulation);
+    if (t2050 != null) {
+      qa.push({
+        q: `${name}の2050年の人口はどうなる見込みですか？`,
+        a:
+          `${name}の2050年の人口は${t2050.toLocaleString()}人（2020年比${futureRateText(m.futurePopulation)}）と推計されています` +
+          (elderly2050 != null ? `。65歳以上の割合は${elderly2050.toFixed(1)}%になる見込みです` : "") +
+          `。一定の仮定に基づく公的推計であり、将来を保証するものではありません（出典: ${m.futurePopulation.source}）。`,
+      });
+    }
   }
 
   // 外国人住民比率（調査対象の自治体のみ）。多様性・国際性の中立的な指標として提示。

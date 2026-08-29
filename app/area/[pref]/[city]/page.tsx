@@ -63,6 +63,7 @@ import { buildInsights } from "@/lib/insights";
 import { computeLivability } from "@/lib/livabilityScore";
 import { populationDensity, densityText } from "@/lib/populationDensity";
 import { hasAgeData, elderlyRatioPct, elderlyRatioText } from "@/lib/ageStats";
+import { buildFuture2050Insights, buildCapacityItems } from "@/lib/future2050";
 import { hasFiscal, isFiscalSpecialWard, fiscalIndexText, fiscalSource } from "@/lib/fiscal";
 import { Reveal } from "@/components/area/Reveal";
 import { Section } from "@/components/area/Section";
@@ -420,6 +421,13 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
     : undefined;
   // 人口密度（実行時算出。面積未収録・人口0は null → 表示しない）。
   const density = populationDensity(m);
+  // 「2050年の暮らし」ビュー（将来人口カード拡張）の派生テキスト。
+  const future2050Insights = buildFuture2050Insights(m);
+  const capacityItems = buildCapacityItems(m, areaStats);
+  // 体力の注記には値を再掲せず、比較文脈（全国平均）だけを添える。
+  const capacityContexts = capacityItems
+    .filter((c) => c.context)
+    .map((c) => `${c.label}の${c.context}`);
   const popNatPos = rankPositions.get("population-most")?.get(m.code);
   const popPrefPos = prefRanks.get("population-most")?.get(m.code);
   const popCompare =
@@ -778,7 +786,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
               id="future-pop"
               icon={Users}
               tone="ad-tone-pop"
-              title="将来人口（公的推計）"
+              title="将来人口と2050年の暮らし（公的推計）"
               link={{ href: mapHrefForCode(m.code, "/map/future-population"), label: "2050年推計人口を地図で見る" }}
             >
               {hasFuturePopulation(fp) ? (
@@ -816,6 +824,34 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
                       高齢化率の今とこれから: 現在 {elderlyRatioText(m.ageStats)}（{formatAsOfJa(m.ageStats.asOf)}・住民基本台帳）／
                       2050年 {fpAges.elderly.toFixed(1)}%（推計）。基準・人口の定義が異なる参考比較です。
                     </p>
+                  )}
+                  {/* 2050年の読み解き（推計値からの決定論生成。推移バー・年齢構成行と重複する
+                      総数・増減率は含めない） */}
+                  {future2050Insights.length > 0 && (
+                    <ul className="ad-insights">
+                      {future2050Insights.map((s, i) => (
+                        <li key={i} className="ad-insight">{s}</li>
+                      ))}
+                    </ul>
+                  )}
+                  {/* 変化を受け止める暮らしの体力 = 財政・保育・住宅ストックの現況を将来文脈で
+                      束ねる（北極星「現在×将来を1画面」。すべて収録済み実データの再掲で、
+                      新しい評価・スコアは作らない）。 */}
+                  {capacityItems.length > 0 && (
+                    <>
+                      <div className="ad-statline">
+                        {capacityItems.map((c) => (
+                          <span key={c.label} className="ad-stat">
+                            <span className="ad-stat-value">{c.value}</span>
+                            <span className="ad-stat-label">{c.label}</span>
+                          </span>
+                        ))}
+                      </div>
+                      <p className="ad-note">
+                        人口構成の変化を受け止める現在の備えとして、財政・保育・住宅ストックの現況（すべて現在の公表実データ）を並べています
+                        {capacityContexts.length > 0 ? `（参考: ${capacityContexts.join("・")}）。` : "。"}
+                      </p>
+                    </>
                   )}
                   <p className="ad-note">
                     <Info size={15} aria-hidden="true" />
