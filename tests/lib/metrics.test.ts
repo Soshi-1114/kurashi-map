@@ -123,4 +123,24 @@ describe("listAllAcrossPrefs / listSummaryAcrossPrefs", () => {
     const s = (await listSummaryAcrossPrefs()).find((x) => x.code === "11999")!;
     expect(s.foreignRatio).toBe(-1);
   });
+
+  it("空き家率は実データのみ vacancyRate に射影、対象外はフィールド欠落", async () => {
+    const withData = muni({
+      code: "11201",
+      vacancy: { rate: 12.6, vacant: 5300, total: 42210, source: "住宅・土地統計調査", asOf: "2023" },
+    });
+    const excluded = muni({
+      code: "11202",
+      vacancy: { rate: -1, vacant: 0, total: 0, source: "対象外（人口1.5万人未満）", asOf: "2023" },
+    });
+    mockLoadPrefData.mockImplementation(async (slug: string) => ({
+      muni: slug === "saitama" ? [withData, excluded] : [],
+      wards: [],
+    }));
+    const { listSummaryAcrossPrefs } = await freshMetrics();
+    const all = await listSummaryAcrossPrefs();
+    expect(all.find((x) => x.code === "11201")!.vacancyRate).toBe(12.6);
+    // 対象外は 0 や -1 でなくフィールドごと省く（地図側は ["has"] で欠損判定）
+    expect("vacancyRate" in all.find((x) => x.code === "11202")!).toBe(false);
+  });
 });

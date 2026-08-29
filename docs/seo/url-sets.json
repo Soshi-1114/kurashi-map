@@ -1,5 +1,26 @@
 [
   {
+    "name": "pr-ume-amenity-rankings",
+    "since": "2026-08-31",
+    "note": "駅数・医療機関数・保育施設数のランキング新設（全国+県別、収録済み amenities の露出強化）。新規URLなのでゼロベース成長で見る。since は想定デプロイ翌日 — 実デプロイがずれたら修正すること",
+    "include": [
+      "/ranking/stations",
+      "/ranking/stations/*",
+      "/ranking/medical-facilities",
+      "/ranking/medical-facilities/*",
+      "/ranking/preschools",
+      "/ranking/preschools/*"
+    ]
+  },
+  {
+    "name": "pr-ume-map-vacancy",
+    "since": "2026-08-31",
+    "note": "空き家率マップ /map/vacancy 新設（2026-07 SERP調査の勝ち筋回収。ランキング vacancy-high/low に地図CTAも点灯）。新規URLなのでゼロベース成長で見る。since は想定デプロイ翌日 — 実デプロイがずれたら修正すること",
+    "include": [
+      "/map/vacancy"
+    ]
+  },
+  {
     "name": "pr-126-population-rankings",
     "pr": 126,
     "since": "2026-08-11",

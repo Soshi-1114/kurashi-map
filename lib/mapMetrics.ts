@@ -8,7 +8,7 @@ import type { Municipality } from "./types";
 
 const NODATA_COLOR = RENT_NODATA_COLOR; // gray-300 を欠損色として全指標で共通化
 
-export type MapMetricKey = "rent" | "landPrice" | "populationTrend" | "foreignRatio" | "futurePopulation";
+export type MapMetricKey = "rent" | "landPrice" | "populationTrend" | "foreignRatio" | "futurePopulation" | "vacancy";
 
 type NumericLegend = {
   kind: "numeric";
@@ -82,6 +82,13 @@ const TREND_ITEMS = [
 // 中央値 -33% / p90 -5% / 増加は107自治体（5.6%）。「0以上=増加=緑」を独立セルにする。
 const FUTURE_CHANGE_THRESHOLDS = [-50, -30, -10, 0] as const;
 const FUTURE_CHANGE_COLORS = ["#762a83", "#9970ab", "#c2a5cf", "#e7d4e8", "#1b7837"] as const;
+
+// 空き家率（%）。高いほど濃い暖色（YlOrRd 5段階。高率=住宅ストックの余剰に注意を促す
+// 方向で家賃の青系と役割を分ける）。しきい値は実分布から: 中央値 14.3% / p75 18.8% /
+// p90 23.8%、全国平均13.8%（2023年）が中央セルに入る。0% は理論上実データのため
+// センチネルにせず、データなし（集計対象外の町村）はフィールド欠落で判定する。
+const VACANCY_THRESHOLDS = [10, 15, 20, 25] as const;
+const VACANCY_COLORS = ["#ffffb2", "#fecc5c", "#fd8d3c", "#f03b20", "#bd0026"] as const;
 
 export const MAP_METRICS: readonly MapMetric[] = [
   {
@@ -164,6 +171,27 @@ export const MAP_METRICS: readonly MapMetric[] = [
     formatValue: (raw) => {
       const v = Number(raw);
       if (!Number.isFinite(v) || v < 0) return "データなし";
+      return `${v.toFixed(1)}%`;
+    },
+  },
+  {
+    key: "vacancy",
+    label: "空き家率",
+    legendTitle: "空き家率（%）",
+    description:
+      "住宅総数に占める空き家の割合（二次的住宅・賃貸用等を含む）。\n出典: 住宅・土地統計調査 2023年（e-Stat）。",
+    nodataLabel: "データなし（人口1.5万人未満の町村など集計対象外）",
+    legend: {
+      kind: "numeric",
+      colors: VACANCY_COLORS,
+      scaleLabels: VACANCY_THRESHOLDS.map((t) => `${t}%`),
+    },
+    colorExpression: () =>
+      numericStepExpression("vacancyRate", VACANCY_THRESHOLDS, VACANCY_COLORS, null),
+    formatValue: (raw) => {
+      // データなしはプロパティ欠落。0% は実データなので「負=データなし」判定はしない。
+      const v = Number(raw);
+      if (raw == null || raw === "" || !Number.isFinite(v) || v < 0) return "データなし";
       return `${v.toFixed(1)}%`;
     },
   },
