@@ -25,7 +25,8 @@ import type { MapFlyDetail } from "@/lib/mapFly";
 import type { StationPoint } from "@/lib/stationSearch";
 import { parseMapDeepLink } from "@/lib/mapDeepLink";
 import {
-  EMPTY_FILTERS, isFilterActive, matchesFilter, buildMatchExpression, type MapFilters,
+  EMPTY_FILTERS, isFilterActive, matchesFilter, buildMatchExpression,
+  parseFilters, applyFiltersToParams, type MapFilters,
 } from "@/lib/mapFilters";
 import {
   HAZARD_OVERLAYS, HAZARD_ZONE_ZOOM, INUNDATION_KEYS, isInundationKey,
@@ -102,7 +103,17 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
     });
   }, []);
   const [activeMetric, setActiveMetric] = useState<MapMetricKey | "none">(initialMetric);
+  // フィルタ状態は URL クエリ（?rentMax= 等）と同期する: 初期値はマウント後にクエリから
+  // 復元し（SSGプリレンダーとの hydration 不整合を避けるため初期レンダーでは読まない。
+  // isMobile と同じパターン）、変更時は updateFilters が replaceState で書き戻す。
   const [filters, setFilters] = useState<MapFilters>(EMPTY_FILTERS);
+  useEffect(() => {
+    const parsed = parseFilters(window.location.search);
+    // マウント直後の1回だけ、URL にフィルタがある場合のみ復元する（SSG の初期HTMLは
+    // 常に EMPTY_FILTERS で描画し、hydration 後に実状態へ寄せる意図的なパターン）。
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (isFilterActive(parsed)) setFilters(parsed);
+  }, []);
   const [isMobile, setIsMobile] = useState(false);
   const [mapReady, setMapReady] = useState(false);
   // 初回ビューのポリゴンが描画され切るまで true にしない（凡例先行・白地図対策）
@@ -723,10 +734,11 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
     setAnnouncement(`${prefName}${m.displayName ?? m.name} を選択しました`);
   }, [selectedCode, byCode]);
 
-  // 条件フィルタの全国該当件数（JS判定。地図の減光と必ず同一条件）。
+  // 条件フィルタの全国該当（JS判定。地図の減光と必ず同一条件）。一覧表示にも使うため
+  // 件数でなく該当自治体そのものを持つ（件数は受け手が .length で導出）。
   const filterActive = isFilterActive(filters);
-  const matchedCount = useMemo(
-    () => (filterActive ? summary.reduce((n, m) => n + (matchesFilter(m, filters) ? 1 : 0), 0) : 0),
+  const matchedMunis = useMemo(
+    () => (filterActive ? summary.filter((m) => matchesFilter(m, filters)) : []),
     [filterActive, filters, summary],
   );
   // レイヤーボタンのバッジ用: 既定値から変更されている設定の数
@@ -736,10 +748,15 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
     overlays.size +
     Object.values(filters).filter((v) => v != null).length;
 
-  // フィルタ条件を更新しつつ GA4 に適用イベントを送る共通ハンドラ。
+  // フィルタ条件を更新しつつ GA4 に適用イベントを送り、URL クエリへ反映する共通ハンドラ
+  // （クリアも同経路。?code=/?pref= 等の他パラメータは applyFiltersToParams が保持する）。
   const updateFilters = useCallback((next: MapFilters) => {
     setFilters(next);
     if (isFilterActive(next)) trackApplyFilter(next);
+    const params = new URLSearchParams(window.location.search);
+    applyFiltersToParams(next, params);
+    const qs = params.toString();
+    window.history.replaceState(null, "", qs ? `?${qs}` : window.location.pathname);
   }, []);
 
   // 指標切替（GA4 イベント付き）。「なし」はトラッキングしない。
@@ -823,6 +840,9 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
     if (pref) await ensurePrefsRef.current([pref.slug]);
     flyToCode(t.code);
   }, [flyToCode, flyToStationPoint]);
+
+  // 該当一覧からの選択（検索確定と同じ経路）。LayersPanel 側の memo を活かすため安定参照。
+  const selectMatch = useCallback((code: string) => flyToMuni({ code }), [flyToMuni]);
 
   // パネル開閉はフル詳細の取得完了で判定（取得中の一瞬は閉のまま）
   const rootClass = [
@@ -920,9 +940,10 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
           onToggleOverlay={toggleOverlay}
           filters={filters}
           onChangeFilters={updateFilters}
-          onClearFilters={() => setFilters(EMPTY_FILTERS)}
+          onClearFilters={() => updateFilters(EMPTY_FILTERS)}
           filterActive={filterActive}
-          matchedCount={matchedCount}
+          matchedMunis={matchedMunis}
+          onSelectMatch={selectMatch}
           isMobile={isMobile}
           activeCount={layerActiveCount}
         />

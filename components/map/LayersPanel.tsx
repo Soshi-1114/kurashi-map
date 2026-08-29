@@ -4,14 +4,17 @@
 // 状態は持たず、すべて props 経由（状態の単一ソースは MapView）。
 // 表示形態は2通り: PC は地図右上のポップオーバー、モバイル（isMobile）は
 // 画面下から開くモーダルの Bottom Sheet（scrim・ESC・スクロールロック・フォーカス移動つき）。
-import { useEffect, useRef } from "react";
+import { memo, useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { MAP_METRICS, getMapMetric, type MapMetricKey } from "@/lib/mapMetrics";
 import {
-  RENT_MAX_OPTIONS, LAND_MAX_OPTIONS, FLOOD_MAX_OPTIONS, type MapFilters,
+  RENT_MAX_OPTIONS, LAND_MAX_OPTIONS, FLOOD_MAX_OPTIONS,
+  VACANCY_MAX_OPTIONS, FUTURE_MIN_OPTIONS, type MapFilters,
 } from "@/lib/mapFilters";
 import { HAZARD_OVERLAYS } from "@/lib/mapHazards";
 import { BASEMAPS, type BasemapKey } from "@/lib/mapBasemaps";
+import { PREFS } from "@/lib/prefs";
+import type { MuniSummary } from "@/lib/types";
 import { SHELTER_KEY, type OverlayKey } from "./mapConstants";
 
 type Props = {
@@ -28,7 +31,10 @@ type Props = {
   onChangeFilters: (next: MapFilters) => void;
   onClearFilters: () => void;
   filterActive: boolean;
-  matchedCount: number;
+  /** フィルタ該当の自治体（matchesFilter と同一条件で MapView が算出）。件数＝.length */
+  matchedMunis: MuniSummary[];
+  /** 該当一覧から自治体を選んだ時（地図フライト＋詳細パネル表示は MapView 側） */
+  onSelectMatch: (code: string) => void;
   /** モバイル表示（MapView の isMobile と連動。true で Bottom Sheet 化） */
   isMobile?: boolean;
   /** 既定値から変更されている設定の数（>0 でトグルボタンにバッジ表示） */
@@ -41,12 +47,22 @@ export default function LayersPanel({
   basemap, onChangeBasemap,
   overlays, onClearOverlays, onToggleOverlay,
   filters, onChangeFilters, onClearFilters,
-  filterActive, matchedCount,
+  filterActive, matchedMunis, onSelectMatch,
   isMobile = false,
   activeCount = 0,
 }: Props) {
+  const matchedCount = matchedMunis.length;
   const panelRef = useRef<HTMLDivElement | null>(null);
   const closeBtnRef = useRef<HTMLButtonElement | null>(null);
+  // 該当一覧の開閉（パネル内のビュー状態なのでローカルに持つ）。
+  // フィルタを全解除すると filter-summary ごと消えるため、明示リセットは不要。
+  const [showMatches, setShowMatches] = useState(false);
+  // MatchedList の memo を活かすため参照を安定させる（モバイルはシートが地図を覆うため、
+  // 選択したら閉じて結果を見せる）。
+  const selectMatch = useCallback((code: string) => {
+    onSelectMatch(code);
+    if (isMobile) onToggleOpen();
+  }, [onSelectMatch, isMobile, onToggleOpen]);
 
   // Escape で閉じる（PC/モバイル共通）。モバイルはモーダルなので加えて
   // body スクロールをロックし、開いた直後に閉じるボタンへフォーカスを移す。
@@ -234,14 +250,40 @@ export default function LayersPanel({
             value={filters.floodMax}
             onChange={(v) => onChangeFilters({ ...filters, floodMax: v })}
           />
+          <SegmentedFilter
+            label="空き家率上限"
+            options={VACANCY_MAX_OPTIONS}
+            value={filters.vacancyMax}
+            onChange={(v) => onChangeFilters({ ...filters, vacancyMax: v })}
+          />
+          <SegmentedFilter
+            label="2050年人口（推計）"
+            options={FUTURE_MIN_OPTIONS}
+            value={filters.futureMin}
+            onChange={(v) => onChangeFilters({ ...filters, futureMin: v })}
+          />
           {filterActive && (
-            <div className="filter-summary" aria-live="polite">
-              <span className="filter-count">
-                全国該当 <strong>{matchedCount.toLocaleString()}</strong> 自治体
-                <span className="filter-count-note">（データなしの自治体は除外）</span>
-              </span>
-              <button className="filter-clear" onClick={onClearFilters}>クリア</button>
-            </div>
+            <>
+              <div className="filter-summary" aria-live="polite">
+                <span className="filter-count">
+                  全国該当 <strong>{matchedCount.toLocaleString()}</strong> 自治体
+                  <span className="filter-count-note">（データなしの自治体は除外）</span>
+                </span>
+                {matchedCount > 0 && (
+                  <button
+                    className="filter-clear"
+                    aria-expanded={showMatches}
+                    onClick={() => setShowMatches((v) => !v)}
+                  >
+                    {showMatches ? "一覧を閉じる" : "一覧を見る"}
+                  </button>
+                )}
+                <button className="filter-clear" onClick={onClearFilters}>クリア</button>
+              </div>
+              {showMatches && matchedCount > 0 && (
+                <MatchedList munis={matchedMunis} onSelect={selectMatch} />
+              )}
+            </>
           )}
       </div>
     </>
@@ -281,6 +323,44 @@ function LayersIcon() {
     </svg>
   );
 }
+
+// フィルタ該当自治体の一覧（都道府県ごとにグループ化。PREFS の並び順＝北→南）。
+// 行クリックで地図フライト＋詳細パネル表示（MapView の検索確定と同じ経路）。
+// munis は MapView 側で useMemo 済み＝参照安定なので、memo でフィルタ非変更時の
+// 全再グループ化・チップ再生成（最大~1,900個）を止める。
+const MatchedList = memo(function MatchedList({ munis, onSelect }: { munis: MuniSummary[]; onSelect: (code: string) => void }) {
+  const byPref = new Map<string, MuniSummary[]>();
+  for (const m of munis) {
+    const list = byPref.get(m.pref);
+    if (list) list.push(m);
+    else byPref.set(m.pref, [m]);
+  }
+  return (
+    <div className="filter-matches">
+      {PREFS.map((p) => {
+        const list = byPref.get(p.slug);
+        if (!list) return null;
+        return (
+          <div key={p.slug} className="filter-matches-group">
+            <div className="filter-matches-pref">
+              {p.nameJa}
+              <span className="filter-matches-count">{list.length}</span>
+            </div>
+            <ul className="filter-matches-list">
+              {list.map((m) => (
+                <li key={m.code}>
+                  <button type="button" className="filter-matches-item" onClick={() => onSelect(m.code)}>
+                    {m.displayName ?? m.name}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        );
+      })}
+    </div>
+  );
+});
 
 function SegmentedFilter({
   label,
