@@ -21,7 +21,7 @@ KurashiMap は Google Analytics 4（gtag.js）でページビューに加えて�
 | `web_vitals` | 各 Web Vital が確定した時（LCP/FCP/TTFB は表示直後、INP/CLS は離脱前後） | `components/WebVitals.tsx` |
 | `select_municipality` | 自治体を選択した時（地図クリック／検索） | `components/MapView.tsx` |
 | `change_metric` | 塗り分け指標を切り替えた時 | `components/MapView.tsx` |
-| `apply_filter` | 条件フィルタ（家賃上限／地価上限／浸水なし）を変更した時 | `components/MapView.tsx` |
+| `apply_filter` | 条件フィルタ（家賃上限／地価上限／浸水深上限／空き家率上限／2050年人口）を変更した時 | `components/MapView.tsx` |
 | `select_section` | 自治体詳細ページの目次（セクションナビ）で移動した時 | `components/area/SectionNav.tsx` |
 | `support_link_click` | 支援（投げ銭）リンクをクリックした時 | `components/area/SupportBanner.tsx` |
 | `furusato_link_click` | ふるさと納税リンクをクリックした時 | `components/area/FurusatoLink.tsx` |
@@ -49,6 +49,8 @@ KurashiMap は Google Analytics 4（gtag.js）でページビューに加えて�
 | `apply_filter` | `rent_max` | 数値 | `0` `50000` `60000` `70000` | 家賃上限（円/月）。`0`=条件なし |
 | | `land_max` | 数値 | `0` `50000` `100000` `200000` | 地価上限（円/㎡）。`0`=条件なし |
 | | `flood_max` | 数値 | `-1` `0` `2` `3` | 浸水深ランク上限（`-1`=条件なし, `0`=浸水なし限定, `2`=〜3m, `3`=〜5m） |
+| | `vacancy_max` | 数値 | `0` `10` `15` `20` | 空き家率上限（%）。`0`=条件なし |
+| | `future_min` | 数値 | `-999` `-20` `-10` `0` | 2050年推計人口の増減率の下限（%）。`-999`=条件なし, `0`=増加見込み限定 |
 | `support_link_click` | `municipality_code` | 文字列 | `13101` | 表示中の自治体コード |
 | | `municipality_name` | 文字列 | `千代田区` | |
 | `furusato_link_click` | `municipality_code` | 文字列 | `13101` | 表示中の自治体コード |
