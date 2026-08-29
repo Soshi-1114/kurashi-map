@@ -145,6 +145,25 @@ describe("matchesFilter — 空き家率上限", () => {
   });
 });
 
+describe("matchesFilter — 高齢化率上限", () => {
+  const f = filters({ agingMax: 35 });
+  it("上限以下なら該当", () => {
+    expect(matchesFilter(summary({ agingRate: 22.9 }), f)).toBe(true);
+    expect(matchesFilter(summary({ agingRate: 35 }), f)).toBe(true);
+  });
+  it("上限超なら非該当", () => {
+    expect(matchesFilter(summary({ agingRate: 40.1 }), f)).toBe(false);
+  });
+  it("フィールド欠落（住民登録なし）は非該当", () => {
+    expect(matchesFilter(summary(), f)).toBe(false);
+  });
+  it("URLラウンドトリップに乗る", () => {
+    const params = new URLSearchParams();
+    applyFiltersToParams(f, params);
+    expect(parseFilters(`?${params.toString()}`)).toEqual(f);
+  });
+});
+
 describe("matchesFilter — 2050年人口の下限", () => {
   const f = filters({ futureMin: -10 });
   it("下限以上なら該当（負値は正常値）", () => {

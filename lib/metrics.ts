@@ -9,6 +9,7 @@ import { floodLevelOf, landslideLevelOf, tsunamiLevelOf, stormSurgeLevelOf, liqu
 import { foreignRatioPct } from "./foreignResidents";
 import { futureChangeRate2050 } from "./futurePopulation";
 import { hasVacancy } from "./vacancy";
+import { elderlyRatioPct } from "./ageStats";
 import muniKana from "@/data/muni-kana.json";
 
 // 自治体のひらがな読み（検索のかな一致用）。scripts/fetch-towns.mjs が生成。
@@ -84,6 +85,7 @@ export async function listSummaryAcrossPrefs(): Promise<MuniSummary[]> {
     const { muni, wards } = await loadPref(p.slug);
     for (const m of [...muni, ...wards]) {
       const futureRate = futureChangeRate2050(m.futurePopulation);
+      const agingRate = elderlyRatioPct(m.ageStats);
       out.push({
         code: m.code,
         pref: m.pref,
@@ -101,6 +103,8 @@ export async function listSummaryAcrossPrefs(): Promise<MuniSummary[]> {
         ...(futureRate != null ? { futureChangeRate: Math.round(futureRate * 10) / 10 } : {}),
         // 空き家率も同方式（集計対象外の町村はフィールド欠落）。元データが小数1桁。
         ...(hasVacancy(m.vacancy) ? { vacancyRate: m.vacancy.rate } : {}),
+        // 高齢化率も同方式（住民登録のない北方領土6村はフィールド欠落）。小数1桁に丸める。
+        ...(agingRate != null ? { agingRate: Math.round(agingRate * 10) / 10 } : {}),
         floodLevel: floodLevelOf(m.hazard),
         landslideLevel: landslideLevelOf(m.hazard),
         tsunamiLevel: tsunamiLevelOf(m.hazard),

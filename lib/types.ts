@@ -170,6 +170,9 @@ export type MuniSummary = {
   // 未満の町村など集計対象外）はフィールド欠落で表現する（futureChangeRate と同方式。
   // 0% が理論上実データになり得るため 0 センチネルは使わない）。
   vacancyRate?: number;
+  // 高齢化率（%・住民基本台帳）。地図の塗り分け・条件フィルタ用。データなし
+  // （北方領土6村=住民登録なし）はフィールド欠落で表現する（vacancyRate と同方式）。
+  agingRate?: number;
   // 浸水深ランク。-1=評価対象外（reinfolib圏外）, 0=なし, 1..6（lib/hazardScale.ts）。
   // 旧 hasFloodRisk(>0)・hazardEvaluated(>=0) を1フィールドに集約。地図の濃淡と
   // 「浸水深◯m以下」フィルタの単一ソース。

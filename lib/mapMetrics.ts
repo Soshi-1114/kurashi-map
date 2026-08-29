@@ -8,7 +8,7 @@ import type { Municipality } from "./types";
 
 const NODATA_COLOR = RENT_NODATA_COLOR; // gray-300 を欠損色として全指標で共通化
 
-export type MapMetricKey = "rent" | "landPrice" | "populationTrend" | "foreignRatio" | "futurePopulation" | "vacancy";
+export type MapMetricKey = "rent" | "landPrice" | "populationTrend" | "foreignRatio" | "futurePopulation" | "vacancy" | "aging";
 
 type NumericLegend = {
   kind: "numeric";
@@ -101,6 +101,15 @@ const FUTURE_CHANGE_COLORS = ["#762a83", "#9970ab", "#c2a5cf", "#e7d4e8", "#1b78
 // センチネルにせず、データなし（集計対象外の町村）はフィールド欠落で判定する。
 const VACANCY_THRESHOLDS = [10, 15, 20, 25] as const;
 const VACANCY_COLORS = ["#ffffb2", "#fecc5c", "#fd8d3c", "#f03b20", "#bd0026"] as const;
+
+// 高齢化率（%）。高いほど濃い紫（ColorBrewer BuPu 5段階）。年齢構成は優劣ではない
+// 中立指標のため、発散配色（PRGn の「良い/悪い」両極の示唆）は使わず順次配色にする。
+// 家賃の青系・空き家の暖色系とも重ならない。しきい値は実分布（中央値35.0%・
+// p20=27.7/p80=42.9）を丸めた [25,30,35,40]（中央値が中央セルに入る）。
+// 0% は理論上実データのためセンチネルにせず、データなし（北方領土6村=住民登録なし）は
+// フィールド欠落で判定する。
+const AGING_THRESHOLDS = [25, 30, 35, 40] as const;
+const AGING_COLORS = ["#edf8fb", "#b3cde3", "#8c96c6", "#8856a7", "#810f7c"] as const;
 
 export const MAP_METRICS: readonly MapMetric[] = [
   {
@@ -196,6 +205,23 @@ export const MAP_METRICS: readonly MapMetric[] = [
     },
     colorExpression: () =>
       numericStepExpression("vacancyRate", VACANCY_THRESHOLDS, VACANCY_COLORS, null),
+    // データなしはプロパティ欠落。0% は実データなので負値センチネル判定はしない。
+    formatValue: (raw) => formatPercent(raw),
+  },
+  {
+    key: "aging",
+    label: "高齢化率",
+    legendTitle: "高齢化率（65歳以上人口の割合・%）",
+    description:
+      "総人口に占める65歳以上人口の割合（年齢構成の事実を示す中立指標）。\n出典: 住民基本台帳に基づく人口・世帯数調査（毎年1月1日時点）。",
+    nodataLabel: "データなし（北方領土など住民登録のない自治体）",
+    legend: {
+      kind: "numeric",
+      colors: AGING_COLORS,
+      scaleLabels: AGING_THRESHOLDS.map((t) => `${t}%`),
+    },
+    colorExpression: () =>
+      numericStepExpression("agingRate", AGING_THRESHOLDS, AGING_COLORS, null),
     // データなしはプロパティ欠落。0% は実データなので負値センチネル判定はしない。
     formatValue: (raw) => formatPercent(raw),
   },

@@ -14,10 +14,11 @@ export type MapFilters = {
   floodMax: number | null;   // 許容する最大浸水深ランク（0..6）。null=条件なし。0=浸水なしに限定
   vacancyMax: number | null; // 空き家率上限（%）。null=条件なし
   futureMin: number | null;  // 2050年推計人口の増減率の下限（%）。null=条件なし。0=増加見込みに限定
+  agingMax: number | null;   // 高齢化率上限（%）。null=条件なし
 };
 
 export const EMPTY_FILTERS: MapFilters = {
-  rentMax: null, landMax: null, floodMax: null, vacancyMax: null, futureMin: null,
+  rentMax: null, landMax: null, floodMax: null, vacancyMax: null, futureMin: null, agingMax: null,
 };
 
 // セグメント選択肢（離散値の方がスライダーよりデータスケールに合い操作も明確）。
@@ -49,6 +50,14 @@ export const VACANCY_MAX_OPTIONS = [
   { label: "〜20%", value: 20 },
 ] as const;
 
+// 高齢化率の上限（%）。しきい値は地図コロプレス（lib/mapMetrics.ts）の中位側と揃える
+// （全国中央値35.0%が「〜35%」に収まる）。
+export const AGING_MAX_OPTIONS = [
+  { label: "〜30%", value: 30 },
+  { label: "〜35%", value: 35 },
+  { label: "〜40%", value: 40 },
+] as const;
+
 // 2050年推計人口の増減率の下限（%）。0=増加見込みに限定。IPSS 公的推計の公表値による
 // 絞り込みで、対象外（浜通り13市町村・北方領土等）はデータなしとして非該当。
 export const FUTURE_MIN_OPTIONS = [
@@ -63,7 +72,7 @@ type FilterSpec = {
   /** MapFilters のフィールド ＝ URL クエリキー */
   key: keyof MapFilters;
   /** MuniSummary の数値フィールド ＝ geojson プロパティ名 */
-  prop: "rent" | "landPrice" | "floodLevel" | "vacancyRate" | "futureChangeRate";
+  prop: "rent" | "landPrice" | "floodLevel" | "vacancyRate" | "futureChangeRate" | "agingRate";
   /** 比較の向き。max=選択値以下が該当 / min=選択値以上が該当 */
   dir: "max" | "min";
   /** 有効値の下限判定（欠損・センチネルを非該当に落とす）。 */
@@ -85,6 +94,7 @@ const FILTER_SPECS: readonly FilterSpec[] = [
   { key: "landMax", prop: "landPrice", dir: "max", floorOp: ">", floor: 0, missingDefault: 0, options: LAND_MAX_OPTIONS },
   { key: "floodMax", prop: "floodLevel", dir: "max", floorOp: ">=", floor: 0, missingDefault: -1, options: FLOOD_MAX_OPTIONS },
   { key: "vacancyMax", prop: "vacancyRate", dir: "max", floorOp: ">=", floor: 0, missingDefault: -1, options: VACANCY_MAX_OPTIONS },
+  { key: "agingMax", prop: "agingRate", dir: "max", floorOp: ">=", floor: 0, missingDefault: -1, options: AGING_MAX_OPTIONS },
   { key: "futureMin", prop: "futureChangeRate", dir: "min", floorOp: ">=", floor: -1000, missingDefault: -9999, options: FUTURE_MIN_OPTIONS },
 ];
 
