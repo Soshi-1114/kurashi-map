@@ -1,5 +1,4 @@
 import "./area-detail.css";
-import "../../../support-links.css";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -80,7 +79,7 @@ import {
 } from "@/components/area/cards";
 import { compactYen, compactPopulation } from "@/lib/format";
 import { SupportBanner } from "@/components/area/SupportBanner";
-import { FurusatoLink } from "@/components/area/FurusatoLink";
+import { FurusatoLink } from "@/components/monetization/FurusatoLink";
 import { DenkiTeaser } from "@/components/area/DenkiTeaser";
 import { supportUrl, furusatoLink } from "@/lib/monetization";
 import { furunaviMunicipalPageUrl } from "@/lib/furunaviMunicipals";

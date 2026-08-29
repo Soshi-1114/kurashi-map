@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { describe, it, expect, afterEach, vi } from "vitest";
 import { render, cleanup, fireEvent, act } from "@testing-library/react";
-import { FurusatoLink } from "@/components/area/FurusatoLink";
+import { FurusatoLink } from "@/components/monetization/FurusatoLink";
 import type { FurusatoLinkInfo } from "@/lib/monetization";
 
 afterEach(() => {

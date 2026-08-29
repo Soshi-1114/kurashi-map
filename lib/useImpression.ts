@@ -18,13 +18,9 @@ export function useImpressionOnce<T extends HTMLElement>(
   params: Record<string, unknown>,
 ): React.RefObject<T | null> {
   const ref = useRef<T>(null);
+  // 送信は1回きりなので、params は初回マウント時点の値を捕捉すれば足りる
   const paramsRef = useRef(params);
   const sent = useRef(false);
-
-  // レンダー中の ref 書き込みは不可（react-hooks/refs）なので commit 後に毎回同期する
-  useEffect(() => {
-    paramsRef.current = params;
-  });
 
   useEffect(() => {
     const el = ref.current;

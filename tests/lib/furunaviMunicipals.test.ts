@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import data from "@/data/furunavi-municipals.json";
-import { furunaviMunicipalId, furunaviMunicipalPageUrl, furunaviTopPageUrl } from "@/lib/furunaviMunicipals";
+import { furunaviMunicipalId, furunaviMunicipalPageUrl, FURUNAVI_TOP_PAGE_URL } from "@/lib/furunaviMunicipals";
 
 // scripts/fetch-furunavi-municipals.mjs の出力破損（空データ・キー形式崩れ）を検出する。
 // 掲載自治体の増減があるため件数は幅で守る。
@@ -40,9 +40,8 @@ describe("data/furunavi-municipals.json", () => {
     expect(furunaviMunicipalPageUrl("99999")).toBeNull();
   });
 
-  it("furunaviTopPageUrl はふるなびトップURL（AT向けutm付き）を返す", () => {
-    const url = furunaviTopPageUrl();
-    expect(url.startsWith("https://furunavi.jp/?")).toBe(true);
-    expect(url).toContain("utm_source=at&utm_medium=affiliate&utm_campaign=default");
+  it("FURUNAVI_TOP_PAGE_URL はふるなびトップURL（AT向けutm付き）", () => {
+    expect(FURUNAVI_TOP_PAGE_URL.startsWith("https://furunavi.jp/?")).toBe(true);
+    expect(FURUNAVI_TOP_PAGE_URL).toContain("utm_source=at&utm_medium=affiliate&utm_campaign=default");
   });
 });

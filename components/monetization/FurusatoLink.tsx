@@ -1,7 +1,7 @@
 "use client";
 
 // ふるさと納税導線の表示専用コンポーネント。リンクの解決・表示可否は
-// サーバー側（lib/monetization.furusatoLink / furusatoPortalLink + lib/furunaviMunicipals）が担い、
+// サーバー側（lib/monetization.furusatoLink + lib/furunaviMunicipals）が担い、
 // ここは解決済みの FurusatoLinkInfo を受け取って描画とクリック・表示計測だけを行う
 // （約1,600件のID対応表やリンク生成ロジックをクライアントに配らない）。
 // 自治体詳細ページ（targetName あり）とランキング等の共通面（targetName なし・portal）の両方で使う。
@@ -22,7 +22,7 @@ export function FurusatoLink({
   municipalityCode,
   placement = "area",
 }: {
-  /** サーバー側で解決済みのリンク情報（furusatoLink / furusatoPortalLink の非 null 戻り値） */
+  /** サーバー側で解決済みのリンク情報（furusatoLink の非 null 戻り値） */
   link: FurusatoLinkInfo;
   /** 寄付先自治体名（行政区の場合は親の政令市名）。自治体に紐付かない面では省略 */
   targetName?: string;

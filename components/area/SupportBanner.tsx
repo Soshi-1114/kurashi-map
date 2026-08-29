@@ -4,7 +4,7 @@
 // データ可視化エリアとは視覚的に分離した位置に置く。支援先URLは環境変数で管理。
 import { Heart } from "lucide-react";
 import { track } from "@/lib/analytics";
-import { AdLinkRow } from "./AdLinkRow";
+import { AdLinkRow } from "@/components/monetization/AdLinkRow";
 
 export function SupportBanner({
   url,
