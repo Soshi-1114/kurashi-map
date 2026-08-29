@@ -66,6 +66,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.7,
     },
+    // 住む街診断（回答状態はクエリなので URL はベースの1件のみ）。
+    {
+      url: absoluteUrl("/shindan"),
+      lastModified: siteLatest,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
     // 電気代シミュレーター（横断ツール。?code= プリセットは同一ページの状態なので URL は1件）。
     // lastModified は料金プランデータの確認時点（data/denki-plans.json の asOf）と
     // テンプレート改訂日の新しい方。priority は全自治体詳細から導線が張られる

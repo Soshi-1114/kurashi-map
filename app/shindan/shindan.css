@@ -1,0 +1,158 @@
+/* 住む街診断（/shindan）。sd-* 名前空間。
+   面・タイポ・セグメントボタンは globals.css の共通プリミティブ
+   （.page-root / .h2 / .filter-segments / .filter-seg / .cmp-share）に委譲し、
+   ここには質問リストと結果リスト固有のレイアウトだけを置く。 */
+
+.sd-title { margin: 0 0 8px; }
+.sd-lead {
+  margin: 0;
+  max-width: 680px;
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  color: var(--text-muted);
+}
+
+/* ---- 質問 ---- */
+.sd-questions {
+  margin: 20px 0 8px;
+  display: grid;
+  gap: 14px;
+}
+.sd-question {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+}
+.sd-question-text { min-width: 220px; flex: 1; }
+.sd-question-q { margin: 0; font-size: var(--text-sm); font-weight: 700; }
+.sd-question-basis { margin: 2px 0 0; font-size: var(--text-xs); color: var(--text-muted); }
+.sd-regions { display: flex; flex-wrap: wrap; gap: 6px; }
+
+/* ---- 結果 ---- */
+.sd-empty {
+  margin: 20px 0;
+  padding: 18px;
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  text-align: center;
+}
+.sd-results { margin-top: 24px; }
+.sd-results-h {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 12px;
+  margin: 0 0 12px;
+  font-size: var(--text-lg);
+}
+.sd-results-sub { font-size: var(--text-xs); font-weight: 600; color: var(--text-muted); }
+.sd-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+.sd-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+}
+.sd-rank {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--surface-strong);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.sd-row-main { flex: 1; min-width: 0; }
+.sd-town {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  font-weight: 700;
+  color: var(--text);
+}
+.sd-town:hover { color: var(--accent); }
+.sd-pref {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--text-muted);
+}
+.sd-axes {
+  margin: 2px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+.sd-axis { white-space: nowrap; }
+.sd-score {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.2;
+}
+.sd-score strong { font-size: var(--text-lg); font-variant-numeric: tabular-nums; }
+.sd-score small { font-size: 10px; color: var(--text-muted); }
+.sd-compare {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--accent);
+}
+.sd-note {
+  margin: 14px 0 0;
+  font-size: var(--text-xs);
+  line-height: var(--leading-relaxed);
+  color: var(--text-muted);
+}
+
+/* ---- FAQ・フッター ---- */
+.sd-faq-section { margin-top: 32px; }
+.sd-h2 {
+  border-left: 3px solid var(--accent);
+  padding-left: 9px;
+  font-size: var(--text-lg);
+}
+.sd-faq { display: grid; gap: 8px; margin-top: 12px; }
+.sd-faq-item {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  padding: 10px 14px;
+}
+.sd-faq-q { font-size: var(--text-sm); font-weight: 700; cursor: pointer; }
+.sd-faq-a { margin: 8px 0 0; font-size: var(--text-sm); color: var(--text-muted); line-height: var(--leading-relaxed); }
+.sd-foot {
+  margin-top: 24px;
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  line-height: var(--leading-relaxed);
+}
