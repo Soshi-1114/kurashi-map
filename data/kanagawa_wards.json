@@ -23,7 +23,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -87,6 +87,29 @@
       "elderly2050": 89713,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 86104,
+      "capacityAge0": 6090,
+      "capacityAge12": 28135,
+      "enrolled": 71699,
+      "hiddenWaitlist": 2135,
+      "enrolledAge0": 4716,
+      "enrolledAge12": 27312,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（横浜市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 33009,
+      "elderly": 64048,
+      "total": 297274,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.95,
+      "source": "総務省 地方公共団体の主要財政指標一覧（横浜市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -113,7 +136,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -177,6 +200,29 @@
       "elderly2050": 75952,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 86104,
+      "capacityAge0": 6090,
+      "capacityAge12": 28135,
+      "enrolled": 71699,
+      "hiddenWaitlist": 2135,
+      "enrolledAge0": 4716,
+      "enrolledAge12": 27312,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（横浜市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 25623,
+      "elderly": 53958,
+      "total": 247956,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.95,
+      "source": "総務省 地方公共団体の主要財政指標一覧（横浜市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -203,7 +249,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -267,6 +313,29 @@
       "elderly2050": 32117,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 86104,
+      "capacityAge0": 6090,
+      "capacityAge12": 28135,
+      "enrolled": 71699,
+      "hiddenWaitlist": 2135,
+      "enrolledAge0": 4716,
+      "enrolledAge12": 27312,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（横浜市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 10922,
+      "elderly": 20792,
+      "total": 107346,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.95,
+      "source": "総務省 地方公共団体の主要財政指標一覧（横浜市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -293,7 +362,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -357,6 +426,29 @@
       "elderly2050": 49765,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 86104,
+      "capacityAge0": 6090,
+      "capacityAge12": 28135,
+      "enrolled": 71699,
+      "hiddenWaitlist": 2135,
+      "enrolledAge0": 4716,
+      "enrolledAge12": 27312,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（横浜市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 13744,
+      "elderly": 37153,
+      "total": 156177,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.95,
+      "source": "総務省 地方公共団体の主要財政指標一覧（横浜市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -383,7 +475,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -447,6 +539,29 @@
       "elderly2050": 60575,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 86104,
+      "capacityAge0": 6090,
+      "capacityAge12": 28135,
+      "enrolled": 71699,
+      "hiddenWaitlist": 2135,
+      "enrolledAge0": 4716,
+      "enrolledAge12": 27312,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（横浜市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 17802,
+      "elderly": 53312,
+      "total": 200857,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.95,
+      "source": "総務省 地方公共団体の主要財政指標一覧（横浜市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -473,7 +588,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -537,6 +652,29 @@
       "elderly2050": 66786,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 86104,
+      "capacityAge0": 6090,
+      "capacityAge12": 28135,
+      "enrolled": 71699,
+      "hiddenWaitlist": 2135,
+      "enrolledAge0": 4716,
+      "enrolledAge12": 27312,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（横浜市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 20462,
+      "elderly": 54392,
+      "total": 202805,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.95,
+      "source": "総務省 地方公共団体の主要財政指標一覧（横浜市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -563,7 +701,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -627,6 +765,29 @@
       "elderly2050": 55120,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 86104,
+      "capacityAge0": 6090,
+      "capacityAge12": 28135,
+      "enrolled": 71699,
+      "hiddenWaitlist": 2135,
+      "enrolledAge0": 4716,
+      "enrolledAge12": 27312,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（横浜市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 17513,
+      "elderly": 46513,
+      "total": 164724,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.95,
+      "source": "総務省 地方公共団体の主要財政指標一覧（横浜市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -653,7 +814,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -717,6 +878,29 @@
       "elderly2050": 60396,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 86104,
+      "capacityAge0": 6090,
+      "capacityAge12": 28135,
+      "enrolled": 71699,
+      "hiddenWaitlist": 2135,
+      "enrolledAge0": 4716,
+      "enrolledAge12": 27312,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（横浜市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 18587,
+      "elderly": 60115,
+      "total": 190971,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.95,
+      "source": "総務省 地方公共団体の主要財政指標一覧（横浜市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -743,7 +927,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -807,6 +991,29 @@
       "elderly2050": 110279,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 86104,
+      "capacityAge0": 6090,
+      "capacityAge12": 28135,
+      "enrolled": 71699,
+      "hiddenWaitlist": 2135,
+      "enrolledAge0": 4716,
+      "enrolledAge12": 27312,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（横浜市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 42437,
+      "elderly": 72609,
+      "total": 360166,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.95,
+      "source": "総務省 地方公共団体の主要財政指標一覧（横浜市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -833,7 +1040,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -897,6 +1104,29 @@
       "elderly2050": 94688,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 86104,
+      "capacityAge0": 6090,
+      "capacityAge12": 28135,
+      "enrolled": 71699,
+      "hiddenWaitlist": 2135,
+      "enrolledAge0": 4716,
+      "enrolledAge12": 27312,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（横浜市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 33101,
+      "elderly": 73735,
+      "total": 280558,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.95,
+      "source": "総務省 地方公共団体の主要財政指標一覧（横浜市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -923,7 +1153,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -987,6 +1217,29 @@
       "elderly2050": 68043,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 86104,
+      "capacityAge0": 6090,
+      "capacityAge12": 28135,
+      "enrolled": 71699,
+      "hiddenWaitlist": 2135,
+      "enrolledAge0": 4716,
+      "enrolledAge12": 27312,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（横浜市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 21910,
+      "elderly": 62089,
+      "total": 210696,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.95,
+      "source": "総務省 地方公共団体の主要財政指標一覧（横浜市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -1013,7 +1266,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -1077,6 +1330,29 @@
       "elderly2050": 80746,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 86104,
+      "capacityAge0": 6090,
+      "capacityAge12": 28135,
+      "enrolled": 71699,
+      "hiddenWaitlist": 2135,
+      "enrolledAge0": 4716,
+      "enrolledAge12": 27312,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（横浜市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 25481,
+      "elderly": 71824,
+      "total": 241178,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.95,
+      "source": "総務省 地方公共団体の主要財政指標一覧（横浜市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -1103,7 +1379,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -1167,6 +1443,29 @@
       "elderly2050": 62694,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 86104,
+      "capacityAge0": 6090,
+      "capacityAge12": 28135,
+      "enrolled": 71699,
+      "hiddenWaitlist": 2135,
+      "enrolledAge0": 4716,
+      "enrolledAge12": 27312,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（横浜市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 20969,
+      "elderly": 45587,
+      "total": 181096,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.95,
+      "source": "総務省 地方公共団体の主要財政指標一覧（横浜市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -1193,7 +1492,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -1257,6 +1556,29 @@
       "elderly2050": 40568,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 86104,
+      "capacityAge0": 6090,
+      "capacityAge12": 28135,
+      "enrolled": 71699,
+      "hiddenWaitlist": 2135,
+      "enrolledAge0": 4716,
+      "enrolledAge12": 27312,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（横浜市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 12879,
+      "elderly": 34202,
+      "total": 121342,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.95,
+      "source": "総務省 地方公共団体の主要財政指標一覧（横浜市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -1283,7 +1605,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -1347,6 +1669,29 @@
       "elderly2050": 39714,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 86104,
+      "capacityAge0": 6090,
+      "capacityAge12": 28135,
+      "enrolled": 71699,
+      "hiddenWaitlist": 2135,
+      "enrolledAge0": 4716,
+      "enrolledAge12": 27312,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（横浜市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 12455,
+      "elderly": 36980,
+      "total": 119942,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.95,
+      "source": "総務省 地方公共団体の主要財政指標一覧（横浜市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -1373,7 +1718,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -1437,6 +1782,29 @@
       "elderly2050": 52564,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 86104,
+      "capacityAge0": 6090,
+      "capacityAge12": 28135,
+      "enrolled": 71699,
+      "hiddenWaitlist": 2135,
+      "enrolledAge0": 4716,
+      "enrolledAge12": 27312,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（横浜市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 16307,
+      "elderly": 44058,
+      "total": 150615,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.95,
+      "source": "総務省 地方公共団体の主要財政指標一覧（横浜市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -1463,7 +1831,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -1527,6 +1895,29 @@
       "elderly2050": 105091,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 86104,
+      "capacityAge0": 6090,
+      "capacityAge12": 28135,
+      "enrolled": 71699,
+      "hiddenWaitlist": 2135,
+      "enrolledAge0": 4716,
+      "enrolledAge12": 27312,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（横浜市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 35273,
+      "elderly": 73596,
+      "total": 305580,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.95,
+      "source": "総務省 地方公共団体の主要財政指標一覧（横浜市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -1553,7 +1944,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -1617,6 +2008,29 @@
       "elderly2050": 72708,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 86104,
+      "capacityAge0": 6090,
+      "capacityAge12": 28135,
+      "enrolled": 71699,
+      "hiddenWaitlist": 2135,
+      "enrolledAge0": 4716,
+      "enrolledAge12": 27312,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（横浜市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 27983,
+      "elderly": 42827,
+      "total": 214032,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.95,
+      "source": "総務省 地方公共団体の主要財政指標一覧（横浜市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -1643,7 +2057,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -1707,6 +2121,29 @@
       "elderly2050": 69626,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 39310,
+      "capacityAge0": 2854,
+      "capacityAge12": 14132,
+      "enrolled": 36161,
+      "hiddenWaitlist": 844,
+      "enrolledAge0": 2126,
+      "enrolledAge12": 13281,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（川崎市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 22389,
+      "elderly": 51353,
+      "total": 235109,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 1.06,
+      "source": "総務省 地方公共団体の主要財政指標一覧（川崎市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -1733,7 +2170,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -1797,6 +2234,29 @@
       "elderly2050": 51578,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 39310,
+      "capacityAge0": 2854,
+      "capacityAge12": 14132,
+      "enrolled": 36161,
+      "hiddenWaitlist": 844,
+      "enrolledAge0": 2126,
+      "enrolledAge12": 13281,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（川崎市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 22152,
+      "elderly": 36757,
+      "total": 176277,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 1.06,
+      "source": "総務省 地方公共団体の主要財政指標一覧（川崎市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -1823,7 +2283,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -1887,6 +2347,29 @@
       "elderly2050": 70465,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 39310,
+      "capacityAge0": 2854,
+      "capacityAge12": 14132,
+      "enrolled": 36161,
+      "hiddenWaitlist": 844,
+      "enrolledAge0": 2126,
+      "enrolledAge12": 13281,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（川崎市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 31211,
+      "elderly": 42631,
+      "total": 265547,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 1.06,
+      "source": "総務省 地方公共団体の主要財政指標一覧（川崎市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -1913,7 +2396,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -1977,6 +2460,29 @@
       "elderly2050": 70223,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 39310,
+      "capacityAge0": 2854,
+      "capacityAge12": 14132,
+      "enrolled": 36161,
+      "hiddenWaitlist": 844,
+      "enrolledAge0": 2126,
+      "enrolledAge12": 13281,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（川崎市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 26112,
+      "elderly": 45179,
+      "total": 232764,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 1.06,
+      "source": "総務省 地方公共団体の主要財政指標一覧（川崎市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -2003,7 +2509,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -2067,6 +2573,29 @@
       "elderly2050": 64786,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 39310,
+      "capacityAge0": 2854,
+      "capacityAge12": 14132,
+      "enrolled": 36161,
+      "hiddenWaitlist": 844,
+      "enrolledAge0": 2126,
+      "enrolledAge12": 13281,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（川崎市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 22653,
+      "elderly": 44106,
+      "total": 220615,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 1.06,
+      "source": "総務省 地方公共団体の主要財政指標一覧（川崎市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -2093,7 +2622,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -2157,6 +2686,29 @@
       "elderly2050": 78584,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 39310,
+      "capacityAge0": 2854,
+      "capacityAge12": 14132,
+      "enrolled": 36161,
+      "hiddenWaitlist": 844,
+      "enrolledAge0": 2126,
+      "enrolledAge12": 13281,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（川崎市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 29171,
+      "elderly": 50739,
+      "total": 234512,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 1.06,
+      "source": "総務省 地方公共団体の主要財政指標一覧（川崎市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -2183,7 +2735,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -2247,6 +2799,29 @@
       "elderly2050": 64283,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 39310,
+      "capacityAge0": 2854,
+      "capacityAge12": 14132,
+      "enrolled": 36161,
+      "hiddenWaitlist": 844,
+      "enrolledAge0": 2126,
+      "enrolledAge12": 13281,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（川崎市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 20282,
+      "elderly": 43810,
+      "total": 177710,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 1.06,
+      "source": "総務省 地方公共団体の主要財政指標一覧（川崎市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -2272,8 +2847,8 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "相模原市 保育所等利用待機児童数（令和6年4月1日）",
-      "asOf": "2024-04-01",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -2337,6 +2912,29 @@
       "elderly2050": 54963,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 16074,
+      "capacityAge0": 1370,
+      "capacityAge12": 5289,
+      "enrolled": 13709,
+      "hiddenWaitlist": 391,
+      "enrolledAge0": 783,
+      "enrolledAge12": 4657,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（相模原市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 16303,
+      "elderly": 48819,
+      "total": 165183,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.83,
+      "source": "総務省 地方公共団体の主要財政指標一覧（相模原市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -2362,8 +2960,8 @@
     "waitlistChildren": {
       "value": 0,
       "unit": "人",
-      "source": "相模原市 保育所等利用待機児童数（令和6年4月1日）",
-      "asOf": "2024-04-01",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -2427,6 +3025,29 @@
       "elderly2050": 92215,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 16074,
+      "capacityAge0": 1370,
+      "capacityAge12": 5289,
+      "enrolled": 13709,
+      "hiddenWaitlist": 391,
+      "enrolledAge0": 783,
+      "enrolledAge12": 4657,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（相模原市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 28968,
+      "elderly": 70270,
+      "total": 270572,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.83,
+      "source": "総務省 地方公共団体の主要財政指標一覧（相模原市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -2450,10 +3071,10 @@
       "isEstimated": false
     },
     "waitlistChildren": {
-      "value": 7,
+      "value": 0,
       "unit": "人",
-      "source": "相模原市 保育所等利用待機児童数（令和6年4月1日）",
-      "asOf": "2024-04-01",
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -2517,6 +3138,29 @@
       "elderly2050": 95335,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 16074,
+      "capacityAge0": 1370,
+      "capacityAge12": 5289,
+      "enrolled": 13709,
+      "hiddenWaitlist": 391,
+      "enrolledAge0": 783,
+      "enrolledAge12": 4657,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（相模原市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 29193,
+      "elderly": 72764,
+      "total": 278681,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.83,
+      "source": "総務省 地方公共団体の主要財政指標一覧（相模原市全体の値）",
+      "asOf": "2024年度"
     }
   }
 ]

@@ -26,7 +26,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -87,6 +87,29 @@
       "elderly2050": 37618,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 32393,
+      "capacityAge0": 2791,
+      "capacityAge12": 10569,
+      "enrolled": 26937,
+      "hiddenWaitlist": 390,
+      "enrolledAge0": 1609,
+      "enrolledAge12": 9841,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（京都市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 10683,
+      "elderly": 32978,
+      "total": 106001,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.81,
+      "source": "総務省 地方公共団体の主要財政指標一覧（京都市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -116,7 +139,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -177,6 +200,29 @@
       "elderly2050": 26966,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 32393,
+      "capacityAge0": 2791,
+      "capacityAge12": 10569,
+      "enrolled": 26937,
+      "hiddenWaitlist": 390,
+      "enrolledAge0": 1609,
+      "enrolledAge12": 9841,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（京都市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 6392,
+      "elderly": 21283,
+      "total": 75183,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.81,
+      "source": "総務省 地方公共団体の主要財政指標一覧（京都市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -206,7 +252,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -267,6 +313,29 @@
       "elderly2050": 50214,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 32393,
+      "capacityAge0": 2791,
+      "capacityAge12": 10569,
+      "enrolled": 26937,
+      "hiddenWaitlist": 390,
+      "enrolledAge0": 1609,
+      "enrolledAge12": 9841,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（京都市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 15246,
+      "elderly": 44441,
+      "total": 149554,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.81,
+      "source": "総務省 地方公共団体の主要財政指標一覧（京都市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -296,7 +365,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -357,6 +426,29 @@
       "elderly2050": 35685,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 32393,
+      "capacityAge0": 2791,
+      "capacityAge12": 10569,
+      "enrolled": 26937,
+      "hiddenWaitlist": 390,
+      "enrolledAge0": 1609,
+      "enrolledAge12": 9841,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（京都市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 10477,
+      "elderly": 26803,
+      "total": 106313,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.81,
+      "source": "総務省 地方公共団体の主要財政指標一覧（京都市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -386,7 +478,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -447,6 +539,29 @@
       "elderly2050": 10385,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 32393,
+      "capacityAge0": 2791,
+      "capacityAge12": 10569,
+      "enrolled": 26937,
+      "hiddenWaitlist": 390,
+      "enrolledAge0": 1609,
+      "enrolledAge12": 9841,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（京都市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 2410,
+      "elderly": 10555,
+      "total": 32589,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.81,
+      "source": "総務省 地方公共団体の主要財政指標一覧（京都市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -476,7 +591,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -537,6 +652,29 @@
       "elderly2050": 24025,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 32393,
+      "capacityAge0": 2791,
+      "capacityAge12": 10569,
+      "enrolled": 26937,
+      "hiddenWaitlist": 390,
+      "enrolledAge0": 1609,
+      "enrolledAge12": 9841,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（京都市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 7084,
+      "elderly": 17857,
+      "total": 77791,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.81,
+      "source": "総務省 地方公共団体の主要財政指標一覧（京都市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -566,7 +704,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -627,6 +765,29 @@
       "elderly2050": 31199,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 32393,
+      "capacityAge0": 2791,
+      "capacityAge12": 10569,
+      "enrolled": 26937,
+      "hiddenWaitlist": 390,
+      "enrolledAge0": 1609,
+      "enrolledAge12": 9841,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（京都市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 10403,
+      "elderly": 25464,
+      "total": 101099,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.81,
+      "source": "総務省 地方公共団体の主要財政指標一覧（京都市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -656,7 +817,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -717,6 +878,29 @@
       "elderly2050": 65587,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 32393,
+      "capacityAge0": 2791,
+      "capacityAge12": 10569,
+      "enrolled": 26937,
+      "hiddenWaitlist": 390,
+      "enrolledAge0": 1609,
+      "enrolledAge12": 9841,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（京都市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 19645,
+      "elderly": 55355,
+      "total": 190387,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.81,
+      "source": "総務省 地方公共団体の主要財政指標一覧（京都市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -746,7 +930,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -807,6 +991,29 @@
       "elderly2050": 89901,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 32393,
+      "capacityAge0": 2791,
+      "capacityAge12": 10569,
+      "enrolled": 26937,
+      "hiddenWaitlist": 390,
+      "enrolledAge0": 1609,
+      "enrolledAge12": 9841,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（京都市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 26291,
+      "elderly": 76386,
+      "total": 263959,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.81,
+      "source": "総務省 地方公共団体の主要財政指標一覧（京都市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -836,7 +1043,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -897,6 +1104,29 @@
       "elderly2050": 45633,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 32393,
+      "capacityAge0": 2791,
+      "capacityAge12": 10569,
+      "enrolled": 26937,
+      "hiddenWaitlist": 390,
+      "enrolledAge0": 1609,
+      "enrolledAge12": 9841,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（京都市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 12035,
+      "elderly": 38317,
+      "total": 125310,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.81,
+      "source": "総務省 地方公共団体の主要財政指標一覧（京都市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -926,7 +1156,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -987,6 +1217,29 @@
       "elderly2050": 46679,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 32393,
+      "capacityAge0": 2791,
+      "capacityAge12": 10569,
+      "enrolled": 26937,
+      "hiddenWaitlist": 390,
+      "enrolledAge0": 1609,
+      "enrolledAge12": 9841,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（京都市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 16098,
+      "elderly": 41577,
+      "total": 141564,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.81,
+      "source": "総務省 地方公共団体の主要財政指標一覧（京都市全体の値）",
+      "asOf": "2024年度"
     }
   }
 ]

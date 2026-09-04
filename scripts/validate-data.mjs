@@ -86,6 +86,40 @@ function checkMuni(file, slug, m, level) {
     if (!isStr(m.shelters.source)) err(file, code, "shelters.source が空");
     if (!isStr(m.shelters.asOf)) err(file, code, "shelters.asOf が空");
   }
+  if (m.childcare !== undefined) {
+    // 保育所等の定員・利用状況。capacity=0 は「定員なし」の実データ。enrolled は
+    // 定員の弾力運用で capacity を超えうるため上限は検証しない。
+    for (const k of ["capacity", "enrolled", "capacityAge0", "enrolledAge0", "capacityAge12", "enrolledAge12", "hiddenWaitlist"]) {
+      if (!isNum(m.childcare[k]) || m.childcare[k] < 0) err(file, code, `childcare.${k} が非負数値でない`);
+    }
+    if (isNum(m.childcare.capacity) && isNum(m.childcare.capacityAge0) && isNum(m.childcare.capacityAge12) &&
+        m.childcare.capacityAge0 + m.childcare.capacityAge12 > m.childcare.capacity) {
+      err(file, code, "childcare の年齢別定員が合計定員を超えている");
+    }
+    if (!isStr(m.childcare.source)) err(file, code, "childcare.source が空");
+    if (!isStr(m.childcare.asOf)) err(file, code, "childcare.asOf が空");
+  }
+  if (m.ageStats !== undefined) {
+    // 年齢構成（住基台帳）。total=0 は住民登録なし（北方領土6村）のセンチネル。
+    // 実データは young+elderly ≦ total（15-64歳を保存しない設計の整合条件）。
+    for (const k of ["young", "elderly", "total"]) {
+      if (!isNum(m.ageStats[k]) || m.ageStats[k] < 0) err(file, code, `ageStats.${k} が非負数値でない`);
+    }
+    if (isNum(m.ageStats.total) && m.ageStats.young + m.ageStats.elderly > m.ageStats.total) {
+      err(file, code, "ageStats の年少+高齢が総人口を超えている");
+    }
+    if (!isStr(m.ageStats.source)) err(file, code, "ageStats.source が空");
+    if (!isStr(m.ageStats.asOf)) err(file, code, "ageStats.asOf が空");
+  }
+  if (m.fiscal !== undefined) {
+    // index=-1 は対象外センチネル（北方領土6村）。実データの財政力指数は概ね 0〜1.5 台
+    // （不交付団体でも 2 未満が通例。3 以上は取り違えの疑い）。
+    if (!isNum(m.fiscal.index) || (m.fiscal.index !== -1 && (m.fiscal.index <= 0 || m.fiscal.index >= 3))) {
+      err(file, code, `fiscal.index が不正 (${m.fiscal.index})`);
+    }
+    if (!isStr(m.fiscal.source)) err(file, code, "fiscal.source が空");
+    if (!isStr(m.fiscal.asOf)) err(file, code, "fiscal.asOf が空");
+  }
   if (m.vacancy !== undefined) {
     // rate=-1 は対象外センチネル（人口1.5万人未満の町村）。実データは 0〜100 の率。
     if (!isNum(m.vacancy.rate) || (m.vacancy.rate !== -1 && (m.vacancy.rate < 0 || m.vacancy.rate > 100))) {

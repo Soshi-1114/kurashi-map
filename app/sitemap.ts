@@ -10,7 +10,7 @@ import {
   withTemplateRevision,
 } from "@/lib/dataFreshness";
 import { absoluteUrl } from "@/lib/site";
-import { MAP_HUBS } from "@/lib/siteNav";
+import { GENERAL_MAP, MAP_HUBS } from "@/lib/siteNav";
 import { denkiPlansLastModified } from "@/lib/denkiPlans";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -45,6 +45,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly",
       priority: 1,
     },
+    // 汎用の全画面地図（「地図で見る」ディープリンクの既定の行き先）。
+    {
+      url: absoluteUrl(GENERAL_MAP.href),
+      lastModified: withTemplateRevision(siteLatest, TEMPLATE_REVISED_AT.mapHub),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
     // 指標別 地図ハブ（ピラーページ群）。一覧は lib/siteNav.ts が単一ソース。
     ...MAP_HUBS.map((hub) => ({
       url: absoluteUrl(hub.href),
@@ -55,6 +62,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // 自治体比較ページ（選択状態はクエリなので URL はベースの1件のみ）。
     {
       url: absoluteUrl("/compare"),
+      lastModified: siteLatest,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    // 住む街診断（回答状態はクエリなので URL はベースの1件のみ）。
+    {
+      url: absoluteUrl("/shindan"),
       lastModified: siteLatest,
       changeFrequency: "monthly",
       priority: 0.7,

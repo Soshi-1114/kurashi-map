@@ -8,7 +8,7 @@ import type { Municipality } from "./types";
 
 const NODATA_COLOR = RENT_NODATA_COLOR; // gray-300 を欠損色として全指標で共通化
 
-export type MapMetricKey = "rent" | "landPrice" | "populationTrend" | "foreignRatio" | "futurePopulation";
+export type MapMetricKey = "rent" | "landPrice" | "populationTrend" | "foreignRatio" | "futurePopulation" | "vacancy" | "aging";
 
 type NumericLegend = {
   kind: "numeric";
@@ -65,6 +65,18 @@ function formatYen(raw: unknown, unit: string): string {
   return `${v.toLocaleString()} ${unit}`;
 }
 
+// %系指標の共通フォーマッタ（外国人比率・空き家率・将来人口増減率で共用）。
+// 欠損の表現が指標ごとに違うためオプションで吸収する:
+// - negIsNodata: 負値センチネル（外国人比率の -1）をデータなしにする。
+//   将来人口増減率・空き家率は「フィールド欠落=データなし」方式（負値/0%が正常値）。
+// - signed: 正値に "+" を付ける（増減率）。
+function formatPercent(raw: unknown, opts: { negIsNodata?: boolean; signed?: boolean } = {}): string {
+  const v = Number(raw);
+  if (raw == null || raw === "" || !Number.isFinite(v)) return "データなし";
+  if (opts.negIsNodata && v < 0) return "データなし";
+  return `${opts.signed && v > 0 ? "+" : ""}${v.toFixed(1)}%`;
+}
+
 // 人口トレンドの5カテゴリ（減少→増加）を紫→緑の発散配色で。
 // 赤緑ダイバージングは P/D 型色覚で識別困難なため、色覚多様性に配慮した
 // ColorBrewer PRGn（紫⇔緑）を採用。「増加=緑」の直感は維持しつつ減少側を紫に。
@@ -80,8 +92,26 @@ const TREND_ITEMS = [
 // 2050年将来推計人口の増減率（%）。人口トレンドと同じ PRGn（紫=減少⇔緑=増加）を
 // 連続値5段階に割り当てる（色覚多様性への配慮も同じ理由）。しきい値は実分布から:
 // 中央値 -33% / p90 -5% / 増加は107自治体（5.6%）。「0以上=増加=緑」を独立セルにする。
-const FUTURE_CHANGE_THRESHOLDS = [-50, -30, -10, 0] as const;
+// export するのは街診断（lib/shindan.ts）が同じ5区分から将来性の星を導出するため
+// （地図の色ランクと診断の星で同じ自治体が別の段階に落ちる不整合を防ぐ）。
+export const FUTURE_CHANGE_THRESHOLDS = [-50, -30, -10, 0] as const;
 const FUTURE_CHANGE_COLORS = ["#762a83", "#9970ab", "#c2a5cf", "#e7d4e8", "#1b7837"] as const;
+
+// 空き家率（%）。高いほど濃い暖色（YlOrRd 5段階。高率=住宅ストックの余剰に注意を促す
+// 方向で家賃の青系と役割を分ける）。しきい値は実分布から: 中央値 14.3% / p75 18.8% /
+// p90 23.8%、全国平均13.8%（2023年）が中央セルに入る。0% は理論上実データのため
+// センチネルにせず、データなし（集計対象外の町村）はフィールド欠落で判定する。
+const VACANCY_THRESHOLDS = [10, 15, 20, 25] as const;
+const VACANCY_COLORS = ["#ffffb2", "#fecc5c", "#fd8d3c", "#f03b20", "#bd0026"] as const;
+
+// 高齢化率（%）。高いほど濃い紫（ColorBrewer BuPu 5段階）。年齢構成は優劣ではない
+// 中立指標のため、発散配色（PRGn の「良い/悪い」両極の示唆）は使わず順次配色にする。
+// 家賃の青系・空き家の暖色系とも重ならない。しきい値は実分布（中央値35.0%・
+// p20=27.7/p80=42.9）を丸めた [25,30,35,40]（中央値が中央セルに入る）。
+// 0% は理論上実データのためセンチネルにせず、データなし（北方領土6村=住民登録なし）は
+// フィールド欠落で判定する。
+const AGING_THRESHOLDS = [25, 30, 35, 40] as const;
+const AGING_COLORS = ["#edf8fb", "#b3cde3", "#8c96c6", "#8856a7", "#810f7c"] as const;
 
 export const MAP_METRICS: readonly MapMetric[] = [
   {
@@ -161,11 +191,41 @@ export const MAP_METRICS: readonly MapMetric[] = [
     },
     colorExpression: () =>
       numericStepExpression("foreignRatio", FOREIGN_RATIO_THRESHOLDS, FOREIGN_COLORS, FOREIGN_NODATA_RATIO),
-    formatValue: (raw) => {
-      const v = Number(raw);
-      if (!Number.isFinite(v) || v < 0) return "データなし";
-      return `${v.toFixed(1)}%`;
+    formatValue: (raw) => formatPercent(raw, { negIsNodata: true }),
+  },
+  {
+    key: "vacancy",
+    label: "空き家率",
+    legendTitle: "空き家率（%）",
+    description:
+      "住宅総数に占める空き家の割合（二次的住宅・賃貸用等を含む）。\n出典: 住宅・土地統計調査 2023年（e-Stat）。",
+    nodataLabel: "データなし（人口1.5万人未満の町村など集計対象外）",
+    legend: {
+      kind: "numeric",
+      colors: VACANCY_COLORS,
+      scaleLabels: VACANCY_THRESHOLDS.map((t) => `${t}%`),
     },
+    colorExpression: () =>
+      numericStepExpression("vacancyRate", VACANCY_THRESHOLDS, VACANCY_COLORS, null),
+    // データなしはプロパティ欠落。0% は実データなので負値センチネル判定はしない。
+    formatValue: (raw) => formatPercent(raw),
+  },
+  {
+    key: "aging",
+    label: "高齢化率",
+    legendTitle: "高齢化率（65歳以上人口の割合・%）",
+    description:
+      "総人口に占める65歳以上人口の割合（年齢構成の事実を示す中立指標）。\n出典: 住民基本台帳に基づく人口・世帯数調査（毎年1月1日時点）。",
+    nodataLabel: "データなし（北方領土など住民登録のない自治体）",
+    legend: {
+      kind: "numeric",
+      colors: AGING_COLORS,
+      scaleLabels: AGING_THRESHOLDS.map((t) => `${t}%`),
+    },
+    colorExpression: () =>
+      numericStepExpression("agingRate", AGING_THRESHOLDS, AGING_COLORS, null),
+    // データなしはプロパティ欠落。0% は実データなので負値センチネル判定はしない。
+    formatValue: (raw) => formatPercent(raw),
   },
   {
     key: "futurePopulation",
@@ -181,13 +241,8 @@ export const MAP_METRICS: readonly MapMetric[] = [
     },
     colorExpression: () =>
       numericStepExpression("futureChangeRate", FUTURE_CHANGE_THRESHOLDS, FUTURE_CHANGE_COLORS, null),
-    formatValue: (raw) => {
-      // データなしはプロパティ欠落（null/undefined）。負値は正常値（減少）なので
-      // 他指標のような「負=データなし」判定はしない。
-      const v = Number(raw);
-      if (raw == null || raw === "" || !Number.isFinite(v)) return "データなし";
-      return `${v > 0 ? "+" : ""}${v.toFixed(1)}%`;
-    },
+    // データなしはプロパティ欠落。負値は正常値（減少）なので負値センチネル判定はしない。
+    formatValue: (raw) => formatPercent(raw, { signed: true }),
   },
 ];
 

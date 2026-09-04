@@ -69,11 +69,32 @@ async function loadRows(): Promise<SourceRow[]> {
       next: NEXT_UPDATE.population,
     },
     {
+      label: "年齢構成（高齢化率・年少人口比）",
+      source: "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      asOf: formatAsOfJa(m.ageStats?.asOf ?? "-"),
+      cycle: "年1回（1月1日時点・夏公表）",
+      next: NEXT_UPDATE.aging,
+    },
+    {
       label: "待機児童数",
       source: "こども家庭庁 保育所等関連状況取りまとめ",
       asOf: formatAsOfJa(m.waitlistChildren.asOf),
       cycle: "年1回（4月1日時点・夏〜秋公表）",
       next: NEXT_UPDATE.waitlist,
+    },
+    {
+      label: "保育所等の定員・利用児童数",
+      source: "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）",
+      asOf: formatAsOfJa(m.childcare?.asOf ?? m.waitlistChildren.asOf),
+      cycle: "年1回（4月1日時点・夏〜秋公表）",
+      next: NEXT_UPDATE.childcare,
+    },
+    {
+      label: "財政力指数",
+      source: "総務省 地方公共団体の主要財政指標一覧",
+      asOf: m.fiscal?.asOf ?? "-",
+      cycle: "年1回（3か年平均）",
+      next: NEXT_UPDATE.fiscal,
     },
     {
       label: "在留外国人数・比率",
@@ -209,6 +230,9 @@ export default async function AboutPage() {
             <strong>人口密度</strong>：人口 ÷ 面積（国土地理院「全国都道府県市区町村別面積調」）。こちらも表示時に算出しています。
           </li>
           <li>
+            <strong>保育の定員余裕率</strong>：（保育所等の定員 − 利用児童数）÷ 定員。定員・利用児童数はこども家庭庁の公表実数で、比率はデータに保存せず表示時に算出しています。政令指定都市は市単位の集計です（区のページには市全体の値をその旨を明記して表示）。負の値は定員を超えた受け入れ（定員の弾力運用）を示します。
+          </li>
+          <li>
             <strong>災害リスク</strong>：表示している浸水深・土砂災害区分などは、<strong>その自治体の区域内で確認された最大の区分</strong>です。{HAZARD_MAX_LEVEL_DISCLAIMER}
           </li>
         </ul>
@@ -269,7 +293,7 @@ export default async function AboutPage() {
       </section>
 
       <div className="detail-footnav">
-        <Link href="/" className="detail-back">地図で見る</Link>
+        <Link href="/map" className="detail-back">地図で見る</Link>
         <Link href="/ranking" className="detail-back">ランキング一覧</Link>
         <Link href="/privacy" className="detail-back">プライバシーポリシー</Link>
       </div>

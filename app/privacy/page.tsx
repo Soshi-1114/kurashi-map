@@ -14,7 +14,7 @@ const DESC =
   "KurashiMapのプライバシーポリシー。Google アナリティクス（GA4）によるアクセス解析、Cookie の利用、収集する情報の範囲と利用目的、外部サイトへのリンクの扱いを開示しています。";
 
 // 最終更新日（ポリシー改定時に手動更新）。
-const LAST_UPDATED = "2026年7月21日";
+const LAST_UPDATED = "2026年8月29日";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -108,9 +108,12 @@ export default function PrivacyPage() {
       </section>
 
       <section className="detail-section">
-        <h2 className="detail-h2">外部サイトへのリンクについて</h2>
+        <h2 className="detail-h2">外部サイトへのリンク・広告について</h2>
         <p className="detail-p">
-          当サイトには、ふるさと納税ポータルや支援（寄付）サービスなど、外部の事業者が運営するサイトへのリンクを掲載する場合があります。リンク先を識別するために、遷移元が当サイトであることを示すパラメータ（UTM）を付与することがありますが、これに個人情報は含まれません。リンク先で収集される情報の取り扱いは各サイトのプライバシーポリシーに従います。当サイトはリンク先サイトの内容・サービスについて責任を負いません。
+          当サイトには、ふるさと納税ポータルや支援（寄付）サービス、保険・電気料金の比較サービスなど、外部の事業者が運営するサイトへのリンクを掲載する場合があります。リンク先を識別するために、遷移元が当サイトであることを示すパラメータ（UTM）を付与することがありますが、これに個人情報は含まれません。リンク先で収集される情報の取り扱いは各サイトのプライバシーポリシーに従います。当サイトはリンク先サイトの内容・サービスについて責任を負いません。
+        </p>
+        <p className="detail-p">
+          当サイトは、アフィリエイトプログラム（アクセストレード等のASP）に参加しており、一部の外部リンクは成果報酬型広告です。該当するリンクには「広告」「PR」の表記を行い、リンクには rel=&quot;sponsored&quot; を付与しています。アフィリエイトリンクの経由時に、ASP事業者が成果計測のために Cookie 等を使用することがあります。計測の仕組み・オプトアウトについては各ASP・リンク先のプライバシーポリシーをご確認ください。広告の有無は掲載データの内容・順位に影響しません。
         </p>
       </section>
 
@@ -134,7 +137,7 @@ export default function PrivacyPage() {
       </section>
 
       <div style={{ marginTop: 28, display: "flex", gap: 16, flexWrap: "wrap" }}>
-        <Link href="/" className="detail-back">地図で見る</Link>
+        <Link href="/map" className="detail-back">地図で見る</Link>
         <Link href="/about" className="detail-back">このサイトについて</Link>
       </div>
     </PageShell>

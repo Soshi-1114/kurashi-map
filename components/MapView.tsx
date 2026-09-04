@@ -21,11 +21,12 @@ import { PREFS, getPrefByCode, getPrefBySlug } from "@/lib/prefs";
 import { hasRent } from "@/lib/rentColor";
 import { getMapMetric, TREND_PROPERTY, type MapMetricKey } from "@/lib/mapMetrics";
 import { trackSelectMunicipality, trackChangeMetric, trackApplyFilter } from "@/lib/analytics";
-import { MAP_FLY_EVENT, type MapFlyDetail } from "@/lib/mapFly";
+import type { MapFlyDetail } from "@/lib/mapFly";
 import type { StationPoint } from "@/lib/stationSearch";
 import { parseMapDeepLink } from "@/lib/mapDeepLink";
 import {
-  EMPTY_FILTERS, isFilterActive, matchesFilter, buildMatchExpression, type MapFilters,
+  EMPTY_FILTERS, isFilterActive, matchesFilter, buildMatchExpression,
+  parseFilters, applyFiltersToParams, type MapFilters,
 } from "@/lib/mapFilters";
 import {
   HAZARD_OVERLAYS, HAZARD_ZONE_ZOOM, INUNDATION_KEYS, isInundationKey,
@@ -51,19 +52,11 @@ type Props = {
   summary: MuniSummary[];
   onMenuClick?: () => void;
   initialMetric?: MapMetricKey | "none";
-  /** スクロールするページに埋め込む場合 true（1本指パン/ホイールを奪わない協調ジェスチャ）。 */
-  cooperativeGestures?: boolean;
-  /** ヘッダーの自治体検索を表示するか。トップページはヒーロー検索と重複するため false。 */
-  showSearch?: boolean;
-  /**
-   * 地図内のフローティングヘッダー（ロゴ＋検索＋メニュー）を出すか。
-   * 全画面地図のピラーページでは地図がページそのものなので必要だが、スクロール
-   * するページに埋め込む場合はページ側のヘッダー（SiteHeader）が担うため false。
-   */
-  showHeader?: boolean;
+  /** 初期表示で点灯する災害等オーバーレイ（ハザードのピラーページで指定）。既定はなし。 */
+  initialOverlays?: readonly OverlayKey[];
 };
 
-export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_MAP_METRIC, cooperativeGestures = false, showSearch = true, showHeader = true }: Props) {
+export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_MAP_METRIC, initialOverlays }: Props) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<MapLibreMap | null>(null);
   const muniGeoRef = useRef<GeoJSON.FeatureCollection | null>(null);
@@ -87,8 +80,6 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
   // マーカーと所属自治体コードは常にセットで生成・破棄するため1つの ref に持ち、
   // その自治体以外へ選択が移ったら外す。
   const stationMarkerRef = useRef<{ marker: Marker; code: string } | null>(null);
-  // 協調ジェスチャ設定（マウント後は不変。初期化 effect を再実行させないため ref に保持）。
-  const cooperativeRef = useRef(cooperativeGestures);
 
   // ベース地図スタイル。state は UI 表示用、ref は地図初期化 effect が再実行されない
   // よう現在値を保持する用。
@@ -97,7 +88,7 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
 
   const [selectedCode, setSelectedCode] = useState<string | null>(null);
   // 災害オーバーレイ（複数選択）。空集合＝何も重ねない。
-  const [overlays, setOverlays] = useState<Set<OverlayKey>>(() => new Set());
+  const [overlays, setOverlays] = useState<Set<OverlayKey>>(() => new Set(initialOverlays));
   const toggleOverlay = useCallback((key: OverlayKey) => {
     setOverlays((prev) => {
       const next = new Set(prev);
@@ -112,7 +103,17 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
     });
   }, []);
   const [activeMetric, setActiveMetric] = useState<MapMetricKey | "none">(initialMetric);
+  // フィルタ状態は URL クエリ（?rentMax= 等）と同期する: 初期値はマウント後にクエリから
+  // 復元し（SSGプリレンダーとの hydration 不整合を避けるため初期レンダーでは読まない。
+  // isMobile と同じパターン）、変更時は updateFilters が replaceState で書き戻す。
   const [filters, setFilters] = useState<MapFilters>(EMPTY_FILTERS);
+  useEffect(() => {
+    const parsed = parseFilters(window.location.search);
+    // マウント直後の1回だけ、URL にフィルタがある場合のみ復元する（SSG の初期HTMLは
+    // 常に EMPTY_FILTERS で描画し、hydration 後に実状態へ寄せる意図的なパターン）。
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (isFilterActive(parsed)) setFilters(parsed);
+  }, []);
   const [isMobile, setIsMobile] = useState(false);
   const [mapReady, setMapReady] = useState(false);
   // 初回ビューのポリゴンが描画され切るまで true にしない（凡例先行・白地図対策）
@@ -268,15 +269,6 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
         center: [139.825, 35.44],
         zoom: 9,
         attributionControl: { compact: true },
-        // 埋め込み時はページスクロールを奪わない（モバイル2本指パン・PC Ctrl+ホイール）。
-        cooperativeGestures: cooperativeRef.current,
-        locale: cooperativeRef.current
-          ? {
-              "CooperativeGesturesHandler.WindowsHelpText": "Ctrl キーを押しながらスクロールすると地図を拡大縮小できます",
-              "CooperativeGesturesHandler.MacHelpText": "⌘ キーを押しながらスクロールすると地図を拡大縮小できます",
-              "CooperativeGesturesHandler.MobileHelpText": "2本の指で地図を操作できます",
-            }
-          : undefined,
       });
       map.addControl(new maplibregl.NavigationControl({ showCompass: false, visualizePitch: false }), "bottom-right");
 
@@ -294,6 +286,9 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
             // 将来人口増減率は負値が正常値でセンチネルを持てないため、データなしは
             // プロパティ欠落のまま流す（mapMetrics 側は ["has"] で欠損判定する）。
             ...(m.futureChangeRate !== undefined ? { futureChangeRate: m.futureChangeRate } : {}),
+            // 空き家率も同方式（集計対象外はプロパティ欠落 → ["has"] で欠損判定）。
+            ...(m.vacancyRate !== undefined ? { vacancyRate: m.vacancyRate } : {}),
+            ...(m.agingRate !== undefined ? { agingRate: m.agingRate } : {}),
             name: m.name,
             floodLevel: m.floodLevel, // -1=対象外, 0=なし, 1..6
             landslideLevel: m.landslideLevel,
@@ -740,10 +735,11 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
     setAnnouncement(`${prefName}${m.displayName ?? m.name} を選択しました`);
   }, [selectedCode, byCode]);
 
-  // 条件フィルタの全国該当件数（JS判定。地図の減光と必ず同一条件）。
+  // 条件フィルタの全国該当（JS判定。地図の減光と必ず同一条件）。一覧表示にも使うため
+  // 件数でなく該当自治体そのものを持つ（件数は受け手が .length で導出）。
   const filterActive = isFilterActive(filters);
-  const matchedCount = useMemo(
-    () => (filterActive ? summary.reduce((n, m) => n + (matchesFilter(m, filters) ? 1 : 0), 0) : 0),
+  const matchedMunis = useMemo(
+    () => (filterActive ? summary.filter((m) => matchesFilter(m, filters)) : []),
     [filterActive, filters, summary],
   );
   // レイヤーボタンのバッジ用: 既定値から変更されている設定の数
@@ -753,10 +749,15 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
     overlays.size +
     Object.values(filters).filter((v) => v != null).length;
 
-  // フィルタ条件を更新しつつ GA4 に適用イベントを送る共通ハンドラ。
+  // フィルタ条件を更新しつつ GA4 に適用イベントを送り、URL クエリへ反映する共通ハンドラ
+  // （クリアも同経路。?code=/?pref= 等の他パラメータは applyFiltersToParams が保持する）。
   const updateFilters = useCallback((next: MapFilters) => {
     setFilters(next);
     if (isFilterActive(next)) trackApplyFilter(next);
+    const params = new URLSearchParams(window.location.search);
+    applyFiltersToParams(next, params);
+    const qs = params.toString();
+    window.history.replaceState(null, "", qs ? `?${qs}` : window.location.pathname);
   }, []);
 
   // 指標切替（GA4 イベント付き）。「なし」はトラッキングしない。
@@ -841,24 +842,12 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
     flyToCode(t.code);
   }, [flyToCode, flyToStationPoint]);
 
-  // ページ内の別クライアント島（トップのヒーロー検索の「地図で表示」）からのフライト依頼を受ける。
-  // lib/mapFly.ts の CustomEvent 1本の疎結合ブリッジ（トップ以外では発火しないため無害）。
-  useEffect(() => {
-    const onFlyRequest = (e: Event) => {
-      const detail = (e as CustomEvent<MapFlyDetail>).detail;
-      // byCode は「summary に実在するコードか」の検証のみ（未知コードの依頼を弾く）
-      if (detail?.code && byCode.has(detail.code)) void flyToMuni(detail);
-    };
-    window.addEventListener(MAP_FLY_EVENT, onFlyRequest);
-    return () => window.removeEventListener(MAP_FLY_EVENT, onFlyRequest);
-  }, [byCode, flyToMuni]);
+  // 該当一覧からの選択（検索確定と同じ経路）。LayersPanel 側の memo を活かすため安定参照。
+  const selectMatch = useCallback((code: string) => flyToMuni({ code }), [flyToMuni]);
 
   // パネル開閉はフル詳細の取得完了で判定（取得中の一瞬は閉のまま）
   const rootClass = [
     "map-root",
-    // ヘッダーを出さない時は、その高さぶんの上端オフセット（--header-h）を畳んで
-    // レイヤーボタン・凡例・サイドパネルを地図の上端まで詰める
-    showHeader ? "" : "map-root--headerless",
     selectedDetail && isMobile ? "is-sheet-open" : "",
     selectedDetail && !isMobile ? "is-panel-open" : "",
   ].filter(Boolean).join(" ");
@@ -910,24 +899,19 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
         </div>
       )}
 
-      {/* 統合ヘッダー（固定）。埋め込み地図ではページ側の SiteHeader が担うため出さない */}
-      {showHeader && (
-        <header className="app-header">
+      {/* 統合ヘッダー（固定） */}
+      <header className="app-header">
           <div className="app-header-brand">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/logo.svg" alt="" className="brand-mark" width={30} height={30} />
             <div className="brand-name">KurashiMap</div>
           </div>
-          {showSearch ? (
-            <MuniSearch
-              municipalities={municipalities}
-              wards={wards}
-              // 検索行（ComboboxHit）→ フライト依頼（MapFlyDetail）への変換はここだけ
-              onSelect={(m) => flyToMuni({ code: m.code, station: m.station })}
-            />
-          ) : (
-            <div className="app-header-spacer" aria-hidden="true" />
-          )}
+          <MuniSearch
+            municipalities={municipalities}
+            wards={wards}
+            // 検索行（ComboboxHit）→ フライト依頼（MapFlyDetail）への変換はここだけ
+            onSelect={(m) => flyToMuni({ code: m.code, station: m.station })}
+          />
           {onMenuClick && (
             <button
               className="app-header-menu-btn"
@@ -941,7 +925,6 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
             </button>
           )}
         </header>
-      )}
 
       {/* 塗り分け指標の切替（地図上のフローティング操作）。サイトナビ（ヘッダーの
           メニュー）と地図コントロールを役割で分け、ヘッダーに混在させない。 */}
@@ -958,9 +941,10 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
           onToggleOverlay={toggleOverlay}
           filters={filters}
           onChangeFilters={updateFilters}
-          onClearFilters={() => setFilters(EMPTY_FILTERS)}
+          onClearFilters={() => updateFilters(EMPTY_FILTERS)}
           filterActive={filterActive}
-          matchedCount={matchedCount}
+          matchedMunis={matchedMunis}
+          onSelectMatch={selectMatch}
           isMobile={isMobile}
           activeCount={layerActiveCount}
         />

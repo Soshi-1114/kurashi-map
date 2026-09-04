@@ -1,5 +1,42 @@
 [
   {
+    "name": "pr-shindan",
+    "since": "2026-08-31",
+    "note": "住む街診断 /shindan 新設（livabilityScore6軸の重み付け診断・AIO耐性ツール資産）。新規URLなのでゼロベース成長で見る。since は想定デプロイ翌日 — 実デプロイがずれたら修正すること",
+    "include": [
+      "/shindan"
+    ]
+  },
+  {
+    "name": "pr-aging-map",
+    "since": "2026-08-31",
+    "note": "高齢化率マップ /map/aging 新設＋地図フィルタに高齢化率上限（ランキング aging-high/low に地図CTAも点灯）。新規URLなのでゼロベース成長で見る。since は想定デプロイ翌日 — 実デプロイがずれたら修正すること",
+    "include": [
+      "/map/aging"
+    ]
+  },
+  {
+    "name": "pr-ume-amenity-rankings",
+    "since": "2026-08-31",
+    "note": "駅数・医療機関数・保育施設数のランキング新設（全国+県別、収録済み amenities の露出強化）。新規URLなのでゼロベース成長で見る。since は想定デプロイ翌日 — 実デプロイがずれたら修正すること",
+    "include": [
+      "/ranking/stations",
+      "/ranking/stations/*",
+      "/ranking/medical-facilities",
+      "/ranking/medical-facilities/*",
+      "/ranking/preschools",
+      "/ranking/preschools/*"
+    ]
+  },
+  {
+    "name": "pr-ume-map-vacancy",
+    "since": "2026-08-31",
+    "note": "空き家率マップ /map/vacancy 新設（2026-07 SERP調査の勝ち筋回収。ランキング vacancy-high/low に地図CTAも点灯）。新規URLなのでゼロベース成長で見る。since は想定デプロイ翌日 — 実デプロイがずれたら修正すること",
+    "include": [
+      "/map/vacancy"
+    ]
+  },
+  {
     "name": "pr-126-population-rankings",
     "pr": 126,
     "since": "2026-08-11",
@@ -54,6 +91,58 @@
       "/ranking/future-population-resilient",
       "/ranking/future-population-resilient/*",
       "/map/future-population"
+    ]
+  },
+  {
+    "name": "pr-166-population-answer-titles",
+    "pr": 166,
+    "since": "2026-08-29",
+    "note": "population-most/density 全国版 title に「日本一は{1位}」を動的挿入（質問型クエリへの答え先出し）。since は想定デプロイ翌日 — 実デプロイがずれたら修正すること",
+    "include": [
+      "/ranking/population-most",
+      "/ranking/population-density"
+    ]
+  },
+  {
+    "name": "pr-166-population-most-pref-titles",
+    "pr": 166,
+    "since": "2026-08-29",
+    "note": "population-most 県別 title を「{県}の市区町村 人口ランキング（人口が多い順）」へ（連続語「人口ランキング」を作る）。since は想定デプロイ翌日 — 実デプロイがずれたら修正すること",
+    "include": [
+      "/ranking/population-most/*"
+    ]
+  },
+  {
+    "name": "pr-166-future-resilient-title",
+    "pr": 166,
+    "since": "2026-08-29",
+    "note": "seoTitle を「2050年の将来人口ランキング｜…」へ変更＋population-growth/decline（全国・県別）から related 導線で内部リンク追加。同PRの地図CTAは全ランキング共通の本文変更として既存セットにも乗る。since は想定デプロイ翌日 — 実デプロイがずれたら修正すること",
+    "include": [
+      "/ranking/future-population-resilient",
+      "/ranking/future-population-resilient/*"
+    ]
+  },
+  {
+    "name": "pr-167-170-map-migration",
+    "pr": 170,
+    "since": "2026-08-29",
+    "note": "地図体験の移設一式（#167-#170）: /map/hazard 新設・汎用 /map 新設・トップのポータル化（埋め込み地図撤去）。/map と /map/hazard は新規URLなのでゼロベース成長で見る。トップは title/description 不変で構成のみ変更。since は想定デプロイ翌日 — 実デプロイがずれたら修正すること",
+    "include": [
+      "/map",
+      "/map/hazard",
+      "/"
+    ]
+  },
+  {
+    "name": "pr-173-174-childcare",
+    "pr": 174,
+    "since": "2026-08-29",
+    "note": "保活余力（保育所等の定員余裕率）新設: ランキング全国+県別は新規URL（ゼロベース成長で見る）。自治体詳細への定員・余裕率カード追加とFAQ 1問は /area/*/* の既存セットにも乗る。待機児童も令和8年版へ同時更新。実デプロイは 2026-08-28（since はその翌日）",
+    "include": [
+      "/ranking/childcare-capacity",
+      "/ranking/childcare-capacity/*",
+      "/ranking/waitlist-zero",
+      "/ranking/waitlist-zero/*"
     ]
   },
   {

@@ -26,7 +26,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -87,6 +87,29 @@
       "elderly2050": 27719,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 18923,
+      "capacityAge0": 2085,
+      "capacityAge12": 6692,
+      "enrolled": 16665,
+      "hiddenWaitlist": 639,
+      "enrolledAge0": 981,
+      "enrolledAge12": 6543,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（北九州市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 8959,
+      "elderly": 33802,
+      "total": 89663,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.69,
+      "source": "総務省 地方公共団体の主要財政指標一覧（北九州市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -116,7 +139,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -177,6 +200,29 @@
       "elderly2050": 22896,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 18923,
+      "capacityAge0": 2085,
+      "capacityAge12": 6692,
+      "enrolled": 16665,
+      "hiddenWaitlist": 639,
+      "enrolledAge0": 981,
+      "enrolledAge12": 6543,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（北九州市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 9166,
+      "elderly": 26343,
+      "total": 78113,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.69,
+      "source": "総務省 地方公共団体の主要財政指標一覧（北九州市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -206,7 +252,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -267,6 +313,29 @@
       "elderly2050": 15496,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 18923,
+      "capacityAge0": 2085,
+      "capacityAge12": 6692,
+      "enrolled": 16665,
+      "hiddenWaitlist": 639,
+      "enrolledAge0": 981,
+      "enrolledAge12": 6543,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（北九州市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 5837,
+      "elderly": 17492,
+      "total": 54063,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.69,
+      "source": "総務省 地方公共団体の主要財政指標一覧（北九州市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -296,7 +365,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -357,6 +426,29 @@
       "elderly2050": 57642,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 18923,
+      "capacityAge0": 2085,
+      "capacityAge12": 6692,
+      "enrolled": 16665,
+      "hiddenWaitlist": 639,
+      "enrolledAge0": 981,
+      "enrolledAge12": 6543,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（北九州市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 18342,
+      "elderly": 51928,
+      "total": 177308,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.69,
+      "source": "総務省 地方公共団体の主要財政指標一覧（北九州市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -386,7 +478,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -447,6 +539,29 @@
       "elderly2050": 63913,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 18923,
+      "capacityAge0": 2085,
+      "capacityAge12": 6692,
+      "enrolled": 16665,
+      "hiddenWaitlist": 639,
+      "enrolledAge0": 981,
+      "enrolledAge12": 6543,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（北九州市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 24702,
+      "elderly": 59886,
+      "total": 202612,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.69,
+      "source": "総務省 地方公共団体の主要財政指標一覧（北九州市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -476,7 +591,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -537,6 +652,29 @@
       "elderly2050": 17701,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 18923,
+      "capacityAge0": 2085,
+      "capacityAge12": 6692,
+      "enrolled": 16665,
+      "hiddenWaitlist": 639,
+      "enrolledAge0": 981,
+      "enrolledAge12": 6543,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（北九州市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 6324,
+      "elderly": 21911,
+      "total": 61193,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.69,
+      "source": "総務省 地方公共団体の主要財政指標一覧（北九州市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -566,7 +704,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -627,6 +765,29 @@
       "elderly2050": 76495,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 18923,
+      "capacityAge0": 2085,
+      "capacityAge12": 6692,
+      "enrolled": 16665,
+      "hiddenWaitlist": 639,
+      "enrolledAge0": 981,
+      "enrolledAge12": 6543,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（北九州市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 28503,
+      "elderly": 74826,
+      "total": 242683,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.69,
+      "source": "総務省 地方公共団体の主要財政指標一覧（北九州市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -717,6 +878,29 @@
       "elderly2050": 103974,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 46983,
+      "capacityAge0": 5124,
+      "capacityAge12": 17084,
+      "enrolled": 39620,
+      "hiddenWaitlist": 898,
+      "enrolledAge0": 2719,
+      "enrolledAge12": 14669,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（福岡市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 44904,
+      "elderly": 74697,
+      "total": 334643,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.87,
+      "source": "総務省 地方公共団体の主要財政指標一覧（福岡市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -807,6 +991,29 @@
       "elderly2050": 67399,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 46983,
+      "capacityAge0": 5124,
+      "capacityAge12": 17084,
+      "enrolled": 39620,
+      "hiddenWaitlist": 898,
+      "enrolledAge0": 2719,
+      "enrolledAge12": 14669,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（福岡市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 24293,
+      "elderly": 44144,
+      "total": 249344,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.87,
+      "source": "総務省 地方公共団体の主要財政指標一覧（福岡市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -897,6 +1104,29 @@
       "elderly2050": 54134,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 46983,
+      "capacityAge0": 5124,
+      "capacityAge12": 17084,
+      "enrolled": 39620,
+      "hiddenWaitlist": 898,
+      "enrolledAge0": 2719,
+      "enrolledAge12": 14669,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（福岡市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 20438,
+      "elderly": 39316,
+      "total": 202039,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.87,
+      "source": "総務省 地方公共団体の主要財政指標一覧（福岡市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -987,6 +1217,29 @@
       "elderly2050": 84142,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 46983,
+      "capacityAge0": 5124,
+      "capacityAge12": 17084,
+      "enrolled": 39620,
+      "hiddenWaitlist": 898,
+      "enrolledAge0": 2719,
+      "enrolledAge12": 14669,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（福岡市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 35684,
+      "elderly": 63429,
+      "total": 272058,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.87,
+      "source": "総務省 地方公共団体の主要財政指標一覧（福岡市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -1077,6 +1330,29 @@
       "elderly2050": 73565,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 46983,
+      "capacityAge0": 5124,
+      "capacityAge12": 17084,
+      "enrolled": 39620,
+      "hiddenWaitlist": 898,
+      "enrolledAge0": 2719,
+      "enrolledAge12": 14669,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（福岡市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 27849,
+      "elderly": 51553,
+      "total": 210280,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.87,
+      "source": "総務省 地方公共団体の主要財政指標一覧（福岡市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -1167,6 +1443,29 @@
       "elderly2050": 42010,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 46983,
+      "capacityAge0": 5124,
+      "capacityAge12": 17084,
+      "enrolled": 39620,
+      "hiddenWaitlist": 898,
+      "enrolledAge0": 2719,
+      "enrolledAge12": 14669,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（福岡市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 16012,
+      "elderly": 32901,
+      "total": 127995,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.87,
+      "source": "総務省 地方公共団体の主要財政指標一覧（福岡市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -1257,6 +1556,29 @@
       "elderly2050": 69753,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 46983,
+      "capacityAge0": 5124,
+      "capacityAge12": 17084,
+      "enrolled": 39620,
+      "hiddenWaitlist": 898,
+      "enrolledAge0": 2719,
+      "enrolledAge12": 14669,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（福岡市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 31203,
+      "elderly": 56169,
+      "total": 224494,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.87,
+      "source": "総務省 地方公共団体の主要財政指標一覧（福岡市全体の値）",
+      "asOf": "2024年度"
     }
   }
 ]

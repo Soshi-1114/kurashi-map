@@ -23,7 +23,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -84,6 +84,29 @@
       "elderly2050": 55991,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 6173,
+      "capacityAge0": 620,
+      "capacityAge12": 2132,
+      "enrolled": 4800,
+      "hiddenWaitlist": 9,
+      "enrolledAge0": 156,
+      "enrolledAge12": 1677,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 21020,
+      "elderly": 55866,
+      "total": 177035,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.51,
+      "source": "総務省 地方公共団体の主要財政指標一覧",
+      "asOf": "2024年度"
     }
   },
   {
@@ -110,7 +133,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -171,6 +194,29 @@
       "elderly2050": 46484,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 5379,
+      "capacityAge0": 556,
+      "capacityAge12": 1799,
+      "enrolled": 4013,
+      "hiddenWaitlist": 31,
+      "enrolledAge0": 208,
+      "enrolledAge12": 1436,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 17898,
+      "elderly": 42918,
+      "total": 143115,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.65,
+      "source": "総務省 地方公共団体の主要財政指標一覧",
+      "asOf": "2024年度"
     }
   },
   {
@@ -197,7 +243,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -258,6 +304,29 @@
       "elderly2050": 13920,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 1709,
+      "capacityAge0": 174,
+      "capacityAge12": 545,
+      "enrolled": 1213,
+      "hiddenWaitlist": 0,
+      "enrolledAge0": 27,
+      "enrolledAge12": 416,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 4856,
+      "elderly": 15398,
+      "total": 42994,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.44,
+      "source": "総務省 地方公共団体の主要財政指標一覧",
+      "asOf": "2024年度"
     }
   },
   {
@@ -284,7 +353,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -345,6 +414,29 @@
       "elderly2050": 9781,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 1057,
+      "capacityAge0": 82,
+      "capacityAge12": 343,
+      "enrolled": 791,
+      "hiddenWaitlist": 7,
+      "enrolledAge0": 37,
+      "enrolledAge12": 272,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 3516,
+      "elderly": 10804,
+      "total": 32063,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.55,
+      "source": "総務省 地方公共団体の主要財政指標一覧",
+      "asOf": "2024年度"
     }
   },
   {
@@ -371,7 +463,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -432,6 +524,29 @@
       "elderly2050": 3053,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 380,
+      "capacityAge0": 25,
+      "capacityAge12": 110,
+      "enrolled": 292,
+      "hiddenWaitlist": 0,
+      "enrolledAge0": 2,
+      "enrolledAge12": 92,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 1106,
+      "elderly": 4156,
+      "total": 10543,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.26,
+      "source": "総務省 地方公共団体の主要財政指標一覧",
+      "asOf": "2024年度"
     }
   },
   {
@@ -458,7 +573,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -519,6 +634,29 @@
       "elderly2050": 691,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 60,
+      "capacityAge0": 3,
+      "capacityAge12": 21,
+      "enrolled": 30,
+      "hiddenWaitlist": 0,
+      "enrolledAge0": 2,
+      "enrolledAge12": 12,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 149,
+      "elderly": 1330,
+      "total": 2575,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.14,
+      "source": "総務省 地方公共団体の主要財政指標一覧",
+      "asOf": "2024年度"
     }
   },
   {
@@ -545,7 +683,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -606,6 +744,29 @@
       "elderly2050": 1599,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 210,
+      "capacityAge0": 18,
+      "capacityAge12": 63,
+      "enrolled": 105,
+      "hiddenWaitlist": 0,
+      "enrolledAge0": 6,
+      "enrolledAge12": 34,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 467,
+      "elderly": 2745,
+      "total": 5930,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.19,
+      "source": "総務省 地方公共団体の主要財政指標一覧",
+      "asOf": "2024年度"
     }
   },
   {
@@ -632,7 +793,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -693,6 +854,29 @@
       "elderly2050": 4470,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 640,
+      "capacityAge0": 65,
+      "capacityAge12": 181,
+      "enrolled": 392,
+      "hiddenWaitlist": 0,
+      "enrolledAge0": 8,
+      "enrolledAge12": 109,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 1558,
+      "elderly": 5881,
+      "total": 15178,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.23,
+      "source": "総務省 地方公共団体の主要財政指標一覧",
+      "asOf": "2024年度"
     }
   },
   {
@@ -719,7 +903,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -780,6 +964,29 @@
       "elderly2050": 1675,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 130,
+      "capacityAge0": 12,
+      "capacityAge12": 43,
+      "enrolled": 102,
+      "hiddenWaitlist": 0,
+      "enrolledAge0": 0,
+      "enrolledAge12": 37,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 503,
+      "elderly": 2392,
+      "total": 5600,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.22,
+      "source": "総務省 地方公共団体の主要財政指標一覧",
+      "asOf": "2024年度"
     }
   },
   {
@@ -806,7 +1013,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -867,6 +1074,29 @@
       "elderly2050": 5029,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 751,
+      "capacityAge0": 66,
+      "capacityAge12": 253,
+      "enrolled": 603,
+      "hiddenWaitlist": 0,
+      "enrolledAge0": 14,
+      "enrolledAge12": 200,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 2170,
+      "elderly": 5378,
+      "total": 16093,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.27,
+      "source": "総務省 地方公共団体の主要財政指標一覧",
+      "asOf": "2024年度"
     }
   },
   {
@@ -893,7 +1123,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -954,6 +1184,29 @@
       "elderly2050": 4610,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 605,
+      "capacityAge0": 71,
+      "capacityAge12": 215,
+      "enrolled": 412,
+      "hiddenWaitlist": 0,
+      "enrolledAge0": 3,
+      "enrolledAge12": 134,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 1641,
+      "elderly": 5997,
+      "total": 15421,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.3,
+      "source": "総務省 地方公共団体の主要財政指標一覧",
+      "asOf": "2024年度"
     }
   },
   {
@@ -980,7 +1233,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -1041,6 +1294,29 @@
       "elderly2050": 4245,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 553,
+      "capacityAge0": 54,
+      "capacityAge12": 178,
+      "enrolled": 460,
+      "hiddenWaitlist": 0,
+      "enrolledAge0": 12,
+      "enrolledAge12": 139,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 1685,
+      "elderly": 5187,
+      "total": 13946,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.3,
+      "source": "総務省 地方公共団体の主要財政指標一覧",
+      "asOf": "2024年度"
     }
   },
   {
@@ -1067,7 +1343,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -1128,6 +1404,29 @@
       "elderly2050": 1137,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 180,
+      "capacityAge0": 14,
+      "capacityAge12": 56,
+      "enrolled": 158,
+      "hiddenWaitlist": 0,
+      "enrolledAge0": 10,
+      "enrolledAge12": 44,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 560,
+      "elderly": 1004,
+      "total": 3585,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.49,
+      "source": "総務省 地方公共団体の主要財政指標一覧",
+      "asOf": "2024年度"
     }
   },
   {
@@ -1154,7 +1453,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -1215,6 +1514,29 @@
       "elderly2050": 4452,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 529,
+      "capacityAge0": 37,
+      "capacityAge12": 152,
+      "enrolled": 378,
+      "hiddenWaitlist": 0,
+      "enrolledAge0": 8,
+      "enrolledAge12": 131,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 1522,
+      "elderly": 5968,
+      "total": 14483,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.27,
+      "source": "総務省 地方公共団体の主要財政指標一覧",
+      "asOf": "2024年度"
     }
   },
   {
@@ -1241,7 +1563,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -1302,6 +1624,29 @@
       "elderly2050": 2972,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 412,
+      "capacityAge0": 51,
+      "capacityAge12": 135,
+      "enrolled": 243,
+      "hiddenWaitlist": 0,
+      "enrolledAge0": 7,
+      "enrolledAge12": 83,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 1004,
+      "elderly": 3920,
+      "total": 9882,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.26,
+      "source": "総務省 地方公共団体の主要財政指標一覧",
+      "asOf": "2024年度"
     }
   },
   {
@@ -1328,7 +1673,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -1389,6 +1734,29 @@
       "elderly2050": 3128,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 409,
+      "capacityAge0": 27,
+      "capacityAge12": 129,
+      "enrolled": 298,
+      "hiddenWaitlist": 0,
+      "enrolledAge0": 12,
+      "enrolledAge12": 98,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 1127,
+      "elderly": 4138,
+      "total": 10080,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.28,
+      "source": "総務省 地方公共団体の主要財政指標一覧",
+      "asOf": "2024年度"
     }
   },
   {
@@ -1415,7 +1783,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -1476,6 +1844,29 @@
       "elderly2050": 1011,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 107,
+      "capacityAge0": 8,
+      "capacityAge12": 37,
+      "enrolled": 54,
+      "hiddenWaitlist": 0,
+      "enrolledAge0": 0,
+      "enrolledAge12": 23,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 233,
+      "elderly": 2054,
+      "total": 3731,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.16,
+      "source": "総務省 地方公共団体の主要財政指標一覧",
+      "asOf": "2024年度"
     }
   },
   {
@@ -1502,7 +1893,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -1563,6 +1954,29 @@
       "elderly2050": 710,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 90,
+      "capacityAge0": 6,
+      "capacityAge12": 24,
+      "enrolled": 42,
+      "hiddenWaitlist": 0,
+      "enrolledAge0": 1,
+      "enrolledAge12": 19,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 147,
+      "elderly": 1377,
+      "total": 2550,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.16,
+      "source": "総務省 地方公共団体の主要財政指標一覧",
+      "asOf": "2024年度"
     }
   },
   {
@@ -1589,7 +2003,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -1650,6 +2064,29 @@
       "elderly2050": 711,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 70,
+      "capacityAge0": 6,
+      "capacityAge12": 24,
+      "enrolled": 52,
+      "hiddenWaitlist": 0,
+      "enrolledAge0": 0,
+      "enrolledAge12": 16,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 192,
+      "elderly": 1219,
+      "total": 2432,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.27,
+      "source": "総務省 地方公共団体の主要財政指標一覧",
+      "asOf": "2024年度"
     }
   }
 ]

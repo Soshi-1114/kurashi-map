@@ -1,7 +1,7 @@
 import "../league.css";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { Trophy, ArrowUpRight, Wallet, Home, JapaneseYen, Baby, Users, Globe2, ShieldCheck, TrendingUp, TrendingDown } from "lucide-react";
+import { Trophy, ArrowUpRight, Wallet, Home, JapaneseYen, Baby, Users, Globe2, ShieldCheck, TrendingUp, TrendingDown, Landmark } from "lucide-react";
 import { listAllAcrossPrefs } from "@/lib/metrics";
 import { RANKINGS, muniLevelOnly, rankBy, type RankingDef } from "@/lib/rankings";
 import { SITE, prefNameOf, absoluteUrl } from "@/lib/site";
@@ -38,11 +38,16 @@ const RANK_VISUAL: Record<string, { Icon: typeof Wallet; tone: string }> = {
   "land-price-high": { Icon: JapaneseYen, tone: "rk-tone-land" },
   "land-price-low": { Icon: JapaneseYen, tone: "rk-tone-land" },
   "waitlist-zero": { Icon: Baby, tone: "rk-tone-kids" },
+  "childcare-capacity": { Icon: Baby, tone: "rk-tone-kids" },
   "population-most": { Icon: Users, tone: "rk-tone-pop" },
   "population-growth": { Icon: TrendingUp, tone: "rk-tone-pop" },
   "population-decline": { Icon: TrendingDown, tone: "rk-tone-pop" },
+  "aging-high": { Icon: Users, tone: "rk-tone-pop" },
+  "aging-low": { Icon: Users, tone: "rk-tone-pop" },
   "foreign-ratio-high": { Icon: Globe2, tone: "rk-tone-foreign" },
   "foreign-ratio-low": { Icon: Globe2, tone: "rk-tone-foreign" },
+  "fiscal-strong": { Icon: Landmark, tone: "rk-tone-infra" },
+  "fiscal-weak": { Icon: Landmark, tone: "rk-tone-infra" },
 };
 function visualFor(slug: string) {
   return RANK_VISUAL[slug] ?? { Icon: Trophy, tone: "rk-tone-rent" };
@@ -148,7 +153,7 @@ export default async function RankingIndexPage() {
       </section>
 
       <nav className="rk-footnav" aria-label="関連リンク">
-        <Link href="/" className="rk-back">← 地図に戻る</Link>
+        <Link href="/map" className="rk-back">← 地図で探す</Link>
       </nav>
     </PageShell>
   );

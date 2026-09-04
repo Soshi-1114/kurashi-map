@@ -16,6 +16,7 @@ import {
   Info,
   Trophy,
   Map as MapIcon,
+  Landmark,
   ArrowLeft,
   ArrowUpRight,
   Search,
@@ -38,6 +39,10 @@ import { getAmbiguousNames } from "@/lib/muniLabel";
 import { buildMuniTitle } from "@/lib/muniMeta";
 import { hasRent, rentBand } from "@/lib/rentColor";
 import { isWaitlistDisclosed } from "@/lib/waitlist";
+import {
+  hasChildcareData, hasChildcareCapacity, childcareOpenRatioText,
+  childcareOpenRatioAge0Pct, childcareOpenRatioAge12Pct,
+} from "@/lib/childcare";
 import { hasLandPrice } from "@/lib/landPrice";
 import { hasVacancy, vacancyRateText } from "@/lib/vacancy";
 import { isAmenitiesCounted, coverageReason } from "@/lib/coverage";
@@ -56,6 +61,10 @@ import { getPrefRanks } from "@/lib/prefRanks";
 import { buildHighlights } from "@/lib/highlights";
 import { buildInsights } from "@/lib/insights";
 import { computeLivability } from "@/lib/livabilityScore";
+import { populationDensity, densityText } from "@/lib/populationDensity";
+import { hasAgeData, elderlyRatioPct, elderlyRatioText } from "@/lib/ageStats";
+import { buildFuture2050Insights, buildCapacityItems } from "@/lib/future2050";
+import { hasFiscal, isFiscalSpecialWard, fiscalIndexText, fiscalSource } from "@/lib/fiscal";
 import { Reveal } from "@/components/area/Reveal";
 import { Section } from "@/components/area/Section";
 import { ScorePanel } from "@/components/area/ScorePanel";
@@ -75,11 +84,14 @@ import {
 } from "@/components/area/cards";
 import { compactYen, compactPopulation } from "@/lib/format";
 import { SupportBanner } from "@/components/area/SupportBanner";
-import { FurusatoLink } from "@/components/area/FurusatoLink";
+import { FurusatoLink } from "@/components/monetization/FurusatoLink";
 import { DenkiTeaser } from "@/components/area/DenkiTeaser";
-import { supportUrl, furusatoUrlTemplate } from "@/lib/monetization";
+import { supportUrl, furusatoLink, kasaiHokenLink } from "@/lib/monetization";
+import { KasaiLink } from "@/components/monetization/KasaiLink";
+import { furunaviMunicipalPageUrl } from "@/lib/furunaviMunicipals";
 import PageShell from "@/components/PageShell";
 import SectionNav, { type SectionNavItem } from "@/components/area/SectionNav";
+import { ShareButton } from "@/components/ShareButton";
 
 type Params = { pref: string; city: string };
 
@@ -197,6 +209,11 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
   const parent = m.parentCode ? all.find((x) => x.code === m.parentCode) ?? null : null;
   const heading = m.displayName ?? m.name;
   const support = supportUrl();
+  const kasai = kasaiHokenLink();
+  // ふるさと納税の寄付先。政令市の行政区は親の政令市（名前・ふるなびID とも donee で引く）。
+  // ふるなび未掲載の自治体は furusatoLink が null を返し、導線ごと非表示になる。
+  const donee = m.level === "ward" && parent ? parent : m;
+  const furusato = furusatoLink(furunaviMunicipalPageUrl(donee.code));
   // 将来人口カードの派生値。const に取れば型ガードの絞り込みが JSX 内へ伝播する。
   const fp = m.futurePopulation;
   const fp2050 = futureTotal(fp, "2050");
@@ -281,6 +298,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
     { id: "hazard", label: "災害・外国人比率", only: "pc" },
     { id: "hazard", label: "災害リスク", only: "sp" },
     { id: "foreign", label: "外国人比率", only: "sp" },
+    { id: "fiscal", label: "財政" },
     { id: "future-pop", label: "将来人口" },
     ...(firstCompareKey ? [{ id: "compare", label: "比較" }] : []),
     { id: "ranking", label: "ランキング" },
@@ -296,6 +314,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
     { "@type": "PropertyValue", name: "人口", unitText: "人", value: m.population },
     isWaitlistDisclosed(m.waitlistChildren) && { "@type": "PropertyValue", name: "待機児童数", unitText: "人", value: m.waitlistChildren.value },
     hasForeignData(m.foreignResidents.source) && { "@type": "PropertyValue", name: "外国人住民比率", unitText: "%", value: Number(foreignRatioPct(m).toFixed(2)) },
+    hasAgeData(m.ageStats) && { "@type": "PropertyValue", name: "高齢化率（65歳以上人口の割合）", unitText: "%", value: Number((elderlyRatioPct(m.ageStats) ?? 0).toFixed(1)) },
   ].filter(Boolean);
 
   const lastModified = muniLastModified(m);
@@ -359,6 +378,21 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
     if (areaStats.rent.national != null) rentRows.push({ label: "全国平均", value: areaStats.rent.national });
   }
 
+  // 財政力指数の比較バー。特別区は都区財政調整制度下の算定で市町村平均との比較が
+  // 誤解を生むため、バーを出さず注記に切り替える（カード側で分岐）。
+  const fiscalRows: CompareRow[] =
+    hasFiscal(m.fiscal) && !isFiscalSpecialWard(m.fiscal)
+      ? [
+          { label: m.name, value: m.fiscal.index, self: true },
+          ...(areaStats.fiscalIndex.byPref.get(m.pref) != null
+            ? [{ label: `${prefName}平均`, value: areaStats.fiscalIndex.byPref.get(m.pref)! }]
+            : []),
+          ...(areaStats.fiscalIndex.national != null
+            ? [{ label: "全国平均", value: areaStats.fiscalIndex.national }]
+            : []),
+        ]
+      : [];
+
   // 外国人住民比率の比較バー（fc がある＝対象かつ比較可能なときのみ）。
   const foreignRows: CompareRow[] = fc
     ? [
@@ -385,6 +419,15 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
         areaStats.rent.national != null ? `全国平均${areaStats.rent.national.toLocaleString()}円` : null,
       ].filter(Boolean).join("・") || undefined
     : undefined;
+  // 人口密度（実行時算出。面積未収録・人口0は null → 表示しない）。
+  const density = populationDensity(m);
+  // 「2050年の暮らし」ビュー（将来人口カード拡張）の派生テキスト。
+  const future2050Insights = buildFuture2050Insights(m);
+  const capacityItems = buildCapacityItems(m, areaStats);
+  // 体力の注記には値を再掲せず、比較文脈（全国平均）だけを添える。
+  const capacityContexts = capacityItems
+    .filter((c) => c.context)
+    .map((c) => `${c.label}の${c.context}`);
   const popNatPos = rankPositions.get("population-most")?.get(m.code);
   const popPrefPos = prefRanks.get("population-most")?.get(m.code);
   const popCompare =
@@ -430,9 +473,19 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
             <span className="ad-title-sub">の住みやすさ</span>
           </h1>
           <p className="ad-lead">{buildSummary(m)}</p>
-          <Link href={`/compare?codes=${m.code}`} className="ad-compare-add ad-compare-add-hero">
-            この自治体を比較ページで見る<ArrowUpRight size={13} aria-hidden="true" />
-          </Link>
+          <div className="ad-hero-actions">
+            <Link href={`/compare?codes=${m.code}`} className="ad-compare-add ad-compare-add-hero">
+              この自治体を比較ページで見る<ArrowUpRight size={13} aria-hidden="true" />
+            </Link>
+            <ShareButton
+              className="ad-share-hero"
+              title={`${prefName}${heading}の住みやすさ｜${SITE.name}`}
+              path={`/area/${m.pref}/${m.code}`}
+              contentType="area"
+              itemId={m.code}
+              label="このページを共有"
+            />
+          </div>
         </div>
 
         <ScorePanel liv={liv} />
@@ -490,7 +543,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
             label="人口"
             value={m.population.toLocaleString()}
             unit="人"
-            sub={`人口トレンド: ${m.populationTrend}`}
+            sub={`人口トレンド: ${m.populationTrend}${density != null ? `・人口密度 ${densityText(density)}` : ""}${hasAgeData(m.ageStats) ? `・高齢化率 ${elderlyRatioText(m.ageStats)}` : ""}`}
             compare={popCompare}
           />
           <KpiCard
@@ -575,7 +628,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
                 ? { text: "待機児童ゼロ", tone: "is-good" }
                 : undefined
             }
-            link={{ href: "/ranking/waitlist-zero", label: "待機児童ゼロの自治体" }}
+            link={{ href: "/ranking/childcare-capacity", label: "保育の余裕をランキングで見る" }}
           >
             {isWaitlistDisclosed(m.waitlistChildren) ? (
               <>
@@ -586,6 +639,39 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
             ) : (
               <NoData text="区別非公表です。" reason={m.waitlistChildren.source.replace("区別非公表（", "").replace(/）.*$/, "")} />
             )}
+            {/* 保育所等の受け入れ状況（定員・利用・余裕率）。政令市の区は市全体の集計
+                （source に明示され SourceLine に出る）。capacity=0 は「定員なし」の実データ。 */}
+            {hasChildcareData(m.childcare) &&
+              (hasChildcareCapacity(m.childcare) ? (
+                <>
+                  <div className="ad-statline">
+                    <span className="ad-stat">
+                      <span className="ad-stat-value">{m.childcare.capacity.toLocaleString()}</span>
+                      <span className="ad-stat-label">保育定員</span>
+                    </span>
+                    <span className="ad-stat">
+                      <span className="ad-stat-value">{m.childcare.enrolled.toLocaleString()}</span>
+                      <span className="ad-stat-label">利用児童数</span>
+                    </span>
+                    <span className="ad-stat">
+                      <span className="ad-stat-value">{childcareOpenRatioText(m.childcare)}</span>
+                      <span className="ad-stat-label">定員余裕率</span>
+                    </span>
+                  </div>
+                  <p className="ad-note">
+                    年齢別の定員余裕率:
+                    0歳児 {childcareOpenRatioAge0Pct(m.childcare) != null ? `${childcareOpenRatioAge0Pct(m.childcare)!.toFixed(1)}%` : "—"} /
+                    1,2歳児 {childcareOpenRatioAge12Pct(m.childcare) != null ? `${childcareOpenRatioAge12Pct(m.childcare)!.toFixed(1)}%` : "—"}。
+                    {m.childcare.hiddenWaitlist > 0 &&
+                      `待機児童のほかに、育児休業中などで待機児童に含まれない申込者が${m.childcare.hiddenWaitlist.toLocaleString()}人います。`}
+                  </p>
+                  <SourceLine source={m.childcare.source} asOf={m.childcare.asOf} />
+                </>
+              ) : (
+                <p className="ad-note">
+                  保育所等の定員はありません（{formatAsOfJa(m.childcare.asOf)}時点・こども家庭庁の公表値）。
+                </p>
+              ))}
             {m.amenities &&
               (isAmenitiesCounted(m.amenities.source) ? (
                 <>
@@ -610,8 +696,16 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
               ))}
           </MetricCard>
 
-          {/* 災害リスク */}
-          <MetricCard id="hazard" icon={ShieldAlert} tone="ad-tone-hazard" title="災害リスク">
+          {/* 災害リスク。リンク先の /map/hazard は洪水・土砂の区域を初期点灯した地図ハブで、
+              当該自治体へフォーカスして開く（区域タイルは GSI 全国配信のため、
+              集計対象外の自治体でも地図では見られる）。 */}
+          <MetricCard
+            id="hazard"
+            icon={ShieldAlert}
+            tone="ad-tone-hazard"
+            title="災害リスク"
+            link={{ href: mapHrefForCode(m.code, "/map/hazard"), label: "ハザードマップを地図で見る" }}
+          >
             <DisasterCard m={m} />
           </MetricCard>
 
@@ -621,7 +715,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
             icon={Globe2}
             tone="ad-tone-foreign"
             title="外国人比率"
-            link={{ href: mapHrefForCode(m.code, "/map/foreign-ratio"), label: "地図・ランキングで見る" }}
+            link={{ href: mapHrefForCode(m.code, "/map/foreign-ratio"), label: "外国人比率を地図で見る" }}
           >
             {hasForeignData(m.foreignResidents.source) ? (
               <>
@@ -648,6 +742,42 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
             )}
           </MetricCard>
 
+          {/* 財政（財政力指数）。低い=悪いという誤読を防ぐ中立注記を必ず添える。
+              特別区は都区財政調整制度下の算定のため平均比較バーを出さず注記に切り替える。 */}
+          <MetricCard
+            id="fiscal"
+            icon={Landmark}
+            tone="ad-tone-infra"
+            title="財政（財政力指数）"
+            link={{ href: "/ranking/fiscal-strong", label: "財政力指数ランキングで比較" }}
+          >
+            {hasFiscal(m.fiscal) ? (
+              <>
+                <MetricPrimary value={fiscalIndexText(m.fiscal)} />
+                {fiscalRows.length > 0 && (
+                  <CompareBar rows={fiscalRows} format={(v) => v.toFixed(2)} caption="財政力指数の比較（自治体・県平均・全国平均）" />
+                )}
+                {isFiscalSpecialWard(m.fiscal) && (
+                  <p className="ad-note">
+                    <Info size={15} aria-hidden="true" />
+                    <span>
+                      特別区は都区財政調整制度のもとで算定され、固定資産税などの大都市税源が都に帰属するため、市町村の指数と同一基準では比較できません（ランキング・平均比較の対象外）。
+                    </span>
+                  </p>
+                )}
+                <p className="ad-note">
+                  <Info size={15} aria-hidden="true" />
+                  <span>
+                    財政力指数は税収による財源の余裕度を示す指標（3か年平均。1超で普通交付税の不交付団体）です。指数が低い自治体には地方交付税で標準的な行政サービスの財源が保障されるため、低さは行政サービスの質や優劣を意味しません。
+                  </span>
+                </p>
+                <SourceLine source={m.fiscal.source} asOf={m.fiscal.asOf} />
+              </>
+            ) : (
+              <NoData text="財政力指数のデータはありません。" reason={coverageReason(fiscalSource(m.fiscal))} />
+            )}
+          </MetricCard>
+
           {/* 将来人口（IPSS 公的推計）。「今と将来」を同じ画面で見る2050暮らしビューの土台。
               titleへの反映は行わない（進行中のtitle刷新の計測と競合させない。
               docs/seo/gsc-seo-roadmap-2026-08.md 参照）。 */}
@@ -656,7 +786,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
               id="future-pop"
               icon={Users}
               tone="ad-tone-pop"
-              title="将来人口（公的推計）"
+              title="将来人口と2050年の暮らし（公的推計）"
               link={{ href: mapHrefForCode(m.code, "/map/future-population"), label: "2050年推計人口を地図で見る" }}
             >
               {hasFuturePopulation(fp) ? (
@@ -665,15 +795,19 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
                   {fpRate != null && (
                     <p className="ad-note">2020年（推計の基準年）比 {futureRateText(fp)}</p>
                   )}
+                  {/* 推計は5年刻み（2025〜2050）を収録しているが、2025年推計は現在人口
+                      （2025年国勢調査・調査基準が異なる）と並ぶと混乱するため出さない。 */}
                   <CompareBar
                     rows={[
                       { label: `現在（${POPULATION_FRESHNESS}）`, value: m.population, self: true },
                       { label: "2030年（推計）", value: futureTotal(fp, "2030") ?? 0 },
+                      { label: "2035年（推計）", value: futureTotal(fp, "2035") ?? 0 },
                       { label: "2040年（推計）", value: futureTotal(fp, "2040") ?? 0 },
+                      { label: "2045年（推計）", value: futureTotal(fp, "2045") ?? 0 },
                       { label: "2050年（推計）", value: fp2050 ?? 0 },
                     ]}
                     format={(v) => `${v.toLocaleString()}人`}
-                    caption="現在人口と将来推計人口の推移"
+                    caption="現在人口と将来推計人口の推移（5年刻み）"
                   />
                   {fpAges && (
                     <p className="ad-note">
@@ -681,6 +815,43 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
                       生産年齢（15-64歳）{fp.working2050.toLocaleString()}人（{fpAges.working.toFixed(1)}%）・
                       高齢（65歳以上）{fp.elderly2050.toLocaleString()}人（{fpAges.elderly.toFixed(1)}%）
                     </p>
+                  )}
+                  {/* 「今と将来」の高齢化率並記（2050暮らしビューの土台）。基準の異なる値
+                      （住基台帳の登録人口 vs 2020年国調基準の推計）のため、差分の演算表示は
+                      せず参考比較であることを明示する。 */}
+                  {hasAgeData(m.ageStats) && fpAges && (
+                    <p className="ad-note">
+                      高齢化率の今とこれから: 現在 {elderlyRatioText(m.ageStats)}（{formatAsOfJa(m.ageStats.asOf)}・住民基本台帳）／
+                      2050年 {fpAges.elderly.toFixed(1)}%（推計）。基準・人口の定義が異なる参考比較です。
+                    </p>
+                  )}
+                  {/* 2050年の読み解き（推計値からの決定論生成。推移バー・年齢構成行と重複する
+                      総数・増減率は含めない） */}
+                  {future2050Insights.length > 0 && (
+                    <ul className="ad-insights">
+                      {future2050Insights.map((s, i) => (
+                        <li key={i} className="ad-insight">{s}</li>
+                      ))}
+                    </ul>
+                  )}
+                  {/* 変化を受け止める暮らしの体力 = 財政・保育・住宅ストックの現況を将来文脈で
+                      束ねる（北極星「現在×将来を1画面」。すべて収録済み実データの再掲で、
+                      新しい評価・スコアは作らない）。 */}
+                  {capacityItems.length > 0 && (
+                    <>
+                      <div className="ad-statline">
+                        {capacityItems.map((c) => (
+                          <span key={c.label} className="ad-stat">
+                            <span className="ad-stat-value">{c.value}</span>
+                            <span className="ad-stat-label">{c.label}</span>
+                          </span>
+                        ))}
+                      </div>
+                      <p className="ad-note">
+                        人口構成の変化を受け止める現在の備えとして、財政・保育・住宅ストックの現況（すべて現在の公表実データ）を並べています
+                        {capacityContexts.length > 0 ? `（参考: ${capacityContexts.join("・")}）。` : "。"}
+                      </p>
+                    </>
                   )}
                   <p className="ad-note">
                     <Info size={15} aria-hidden="true" />
@@ -835,6 +1006,27 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
           })}
         </ul>
       </Section>
+      {/* 生活関連の導線（データ可視化エリアとは視覚的に分離）。
+          ページ最下部では到達率が低いため、ランキング直後・FAQ の手前に置く
+          （到達・クリックは GA4 の furusato_link_impression / _click で計測）。
+          電気代シミュレーターは内部リンクで常時表示。
+          ふるさと納税はアクセストレード×ふるなび提携済み（2026-08）。
+          env（商品リンクテンプレート or 固定リンク）の設定で点灯する */}
+      <Reveal>
+        <section className="ad-support-section" aria-label="生活関連の参考リンク">
+          {/* 供給エリア名（自治体固有情報）を添えて /denki にプリセット遷移 */}
+          <DenkiTeaser municipalityCode={m.code} municipalityName={m.name} />
+          {support && (
+            <SupportBanner url={support} municipalityCode={m.code} municipalityName={m.name} />
+          )}
+          {furusato && (
+            <FurusatoLink link={furusato} targetName={donee.name} municipalityCode={m.code} />
+          )}
+          {/* 火災保険（水災補償）。ハザード情報を持つサイトならではの文脈一致導線。
+              env 未設定なら kasai が null で導線ごと出ない */}
+          {kasai && <KasaiLink link={kasai} municipalityCode={m.code} placement="area" />}
+        </section>
+      </Reveal>
       {/* FAQ（Accordion・デフォルト閉じる） */}
       <Section icon={Info} tone="ad-tone-infra" title={`${m.name}のよくある質問`} id="details">
         <div className="ad-faq">
@@ -857,26 +1049,6 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
             本ページの数値は政府統計・国土数値情報の実データです。家賃は住宅・土地統計調査、人口は国勢調査（ともに e-Stat 経由）、地価は地価公示・地価調査、ハザード・生活インフラは不動産情報ライブラリ（reinfolib）／国土数値情報、待機児童はこども家庭庁、外国人住民は出入国在留管理庁「在留外国人統計」（e-Stat）の公表値に基づきます。総合スコアは公表値のみから算出した目安で、データのない指標は除外しています。データのない項目は推計で埋めず「データなし／対象外」と明示しています。
           </p>
         </details>
-      </Reveal>
-      {/* 生活関連の導線（データ可視化エリアとは視覚的に分離）。
-          電気代シミュレーターは内部リンクで常時表示。
-          ふるさと納税は提携ASP確定（env設定）まで非表示 */}
-      <Reveal>
-        <section className="ad-support-section" aria-label="生活関連の参考リンク">
-          {/* 供給エリア名（自治体固有情報）を添えて /denki にプリセット遷移 */}
-          <DenkiTeaser municipalityCode={m.code} municipalityName={m.name} />
-          {support && (
-            <SupportBanner url={support} municipalityCode={m.code} municipalityName={m.name} />
-          )}
-          {/* 政令市の行政区は寄付先が親の政令市になるため、寄付先名は親市名を使う */}
-          {furusatoUrlTemplate() && (
-            <FurusatoLink
-              targetName={m.level === "ward" && parent ? parent.name : m.name}
-              prefName={prefName}
-              municipalityCode={m.code}
-            />
-          )}
-        </section>
       </Reveal>
       {/* ページ下部 CTA */}
       <Reveal>

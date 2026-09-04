@@ -5,6 +5,8 @@ import {
   isFilterActive,
   matchesFilter,
   buildMatchExpression,
+  parseFilters,
+  applyFiltersToParams,
   type MapFilters,
 } from "@/lib/mapFilters";
 
@@ -125,5 +127,87 @@ describe("buildMatchExpression", () => {
   it("浸水句は floodLevel の範囲条件を含む", () => {
     const expr = buildMatchExpression(filters({ floodMax: 2 })) as unknown[];
     expect(JSON.stringify(expr)).toContain("floodLevel");
+  });
+});
+
+describe("matchesFilter — 空き家率上限", () => {
+  const f = filters({ vacancyMax: 15 });
+  it("上限以下なら該当（0% は実データとして該当）", () => {
+    expect(matchesFilter(summary({ vacancyRate: 12.6 }), f)).toBe(true);
+    expect(matchesFilter(summary({ vacancyRate: 15 }), f)).toBe(true);
+    expect(matchesFilter(summary({ vacancyRate: 0 }), f)).toBe(true);
+  });
+  it("上限超なら非該当", () => {
+    expect(matchesFilter(summary({ vacancyRate: 20.1 }), f)).toBe(false);
+  });
+  it("フィールド欠落（集計対象外の町村）は非該当（“該当”扱いしない=honesty）", () => {
+    expect(matchesFilter(summary(), f)).toBe(false);
+  });
+});
+
+describe("matchesFilter — 高齢化率上限", () => {
+  const f = filters({ agingMax: 35 });
+  it("上限以下なら該当", () => {
+    expect(matchesFilter(summary({ agingRate: 22.9 }), f)).toBe(true);
+    expect(matchesFilter(summary({ agingRate: 35 }), f)).toBe(true);
+  });
+  it("上限超なら非該当", () => {
+    expect(matchesFilter(summary({ agingRate: 40.1 }), f)).toBe(false);
+  });
+  it("フィールド欠落（住民登録なし）は非該当", () => {
+    expect(matchesFilter(summary(), f)).toBe(false);
+  });
+  it("URLラウンドトリップに乗る", () => {
+    const params = new URLSearchParams();
+    applyFiltersToParams(f, params);
+    expect(parseFilters(`?${params.toString()}`)).toEqual(f);
+  });
+});
+
+describe("matchesFilter — 2050年人口の下限", () => {
+  const f = filters({ futureMin: -10 });
+  it("下限以上なら該当（負値は正常値）", () => {
+    expect(matchesFilter(summary({ futureChangeRate: 3.2 }), f)).toBe(true);
+    expect(matchesFilter(summary({ futureChangeRate: -10 }), f)).toBe(true);
+  });
+  it("下限未満なら非該当", () => {
+    expect(matchesFilter(summary({ futureChangeRate: -33 }), f)).toBe(false);
+  });
+  it("futureMin=0 は増加見込みに限定", () => {
+    const f0 = filters({ futureMin: 0 });
+    expect(matchesFilter(summary({ futureChangeRate: 0 }), f0)).toBe(true);
+    expect(matchesFilter(summary({ futureChangeRate: -0.1 }), f0)).toBe(false);
+  });
+  it("フィールド欠落（推計対象外）は非該当", () => {
+    expect(matchesFilter(summary(), f)).toBe(false);
+  });
+  it("MapLibre 式にも min 方向の句が立つ", () => {
+    const expr = buildMatchExpression(f) as unknown[];
+    expect(JSON.stringify(expr)).toContain("futureChangeRate");
+    expect(JSON.stringify(expr)).toContain('">="');
+  });
+});
+
+describe("URL 同期（parseFilters / applyFiltersToParams）", () => {
+  it("クエリから復元し、選択肢に無い値・未知キーは条件なしに落とす", () => {
+    const f = parseFilters("?rentMax=60000&vacancyMax=15&futureMin=0&floodMax=999&code=13104");
+    expect(f).toEqual({ ...EMPTY_FILTERS, rentMax: 60000, vacancyMax: 15, futureMin: 0 });
+    expect(parseFilters("")).toEqual(EMPTY_FILTERS);
+    expect(parseFilters("?rentMax=abc")).toEqual(EMPTY_FILTERS);
+  });
+
+  it("applyFiltersToParams は他パラメータを保持し、null 条件はキーごと削除する", () => {
+    const params = new URLSearchParams("?code=13104&rentMax=50000");
+    applyFiltersToParams(filters({ vacancyMax: 20 }), params);
+    expect(params.get("code")).toBe("13104"); // フィルタ以外は触らない
+    expect(params.get("vacancyMax")).toBe("20");
+    expect(params.get("rentMax")).toBeNull(); // 条件なしに戻したキーは消える
+  });
+
+  it("復元→反映のラウンドトリップで状態が保たれる", () => {
+    const f = filters({ rentMax: 50000, floodMax: 0, futureMin: -20 });
+    const params = new URLSearchParams();
+    applyFiltersToParams(f, params);
+    expect(parseFilters(`?${params.toString()}`)).toEqual(f);
   });
 });

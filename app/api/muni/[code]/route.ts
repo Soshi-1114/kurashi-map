@@ -1,5 +1,5 @@
-// 自治体コードからフル Municipality を返す。トップ地図で自治体を選択した時に
-// 詳細パネル用にオンデマンド取得する（初期ページは軽量サマリのみ配信）。
+// 自治体コードからフル Municipality を返す。地図ページ（/map・/map/*）で自治体を
+// 選択した時に詳細パネル用にオンデマンド取得する（初期ページは軽量サマリのみ配信）。
 import { NextResponse } from "next/server";
 import { getMunicipality } from "@/lib/metrics";
 

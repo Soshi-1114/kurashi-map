@@ -26,7 +26,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -87,6 +87,29 @@
       "elderly2050": 50091,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 57466,
+      "capacityAge0": 4958,
+      "capacityAge12": 19208,
+      "enrolled": 49472,
+      "hiddenWaitlist": 991,
+      "enrolledAge0": 2317,
+      "enrolledAge12": 18163,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（名古屋市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 17657,
+      "elderly": 40666,
+      "total": 160719,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.98,
+      "source": "総務省 地方公共団体の主要財政指標一覧（名古屋市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -116,7 +139,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -177,6 +200,29 @@
       "elderly2050": 26834,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 57466,
+      "capacityAge0": 4958,
+      "capacityAge12": 19208,
+      "enrolled": 49472,
+      "hiddenWaitlist": 991,
+      "enrolledAge0": 2317,
+      "enrolledAge12": 18163,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（名古屋市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 10152,
+      "elderly": 18868,
+      "total": 86212,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.98,
+      "source": "総務省 地方公共団体の主要財政指標一覧（名古屋市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -206,7 +252,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -267,6 +313,29 @@
       "elderly2050": 49713,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 57466,
+      "capacityAge0": 4958,
+      "capacityAge12": 19208,
+      "enrolled": 49472,
+      "hiddenWaitlist": 991,
+      "enrolledAge0": 2317,
+      "enrolledAge12": 18163,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（名古屋市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 16140,
+      "elderly": 46070,
+      "total": 161389,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.98,
+      "source": "総務省 地方公共団体の主要財政指標一覧（名古屋市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -296,7 +365,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -357,6 +426,29 @@
       "elderly2050": 44334,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 57466,
+      "capacityAge0": 4958,
+      "capacityAge12": 19208,
+      "enrolled": 49472,
+      "hiddenWaitlist": 991,
+      "enrolledAge0": 2317,
+      "enrolledAge12": 18163,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（名古屋市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 16071,
+      "elderly": 35433,
+      "total": 149123,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.98,
+      "source": "総務省 地方公共団体の主要財政指標一覧（名古屋市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -386,7 +478,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -447,6 +539,29 @@
       "elderly2050": 39437,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 57466,
+      "capacityAge0": 4958,
+      "capacityAge12": 19208,
+      "enrolled": 49472,
+      "hiddenWaitlist": 991,
+      "enrolledAge0": 2317,
+      "enrolledAge12": 18163,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（名古屋市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 12728,
+      "elderly": 34176,
+      "total": 139829,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.98,
+      "source": "総務省 地方公共団体の主要財政指標一覧（名古屋市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -476,7 +591,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -537,6 +652,29 @@
       "elderly2050": 25999,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 57466,
+      "capacityAge0": 4958,
+      "capacityAge12": 19208,
+      "enrolled": 49472,
+      "hiddenWaitlist": 991,
+      "enrolledAge0": 2317,
+      "enrolledAge12": 18163,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（名古屋市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 6674,
+      "elderly": 17812,
+      "total": 102869,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.98,
+      "source": "総務省 地方公共団体の主要財政指標一覧（名古屋市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -566,7 +704,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -627,6 +765,29 @@
       "elderly2050": 29843,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 57466,
+      "capacityAge0": 4958,
+      "capacityAge12": 19208,
+      "enrolled": 49472,
+      "hiddenWaitlist": 991,
+      "enrolledAge0": 2317,
+      "enrolledAge12": 18163,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（名古屋市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 13109,
+      "elderly": 25857,
+      "total": 107073,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.98,
+      "source": "総務省 地方公共団体の主要財政指標一覧（名古屋市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -656,7 +817,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -717,6 +878,29 @@
       "elderly2050": 33767,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 57466,
+      "capacityAge0": 4958,
+      "capacityAge12": 19208,
+      "enrolled": 49472,
+      "hiddenWaitlist": 991,
+      "enrolledAge0": 2317,
+      "enrolledAge12": 18163,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（名古屋市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 13549,
+      "elderly": 28412,
+      "total": 108569,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.98,
+      "source": "総務省 地方公共団体の主要財政指標一覧（名古屋市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -746,7 +930,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -807,6 +991,29 @@
       "elderly2050": 21089,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 57466,
+      "capacityAge0": 4958,
+      "capacityAge12": 19208,
+      "enrolled": 49472,
+      "hiddenWaitlist": 991,
+      "enrolledAge0": 2317,
+      "enrolledAge12": 18163,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（名古屋市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 6489,
+      "elderly": 17362,
+      "total": 65853,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.98,
+      "source": "総務省 地方公共団体の主要財政指標一覧（名古屋市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -836,7 +1043,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -897,6 +1104,29 @@
       "elderly2050": 65773,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 57466,
+      "capacityAge0": 4958,
+      "capacityAge12": 19208,
+      "enrolled": 49472,
+      "hiddenWaitlist": 991,
+      "enrolledAge0": 2317,
+      "enrolledAge12": 18163,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（名古屋市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 23486,
+      "elderly": 53743,
+      "total": 215998,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.98,
+      "source": "総務省 地方公共団体の主要財政指標一覧（名古屋市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -926,7 +1156,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -987,6 +1217,29 @@
       "elderly2050": 44829,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 57466,
+      "capacityAge0": 4958,
+      "capacityAge12": 19208,
+      "enrolled": 49472,
+      "hiddenWaitlist": 991,
+      "enrolledAge0": 2317,
+      "enrolledAge12": 18163,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（名古屋市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 14096,
+      "elderly": 39570,
+      "total": 140269,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.98,
+      "source": "総務省 地方公共団体の主要財政指標一覧（名古屋市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -1016,7 +1269,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -1077,6 +1330,29 @@
       "elderly2050": 39171,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 57466,
+      "capacityAge0": 4958,
+      "capacityAge12": 19208,
+      "enrolled": 49472,
+      "hiddenWaitlist": 991,
+      "enrolledAge0": 2317,
+      "enrolledAge12": 18163,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（名古屋市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 13170,
+      "elderly": 39161,
+      "total": 131380,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.98,
+      "source": "総務省 地方公共団体の主要財政指標一覧（名古屋市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -1106,7 +1382,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -1167,6 +1443,29 @@
       "elderly2050": 59916,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 57466,
+      "capacityAge0": 4958,
+      "capacityAge12": 19208,
+      "enrolled": 49472,
+      "hiddenWaitlist": 991,
+      "enrolledAge0": 2317,
+      "enrolledAge12": 18163,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（名古屋市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 23278,
+      "elderly": 43693,
+      "total": 175752,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.98,
+      "source": "総務省 地方公共団体の主要財政指標一覧（名古屋市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -1196,7 +1495,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -1257,6 +1556,29 @@
       "elderly2050": 82473,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 57466,
+      "capacityAge0": 4958,
+      "capacityAge12": 19208,
+      "enrolled": 49472,
+      "hiddenWaitlist": 991,
+      "enrolledAge0": 2317,
+      "enrolledAge12": 18163,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（名古屋市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 34550,
+      "elderly": 59090,
+      "total": 249551,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.98,
+      "source": "総務省 地方公共団体の主要財政指標一覧（名古屋市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -1286,7 +1608,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -1347,6 +1669,29 @@
       "elderly2050": 49812,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 57466,
+      "capacityAge0": 4958,
+      "capacityAge12": 19208,
+      "enrolled": 49472,
+      "hiddenWaitlist": 991,
+      "enrolledAge0": 2317,
+      "enrolledAge12": 18163,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（名古屋市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 21093,
+      "elderly": 37697,
+      "total": 159469,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.98,
+      "source": "総務省 地方公共団体の主要財政指標一覧（名古屋市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -1376,7 +1721,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -1437,6 +1782,29 @@
       "elderly2050": 52563,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 57466,
+      "capacityAge0": 4958,
+      "capacityAge12": 19208,
+      "enrolled": 49472,
+      "hiddenWaitlist": 991,
+      "enrolledAge0": 2317,
+      "enrolledAge12": 18163,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（名古屋市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 18758,
+      "elderly": 38639,
+      "total": 156666,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.98,
+      "source": "総務省 地方公共団体の主要財政指標一覧（名古屋市全体の値）",
+      "asOf": "2024年度"
     }
   }
 ]

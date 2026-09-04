@@ -14,7 +14,7 @@ KurashiMap の各指標データは GitHub Actions が定期/手動で取得し�
 
 | ワークフロー | 取得元 | 対象指標 | 更新頻度（cron） | 必要 Secret |
 |---|---|---|---|---|
-| **annual** (`data-update-annual.yml`) | e-Stat / 国土数値情報 L01・S12 / こども家庭庁 Excel | 人口・家賃・医療機関・駅数・地価・待機児童 | 年1回 3/15 04:00 JST | `ESTAT_APP_ID` |
+| **annual** (`data-update-annual.yml`) | e-Stat / 国土数値情報 L01・S12 / こども家庭庁 Excel / 総務省 Excel | 人口・家賃・医療機関・駅数・地価・待機児童・保育所等定員・年齢構成・財政力指数 | 年1回 3/15 04:00 JST | `ESTAT_APP_ID` |
 | **quarterly** (`data-update-quarterly.yml`) | 不動産情報ライブラリ reinfolib | 災害リスク・生活インフラ（保育） | 四半期 1/1・4/1・7/1・10/1 04:00 JST | `REINFOLIB_API_KEY` |
 
 どちらも `main` へは直接 push せず、**単一 PR を自動作成**して反映する（PR をマージで反映）。
@@ -54,9 +54,15 @@ KurashiMap の各指標データは GitHub Actions が定期/手動で取得し�
    続けて同じ GeoJSON から `build-station-index.mjs` が駅名検索インデックス
    `data/stations.json`（/api/station-search 用。約9,300駅）を再生成する
 7. `fetch-waitlist.mjs --all`（待機児童, CFA）— Excel を1回パースして全県へ反映
-8. 地価ループ（県別）: 各県の L01 zip を DL（3回リトライ）→ `fetch-land-price.mjs --pref=X`。
+8. `fetch-childcare.mjs --all`（保育所等の定員・利用状況, CFA）— 定員・申込者 Excel を1回パースして全県へ反映
+9. `fetch-age-stats.mjs --all`（年齢構成, 総務省 住基台帳）— 市区町村別年齢階級別人口 Excel を
+   1回 DL・パースして全県へ反映（0-14歳・65歳以上・総人口。高齢化率は実行時算出）。
+   区別データが出典にあるため政令市の合算は不要。DL 失敗・パース失敗は `::warning::` で継続
+10. `fetch-fiscal.mjs --all`（財政力指数, 総務省 主要財政指標一覧）— 全市町村 Excel を
+   1回 DL・パースして全県へ反映。DL 失敗・パース失敗は `::warning::` で継続
+11. 地価ループ（県別）: 各県の L01 zip を DL（3回リトライ）→ `fetch-land-price.mjs --pref=X`。
    県別の失敗は `::warning::` で記録し継続（他県は止めない）
-9. `data/` に差分があれば単一 PR（ブランチ `data/annual-{run_id}`）を `gh` CLI で作成
+12. `data/` に差分があれば単一 PR（ブランチ `data/annual-{run_id}`）を `gh` CLI で作成
 
 > e-Stat/CFA は全国まとめ取得なので接続回数が激減し、`estat.mjs` のリトライ＋タイムアウトと
 > 併せて接続タイムアウトはほぼ起きない。地価のみ県別 zip のため逐次。
@@ -73,27 +79,38 @@ annual ワークフローは「バージョン設定を読み込み」ステッ�
 |---|---|---|
 | `L01_VERSION` | 地価公示 L01 の zip バージョン（現在 `"26"` = 令和8年/2026） | 翌年の L01 公開後に番号を +1。`https://nlftp.mlit.go.jp/ksj/gml/data/L01/L01-{N}/L01-{N}_{code}_GML.zip` が 200 を返すか確認 |
 | `L01_ASOF` | 地価の出典表示の年（現在 `"2026"`） | **`L01_VERSION` と必ず同期**（`fetch-land-price.mjs` の `asOf` に入る） |
-| `CFA_XLSX_URL` | こども家庭庁 待機児童 Excel の URL（現在 令和7年/2025-04-01 版 `_r7_02.xlsx`） | 下記「CFA Excel の選び方」参照 |
-| `CFA_ASOF` | 待機児童の出典表示の基準時点（現在 `"2025-04-01"`） | **`CFA_XLSX_URL` の年度と必ず同期**（`fetch-waitlist.mjs` の `asOf` に入る） |
+| `CFA_XLSX_URL` | こども家庭庁 待機児童 Excel の URL（現在 令和8年/2026-04-01 版 `_r8_01.xlsx`） | 下記「CFA Excel の選び方」参照 |
+| `CFA_ASOF` | 待機児童・保育所等定員の出典表示の基準時点（現在 `"2026-04-01"`） | **`CFA_XLSX_URL`・`CFA_CAPACITY_XLSX_URL` の年度と必ず同期**（`fetch-waitlist.mjs` / `fetch-childcare.mjs` の `asOf` に入る） |
+| `JUKI_AGE_STATINFID` | 住基台帳 市区町村別年齢階級別人口【総計】の e-Stat statInfId（現在 2026-01-01 版 `000040479050`） | 例年7月末〜8月の公表後、e-Stat 統計表一覧（`toukei=00200241`）で新年版の表IDを確認して差し替え |
+| `JUKI_ASOF` | 年齢構成の基準日（現在 `"2026-01-01"`） | **`JUKI_AGE_STATINFID` と必ず同期**（`fetch-age-stats.mjs` の `asOf` に入る） |
+| `FISCAL_XLSX_URL` | 総務省 主要財政指標一覧の全市町村 Excel URL（現在 令和6年度版） | 年度ページ（`soumu.go.jp/iken/shihyo_ichiran.html` から辿る）で新年度の main_content URL を確認して差し替え |
+| `FISCAL_ASOF` | 財政力指数の年度表示（現在 `"2024年度"`。3か年平均） | **`FISCAL_XLSX_URL` と必ず同期**（`fetch-fiscal.mjs` の `asOf` に入る） |
+| `CFA_CAPACITY_XLSX_URL` | 同取りまとめの別添「（参考）定員・申込者の状況」Excel の URL（現在 令和8年版 `_r8_02.xlsx`。保活余力 `childcare` の出典） | `CFA_XLSX_URL` と同時に公表ページで確認して差し替え。市区町村別の別添は令和6年分から存在 |
 | `MEDICAL_HOSP_STATSDATAID` / `MEDICAL_CLINIC_STATSDATAID` | 医療施設調査 市区町村別の第1表（病院）/第2表（診療所・歯科）の statsDataId（現在 令和6年/2024） | 毎年**新しい表IDが追加**される（同一IDの更新ではない）。e-Stat 統計コード 00450021 で最新年の両表を確認して差し替え |
 | `MEDICAL_ASOF` | 医療機関の基準時点（現在 `"2024年10月"`。調査は毎年10/1時点） | 表IDと必ず同期。**`AMENITIES_ASOF` の医療機関部分も同時に更新**（`versions.test.ts` が同期を検査） |
 | `S12_URL` | 国土数値情報 駅別乗降客数 S12 の全国 GML zip（現在 S12-24=2024年度版） | 新年度版の公開（例年4月）後に URL の `S12-{NN}` を差し替え。zip に UTF-8 GeoJSON が同梱されているか確認 |
 | `S12_ASOF` | 駅データの整備年度（現在 `"2024年度"`） | **`S12_URL` と必ず同期**。`AMENITIES_ASOF` の駅部分も同時に更新（`versions.test.ts` が同期を検査） |
 
 #### CFA Excel の選び方（重要）
-`fetch-waitlist.mjs` は Excel 内のシート **「資料６－１」「資料６－２」** を読む。
-これらは公表ページの **「（参考）資料1～6」** という Excel に入っている。
+CFA からは2つの Excel を使う:
+- `fetch-waitlist.mjs`（待機児童）はシート **「資料６－１」「資料６－２」** を読む。
+  公表ページの **「（参考）資料1～6」** という Excel に入っている。
+- `fetch-childcare.mjs`（保活余力 `childcare`）はシート **「定員の状況」「申込者の状況」** を読む。
+  公表ページの **「（参考）定員・申込者の状況」**（市区町村別の別添）という Excel に入っている。
 
-- **ファイル名末尾の採番は年度で変わる**（令和6年=`_r6_03.xlsx` / 令和7年=`_r7_02.xlsx`）。
-  番号で機械的に推測せず、必ず公表ページのラベル「（参考）資料1～6」のリンクを使う。
+- **ファイル名末尾の採番は年度で変わり、割り当ても入れ替わる**
+  （令和7年=資料1～6が `_r7_02.xlsx` / 令和8年=資料1～6が `_r8_01.xlsx`・定員申込者が `_r8_02.xlsx`）。
+  番号で機械的に推測せず、必ず公表ページのラベルからリンクを取ること。
+- 令和8年版のファイル名は**全角数字とスペースを含む**ため、versions.mjs には
+  パーセントエンコード済みの URL を入れる（curl がそのまま使える形）。
 - 公表ページ: こども家庭庁「保育所等関連状況取りまとめ（令和N年4月1日）」
-  例: https://www.cfa.go.jp/policies/hoiku/torimatome/r7
-- 差し替え後は `asOf` も合わせる必要がある（次項）。
+  例: https://www.cfa.go.jp/policies/hoiku/torimatome/r8 （例年8月末公表）
+- 差し替え後は `CFA_ASOF` も合わせる必要がある（次項）。
 
 #### asOf の同期（誠実性方針）
-CFA の年度を上げたら、`scripts/fetch-waitlist.mjs` 内の `asOf`（2箇所、現在
-`"2025-04-01"`）も新年度の基準日に更新する。URL だけ替えると出典年と実データが
-食い違い、`source`/`asOf` 表示が誤る。
+CFA の年度を上げたら `CFA_ASOF` も新年度の基準日（4月1日）に更新する
+（両スクリプトの `asOf` は versions.mjs の `CFA_ASOF` から読むため、更新箇所は1箇所）。
+URL だけ替えると出典年と実データが食い違い、`source`/`asOf` 表示が誤る。
 
 #### 差し替え前の検証手順（推奨）
 ```bash
@@ -187,6 +204,8 @@ GitHub の **Actions** タブ → 対象ワークフロー → **Run workflow**�
 | 自治体ポリゴン | 国土数値情報 N03 行政区域 | 手動・不定期（市町村合併時など） | `rebuild-geometry.mjs`（トポロジー保存簡略化。public/*.geojson のみ再生成し data/*.json には触れない） |
 | 生活インフラ（保育） | reinfolib XKT007 | 年度更新 | `fetch-amenities.mjs` |
 | 医療機関 | 厚労省 医療施設調査（e-Stat） | 年1回（10/1時点・翌年公表。市区町村別は statsDataId が毎年変わる） | `fetch-medical.mjs` |
+| 年齢構成（高齢化率） | 総務省 住民基本台帳に基づく人口・世帯数調査 市区町村別年齢階級別人口【総計】（e-Stat Excel。API の DB 提供なし） | 年1回（1/1時点・例年7月末〜8月公表。**statInfId が毎年変わる**） | `fetch-age-stats.mjs`（`--all` 全国一括。区別データが出典にあり政令市合算不要。北方領土6村は total=0 センチネル） |
+| 財政力指数 | 総務省 地方公共団体の主要財政指標一覧（全市町村 Excel。main_content の採番が年度で変わる） | 年1回（3か年平均・例年夏〜冬公表） | `fetch-fiscal.mjs`（`--all` 全国一括。政令市の区は市の値を展開・特別区は都区財政調整の注記付きでランキング対象外・北方領土6村は index=-1 センチネル） |
 | 外国人住民比率 | 出入国在留管理庁 在留外国人統計（e-Stat） | 年2回（6月末・12月末時点。各7月頃/翌年公表） | `fetch-foreign-residents.mjs`（**手動**, §7） |
 | 空き家率 | 総務省 住宅・土地統計調査「居住世帯の有無(8区分)別住宅数」（e-Stat statsDataId 0004021421） | 5年ごと（次回2028年調査） | `fetch-vacancy.mjs`（`--all` 全国一括。家賃と同じ調査のため対象制約も同じ＝人口1.5万人未満の町村は rate=-1 センチネル） |
 
@@ -487,3 +506,32 @@ npx vitest run tests/lib/futurePopulation.test.ts
 - 関西電力の個人向けページ（kepco.jp）は bot 遮断があり、公式プレスリリース PDF で確認した経緯あり。
 - 世帯人数別の使用量目安（`lib/denkiSim.ts` の `HOUSEHOLD_KWH`）の出典は環境省・家庭CO2統計の
   確報（隔年化。次回は令和7年度調査分）。新しい確報が出たら GJ→kWh 換算（1kWh=3.6MJ）で更新する。
+
+## 13. ふるなび掲載自治体ID（ふるさと納税導線・手動）
+
+自治体詳細ページのふるさと納税導線（アクセストレード×ふるなび提携）が、ふるなび側の
+自治体ページ `/Municipal/Product/Search?municipalid={id}` へディープリンクするための
+JISコード→ふるなび内部ID対応表。**統計値ではない**ため honesty 方針の対象外だが、
+未掲載の自治体では導線自体を非表示にする（掲載のない寄付先へ誤誘導しない）。
+
+- 出典: ふるなび 自治体一覧（`furunavi.jp/Municipal/List/`）。全掲載自治体（約1,600件）が
+  Vue 用の埋め込み JSON としてサーバーレンダリングされており、1リクエストで取れる。
+  `CityCode` フィールドは常に null のため、都道府県ID（=JIS都道府県番号）+ 自治体名で突合する
+  （「梼原町/檮原町」「ヶ/ケ」の表記ゆれはスクリプト内で正規化）。
+- 生成物: `data/furunavi-municipals.json` … `{source, fetchedAt, byCode: {JISコード: municipalid}}`。
+  政令市は親市コードのみ（区は載せない。アプリ側が親市で引く）。検証は
+  `tests/lib/furunaviMunicipals.test.ts`（npm run test 経由。validate-data.mjs の対象外）。
+
+### 手動実行
+
+```bash
+node scripts/fetch-furunavi-municipals.mjs   # APIキー不要
+```
+
+### 既知の注意点
+
+- 掲載自治体は増減するため**年1回程度の再実行**を想定（ワークフロー未登録）。
+- 突合できなかった掲載自治体はスクリプトが一覧で出力する。名称ゆれなら
+  スクリプトの `normalizeName` に変換を足す。
+- 導線の env 設定・文言規制（返礼品訴求NG等）は `.env.example` と
+  `components/area/FurusatoLink.tsx` のコメントを参照。

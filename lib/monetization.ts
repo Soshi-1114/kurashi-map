@@ -58,39 +58,95 @@ export function denkiOfferUrl(
 }
 
 /**
- * ふるさと納税リンクの URL テンプレート。未設定・不正なら null（導線は表示しない）。
+ * ふるさと納税リンクの URL テンプレート。未設定・不正なら null。
  *
- * 提携先ASP（さとふる／ふるなび等）の審査完了までは env を空にして導線ごと非表示にする
- * （さとふる検索URLへの素リンクは 404 になるため。2026-07 確認）。
+ * ASP のリンク先URL自由型リンク（アクセストレードの商品リンク等）を設定する。
+ * `{url}` プレースホルダをリンク先URL（URLエンコード済み）で置換する。
+ * 例: https://h.accesstrade.net/sp/cc?rk=xxxx&url={url}
  */
 export function furusatoUrlTemplate(): string | null {
   const t = process.env.NEXT_PUBLIC_FURUSATO_URL_TEMPLATE?.trim();
-  return t && t.includes("{keyword}") ? t : null;
+  return t && t.includes("{url}") ? t : null;
 }
 
 /**
- * ふるさと納税の検索リンク生成。
- *
- * 環境変数 NEXT_PUBLIC_FURUSATO_URL_TEMPLATE の `{keyword}` を自治体名で置換する。
- * 表示の可否は呼び出し側が furusatoUrlTemplate() で判定する前提（未設定時の
- * さとふる検索URLフォールバックは後方互換のために残している）。
- *
- * @param cityName 寄付先自治体名（政令市の行政区の場合は親の政令市名を渡すこと）
- * @param prefName 都道府県名（同名自治体の曖昧さ回避のため keyword に前置する）
+ * ASP発行の固定アフィリエイトリンク（例: アクセストレードのテキストリンク）。
+ * 商品リンク（テンプレート）が使えなくなった場合の運用フォールバック。未設定なら null。
  */
-export function generateFurusatoUrl(cityName: string, prefName?: string): string {
-  // 「府中市」など同名自治体があるため、県名を前置して一意性を上げる。
-  const keyword = prefName ? `${prefName}${cityName}` : cityName;
-  const encoded = encodeURIComponent(keyword);
+export function furusatoAffUrl(): string | null {
+  const u = process.env.NEXT_PUBLIC_FURUSATO_AFF_URL?.trim();
+  return u ? u : null;
+}
 
-  const template = furusatoUrlTemplate();
-  let base: string;
-  if (template) {
-    base = template.replaceAll("{keyword}", encoded);
-  } else {
-    // デフォルト: さとふるのキーワード検索（提携確定まではアフィリエイトIDなしの素のURL）。
-    base = `https://www.satofull.jp/search/?keyword=${encoded}`;
+export type KasaiLinkInfo = {
+  url: string;
+  /** AT のインプレッション計測ピクセル（sp/rr）。AT 以外の ASP は null */
+  impressionPixel: string | null;
+};
+
+/**
+ * 火災保険（一括見積もり等）導線のリンク。null なら導線は表示しない。
+ *
+ * ハザード情報（災害リスクカード・/map/hazard）と文脈が一致する唯一の収益導線として、
+ * ASP 提携確定後に env を設定して点灯する。素リンクのフォールバックは持たない
+ * （中立に案内できる公式サイトが存在しないため、未提携時は導線ごと出さない）。
+ * env には ASP 発行のリンクをそのまま設定し、加工しない（UTM を足すと ASP 計測を壊す）。
+ */
+export function kasaiHokenLink(): KasaiLinkInfo | null {
+  const u = process.env.NEXT_PUBLIC_KASAI_HOKEN_URL?.trim();
+  if (!u) return null;
+  return { url: u, impressionPixel: atImpressionPixel(u) };
+}
+
+export type FurusatoLinkInfo = {
+  url: string;
+  /** municipal = 自治体ページへのディープリンク / portal = ポータルの固定ページへ（寄付先は移動先で選ぶ） */
+  kind: "municipal" | "portal";
+  /** AT のインプレッション計測ピクセル（sp/rr）。クリックリンクと対で描画する。AT 以外は null */
+  impressionPixel: string | null;
+};
+
+// アクセストレードの生成リンクコードはクリック URL（sp/cc）と対で 1x1 の計測画像
+// （sp/rr）を持つ。リンクだけ張ると imp が計上されないため、対の URL をここで導出する。
+function atImpressionPixel(url: string): string | null {
+  try {
+    const u = new URL(url);
+    if (u.hostname !== "h.accesstrade.net") return null;
+    const rk = u.searchParams.get("rk");
+    return rk ? `https://h.accesstrade.net/sp/rr?rk=${rk}` : null;
+  } catch {
+    return null;
   }
+}
 
-  return withUtm(base, "furusato");
+/**
+ * ふるさと納税導線のリンクを返す。null なら導線は表示しない。
+ *
+ * 非表示になるのは (a) env 未設定、(b) リンク先がない＝ふるなび未掲載の自治体
+ * （destUrl が null）。未掲載自治体に導線を出すと、移動先で寄付先が見つからない
+ * 誤誘導になるため出さない。
+ *
+ * テンプレート（自治体ページへのディープリンク）＞ 固定リンクの順で採用。
+ * env に設定されるのは ASP 発行のリンクなので、denkiOfferUrl と同じ契約で
+ * 一切加工せずそのまま使う（UTM を足すと ASP 計測を壊す）。
+ *
+ * @param destUrl リンク先URL（lib/furunaviMunicipals.ts の furunaviMunicipalPageUrl /
+ *   FURUNAVI_TOP_PAGE_URL で解決。未掲載は null）
+ * @param destKind destUrl の着地の種類。自治体ページなら "municipal"（既定）、
+ *   ふるなびトップ等なら "portal"。固定リンクへのフォールバック時は着地が
+ *   ポータル側になるため destKind に関わらず "portal" を返す
+ */
+export function furusatoLink(
+  destUrl: string | null,
+  destKind: "municipal" | "portal" = "municipal",
+): FurusatoLinkInfo | null {
+  if (destUrl == null) return null;
+  const template = furusatoUrlTemplate();
+  if (template) {
+    const url = template.replaceAll("{url}", encodeURIComponent(destUrl));
+    return { url, kind: destKind, impressionPixel: atImpressionPixel(url) };
+  }
+  const aff = furusatoAffUrl();
+  if (aff) return { url: aff, kind: "portal", impressionPixel: atImpressionPixel(aff) };
+  return null;
 }

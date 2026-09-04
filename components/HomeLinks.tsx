@@ -3,18 +3,31 @@
 // ファーストビューのヒーロー側が持つため、ここには置かない）。
 
 import Link from "next/link";
-import { RANKINGS, type RankingCategory } from "@/lib/rankings";
+import { RANKINGS, muniLevelOnly, type RankingCategory } from "@/lib/rankings";
+import { listAllAcrossPrefs } from "@/lib/metrics";
 import { MAP_HUBS } from "@/lib/siteNav";
 import PrefRegionPicker from "@/components/home/PrefRegionPicker";
 
 export type PopularMuni = { pref: string; code: string; name: string };
 
+// 「人気の自治体」= 人口上位（市区町村のみ、政令市の区は除外）。内部リンクを主要都市に
+// 集約する。ビルド時のみフルデータを使い、クライアントには小さな popular 配列だけを渡す
+// （トップと /map で共用）。
+export async function getPopularMunis(limit = 12): Promise<PopularMuni[]> {
+  const munis = muniLevelOnly(await listAllAcrossPrefs());
+  return munis
+    .slice()
+    .sort((a, b) => b.population - a.population)
+    .slice(0, limit)
+    .map((m) => ({ pref: m.pref, code: m.code, name: m.name }));
+}
+
 // トップに出す代表ランキング（カテゴリごとに数件へ絞り、全量は /ranking に送る）。
 // slug は lib/rankings.ts の定義に一致させる（URLは変更しない）。
 const RANKING_PICKS: Array<{ category: RankingCategory; slugs: string[] }> = [
   { category: "住まい", slugs: ["rent-cheap", "land-price-high", "vacancy-high"] },
-  { category: "人口・まち", slugs: ["population-most", "population-growth", "population-density"] },
-  { category: "子育て・生活", slugs: ["waitlist-zero"] },
+  { category: "人口・まち", slugs: ["population-most", "population-growth", "population-density", "aging-high"] },
+  { category: "子育て・生活", slugs: ["waitlist-zero", "childcare-capacity"] },
 ];
 
 export default function HomeLinks({ popular }: { popular: PopularMuni[] }) {

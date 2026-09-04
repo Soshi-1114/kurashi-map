@@ -8,8 +8,13 @@ import type { Municipality } from "./types";
 import { hasRent } from "./rentColor";
 import { hasLandPrice } from "./landPrice";
 import { isWaitlistDisclosed } from "./waitlist";
+import { isAmenitiesCounted } from "./coverage";
+import { hasAgeData, elderlyRatioPct, elderlyRatioText, AGE_FRESHNESS_SUFFIX } from "./ageStats";
+import { isFiscalRankable, fiscalIndexText } from "./fiscal";
+import { formatAsOfJa } from "./format";
 import { hasForeignData, foreignRatioPct } from "./foreignResidents";
 import { hasVacancy, vacancyRateText } from "./vacancy";
+import { hasChildcareCapacity, childcareOpenRatioPct, childcareOpenRatioText } from "./childcare";
 import { populationDensity, densityText } from "./populationDensity";
 import { hasFuturePopulation, futureChangeRate2050, futureRateText } from "./futurePopulation";
 import { prefNameOf } from "./site";
@@ -30,6 +35,33 @@ export type RankingDef = {
    * 背景: GSC で「埼玉 相場」「家賃相場 岡山市」等が多数表示・0クリック（2026-07 分析）。
    */
   seoTitle?: string;
+  /**
+   * meta title の末尾に「｜」区切りで添える答えフレーズ（例:「日本一は横浜市」）を
+   * 1位自治体から組み立てる任意フック。「日本の市として人口が最も多いのはどこ」のような
+   * 質問型クエリに title で即答する用途（2026-08 GSC分析: population-most で同クエリが
+   * 305imp/0click）。seoTitle と同じく title タグ専用で、H1・構造化データには使わない。
+   */
+  seoTitleAnswer?: (top1: Municipality) => string;
+  /**
+   * 県別ページの meta title 用の言い換え（任意）。「{県}の◯◯」の◯◯部分に入る。
+   * 検索クエリの連続語（例:「人口ランキング」）を title に作るのが目的
+   * （2026-08 GSC分析:「兵庫県 市町村 人口ランキング」等に対し既定 title は
+   * 「人口が多い市区町村ランキング」で連続語を含まず CTR 0〜1.8%）。
+   */
+  prefSeoTitle?: string;
+  /**
+   * 関連ランキングへの導線（任意）。全国版・県別版のヒーロー action ボタンとして表示する。
+   * リンク先が新規ページ群のとき、検索流入の強いページからの内部リンクで
+   * インデックス・順位の立ち上がりを助ける用途（2026-08 GSC分析: future-population 系が
+   * 2ページ目に滞留）。県別版はリンク先の県別ページにデータがある場合のみ表示。
+   */
+  related?: { slug: string; label: string };
+  /**
+   * 対応する指標別地図ハブ（/map/*）の href（任意）。ランキングページ（全国・県別）の
+   * 「地図で見る」CTA がここから MAP_HUBS のラベルを引いて表示する。対応ハブが無い指標
+   * （population-most・vacancy 等）は未設定にし、CTA 自体を出さない。
+   */
+  mapHub?: string;
   /** ランキング一覧・パンくず用の短いラベル */
   shortLabel: string;
   /** meta description のひな型（{top1} を1位自治体名に置換） */
@@ -98,15 +130,10 @@ const RENT_NOTE =
 const FOREIGN_NOTE =
   "外国人住民比率は多様性・国際性の目安です（出典: 出入国在留管理庁「在留外国人統計」）。比率の高い／低いという事実を示すもので、住みやすさ等の価値判断とは無関係です。";
 
-// "2024-12"・"2025-04-01" → "2024年12月"・"2025年4月"。データ asOf を見出し・出典表示の
-// 鮮度ラベルへ整形する（日付は月に丸める）。整形できない形式（和暦・複合ラベル等）はそのまま返す。
-export function formatAsOfJa(asOf: string): string {
-  const m = /^(\d{4})-(\d{1,2})(?:-\d{1,2})?$/.exec(asOf ?? "");
-  if (m) return `${m[1]}年${Number(m[2])}月`;
-  const y = /^(\d{4})$/.exec(asOf ?? "");
-  if (y) return `${y[1]}年`;
-  return asOf ?? "";
-}
+// formatAsOfJa の実体は lib/format.ts（クライアントコンポーネントが本モジュールを
+// import すると RANKINGS の生テキストごとバンドルされるため移設）。サーバー側の
+// 既存呼び出し（多数）の互換のためここから再exportする。
+export { formatAsOfJa };
 
 // 指標の asOf から H1 用の鮮度ラベル（例「2025年6月最新」）を導出する汎用フック。
 function freshnessFromAsOf(getAsOf: (m: Municipality) => string) {
@@ -221,13 +248,19 @@ const FOREIGN_FAQ: { q: string; a: string }[] = [
 export const NEXT_UPDATE = {
   rent: "出典（住宅・土地統計調査）は5年周期のため、現在の2023年調査が最新の公表データです。次回は2028年調査（結果公表は2029年以降）の見込みです。",
   landPrice: "地価公示は毎年3月公表です。次回（2027年地価公示）の公表後に更新予定です。",
-  waitlist: "こども家庭庁の次回取りまとめ（2026年4月1日時点）は例年8月末〜9月に公表され、公表後に更新予定です。",
+  waitlist: "こども家庭庁の次回取りまとめ（2027年4月1日時点）は例年8月末〜9月に公表され、公表後に更新予定です。",
+  childcare: "こども家庭庁の次回取りまとめ（2027年4月1日時点）は例年8月末〜9月に公表され、公表後に更新予定です。",
   population: "令和7年（2025年）国勢調査の確定値（人口等基本集計）が2026年9月までに公表予定で、公表後に更新予定です。",
   foreign: "在留外国人統計は年2回公表です。次回は2026年6月末時点の市区町村別データが2026年12月中旬に公表見込みで、公表後すみやかに更新予定です。",
   vacancy:
     "出典（住宅・土地統計調査）は5年周期のため、現在の2023年調査が最新の公表データです。次回は2028年調査（結果公表は2029年以降）の見込みです。",
   future:
     "地域別将来推計人口は約5年周期で改定されます。現在の令和5(2023)年推計が最新で、次回（2028年頃見込み）の公表後に更新予定です。",
+  aging: "住民基本台帳の年齢階級別人口は毎年1月1日時点で、例年7月末〜8月に公表されます。公表後すみやかに更新予定です。",
+  fiscal: "主要財政指標一覧は年1回、総務省から公表されます（例年夏〜冬）。次年度版の公表後に更新予定です。",
+  stations: "駅データ（国土数値情報 S12）は年度ごとに更新されます。新年度版の公表後に更新予定です。",
+  medical: "医療施設調査は毎年10月1日時点で実施されます。市区町村別データの公表後に更新予定です。",
+  preschools: "施設データは年度ごとに更新されます。新年度データの公表・反映後に更新予定です。",
 } as const;
 
 // 空き家率の鮮度ラベル。asOf 由来の「2023年最新」は誤解を招くため、調査名を明示する固定文字列。
@@ -285,6 +318,36 @@ const FUTURE_FAQ: { q: string; a: string }[] = [
   },
 ];
 
+// 保育定員余裕率ランキングの注記・FAQ（可視テキストと構造化データの単一ソース）。
+// しきい値（定員100人以上）を変える時は qualifies・note・FAQ を必ず同時に更新する。
+const CHILDCARE_NOTE =
+  "定員余裕率は（定員 − 利用児童数）÷ 定員で、こども家庭庁「保育所等関連状況取りまとめ」の公表実数（毎年4月1日時点）から算出しています。入りやすさの目安であり、年齢（特に0〜2歳）・地域・時期によって状況は大きく異なります。定員100人未満の自治体は率が振れやすいためランキングの対象外です。政令指定都市は市単位の集計です。";
+
+const CHILDCARE_FAQ: { q: string; a: string }[] = [
+  {
+    q: "定員余裕率とは何ですか？",
+    a: "保育所・認定こども園・地域型保育事業などの定員合計から利用児童数を引いた「空き」の割合です。こども家庭庁「保育所等関連状況取りまとめ」（毎年4月1日時点）の市区町村別の公表実数のみから算出しており、推計は行っていません。率が高いほど受け皿に余裕がある目安になりますが、年齢別・地域別の偏りは含まれます。",
+  },
+  {
+    q: "待機児童ゼロなのに入りにくい地域があるのはなぜですか？",
+    a: "待機児童の集計には、育児休業中の方・特定の保育園のみを希望している方・求職活動を休止している方が含まれません（いわゆる隠れ待機）。また0〜2歳児は定員が少なく、自治体全体では余裕があっても年齢や地域によっては入りにくいことがあります。各自治体ページでは待機児童数とあわせて、待機児童に含まれない申込者数も表示しています。",
+  },
+  {
+    q: "掲載されていない自治体があるのはなぜですか？",
+    a: "定員100人未満の自治体は保育所1園の開設・閉鎖で率が大きく動くため、ランキングの対象外としています（自治体ページでは定員・利用児童数を確認できます）。市区町村別データが公表されていない北方領土の村も対象外です。",
+  },
+];
+
+// 1位自治体（実データ）から余裕率・基準時点を含む meta description を組み立てる。
+function childcareMetaDescription(top1: Municipality | null): string {
+  const head = "全国の市区町村を保育所等の定員余裕率（(定員−利用児童数)÷定員）が高い順にランキング。";
+  const tail =
+    "こども家庭庁「保育所等関連状況取りまとめ」の公表実数で、保育の入りやすさの目安を比較できます（定員100人以上の自治体が対象）。";
+  if (!top1?.childcare) return `${head}${tail}`;
+  const name = `${prefNameOf(top1.pref)}${top1.displayName ?? top1.name}`;
+  return `${head}1位は${name}（余裕率${childcareOpenRatioText(top1.childcare)}、${formatAsOfJa(top1.childcare.asOf)}時点）。${tail}`;
+}
+
 // 1位自治体（実データ）から増減率・基準年を含む meta description を組み立てる。
 function futureMetaDescription(direction: "decline" | "resilient") {
   const head =
@@ -315,6 +378,9 @@ const POPULATION_METRIC_TEXT: Record<
   densityLow: { noun: "人口密度", verb: "低い", valueOf: (m) => densityText(populationDensity(m) ?? 0) },
 };
 
+// 「日本一は{1位}」。population-most / population-density の seoTitleAnswer で共用する。
+const nihonichiTop1 = (top1: Municipality): string => `日本一は${top1.displayName ?? top1.name}`;
+
 function populationMetaDescription(metric: keyof typeof POPULATION_METRIC_TEXT) {
   const { noun, verb, valueOf } = POPULATION_METRIC_TEXT[metric];
   return (top1: Municipality | null): string => {
@@ -325,6 +391,161 @@ function populationMetaDescription(metric: keyof typeof POPULATION_METRIC_TEXT) 
     return `${head}最も${noun}が${verb}のは${name}（${valueOf(top1)}、${POPULATION_FRESHNESS}）。${tail}`;
   };
 }
+
+// ---- 高齢化率（住民基本台帳）ランキング ----
+
+// 中立フレーミング注記。国勢調査ベースとの基準差も明示する（出典を混同させない）。
+const AGING_NOTE =
+  "高齢化率は65歳以上人口を総人口で割った割合です（住民基本台帳・総計＝外国人住民を含む、毎年1月1日時点）。年齢構成という地域の事実を示す指標であり、住みやすさ等の優劣を意味しません。国勢調査ベースの高齢化率とは基準日・人口の定義が異なるため、数値がわずかに異なることがあります。";
+
+const AGING_FAQ: { q: string; a: string }[] = [
+  {
+    q: "高齢化率はどうやって計算していますか？",
+    a: "総務省「住民基本台帳に基づく人口、人口動態及び世帯数調査」の市区町村別年齢階級別人口（総計＝外国人住民を含む）から、65歳以上人口を総人口で割った割合です。分子・分母とも同じ調査の公表実数で、推計値は使用していません。",
+  },
+  {
+    q: "国勢調査の高齢化率と数値が違うのはなぜですか？",
+    a: "本サイトの高齢化率は住民基本台帳（毎年1月1日時点の登録人口）に基づきます。国勢調査（5年ごと・常住人口）とは基準日と人口の定義が異なるため、数値がわずかに異なることがあります。毎年更新できる鮮度を優先して住民基本台帳を採用しています。",
+  },
+  {
+    q: "高齢化率が高い・低いことに良し悪しはありますか？",
+    a: "ありません。年齢構成は地域の歴史や産業構造を反映した事実であり、住みやすさや行政サービスの質とは別のものです。本サイトは事実として中立に提示しています。",
+  },
+  {
+    q: "掲載されていない自治体があるのはなぜですか？",
+    a: "北方領土の6村は住民登録がないため、高齢化率を算出できず対象外としています。それ以外の全市区町村を収録しています。",
+  },
+];
+
+// 1位自治体（実データ）から比率・基準日を含む meta description を組み立てる。
+function agingMetaDescription(highLow: "高い" | "低い") {
+  return (top1: Municipality | null): string => {
+    const head = `全国の市区町村を高齢化率（65歳以上人口の割合）が${highLow}順にランキング。`;
+    const tail = "総務省 住民基本台帳（毎年1月1日時点）の実データで、地域の年齢構成を比較できます。";
+    if (!top1 || !hasAgeData(top1.ageStats)) return `${head}${tail}`;
+    const name = `${prefNameOf(top1.pref)}${top1.displayName ?? top1.name}`;
+    return `${head}最も${highLow}のは${name}（${elderlyRatioText(top1.ageStats)}、${formatAsOfJa(top1.ageStats.asOf)}時点）。${tail}`;
+  };
+}
+
+const agingFreshnessLabel = (top1: Municipality | null): string | null =>
+  top1 && hasAgeData(top1.ageStats)
+    ? `${formatAsOfJa(top1.ageStats.asOf)}${AGE_FRESHNESS_SUFFIX}`
+    : null;
+
+// ---- 財政力指数ランキング ----
+
+// 交付税制度の中立説明。「低い=悪い自治体」という誤読を必ず防ぐ（honesty 方針の
+// 中立フレーミング。フッター注記と FAQ の両方で繰り返す）。
+const FISCAL_NOTE =
+  "財政力指数は基準財政収入額÷基準財政需要額の3か年平均で、1を超えると普通交付税の不交付団体になります。指数が低い自治体には地方交付税により標準的な行政サービスの財源が国から保障されるため、指数の低さは行政サービスの質や自治体の優劣を意味しません。税収構造・人口規模を反映した客観指標として中立にご覧ください。東京23特別区は都区財政調整制度下の算定のためランキングには含めていません（各区の詳細ページでは指数を確認できます）。";
+
+const FISCAL_FAQ: { q: string; a: string }[] = [
+  {
+    q: "財政力指数とは何ですか？",
+    a: "地方交付税の算定に使う基準財政収入額を基準財政需要額で割った値の3か年平均で、自治体の税収による財源の余裕度を示す指標です。1を超えると普通交付税の不交付団体になります。出典は総務省「地方公共団体の主要財政指標一覧」の公表値で、推計値は使用していません。",
+  },
+  {
+    q: "財政力指数が低いと生活に影響がありますか？",
+    a: "指数が低い自治体には地方交付税により標準的な行政サービスの財源が国から保障される制度になっているため、指数の低さがそのまま行政サービスの質の低さを意味するわけではありません。税収構造や人口規模を反映した客観指標として中立にご覧ください。",
+  },
+  {
+    q: "東京23区が載っていないのはなぜですか？",
+    a: "特別区は都区財政調整制度のもとで算定され、固定資産税などの大都市税源が都に帰属するため、市町村の財政力指数と同じ土俵で比較できません（総務省の全国市町村平均も特別区を除いて算出されています）。各区の指数は詳細ページ・比較ページで注記付きで確認できます。",
+  },
+  {
+    q: "政令指定都市の区はどう扱っていますか？",
+    a: "財政力指数は市単位で算定されるため、政令指定都市の区のページには市全体の値を「（○○市全体の値）」と明示して表示しています。ランキングは市単位で集計しています。",
+  },
+  {
+    q: "データはいつ更新されますか？",
+    a: "総務省「地方公共団体の主要財政指標一覧」は年1回公表されます。財政力指数は直近3か年度の平均値で、本サイトは新年度版の公表後に更新します。",
+  },
+];
+
+// 1位自治体（実データ）から指数・年度を含む meta description を組み立てる。
+function fiscalMetaDescription(strongWeak: "高い" | "低い") {
+  return (top1: Municipality | null): string => {
+    const head = `全国の市町村を財政力指数が${strongWeak}順にランキング。`;
+    const tail = "総務省「地方公共団体の主要財政指標一覧」の公表値で、自治体の税収による財源の余裕度を比較できます。";
+    if (!top1 || !isFiscalRankable(top1.fiscal)) return `${head}${tail}`;
+    const name = `${prefNameOf(top1.pref)}${top1.displayName ?? top1.name}`;
+    return `${head}${strongWeak === "高い" ? "最も高い" : "最も低い"}のは${name}（${fiscalIndexText(top1.fiscal)}・${top1.fiscal.asOf}）。${tail}`;
+  };
+}
+
+const fiscalFreshnessLabel = (top1: Municipality | null): string | null =>
+  top1 && isFiscalRankable(top1.fiscal) ? `${top1.fiscal.asOf}（3か年平均）` : null;
+
+// ---- 生活インフラ（駅・医療機関・保育施設）ランキング ----
+
+// amenities.asOf は「駅 2025年度／保育 令和5年度／医療機関 2024年10月」の複合形式
+// （scripts/_lib/versions.mjs の AMENITIES_ASOF）。指標ごとの鮮度ラベルには
+// 該当部分だけを取り出して使う。キーが見つからない形式はそのまま返す。
+export function amenityAsOfPart(asOf: string, key: "駅" | "保育" | "医療機関"): string {
+  const m = new RegExp(`${key} ([^／]+)`).exec(asOf);
+  return m ? m[1] : asOf;
+}
+
+// amenity 系の freshnessLabel（複合 asOf の部分抽出＋指標ごとのサフィックス）。
+// freshnessFromAsOf は「◯◯最新」固定＋単一 asOf 前提のためここでは使えない。
+function amenityFreshness(key: "駅" | "保育" | "医療機関", suffix: string) {
+  return (top1: Municipality | null): string | null =>
+    top1?.amenities ? `${amenityAsOfPart(top1.amenities.asOf, key)}${suffix}` : null;
+}
+
+// 生活インフラの集計対象か（北方領土など対象外センチネルの自治体を除外）。
+const hasAmenities = (m: Municipality): boolean =>
+  m.amenities != null && isAmenitiesCounted(m.amenities.source);
+
+// 施設数ランキング共通の注意書き（実数＝規模に比例しやすいことの明示）。
+const AMENITY_COUNT_CAVEAT =
+  "面積や人口規模が大きい自治体ほど施設数は多くなりやすい実数であり、人口あたりの多さや利用のしやすさを直接示すものではありません。";
+
+const STATIONS_FAQ: { q: string; a: string }[] = [
+  {
+    q: "駅数はどうやって数えていますか？",
+    a: "国土数値情報「駅別乗降客数（S12）」の駅データを市区町村ごとに数えた実数です。複数路線が乗り入れる駅は駅コードで名寄せして1駅と数え、政令指定都市は区の駅の重複を除いて集計しています。",
+  },
+  {
+    q: "駅が多いと住みやすいのですか？",
+    a: "駅数は鉄道網の集積を示す客観的な指標のひとつで、住みやすさそのものを示すものではありません。駅までの距離・運行本数・行き先は駅数には含まれないため、あくまで目安としてご覧ください。",
+  },
+  {
+    q: "データはいつ更新されますか？",
+    a: "国土数値情報の駅データ（S12）は年度ごとに更新されます。新年度版の公表後、本サイトのデータも更新します。",
+  },
+];
+
+const MEDICAL_FAQ: { q: string; a: string }[] = [
+  {
+    q: "医療機関数には何が含まれますか？",
+    a: "厚生労働省「医療施設調査」の病院・一般診療所・歯科診療所の合計です。政府統計の公表実数のみで、推計値は使用していません。診療科別（小児科・産婦人科など）の内訳は含みません。",
+  },
+  {
+    q: "医療機関が多いと医療に困らないのですか？",
+    a: "医療機関数は医療資源の集積を示す客観的な指標のひとつですが、人口あたりの多さ・診療科の構成・救急対応などは含まれません。あくまで目安としてご覧ください。",
+  },
+  {
+    q: "データはいつ更新されますか？",
+    a: "医療施設調査は毎年10月1日時点で実施されます。市区町村別データの公表後、本サイトのデータも更新します。",
+  },
+];
+
+const PRESCHOOLS_FAQ: { q: string; a: string }[] = [
+  {
+    q: "保育・幼稚園の施設数には何が含まれますか？",
+    a: "保育所・幼稚園・認定こども園などの施設数の合計です（国土数値情報／不動産情報ライブラリの施設データ）。施設の実数であり、定員や空き状況は含みません。",
+  },
+  {
+    q: "施設が多ければ保育園に入りやすいのですか？",
+    a: "必ずしもそうではありません。施設数は人口規模に比例しやすいため、入りやすさの目安には定員に対する空きの割合（定員余裕率）をご覧ください。本サイトでは「保育の定員に余裕がある市区町村ランキング」として別に掲載しています。",
+  },
+  {
+    q: "データはいつ更新されますか？",
+    a: "施設データは年度ごとに更新されます。新年度データの公表・反映後、本サイトのデータも更新します。",
+  },
+];
 
 // 1位自治体（実データ）から「名前・比率・基準年」を含む meta description を組み立てる。
 function foreignMetaDescription(highLow: "高い" | "低い") {
@@ -349,6 +570,7 @@ export const RANKINGS: RankingDef[] = [
       "全国の市区町村を民営借家の家賃平均が安い順にランキング。最も家賃が安いのは{top1}。家賃相場の低い自治体を政府統計（住宅・土地統計調査）の実データで比較できます。",
     lead: "全国の市区町村を民営借家の家賃平均が安い順に並べたランキングです。",
     note: RENT_NOTE,
+    mapHub: "/map/rent",
     columnLabel: "家賃平均",
     order: "asc",
     nextUpdate: NEXT_UPDATE.rent,
@@ -368,6 +590,7 @@ export const RANKINGS: RankingDef[] = [
     lead: "全国の市区町村を民営借家の家賃平均が高い順に並べたランキングです。",
     note: RENT_NOTE,
     prefSummary: true,
+    mapHub: "/map/rent",
     columnLabel: "家賃平均",
     order: "desc",
     nextUpdate: NEXT_UPDATE.rent,
@@ -387,6 +610,7 @@ export const RANKINGS: RankingDef[] = [
     intro: vacancyIntro("高い"),
     faq: VACANCY_FAQ,
     prefSummary: true,
+    mapHub: "/map/vacancy",
     columnLabel: "空き家率",
     order: "desc",
     freshnessLabel: () => VACANCY_FRESHNESS,
@@ -405,6 +629,7 @@ export const RANKINGS: RankingDef[] = [
     lead: "全国の市区町村を、空き家率（空き家数 ÷ 住宅総数）が低い順に並べたランキングです（住宅・土地統計調査 2023年）。",
     intro: vacancyIntro("低い"),
     faq: VACANCY_FAQ,
+    mapHub: "/map/vacancy",
     columnLabel: "空き家率",
     order: "asc",
     freshnessLabel: () => VACANCY_FRESHNESS,
@@ -422,6 +647,7 @@ export const RANKINGS: RankingDef[] = [
       "全国の市区町村を住宅地の地価が高い順にランキング。最も地価が高いのは{top1}。地価公示・地価調査の実データで自治体を比較できます。",
     lead: "全国の市区町村を住宅地の地価（円/㎡）が高い順に並べたランキングです。",
     prefSummary: true,
+    mapHub: "/map/land-price",
     columnLabel: "地価（住宅地）",
     order: "desc",
     freshnessLabel: freshnessFromAsOf((m) => m.landPrice.asOf),
@@ -438,6 +664,7 @@ export const RANKINGS: RankingDef[] = [
     description:
       "全国の市区町村を住宅地の地価が安い順にランキング。最も地価が安いのは{top1}。地価公示・地価調査の実データで、土地が手頃な自治体を比較できます。",
     lead: "全国の市区町村を住宅地の地価（円/㎡）が安い順に並べたランキングです。",
+    mapHub: "/map/land-price",
     columnLabel: "地価（住宅地）",
     order: "asc",
     freshnessLabel: freshnessFromAsOf((m) => m.landPrice.asOf),
@@ -463,11 +690,108 @@ export const RANKINGS: RankingDef[] = [
     qualifies: (m) => isWaitlistDisclosed(m.waitlistChildren) && m.waitlistChildren.value === 0,
     sortValue: (m) => m.population,
     display: (m) => `${m.population.toLocaleString()}人`,
+    related: { slug: "childcare-capacity", label: "保育の定員に余裕がある市区町村" },
+  },
+  {
+    slug: "childcare-capacity",
+    category: "子育て・生活",
+    title: "保育の定員に余裕がある市区町村ランキング",
+    seoTitle: "保育園に入りやすい市区町村ランキング（保育所等の定員余裕率）",
+    shortLabel: "保育に余裕",
+    description:
+      "全国の市区町村を保育所等の定員余裕率（(定員−利用児童数)÷定員）が高い順にランキング。最も余裕があるのは{top1}。こども家庭庁の公表実数で保育の入りやすさの目安を比較できます。",
+    metaDescription: childcareMetaDescription,
+    lead: "全国の市区町村を、保育所等の定員余裕率（(定員 − 利用児童数) ÷ 定員）が高い順に並べたランキングです。",
+    note: CHILDCARE_NOTE,
+    faq: CHILDCARE_FAQ,
+    prefSummary: true,
+    columnLabel: "定員余裕率",
+    order: "desc",
+    freshnessLabel: freshnessFromAsOf((m) => m.childcare?.asOf ?? ""),
+    nextUpdate: NEXT_UPDATE.childcare,
+    // 定員100人未満は分母が小さく率が振れやすい（保育所1園の増減で数十ptが動く）ため
+    // ランキング対象外にする。しきい値は note・FAQ にも明記して整合させること。
+    qualifies: (m) => hasChildcareCapacity(m.childcare) && m.childcare!.capacity >= 100,
+    sortValue: (m) => childcareOpenRatioPct(m.childcare) ?? 0,
+    display: (m) => childcareOpenRatioText(m.childcare),
+    related: { slug: "waitlist-zero", label: "待機児童ゼロの市区町村" },
+  },
+  {
+    slug: "stations",
+    category: "子育て・生活",
+    title: "駅が多い市区町村ランキング",
+    shortLabel: "駅が多い",
+    description:
+      "全国の市区町村を鉄道駅の数が多い順にランキング。最も駅が多いのは{top1}。国土数値情報（S12 駅データ）の実データで、鉄道網の集積を比較できます。",
+    lead: "全国の市区町村を、鉄道駅の数が多い順に並べたランキングです。",
+    note: `駅数は国土数値情報「駅別乗降客数（S12）」の駅を市区町村ごとに数えた実数です（複数路線が乗り入れる駅は駅コードで名寄せして1駅と数えます）。${AMENITY_COUNT_CAVEAT}`,
+    intro: [
+      "このページは、全国の市区町村を鉄道駅の数が多い順に並べたランキングです。上位には、面積が広く複数の路線が乗り入れる大都市や、鉄道網の結節点となる自治体が並ぶ傾向があります。",
+      "駅数は鉄道アクセスの集積を示す客観的な指標のひとつです。ただし駅までの距離・運行本数・行き先の情報は含まれないため、住みやすさの判断材料としては、家賃・人口・子育てなど他の指標とあわせてご覧ください。各順位の自治体名から、その地域の住環境データをまとめて確認できます。",
+    ],
+    faq: STATIONS_FAQ,
+    related: { slug: "medical-facilities", label: "医療機関が多い市区町村" },
+    columnLabel: "駅数",
+    order: "desc",
+    freshnessLabel: amenityFreshness("駅", "時点"),
+    nextUpdate: NEXT_UPDATE.stations,
+    qualifies: hasAmenities,
+    sortValue: (m) => m.amenities?.stations ?? 0,
+    display: (m) => `${(m.amenities?.stations ?? 0).toLocaleString()}駅`,
+  },
+  {
+    slug: "medical-facilities",
+    category: "子育て・生活",
+    title: "医療機関が多い市区町村ランキング",
+    seoTitle: "病院・診療所が多い市区町村ランキング（医療機関数）",
+    shortLabel: "医療機関が多い",
+    description:
+      "全国の市区町村を医療機関数（病院・一般診療所・歯科診療所の合計）が多い順にランキング。最も多いのは{top1}。厚生労働省「医療施設調査」の実データで比較できます。",
+    lead: "全国の市区町村を、医療機関数（病院・一般診療所・歯科診療所の合計）が多い順に並べたランキングです。",
+    note: `医療機関数は厚生労働省「医療施設調査」の病院・一般診療所・歯科診療所の合計（公表実数）です。${AMENITY_COUNT_CAVEAT}診療科別の内訳や救急対応の有無は含みません。`,
+    intro: [
+      "このページは、全国の市区町村を医療機関の数が多い順に並べたランキングです。医療機関数は病院・一般診療所・歯科診療所の合計で、上位には人口規模の大きい大都市が並ぶ傾向があります。",
+      "医療機関数は地域の医療資源の集積を示す客観的な指標のひとつです。人口あたりの多さや診療科の構成は含まれないため、あくまで目安として、家賃・子育て・災害リスクなど他の住環境データとあわせてご覧ください。",
+    ],
+    faq: MEDICAL_FAQ,
+    related: { slug: "preschools", label: "保育園・幼稚園が多い市区町村" },
+    columnLabel: "医療機関数",
+    order: "desc",
+    freshnessLabel: amenityFreshness("医療機関", "医療施設調査"),
+    nextUpdate: NEXT_UPDATE.medical,
+    qualifies: hasAmenities,
+    sortValue: (m) => m.amenities?.medicalFacilities ?? 0,
+    display: (m) => `${(m.amenities?.medicalFacilities ?? 0).toLocaleString()}件`,
+  },
+  {
+    slug: "preschools",
+    category: "子育て・生活",
+    title: "保育園・幼稚園が多い市区町村ランキング",
+    shortLabel: "保育・幼稚園が多い",
+    description:
+      "全国の市区町村を保育所・幼稚園・認定こども園の施設数が多い順にランキング。最も多いのは{top1}。施設の実数で子育てインフラの集積を比較できます。",
+    lead: "全国の市区町村を、保育所・幼稚園・認定こども園などの施設数が多い順に並べたランキングです。",
+    note: `施設数は保育所・幼稚園・認定こども園などの合計（国土数値情報／不動産情報ライブラリの施設データ）の実数です。${AMENITY_COUNT_CAVEAT}保育の入りやすさの目安には定員余裕率のランキングをご覧ください。`,
+    intro: [
+      "このページは、全国の市区町村を保育所・幼稚園・認定こども園などの施設数が多い順に並べたランキングです。施設数は人口規模に比例しやすいため、上位には子育て世帯の多い大都市が並ぶ傾向があります。",
+      "「施設が多い」ことと「入りやすい」ことは別です。入りやすさの目安には、定員に対する空きの割合で比較する「保育の定員に余裕がある市区町村ランキング」をあわせてご覧ください。各順位の自治体名から、待機児童数・定員余裕率などの子育てデータをまとめて確認できます。",
+    ],
+    faq: PRESCHOOLS_FAQ,
+    related: { slug: "childcare-capacity", label: "保育の定員に余裕がある市区町村" },
+    columnLabel: "保育・幼稚園等",
+    order: "desc",
+    freshnessLabel: amenityFreshness("保育", "時点"),
+    nextUpdate: NEXT_UPDATE.preschools,
+    qualifies: hasAmenities,
+    sortValue: (m) => m.amenities?.preschools ?? 0,
+    display: (m) => `${(m.amenities?.preschools ?? 0).toLocaleString()}施設`,
   },
   {
     slug: "population-most",
     category: "人口・まち",
     title: "人口が多い市区町村ランキング",
+    seoTitleAnswer: nihonichiTop1,
+    prefSeoTitle: "市区町村 人口ランキング（人口が多い順）",
     shortLabel: "人口が多い",
     description:
       "全国の市区町村を人口が多い順にランキング。最も人口が多いのは{top1}。国勢調査の人口（実データ）で自治体規模を比較できます。",
@@ -485,6 +809,7 @@ export const RANKINGS: RankingDef[] = [
     slug: "population-density",
     category: "人口・まち",
     title: "人口密度が高い市区町村ランキング",
+    seoTitleAnswer: nihonichiTop1,
     shortLabel: "人口密度が高い",
     description:
       "全国の市区町村を人口密度（人/km²）が高い順にランキング。最も人口密度が高いのは{top1}。国勢調査人口と国土地理院の面積データで比較できます。",
@@ -533,6 +858,8 @@ export const RANKINGS: RankingDef[] = [
       `全国の市区町村を5年間（${CENSUS_PERIOD}）の人口増減率が高い順にランキング。最も人口増加率が高いのは{top1}。国勢調査の実データで人口が増えている自治体を比較できます。`,
     lead: `全国の市区町村を、5年間（${CENSUS_PERIOD}）の人口増減率が高い順に並べたランキングです。`,
     note: "人口増減率は2020年と2025年の国勢調査人口の比較（%）で、転入・出生などの内訳は含みません。人口規模が小さい自治体や、震災からの帰還が進む自治体（福島県大熊町など）では率が大きく出ることがあります。",
+    related: { slug: "future-population-resilient", label: "2050年も人口を維持する見込みの自治体" },
+    mapHub: "/map/population-trend",
     prefSummary: true,
     columnLabel: "人口増減率（2020→2025）",
     order: "desc",
@@ -554,6 +881,8 @@ export const RANKINGS: RankingDef[] = [
       `全国の市区町村を5年間（${CENSUS_PERIOD}）の人口減少率が高い順にランキング。最も人口が減っているのは{top1}。国勢調査の実データで人口が減っている自治体を比較できます。`,
     lead: `全国の市区町村を、5年間（${CENSUS_PERIOD}）の人口減少率が大きい順に並べたランキングです。`,
     note: "人口増減率は2020年と2025年の国勢調査人口の比較（%）で、転出・自然減などの内訳は含みません。人口規模が小さい自治体や、原発事故の避難区域を抱える自治体（福島県双葉町など）では減少率が大きく出ることがあります。人口が増えている自治体は表の下位（増加側）に並びます。",
+    related: { slug: "future-population-decline", label: "2050年の将来推計人口ランキング" },
+    mapHub: "/map/population-trend",
     columnLabel: "人口増減率（2020→2025）",
     order: "asc",
     freshnessLabel: () => POPULATION_FRESHNESS,
@@ -564,6 +893,91 @@ export const RANKINGS: RankingDef[] = [
       const r = m.populationChangeRate ?? 0;
       return `${r > 0 ? "+" : ""}${r.toFixed(1)}%`;
     },
+  },
+  {
+    slug: "aging-high",
+    category: "人口・まち",
+    title: "高齢化率が高い市区町村ランキング",
+    seoTitleAnswer: nihonichiTop1,
+    shortLabel: "高齢化率が高い",
+    description:
+      "全国の市区町村を高齢化率（65歳以上人口の割合）が高い順にランキング。総務省 住民基本台帳の実データで地域の年齢構成を比較できます。",
+    metaDescription: agingMetaDescription("高い"),
+    lead: "全国の市区町村を、高齢化率（65歳以上人口 ÷ 総人口）が高い順に並べたランキングです（住民基本台帳・毎年1月1日時点）。",
+    note: AGING_NOTE,
+    faq: AGING_FAQ,
+    related: { slug: "future-population-decline", label: "2050年の将来推計人口ランキング" },
+    prefSummary: true,
+    mapHub: "/map/aging",
+    columnLabel: "高齢化率",
+    order: "desc",
+    freshnessLabel: agingFreshnessLabel,
+    nextUpdate: NEXT_UPDATE.aging,
+    qualifies: (m) => hasAgeData(m.ageStats),
+    sortValue: (m) => elderlyRatioPct(m.ageStats) ?? 0,
+    display: (m) => elderlyRatioText(m.ageStats),
+  },
+  {
+    slug: "aging-low",
+    category: "人口・まち",
+    title: "高齢化率が低い市区町村ランキング",
+    shortLabel: "高齢化率が低い",
+    description:
+      "全国の市区町村を高齢化率（65歳以上人口の割合）が低い順にランキング。若い世代が多い自治体を総務省 住民基本台帳の実データで比較できます。",
+    metaDescription: agingMetaDescription("低い"),
+    lead: "全国の市区町村を、高齢化率（65歳以上人口 ÷ 総人口）が低い順に並べたランキングです（住民基本台帳・毎年1月1日時点）。",
+    note: AGING_NOTE,
+    faq: AGING_FAQ,
+    related: { slug: "population-growth", label: "人口増加率ランキング" },
+    mapHub: "/map/aging",
+    columnLabel: "高齢化率",
+    order: "asc",
+    freshnessLabel: agingFreshnessLabel,
+    nextUpdate: NEXT_UPDATE.aging,
+    qualifies: (m) => hasAgeData(m.ageStats),
+    sortValue: (m) => elderlyRatioPct(m.ageStats) ?? 0,
+    display: (m) => elderlyRatioText(m.ageStats),
+  },
+  {
+    slug: "fiscal-strong",
+    category: "人口・まち",
+    title: "財政力指数が高い市区町村ランキング",
+    shortLabel: "財政力指数が高い",
+    description:
+      "全国の市町村を財政力指数が高い順にランキング。総務省「地方公共団体の主要財政指標一覧」の公表値で、税収による財源の余裕度を比較できます。",
+    metaDescription: fiscalMetaDescription("高い"),
+    lead: "全国の市町村を、財政力指数（基準財政収入額 ÷ 基準財政需要額の3か年平均）が高い順に並べたランキングです。",
+    note: FISCAL_NOTE,
+    faq: FISCAL_FAQ,
+    related: { slug: "fiscal-weak", label: "財政力指数が低い市区町村" },
+    prefSummary: true,
+    columnLabel: "財政力指数",
+    order: "desc",
+    freshnessLabel: fiscalFreshnessLabel,
+    nextUpdate: NEXT_UPDATE.fiscal,
+    qualifies: (m) => isFiscalRankable(m.fiscal),
+    sortValue: (m) => m.fiscal?.index ?? 0,
+    display: (m) => fiscalIndexText(m.fiscal),
+  },
+  {
+    slug: "fiscal-weak",
+    category: "人口・まち",
+    title: "財政力指数が低い市区町村ランキング",
+    shortLabel: "財政力指数が低い",
+    description:
+      "全国の市町村を財政力指数が低い順にランキング。地方交付税による財源保障の仕組みとあわせて、総務省の公表値で自治体の税収構造を比較できます。",
+    metaDescription: fiscalMetaDescription("低い"),
+    lead: "全国の市町村を、財政力指数（基準財政収入額 ÷ 基準財政需要額の3か年平均）が低い順に並べたランキングです。指数が低い自治体には地方交付税で標準的な行政サービスの財源が保障されます。",
+    note: FISCAL_NOTE,
+    faq: FISCAL_FAQ,
+    related: { slug: "fiscal-strong", label: "財政力指数が高い市区町村" },
+    columnLabel: "財政力指数",
+    order: "asc",
+    freshnessLabel: fiscalFreshnessLabel,
+    nextUpdate: NEXT_UPDATE.fiscal,
+    qualifies: (m) => isFiscalRankable(m.fiscal),
+    sortValue: (m) => m.fiscal?.index ?? 0,
+    display: (m) => fiscalIndexText(m.fiscal),
   },
   {
     slug: "future-population-decline",
@@ -577,6 +991,7 @@ export const RANKINGS: RankingDef[] = [
     lead: "全国の市区町村を、2050年の将来推計人口の減少率（2020年国勢調査基準）が大きい順に並べたランキングです。",
     note: FUTURE_NOTE,
     faq: FUTURE_FAQ,
+    mapHub: "/map/future-population",
     columnLabel: "人口増減率（2020→2050・推計）",
     order: "asc",
     freshnessLabel: () => FUTURE_FRESHNESS,
@@ -589,7 +1004,9 @@ export const RANKINGS: RankingDef[] = [
     slug: "future-population-resilient",
     category: "人口・まち",
     title: "2050年推計人口の減少率が小さい市区町村ランキング",
-    seoTitle: "2050年も人口を維持する見込みの市区町村ランキング【将来推計人口】",
+    // 連続語「人口ランキング」を title 先頭側に作る（2026-08 GSC分析: 表示クエリは
+    // 「2050年 人口 ランキング 市町村」系だが、旧 title は連続語を含まず 129imp/0click/11位）。
+    seoTitle: "2050年の将来人口ランキング｜人口を維持する見込みの市区町村",
     shortLabel: "2050年人口維持",
     description:
       "全国の市区町村を2050年将来推計人口の減少率が小さい順（増加を含む）にランキング。国立社会保障・人口問題研究所（令和5年推計）の公表値で比較できます。",
@@ -597,6 +1014,7 @@ export const RANKINGS: RankingDef[] = [
     lead: "全国の市区町村を、2050年の将来推計人口の減少率（2020年国勢調査基準）が小さい順に並べたランキングです。推計上、人口が増える見込みの自治体が上位に入ります。",
     note: FUTURE_NOTE,
     faq: FUTURE_FAQ,
+    mapHub: "/map/future-population",
     columnLabel: "人口増減率（2020→2050・推計）",
     order: "desc",
     freshnessLabel: () => FUTURE_FRESHNESS,
@@ -622,6 +1040,7 @@ export const RANKINGS: RankingDef[] = [
     freshnessLabel: foreignFreshnessLabel,
     nextUpdate: NEXT_UPDATE.foreign,
     prefSummary: true,
+    mapHub: "/map/foreign-ratio",
     columnLabel: "外国人住民比率",
     order: "desc",
     // 在留外国人統計の対象かつ人口が有効（比率を算出できる）自治体のみ。
@@ -645,6 +1064,7 @@ export const RANKINGS: RankingDef[] = [
     compareForeignAvg: true,
     freshnessLabel: foreignFreshnessLabel,
     nextUpdate: NEXT_UPDATE.foreign,
+    mapHub: "/map/foreign-ratio",
     columnLabel: "外国人住民比率",
     order: "asc",
     qualifies: (m) => hasForeignData(m.foreignResidents.source) && m.population > 0,

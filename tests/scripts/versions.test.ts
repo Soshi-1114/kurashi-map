@@ -10,6 +10,8 @@ describe("VERSIONS 単一ソース", () => {
       "CFA_XLSX_URL", "CFA_ASOF",
       "GSI_SHELTER_URL", "GSI_SHELTER_ASOF",
       "FOREIGN_ASOF",
+      "JUKI_AGE_STATINFID", "JUKI_ASOF",
+      "FISCAL_XLSX_URL", "FISCAL_ASOF",
       "MEDICAL_HOSP_STATSDATAID", "MEDICAL_CLINIC_STATSDATAID", "MEDICAL_ASOF",
       "S12_URL", "S12_ASOF",
       "AMENITIES_SOURCE", "AMENITIES_ASOF",
@@ -31,6 +33,20 @@ describe("VERSIONS 単一ソース", () => {
     expect(VERSIONS.L01_ASOF).toBe(`20${VERSIONS.L01_VERSION}`);
   });
 
+  it("JUKI_ASOF が1月1日時点の日付形式（住基台帳は毎年1月1日基準）", () => {
+    // statInfId は年から導出できないため相関テスト不可。年度更新時に statInfId と
+    // ASOF をセットで差し替える運用は versions.mjs のコメントに明記している。
+    expect(VERSIONS.JUKI_ASOF).toMatch(/^\d{4}-01-01$/);
+    expect(VERSIONS.JUKI_AGE_STATINFID).toMatch(/^\d{12}$/);
+  });
+
+  it("FISCAL_ASOF は年度形式・URL は総務省の main_content 配下", () => {
+    // main_content の採番は年度から導出できないため相関テスト不可。年度更新時に
+    // URL と ASOF をセットで差し替える運用は versions.mjs のコメントに明記している。
+    expect(VERSIONS.FISCAL_ASOF).toMatch(/^\d{4}年度$/);
+    expect(VERSIONS.FISCAL_XLSX_URL).toMatch(/^https:\/\/www\.soumu\.go\.jp\/main_content\/\d+\.xlsx$/);
+  });
+
   it("AMENITIES_ASOF の医療機関部分が MEDICAL_ASOF と同期している", () => {
     // 医療施設調査の年度を上げたら amenities の表示ラベルも合わせる運用（片方だけの更新を検知）。
     expect(VERSIONS.AMENITIES_ASOF).toContain(VERSIONS.MEDICAL_ASOF);
@@ -46,13 +62,22 @@ describe("VERSIONS 単一ソース", () => {
     expect(VERSIONS.S12_ASOF).toBe(`20${m![1]}年度`);
   });
 
-  it("CFA_XLSX_URL の年度採番と CFA_ASOF が整合する（r7 ⇔ 2025）", () => {
+  it("CFA_XLSX_URL / CFA_CAPACITY_XLSX_URL の年度採番と CFA_ASOF が整合する", () => {
     // URL の _rN_ は令和N年。CFA_ASOF は西暦の年度開始日（令和N年 = 西暦 2018+N）。
-    const m = VERSIONS.CFA_XLSX_URL.match(/_r(\d+)_/);
-    expect(m, "URL に _rN_ 採番が見つからない").not.toBeNull();
-    const reiwa = Number(m![1]);
+    // R8 以降のファイル名は全角数字（％エンコード）を含むため、デコード＋全角→半角の
+    // 正規化をかけてから採番を読む。
+    const reiwaOf = (url: string) => {
+      const normalized = decodeURIComponent(url).replace(/[０-９]/g, (c) =>
+        String.fromCharCode(c.charCodeAt(0) - 0xfee0),
+      );
+      const m = normalized.match(/_r(\d+)_/);
+      expect(m, `URL に _rN_ 採番が見つからない: ${url}`).not.toBeNull();
+      return Number(m![1]);
+    };
     const asOfYear = Number(VERSIONS.CFA_ASOF.slice(0, 4));
-    expect(asOfYear).toBe(2018 + reiwa);
+    expect(asOfYear).toBe(2018 + reiwaOf(VERSIONS.CFA_XLSX_URL));
+    // 定員・申込者 Excel は CFA_ASOF を共用するため、同じ年度採番であること
+    expect(asOfYear).toBe(2018 + reiwaOf(VERSIONS.CFA_CAPACITY_XLSX_URL));
   });
 });
 

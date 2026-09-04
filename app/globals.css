@@ -287,6 +287,7 @@ html, body {
 .ad-metric-card,
 .ad-rankcard,
 .ad-arearow-list,
+.home-mapcta-card,
 .ad-score {
   background: var(--surface-strong);
   border: 1px solid var(--border);
@@ -613,33 +614,6 @@ html, body {
   .site-header-nav a.site-header-nav-optional { display: none; }
 }
 
-/* キーボード操作時だけ現れる「本文へスキップ」リンク（PageShell の先頭）。
-   非表示は .sr-only と同じレシピ（フォーカス可能なまま視覚的に隠す）。 */
-.skip-link {
-  position: absolute;
-  width: 1px; height: 1px;
-  padding: 0; margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-.skip-link:focus {
-  width: auto; height: auto;
-  margin: 0;
-  overflow: visible;
-  clip: auto;
-  left: 8px; top: 8px;
-  z-index: 100;
-  padding: 10px 16px;
-  background: var(--surface-strong);
-  color: var(--text);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  font-size: var(--text-sm);
-  font-weight: 600;
-}
-
 /* ============================================================
    共通フッター（SiteFooter）。設置場所・目的は components/SiteFooter.tsx 参照。
    ============================================================ */
@@ -694,9 +668,8 @@ html, body {
    ============================================================ */
 .home-hero {
   position: relative;
-  /* 検索ドロップダウンを直下の地図より前面に。地図（.home-map）は position:relative の
-     z-index:auto でスタッキングコンテキストを作らないため、その内部の app-header(12)・
-     map-loading(11) が同じ土俵に出てくる。それらより上、かつドロワー(30/31)と
+  /* 検索ドロップダウンを、DOM 上後続の絶対配置要素（地図導線カードの .home-mapcta-body）
+     より前面に出すためのスタッキングコンテキスト。ドロワー(30/31)と
      モバイルのレイヤーシート(60-62)より下に置く。 */
   z-index: 20;
   background: var(--bg-elev);
@@ -781,21 +754,45 @@ html, body {
   .home-hero-action { font-size: var(--text-xs); }
 }
 
-/* スクロールページに埋め込む地図（トップ）。ピラーページの 100dvh とは別定義 */
-.home-map--embedded {
-  height: min(72dvh, 680px);
-  border-bottom: 1px solid var(--border);
-  /* ボトムシートは「下へ translate して隠す」設計。全画面地図では画面外に逃げるが、
-     埋め込み地図では地図下のページ内容の上に出てしまうため、地図の枠で切り取る。
-     position:fixed の子（モバイルのレイヤーシート）は overflow の対象外なので影響しない。 */
-  overflow: hidden;
+/* トップの地図導線カード（地図本体は /map へ移設。docs/home-renewal-plan-2026-08.md PR-2）。
+   プレビュー画像（initial-view.svg）に重ねたラベルで、1タップで全画面地図へ。 */
+.home-mapcta {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 20px 16px 8px;
 }
+/* カードの地色・枠・角丸は共有カード群（上の .card 系セレクタ）から継承し、
+   ここは画像カード固有の差分だけを持つ。 */
+.home-mapcta-card {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+}
+.home-mapcta-card:hover { border-color: var(--accent); }
+.home-mapcta-img {
+  display: block;
+  width: 100%;
+  height: clamp(220px, 36dvh, 400px);
+  object-fit: cover;
+}
+.home-mapcta-body {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 28px 18px 14px;
+  /* 画像の明暗によらず読めるよう、下端だけ暗幕グラデーションを敷く */
+  background: linear-gradient(transparent, rgba(10, 16, 24, 0.62));
+  color: #fff;
+}
+.home-mapcta-title { font-size: var(--text-lg); font-weight: 700; }
+.home-mapcta-sub { font-size: var(--text-sm); opacity: 0.92; }
+.home-mapcta-hubs { margin-top: 10px; }
 @media (max-width: 768px) {
-  /* SP: 操作可能な地図領域を最低 420px 確保しつつ、下のコンテンツが覗く高さに */
-  .home-map--embedded {
-    height: 55dvh;
-    min-height: 420px;
-  }
+  .home-mapcta-img { height: clamp(180px, 30dvh, 280px); }
+  .home-mapcta-sub { font-size: var(--text-xs); }
 }
 
 /* 地図下の回遊コンテンツ（トップのみ。ドロワーの .home-links とは独立の通常フロー） */
@@ -859,9 +856,6 @@ button { font-family: inherit; }
   --header-h: 60px;
 }
 .map-root { position: relative; width: 100%; height: 100%; background: var(--bg); }
-/* 地図内ヘッダーを出さない場合（ページ側の SiteHeader が担う）。その高さぶんの
-   上端オフセットを畳み、レイヤーボタン・凡例・サイドパネルを地図上端まで詰める。 */
-.map-root--headerless { --header-h: 0px; }
 .map-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
 /* 初期描画用スケルトン地図（LCP 要素）。canvas より上・ヘッダーやローディングより下に
@@ -995,8 +989,6 @@ button { font-family: inherit; }
   box-shadow: 0 0 0 4px var(--accent-soft);
 }
 .app-header-search input::placeholder { color: var(--text-faint); font-weight: 400; }
-/* 検索非表示時（トップページ）にブランドを左端へ保つための伸縮スペーサ */
-.app-header-spacer { flex: 1; }
 
 /* 塗り分け指標の切替＝地図上のフローティング操作（ヘッダーのサイトナビとは分離）。
    ボタン＋パネルを1つのコンテナにまとめ、地図右上に重ねる。
@@ -1367,6 +1359,50 @@ button { font-family: inherit; }
   flex-shrink: 0;
 }
 .filter-clear:hover { text-decoration: underline; }
+
+/* フィルタ該当自治体の一覧（LayersPanel 内・都道府県ごとにグループ化）。
+   件数が多くてもパネルを溢れさせないよう固定高でスクロールさせる */
+.filter-matches {
+  margin-top: 8px;
+  max-height: 240px;
+  overflow-y: auto;
+  border-top: 1px solid var(--border);
+  padding-top: 8px;
+  display: grid;
+  gap: 8px;
+}
+.filter-matches-pref {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--text-muted);
+}
+.filter-matches-count {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+}
+.filter-matches-list {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.filter-matches-item {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  padding: 3px 10px;
+  font-size: var(--text-xs);
+  font-family: inherit;
+  color: var(--text);
+  cursor: pointer;
+}
+.filter-matches-item:hover { border-color: var(--accent); color: var(--accent); }
 
 /* 凡例 — シートに隠れないよう sheet open 時は繰り上げる */
 .legend {

@@ -8,6 +8,8 @@ import { PREFS, getPrefBySlug, getPrefByCode, loadPrefData } from "./prefs";
 import { floodLevelOf, landslideLevelOf, tsunamiLevelOf, stormSurgeLevelOf, liquefactionLevelOf } from "./hazardScale";
 import { foreignRatioPct } from "./foreignResidents";
 import { futureChangeRate2050 } from "./futurePopulation";
+import { hasVacancy } from "./vacancy";
+import { elderlyRatioPct } from "./ageStats";
 import muniKana from "@/data/muni-kana.json";
 
 // 自治体のひらがな読み（検索のかな一致用）。scripts/fetch-towns.mjs が生成。
@@ -74,8 +76,8 @@ function roundRatio(r: number): number {
 }
 
 /**
- * 全 pref 横断の軽量サマリ。トップ地図の初期配信用（検索・色付け・分割に必要な
- * 最小フィールドのみ）。フル Municipality（約1.8MB）を積まずに済む。
+ * 全 pref 横断の軽量サマリ。地図ページ（/map・/map/*）の初期配信用（検索・色付け・分割に
+ * 必要な最小フィールドのみ）。フル Municipality（約1.8MB）を積まずに済む。
  */
 export async function listSummaryAcrossPrefs(): Promise<MuniSummary[]> {
   const out: MuniSummary[] = [];
@@ -83,6 +85,7 @@ export async function listSummaryAcrossPrefs(): Promise<MuniSummary[]> {
     const { muni, wards } = await loadPref(p.slug);
     for (const m of [...muni, ...wards]) {
       const futureRate = futureChangeRate2050(m.futurePopulation);
+      const agingRate = elderlyRatioPct(m.ageStats);
       out.push({
         code: m.code,
         pref: m.pref,
@@ -98,6 +101,10 @@ export async function listSummaryAcrossPrefs(): Promise<MuniSummary[]> {
         foreignRatio: roundRatio(foreignRatioPct(m)),
         // 2050年増減率は小数1桁で十分（データなしはフィールドごと省いてペイロードを増やさない）。
         ...(futureRate != null ? { futureChangeRate: Math.round(futureRate * 10) / 10 } : {}),
+        // 空き家率も同方式（集計対象外の町村はフィールド欠落）。元データが小数1桁。
+        ...(hasVacancy(m.vacancy) ? { vacancyRate: m.vacancy.rate } : {}),
+        // 高齢化率も同方式（住民登録のない北方領土6村はフィールド欠落）。小数1桁に丸める。
+        ...(agingRate != null ? { agingRate: Math.round(agingRate * 10) / 10 } : {}),
         floodLevel: floodLevelOf(m.hazard),
         landslideLevel: landslideLevelOf(m.hazard),
         tsunamiLevel: tsunamiLevelOf(m.hazard),

@@ -17,12 +17,21 @@ export const VERSIONS = {
   L01_VERSION: "26",
   L01_ASOF: "2026",
 
-  // こども家庭庁「保育所等関連状況取りまとめ」待機児童 Excel。
-  // URL 末尾の採番（_r7_02）は年度で変わり自動推測できないため、公表ページで確認して
-  // 手動更新する（docs/data-update.md §待機児童）。CFA_ASOF（令和7年=2025-04-01）と必ず同期。
+  // こども家庭庁「保育所等関連状況取りまとめ」待機児童 Excel（資料６－１/６－２）。
+  // URL 末尾の採番は年度で変わり自動推測できない（R7 は _02、R8 は _01 と入れ替わった。
+  // R8 のファイル名は全角「８」とスペースを含むためパーセントエンコード済み文字列で持つ）。
+  // 公表ページで確認して手動更新する（docs/data-update.md §待機児童）。
+  // CFA_ASOF（令和8年=2026-04-01）と必ず同期。
   CFA_XLSX_URL:
-    "https://www.cfa.go.jp/assets/contents/node/basic_page/field_ref_resources/b0a8057b-34bf-4c20-84fb-ae592708ca9b/1a728dcc/20250828_policies_hoiku_torimatome_r7_02.xlsx",
-  CFA_ASOF: "2025-04-01",
+    "https://www.cfa.go.jp/assets/contents/node/basic_page/field_ref_resources/68234dca-5d01-4ec2-ac2f-86f598c55b5c/947707bb/20260825_%20policies_hoiku_torimatome_r%EF%BC%98_01.xlsx",
+  CFA_ASOF: "2026-04-01",
+
+  // 同取りまとめの別添「（参考）定員・申込者の状況」Excel（定員の状況/申込者の状況の2シート、
+  // R8 は _02）。保活余力（childcare: fetch-childcare.mjs）の出典で、基準時点は CFA_ASOF を共用。
+  // 市区町村別の別添は令和6年分から存在（それ以前に戻すことはない）。年度更新は
+  // CFA_XLSX_URL と同時に公表ページで確認して手動更新する。
+  CFA_CAPACITY_XLSX_URL:
+    "https://www.cfa.go.jp/assets/contents/node/basic_page/field_ref_resources/68234dca-5d01-4ec2-ac2f-86f598c55b5c/3e3cd95a/20260826_%20policies_hoiku_torimatome_r%EF%BC%98_02.xlsx",
 
   // 国土地理院「指定緊急避難場所データ」全国版 CSV（mergeFromCity_2 = 指定緊急避難場所）。
   // 空文字にすると annual ワークフローの避難場所ステップはスキップ（警告のみ）。
@@ -42,6 +51,21 @@ export const VERSIONS = {
   // ASOF を同時に更新し、fetch-future-population.mjs を全県で再実行する。
   IPSS_BASE_URL: "https://www.ipss.go.jp/pp-shicyoson/j/shicyoson23/2gaiyo_hyo",
   IPSS_ASOF: "2023",
+
+  // 総務省「住民基本台帳に基づく人口、人口動態及び世帯数調査」の
+  // 市区町村別年齢階級別人口【総計】Excel（e-Stat 表26-04相当）。年齢構成（ageStats:
+  // fetch-age-stats.mjs）の出典。毎年1月1日時点・例年7月末〜8月に公表され、年度ごとに
+  // **新しい statInfId** が採番される（同一IDの更新ではない）。公表後に e-Stat の
+  // 統計表一覧（toukei=00200241）で新IDを確認し、JUKI_ASOF とセットで差し替える。
+  JUKI_AGE_STATINFID: "000040479050",
+  JUKI_ASOF: "2026-01-01",
+
+  // 総務省「地方公共団体の主要財政指標一覧」の全市町村 Excel（財政力指数の出典:
+  // fetch-fiscal.mjs）。main_content の採番は年度ごとに変わり自動推測できないため、
+  // 公表ページ（soumu.go.jp/iken/shihyo_ichiran.html から年度ページへ）で確認して
+  // 手動更新する。FISCAL_ASOF（年度・財政力指数は3か年平均）と必ず同期。
+  FISCAL_XLSX_URL: "https://www.soumu.go.jp/main_content/001044529.xlsx",
+  FISCAL_ASOF: "2024年度",
 
   // 出入国在留管理庁「在留外国人統計」の基準時点（半期公表・手動更新）。
   // 期を更新したら statInfId とセットで合わせる（docs/data-update.md §在留外国人）。

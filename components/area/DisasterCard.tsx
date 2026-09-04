@@ -1,9 +1,11 @@
 // 災害リスクカード。数値ラベルに加え、種別ごとのリスクレベルを5段階の amber スター
 // （多いほど高リスク = Warning カラー）で可視化する。評価対象外は NoData にフォールバック。
-import { Star, Droplets, Mountain, Waves, Wind, Layers, Info } from "lucide-react";
+import { Star, Droplets, Mountain, Waves, Wind, Layers, Info, MapPin } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import type { Municipality } from "@/lib/types";
 import { isHazardEvaluated, coverageReason } from "@/lib/coverage";
+import { hasShelterData } from "@/lib/shelters";
+import { formatAsOfJa } from "@/lib/format";
 import {
   floodLevelOf,
   floodGraded,
@@ -120,6 +122,20 @@ export function DisasterCard({ m }: { m: Municipality }) {
         <p className="ad-hazard-note">
           <Info size={15} aria-hidden="true" />
           {m.hazard.note}
+        </p>
+      )}
+      {/* 指定緊急避難場所の件数。未収録（出典CSVに掲載がない）と0か所は意味が違うため
+          区別して表示する（lib/shelters.ts の honesty 方針）。 */}
+      {m.shelters && (
+        <p className="ad-note">
+          <MapPin size={15} aria-hidden="true" />
+          {hasShelterData(m.shelters.source) ? (
+            <span>
+              指定緊急避難場所は{m.shelters.count.toLocaleString()}か所です（{m.shelters.source}・{formatAsOfJa(m.shelters.asOf)}時点）。場所は「ハザードマップを地図で見る」の避難所レイヤーで確認できます。
+            </span>
+          ) : (
+            <span>指定緊急避難場所は未収録です（出典データに掲載のない自治体。0か所とは異なります）。</span>
+          )}
         </p>
       )}
       {/* 表示値は自治体内の最大区分。全域のリスクと誤読されないよう必ず併記する（honesty 方針）。 */}

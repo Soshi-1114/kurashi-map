@@ -50,6 +50,23 @@ export type Municipality = {
   rent: Metric;          // 民営借家の家賃平均
   landPrice: Metric;     // 住宅地地価
   waitlistChildren: Metric; // 待機児童（value=人数）
+  // 保育所等の受け入れ状況（こども家庭庁「保育所等関連状況取りまとめ」別添
+  // 「（参考）定員・申込者の状況」。待機児童と同一公表物・同一基準日）。
+  // 政令市は市単位集計のため、区には市全体の値を source「（○○市全体の集計）」付きで持たせる
+  // （lib/childcare.ts isChildcareCityAggregate）。定員余裕率などの派生値は保存せず実行時算出。
+  // capacity=0 は「保育所等の定員なし」の実データ（小規模町村）。enrolled が capacity を
+  // 超えることがある（定員の弾力運用）。
+  childcare?: {
+    capacity: number;      // 定員合計（全施設類型）
+    enrolled: number;      // 利用児童数合計
+    capacityAge0: number;  // 0歳児の定員
+    enrolledAge0: number;  // 0歳児の利用児童数
+    capacityAge12: number; // 1,2歳児の定員
+    enrolledAge12: number; // 1,2歳児の利用児童数（出典の1歳児+2歳児）
+    hiddenWaitlist: number; // 待機児童に含まれない申込者（育児休業中+特定園のみ希望+求職活動休止）
+    source: string;
+    asOf: string;
+  };
   // 在留外国人総数（value=人数）。出入国在留管理庁 在留外国人統計。北方領土等は
   // source に「対象外」を持つ（lib/foreignResidents.ts hasForeignData 参照）。
   // 人口比（%）は保存せず population と突き合わせて実行時に算出する。
@@ -90,6 +107,32 @@ export type Municipality = {
     source: string;
     asOf: string;
   };
+  // 年齢構成（住民基本台帳・総計＝外国人住民含む、毎年1月1日時点）。
+  // 高齢化率・年少人口比は保存せず実行時算出（派生値は保存しない方針。lib/ageStats.ts）。
+  // 分母 total は国勢調査の population ではなく住基台帳の総人口を使う: 分子（住基・
+  // 登録人口）と調査・基準日・人口概念を揃えないと比率が歪む（futurePopulation が
+  // base2020 を分母にするのと同じ流儀）。15-64歳は total - young - elderly で導出可能
+  // なので保存しない。北方領土6村は住民登録がなく全列0 → total=0 センチネル
+  // （hasAgeData 参照）。政令市は区別データがそのまま出典にある（合算・展開なし）。
+  ageStats?: {
+    young: number;    // 0〜14歳人口
+    elderly: number;  // 65歳以上人口
+    total: number;    // 住基台帳の総人口（比率の分母）
+    source: string;
+    asOf: string;     // "2026-01-01"
+  };
+  // 財政力指数（総務省「地方公共団体の主要財政指標一覧」・3か年平均・小数2桁）。
+  // 経常収支比率等は制度説明なしに誤読リスクが高いため収録しない（1指標に絞る。
+  // 出典の同一行にあるため後日の拡張コストはほぼゼロ）。
+  // センチネル: 出典に行がない北方領土6村は index=-1（指数は正値のみなので安全。
+  // lib/fiscal.ts hasFiscal 参照）。政令市の区は市単位の値を source「（○○市全体の値）」
+  // 付きで展開（childcare と同方式）。東京23特別区は都区財政調整制度下の算定のため
+  // source に明記し、ランキング対象外（lib/fiscal.ts isFiscalRankable）。
+  fiscal?: {
+    index: number;   // 財政力指数
+    source: string;
+    asOf: string;    // "2024年度"（令和6年度。R4-R6の3か年平均）
+  };
   // 指定緊急避難場所の件数サマリ（点の座標は別ファイル data/{slug}_shelters.json に置き
   // 地図選択時に /api/shelters/[code] で取得する）。未収録は source にセンチネルを持つ
   // （lib/shelters.ts hasShelterData 参照）。詳細パネルの件数表示用。
@@ -100,8 +143,8 @@ export type Municipality = {
   };
 };
 
-// トップ地図の初期配信用の軽量サマリ。検索・地図の色付け・自治体分割に必要な
-// 最小フィールドのみ（全1923自治体ぶんを積んでも軽い）。詳細は選択時に
+// 地図ページ（/map・/map/*）の初期配信用の軽量サマリ。検索・地図の色付け・自治体分割に
+// 必要な最小フィールドのみ（全1923自治体ぶんを積んでも軽い）。詳細は選択時に
 // /api/muni/[code] でフル Municipality を取得する。
 export type MuniSummary = {
   code: string;
@@ -123,6 +166,13 @@ export type MuniSummary = {
   // 減少（負値）が正常値のため負のセンチネルは使えず、データなし（対象外）は
   // フィールド欠落で表現する（lib/futurePopulation.ts futureChangeRate2050 で算出）。
   futureChangeRate?: number;
+  // 空き家率（%・住宅・土地統計調査）。地図の塗り分け用。データなし（人口1.5万人
+  // 未満の町村など集計対象外）はフィールド欠落で表現する（futureChangeRate と同方式。
+  // 0% が理論上実データになり得るため 0 センチネルは使わない）。
+  vacancyRate?: number;
+  // 高齢化率（%・住民基本台帳）。地図の塗り分け・条件フィルタ用。データなし
+  // （北方領土6村=住民登録なし）はフィールド欠落で表現する（vacancyRate と同方式）。
+  agingRate?: number;
   // 浸水深ランク。-1=評価対象外（reinfolib圏外）, 0=なし, 1..6（lib/hazardScale.ts）。
   // 旧 hasFloodRisk(>0)・hazardEvaluated(>=0) を1フィールドに集約。地図の濃淡と
   // 「浸水深◯m以下」フィルタの単一ソース。

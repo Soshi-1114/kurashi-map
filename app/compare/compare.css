@@ -18,6 +18,22 @@
   line-height: var(--leading-relaxed);
   color: var(--text-muted);
 }
+/* 共有ボタン（選択状態込みの現在URLを共有）。テキストリンク風の控えめな見た目 */
+.cmp-share {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 10px;
+  padding: 0;
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+.cmp-share:hover { color: var(--accent); }
 
 /* ピッカー */
 .cmp-picker {

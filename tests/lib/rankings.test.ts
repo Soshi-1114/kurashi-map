@@ -2,8 +2,9 @@ import { describe, it, expect } from "vitest";
 import {
   getRankingBySlug, muniLevelOnly, rankBy, RANKINGS,
   housingSurveyLabel, landPriceSurveyLabel, appendFreshness, freshnessPrefix,
-  splitRankingTitle,
+  splitRankingTitle, amenityAsOfPart,
 } from "@/lib/rankings";
+import type { Municipality } from "@/lib/types";
 import { muni, metric } from "../_fixtures";
 
 describe("muniLevelOnly", () => {
@@ -164,6 +165,38 @@ describe("population-decline ランキング", () => {
   });
 });
 
+describe("childcare-capacity ランキング", () => {
+  const def = getRankingBySlug("childcare-capacity")!;
+  const cc = (capacity: number, enrolled: number) => ({
+    capacity, enrolled,
+    capacityAge0: 0, enrolledAge0: 0, capacityAge12: 0, enrolledAge12: 0, hiddenWaitlist: 0,
+    source: "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）",
+    asOf: "2026-04-01",
+  });
+
+  it("定員余裕率の降順、定員100人未満・未収録は対象外", () => {
+    const list = [
+      muni({ code: "A", childcare: cc(1000, 900) }), // 10%
+      muni({ code: "B", childcare: cc(500, 400) }),  // 20%
+      muni({ code: "C", childcare: cc(50, 10) }),    // 80% だが定員<100 → 除外
+      muni({ code: "D" }),                            // 未収録 → 除外
+    ];
+    expect(rankBy(def, list).map((m) => m.code)).toEqual(["B", "A"]);
+  });
+
+  it("display は小数1桁%、定員の弾力運用（利用>定員）は負値のまま出す", () => {
+    expect(def.display(muni({ childcare: cc(1000, 800) }))).toBe("20.0%");
+    expect(def.display(muni({ childcare: cc(1000, 1050) }))).toBe("-5.0%");
+  });
+
+  it("metaDescription は1位の余裕率と基準時点を含む（実データ算出）", () => {
+    const desc = def.metaDescription!(muni({ pref: "saitama", name: "戸田市", childcare: cc(1000, 800) }));
+    expect(desc).toContain("20.0%");
+    expect(desc).toContain("2026年4月");
+    expect(desc).toContain("戸田市");
+  });
+});
+
 describe("population-most / population-density の metaDescription", () => {
   // 2026-08 GSC分析: 「{市} 人口」のような特定1市を探す検索でも表示されるため、
   // 都道府県別ページで全市区町村を掲載していることを明記する（rankings.ts 参照）。
@@ -194,6 +227,48 @@ describe("population-most / population-density の metaDescription", () => {
   it("top1 が null でもフォールバック文言を返す", () => {
     const def = getRankingBySlug("population-most")!;
     expect(def.metaDescription!(null)).toContain("国勢調査");
+  });
+});
+
+describe("population 系の seoTitleAnswer / prefSeoTitle", () => {
+  // 2026-08 GSC分析:「日本の市として人口が最も多いのはどこ」等の質問型クエリ
+  // （305imp/0click）に title で即答するため、1位自治体名の答えフレーズを title に足す。
+  it("population-most の seoTitleAnswer は1位の自治体名で答えを先出しする", () => {
+    const def = getRankingBySlug("population-most")!;
+    const top1 = muni({ pref: "kanagawa", name: "横浜市", population: 3770000 });
+    expect(def.seoTitleAnswer!(top1)).toBe("日本一は横浜市");
+  });
+
+  it("population-density の seoTitleAnswer は displayName を優先する", () => {
+    const def = getRankingBySlug("population-density")!;
+    const top1 = muni({ pref: "tokyo", name: "豊島区", displayName: "東京都豊島区", population: 300000, areaKm2: 13 });
+    expect(def.seoTitleAnswer!(top1)).toBe("日本一は東京都豊島区");
+  });
+
+  it("population-most の prefSeoTitle は連続語「人口ランキング」を含む", () => {
+    const def = getRankingBySlug("population-most")!;
+    expect(def.prefSeoTitle).toContain("人口ランキング");
+  });
+});
+
+describe("related 導線と将来人口の seoTitle", () => {
+  it("related.slug はすべて実在するランキングを指す", () => {
+    for (const r of RANKINGS) {
+      if (r.related) {
+        expect(getRankingBySlug(r.related.slug), `${r.slug} → ${r.related.slug}`).toBeTruthy();
+      }
+    }
+  });
+
+  it("現在の人口増減ランキングから2050年将来推計へ導線を張る", () => {
+    expect(getRankingBySlug("population-decline")!.related?.slug).toBe("future-population-decline");
+    expect(getRankingBySlug("population-growth")!.related?.slug).toBe("future-population-resilient");
+  });
+
+  it("future-population-resilient の seoTitle は連続語「人口ランキング」と「2050年」を含む", () => {
+    const t = getRankingBySlug("future-population-resilient")!.seoTitle!;
+    expect(t).toContain("人口ランキング");
+    expect(t).toContain("2050年");
   });
 });
 
@@ -342,5 +417,127 @@ describe("splitRankingTitle", () => {
 
   it("未知の語尾はフォールバックで全文を強調フレーズとして返す", () => {
     expect(splitRankingTitle("独自タイトル")).toEqual({ em: "独自タイトル", rest: "" });
+  });
+});
+
+describe("高齢化率ランキング", () => {
+  const ageStats = (elderly: number, total = 100_000, young = 10_000) => ({
+    young, elderly, total,
+    source: "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+    asOf: "2026-01-01",
+  });
+
+  it("aging-high は高齢化率の降順、住民登録なし（total=0）・未収録は除外", () => {
+    const def = getRankingBySlug("aging-high")!;
+    const list = [
+      muni({ code: "A", ageStats: ageStats(30_000) }),
+      muni({ code: "B", ageStats: ageStats(60_000) }),
+      muni({ code: "C", ageStats: { young: 0, elderly: 0, total: 0, source: "データなし（住民登録なし）", asOf: "-" } }),
+      muni({ code: "D" }), // 未収録
+    ];
+    expect(rankBy(def, list).map((m) => m.code)).toEqual(["B", "A"]);
+    expect(def.display(list[1])).toBe("60.0%");
+  });
+
+  it("aging-low は昇順、freshnessLabel は住基台帳の基準月", () => {
+    const def = getRankingBySlug("aging-low")!;
+    const list = [
+      muni({ code: "A", ageStats: ageStats(30_000) }),
+      muni({ code: "B", ageStats: ageStats(60_000) }),
+    ];
+    expect(rankBy(def, list).map((m) => m.code)).toEqual(["A", "B"]);
+    expect(def.freshnessLabel!(list[0])).toBe("2026年1月住民基本台帳");
+  });
+
+  it("metaDescription は1位の比率と基準時点を含む（実データ算出）", () => {
+    const def = getRankingBySlug("aging-high")!;
+    const top1 = muni({ pref: "gunma", name: "南牧村", ageStats: ageStats(68_100, 100_000) });
+    const desc = def.metaDescription!(top1);
+    expect(desc).toContain("68.1%");
+    expect(desc).toContain("2026年1月");
+    expect(def.metaDescription!(null)).toContain("住民基本台帳");
+  });
+});
+
+describe("財政力指数ランキング", () => {
+  const fiscal = (index: number, source = "総務省 地方公共団体の主要財政指標一覧") => ({
+    index, source, asOf: "2024年度",
+  });
+
+  it("fiscal-strong は指数の降順、特別区（都区財政調整）・センチネルは除外", () => {
+    const def = getRankingBySlug("fiscal-strong")!;
+    const list = [
+      muni({ code: "A", fiscal: fiscal(0.49) }),
+      muni({ code: "B", fiscal: fiscal(1.99) }),
+      muni({ code: "C", fiscal: fiscal(0.85, "総務省 地方公共団体の主要財政指標一覧（特別区・都区財政調整制度下の算定）") }),
+      muni({ code: "D", fiscal: fiscal(-1, "データなし（対象外）") }),
+      muni({ code: "E" }), // 未収録
+    ];
+    expect(rankBy(def, list).map((m) => m.code)).toEqual(["B", "A"]);
+    expect(def.display(list[1])).toBe("1.99");
+  });
+
+  it("fiscal-weak は昇順、freshnessLabel は年度+3か年平均", () => {
+    const def = getRankingBySlug("fiscal-weak")!;
+    const list = [muni({ code: "A", fiscal: fiscal(0.06) }), muni({ code: "B", fiscal: fiscal(0.49) })];
+    expect(rankBy(def, list).map((m) => m.code)).toEqual(["A", "B"]);
+    expect(def.freshnessLabel!(list[0])).toBe("2024年度（3か年平均）");
+  });
+
+  it("metaDescription は1位の指数と年度を含む（実データ算出）", () => {
+    const def = getRankingBySlug("fiscal-strong")!;
+    const top1 = muni({ pref: "aichi", name: "飛島村", fiscal: fiscal(1.99) });
+    const desc = def.metaDescription!(top1);
+    expect(desc).toContain("1.99");
+    expect(desc).toContain("2024年度");
+    expect(def.metaDescription!(null)).toContain("主要財政指標一覧");
+  });
+});
+
+describe("生活インフラ（駅・医療機関・保育施設）ランキング", () => {
+  const AMENITIES_ASOF = "駅 2025年度／保育 令和5年度／医療機関 2024年10月";
+  const amenities = (partial: Partial<NonNullable<Municipality["amenities"]>> = {}) => ({
+    stations: 10,
+    preschools: 100,
+    medicalFacilities: 500,
+    source: "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
+    asOf: AMENITIES_ASOF,
+    ...partial,
+  });
+
+  it("amenityAsOfPart は複合 asOf から指標ごとの時点を取り出す", () => {
+    expect(amenityAsOfPart(AMENITIES_ASOF, "駅")).toBe("2025年度");
+    expect(amenityAsOfPart(AMENITIES_ASOF, "保育")).toBe("令和5年度");
+    expect(amenityAsOfPart(AMENITIES_ASOF, "医療機関")).toBe("2024年10月");
+    // 未知の形式はそのまま返す（ラベルが空にならない）
+    expect(amenityAsOfPart("2025", "駅")).toBe("2025");
+  });
+
+  it("stations は駅数の降順、集計対象外・amenities なしは除外", () => {
+    const def = getRankingBySlug("stations")!;
+    const list = [
+      muni({ code: "A", amenities: amenities({ stations: 3 }) }),
+      muni({ code: "B", amenities: amenities({ stations: 40 }) }),
+      muni({ code: "C", amenities: amenities({ stations: 5, source: "対象外（北方領土）" }) }),
+      muni({ code: "D" }), // amenities なし → 除外
+    ];
+    expect(rankBy(def, list).map((m) => m.code)).toEqual(["B", "A"]);
+    expect(def.display(list[1])).toBe("40駅");
+  });
+
+  it("medical-facilities / preschools も同様に降順・件数表示", () => {
+    const medical = getRankingBySlug("medical-facilities")!;
+    const pre = getRankingBySlug("preschools")!;
+    const m = muni({ amenities: amenities({ medicalFacilities: 1796, preschools: 733 }) });
+    expect(medical.qualifies(m)).toBe(true);
+    expect(medical.display(m)).toBe("1,796件");
+    expect(pre.display(m)).toBe("733施設");
+  });
+
+  it("freshnessLabel は指標ごとの時点だけを使う（複合 asOf をそのまま出さない）", () => {
+    const m = muni({ amenities: amenities() });
+    expect(getRankingBySlug("stations")!.freshnessLabel!(m)).toBe("2025年度時点");
+    expect(getRankingBySlug("medical-facilities")!.freshnessLabel!(m)).toBe("2024年10月医療施設調査");
+    expect(getRankingBySlug("preschools")!.freshnessLabel!(m)).toBe("令和5年度時点");
   });
 });

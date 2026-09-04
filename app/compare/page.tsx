@@ -11,6 +11,7 @@ import { PREFS } from "@/lib/prefs";
 import type { NationalAverages } from "@/lib/compareMetrics";
 import CompareClient, { MAX_COMPARE } from "@/components/compare/CompareClient";
 import PageShell from "@/components/PageShell";
+import { ShareButton } from "@/components/ShareButton";
 
 // 自治体比較ページ。骨格（説明・プリセット・パンくず）は SSG の静的HTML、
 // 選択状態は ?codes= のクエリとしてクライアント側で扱う（組合せの静的生成はしない）。
@@ -65,6 +66,8 @@ export default async function ComparePage() {
     vacancyRate: areaStats.vacancyRate.national,
     density: areaStats.density.national,
     foreignRatio: nationalForeignAvg(foreignStats),
+    agingRate: areaStats.agingRate.national,
+    fiscalIndex: areaStats.fiscalIndex.national,
   };
 
   // 県平均（選択自治体が同一県のときだけクライアント側で切替表示に使う）。
@@ -80,6 +83,8 @@ export default async function ComparePage() {
       vacancyRate: areaStats.vacancyRate.byPref.get(p.slug) ?? null,
       density: areaStats.density.byPref.get(p.slug) ?? null,
       foreignRatio: foreignByPref.get(p.slug) ?? null,
+      agingRate: areaStats.agingRate.byPref.get(p.slug) ?? null,
+      fiscalIndex: areaStats.fiscalIndex.byPref.get(p.slug) ?? null,
     };
   }
 
@@ -105,6 +110,14 @@ export default async function ComparePage() {
         <p className="cmp-lead">
           気になる市区町村を最大{MAX_COMPARE}つ選ぶと、人口・住まい・子育て・生活インフラ・災害リスクの主要指標を横並びで確認できます。数値はすべて政府統計・国土数値情報の実データで、データのない項目は「データなし／対象外」と表示します。
         </p>
+        {/* path を渡さず現在のURL（?codes= の選択状態込み）を共有する */}
+        <ShareButton
+          className="cmp-share"
+          title={`自治体を比較｜${SITE.name}`}
+          contentType="compare"
+          itemId="compare"
+          label="この比較を共有"
+        />
       </header>
 
       <Suspense fallback={<p className="cmp-empty">読み込み中…</p>}>

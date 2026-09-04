@@ -26,7 +26,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -87,6 +87,29 @@
       "elderly2050": 46028,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 30930,
+      "capacityAge0": 2497,
+      "capacityAge12": 10350,
+      "enrolled": 27098,
+      "hiddenWaitlist": 579,
+      "enrolledAge0": 1120,
+      "enrolledAge12": 9504,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（広島市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 14001,
+      "elderly": 34825,
+      "total": 136992,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.77,
+      "source": "総務省 地方公共団体の主要財政指標一覧（広島市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -116,7 +139,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -177,6 +200,29 @@
       "elderly2050": 36207,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 30930,
+      "capacityAge0": 2497,
+      "capacityAge12": 10350,
+      "enrolled": 27098,
+      "hiddenWaitlist": 579,
+      "enrolledAge0": 1120,
+      "enrolledAge12": 9504,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（広島市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 14355,
+      "elderly": 32278,
+      "total": 116545,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.77,
+      "source": "総務省 地方公共団体の主要財政指標一覧（広島市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -206,7 +252,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -267,6 +313,29 @@
       "elderly2050": 44574,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 30930,
+      "capacityAge0": 2497,
+      "capacityAge12": 10350,
+      "enrolled": 27098,
+      "hiddenWaitlist": 579,
+      "enrolledAge0": 1120,
+      "enrolledAge12": 9504,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（広島市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 16997,
+      "elderly": 35686,
+      "total": 139821,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.77,
+      "source": "総務省 地方公共団体の主要財政指標一覧（広島市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -296,7 +365,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -357,6 +426,29 @@
       "elderly2050": 57887,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 30930,
+      "capacityAge0": 2497,
+      "capacityAge12": 10350,
+      "enrolled": 27098,
+      "hiddenWaitlist": 579,
+      "enrolledAge0": 1120,
+      "enrolledAge12": 9504,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（広島市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 21312,
+      "elderly": 45859,
+      "total": 184572,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.77,
+      "source": "総務省 地方公共団体の主要財政指標一覧（広島市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -386,7 +478,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -447,6 +539,29 @@
       "elderly2050": 74079,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 30930,
+      "capacityAge0": 2497,
+      "capacityAge12": 10350,
+      "enrolled": 27098,
+      "hiddenWaitlist": 579,
+      "enrolledAge0": 1120,
+      "enrolledAge12": 9504,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（広島市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 34109,
+      "elderly": 53803,
+      "total": 241697,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.77,
+      "source": "総務省 地方公共団体の主要財政指標一覧（広島市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -476,7 +591,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -537,6 +652,29 @@
       "elderly2050": 42997,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 30930,
+      "capacityAge0": 2497,
+      "capacityAge12": 10350,
+      "enrolled": 27098,
+      "hiddenWaitlist": 579,
+      "enrolledAge0": 1120,
+      "enrolledAge12": 9504,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（広島市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 13810,
+      "elderly": 48739,
+      "total": 135300,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.77,
+      "source": "総務省 地方公共団体の主要財政指標一覧（広島市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -566,7 +704,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -627,6 +765,29 @@
       "elderly2050": 22808,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 30930,
+      "capacityAge0": 2497,
+      "capacityAge12": 10350,
+      "enrolled": 27098,
+      "hiddenWaitlist": 579,
+      "enrolledAge0": 1120,
+      "enrolledAge12": 9504,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（広島市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 8295,
+      "elderly": 20915,
+      "total": 74440,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.77,
+      "source": "総務省 地方公共団体の主要財政指標一覧（広島市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -656,7 +817,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -717,6 +878,29 @@
       "elderly2050": 45296,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 30930,
+      "capacityAge0": 2497,
+      "capacityAge12": 10350,
+      "enrolled": 27098,
+      "hiddenWaitlist": 579,
+      "enrolledAge0": 1120,
+      "enrolledAge12": 9504,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（広島市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 18497,
+      "elderly": 39764,
+      "total": 138544,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.77,
+      "source": "総務省 地方公共団体の主要財政指標一覧（広島市全体の値）",
+      "asOf": "2024年度"
     }
   }
 ]

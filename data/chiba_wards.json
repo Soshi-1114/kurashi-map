@@ -23,7 +23,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -87,6 +87,29 @@
       "elderly2050": 69225,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 21805,
+      "capacityAge0": 2009,
+      "capacityAge12": 7024,
+      "enrolled": 19762,
+      "hiddenWaitlist": 650,
+      "enrolledAge0": 1135,
+      "enrolledAge12": 7206,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（千葉市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 22679,
+      "elderly": 48624,
+      "total": 220144,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.88,
+      "source": "総務省 地方公共団体の主要財政指標一覧（千葉市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -113,7 +136,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -177,6 +200,29 @@
       "elderly2050": 55974,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 21805,
+      "capacityAge0": 2009,
+      "capacityAge12": 7024,
+      "enrolled": 19762,
+      "hiddenWaitlist": 650,
+      "enrolledAge0": 1135,
+      "enrolledAge12": 7206,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（千葉市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 17388,
+      "elderly": 48622,
+      "total": 177274,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.88,
+      "source": "総務省 地方公共団体の主要財政指標一覧（千葉市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -203,7 +249,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -267,6 +313,29 @@
       "elderly2050": 54781,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 21805,
+      "capacityAge0": 2009,
+      "capacityAge12": 7024,
+      "enrolled": 19762,
+      "hiddenWaitlist": 650,
+      "enrolledAge0": 1135,
+      "enrolledAge12": 7206,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（千葉市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 16450,
+      "elderly": 43166,
+      "total": 158325,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.88,
+      "source": "総務省 地方公共団体の主要財政指標一覧（千葉市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -293,7 +362,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -357,6 +426,29 @@
       "elderly2050": 49788,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 21805,
+      "capacityAge0": 2009,
+      "capacityAge12": 7024,
+      "enrolled": 19762,
+      "hiddenWaitlist": 650,
+      "enrolledAge0": 1135,
+      "enrolledAge12": 7206,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（千葉市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 14300,
+      "elderly": 45003,
+      "total": 146463,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.88,
+      "source": "総務省 地方公共団体の主要財政指標一覧（千葉市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -383,7 +475,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -447,6 +539,29 @@
       "elderly2050": 45626,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 21805,
+      "capacityAge0": 2009,
+      "capacityAge12": 7024,
+      "enrolled": 19762,
+      "hiddenWaitlist": 650,
+      "enrolledAge0": 1135,
+      "enrolledAge12": 7206,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（千葉市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 16182,
+      "elderly": 32435,
+      "total": 128662,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.88,
+      "source": "総務省 地方公共団体の主要財政指標一覧（千葉市全体の値）",
+      "asOf": "2024年度"
     }
   },
   {
@@ -473,7 +588,7 @@
       "value": 0,
       "unit": "人",
       "source": "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-      "asOf": "2025-04-01",
+      "asOf": "2026-04-01",
       "isEstimated": false
     },
     "hazard": {
@@ -537,6 +652,29 @@
       "elderly2050": 47915,
       "source": "国立社会保障・人口問題研究所 日本の地域別将来推計人口（令和5年推計）",
       "asOf": "2023"
+    },
+    "childcare": {
+      "capacity": 21805,
+      "capacityAge0": 2009,
+      "capacityAge12": 7024,
+      "enrolled": 19762,
+      "hiddenWaitlist": 650,
+      "enrolledAge0": 1135,
+      "enrolledAge12": 7206,
+      "source": "こども家庭庁 保育所等関連状況取りまとめ（定員・申込者の状況）（千葉市全体の集計）",
+      "asOf": "2026-04-01"
+    },
+    "ageStats": {
+      "young": 17435,
+      "elderly": 41232,
+      "total": 155737,
+      "source": "総務省 住民基本台帳に基づく人口・世帯数調査（総計・外国人住民含む）",
+      "asOf": "2026-01-01"
+    },
+    "fiscal": {
+      "index": 0.88,
+      "source": "総務省 地方公共団体の主要財政指標一覧（千葉市全体の値）",
+      "asOf": "2024年度"
     }
   }
 ]

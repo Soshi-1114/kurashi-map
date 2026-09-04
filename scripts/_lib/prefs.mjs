@@ -342,6 +342,11 @@ export const PREFS = {
   },
 };
 
+// 正規の47都道府県名の集合。JISコード列を持たない Excel 出典（CFA 等）で
+// 「県名列がこの集合にある行だけ採用」する検証に使う（各スクリプトでの
+// ハードコード複製を避け、PREFS から導出する単一ソース）。
+export const PREF_NAMES = new Set(Object.values(PREFS).map((p) => p.nameJa));
+
 export function getPref(slug) {
   const p = PREFS[slug];
   if (!p) {
