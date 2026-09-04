@@ -20,7 +20,8 @@ import { fileURLToPath } from "node:url";
 //   - tiles.openfreemap.org … 基盤地図(positron)の style/タイル(pbf)/スプライト/グリフ
 //   - *.gsi.go.jp           … 淡色地図(cyberjapandata)・ハザードタイル(disaportaldata)
 //   - *.googletagmanager.com / *.google-analytics.com … GA4(gtag.js / collect)
-// blob: は MapLibre GL が WebWorker を blob URL で生成するために worker-src で必須。
+// worker-src: MapLibre GL v6 は WebWorker を同一オリジンの実URL（/vendor/maplibre/、
+// scripts/copy-maplibre-worker.mjs が配置）でロードするため 'self' が必須。blob: は予備。
 const csp = [
   "default-src 'self'",
   "base-uri 'self'",
@@ -32,7 +33,7 @@ const csp = [
   "img-src 'self' data: blob: https://tiles.openfreemap.org https://*.gsi.go.jp https://www.googletagmanager.com https://www.google-analytics.com",
   "connect-src 'self' https://tiles.openfreemap.org https://*.gsi.go.jp https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com",
   "font-src 'self' data:",
-  "worker-src blob:",
+  "worker-src 'self' blob:",
   "child-src blob:",
   "manifest-src 'self'",
   "upgrade-insecure-requests",
