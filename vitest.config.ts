@@ -7,7 +7,9 @@ export default defineConfig({
     alias: { "@": fileURLToPath(new URL(".", import.meta.url)) },
   },
   // .tsx を React 17+ の自動 JSX ランタイムで変換（テストで React を明示 import しない）。
-  esbuild: { jsx: "automatic" },
+  // vitest 4 (rolldown-vite) は esbuild オプションを無視するため、JSX 変換は oxc に指定する
+  // （Next の tsconfig は "jsx": "preserve" のままなので、ここで指定しないと .tsx が未変換になる）
+  oxc: { jsx: { runtime: "automatic" } },
   test: {
     // lib のロジックテストは node 環境（既定）。tests/components/ の React
     // コンポーネントテストは各ファイル冒頭の `// @vitest-environment jsdom`
