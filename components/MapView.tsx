@@ -8,6 +8,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type {
   Map as MapLibreMap,
   MapMouseEvent,
+  MapLayerMouseEvent,
   GeoJSONSource,
   MapGeoJSONFeature,
   DataDrivenPropertyValueSpecification,
@@ -216,7 +217,7 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
       padding: flyPadding(typeof window !== "undefined" && window.innerWidth < 768),
       duration: 800,
     });
-    const { default: maplibregl } = await import("maplibre-gl");
+    const maplibregl = await import("maplibre-gl");
     stationMarkerRef.current?.marker.remove();
     stationMarkerRef.current = {
       marker: new maplibregl.Marker({ color: "#1d4ed8" }).setLngLat([station.lng, station.lat]).addTo(map),
@@ -242,7 +243,10 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
       // 発火しないため、それを待たず自前の同一オリジンファイルを並行して取得開始する
       // （直列ウォーターフォールを避け、CDN 往復と自前fetchを同時に走らせる）。
       const prefGeoPromise = fetchGeoJsonOrEmpty("/prefectures.geojson");
-      const { default: maplibregl } = await import("maplibre-gl");
+      const maplibregl = await import("maplibre-gl");
+      // v6 の WebWorker は実URLの別ファイル（動的解決）で、webpack が同梱できない。
+      // postinstall（scripts/copy-maplibre-worker.mjs）が public/ へ複製したものを指す。
+      maplibregl.setWorkerUrl("/vendor/maplibre/maplibre-gl-worker.mjs");
       // 動的 import 中にアンマウントされた / 既にマップが立っていれば中断
       if (disposed || !containerRef.current || mapRef.current) return;
 
@@ -351,7 +355,7 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
         map.on("mouseleave", "shelter-points", () => { map.getCanvas().style.cursor = ""; });
         // ツールチップはスクリーン座標固定なので、パン/ズーム開始で閉じて取り残しを防ぐ。
         map.on("movestart", () => setTooltip(null));
-        map.on("click", (e) => {
+        map.on("click", (e: MapMouseEvent) => {
           // クリック/タップはまずツールチップを閉じ、避難場所ヒット時だけ出し直す
           // （タッチにはホバー消去がないため、明示的に消さないと出しっぱなしになる）。
           setTooltip(null);
@@ -383,7 +387,7 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
 
         // 都道府県クリック → その県内まで fly-in（pref outline がまだ見える低〜中ズーム時のみ）
         let hoveredPrefRef = "";
-        map.on("click", "pref-fill", (e) => {
+        map.on("click", "pref-fill", (e: MapLayerMouseEvent) => {
           if (map.getZoom() >= PREF_CLICK_MAX_ZOOM) return; // 高ズームでは pref クリックを無視
           const f = e.features?.[0];
           if (!f) return;
@@ -393,7 +397,7 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
           if (!bbox) return;
           flyToPrefBbox(map, bbox, 900);
         });
-        map.on("mousemove", "pref-fill", (e) => {
+        map.on("mousemove", "pref-fill", (e: MapLayerMouseEvent) => {
           if (map.getZoom() >= PREF_CLICK_MAX_ZOOM) return;
           const f = e.features?.[0];
           if (!f) return;
@@ -689,8 +693,8 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
     for (const id of ids) {
       map.setPaintProperty(id, "text-opacity-transition", { duration: 300, delay: 0 });
       map.setPaintProperty(id, "icon-opacity-transition", { duration: 300, delay: 0 });
-      map.setPaintProperty(id, "text-opacity", dim ? 0.35 : (text.get(id) ?? 1));
-      map.setPaintProperty(id, "icon-opacity", dim ? 0.3 : (icon.get(id) ?? 1));
+      map.setPaintProperty(id, "text-opacity", dim ? 0.35 : ((text.get(id) ?? 1) as DataDrivenPropertyValueSpecification<number>));
+      map.setPaintProperty(id, "icon-opacity", dim ? 0.3 : ((icon.get(id) ?? 1) as DataDrivenPropertyValueSpecification<number>));
     }
   }, [selectedCode, mapReady]);
 

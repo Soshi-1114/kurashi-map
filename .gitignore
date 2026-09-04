@@ -31,3 +31,6 @@ screenshots/
 # GSC分析ツールのサービスアカウントキー・出力レポート
 gsc-service-account*.json
 reports/gsc/
+
+# maplibre-gl v6 の worker 複製（postinstall が node_modules から生成）
+public/vendor/
