@@ -26,3 +26,17 @@ export const MAP_HUBS: ReadonlyArray<NavLink & { sitemapPriority: number }> = [
 export function mapHubByHref(href: string | undefined): NavLink | null {
   return MAP_HUBS.find((h) => h.href === href) ?? null;
 }
+
+/**
+ * 比較ページ（/compare）へ送るURL。
+ *
+ * ランキングは検索流入の9割を占める一方、比較・診断といった「道具」のページには
+ * ほとんど回遊していない（2026-09 実測: /compare 80PV・/shindan 13PV）。
+ * ランキングから道具へ渡す導線をこのヘルパーに集約する。
+ *
+ * from は着地側（CompareClient）が GA4 の compare_start イベントの source として
+ * 送る。リンク自体はサーバーコンポーネントのまま置けるよう、素の文字列を返す。
+ */
+export function compareHref(codes: string[], from: string): string {
+  return `/compare?codes=${codes.join(",")}&from=${encodeURIComponent(from)}`;
+}

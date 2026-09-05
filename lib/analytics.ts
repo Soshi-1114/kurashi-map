@@ -56,6 +56,20 @@ export function trackShindanRun(params: { weights: string; regions: string; resu
   });
 }
 
+/**
+ * 比較ページへの着地（ランキング等からの送客）。source で導線の位置を区別する。
+ * 発火はランキング側ではなく /compare のマウント時に1回（?from= を見る）:
+ * ランキング表の各行をクライアントコンポーネントにすると100件ぶんの hydration が
+ * 増えるため、リンクは素のままにして着地側で1回だけ計測する。
+ */
+export function trackCompareStart(params: { codes: string[]; source: string }): void {
+  track("compare_start", {
+    municipality_codes: params.codes.join(","),
+    count: params.codes.length,
+    source: params.source,
+  });
+}
+
 /** 街診断の結果から自治体詳細への遷移。 */
 export function trackShindanResultClick(code: string, position: number): void {
   track("shindan_result_click", { municipality_code: code, position });

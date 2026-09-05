@@ -3,14 +3,14 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import {
-  Trophy, BarChart3, Database, ArrowLeft, Map as MapIcon, ShieldCheck,
+  Trophy, BarChart3, Database, ArrowLeft, Map as MapIcon, ShieldCheck, Scale,
 } from "lucide-react";
 import { listMunicipalities } from "@/lib/metrics";
 import { RANKINGS, getRankingBySlug, rankBy, medianOf, appendFreshness, type RankingDef } from "@/lib/rankings";
 import { getRankPositions, getNationalMedians } from "@/lib/rankingStats";
 import { PREFS, getPrefBySlug } from "@/lib/prefs";
 import { SITE, absoluteUrl } from "@/lib/site";
-import { mapHubByHref } from "@/lib/siteNav";
+import { mapHubByHref, compareHref } from "@/lib/siteNav";
 import { mapHrefForPref } from "@/lib/mapDeepLink";
 import { getForeignStats } from "@/lib/foreignStats";
 import { countWaitlistDisclosed } from "@/lib/waitlist";
@@ -150,6 +150,9 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
   const ladder = ranked.slice(3, TOP_CARDS);
   const rest = ranked.slice(TOP_CARDS);
 
+  // 「上位N件を比較する」に渡すコード（比較ページの上限 MAX_COMPARE=3 に合わせる）。
+  const topForCompare = isList ? [] : podium.map((m) => m.code);
+
   // ラダー（4位〜10位）とエクスパンド内（11位〜）で同一の行マークアップを共有する。
   // 全国版のラダーは県名の副行が付くため共通化せず、このページ内だけの重複を畳む。
   const ladderOl = (items: Municipality[], start: number) => (
@@ -260,6 +263,13 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
           <Link href={`/area/${pref.slug}`} className="rk-action rk-action-ghost">
             <MapIcon size={15} aria-hidden="true" />{prefName}の全自治体
           </Link>
+          {/* 県内の上位を1クリックで比較ページへ（ランキング＝情報意図から、
+              比較＝選択意図の道具へ渡す導線）。一覧型は順位ではないため出さない。 */}
+          {topForCompare.length >= 2 && (
+            <Link href={compareHref(topForCompare, "pref_ranking_top3")} className="rk-action rk-action-ghost">
+              <Scale size={15} aria-hidden="true" />上位{topForCompare.length}件を比較する
+            </Link>
+          )}
           {mapHub && (
             <Link href={mapHrefForPref(pref.slug, mapHub.href)} className="rk-action rk-action-ghost">
               <MapIcon size={15} aria-hidden="true" />{mapHub.label}

@@ -6,7 +6,7 @@
 // から取得する（トップ地図の詳細パネルと同じ2段階配信方針）。
 // 表示は2構造: PC=指標×自治体のテーブル、SP=指標単位の縦型リスト（CSSで切替）。
 // 単一テーブルの display 上書きはテーブルセマンティクスを壊すため採らない。
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import type { Municipality, MuniSummary } from "@/lib/types";
@@ -15,6 +15,7 @@ import { useMuniCombobox } from "@/lib/useMuniCombobox";
 import { muniContextLabel } from "@/lib/muniLabel";
 import { barWidthPct } from "@/lib/format";
 import { getPrefBySlug } from "@/lib/prefs";
+import { trackCompareStart } from "@/lib/analytics";
 
 export const MAX_COMPARE = 3;
 
@@ -67,6 +68,19 @@ export default function CompareClient({
   const byCode = useMemo(() => new Map(munis.map((m) => [m.code, m])), [munis]);
   const known = useMemo(() => new Set(munis.map((m) => m.code)), [munis]);
   const codes = useMemo(() => parseCodes(searchParams.get("codes"), known), [searchParams, known]);
+
+  // 他ページからの送客を1回だけ計測する（?from=ranking_row 等）。
+  // ランキング表の各行をクライアント化すると100件ぶん hydration が増えるため、
+  // リンクは素のままにして着地側のここで数える。codes 変更（router.replace）では
+  // 再発火させたくないので ref でガードする。
+  const fromFired = useRef(false);
+  useEffect(() => {
+    if (fromFired.current) return;
+    const from = searchParams.get("from");
+    if (!from) return;
+    fromFired.current = true;
+    trackCompareStart({ codes, source: from });
+  }, [searchParams, codes]);
 
   // 取得済みフルデータ（code → Municipality）。一度取得したものは保持する。
   const [detail, setDetail] = useState<Record<string, DetailState>>({});

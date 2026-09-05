@@ -3,6 +3,7 @@ import type { Municipality } from "@/lib/types";
 import { listAllAcrossPrefs } from "@/lib/metrics";
 import { PREFS } from "@/lib/prefs";
 import { RANKINGS, muniLevelOnly } from "@/lib/rankings";
+import { PREF_RANKINGS } from "@/lib/prefRankings";
 import {
   TEMPLATE_REVISED_AT,
   latestLastModified,
@@ -106,6 +107,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     ...RANKINGS.map((r) => ({
       url: absoluteUrl(`/ranking/${r.slug}`),
+      lastModified: siteLatest,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })),
+    // 都道府県ランキング（47都道府県を1本に並べたページ。実数合算で県の値を出す指標のみ）。
+    // 全国版と同じく全データ由来なのでサイト最新、優先度も全国版と同格に置く。
+    ...PREF_RANKINGS.map((r) => ({
+      url: absoluteUrl(`/ranking/${r.slug}/prefecture`),
       lastModified: siteLatest,
       changeFrequency: "monthly" as const,
       priority: 0.8,

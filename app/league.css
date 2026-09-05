@@ -415,6 +415,28 @@
 /* ---- 統計表（globals .pref-table を継承しつつラップを共通化） ---- */
 .rk-table-wrap { margin-top: 4px; }
 
+/* 順位表の行から比較ページへ送る小リンク。自治体名（.pref-table-link）より
+   目立たせないため、色は muted・枠線のみのチップにする。 */
+.rk-row-compare {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+  font-size: var(--text-2xs);
+  font-weight: 700;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 2px 7px;
+}
+.rk-row-compare:hover,
+.rk-row-compare:focus-visible {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  text-decoration: none;
+}
+
 /* ============================================================================
    FAQ（native details アコーディオン）/ 出典（折りたたみ）
    ========================================================================== */
