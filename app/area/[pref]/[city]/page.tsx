@@ -707,6 +707,9 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
             link={{ href: mapHrefForCode(m.code, "/map/hazard"), label: "ハザードマップを地図で見る" }}
           >
             <DisasterCard m={m} />
+            {/* 火災保険（水災補償）。浸水想定を見た直後というハザード文脈一致の導線
+                （env 未設定なら kasai が null で導線ごと出ない） */}
+            {kasai && <KasaiLink link={kasai} municipalityCode={m.code} placement="area" />}
           </MetricCard>
 
           {/* 外国人比率 */}
@@ -860,6 +863,11 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
                     </span>
                   </p>
                   <SourceLine source={fp.source} asOf={fp.asOf} estimated />
+                  {/* 人口減少の推計を見た直後の「地域を応援する」文脈導線（最下部の広告連結から移設）。
+                      env 未設定・ふるなび未掲載自治体なら furusato が null で出ない */}
+                  {furusato && (
+                    <FurusatoLink link={furusato} targetName={donee.name} municipalityCode={m.code} placement="future-view" />
+                  )}
                 </>
               ) : (
                 <NoData
@@ -1019,12 +1027,6 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
           {support && (
             <SupportBanner url={support} municipalityCode={m.code} municipalityName={m.name} />
           )}
-          {furusato && (
-            <FurusatoLink link={furusato} targetName={donee.name} municipalityCode={m.code} />
-          )}
-          {/* 火災保険（水災補償）。ハザード情報を持つサイトならではの文脈一致導線。
-              env 未設定なら kasai が null で導線ごと出ない */}
-          {kasai && <KasaiLink link={kasai} municipalityCode={m.code} placement="area" />}
         </section>
       </Reveal>
       {/* FAQ（Accordion・デフォルト閉じる） */}
