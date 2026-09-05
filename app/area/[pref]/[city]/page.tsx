@@ -295,8 +295,8 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
     { id: "rent", label: "環境", only: "pc" },
     { id: "rent", label: "家賃", only: "sp" },
     { id: "kids", label: "子育て・生活環境", only: "sp" },
-    { id: "hazard", label: "災害・外国人比率", only: "pc" },
-    { id: "hazard", label: "災害リスク", only: "sp" },
+    // 災害リスクは全幅カード化（外国人比率とは別の行）に伴い、PC/SP ともラベルを分離
+    { id: "hazard", label: "災害リスク" },
     { id: "foreign", label: "外国人比率", only: "sp" },
     { id: "fiscal", label: "財政" },
     { id: "future-pop", label: "将来人口" },
@@ -698,19 +698,23 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
 
           {/* 災害リスク。リンク先の /map/hazard は洪水・土砂の区域を初期点灯した地図ハブで、
               当該自治体へフォーカスして開く（区域タイルは GSI 全国配信のため、
-              集計対象外の自治体でも地図では見られる）。 */}
-          <MetricCard
-            id="hazard"
-            icon={ShieldAlert}
-            tone="ad-tone-hazard"
-            title="災害リスク"
-            link={{ href: mapHrefForCode(m.code, "/map/hazard"), label: "ハザードマップを地図で見る" }}
-          >
-            <DisasterCard m={m} />
-            {/* 火災保険（水災補償）。浸水想定を見た直後というハザード文脈一致の導線
-                （env 未設定なら kasai が null で導線ごと出ない） */}
-            {kasai && <KasaiLink link={kasai} municipalityCode={m.code} placement="area" />}
-          </MetricCard>
+              集計対象外の自治体でも地図では見られる）。
+              情報量が多いカードのため全幅（ad-span-2）にする。これにより次の行で
+              外国人比率と財政力指数が横並びになる（薄いカード同士のペア）。 */}
+          <div className="ad-span-2">
+            <MetricCard
+              id="hazard"
+              icon={ShieldAlert}
+              tone="ad-tone-hazard"
+              title="災害リスク"
+              link={{ href: mapHrefForCode(m.code, "/map/hazard"), label: "ハザードマップを地図で見る" }}
+            >
+              <DisasterCard m={m} />
+              {/* 火災保険（水災補償）。浸水想定を見た直後というハザード文脈一致の導線
+                  （env 未設定なら kasai が null で導線ごと出ない） */}
+              {kasai && <KasaiLink link={kasai} municipalityCode={m.code} placement="area" />}
+            </MetricCard>
+          </div>
 
           {/* 外国人比率 */}
           <MetricCard
