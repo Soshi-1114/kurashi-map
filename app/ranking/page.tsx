@@ -1,9 +1,10 @@
 import "../league.css";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { Trophy, ArrowUpRight, Wallet, Home, JapaneseYen, Baby, Users, Globe2, ShieldCheck, TrendingUp, TrendingDown, Landmark } from "lucide-react";
+import { Trophy, ArrowUpRight, Wallet, Home, JapaneseYen, Baby, Users, Globe2, ShieldCheck, TrendingUp, TrendingDown, Landmark, MapPin } from "lucide-react";
 import { listAllAcrossPrefs } from "@/lib/metrics";
 import { RANKINGS, muniLevelOnly, rankBy, type RankingDef } from "@/lib/rankings";
+import { PREF_RANKINGS, buildPrefRankingRows } from "@/lib/prefRankings";
 import { SITE, prefNameOf, absoluteUrl } from "@/lib/site";
 import { RankBadge } from "@/components/RankBadge";
 import PageShell from "@/components/PageShell";
@@ -54,12 +55,16 @@ function visualFor(slug: string) {
 }
 
 export default async function RankingIndexPage() {
-  const munis = muniLevelOnly(await listAllAcrossPrefs());
+  const all = await listAllAcrossPrefs();
+  const munis = muniLevelOnly(all);
   // 各ランキングの1位を添えて、一覧をリッチに（クロール用の内部リンクも厚くなる）
   const cards: { def: RankingDef; top1: ReturnType<typeof rankBy>[number] | null }[] = RANKINGS.map((def) => {
     const top1 = rankBy(def, munis, 1)[0] ?? null;
     return { def, top1 };
   });
+  // 都道府県ランキング（47都道府県を並べる別ページ型）。ここが唯一のハブなので、
+  // 一覧に載せないと新規URLの入口が各指標のヒーローCTA1本だけになってしまう。
+  const prefCards = PREF_RANKINGS.map((def) => ({ def, top1: buildPrefRankingRows(def, all)[0] ?? null }));
 
   const ldJson = {
     "@context": "https://schema.org",
@@ -74,13 +79,21 @@ export default async function RankingIndexPage() {
       {
         "@type": "ItemList",
         name: "住みやすさ・家賃ランキング一覧",
-        numberOfItems: RANKINGS.length,
-        itemListElement: RANKINGS.map((r, i) => ({
-          "@type": "ListItem",
-          position: i + 1,
-          name: r.title,
-          url: absoluteUrl(`/ranking/${r.slug}`),
-        })),
+        numberOfItems: RANKINGS.length + PREF_RANKINGS.length,
+        itemListElement: [
+          ...RANKINGS.map((r, i) => ({
+            "@type": "ListItem",
+            position: i + 1,
+            name: r.title,
+            url: absoluteUrl(`/ranking/${r.slug}`),
+          })),
+          ...PREF_RANKINGS.map((r, i) => ({
+            "@type": "ListItem",
+            position: RANKINGS.length + i + 1,
+            name: r.title,
+            url: absoluteUrl(`/ranking/${r.slug}/prefecture`),
+          })),
+        ],
       },
     ],
   };
@@ -103,6 +116,7 @@ export default async function RankingIndexPage() {
         </p>
         <ul className="rk-hero-meta">
           <li className="rk-meta-pill"><Trophy size={13} aria-hidden="true" /><b>{RANKINGS.length}</b> 種類の指標</li>
+          <li className="rk-meta-pill"><MapPin size={13} aria-hidden="true" />都道府県版 <b>{PREF_RANKINGS.length}</b> 種類</li>
           <li className="rk-meta-pill"><ShieldCheck size={13} aria-hidden="true" />推計値なし・出典明記</li>
         </ul>
       </header>
@@ -142,6 +156,44 @@ export default async function RankingIndexPage() {
                           <small>{prefNameOf(top1.pref)}</small>
                         </span>
                         <span className="rk-champ-value">{def.display(top1)}</span>
+                      </span>
+                    </div>
+                  )}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+
+      <section className="rk-section">
+        <div className="rk-section-head">
+          <span className="rk-section-icon"><MapPin size={20} aria-hidden="true" /></span>
+          <div className="rk-section-heading">
+            <h2 className="rk-h2">都道府県で比べる</h2>
+            <p className="rk-section-sub">
+              市区町村ではなく、47都道府県を並べたランキングです。県の値は公表値、または県内市区町村の実数を合算して求めています。
+            </p>
+          </div>
+        </div>
+
+        <ul className="rk-champ-grid">
+          {prefCards.map(({ def, top1 }) => {
+            const { Icon, tone } = visualFor(def.slug);
+            return (
+              <li key={def.slug}>
+                <Link href={`/ranking/${def.slug}/prefecture`} className="rk-champ">
+                  <div className="rk-champ-head">
+                    <span className={`rk-champ-icon ${tone}`}><Icon size={20} aria-hidden="true" /></span>
+                    <span className="rk-champ-title">{def.title}</span>
+                    <ArrowUpRight size={18} className="rk-champ-arrow" aria-hidden="true" />
+                  </div>
+                  {top1 && (
+                    <div className="rk-champ-winner">
+                      <RankBadge className="rk-champ-medal" isList={false} rank={1} rankAriaLabel="1位" />
+                      <span className="rk-champ-winner-body">
+                        <span className="rk-champ-town">{top1.prefName}</span>
+                        <span className="rk-champ-value">{def.display(top1.value)}</span>
                       </span>
                     </div>
                   )}
