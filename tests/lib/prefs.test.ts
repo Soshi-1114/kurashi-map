@@ -54,6 +54,15 @@ describe("getPrefBySlug", () => {
   });
 });
 
+// /ranking/{metric}/prefecture は静的セグメント。Next は静的 > 動的で解決するため、
+// PREFS に "prefecture" という slug が入ると /ranking/{metric}/prefecture がその県の
+// ページとして到達不能になる。ビルドも実行時も落ちない静かな壊れ方なのでテストで止める。
+describe("予約済みスラッグ", () => {
+  it('PREFS に "prefecture" は含まれない（都道府県ランキングのURLと衝突するため）', () => {
+    expect(PREFS.some((p) => p.slug === "prefecture")).toBe(false);
+  });
+});
+
 describe("getPrefByCode", () => {
   it("5桁コードの先頭2桁で引く", () => {
     expect(getPrefByCode("11203")?.slug).toBe("saitama");

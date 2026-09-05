@@ -244,6 +244,6 @@ export function livabilityBands(munis: Municipality[], maxBands = 3): Livability
     .slice(0, maxBands)
     .map(([score, list]) => ({
       score,
-      munis: list.slice().sort((a, b) => a.code.localeCompare(b.code)),
+      munis: list.sort((a, b) => a.code.localeCompare(b.code)),
     }));
 }

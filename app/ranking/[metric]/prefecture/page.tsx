@@ -17,14 +17,9 @@ import {
 } from "lucide-react";
 import { listAllAcrossPrefs } from "@/lib/metrics";
 import { getRankingBySlug } from "@/lib/rankings";
-import {
-  PREF_RANKINGS,
-  getPrefRankingBySlug,
-  buildPrefRankingRows,
-  type PrefRankingDef,
-  type PrefRankingRow,
-} from "@/lib/prefRankings";
+import { PREF_RANKINGS, getPrefRankingBySlug, getPrefRankingRows } from "@/lib/prefRankings";
 import { SITE, absoluteUrl } from "@/lib/site";
+import { shindanHref } from "@/lib/siteNav";
 import RankFaq from "@/components/RankFaq";
 import RankSources, { RANKING_SOURCES_TEXT } from "@/components/RankSources";
 import { RankBadge } from "@/components/RankBadge";
@@ -38,15 +33,11 @@ export function generateStaticParams() {
   return PREF_RANKINGS.map((r) => ({ metric: r.slug }));
 }
 
-async function rowsFor(def: PrefRankingDef): Promise<PrefRankingRow[]> {
-  return buildPrefRankingRows(def, await listAllAcrossPrefs());
-}
-
 export async function generateMetadata(props: { params: Promise<Params> }): Promise<Metadata> {
   const params = await props.params;
   const def = getPrefRankingBySlug(params.metric);
   if (!def) return { title: "見つかりません | KurashiMap" };
-  const rows = await rowsFor(def);
+  const rows = await getPrefRankingRows(def);
   const top = rows[0];
   // 「1位は◯◯」を title に先出しする（2026-08 の GSC 分析で、答えを先に出す title が
   // 質問型クエリの CTR に効くと判明したのと同じ方針）。
@@ -78,14 +69,17 @@ export default async function PrefectureRankingPage(props: { params: Promise<Par
   const def = getPrefRankingBySlug(params.metric);
   if (!def) notFound();
 
-  const all = await listAllAcrossPrefs();
-  const rows = buildPrefRankingRows(def, all);
+  // 行はキャッシュ済みアクセサから取る（generateMetadata と本文で二重集計しない）。
+  // all は def.sourceOf（出典を実データの source/asOf から導く）にだけ必要。
+  const [rows, all] = await Promise.all([getPrefRankingRows(def), listAllAcrossPrefs()]);
   if (rows.length === 0) notFound();
 
   const podium = rows.slice(0, 3);
   const source = def.sourceOf(all);
   // 対応する市区町村ランキング（同じ指標を自治体単位で見る導線）。
+  // PREF_RANKINGS の全 slug は RANKINGS に在る（tests/lib/prefRankings.test.ts が保証）。
   const muniDef = getRankingBySlug(def.slug);
+  if (!muniDef) notFound();
   // 全都道府県で対象外の自治体が1件もなければカバレッジ列は出さない（ノイズを減らす）。
   const showCoverage = rows.some((r) => r.covered < r.total);
   const others = PREF_RANKINGS.filter((r) => r.slug !== def.slug);
@@ -98,12 +92,10 @@ export default async function PrefectureRankingPage(props: { params: Promise<Par
         itemListElement: [
           { "@type": "ListItem", position: 1, name: SITE.name, item: absoluteUrl("/") },
           { "@type": "ListItem", position: 2, name: "ランキング", item: absoluteUrl("/ranking") },
-          ...(muniDef
-            ? [{ "@type": "ListItem", position: 3, name: muniDef.shortLabel, item: absoluteUrl(`/ranking/${def.slug}`) }]
-            : []),
+          { "@type": "ListItem", position: 3, name: muniDef.shortLabel, item: absoluteUrl(`/ranking/${def.slug}`) },
           {
             "@type": "ListItem",
-            position: muniDef ? 4 : 3,
+            position: 4,
             name: def.shortLabel,
             item: absoluteUrl(`/ranking/${def.slug}/prefecture`),
           },
@@ -141,7 +133,7 @@ export default async function PrefectureRankingPage(props: { params: Promise<Par
       trail={[
         { name: SITE.name, href: "/" },
         { name: "ランキング", href: "/ranking" },
-        ...(muniDef ? [{ name: muniDef.shortLabel, href: `/ranking/${def.slug}` }] : []),
+        { name: muniDef.shortLabel, href: `/ranking/${def.slug}` },
         { name: "都道府県別" },
       ]}
     >
@@ -165,12 +157,10 @@ export default async function PrefectureRankingPage(props: { params: Promise<Par
           <Info size={14} aria-hidden="true" /> 集計方法: {def.method}
         </p>
         <div className="rk-hero-actions">
-          {muniDef && (
-            <Link href={`/ranking/${def.slug}`} className="rk-action rk-action-primary">
-              <BarChart3 size={15} aria-hidden="true" />市区町村版を見る
-            </Link>
-          )}
-          <Link href="/shindan?from=prefecture_ranking" className="rk-action rk-action-ghost">
+          <Link href={`/ranking/${def.slug}`} className="rk-action rk-action-primary">
+            <BarChart3 size={15} aria-hidden="true" />市区町村版を見る
+          </Link>
+          <Link href={shindanHref("prefecture_ranking")} className="rk-action rk-action-ghost">
             <Compass size={15} aria-hidden="true" />条件から街を診断する
           </Link>
           <ShareButton
@@ -255,26 +245,24 @@ export default async function PrefectureRankingPage(props: { params: Promise<Par
         </div>
       </section>
 
-      {others.length > 0 && (
-        <section className="rk-section">
-          <div className="rk-section-head">
-            <span className="rk-section-icon"><MapIcon size={20} aria-hidden="true" /></span>
-            <div className="rk-section-heading">
-              <h2 className="rk-h2">ほかの都道府県ランキング</h2>
-              <p className="rk-section-sub">同じ実データで、別の指標でも比べてみましょう。</p>
-            </div>
+      <section className="rk-section">
+        <div className="rk-section-head">
+          <span className="rk-section-icon"><MapIcon size={20} aria-hidden="true" /></span>
+          <div className="rk-section-heading">
+            <h2 className="rk-h2">ほかの都道府県ランキング</h2>
+            <p className="rk-section-sub">同じ実データで、別の指標でも比べてみましょう。</p>
           </div>
-          <ul className="pref-chip-grid">
-            {others.map((r) => (
-              <li key={r.slug}>
-                <Link href={`/ranking/${r.slug}/prefecture`} className="pref-chip">
-                  {r.shortLabel}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
+        </div>
+        <ul className="pref-chip-grid">
+          {others.map((r) => (
+            <li key={r.slug}>
+              <Link href={`/ranking/${r.slug}/prefecture`} className="pref-chip">
+                {r.shortLabel}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
 
       <FurusatoBand />
 
@@ -283,11 +271,9 @@ export default async function PrefectureRankingPage(props: { params: Promise<Par
       <RankSources>{RANKING_SOURCES_TEXT}</RankSources>
 
       <nav className="rk-footnav" aria-label="関連リンク">
-        {muniDef && (
-          <Link href={`/ranking/${def.slug}`} className="rk-back">
-            <ArrowLeft size={15} aria-hidden="true" />市区町村版
-          </Link>
-        )}
+        <Link href={`/ranking/${def.slug}`} className="rk-back">
+          <ArrowLeft size={15} aria-hidden="true" />市区町村版
+        </Link>
         <Link href="/ranking" className="rk-back"><Trophy size={15} aria-hidden="true" />ランキング一覧</Link>
         <Link href="/map" className="rk-back"><MapIcon size={15} aria-hidden="true" />地図で探す</Link>
       </nav>

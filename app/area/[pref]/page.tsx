@@ -13,6 +13,7 @@ import RankLinkList from "@/components/RankLinkList";
 import RankSources from "@/components/RankSources";
 import { PREFS, getPrefBySlug } from "@/lib/prefs";
 import { mapHrefForPref } from "@/lib/mapDeepLink";
+import { shindanHref } from "@/lib/siteNav";
 import { SITE, absoluteUrl } from "@/lib/site";
 import { hasRent, rentBand } from "@/lib/rentColor";
 import { livabilityBands } from "@/lib/livabilityScore";
@@ -332,7 +333,7 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
             点数の高さは利便性の目安であって、暮らしの良し悪しを決めるものではありません。
           </p>
           <div className="rk-hero-actions">
-            <Link href="/shindan?from=pref_hub" className="rk-action rk-action-primary">
+            <Link href={shindanHref("pref_hub")} className="rk-action rk-action-primary">
               <Compass size={15} aria-hidden="true" />重視する条件を選んで診断する
             </Link>
           </div>

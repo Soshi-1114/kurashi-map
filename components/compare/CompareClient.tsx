@@ -16,8 +16,11 @@ import { muniContextLabel } from "@/lib/muniLabel";
 import { barWidthPct } from "@/lib/format";
 import { getPrefBySlug } from "@/lib/prefs";
 import { trackCompareStart } from "@/lib/analytics";
+import { MAX_COMPARE } from "@/lib/siteNav";
 
-export const MAX_COMPARE = 3;
+// 実体は lib/siteNav.ts（送り出す側のサーバーコンポーネントからも参照するため）。
+// 既存の import 元を変えずに済むよう、ここから再 export する。
+export { MAX_COMPARE };
 
 /** 平均列の種類。県平均は選択自治体がすべて同一県のときだけ選べる。 */
 type AvgKind = "national" | "pref";

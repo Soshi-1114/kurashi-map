@@ -18,12 +18,12 @@ import type { Municipality } from "./types";
 import { PREFS } from "./prefs";
 import { prefNameOf } from "./site";
 import { formatAsOfJa } from "./format";
-import { groupByPref, muniLevelOnly } from "./rankings";
+import { groupByPref, muniLevelOnly, POPULATION_FRESHNESS } from "./rankings";
 import { hasVacancy } from "./vacancy";
 import { hasAgeData } from "./ageStats";
 import { hasForeignData } from "./foreignResidents";
-import { hasChildcareData } from "./childcare";
-import { densityText } from "./populationDensity";
+import { hasChildcareCapacity } from "./childcare";
+import { populationDensity, densityText } from "./populationDensity";
 
 export type PrefRankingRow = {
   prefSlug: string;
@@ -52,10 +52,18 @@ export type PrefRankingDef = {
   lead: string;
   /** 集計方法の説明。honesty 方針でページに必ず表示する */
   method: string;
-  /** 県内市区町村の実数から県の値を算出する。対象データが1件も無ければ null */
-  aggregate: (munis: Municipality[]) => number | null;
-  /** 合算に使えた自治体か（covered の数え方。aggregate と同じ判定を使う） */
+  /**
+   * 合算に使える自治体か。**対象判定の単一ソース**で、カバレッジ（covered）の
+   * 数え方でもある。buildPrefRankingRows がこの述語で絞ってから aggregate を呼ぶ。
+   * 判定は lib/vacancy.hasVacancy 等の共有ヘルパーに委譲し、ここで再実装しない。
+   */
   counts: (m: Municipality) => boolean;
+  /**
+   * 県の値を算出する。**counts で絞り込み済みの配列**が渡るので、ここで対象判定を
+   * 再度書かないこと（二重定義は covered と合計がずれる原因になる）。
+   * 空配列で呼ばれることはない（呼び出し側が弾く）。
+   */
+  aggregate: (munis: Municipality[]) => number | null;
   /** 値の表示テキスト */
   display: (value: number) => string;
   /** 出典テキスト（実データの source / asOf から導出。無ければ null） */
@@ -65,17 +73,18 @@ export type PrefRankingDef = {
 
 // ---- 集計の小道具 ----
 
-/** 分子・分母をそれぞれ合算して百分率にする（率の平均ではなく実数の比）。 */
+/**
+ * 分子・分母をそれぞれ合算して百分率にする（率の平均ではなく実数の比）。
+ * 対象判定は済んでいる前提（PrefRankingDef.counts を参照）。
+ */
 function ratioPct(
   munis: Municipality[],
-  ok: (m: Municipality) => boolean,
   numer: (m: Municipality) => number,
   denom: (m: Municipality) => number,
 ): number | null {
   let n = 0;
   let d = 0;
   for (const m of munis) {
-    if (!ok(m)) continue;
     n += numer(m);
     d += denom(m);
   }
@@ -105,18 +114,15 @@ export const PREF_RANKINGS: PrefRankingDef[] = [
     columnLabel: "人口",
     order: "desc",
     lead: "都道府県ごとの人口を、県内の全市区町村の人口を合算して求めた順位です。",
-    method: "県内の全市区町村の人口（2025年国勢調査）を合算しています。",
+    method: `県内の全市区町村の人口（${POPULATION_FRESHNESS}）を合算しています。`,
     counts: (m) => m.population > 0,
-    aggregate: (munis) => {
-      const v = munis.reduce((s, m) => s + (m.population > 0 ? m.population : 0), 0);
-      return v > 0 ? v : null;
-    },
+    aggregate: (munis) => munis.reduce((s, m) => s + m.population, 0),
     display: (v) => `${Math.round(v).toLocaleString()}人`,
-    sourceOf: () => "2025年国勢調査（総務省）",
+    sourceOf: () => `${POPULATION_FRESHNESS}（総務省）`,
     faq: [
       {
         q: "この人口はいつ時点のものですか？",
-        a: "2025年国勢調査の値です。県内の全市区町村の人口を合算して算出しています（政令指定都市は市の値を1件として数え、行政区の重複計上はしていません）。",
+        a: `${POPULATION_FRESHNESS}の値です。県内の全市区町村の人口を合算して算出しています（政令指定都市は市の値を1件として数え、行政区の重複計上はしていません）。`,
       },
     ],
   },
@@ -128,21 +134,21 @@ export const PREF_RANKINGS: PrefRankingDef[] = [
     columnLabel: "人口密度",
     order: "desc",
     lead: "都道府県ごとの人口密度を、県内の市区町村の人口と面積をそれぞれ合算して求めた順位です。",
-    method:
-      "県内市区町村の人口（2025年国勢調査）の合計を、面積（国土地理院「全国都道府県市区町村別面積調」）の合計で割って算出しています。市区町村ごとの密度を平均したものではありません。",
-    counts: (m) => m.population > 0 && m.areaKm2 != null && m.areaKm2 > 0,
+    method: `県内市区町村の人口（${POPULATION_FRESHNESS}）の合計を、面積（国土地理院「全国都道府県市区町村別面積調」）の合計で割って算出しています。市区町村ごとの密度を平均したものではありません。`,
+    // 面積未収録・人口0の除外は populationDensity が持つ（市区町村ランキングの
+    // qualifies と同じ式。ここで再実装しない）。
+    counts: (m) => populationDensity(m) != null,
     aggregate: (munis) => {
       let pop = 0;
       let area = 0;
       for (const m of munis) {
-        if (!(m.population > 0) || m.areaKm2 == null || !(m.areaKm2 > 0)) continue;
         pop += m.population;
-        area += m.areaKm2;
+        area += m.areaKm2!;
       }
       return area > 0 ? pop / area : null;
     },
     display: densityText,
-    sourceOf: () => "2025年国勢調査・国土地理院「全国都道府県市区町村別面積調」",
+    sourceOf: () => `${POPULATION_FRESHNESS}・国土地理院「全国都道府県市区町村別面積調」`,
     faq: [
       {
         q: "市区町村ごとの人口密度を平均した値ですか？",
@@ -161,13 +167,8 @@ export const PREF_RANKINGS: PrefRankingDef[] = [
     method:
       "県内市区町村の65歳以上人口の合計を、総人口の合計で割って算出しています（住民基本台帳・毎年1月1日時点、外国人住民を含む）。市区町村ごとの高齢化率を平均したものではありません。",
     counts: (m) => hasAgeData(m.ageStats),
-    aggregate: (munis) =>
-      ratioPct(
-        munis,
-        (m) => hasAgeData(m.ageStats),
-        (m) => m.ageStats!.elderly,
-        (m) => m.ageStats!.total,
-      ),
+    // 非null断定は counts（hasAgeData）が保証する。filter は要素型を絞らないため必要。
+    aggregate: (munis) => ratioPct(munis, (m) => m.ageStats!.elderly, (m) => m.ageStats!.total),
     display: (v) => `${v.toFixed(1)}%`,
     sourceOf: (munis) =>
       sourceFrom(munis, (m) => (hasAgeData(m.ageStats) ? m.ageStats : null)),
@@ -189,13 +190,8 @@ export const PREF_RANKINGS: PrefRankingDef[] = [
     method:
       "県内市区町村の空き家数の合計を、住宅総数の合計で割って算出しています（住宅・土地統計調査）。同調査の市区町村集計は人口1.5万人未満の町村を含まないため、それらは合算の対象外です（各行のカバレッジを併記しています）。",
     counts: (m) => hasVacancy(m.vacancy),
-    aggregate: (munis) =>
-      ratioPct(
-        munis,
-        (m) => hasVacancy(m.vacancy),
-        (m) => m.vacancy!.vacant,
-        (m) => m.vacancy!.total,
-      ),
+    // 非null断定は counts（hasVacancy）が保証する。
+    aggregate: (munis) => ratioPct(munis, (m) => m.vacancy!.vacant, (m) => m.vacancy!.total),
     display: (v) => `${v.toFixed(1)}%`,
     sourceOf: (munis) => sourceFrom(munis, (m) => (hasVacancy(m.vacancy) ? m.vacancy : null)),
     faq: [
@@ -218,15 +214,9 @@ export const PREF_RANKINGS: PrefRankingDef[] = [
     order: "desc",
     lead: "都道府県ごとの外国人住民の割合を、県内市区町村の実人数を合算して求めた順位です。",
     method:
-      "県内市区町村の在留外国人数の合計を、人口の合計で割って算出しています（出入国在留管理庁「在留外国人統計」÷ 2025年国勢調査人口）。比率の高い低いという事実を示すもので、住みやすさ等の価値判断とは無関係です。",
+      `県内市区町村の在留外国人数の合計を、人口の合計で割って算出しています（出入国在留管理庁「在留外国人統計」÷ ${POPULATION_FRESHNESS}人口）。比率の高い低いという事実を示すもので、住みやすさ等の価値判断とは無関係です。`,
     counts: (m) => hasForeignData(m.foreignResidents.source) && m.population > 0,
-    aggregate: (munis) =>
-      ratioPct(
-        munis,
-        (m) => hasForeignData(m.foreignResidents.source) && m.population > 0,
-        (m) => m.foreignResidents.value,
-        (m) => m.population,
-      ),
+    aggregate: (munis) => ratioPct(munis, (m) => m.foreignResidents.value, (m) => m.population),
     display: (v) => `${v.toFixed(2)}%`,
     sourceOf: (munis) =>
       sourceFrom(munis, (m) =>
@@ -249,22 +239,20 @@ export const PREF_RANKINGS: PrefRankingDef[] = [
     lead: "都道府県ごとの保育所等の定員の余裕を、県内市区町村の定員と利用児童数を合算して求めた順位です。",
     method:
       "（県内の定員合計 − 利用児童数合計）÷ 定員合計 × 100 で算出しています（こども家庭庁「保育所等関連状況取りまとめ」）。負の値は定員の弾力運用（定員を超えた受け入れ）を示す実データです。政令指定都市は市単位の集計値のため、市を1件として数えています。",
-    counts: (m) => hasChildcareData(m.childcare) && m.childcare.capacity > 0,
+    counts: (m) => hasChildcareCapacity(m.childcare),
+    // 非null断定は counts（hasChildcareCapacity）が保証する。
     aggregate: (munis) => {
       let capacity = 0;
       let enrolled = 0;
       for (const m of munis) {
-        if (!hasChildcareData(m.childcare) || !(m.childcare.capacity > 0)) continue;
-        capacity += m.childcare.capacity;
-        enrolled += m.childcare.enrolled;
+        capacity += m.childcare!.capacity;
+        enrolled += m.childcare!.enrolled;
       }
       return capacity > 0 ? ((capacity - enrolled) / capacity) * 100 : null;
     },
     display: (v) => `${v.toFixed(1)}%`,
     sourceOf: (munis) =>
-      sourceFrom(munis, (m) =>
-        hasChildcareData(m.childcare) && m.childcare.capacity > 0 ? m.childcare : null,
-      ),
+      sourceFrom(munis, (m) => (hasChildcareCapacity(m.childcare) ? m.childcare! : null)),
     faq: [
       {
         q: "定員余裕率が高いと入園しやすいということですか？",
@@ -298,13 +286,18 @@ export function buildPrefRankingRows(
   for (const p of PREFS) {
     const list = byPref.get(p.slug);
     if (!list || list.length === 0) continue;
-    const value = def.aggregate(list);
+    // 対象判定はここで1回だけ行い、絞り込んだ配列を aggregate へ渡す。
+    // covered は「合算に実際に使った件数」そのものになるので、合計とカバレッジが
+    // 定義上ずれ得ない（両者が別々に述語を持っていた頃の drift を構造的に潰す）。
+    const eligible = list.filter(def.counts);
+    if (eligible.length === 0) continue;
+    const value = def.aggregate(eligible);
     if (value == null) continue;
     rows.push({
       prefSlug: p.slug,
       prefName: prefNameOf(p.slug),
       value,
-      covered: list.filter(def.counts).length,
+      covered: eligible.length,
       total: list.length,
     });
   }

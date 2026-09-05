@@ -10,7 +10,7 @@ import { RANKINGS, getRankingBySlug, muniLevelOnly, rankBy, appendFreshness, typ
 import { hasPrefRanking } from "@/lib/prefRankings";
 import { PREFS } from "@/lib/prefs";
 import { SITE, prefNameOf, absoluteUrl } from "@/lib/site";
-import { mapHubByHref, compareHref } from "@/lib/siteNav";
+import { mapHubByHref, compareHref, shindanHref, MAX_COMPARE } from "@/lib/siteNav";
 import PrefRegionLinks from "@/components/PrefRegionLinks";
 import RankLinkList from "@/components/RankLinkList";
 import RankFaq from "@/components/RankFaq";
@@ -84,7 +84,7 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
   const fullRanked = rankBy(def, allMunis);
   const ranked = fullRanked.slice(0, TOP_TABLE);
   if (ranked.length === 0) notFound();
-  const podium = ranked.slice(0, 3);          // トップ3＝順位台
+  const podium = ranked.slice(0, MAX_COMPARE); // 順位台＝比較ページの上限と同数
   const ladder = ranked.slice(3, TOP_CARDS);  // 4位以降＝序列ラダー
   // membershipList 型（例: 待機児童ゼロ）は「条件に該当する自治体の一覧」で、並び順は
   // 人口など別の指標。順位・メダル・「N位」表記を出すと意味を誤読するため見せ方を変える。
@@ -92,10 +92,6 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
   // 一覧型は掲載数（TOP_TABLE で頭打ち）と該当総数が大きく違う。「該当N自治体」が
   // 掲載数に見えないよう、該当総数を別に数えて併記する。
   const qualifiedCount = isList ? fullRanked.length : ranked.length;
-
-  // 「上位N件を比較する」に渡すコード（比較ページの上限 MAX_COMPARE=3 に合わせる）。
-  // 一覧型（membershipList）は順位ではないため上位3件という括りが意味を持たず、出さない。
-  const topForCompare = isList ? [] : ranked.slice(0, 3).map((m) => m.code);
 
   const others = RANKINGS.filter((r) => r.slug !== def.slug);
   // 対応する地図ハブがある指標のみ「地図で見る」CTA を出す（GA4 分析 2026-08:
@@ -193,12 +189,14 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
           )}
           {/* ランキング（情報意図）から比較（選択意図）へ渡す1クリック導線。
               上位3件を最初から選択した状態で /compare に着地する（MAX_COMPARE=3）。 */}
-          {topForCompare.length >= 2 && (
-            <Link href={compareHref(topForCompare, "ranking_top3")} className="rk-action rk-action-ghost">
-              <Scale size={15} aria-hidden="true" />上位{topForCompare.length}件を比較する
+          {/* 一覧型（membershipList）は順位ではないため「上位N件」という括りが意味を持たない。
+              件数は podium（=MAX_COMPARE 件）そのままで、compareHref 側でも上限に丸まる。 */}
+          {!isList && podium.length >= 2 && (
+            <Link href={compareHref(podium.map((m) => m.code), "ranking_top3")} className="rk-action rk-action-ghost">
+              <Scale size={15} aria-hidden="true" />上位{podium.length}件を比較する
             </Link>
           )}
-          <Link href="/shindan?from=ranking" className="rk-action rk-action-ghost">
+          <Link href={shindanHref("ranking")} className="rk-action rk-action-ghost">
             <Compass size={15} aria-hidden="true" />条件から街を診断する
           </Link>
           {/* 都道府県版がある指標だけ、47都道府県を並べたページへ送る

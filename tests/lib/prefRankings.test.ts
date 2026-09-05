@@ -62,9 +62,9 @@ describe("prefRankings", () => {
       expect(aging.aggregate([small, big])).not.toBeCloseTo(35, 1);
     });
 
-    it("データが無ければ null（0 として並べない）", () => {
-      expect(aging.aggregate([muni({ code: "01203" })])).toBeNull();
-      expect(aging.aggregate([])).toBeNull();
+    it("counts が欠損を弾く（aggregate は絞り込み済みの配列しか受け取らない）", () => {
+      expect(aging.counts(small)).toBe(true);
+      expect(aging.counts(muni({ code: "01203" }))).toBe(false);
     });
   });
 
@@ -82,8 +82,11 @@ describe("prefRankings", () => {
       vacancy: { rate: -1, vacant: 0, total: 0, source: "住宅・土地統計調査（対象外）", asOf: "2023" },
     });
 
-    it("対象外の 0 を分母に混ぜない", () => {
-      expect(vacancy.aggregate([counted, excluded])).toBeCloseTo(20, 6);
+    it("実経路（buildPrefRankingRows）で対象外の 0 を分母に混ぜない", () => {
+      const rows = buildPrefRankingRows(vacancy, [counted, excluded]);
+      expect(rows[0].value).toBeCloseTo(20, 6);
+      expect(rows[0].covered).toBe(1);
+      expect(rows[0].total).toBe(2);
     });
 
     it("counts は対象外を数えない（カバレッジ表示の母数）", () => {
@@ -108,8 +111,10 @@ describe("prefRankings", () => {
       foreignResidents: metric({ value: 0, source: "調査対象外" }),
     });
 
-    it("対象自治体だけで比率を出す", () => {
-      expect(foreign.aggregate([counted, excluded])).toBeCloseTo(5, 6);
+    it("実経路で対象自治体だけの比率になる（対象外は分母にも入らない）", () => {
+      expect(foreign.counts(counted)).toBe(true);
+      expect(foreign.counts(excluded)).toBe(false);
+      expect(foreign.aggregate([counted])).toBeCloseTo(5, 6);
     });
   });
 
@@ -154,9 +159,15 @@ describe("prefRankings", () => {
       expect(density.aggregate([dense, sparse])).toBeLessThan(1000);
     });
 
-    it("面積が無い自治体は人口も分子に入れない", () => {
+    it("面積が無い自治体は counts が弾く（populationDensity と同じ判定）", () => {
       const noArea = muni({ code: "13103", pref: "tokyo", population: 999999 });
-      expect(density.aggregate([dense, noArea])).toBeCloseTo(10000, 6);
+      expect(density.counts(dense)).toBe(true);
+      expect(density.counts(noArea)).toBe(false);
+      // 実経路（buildPrefRankingRows）では分子にも分母にも入らない
+      const rows = buildPrefRankingRows(density, [dense, noArea]);
+      expect(rows[0].value).toBeCloseTo(10000, 6);
+      expect(rows[0].covered).toBe(1);
+      expect(rows[0].total).toBe(2);
     });
   });
 
@@ -211,5 +222,49 @@ describe("prefRankings", () => {
       expect(r[0].value).toBeCloseTo(20, 6); // 区が混ざれば 55% になる
       expect(r[0].total).toBe(1);
     });
+  });
+
+  // counts と aggregate が対象判定を二重に持つと「県の合計」と「カバレッジ」が
+  // 静かにずれる。絞り込みは buildPrefRankingRows の1箇所だけで行う契約を固定する。
+  describe("対象判定の単一ソース", () => {
+    it("すべての定義で、counts が false の自治体だけの県は行に出ない", () => {
+      // 人口0・各指標のデータなし＝6定義すべてで対象外になる自治体
+      const blank = muni({ code: "01203", pref: "hokkaido", population: 0 });
+      for (const def of PREF_RANKINGS) {
+        expect(def.counts(blank), `${def.slug}: counts`).toBe(false);
+        expect(buildPrefRankingRows(def, [blank]), `${def.slug}: rows`).toEqual([]);
+      }
+    });
+
+    it("covered は合算に実際に使った件数（counts を通った数）と一致する", () => {
+      const aging = getPrefRankingBySlug("aging-high")!;
+      const withData = muni({
+        code: "01201", pref: "hokkaido",
+        ageStats: { young: 10, elderly: 300, total: 1000, source: "住基", asOf: "2026-01-01" },
+      });
+      const list = [withData, muni({ code: "01202", pref: "hokkaido" }), muni({ code: "01203", pref: "hokkaido" })];
+      const rows = buildPrefRankingRows(aging, list);
+      expect(rows[0].covered).toBe(list.filter(aging.counts).length);
+    });
+  });
+});
+
+// 外国人住民比率の県値は lib/foreignStats.ts でも（比較ページの県平均として）計算されて
+// いる。同じ公表数値の実装が2つある以上、片方だけ変わって静かにずれないよう実データで縛る。
+describe("外国人住民比率の県値は foreignStats の県平均と一致する", () => {
+  it("全47都道府県で一致する", async () => {
+    const [{ listAllAcrossPrefs }, { getForeignStats, prefForeignAvgs }] = await Promise.all([
+      import("@/lib/metrics"),
+      import("@/lib/foreignStats"),
+    ]);
+    const def = getPrefRankingBySlug("foreign-ratio-high")!;
+    const rows = buildPrefRankingRows(def, await listAllAcrossPrefs());
+    const avgs = prefForeignAvgs(await getForeignStats());
+    expect(rows.length).toBeGreaterThan(0);
+    for (const r of rows) {
+      const expected = avgs.get(r.prefSlug);
+      expect(expected, r.prefSlug).toBeDefined();
+      expect(r.value, r.prefSlug).toBeCloseTo(expected!, 9);
+    }
   });
 });
