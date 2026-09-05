@@ -30,6 +30,7 @@ import { hasAgeData } from "./ageStats";
 import { hasForeignData } from "./foreignResidents";
 import { hasChildcareCapacity } from "./childcare";
 import { populationDensity, densityText } from "./populationDensity";
+import { prefVacancyRate, PREF_VACANCY_SOURCE, PREF_VACANCY_ASOF } from "./vacancyPref";
 
 export type PrefRankingRow = {
   prefSlug: string;
@@ -40,6 +41,37 @@ export type PrefRankingRow = {
   /** 県内の市区町村数（政令市は親市で1件。muniLevelOnly 後の数） */
   total: number;
 };
+
+/**
+ * 県の値をどう作るか。**この二択を型で強制する**のが目的で、新しい指標を足すときに
+ * 「合算していいのか」を必ず考えさせるためにある（冒頭の honesty 方針を参照）。
+ *
+ * - `aggregate`: 県内市区町村の実数を合算する。合算が公表値を再現できると確認できた
+ *   指標に限る。カバレッジ（対象N/全M）はページに出る
+ * - `published`: 都道府県として公表されている値をそのまま使う。市区町村集計に調査
+ *   対象外があって合算が公表値を再現できない指標（空き家率）はこちら
+ */
+export type PrefRankingValue =
+  | {
+      from: "aggregate";
+      /**
+       * 合算に使える自治体か。**対象判定の単一ソース**で、カバレッジ（covered）の
+       * 数え方でもある。buildPrefRankingRows がこの述語で絞ってから compute を呼ぶ。
+       * 判定は lib/ageStats.hasAgeData 等の共有ヘルパーに委譲し、ここで再実装しない。
+       */
+      counts: (m: Municipality) => boolean;
+      /**
+       * 県の値を算出する。**counts で絞り込み済みの配列**が渡るので、ここで対象判定を
+       * 再度書かないこと（二重定義は covered と合計がずれる原因になる）。
+       * 空配列で呼ばれることはない（呼び出し側が弾く）。
+       */
+      compute: (munis: Municipality[]) => number | null;
+    }
+  | {
+      from: "published";
+      /** 都道府県スラッグ → 公表値。未収録は null（0 で埋めない）。 */
+      lookup: (prefSlug: string) => number | null;
+    };
 
 export type PrefRankingDef = {
   /** 対応する市区町村ランキングの slug。URL は /ranking/{slug}/prefecture */
@@ -58,18 +90,8 @@ export type PrefRankingDef = {
   lead: string;
   /** 集計方法の説明。honesty 方針でページに必ず表示する */
   method: string;
-  /**
-   * 合算に使える自治体か。**対象判定の単一ソース**で、カバレッジ（covered）の
-   * 数え方でもある。buildPrefRankingRows がこの述語で絞ってから aggregate を呼ぶ。
-   * 判定は lib/vacancy.hasVacancy 等の共有ヘルパーに委譲し、ここで再実装しない。
-   */
-  counts: (m: Municipality) => boolean;
-  /**
-   * 県の値を算出する。**counts で絞り込み済みの配列**が渡るので、ここで対象判定を
-   * 再度書かないこと（二重定義は covered と合計がずれる原因になる）。
-   * 空配列で呼ばれることはない（呼び出し側が弾く）。
-   */
-  aggregate: (munis: Municipality[]) => number | null;
+  /** 県の値の作り方。型で二択を強制する（PrefRankingValue のコメント参照） */
+  value: PrefRankingValue;
   /** 値の表示テキスト */
   display: (value: number) => string;
   /** 出典テキスト（実データの source / asOf から導出。無ければ null） */
@@ -121,8 +143,11 @@ export const PREF_RANKINGS: PrefRankingDef[] = [
     order: "desc",
     lead: "都道府県ごとの人口を、県内の全市区町村の人口を合算して求めた順位です。",
     method: `県内の全市区町村の人口（${POPULATION_FRESHNESS}）を合算しています。`,
-    counts: (m) => m.population > 0,
-    aggregate: (munis) => munis.reduce((s, m) => s + m.population, 0),
+    value: {
+      from: "aggregate",
+      counts: (m) => m.population > 0,
+      compute: (munis) => munis.reduce((s, m) => s + m.population, 0),
+    },
     display: (v) => `${Math.round(v).toLocaleString()}人`,
     sourceOf: () => `${POPULATION_FRESHNESS}（総務省）`,
     faq: [
@@ -143,15 +168,18 @@ export const PREF_RANKINGS: PrefRankingDef[] = [
     method: `県内市区町村の人口（${POPULATION_FRESHNESS}）の合計を、面積（国土地理院「全国都道府県市区町村別面積調」）の合計で割って算出しています。市区町村ごとの密度を平均したものではありません。境界未定地域の扱いにより、都道府県として公表される面積とわずかに差が出る場合があります（順位には影響しません）。`,
     // 面積未収録・人口0の除外は populationDensity が持つ（市区町村ランキングの
     // qualifies と同じ式。ここで再実装しない）。
-    counts: (m) => populationDensity(m) != null,
-    aggregate: (munis) => {
-      let pop = 0;
-      let area = 0;
-      for (const m of munis) {
-        pop += m.population;
-        area += m.areaKm2!;
-      }
-      return area > 0 ? pop / area : null;
+    value: {
+      from: "aggregate",
+      counts: (m) => populationDensity(m) != null,
+      compute: (munis) => {
+        let pop = 0;
+        let area = 0;
+        for (const m of munis) {
+          pop += m.population;
+          area += m.areaKm2!;
+        }
+        return area > 0 ? pop / area : null;
+      },
     },
     display: densityText,
     sourceOf: () => `${POPULATION_FRESHNESS}・国土地理院「全国都道府県市区町村別面積調」`,
@@ -172,9 +200,12 @@ export const PREF_RANKINGS: PrefRankingDef[] = [
     lead: "都道府県ごとの高齢化率（65歳以上の割合）を、県内市区町村の実人数を合算して求めた順位です。",
     method:
       "県内市区町村の65歳以上人口の合計を、総人口の合計で割って算出しています（住民基本台帳・毎年1月1日時点、外国人住民を含む）。市区町村ごとの高齢化率を平均したものではありません。",
-    counts: (m) => hasAgeData(m.ageStats),
-    // 非null断定は counts（hasAgeData）が保証する。filter は要素型を絞らないため必要。
-    aggregate: (munis) => ratioPct(munis, (m) => m.ageStats!.elderly, (m) => m.ageStats!.total),
+    value: {
+      from: "aggregate",
+      counts: (m) => hasAgeData(m.ageStats),
+      // 非null断定は counts（hasAgeData）が保証する。filter は要素型を絞らないため必要。
+      compute: (munis) => ratioPct(munis, (m) => m.ageStats!.elderly, (m) => m.ageStats!.total),
+    },
     display: (v) => `${v.toFixed(1)}%`,
     sourceOf: (munis) =>
       sourceFrom(munis, (m) => (hasAgeData(m.ageStats) ? m.ageStats : null)),
@@ -182,6 +213,32 @@ export const PREF_RANKINGS: PrefRankingDef[] = [
       {
         q: "高齢化率はどう計算していますか？",
         a: "65歳以上人口 ÷ 総人口 × 100 です。都道府県の値は、県内市区町村の実人数をそれぞれ合算してから割っています（率の平均ではありません）。出典は総務省「住民基本台帳に基づく人口・世帯数調査」で、外国人住民を含む総計です。",
+      },
+    ],
+  },
+  {
+    slug: "vacancy-high",
+    title: "都道府県の空き家率ランキング",
+    seoTitle: "都道府県別 空き家率ランキング",
+    shortLabel: "都道府県の空き家率",
+    columnLabel: "空き家率",
+    order: "desc",
+    lead: "都道府県ごとの空き家率を、住宅・土地統計調査の都道府県別の公表値で並べた順位です。",
+    // 「合算しない」ことをページ本文でも明示する（同じ調査でも市区町村集計は
+    // 人口1.5万人未満の町村を含まず、合算すると公表と順位が入れ替わるため）。
+    method:
+      "総務省「住宅・土地統計調査」が都道府県別に公表している空き家数と住宅総数から算出した公表ベースの値です。市区町村の値を合算したものではありません（同調査の市区町村別集計は人口1.5万人未満の町村を含まないため、合算すると公表値より低く出ます）。",
+    value: { from: "published", lookup: prefVacancyRate },
+    display: (v) => `${v.toFixed(2)}%`,
+    sourceOf: () => `${PREF_VACANCY_SOURCE}（${formatAsOfJa(PREF_VACANCY_ASOF)}）`,
+    faq: [
+      {
+        q: "市区町村の空き家率を平均・合算した値ですか？",
+        a: "いいえ。都道府県として公表されている空き家数と住宅総数から算出しています。住宅・土地統計調査の市区町村別集計は人口1.5万人未満の町村を含まず、それらは空き家率が高い傾向にあるため、市区町村を合算すると公表値より低く出て順位も変わってしまいます。",
+      },
+      {
+        q: "空き家率には別荘なども含まれますか？",
+        a: "住宅・土地統計調査の「空き家」には、賃貸・売却用の住宅のほか二次的住宅（別荘など）が含まれます。観光地を抱える地域で高く出るのはこのためです。",
       },
     ],
   },
@@ -195,8 +252,11 @@ export const PREF_RANKINGS: PrefRankingDef[] = [
     lead: "都道府県ごとの外国人住民の割合を、県内市区町村の実人数を合算して求めた順位です。",
     method:
       `県内市区町村の在留外国人数の合計を、人口の合計で割って算出しています（出入国在留管理庁「在留外国人統計」÷ ${POPULATION_FRESHNESS}人口）。比率の高い低いという事実を示すもので、住みやすさ等の価値判断とは無関係です。`,
-    counts: (m) => hasForeignData(m.foreignResidents.source) && m.population > 0,
-    aggregate: (munis) => ratioPct(munis, (m) => m.foreignResidents.value, (m) => m.population),
+    value: {
+      from: "aggregate",
+      counts: (m) => hasForeignData(m.foreignResidents.source) && m.population > 0,
+      compute: (munis) => ratioPct(munis, (m) => m.foreignResidents.value, (m) => m.population),
+    },
     display: (v) => `${v.toFixed(2)}%`,
     sourceOf: (munis) =>
       sourceFrom(munis, (m) =>
@@ -219,16 +279,19 @@ export const PREF_RANKINGS: PrefRankingDef[] = [
     lead: "都道府県ごとの保育所等の定員の余裕を、県内市区町村の定員と利用児童数を合算して求めた順位です。",
     method:
       "（県内の定員合計 − 利用児童数合計）÷ 定員合計 × 100 で算出しています（こども家庭庁「保育所等関連状況取りまとめ」）。負の値は定員の弾力運用（定員を超えた受け入れ）を示す実データです。政令指定都市は市単位の集計値のため、市を1件として数えています。",
-    counts: (m) => hasChildcareCapacity(m.childcare),
-    // 非null断定は counts（hasChildcareCapacity）が保証する。
-    aggregate: (munis) => {
-      let capacity = 0;
-      let enrolled = 0;
-      for (const m of munis) {
-        capacity += m.childcare!.capacity;
-        enrolled += m.childcare!.enrolled;
-      }
-      return capacity > 0 ? ((capacity - enrolled) / capacity) * 100 : null;
+    value: {
+      from: "aggregate",
+      counts: (m) => hasChildcareCapacity(m.childcare),
+      // 非null断定は counts（hasChildcareCapacity）が保証する。
+      compute: (munis) => {
+        let capacity = 0;
+        let enrolled = 0;
+        for (const m of munis) {
+          capacity += m.childcare!.capacity;
+          enrolled += m.childcare!.enrolled;
+        }
+        return capacity > 0 ? ((capacity - enrolled) / capacity) * 100 : null;
+      },
     },
     display: (v) => `${v.toFixed(1)}%`,
     sourceOf: (munis) =>
@@ -266,18 +329,27 @@ export function buildPrefRankingRows(
   for (const p of PREFS) {
     const list = byPref.get(p.slug);
     if (!list || list.length === 0) continue;
-    // 対象判定はここで1回だけ行い、絞り込んだ配列を aggregate へ渡す。
-    // covered は「合算に実際に使った件数」そのものになるので、合計とカバレッジが
-    // 定義上ずれ得ない（両者が別々に述語を持っていた頃の drift を構造的に潰す）。
-    const eligible = list.filter(def.counts);
-    if (eligible.length === 0) continue;
-    const value = def.aggregate(eligible);
+    let value: number | null;
+    let covered: number;
+    if (def.value.from === "published") {
+      // 公表値型は県全体を対象にした値なので、カバレッジは常に全域。
+      value = def.value.lookup(p.slug);
+      covered = list.length;
+    } else {
+      // 対象判定はここで1回だけ行い、絞り込んだ配列を compute へ渡す。
+      // covered は「合算に実際に使った件数」そのものになるので、合計とカバレッジが
+      // 定義上ずれ得ない（両者が別々に述語を持っていた頃の drift を構造的に潰す）。
+      const eligible = list.filter(def.value.counts);
+      if (eligible.length === 0) continue;
+      value = def.value.compute(eligible);
+      covered = eligible.length;
+    }
     if (value == null) continue;
     rows.push({
       prefSlug: p.slug,
       prefName: prefNameOf(p.slug),
       value,
-      covered: eligible.length,
+      covered,
       total: list.length,
     });
   }
