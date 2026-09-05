@@ -33,6 +33,7 @@ import {
   HAZARD_OVERLAYS, HAZARD_ZONE_ZOOM, INUNDATION_KEYS, isInundationKey,
 } from "@/lib/mapHazards";
 import { DEFAULT_BASEMAP, getBasemap, type BasemapKey } from "@/lib/mapBasemaps";
+import { kasaiHokenLink } from "@/lib/monetization";
 import {
   WARDS_MIN_ZOOM, MUNI_MIN_ZOOM, PREF_CLICK_MAX_ZOOM, TOKYO_BAY_BBOX,
   DEFAULT_MAP_METRIC, SHELTER_KEY, type OverlayKey,
@@ -57,7 +58,11 @@ type Props = {
   initialOverlays?: readonly OverlayKey[];
 };
 
+// 火災保険導線（env 未設定なら null）。NEXT_PUBLIC はビルド時定数なのでモジュール評価1回でよい。
+const KASAI_LINK = kasaiHokenLink();
+
 export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_MAP_METRIC, initialOverlays }: Props) {
+  const kasai = KASAI_LINK;
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<MapLibreMap | null>(null);
   const muniGeoRef = useRef<GeoJSON.FeatureCollection | null>(null);
@@ -957,11 +962,12 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
       {/* 凡例（選択中の指標に追従）。初回描画完了まで出さず「凡例だけ先行」を防ぐ */}
       {firstPaintReady && <MetricLegend metricKey={activeMetric} overlays={overlays} belowHazardZoom={belowHazardZoom} />}
 
-      {/* パネル / シート */}
+      {/* パネル / シート。火災保険導線は災害オーバーレイ表示中のみ渡す（ハザードを
+          見ている文脈でだけ出す。/map/hazard は初期オーバーレイで最初から文脈に入る） */}
       {!isMobile ? (
-        <AreaPanel municipality={selectedDetail} selectedCode={selectedCode} related={relatedNearby} onClose={() => setSelectedCode(null)} />
+        <AreaPanel municipality={selectedDetail} selectedCode={selectedCode} related={relatedNearby} kasai={overlays.size > 0 ? kasai : null} onClose={() => setSelectedCode(null)} />
       ) : (
-        <MobileSheet municipality={selectedDetail} onClose={() => setSelectedCode(null)} />
+        <MobileSheet municipality={selectedDetail} kasai={overlays.size > 0 ? kasai : null} onClose={() => setSelectedCode(null)} />
       )}
     </div>
   );

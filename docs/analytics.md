@@ -59,7 +59,7 @@ KurashiMap は Google Analytics 4（gtag.js）でページビューに加えて�
 | `support_link_click` | `municipality_code` | 文字列 | `13101` | 表示中の自治体コード |
 | | `municipality_name` | 文字列 | `千代田区` | |
 | `furusato_link_click` | `municipality_code` | 文字列 | `13101` | 表示中の自治体コード |
-| `kasai_link_impression` / `kasai_link_click` | `placement` | 文字列 | `area` / `hazard-map` | 掲載面（面ごとのCTR分析用） |
+| `kasai_link_impression` / `kasai_link_click` | `placement` | 文字列 | `area` / `hazard-map` / `map-panel` | 掲載面（面ごとのCTR分析用）。`map-panel`=地図の自治体パネル（災害オーバーレイ表示中のみ） |
 | `kasai_link_impression` / `kasai_link_click` | `municipality_code` | 文字列 | `13101` | 表示中の自治体コード（自治体面のみ） |
 | | `municipality_name` | 文字列 | `千代田区` | 寄付先名（行政区は親の政令市名） |
 | `shindan_run` | `weights` | 文字列 | `210120` | SHINDAN_AXES 順の重み6桁（0-2） |

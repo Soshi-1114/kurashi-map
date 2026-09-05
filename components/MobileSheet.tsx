@@ -6,11 +6,15 @@ import type { Municipality } from "@/lib/types";
 import { buildSummary } from "@/lib/summary";
 import { hasRent } from "@/lib/rentColor";
 import { MetricCards } from "./AreaPanel";
+import { KasaiLink } from "./monetization/KasaiLink";
+import type { KasaiLinkInfo } from "@/lib/monetization";
 
 type Stage = "peek" | "half" | "full";
 
 type Props = {
   municipality: Municipality | null;
+  /** 火災保険導線。災害オーバーレイ表示中のみ非 null（文脈一致の面でだけ出す）。 */
+  kasai?: KasaiLinkInfo | null;
   onClose: () => void;
 };
 
@@ -52,7 +56,7 @@ function stageVisiblePx(stage: Stage, halfPx: number, sheetPx: number): number {
 function stageTranslate(stage: Stage, halfPx: number, sheetPx: number): number {
   return sheetPx - stageVisiblePx(stage, halfPx, sheetPx);
 }
-export default function MobileSheet({ municipality, onClose }: Props) {
+export default function MobileSheet({ municipality, kasai, onClose }: Props) {
   const [stage, setStage] = useState<Stage>("half");
   // ドラッグ中の translateY（null = 非ドラッグ）
   const [dragY, setDragY] = useState<number | null>(null);
@@ -243,6 +247,7 @@ export default function MobileSheet({ municipality, onClose }: Props) {
           {stage !== "peek" && (
             <div ref={halfContentRef} style={{ marginTop: "var(--space-3)" }}>
               <MetricCards m={m} />
+              {kasai && <KasaiLink link={kasai} municipalityCode={m.code} placement="map-panel" />}
             </div>
           )}
 
