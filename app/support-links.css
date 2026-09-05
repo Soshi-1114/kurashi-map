@@ -17,9 +17,12 @@
 }
 .ad-linkrow {
   display: flex;
+  /* 狭い面（地図の自治体パネル等）ではボタンを下の行へ折り返す。
+     テキスト列の basis を確保しないと、コピーが数文字幅に圧縮されて縦長になる */
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-4);
+  gap: var(--space-3) var(--space-4);
   min-height: 72px; /* CLS 対策: 領域を事前確保 */
   padding: var(--space-4) var(--space-5);
   background: var(--surface-subtle);
@@ -30,6 +33,7 @@
   display: flex;
   align-items: flex-start;
   gap: 10px;
+  flex: 1 1 220px; /* 220px を切ったらボタンが折り返す（コピーの字詰まり防止） */
   min-width: 0;
 }
 .ad-linkrow-icon { color: var(--accent); flex: none; margin-top: 2px; }
