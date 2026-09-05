@@ -6,7 +6,7 @@ import {
   buildPrefRankingRows,
 } from "@/lib/prefRankings";
 import { RANKINGS } from "@/lib/rankings";
-import { prefVacancy, prefVacancySlugs } from "@/lib/vacancyPref";
+import vacancyPrefJson from "@/data/vacancy-pref.json";
 import { muni, metric } from "../_fixtures";
 
 // 都道府県ランキングの要は「率の平均ではなく実数の比」であること。
@@ -257,15 +257,10 @@ describe("空き家率（published 型）は公表値をそのまま使う", () 
   });
 
   it("47都道府県すべてを収録し、全国合計が公表の13.8%を再現する", () => {
-    const slugs = prefVacancySlugs();
-    expect(slugs).toHaveLength(47);
-    let vacant = 0;
-    let total = 0;
-    for (const slug of slugs) {
-      const v = prefVacancy(slug)!;
-      vacant += v.vacant;
-      total += v.total;
-    }
+    const rows = Object.values(vacancyPrefJson.prefs);
+    expect(rows).toHaveLength(47);
+    const vacant = rows.reduce((s, v) => s + v.vacant, 0);
+    const total = rows.reduce((s, v) => s + v.total, 0);
     expect((vacant / total) * 100).toBeCloseTo(13.8, 1);
   });
 
@@ -276,6 +271,32 @@ describe("空き家率（published 型）は公表値をそのまま使う", () 
     expect(rows[1].prefSlug).toBe("wakayama");
     // 公表値型はカバレッジが常に全域（県全体の値なので）
     expect(rows[0].covered).toBe(rows[0].total);
+  });
+});
+
+// 空き家率の事故（合算すると総務省公表と1位が逆転した）の再発防止。
+// 原因は「counts を通った自治体が県の母集団を十分カバーしていない」ことだった。
+// 実測: 現行の合算型5指標は最小カバー率 99.5%（保育定員余裕率・高知）に対し、
+// 空き家率は 84.3%（青森）。閾値 99% で事故だけを弾ける。
+describe("合算型は県人口をほぼカバーしていること（公表値と乖離しないための下限）", () => {
+  const MIN_POPULATION_COVERAGE = 99;
+
+  it("すべての aggregate 指標で、各県の人口カバー率が99%以上", async () => {
+    const [{ listAllAcrossPrefs }, { muniLevelOnly, groupByPref }] = await Promise.all([
+      import("@/lib/metrics"),
+      import("@/lib/rankings"),
+    ]);
+    const byPref = groupByPref(muniLevelOnly(await listAllAcrossPrefs()));
+    for (const def of PREF_RANKINGS) {
+      if (def.value.from !== "aggregate") continue;
+      for (const [pref, list] of byPref) {
+        const pop = list.reduce((s, m) => s + m.population, 0);
+        if (pop === 0) continue;
+        const covered = list.filter(def.value.counts).reduce((s, m) => s + m.population, 0);
+        const pct = (covered / pop) * 100;
+        expect(pct, `${def.slug} / ${pref}`).toBeGreaterThanOrEqual(MIN_POPULATION_COVERAGE);
+      }
+    }
   });
 });
 

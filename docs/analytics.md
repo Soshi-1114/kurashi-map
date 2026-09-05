@@ -27,8 +27,7 @@ KurashiMap は Google Analytics 4（gtag.js）でページビューに加えて�
 | `furusato_link_click` | ふるさと納税リンクをクリックした時 | `components/area/FurusatoLink.tsx` |
 | `kasai_link_impression` | 火災保険導線が50%視認された時（1要素1回） | `components/monetization/KasaiLink.tsx` |
 | `kasai_link_click` | 火災保険の外部リンクをクリックした時（キーイベント候補） | `components/monetization/KasaiLink.tsx` |
-| `compare_start` | 他ページ（ランキング等）から比較ページに着地した時（`?from=` があるときのみ1回） | `components/compare/CompareClient.tsx` |
-| `tool_entry` | 他ページから道具のページ（診断）に着地した時（`?from=` があるときのみ1回） | `components/shindan/ShindanClient.tsx` |
+| `tool_entry` | 他ページから道具のページ（比較・診断）に着地した時（`?from=` があるときのみ1回） | `lib/useToolEntry.ts`（`CompareClient` / `ShindanClient` から呼ぶ） |
 | `shindan_run` | 街診断の重み・地方の組み合わせを変更した時 | `components/shindan/ShindanClient.tsx` |
 | `shindan_result_click` | 診断結果から自治体詳細へ遷移した時 | `components/shindan/ShindanClient.tsx` |
 | `denki_simulate` | 電気代シミュレーターの入力を確定した時（連続入力は 1s debounce） | `components/denki/DenkiSimulator.tsx` |
@@ -65,11 +64,10 @@ KurashiMap は Google Analytics 4（gtag.js）でページビューに加えて�
 | `kasai_link_impression` / `kasai_link_click` | `placement` | 文字列 | `area` / `hazard-map` / `map-panel` / `shindan` | 掲載面（面ごとのCTR分析用）。`area`=詳細ページ災害カード直下、`map-panel`=地図の自治体パネル（災害オーバーレイ表示中のみ）、`shindan`=診断で災害重視時の結果下 |
 | `kasai_link_impression` / `kasai_link_click` | `municipality_code` | 文字列 | `13101` | 表示中の自治体コード（自治体面のみ） |
 | | `municipality_name` | 文字列 | `千代田区` | 寄付先名（行政区は親の政令市名） |
-| `compare_start` | `municipality_codes` | 文字列 | `13101,27100` | 着地時に選択済みの自治体コード（カンマ区切り） |
-| | `count` | 数値 | `3` | 同上の件数 |
-| | `source` | 文字列 | `ranking_row` / `ranking_top3` / `pref_ranking_top3` | 送り元の導線 |
-| `tool_entry` | `tool` | 文字列 | `shindan` | 着地した道具のページ |
-| | `source` | 文字列 | `ranking` / `pref_ranking` / `prefecture_ranking` | 送り元の導線 |
+| `tool_entry` | `tool` | 文字列 | `compare` / `shindan` | 着地した道具のページ |
+| | `source` | 文字列 | `ranking` / `ranking_row` / `ranking_top3` / `pref_ranking` / `pref_ranking_top3` / `prefecture_ranking` / `pref_hub` | 送り元の導線。語彙は `lib/siteNav.ts` の `ToolSource` 型で閉じている（`pref_ranking`=県別ランキング、`prefecture_ranking`=都道府県ランキング） |
+| | `municipality_codes` | 文字列 | `13101,27100` | 比較のみ。着地時に選択済みの自治体コード |
+| | `count` | 数値 | `3` | 比較のみ。同上の件数 |
 | `shindan_run` | `weights` | 文字列 | `210120` | SHINDAN_AXES 順の重み6桁（0-2） |
 | | `regions` | 文字列 | `kanto,tokai` | 選択した地方（空=全国） |
 | | `result_count` | 数値 | `312` | 条件に該当した自治体数 |

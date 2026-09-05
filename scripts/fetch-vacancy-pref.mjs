@@ -17,7 +17,8 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { PREFS } from "./_lib/prefs.mjs";
-import { requireEstatAppId, fetchStatsValues } from "./_lib/estat.mjs";
+import { requireEstatAppId } from "./_lib/estat.mjs";
+import { fetchHousingCounts, HOUSING_AS_OF } from "./_lib/housingStats.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
@@ -25,11 +26,9 @@ const OUT = path.join(ROOT, "data", "vacancy-pref.json");
 
 const APP_ID = requireEstatAppId();
 
-const STATS_DATA_ID = "0004021421";
+// 表ID・カテゴリコード・基準年は scripts/_lib/housingStats.mjs に集約（市区町村版と共有）。
 const SOURCE = "住宅・土地統計調査（居住世帯の有無別住宅数・都道府県）";
-const AS_OF = "2023";
-const CAT_TOTAL = "0";   // 居住世帯の有無: 総数（住宅総数）
-const CAT_VACANT = "22"; // 居住世帯の有無: 空き家
+const AS_OF = HOUSING_AS_OF;
 // e-Stat の地域コードは都道府県が5桁ゼロ埋め（北海道=01000 … 沖縄=47000）。
 // scripts/_lib/prefs.mjs の PREFS は slug をキーにしたオブジェクトで、県コードは `code`。
 const PREF_LIST = Object.entries(PREFS).map(([slug, p]) => ({ slug, code: p.code }));
@@ -38,19 +37,7 @@ const areaCodeOf = (code) => `${code}000`;
 async function main() {
   const codes = PREF_LIST.map((p) => areaCodeOf(p.code));
   console.log(`都道府県 ${codes.length}件の空き家数を取得...`);
-  const rows = await fetchStatsValues(APP_ID, STATS_DATA_ID, codes, {
-    cdCat01: `${CAT_TOTAL},${CAT_VACANT}`,
-  });
-
-  const byArea = new Map();
-  for (const v of rows) {
-    const area = v["@area"];
-    const n = parseInt(v["$"], 10);
-    if (Number.isNaN(n)) continue;
-    if (!byArea.has(area)) byArea.set(area, { total: 0, vacant: 0 });
-    if (v["@cat01"] === CAT_TOTAL) byArea.get(area).total = n;
-    else if (v["@cat01"] === CAT_VACANT) byArea.get(area).vacant = n;
-  }
+  const byArea = await fetchHousingCounts(APP_ID, codes);
 
   const prefs = {};
   const missing = [];

@@ -17,7 +17,7 @@ import { shindanHref } from "@/lib/siteNav";
 import { SITE, absoluteUrl } from "@/lib/site";
 import { hasRent, rentBand } from "@/lib/rentColor";
 import { livabilityBands } from "@/lib/livabilityScore";
-import { buildPrefHazardRows, summarizePrefHazard } from "@/lib/prefHazardTable";
+import { buildPrefHazardRows } from "@/lib/prefHazardTable";
 import { HAZARD_MAX_LEVEL_DISCLAIMER } from "@/lib/hazardScale";
 import { hasLandPrice } from "@/lib/landPrice";
 import { isWaitlistDisclosed } from "@/lib/waitlist";
@@ -145,7 +145,7 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
   // 理由は lib/prefHazardTable.ts の冒頭コメント: 「浸水想定なし」を抜き出すと
   // 区域指定の進み具合を安全性と取り違えさせるため。
   const hazardRows = buildPrefHazardRows(muni);
-  const hazardSummary = summarizePrefHazard(hazardRows);
+  const hazardEvaluated = hazardRows.filter((r) => r.evaluated).length;
 
   // 全自治体一覧（行政コード順 = 行政の標準的な並び）。displayName で区はフルネーム表示。
   const listed = [...all].sort((a, b) => a.code.localeCompare(b.code));
@@ -459,7 +459,7 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
             <div className="rk-section-heading">
               <h2 className="rk-h2">{prefName}の市区町村別 災害リスク</h2>
               <p className="rk-section-sub">
-                県内 {hazardSummary.total} 市区町村の洪水・土砂・津波・高潮の想定を、行政コード順にそのまま並べています（リスクの大小では並べ替えていません）。
+                県内 {hazardRows.length} 市区町村の洪水・土砂・津波・高潮の想定を、行政コード順にそのまま並べています（リスクの大小では並べ替えていません）。
               </p>
             </div>
           </div>
@@ -479,7 +479,7 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
                   {hazardRows.map((r) => (
                     <tr key={r.code}>
                       <th scope="row">
-                        <Link href={`/area/${r.pref}/${r.code}`} className="pref-table-link">{r.name}</Link>
+                        <Link href={`/area/${pref.slug}/${r.code}`} className="pref-table-link">{r.name}</Link>
                       </th>
                       <td>{r.flood}</td>
                       <td>{r.landslide}</td>
@@ -495,7 +495,7 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
             出典は国土数値情報（不動産情報ライブラリ）です。表示しているのは各自治体内で確認された<strong>最大の区分</strong>で、{HAZARD_MAX_LEVEL_DISCLAIMER}
             「想定なし」は洪水浸水想定区域などが<strong>指定されていない</strong>ことを示すもので、災害が起きないことを意味しません。
             区域の指定状況は河川管理者や地域によって差があります。「対象外」は元データの整備範囲外です
-            （評価済み {hazardSummary.evaluated} / {hazardSummary.total} 自治体）。
+            （評価済み {hazardEvaluated} / {hazardRows.length} 自治体）。
           </p>
           <div className="rk-hero-actions">
             <Link href={mapHrefForPref(pref.slug, "/map/hazard")} className="rk-action rk-action-primary">

@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { buildPrefHazardRows, summarizePrefHazard } from "@/lib/prefHazardTable";
+import { buildPrefHazardRows } from "@/lib/prefHazardTable";
 import { muni, hazard } from "../_fixtures";
 
 // この一覧の要は「選別しないこと」。リスクの低い自治体を抜き出すと、それは安全性ではなく
@@ -24,9 +24,9 @@ describe("buildPrefHazardRows", () => {
         hazard: hazard({ floodLevel: 0, tsunamiLevel: 7, tsunamiDepth: "10m以上 ～ 20m未満" }),
       }),
     ]);
+    // 洪水だけ見れば「浸水なし」だが、津波の列に想定が出る。単一指標で安全と見せない
     expect(rows[0].flood).toBe("浸水なし");
     expect(rows[0].tsunami).toContain("10m以上");
-    expect(rows[0].riskCount).toBe(1); // 津波のぶんだけ数える
   });
 
   it("評価対象外は全列が「対象外」になる（想定なしと混同させない）", () => {
@@ -41,7 +41,6 @@ describe("buildPrefHazardRows", () => {
     expect([rows[0].flood, rows[0].landslide, rows[0].tsunami, rows[0].stormSurge]).toEqual([
       "対象外", "対象外", "対象外", "対象外",
     ]);
-    expect(rows[0].riskCount).toBe(0);
   });
 
   it("内陸（津波・高潮が -1）は「対象外」、想定0は「想定なし」と書き分ける", () => {
@@ -55,31 +54,10 @@ describe("buildPrefHazardRows", () => {
     expect(rows[0].stormSurge).toBe("想定なし"); // 評価済みで想定が無い
   });
 
-  it("riskCount は「想定あり」の指標数（対象外は数えない）", () => {
-    const rows = buildPrefHazardRows([
-      muni({
-        code: "11202",
-        hazard: hazard({ floodLevel: 3, landslideLevel: 2, tsunamiLevel: -1, stormSurgeLevel: -1 }),
-      }),
-    ]);
-    expect(rows[0].riskCount).toBe(2);
-  });
-
   it("表示名は displayName を優先する（政令市の区）", () => {
     const rows = buildPrefHazardRows([
       muni({ code: "11101", name: "西区", displayName: "さいたま市西区" }),
     ]);
     expect(rows[0].name).toBe("さいたま市西区");
-  });
-});
-
-describe("summarizePrefHazard", () => {
-  it("総数・評価済み数・想定あり数を実数で返す（断定的な要約はしない）", () => {
-    const rows = buildPrefHazardRows([
-      muni({ code: "11201", hazard: hazard({ floodLevel: 3 }) }),
-      muni({ code: "11202", hazard: hazard({ floodLevel: 0 }) }),
-      muni({ code: "11203", hazard: hazard({ source: "対象外（テスト）" }) }),
-    ]);
-    expect(summarizePrefHazard(rows)).toEqual({ total: 3, evaluated: 2, anyRisk: 1 });
   });
 });

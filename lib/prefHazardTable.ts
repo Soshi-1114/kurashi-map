@@ -26,7 +26,6 @@ import {
 
 export type PrefHazardRow = {
   code: string;
-  pref: string;
   name: string;
   /** 評価対象か（false なら全列が「対象外」） */
   evaluated: boolean;
@@ -38,8 +37,6 @@ export type PrefHazardRow = {
   tsunami: string;
   /** 高潮の想定（沿岸のみ） */
   stormSurge: string;
-  /** 何らかの想定がある指標の数（0〜4）。並べ替えには使わず、表示の補助のみ */
-  riskCount: number;
 };
 
 const NOT_EVALUATED = "対象外";
@@ -57,14 +54,12 @@ export function buildPrefHazardRows(munis: Municipality[]): PrefHazardRow[] {
       if (!evaluated) {
         return {
           code: m.code,
-          pref: m.pref,
           name: m.displayName ?? m.name,
           evaluated,
           flood: NOT_EVALUATED,
           landslide: NOT_EVALUATED,
           tsunami: NOT_EVALUATED,
           stormSurge: NOT_EVALUATED,
-          riskCount: 0,
         };
       }
       const flood = floodLevelOf(m.hazard);
@@ -73,28 +68,12 @@ export function buildPrefHazardRows(munis: Municipality[]): PrefHazardRow[] {
       const surge = stormSurgeLevelOf(m.hazard);
       return {
         code: m.code,
-        pref: m.pref,
         name: m.displayName ?? m.name,
         evaluated,
         flood: floodLevelLabel(flood),
         landslide: landslideLevelLabel(slide),
         tsunami: coastalHazardLabel(tsunami, m.hazard.tsunamiDepth),
         stormSurge: coastalHazardLabel(surge, m.hazard.stormSurgeDepth),
-        // 「想定あり」の数。0=すべて想定なし。対象外(-1)は数えない
-        riskCount: [flood > 0, slide > 0, tsunami > 0, surge > 0].filter(Boolean).length,
       };
     });
-}
-
-/** 一覧の下に出す要約（何件が評価済みか・何件が想定ありか）。断定を避けた実数のみ。 */
-export function summarizePrefHazard(rows: PrefHazardRow[]): {
-  total: number;
-  evaluated: number;
-  anyRisk: number;
-} {
-  return {
-    total: rows.length,
-    evaluated: rows.filter((r) => r.evaluated).length,
-    anyRisk: rows.filter((r) => r.riskCount > 0).length,
-  };
 }
