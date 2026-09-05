@@ -13,7 +13,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import {
-  Trophy, BarChart3, Database, ArrowLeft, Map as MapIcon, ShieldCheck, Info,
+  Trophy, BarChart3, Database, ArrowLeft, Map as MapIcon, ShieldCheck, Info, Compass,
 } from "lucide-react";
 import { listAllAcrossPrefs } from "@/lib/metrics";
 import { getRankingBySlug } from "@/lib/rankings";
@@ -170,6 +170,9 @@ export default async function PrefectureRankingPage(props: { params: Promise<Par
               <BarChart3 size={15} aria-hidden="true" />市区町村版を見る
             </Link>
           )}
+          <Link href="/shindan?from=prefecture_ranking" className="rk-action rk-action-ghost">
+            <Compass size={15} aria-hidden="true" />条件から街を診断する
+          </Link>
           <ShareButton
             className="rk-action rk-action-ghost"
             title={`${def.title}｜${SITE.name}`}

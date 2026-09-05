@@ -13,7 +13,7 @@ import {
   type ShindanEntry, type ShindanWeights, type ShindanWeight,
 } from "@/lib/shindan";
 import { REGIONS, getPrefByCode } from "@/lib/prefs";
-import { trackShindanRun, trackShindanResultClick } from "@/lib/analytics";
+import { trackShindanRun, trackShindanResultClick, trackToolEntry } from "@/lib/analytics";
 import { kasaiHokenLink } from "@/lib/monetization";
 import { KasaiLink } from "@/components/monetization/KasaiLink";
 
@@ -38,6 +38,10 @@ export default function ShindanClient({ entries }: { entries: ShindanEntry[] }) 
     // eslint-disable-next-line react-hooks/set-state-in-effect
     if (hasAnyWeight(w)) setWeights(w);
     if (r.length > 0) setRegions(r);
+    // ランキング等からの送客を1回だけ数える（?from=ranking）。診断ページは検索流入が
+    // ほぼ無く、流入は他ページからの回遊が前提なので、送り元を持たせて効果を見る。
+    const from = params.get("from");
+    if (from) trackToolEntry("shindan", from);
   }, []);
 
   // 状態・URL・計測を1箇所で更新する（復元時は通らないため、shindan_run は

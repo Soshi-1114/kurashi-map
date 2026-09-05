@@ -47,6 +47,15 @@ export function trackApplyFilter(params: MapFilters): void {
   });
 }
 
+/**
+ * 道具のページ（診断・比較など）への着地を、送り元つきで1回だけ数える。
+ * ランキング（情報意図）から道具（選択意図）へどれだけ流れたかを見るための指標で、
+ * compare_start と同じく着地側で ?from= を読んで発火する。
+ */
+export function trackToolEntry(tool: string, source: string): void {
+  track("tool_entry", { tool, source });
+}
+
 /** 街診断の実行（重み・地方の組み合わせ変更ごとに1回）。 */
 export function trackShindanRun(params: { weights: string; regions: string; resultCount: number }): void {
   track("shindan_run", {

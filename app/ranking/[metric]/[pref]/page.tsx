@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import {
-  Trophy, BarChart3, Database, ArrowLeft, Map as MapIcon, ShieldCheck, Scale,
+  Trophy, BarChart3, Database, ArrowLeft, Map as MapIcon, ShieldCheck, Scale, Compass,
 } from "lucide-react";
 import { listMunicipalities } from "@/lib/metrics";
 import { RANKINGS, getRankingBySlug, rankBy, medianOf, appendFreshness, type RankingDef } from "@/lib/rankings";
@@ -270,6 +270,9 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
               <Scale size={15} aria-hidden="true" />上位{topForCompare.length}件を比較する
             </Link>
           )}
+          <Link href="/shindan?from=pref_ranking" className="rk-action rk-action-ghost">
+            <Compass size={15} aria-hidden="true" />条件から街を診断する
+          </Link>
           {mapHub && (
             <Link href={mapHrefForPref(pref.slug, mapHub.href)} className="rk-action rk-action-ghost">
               <MapIcon size={15} aria-hidden="true" />{mapHub.label}

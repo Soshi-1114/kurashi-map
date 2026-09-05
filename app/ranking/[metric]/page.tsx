@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import {
-  Trophy, BarChart3, MapPin, Database, ArrowLeft, Map as MapIcon, ShieldCheck, Scale,
+  Trophy, BarChart3, MapPin, Database, ArrowLeft, Map as MapIcon, ShieldCheck, Scale, Compass,
 } from "lucide-react";
 import { listAllAcrossPrefs } from "@/lib/metrics";
 import { RANKINGS, getRankingBySlug, muniLevelOnly, rankBy, appendFreshness, type RankingDef } from "@/lib/rankings";
@@ -18,6 +18,9 @@ import RankSources, { RANKING_SOURCES_TEXT } from "@/components/RankSources";
 import { RankBadge } from "@/components/RankBadge";
 import PageShell from "@/components/PageShell";
 import { FurusatoBand } from "@/components/monetization/FurusatoBand";
+import { FurusatoLink } from "@/components/monetization/FurusatoLink";
+import { furusatoLink } from "@/lib/monetization";
+import { furunaviMunicipalPageUrl } from "@/lib/furunaviMunicipals";
 import { ShareButton } from "@/components/ShareButton";
 
 type Params = { metric: string };
@@ -103,6 +106,11 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
 
   // データ鮮度ラベル（指標の asOf 由来）。
   const top1 = ranked[0] ?? null;
+
+  // 1位自治体のふるさと納税リンク（ふるなび未掲載なら null で導線ごと非表示）。
+  // 最下部の固定バンドとは別に、1位が話題の中心になっている順位台の直後へ置く
+  // （2026-09 実測: 全導線がページ最下部にあり露出330→クリック1だった）。
+  const topFurusato = top1 ? furusatoLink(furunaviMunicipalPageUrl(top1.code)) : null;
   const top1Name = top1 ? `${prefNameOf(top1.pref)}${top1.displayName ?? top1.name}` : "—";
   const freshness = def.freshnessLabel?.(top1) ?? null;
   // 薄ページ対策の導入文・FAQ（定義があるランキングのみ）。{top1} は1位自治体名に置換。
@@ -190,6 +198,9 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
               <Scale size={15} aria-hidden="true" />上位{topForCompare.length}件を比較する
             </Link>
           )}
+          <Link href="/shindan?from=ranking" className="rk-action rk-action-ghost">
+            <Compass size={15} aria-hidden="true" />条件から街を診断する
+          </Link>
           {/* 都道府県版がある指標だけ、47都道府県を並べたページへ送る
               （「都道府県 空き家 ランキング」等、県単位で比べたい検索意図の受け皿）。 */}
           {hasPrefRanking(def.slug) && (
@@ -253,6 +264,20 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
               </li>
             ))}
           </ol>
+        )}
+
+        {/* 1位自治体のふるさと納税導線。順位台の直後＝1位が話題の中心にある位置に置く
+            （ページ最下部の FurusatoBand とは掲載面を分けて GA4 で CTR を比べる）。
+            一覧型は「1位」が存在しないため出さない。 */}
+        {!isList && topFurusato && top1 && (
+          <div className="ad-support-section" aria-label="生活関連の参考リンク">
+            <FurusatoLink
+              link={topFurusato}
+              targetName={top1.displayName ?? top1.name}
+              municipalityCode={top1.code}
+              placement="ranking-top"
+            />
+          </div>
         )}
 
         {ladder.length > 0 && (
