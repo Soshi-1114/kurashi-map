@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { MAP_HUBS, mapHubByHref } from "@/lib/siteNav";
+import { MAP_HUBS, mapHubByHref, compareHref } from "@/lib/siteNav";
 import { RANKINGS } from "@/lib/rankings";
 
 describe("mapHubByHref / RankingDef.mapHub", () => {
@@ -15,6 +15,17 @@ describe("mapHubByHref / RankingDef.mapHub", () => {
   it("未設定・未知の href は null（CTA を出さない）", () => {
     expect(mapHubByHref(undefined)).toBeNull();
     expect(mapHubByHref("/map/unknown")).toBeNull();
+  });
+
+  it("compareHref: codes をカンマ連結し、from を計測用に付ける", () => {
+    expect(compareHref(["11203"], "ranking_row")).toBe("/compare?codes=11203&from=ranking_row");
+    expect(compareHref(["13101", "27100", "14100"], "ranking_top3")).toBe(
+      "/compare?codes=13101,27100,14100&from=ranking_top3",
+    );
+  });
+
+  it("compareHref: from はURLエンコードする（クエリ壊れの防止）", () => {
+    expect(compareHref(["11203"], "a&b=c")).toBe("/compare?codes=11203&from=a%26b%3Dc");
   });
 
   it("各地図ハブに少なくとも1つのランキングが対応する（対応の腐り検出）", () => {

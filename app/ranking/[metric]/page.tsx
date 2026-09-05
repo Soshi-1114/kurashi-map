@@ -3,13 +3,14 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import {
-  Trophy, BarChart3, MapPin, Database, ArrowLeft, Map as MapIcon, ShieldCheck,
+  Trophy, BarChart3, MapPin, Database, ArrowLeft, Map as MapIcon, ShieldCheck, Scale, Compass,
 } from "lucide-react";
 import { listAllAcrossPrefs } from "@/lib/metrics";
 import { RANKINGS, getRankingBySlug, muniLevelOnly, rankBy, appendFreshness, type RankingDef } from "@/lib/rankings";
+import { hasPrefRanking } from "@/lib/prefRankings";
 import { PREFS } from "@/lib/prefs";
 import { SITE, prefNameOf, absoluteUrl } from "@/lib/site";
-import { mapHubByHref } from "@/lib/siteNav";
+import { mapHubByHref, compareHref, shindanHref, MAX_COMPARE } from "@/lib/siteNav";
 import PrefRegionLinks from "@/components/PrefRegionLinks";
 import RankLinkList from "@/components/RankLinkList";
 import RankFaq from "@/components/RankFaq";
@@ -17,6 +18,9 @@ import RankSources, { RANKING_SOURCES_TEXT } from "@/components/RankSources";
 import { RankBadge } from "@/components/RankBadge";
 import PageShell from "@/components/PageShell";
 import { FurusatoBand } from "@/components/monetization/FurusatoBand";
+import { FurusatoLink } from "@/components/monetization/FurusatoLink";
+import { furusatoLink } from "@/lib/monetization";
+import { furunaviMunicipalPageUrl } from "@/lib/furunaviMunicipals";
 import { ShareButton } from "@/components/ShareButton";
 
 type Params = { metric: string };
@@ -80,7 +84,7 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
   const fullRanked = rankBy(def, allMunis);
   const ranked = fullRanked.slice(0, TOP_TABLE);
   if (ranked.length === 0) notFound();
-  const podium = ranked.slice(0, 3);          // トップ3＝順位台
+  const podium = ranked.slice(0, MAX_COMPARE); // 順位台＝比較ページの上限と同数
   const ladder = ranked.slice(3, TOP_CARDS);  // 4位以降＝序列ラダー
   // membershipList 型（例: 待機児童ゼロ）は「条件に該当する自治体の一覧」で、並び順は
   // 人口など別の指標。順位・メダル・「N位」表記を出すと意味を誤読するため見せ方を変える。
@@ -98,6 +102,11 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
 
   // データ鮮度ラベル（指標の asOf 由来）。
   const top1 = ranked[0] ?? null;
+
+  // 1位自治体のふるさと納税リンク（ふるなび未掲載なら null で導線ごと非表示）。
+  // 最下部の固定バンドとは別に、1位が話題の中心になっている順位台の直後へ置く
+  // （2026-09 実測: 全導線がページ最下部にあり露出330→クリック1だった）。
+  const topFurusato = top1 ? furusatoLink(furunaviMunicipalPageUrl(top1.code)) : null;
   const top1Name = top1 ? `${prefNameOf(top1.pref)}${top1.displayName ?? top1.name}` : "—";
   const freshness = def.freshnessLabel?.(top1) ?? null;
   // 薄ページ対策の導入文・FAQ（定義があるランキングのみ）。{top1} は1位自治体名に置換。
@@ -178,6 +187,25 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
               <MapIcon size={15} aria-hidden="true" />{mapHub.label}で全国を見る
             </Link>
           )}
+          {/* ランキング（情報意図）から比較（選択意図）へ渡す1クリック導線。
+              上位3件を最初から選択した状態で /compare に着地する（MAX_COMPARE=3）。 */}
+          {/* 一覧型（membershipList）は順位ではないため「上位N件」という括りが意味を持たない。
+              件数は podium（=MAX_COMPARE 件）そのままで、compareHref 側でも上限に丸まる。 */}
+          {!isList && podium.length >= 2 && (
+            <Link href={compareHref(podium.map((m) => m.code), "ranking_top3")} className="rk-action rk-action-ghost">
+              <Scale size={15} aria-hidden="true" />上位{podium.length}件を比較する
+            </Link>
+          )}
+          <Link href={shindanHref("ranking")} className="rk-action rk-action-ghost">
+            <Compass size={15} aria-hidden="true" />条件から街を診断する
+          </Link>
+          {/* 都道府県版がある指標だけ、47都道府県を並べたページへ送る
+              （「都道府県 空き家 ランキング」等、県単位で比べたい検索意図の受け皿）。 */}
+          {hasPrefRanking(def.slug) && (
+            <Link href={`/ranking/${def.slug}/prefecture`} className="rk-action rk-action-ghost">
+              <MapPin size={15} aria-hidden="true" />都道府県別で見る
+            </Link>
+          )}
           {def.related && (
             <Link href={`/ranking/${def.related.slug}`} className="rk-action rk-action-ghost">
               <BarChart3 size={15} aria-hidden="true" />{def.related.label}
@@ -236,6 +264,20 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
           </ol>
         )}
 
+        {/* 1位自治体のふるさと納税導線。順位台の直後＝1位が話題の中心にある位置に置く
+            （ページ最下部の FurusatoBand とは掲載面を分けて GA4 で CTR を比べる）。
+            一覧型は「1位」が存在しないため出さない。 */}
+        {!isList && topFurusato && top1 && (
+          <div className="ad-support-section" aria-label="生活関連の参考リンク">
+            <FurusatoLink
+              link={topFurusato}
+              targetName={top1.displayName ?? top1.name}
+              municipalityCode={top1.code}
+              placement="ranking-top"
+            />
+          </div>
+        )}
+
         {ladder.length > 0 && (
           <ol className="rk-ladder" start={4}>
             {ladder.map((m, i) => (
@@ -279,6 +321,7 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
                   <th scope="col">自治体</th>
                   <th scope="col">都道府県</th>
                   <th scope="col" className="num">{def.columnLabel}</th>
+                  <th scope="col">比較</th>
                 </tr>
               </thead>
               <tbody>
@@ -296,6 +339,17 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
                       </Link>
                     </td>
                     <td className="num">{def.display(m)}</td>
+                    {/* 1クリックで比較ページへ。素のリンクのままにして計測は着地側で行う
+                        （100行ぶんのクライアント化を避ける。lib/analytics trackCompareStart 参照）。 */}
+                    <td>
+                      <Link
+                        href={compareHref([m.code], "ranking_row")}
+                        className="rk-row-compare"
+                        aria-label={`${m.displayName ?? m.name}を比較に追加`}
+                      >
+                        <Scale size={13} aria-hidden="true" />比較
+                      </Link>
+                    </td>
                   </tr>
                 ))}
               </tbody>

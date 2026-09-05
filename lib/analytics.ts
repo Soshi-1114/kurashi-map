@@ -47,12 +47,35 @@ export function trackApplyFilter(params: MapFilters): void {
   });
 }
 
+/**
+ * 道具のページ（診断・比較など）への着地を、送り元つきで1回だけ数える。
+ * ランキング（情報意図）から道具（選択意図）へどれだけ流れたかを見るための指標で、
+ * compare_start と同じく着地側で ?from= を読んで発火する。
+ */
+export function trackToolEntry(tool: string, source: string): void {
+  track("tool_entry", { tool, source });
+}
+
 /** 街診断の実行（重み・地方の組み合わせ変更ごとに1回）。 */
 export function trackShindanRun(params: { weights: string; regions: string; resultCount: number }): void {
   track("shindan_run", {
     weights: params.weights,       // SHINDAN_AXES 順の6桁（例 "210120"）
     regions: params.regions,       // 地方キーのカンマ区切り（空=全国）
     result_count: params.resultCount,
+  });
+}
+
+/**
+ * 比較ページへの着地（ランキング等からの送客）。source で導線の位置を区別する。
+ * 発火はランキング側ではなく /compare のマウント時に1回（?from= を見る）:
+ * ランキング表の各行をクライアントコンポーネントにすると100件ぶんの hydration が
+ * 増えるため、リンクは素のままにして着地側で1回だけ計測する。
+ */
+export function trackCompareStart(params: { codes: string[]; source: string }): void {
+  track("compare_start", {
+    municipality_codes: params.codes.join(","),
+    count: params.codes.length,
+    source: params.source,
   });
 }
 

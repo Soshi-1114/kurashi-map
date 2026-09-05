@@ -28,7 +28,7 @@ export function FurusatoLink({
   targetName?: string;
   municipalityCode?: string;
   /** 掲載面。GA4 の click / impression を面ごとに分けて CTR を見るための次元 */
-  placement?: "area" | "ranking" | "future-view";
+  placement?: "area" | "ranking" | "ranking-top" | "future-view";
 }) {
   // portal（固定リンク）は着地がポータルのトップ等になるため、
   // 自治体のページに着くと誤解させない文言にする。

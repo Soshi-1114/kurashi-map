@@ -26,3 +26,32 @@ export const MAP_HUBS: ReadonlyArray<NavLink & { sitemapPriority: number }> = [
 export function mapHubByHref(href: string | undefined): NavLink | null {
   return MAP_HUBS.find((h) => h.href === href) ?? null;
 }
+
+// ---- 道具（比較・診断）への送客 ----
+//
+// ランキングは検索流入の9割を占める一方、比較・診断といった「道具」のページには
+// ほとんど回遊していない（2026-09 実測: /compare 80PV・/shindan 13PV）。
+// 送り先URLと `from` の語彙をこの2関数に集約し、各ページで生成しない。
+//
+// from は着地側（CompareClient / ShindanClient）が GA4 の compare_start /
+// tool_entry の source として送る。リンク自体はサーバーコンポーネントのまま
+// 置けるよう、どちらも素の文字列を返す。
+
+/**
+ * 比較ページで横並びにできる自治体数の上限。
+ * ここに置くのは、上限を知る必要があるのがクライアント（CompareClient のピッカー）
+ * だけでなく、送り出す側（ランキングの「上位N件を比較する」）でもあるため。
+ * サーバーコンポーネントから "use client" モジュールを参照しないで済ませる。
+ */
+export const MAX_COMPARE = 3;
+
+/** 比較ページ（/compare）へ送るURL。codes は MAX_COMPARE 件に丸める。 */
+export function compareHref(codes: string[], from: string): string {
+  const capped = codes.slice(0, MAX_COMPARE);
+  return `/compare?codes=${capped.join(",")}&from=${encodeURIComponent(from)}`;
+}
+
+/** 街診断（/shindan）へ送るURL。 */
+export function shindanHref(from: string): string {
+  return `/shindan?from=${encodeURIComponent(from)}`;
+}

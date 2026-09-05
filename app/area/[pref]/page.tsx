@@ -2,7 +2,7 @@ import "../../league.css";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Wallet, MapIcon, BarChart3, ArrowLeft, ArrowUpRight, Building2, Users } from "lucide-react";
+import { Wallet, MapIcon, BarChart3, ArrowLeft, ArrowUpRight, Building2, Users, Compass, Star } from "lucide-react";
 import { listMunicipalities, listAll } from "@/lib/metrics";
 import {
   RANKINGS, getRankingBySlug, rankBy,
@@ -13,8 +13,10 @@ import RankLinkList from "@/components/RankLinkList";
 import RankSources from "@/components/RankSources";
 import { PREFS, getPrefBySlug } from "@/lib/prefs";
 import { mapHrefForPref } from "@/lib/mapDeepLink";
+import { shindanHref } from "@/lib/siteNav";
 import { SITE, absoluteUrl } from "@/lib/site";
 import { hasRent, rentBand } from "@/lib/rentColor";
+import { livabilityBands } from "@/lib/livabilityScore";
 import { hasLandPrice } from "@/lib/landPrice";
 import { isWaitlistDisclosed } from "@/lib/waitlist";
 import type { Municipality } from "@/lib/types";
@@ -130,6 +132,12 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
     .slice(0, 10);
   const cheapPodium = cheapest.slice(0, 3);
   const cheapLadder = cheapest.slice(3, 10);
+
+  // 住みやすさ総合スコアの上位バンド（同点をまとめた形）。
+  // 「{県} 住みやすさ」は 2026-09 実測で 659表示・クリック0・平均28〜44位と、
+  // 需要はあるのに答えを持てていなかったクエリ。順位表にしないのは意図的で、
+  // スコアが17段階しかなく同点が多数出るため（lib/livabilityScore.livabilityBands）。
+  const livBands = livabilityBands(muni, 3);
 
   // 全自治体一覧（行政コード順 = 行政の標準的な並び）。displayName で区はフルネーム表示。
   const listed = [...all].sort((a, b) => a.code.localeCompare(b.code));
@@ -285,6 +293,50 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
             中央値は「県内の市区町村を値の順に並べた真ん中の自治体の値」で、平均ではありません（人口規模による重み付けをしていません）。
             順位は値が高い順で、高い・低いに優劣の意味はありません。データのない自治体は集計に含めていません。
           </p>
+        </section>
+      )}
+
+      {livBands.length > 0 && (
+        <section className="rk-section">
+          <div className="rk-section-head">
+            <span className="rk-section-icon rk-tone-pop"><Star size={20} aria-hidden="true" /></span>
+            <div className="rk-section-heading">
+              <h2 className="rk-h2">{prefName}の住みやすさスコア</h2>
+              <p className="rk-section-sub">
+                交通アクセス・家賃・保育・災害リスク・生活インフラの5軸を、政府統計の実データから
+                星1〜5で評価して平均した「目安」です（100点満点）。データのない軸は算出から除き、母数を補正しています。
+              </p>
+            </div>
+          </div>
+          <ul className="pref-liv-bands">
+            {livBands.map((band) => (
+              <li key={band.score} className="pref-liv-band">
+                <span className="pref-liv-score">
+                  <b>{band.score}</b><span className="pref-liv-unit">点</span>
+                </span>
+                <ul className="pref-chip-grid">
+                  {band.munis.map((m) => (
+                    <li key={m.code}>
+                      <Link href={`/area/${m.pref}/${m.code}`} className="pref-chip">
+                        {m.displayName ?? m.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ul>
+          <p className="rk-section-sub">
+            スコアは5軸の星（各1〜5）の平均なので取りうる値が限られ、<strong>同じ点数の自治体が多く並びます</strong>。
+            そのため順位（1位・2位…）ではなく同点をまとめて表示しています。
+            また、交通アクセスと生活インフラの軸は施設の実数を用いるため、規模の大きい自治体ほど高く出る傾向があります。
+            点数の高さは利便性の目安であって、暮らしの良し悪しを決めるものではありません。
+          </p>
+          <div className="rk-hero-actions">
+            <Link href={shindanHref("pref_hub")} className="rk-action rk-action-primary">
+              <Compass size={15} aria-hidden="true" />重視する条件を選んで診断する
+            </Link>
+          </div>
         </section>
       )}
 

@@ -27,6 +27,8 @@ KurashiMap は Google Analytics 4（gtag.js）でページビューに加えて�
 | `furusato_link_click` | ふるさと納税リンクをクリックした時 | `components/area/FurusatoLink.tsx` |
 | `kasai_link_impression` | 火災保険導線が50%視認された時（1要素1回） | `components/monetization/KasaiLink.tsx` |
 | `kasai_link_click` | 火災保険の外部リンクをクリックした時（キーイベント候補） | `components/monetization/KasaiLink.tsx` |
+| `compare_start` | 他ページ（ランキング等）から比較ページに着地した時（`?from=` があるときのみ1回） | `components/compare/CompareClient.tsx` |
+| `tool_entry` | 他ページから道具のページ（診断）に着地した時（`?from=` があるときのみ1回） | `components/shindan/ShindanClient.tsx` |
 | `shindan_run` | 街診断の重み・地方の組み合わせを変更した時 | `components/shindan/ShindanClient.tsx` |
 | `shindan_result_click` | 診断結果から自治体詳細へ遷移した時 | `components/shindan/ShindanClient.tsx` |
 | `denki_simulate` | 電気代シミュレーターの入力を確定した時（連続入力は 1s debounce） | `components/denki/DenkiSimulator.tsx` |
@@ -59,10 +61,15 @@ KurashiMap は Google Analytics 4（gtag.js）でページビューに加えて�
 | `support_link_click` | `municipality_code` | 文字列 | `13101` | 表示中の自治体コード |
 | | `municipality_name` | 文字列 | `千代田区` | |
 | `furusato_link_click` | `municipality_code` | 文字列 | `13101` | 表示中の自治体コード |
-| | `placement` | 文字列 | `area` / `ranking` / `future-view` | 掲載面。`future-view`=詳細ページの将来人口カード内 |
+| | `placement` | 文字列 | `area` / `ranking` / `ranking-top` / `future-view` | 掲載面。`ranking-top`=ランキング順位台の直後（1位自治体）、`ranking`=ページ最下部の帯、`future-view`=詳細ページの将来人口カード内 |
 | `kasai_link_impression` / `kasai_link_click` | `placement` | 文字列 | `area` / `hazard-map` / `map-panel` / `shindan` | 掲載面（面ごとのCTR分析用）。`area`=詳細ページ災害カード直下、`map-panel`=地図の自治体パネル（災害オーバーレイ表示中のみ）、`shindan`=診断で災害重視時の結果下 |
 | `kasai_link_impression` / `kasai_link_click` | `municipality_code` | 文字列 | `13101` | 表示中の自治体コード（自治体面のみ） |
 | | `municipality_name` | 文字列 | `千代田区` | 寄付先名（行政区は親の政令市名） |
+| `compare_start` | `municipality_codes` | 文字列 | `13101,27100` | 着地時に選択済みの自治体コード（カンマ区切り） |
+| | `count` | 数値 | `3` | 同上の件数 |
+| | `source` | 文字列 | `ranking_row` / `ranking_top3` / `pref_ranking_top3` | 送り元の導線 |
+| `tool_entry` | `tool` | 文字列 | `shindan` | 着地した道具のページ |
+| | `source` | 文字列 | `ranking` / `pref_ranking` / `prefecture_ranking` | 送り元の導線 |
 | `shindan_run` | `weights` | 文字列 | `210120` | SHINDAN_AXES 順の重み6桁（0-2） |
 | | `regions` | 文字列 | `kanto,tokai` | 選択した地方（空=全国） |
 | | `result_count` | 数値 | `312` | 条件に該当した自治体数 |
@@ -179,6 +186,28 @@ KurashiMap は Google Analytics 4（gtag.js）でページビューに加えて�
 - 行: `塗り分け指標`(metric_key)
 - 値: `イベント数` または `総ユーザー数`
 - → 家賃／地価／人口トレンドのどれが使われているか
+
+---
+
+### D. 「条件の組み合わせ」需要の観測（AND 組み合わせページを作る前に）
+
+2026-09-05 の調査で、2軸以上の意図を含む検索クエリは 62日で **5件・のべ13表示**しか
+無かった（「神奈川 家賃安い 住みやすい」8表示など）。条件は6軸×3値あり、組み合わせを
+静的ページ化すると数が爆発してインデックス予算を毀損する側に倒れる。**作る前に需要を測る**。
+
+測り方は2系統。どちらも既存の計測だけで足り、新しいページは作らない。
+
+1. **実際の利用から**（GA4・`apply_filter`）— 探索レポートで内訳ディメンションに
+   `rent_max` / `flood_max` / `vacancy_max` / `aging_max` / `future_min` を並べ、
+   同時に2つ以上が「条件なし」以外になっている行を数える。
+   ユーザーが実際に複数条件を重ねているかが分かる（意図の実在確認）。
+2. **検索需要から**（GSC）— `npm run gsc:analyze` の `queries.csv` に対し、
+   軸語（家賃/相場・災害/浸水・子育て/保育・空き家・人口・高齢/老後・住みやす）が
+   2つ以上同居する行を抽出して表示回数の合計を見る。
+
+**判断の目安**: 上記2系統のどちらかで、組み合わせ意図が月あたり数百表示規模に
+育ったら静的ページ化を検討する。それまでは `/map` のフィルタ（URL 同期済み）で
+共有可能にしておくに留める。
 
 ---
 
