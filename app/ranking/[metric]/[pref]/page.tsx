@@ -420,12 +420,13 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
         labelPrefix={`${prefName}の`}
       />
 
+      {/* ふるさと納税の導線（検索流入の主戦場）。FAQ・出典より上=ランキング直後に置く */}
+      <FurusatoBand />
+
       <RankFaq faq={faq} />
 
       <RankSources>{RANKING_SOURCES_TEXT}</RankSources>
 
-      {/* ふるさと納税の導線（検索流入の主戦場に置く固定リンク）。env 設定で点灯 */}
-      <FurusatoBand />
 
       <nav className="rk-footnav" aria-label="関連リンク">
         <Link href={`/ranking/${def.slug}`} className="rk-back"><ArrowLeft size={15} aria-hidden="true" />全国版</Link>

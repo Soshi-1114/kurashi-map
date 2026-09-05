@@ -14,12 +14,17 @@ import {
 } from "@/lib/shindan";
 import { REGIONS, getPrefByCode } from "@/lib/prefs";
 import { trackShindanRun, trackShindanResultClick } from "@/lib/analytics";
+import { kasaiHokenLink } from "@/lib/monetization";
+import { KasaiLink } from "@/components/monetization/KasaiLink";
 
 const WEIGHT_LABELS: { value: ShindanWeight; label: string }[] = [
   { value: 0, label: "こだわらない" },
   { value: 1, label: "やや重視" },
   { value: 2, label: "とても重視" },
 ];
+
+// 火災保険導線（env 未設定なら null）。NEXT_PUBLIC はビルド時定数なのでモジュール評価1回でよい。
+const KASAI_LINK = kasaiHokenLink();
 
 export default function ShindanClient({ entries }: { entries: ShindanEntry[] }) {
   // 初期値はマウント後に URL から復元する（SSG プリレンダーとの hydration 不整合を
@@ -161,6 +166,9 @@ export default function ShindanClient({ entries }: { entries: ShindanEntry[] }) 
           <p className="sd-note">
             適合スコアは、重視した軸の住みやすさ評価（1〜5・政府統計の実データから算出した目安）を重み付き平均して100点換算した値です。重視した指標のデータがない自治体は対象外です。アクセス・生活インフラは施設の実数で測るため、規模の大きい自治体ほど高く出る傾向があります。
           </p>
+          {/* 「災害の少なさ」を重視した人にだけ出す文脈一致の火災保険導線
+              （env 未設定なら KASAI_LINK が null で出ない） */}
+          {weights.disaster > 0 && KASAI_LINK && <KasaiLink link={KASAI_LINK} placement="shindan" />}
         </section>
       )}
     </div>

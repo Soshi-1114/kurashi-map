@@ -329,12 +329,13 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
         href={(r) => `/ranking/${r.slug}`}
       />
 
+      {/* ふるさと納税の導線（検索流入の主戦場）。FAQ・出典より上=ランキング直後に置く */}
+      <FurusatoBand />
+
       <RankFaq faq={faq} />
 
       <RankSources>{RANKING_SOURCES_TEXT}</RankSources>
 
-      {/* ふるさと納税の導線（検索流入の主戦場に置く固定リンク）。env 設定で点灯 */}
-      <FurusatoBand />
 
       <nav className="rk-footnav" aria-label="関連リンク">
         <Link href="/ranking" className="rk-back"><ArrowLeft size={15} aria-hidden="true" />ランキング一覧</Link>
