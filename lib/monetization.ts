@@ -80,7 +80,7 @@ export function furusatoAffUrl(): string | null {
 
 export type KasaiLinkInfo = {
   url: string;
-  /** AT のインプレッション計測ピクセル（sp/rr）。AT 以外の ASP は null */
+  /** ASP のインプレッション計測ピクセル。AT は URL から導出、他 ASP は env 指定。無ければ null */
   impressionPixel: string | null;
 };
 
@@ -95,7 +95,10 @@ export type KasaiLinkInfo = {
 export function kasaiHokenLink(): KasaiLinkInfo | null {
   const u = process.env.NEXT_PUBLIC_KASAI_HOKEN_URL?.trim();
   if (!u) return null;
-  return { url: u, impressionPixel: atImpressionPixel(u) };
+  // A8 等、クリックURLから計測画像を導出できない ASP はリンクコード同梱の 1x1 画像URL
+  // （例: https://www14.a8.net/0.gif?a8mat=...）を env でそのまま渡す。AT は URL から導出。
+  const pixel = process.env.NEXT_PUBLIC_KASAI_HOKEN_PIXEL?.trim();
+  return { url: u, impressionPixel: pixel || atImpressionPixel(u) };
 }
 
 export type FurusatoLinkInfo = {

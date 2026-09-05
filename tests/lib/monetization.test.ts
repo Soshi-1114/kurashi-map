@@ -14,6 +14,7 @@ const KEYS = [
   "NEXT_PUBLIC_FURUSATO_URL_TEMPLATE",
   "NEXT_PUBLIC_FURUSATO_AFF_URL",
   "NEXT_PUBLIC_KASAI_HOKEN_URL",
+  "NEXT_PUBLIC_KASAI_HOKEN_PIXEL",
 ] as const;
 afterEach(() => {
   for (const k of KEYS) delete process.env[k];
@@ -165,5 +166,11 @@ describe("kasaiHokenLink", () => {
     process.env.NEXT_PUBLIC_KASAI_HOKEN_URL = "https://px.a8.net/svt/ejp?a8mat=abc";
     const link = kasaiHokenLink()!;
     expect(link.impressionPixel).toBeNull();
+  });
+
+  it("PIXEL env があればそれを優先する（A8 のリンクコード同梱 1x1 画像）", () => {
+    process.env.NEXT_PUBLIC_KASAI_HOKEN_URL = "https://px.a8.net/svt/ejp?a8mat=abc";
+    process.env.NEXT_PUBLIC_KASAI_HOKEN_PIXEL = "https://www14.a8.net/0.gif?a8mat=abc";
+    expect(kasaiHokenLink()!.impressionPixel).toBe("https://www14.a8.net/0.gif?a8mat=abc");
   });
 });
