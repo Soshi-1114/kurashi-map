@@ -12,6 +12,8 @@ import { hasForeignData, foreignRatioPct } from "@/lib/foreignResidents";
 import { hasShelterData, SHELTER_NODATA } from "@/lib/shelters";
 import { hasFuturePopulation, futureTotal, futurePopSource, futurePopAsOf } from "@/lib/futurePopulation";
 import { floodLevelOf, landslideLevelOf, floodGraded, floodLevelLabel, landslideLevelLabel } from "@/lib/hazardScale";
+import type { KasaiLinkInfo } from "@/lib/monetization";
+import { KasaiLink } from "./monetization/KasaiLink";
 
 type Props = {
   municipality: Municipality | null;
@@ -19,10 +21,12 @@ type Props = {
   selectedCode?: string | null;
   // 同県・同階層で家賃が近い自治体（CTA 下の余白に置くクイックリンク）
   related?: MuniSummary[];
+  /** 火災保険導線。災害オーバーレイ表示中のみ非 null（文脈一致の面でだけ出す）。 */
+  kasai?: KasaiLinkInfo | null;
   onClose: () => void;
 };
 
-export default function AreaPanel({ municipality, selectedCode, related, onClose }: Props) {
+export default function AreaPanel({ municipality, selectedCode, related, kasai, onClose }: Props) {
   if (!municipality) {
     if (selectedCode) return null; // 取得中
     // 未選択時：操作を促す空状態ガイド（AreaPanel は PC のみ描画される）
@@ -51,6 +55,7 @@ export default function AreaPanel({ municipality, selectedCode, related, onClose
       <div className="panel-body">
         <div className="summary-block">{buildSummary(m)}</div>
         <MetricCards m={m} />
+        {kasai && <KasaiLink link={kasai} municipalityCode={m.code} placement="map-panel" />}
         <Link href={`/area/${m.pref}/${m.code}`} className="cta-button">
           詳細を見る →
         </Link>

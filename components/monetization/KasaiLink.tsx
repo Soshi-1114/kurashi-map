@@ -23,7 +23,7 @@ export function KasaiLink({
   link: KasaiLinkInfo;
   municipalityCode?: string;
   /** 掲載面。GA4 の click / impression を面ごとに分けて CTR を見るための次元 */
-  placement?: "area" | "hazard-map";
+  placement?: "area" | "hazard-map" | "map-panel";
 }) {
   const eventParams = {
     placement,
