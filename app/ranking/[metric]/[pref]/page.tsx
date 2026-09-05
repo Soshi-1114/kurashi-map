@@ -10,7 +10,7 @@ import { RANKINGS, getRankingBySlug, rankBy, medianOf, appendFreshness, type Ran
 import { getRankPositions, getNationalMedians } from "@/lib/rankingStats";
 import { PREFS, getPrefBySlug } from "@/lib/prefs";
 import { SITE, absoluteUrl } from "@/lib/site";
-import { mapHubByHref, compareHref, shindanHref, MAX_COMPARE } from "@/lib/siteNav";
+import { mapHubByHref, compareHref, shindanHref } from "@/lib/siteNav";
 import { mapHrefForPref } from "@/lib/mapDeepLink";
 import { getForeignStats } from "@/lib/foreignStats";
 import { countWaitlistDisclosed } from "@/lib/waitlist";
@@ -146,10 +146,9 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
 
   // 全国版と同じポディウム（1〜3位）＋ラダー（4位〜）の分割。11位以下は
   // トップ10と同じセクション内の details（エクスパンド）に畳む。
-  const podium = ranked.slice(0, MAX_COMPARE); // 順位台＝比較ページの上限と同数
+  const podium = ranked.slice(0, 3);
   const ladder = ranked.slice(3, TOP_CARDS);
   const rest = ranked.slice(TOP_CARDS);
-
 
   // ラダー（4位〜10位）とエクスパンド内（11位〜）で同一の行マークアップを共有する。
   // 全国版のラダーは県名の副行が付くため共通化せず、このページ内だけの重複を畳む。
@@ -232,7 +231,6 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
   return (
     <PageShell innerClassName="rk-root" trail={[{ name: SITE.name, href: "/" }, { name: "ランキング", href: "/ranking" }, { name: def.shortLabel, href: `/ranking/${def.slug}` }, { name: prefName }]}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }} />
-
 
       <header className="rk-hero rk-reveal">
         <span className="rk-eyebrow"><Database size={14} aria-hidden="true" />都道府県別ランキング</span>
@@ -437,7 +435,6 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
       <RankFaq faq={faq} />
 
       <RankSources>{RANKING_SOURCES_TEXT}</RankSources>
-
 
       <nav className="rk-footnav" aria-label="関連リンク">
         <Link href={`/ranking/${def.slug}`} className="rk-back"><ArrowLeft size={15} aria-hidden="true" />全国版</Link>

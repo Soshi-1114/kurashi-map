@@ -10,7 +10,7 @@ import { RANKINGS, getRankingBySlug, muniLevelOnly, rankBy, appendFreshness, typ
 import { hasPrefRanking } from "@/lib/prefRankings";
 import { PREFS } from "@/lib/prefs";
 import { SITE, prefNameOf, absoluteUrl } from "@/lib/site";
-import { mapHubByHref, compareHref, shindanHref, MAX_COMPARE } from "@/lib/siteNav";
+import { mapHubByHref, compareHref, shindanHref } from "@/lib/siteNav";
 import PrefRegionLinks from "@/components/PrefRegionLinks";
 import RankLinkList from "@/components/RankLinkList";
 import RankFaq from "@/components/RankFaq";
@@ -84,7 +84,7 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
   const fullRanked = rankBy(def, allMunis);
   const ranked = fullRanked.slice(0, TOP_TABLE);
   if (ranked.length === 0) notFound();
-  const podium = ranked.slice(0, MAX_COMPARE); // 順位台＝比較ページの上限と同数
+  const podium = ranked.slice(0, 3);          // トップ3＝順位台
   const ladder = ranked.slice(3, TOP_CARDS);  // 4位以降＝序列ラダー
   // membershipList 型（例: 待機児童ゼロ）は「条件に該当する自治体の一覧」で、並び順は
   // 人口など別の指標。順位・メダル・「N位」表記を出すと意味を誤読するため見せ方を変える。
@@ -189,8 +189,7 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
           )}
           {/* ランキング（情報意図）から比較（選択意図）へ渡す1クリック導線。
               上位3件を最初から選択した状態で /compare に着地する（MAX_COMPARE=3）。 */}
-          {/* 一覧型（membershipList）は順位ではないため「上位N件」という括りが意味を持たない。
-              件数は podium（=MAX_COMPARE 件）そのままで、compareHref 側でも上限に丸まる。 */}
+          {/* 一覧型（membershipList）は順位ではないため「上位N件」という括りが意味を持たない。 */}
           {!isList && podium.length >= 2 && (
             <Link href={compareHref(podium.map((m) => m.code), "ranking_top3")} className="rk-action rk-action-ghost">
               <Scale size={15} aria-hidden="true" />上位{podium.length}件を比較する
@@ -342,12 +341,14 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
                     {/* 1クリックで比較ページへ。素のリンクのままにして計測は着地側で行う
                         （100行ぶんのクライアント化を避ける。lib/analytics trackCompareStart 参照）。 */}
                     <td>
+                      {/* アイコンは付けない: lucide の inline SVG は1つ431バイトで、
+                          100行×24ページで約1MBの静的HTMLになる。文字だけで意味は通る。 */}
                       <Link
                         href={compareHref([m.code], "ranking_row")}
                         className="rk-row-compare"
                         aria-label={`${m.displayName ?? m.name}を比較に追加`}
                       >
-                        <Scale size={13} aria-hidden="true" />比較
+                        比較
                       </Link>
                     </td>
                   </tr>

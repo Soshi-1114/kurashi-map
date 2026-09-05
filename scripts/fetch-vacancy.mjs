@@ -14,42 +14,24 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { resolvePrefs } from "./_lib/prefs.mjs";
 import { loadAllMuni, saveMuni } from "./_lib/data.mjs";
-import { requireEstatAppId, fetchStatsValues } from "./_lib/estat.mjs";
+import { requireEstatAppId } from "./_lib/estat.mjs";
+import { fetchHousingCounts, HOUSING_AS_OF } from "./_lib/housingStats.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
 
 const APP_ID = requireEstatAppId();
 
-const STATS_DATA_ID = "0004021421";
+// 表ID・カテゴリコード・基準年は scripts/_lib/housingStats.mjs に集約（都道府県版と共有）。
 const SOURCE = "住宅・土地統計調査（居住世帯の有無別住宅数）";
 const SOURCE_EXCLUDED = "データなし（住宅統計の集計対象外）";
-const AS_OF = "2023";
-const CAT_TOTAL = "0";  // 居住世帯の有無: 総数（住宅総数）
-const CAT_VACANT = "22"; // 居住世帯の有無: 空き家
-
-async function fetchCounts(codes) {
-  // area -> { total, vacant }
-  const byArea = new Map();
-  const rows = await fetchStatsValues(APP_ID, STATS_DATA_ID, codes, {
-    cdCat01: `${CAT_TOTAL},${CAT_VACANT}`,
-  });
-  for (const v of rows) {
-    const area = v["@area"];
-    const n = parseInt(v["$"], 10);
-    if (Number.isNaN(n)) continue;
-    if (!byArea.has(area)) byArea.set(area, { total: 0, vacant: 0 });
-    if (v["@cat01"] === CAT_TOTAL) byArea.get(area).total = n;
-    else if (v["@cat01"] === CAT_VACANT) byArea.get(area).vacant = n;
-  }
-  return byArea;
-}
+const AS_OF = HOUSING_AS_OF;
 
 async function main() {
   const prefs = resolvePrefs(process.argv.slice(2));
   const { entries, byCode, codes } = await loadAllMuni(ROOT, prefs);
   console.log(`対象 ${prefs.length}県 / ${codes.length}自治体 の空き家数を一括取得...`);
-  const byArea = await fetchCounts(codes);
+  const byArea = await fetchHousingCounts(APP_ID, codes);
   console.log(`データ取得: ${byArea.size}自治体`);
 
   let filled = 0, excluded = 0, natVacant = 0, natTotal = 0;

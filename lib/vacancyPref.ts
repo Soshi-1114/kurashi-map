@@ -35,13 +35,3 @@ export const PREF_VACANCY_ASOF = file.asOf;
 export function prefVacancyRate(prefSlug: string): number | null {
   return file.prefs[prefSlug]?.rate ?? null;
 }
-
-/** 都道府県スラッグ → 実数（空き家数・住宅総数）。未収録は null。 */
-export function prefVacancy(prefSlug: string): PrefVacancy | null {
-  return file.prefs[prefSlug] ?? null;
-}
-
-/** 収録されている都道府県スラッグの一覧（テストの網羅チェック用）。 */
-export function prefVacancySlugs(): string[] {
-  return Object.keys(file.prefs);
-}

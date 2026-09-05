@@ -38,6 +38,21 @@ export function mapHubByHref(href: string | undefined): NavLink | null {
 // 置けるよう、どちらも素の文字列を返す。
 
 /**
+ * 道具への送客元の語彙。**閉じた union にするのが要点**で、GA4 のディメンション値が
+ * ここに列挙したものだけになる（自由文字列だと typo が黙って新しい値になり、
+ * さらに `pref_ranking`（県別ランキング）と `prefecture_ranking`（都道府県ランキング）の
+ * ような紛らわしい対も型で守れない）。増やすときはここに足す。
+ */
+export type ToolSource =
+  | "ranking" // 全国ランキングのヒーロー
+  | "ranking_row" // 全国ランキングの順位表の各行
+  | "ranking_top3" // 全国ランキングの「上位3件を比較する」
+  | "pref_ranking" // 県別ランキング（/ranking/{指標}/{県}）のヒーロー
+  | "pref_ranking_top3" // 同上の「上位3件を比較する」
+  | "prefecture_ranking" // 都道府県ランキング（/ranking/{指標}/prefecture）のヒーロー
+  | "pref_hub"; // 県ハブ（/area/{県}）
+
+/**
  * 比較ページで横並びにできる自治体数の上限。
  * ここに置くのは、上限を知る必要があるのがクライアント（CompareClient のピッカー）
  * だけでなく、送り出す側（ランキングの「上位N件を比較する」）でもあるため。
@@ -46,12 +61,12 @@ export function mapHubByHref(href: string | undefined): NavLink | null {
 export const MAX_COMPARE = 3;
 
 /** 比較ページ（/compare）へ送るURL。codes は MAX_COMPARE 件に丸める。 */
-export function compareHref(codes: string[], from: string): string {
+export function compareHref(codes: string[], from: ToolSource): string {
   const capped = codes.slice(0, MAX_COMPARE);
   return `/compare?codes=${capped.join(",")}&from=${encodeURIComponent(from)}`;
 }
 
 /** 街診断（/shindan）へ送るURL。 */
-export function shindanHref(from: string): string {
+export function shindanHref(from: ToolSource): string {
   return `/shindan?from=${encodeURIComponent(from)}`;
 }

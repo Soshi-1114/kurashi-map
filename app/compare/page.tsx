@@ -9,7 +9,8 @@ import { getAreaStats } from "@/lib/areaStats";
 import { getForeignStats, nationalForeignAvg, prefForeignAvgs } from "@/lib/foreignStats";
 import { PREFS } from "@/lib/prefs";
 import type { NationalAverages } from "@/lib/compareMetrics";
-import CompareClient, { MAX_COMPARE } from "@/components/compare/CompareClient";
+import CompareClient from "@/components/compare/CompareClient";
+import { MAX_COMPARE } from "@/lib/siteNav";
 import PageShell from "@/components/PageShell";
 import { ShareButton } from "@/components/ShareButton";
 
