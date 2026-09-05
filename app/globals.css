@@ -1702,6 +1702,11 @@ button { font-family: inherit; }
   margin-bottom: 16px;
 }
 
+/* 地図パネル／モバイルシート内に置く広告導線（火災保険）の上余白。
+   AdLinkRow 自体は余白を持たない（面ごとにここで与える）。 */
+.panel-body .ad-linkrow,
+.sheet .ad-linkrow { margin-top: 12px; }
+
 /* MetricCards */
 .metric-grid {
   display: grid;
