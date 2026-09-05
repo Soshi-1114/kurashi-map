@@ -20,6 +20,8 @@ import { fileURLToPath } from "node:url";
 //   - tiles.openfreemap.org … 基盤地図(positron)の style/タイル(pbf)/スプライト/グリフ
 //   - *.gsi.go.jp           … 淡色地図(cyberjapandata)・ハザードタイル(disaportaldata)
 //   - *.googletagmanager.com / *.google-analytics.com … GA4(gtag.js / collect)
+// img-src の h.accesstrade.net / *.a8.net は ASP のインプレッション計測 1x1 画像
+// （AT: sp/rr、A8: www1x.a8.net/0.gif。サブドメイン可変のためワイルドカード）。
 // worker-src: MapLibre GL v6 は WebWorker を同一オリジンの実URL（/vendor/maplibre/、
 // scripts/copy-maplibre-worker.mjs が配置）でロードするため 'self' が必須。blob: は予備。
 const csp = [
@@ -30,7 +32,7 @@ const csp = [
   "form-action 'self'",
   "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com",
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob: https://tiles.openfreemap.org https://*.gsi.go.jp https://www.googletagmanager.com https://www.google-analytics.com",
+  "img-src 'self' data: blob: https://tiles.openfreemap.org https://*.gsi.go.jp https://www.googletagmanager.com https://www.google-analytics.com https://h.accesstrade.net https://*.a8.net",
   "connect-src 'self' https://tiles.openfreemap.org https://*.gsi.go.jp https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com",
   "font-src 'self' data:",
   "worker-src 'self' blob:",
