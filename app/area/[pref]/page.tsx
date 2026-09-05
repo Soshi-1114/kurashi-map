@@ -18,6 +18,7 @@ import { SITE, absoluteUrl } from "@/lib/site";
 import { hasRent, rentBand } from "@/lib/rentColor";
 import { livabilityBands } from "@/lib/livabilityScore";
 import { buildPrefHazardRows } from "@/lib/prefHazardTable";
+import { PREF_RANKINGS } from "@/lib/prefRankings";
 import { HAZARD_MAX_LEVEL_DISCLAIMER } from "@/lib/hazardScale";
 import { hasLandPrice } from "@/lib/landPrice";
 import { isWaitlistDisclosed } from "@/lib/waitlist";
@@ -301,6 +302,22 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
             中央値は「県内の市区町村を値の順に並べた真ん中の自治体の値」で、平均ではありません（人口規模による重み付けをしていません）。
             順位は値が高い順で、高い・低いに優劣の意味はありません。データのない自治体は集計に含めていません。
           </p>
+          {/* 都道府県ランキングへの導線。この表の順位（県内中央値ベース）とは別の数字なので、
+              「同じ順位の詳細」と誤読されないよう違いを本文で明示する。 */}
+          <p className="rk-section-sub">
+            なお上の順位は<strong>県内の中央値</strong>で都道府県を並べたものです。
+            県全体の値（公表値、または県内市区町村の実数を合算した値）で47都道府県を並べたランキングは別にあり、
+            算出方法が違うため順位も一致しません。
+          </p>
+          <ul className="pref-chip-grid">
+            {PREF_RANKINGS.map((r) => (
+              <li key={r.slug}>
+                <Link href={`/ranking/${r.slug}/prefecture`} className="pref-chip">
+                  {r.shortLabel}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </section>
       )}
 
