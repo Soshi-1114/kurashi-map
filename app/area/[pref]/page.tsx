@@ -2,7 +2,7 @@ import "../../league.css";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Wallet, MapIcon, BarChart3, ArrowLeft, ArrowUpRight, Building2, Users, Compass, Star } from "lucide-react";
+import { Wallet, MapIcon, BarChart3, ArrowLeft, ArrowUpRight, Building2, Users, Compass, Star, ShieldAlert } from "lucide-react";
 import { listMunicipalities, listAll } from "@/lib/metrics";
 import {
   RANKINGS, getRankingBySlug, rankBy,
@@ -17,6 +17,8 @@ import { shindanHref } from "@/lib/siteNav";
 import { SITE, absoluteUrl } from "@/lib/site";
 import { hasRent, rentBand } from "@/lib/rentColor";
 import { livabilityBands } from "@/lib/livabilityScore";
+import { buildPrefHazardRows, summarizePrefHazard } from "@/lib/prefHazardTable";
+import { HAZARD_MAX_LEVEL_DISCLAIMER } from "@/lib/hazardScale";
 import { hasLandPrice } from "@/lib/landPrice";
 import { isWaitlistDisclosed } from "@/lib/waitlist";
 import type { Municipality } from "@/lib/types";
@@ -138,6 +140,12 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
   // 需要はあるのに答えを持てていなかったクエリ。順位表にしないのは意図的で、
   // スコアが17段階しかなく同点が多数出るため（lib/livabilityScore.livabilityBands）。
   const livBands = livabilityBands(muni, 3);
+
+  // 市区町村別の災害リスク一覧。**順位も該当リストも作らない**（全自治体をそのまま並べる）。
+  // 理由は lib/prefHazardTable.ts の冒頭コメント: 「浸水想定なし」を抜き出すと
+  // 区域指定の進み具合を安全性と取り違えさせるため。
+  const hazardRows = buildPrefHazardRows(muni);
+  const hazardSummary = summarizePrefHazard(hazardRows);
 
   // 全自治体一覧（行政コード順 = 行政の標準的な並び）。displayName で区はフルネーム表示。
   const listed = [...all].sort((a, b) => a.code.localeCompare(b.code));
@@ -443,6 +451,59 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
         href={(r) => `/ranking/${r.slug}/${pref.slug}`}
         labelPrefix={`${prefName}の`}
       />
+
+      {hazardRows.length > 0 && (
+        <section className="rk-section">
+          <div className="rk-section-head">
+            <span className="rk-section-icon rk-tone-hazard"><ShieldAlert size={20} aria-hidden="true" /></span>
+            <div className="rk-section-heading">
+              <h2 className="rk-h2">{prefName}の市区町村別 災害リスク</h2>
+              <p className="rk-section-sub">
+                県内 {hazardSummary.total} 市区町村の洪水・土砂・津波・高潮の想定を、行政コード順にそのまま並べています（リスクの大小では並べ替えていません）。
+              </p>
+            </div>
+          </div>
+          <div className="rk-table-wrap">
+            <div className="pref-table-wrap">
+              <table className="pref-table">
+                <thead>
+                  <tr>
+                    <th scope="col">自治体</th>
+                    <th scope="col">洪水（最大浸水深）</th>
+                    <th scope="col">土砂災害</th>
+                    <th scope="col">津波</th>
+                    <th scope="col">高潮</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {hazardRows.map((r) => (
+                    <tr key={r.code}>
+                      <th scope="row">
+                        <Link href={`/area/${r.pref}/${r.code}`} className="pref-table-link">{r.name}</Link>
+                      </th>
+                      <td>{r.flood}</td>
+                      <td>{r.landslide}</td>
+                      <td>{r.tsunami}</td>
+                      <td>{r.stormSurge}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <p className="rk-section-sub">
+            出典は国土数値情報（不動産情報ライブラリ）です。表示しているのは各自治体内で確認された<strong>最大の区分</strong>で、{HAZARD_MAX_LEVEL_DISCLAIMER}
+            「想定なし」は洪水浸水想定区域などが<strong>指定されていない</strong>ことを示すもので、災害が起きないことを意味しません。
+            区域の指定状況は河川管理者や地域によって差があります。「対象外」は元データの整備範囲外です
+            （評価済み {hazardSummary.evaluated} / {hazardSummary.total} 自治体）。
+          </p>
+          <div className="rk-hero-actions">
+            <Link href={mapHrefForPref(pref.slug, "/map/hazard")} className="rk-action rk-action-primary">
+              <MapIcon size={15} aria-hidden="true" />{prefName}の災害リスクを地図で見る
+            </Link>
+          </div>
+        </section>
+      )}
 
       <section className="rk-section">
         <div className="rk-section-head">
