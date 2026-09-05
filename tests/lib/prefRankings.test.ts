@@ -6,6 +6,7 @@ import {
   buildPrefRankingRows,
 } from "@/lib/prefRankings";
 import { RANKINGS } from "@/lib/rankings";
+import { prefVacancy, prefVacancySlugs } from "@/lib/vacancyPref";
 import { muni, metric } from "../_fixtures";
 
 // 都道府県ランキングの要は「率の平均ではなく実数の比」であること。
@@ -30,10 +31,10 @@ describe("prefRankings", () => {
     expect(hasPrefRanking("rent-high")).toBe(false);
     expect(hasPrefRanking("land-price-high")).toBe(false);
     expect(hasPrefRanking("fiscal-strong")).toBe(false);
-    // 空き家率は市区町村集計が人口1.5万人未満の町村を含まず、合算すると総務省公表と
-    // 1位が入れ替わる（徳島21.24%/和歌山21.17% → 20.4%/20.7%）。県表の公表値を
-    // 取得するまでは収録しない
-    expect(hasPrefRanking("vacancy-high")).toBe(false);
+    // 空き家率は「合算だと総務省公表と1位が逆転する」ため、都道府県表の公表値を
+    // 使う published 型として収録している（合算型に戻してはいけない）
+    expect(hasPrefRanking("vacancy-high")).toBe(true);
+    expect(getPrefRankingBySlug("vacancy-high")!.value.from).toBe("published");
   });
 
   it("集計方法（method）を全定義が持つ（honesty: ページに必ず出す）", () => {
@@ -44,6 +45,10 @@ describe("prefRankings", () => {
 
   describe("高齢化率: 率の平均ではなく実人数の比で集計する", () => {
     const aging = getPrefRankingBySlug("aging-high")!;
+    // value は判別共用体。合算型であることを確かめてから compute/counts を取り出す。
+    if (aging.value.from !== "aggregate") throw new Error("aging-high は合算型のはず");
+    const agingAgg = aging.value.compute;
+    const agingCounts = aging.value.counts;
     // 小さい町（高齢化率50%）と大きい市（高齢化率20%）。
     // 率の単純平均なら35%になるが、実人数の比なら 20.9% が正しい。
     const small = muni({
@@ -59,21 +64,24 @@ describe("prefRankings", () => {
 
     it("実人数の合算比を返す", () => {
       // (500 + 20000) / (1000 + 100000) * 100 = 20.297...
-      expect(aging.aggregate([small, big])).toBeCloseTo((20500 / 101000) * 100, 6);
+      expect(agingAgg([small, big])).toBeCloseTo((20500 / 101000) * 100, 6);
     });
 
     it("率の単純平均（35%）にはならない", () => {
-      expect(aging.aggregate([small, big])).not.toBeCloseTo(35, 1);
+      expect(agingAgg([small, big])).not.toBeCloseTo(35, 1);
     });
 
     it("counts が欠損を弾く（aggregate は絞り込み済みの配列しか受け取らない）", () => {
-      expect(aging.counts(small)).toBe(true);
-      expect(aging.counts(muni({ code: "01203" }))).toBe(false);
+      expect(agingCounts(small)).toBe(true);
+      expect(agingCounts(muni({ code: "01203" }))).toBe(false);
     });
   });
 
   describe("外国人住民比率: 対象外の自治体を分母にも入れない", () => {
     const foreign = getPrefRankingBySlug("foreign-ratio-high")!;
+    if (foreign.value.from !== "aggregate") throw new Error("foreign-ratio-high は合算型のはず");
+    const foreignAgg = foreign.value.compute;
+    const foreignCounts = foreign.value.counts;
     const counted = muni({
       code: "13101",
       pref: "tokyo",
@@ -89,14 +97,16 @@ describe("prefRankings", () => {
     });
 
     it("実経路で対象自治体だけの比率になる（対象外は分母にも入らない）", () => {
-      expect(foreign.counts(counted)).toBe(true);
-      expect(foreign.counts(excluded)).toBe(false);
-      expect(foreign.aggregate([counted])).toBeCloseTo(5, 6);
+      expect(foreignCounts(counted)).toBe(true);
+      expect(foreignCounts(excluded)).toBe(false);
+      expect(foreignAgg([counted])).toBeCloseTo(5, 6);
     });
   });
 
   describe("保育定員余裕率: 定員と利用児童数をそれぞれ合算する", () => {
     const childcare = getPrefRankingBySlug("childcare-capacity")!;
+    if (childcare.value.from !== "aggregate") throw new Error("childcare-capacity は合算型のはず");
+    const childcareAgg = childcare.value.compute;
     const a = muni({
       code: "20201",
       pref: "nagano",
@@ -118,28 +128,31 @@ describe("prefRankings", () => {
 
     it("(定員合計 − 利用合計) ÷ 定員合計。定員超過は負の実データとしてそのまま効く", () => {
       // (2000 - 1900) / 2000 * 100 = 5
-      expect(childcare.aggregate([a, b])).toBeCloseTo(5, 6);
+      expect(childcareAgg([a, b])).toBeCloseTo(5, 6);
     });
   });
 
   describe("人口密度: 人口合計 ÷ 面積合計（密度の平均ではない）", () => {
     const density = getPrefRankingBySlug("population-density")!;
+    if (density.value.from !== "aggregate") throw new Error("population-density は合算型のはず");
+    const densityAgg = density.value.compute;
+    const densityCounts = density.value.counts;
     const dense = muni({ code: "13101", pref: "tokyo", population: 100000, areaKm2: 10 });
     const sparse = muni({ code: "13102", pref: "tokyo", population: 1000, areaKm2: 1000 });
 
     it("実数の比で算出する", () => {
       // 101000 / 1010 = 100
-      expect(density.aggregate([dense, sparse])).toBeCloseTo(100, 6);
+      expect(densityAgg([dense, sparse])).toBeCloseTo(100, 6);
     });
 
     it("密度の単純平均（約5000）にはならない", () => {
-      expect(density.aggregate([dense, sparse])).toBeLessThan(1000);
+      expect(densityAgg([dense, sparse])).toBeLessThan(1000);
     });
 
     it("面積が無い自治体は counts が弾く（populationDensity と同じ判定）", () => {
       const noArea = muni({ code: "13103", pref: "tokyo", population: 999999 });
-      expect(density.counts(dense)).toBe(true);
-      expect(density.counts(noArea)).toBe(false);
+      expect(densityCounts(dense)).toBe(true);
+      expect(densityCounts(noArea)).toBe(false);
       // 実経路（buildPrefRankingRows）では分子にも分母にも入らない
       const rows = buildPrefRankingRows(density, [dense, noArea]);
       expect(rows[0].value).toBeCloseTo(10000, 6);
@@ -208,21 +221,61 @@ describe("prefRankings", () => {
       // 人口0・各指標のデータなし＝6定義すべてで対象外になる自治体
       const blank = muni({ code: "01203", pref: "hokkaido", population: 0 });
       for (const def of PREF_RANKINGS) {
-        expect(def.counts(blank), `${def.slug}: counts`).toBe(false);
+        if (def.value.from !== "aggregate") continue; // 公表値型は自治体データに依存しない
+        expect(def.value.counts(blank), `${def.slug}: counts`).toBe(false);
         expect(buildPrefRankingRows(def, [blank]), `${def.slug}: rows`).toEqual([]);
       }
     });
 
     it("covered は合算に実際に使った件数（counts を通った数）と一致する", () => {
       const aging = getPrefRankingBySlug("aging-high")!;
+      if (aging.value.from !== "aggregate") throw new Error("aging-high は合算型のはず");
       const withData = muni({
         code: "01201", pref: "hokkaido",
         ageStats: { young: 10, elderly: 300, total: 1000, source: "住基", asOf: "2026-01-01" },
       });
       const list = [withData, muni({ code: "01202", pref: "hokkaido" }), muni({ code: "01203", pref: "hokkaido" })];
       const rows = buildPrefRankingRows(aging, list);
-      expect(rows[0].covered).toBe(list.filter(aging.counts).length);
+      expect(rows[0].covered).toBe(list.filter(aging.value.counts).length);
     });
+  });
+});
+
+// 空き家率は published 型。合算では公表値を再現できない指標がここに来る。
+describe("空き家率（published 型）は公表値をそのまま使う", () => {
+  const vac = getPrefRankingBySlug("vacancy-high")!;
+
+  it("value.from は published（合算型に戻すと公表と順位が逆転する）", () => {
+    expect(vac.value.from).toBe("published");
+  });
+
+  it("lookup は都道府県スラッグで公表値を返し、未知のスラッグは null", () => {
+    if (vac.value.from !== "published") throw new Error("published のはず");
+    expect(vac.value.lookup("tokushima")).toBeCloseTo(21.33, 2);
+    expect(vac.value.lookup("wakayama")).toBeCloseTo(21.25, 2);
+    expect(vac.value.lookup("atlantis")).toBeNull();
+  });
+
+  it("47都道府県すべてを収録し、全国合計が公表の13.8%を再現する", () => {
+    const slugs = prefVacancySlugs();
+    expect(slugs).toHaveLength(47);
+    let vacant = 0;
+    let total = 0;
+    for (const slug of slugs) {
+      const v = prefVacancy(slug)!;
+      vacant += v.vacant;
+      total += v.total;
+    }
+    expect((vacant / total) * 100).toBeCloseTo(13.8, 1);
+  });
+
+  it("公表の1位は徳島県・2位は和歌山県（合算だと逆転していた）", async () => {
+    const { listAllAcrossPrefs } = await import("@/lib/metrics");
+    const rows = buildPrefRankingRows(vac, await listAllAcrossPrefs());
+    expect(rows[0].prefSlug).toBe("tokushima");
+    expect(rows[1].prefSlug).toBe("wakayama");
+    // 公表値型はカバレッジが常に全域（県全体の値なので）
+    expect(rows[0].covered).toBe(rows[0].total);
   });
 });
 

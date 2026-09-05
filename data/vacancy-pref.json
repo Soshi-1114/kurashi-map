@@ -1,0 +1,241 @@
+{
+  "source": "住宅・土地統計調査（居住世帯の有無別住宅数・都道府県）",
+  "asOf": "2023",
+  "prefs": {
+    "saitama": {
+      "rate": 9.29,
+      "vacant": 330400,
+      "total": 3555100
+    },
+    "chiba": {
+      "rate": 12.35,
+      "vacant": 394100,
+      "total": 3191100
+    },
+    "gunma": {
+      "rate": 16.67,
+      "vacant": 161300,
+      "total": 967400
+    },
+    "tochigi": {
+      "rate": 16.86,
+      "vacant": 163700,
+      "total": 971000
+    },
+    "ibaraki": {
+      "rate": 14.11,
+      "vacant": 196200,
+      "total": 1390900
+    },
+    "tokyo": {
+      "rate": 10.93,
+      "vacant": 896500,
+      "total": 8201400
+    },
+    "kanagawa": {
+      "rate": 9.8,
+      "vacant": 467100,
+      "total": 4765000
+    },
+    "yamanashi": {
+      "rate": 20.42,
+      "vacant": 87200,
+      "total": 427000
+    },
+    "nagano": {
+      "rate": 20.06,
+      "vacant": 208500,
+      "total": 1039600
+    },
+    "gifu": {
+      "rate": 16.06,
+      "vacant": 148400,
+      "total": 924100
+    },
+    "shizuoka": {
+      "rate": 16.7,
+      "vacant": 296300,
+      "total": 1774100
+    },
+    "aichi": {
+      "rate": 11.82,
+      "vacant": 433000,
+      "total": 3664700
+    },
+    "mie": {
+      "rate": 16.34,
+      "vacant": 142700,
+      "total": 873500
+    },
+    "shiga": {
+      "rate": 12.29,
+      "vacant": 81600,
+      "total": 664200
+    },
+    "kyoto": {
+      "rate": 13.15,
+      "vacant": 180400,
+      "total": 1372200
+    },
+    "osaka": {
+      "rate": 14.24,
+      "vacant": 701900,
+      "total": 4928600
+    },
+    "hyogo": {
+      "rate": 13.83,
+      "vacant": 386900,
+      "total": 2798000
+    },
+    "nara": {
+      "rate": 14.64,
+      "vacant": 93600,
+      "total": 639500
+    },
+    "wakayama": {
+      "rate": 21.25,
+      "vacant": 105300,
+      "total": 495600
+    },
+    "tottori": {
+      "rate": 15.75,
+      "vacant": 41300,
+      "total": 262300
+    },
+    "shimane": {
+      "rate": 17.05,
+      "vacant": 54600,
+      "total": 320300
+    },
+    "okayama": {
+      "rate": 16.45,
+      "vacant": 157200,
+      "total": 955400
+    },
+    "hiroshima": {
+      "rate": 15.79,
+      "vacant": 231400,
+      "total": 1465500
+    },
+    "yamaguchi": {
+      "rate": 19.37,
+      "vacant": 140700,
+      "total": 726400
+    },
+    "tokushima": {
+      "rate": 21.33,
+      "vacant": 83000,
+      "total": 389200
+    },
+    "kagawa": {
+      "rate": 18.57,
+      "vacant": 91500,
+      "total": 492800
+    },
+    "ehime": {
+      "rate": 19.76,
+      "vacant": 145600,
+      "total": 736800
+    },
+    "kochi": {
+      "rate": 20.28,
+      "vacant": 78700,
+      "total": 388100
+    },
+    "fukuoka": {
+      "rate": 12.4,
+      "vacant": 335300,
+      "total": 2703300
+    },
+    "saga": {
+      "rate": 14.49,
+      "vacant": 53300,
+      "total": 367900
+    },
+    "nagasaki": {
+      "rate": 17.25,
+      "vacant": 113000,
+      "total": 655000
+    },
+    "kumamoto": {
+      "rate": 14.93,
+      "vacant": 127100,
+      "total": 851100
+    },
+    "oita": {
+      "rate": 19.14,
+      "vacant": 115500,
+      "total": 603300
+    },
+    "miyazaki": {
+      "rate": 16.29,
+      "vacant": 90700,
+      "total": 556800
+    },
+    "kagoshima": {
+      "rate": 20.48,
+      "vacant": 184200,
+      "total": 899600
+    },
+    "okinawa": {
+      "rate": 9.35,
+      "vacant": 65400,
+      "total": 699400
+    },
+    "aomori": {
+      "rate": 16.74,
+      "vacant": 98800,
+      "total": 590300
+    },
+    "iwate": {
+      "rate": 17.33,
+      "vacant": 100400,
+      "total": 579400
+    },
+    "miyagi": {
+      "rate": 12.42,
+      "vacant": 140300,
+      "total": 1129200
+    },
+    "akita": {
+      "rate": 15.77,
+      "vacant": 69500,
+      "total": 440600
+    },
+    "yamagata": {
+      "rate": 13.55,
+      "vacant": 61700,
+      "total": 455400
+    },
+    "fukushima": {
+      "rate": 15.18,
+      "vacant": 131000,
+      "total": 862900
+    },
+    "niigata": {
+      "rate": 15.3,
+      "vacant": 155300,
+      "total": 1015200
+    },
+    "toyama": {
+      "rate": 14.71,
+      "vacant": 69700,
+      "total": 473900
+    },
+    "ishikawa": {
+      "rate": 15.6,
+      "vacant": 86400,
+      "total": 554000
+    },
+    "fukui": {
+      "rate": 15.55,
+      "vacant": 53100,
+      "total": 341400
+    },
+    "hokkaido": {
+      "rate": 15.64,
+      "vacant": 451900,
+      "total": 2888500
+    }
+  }
+}
