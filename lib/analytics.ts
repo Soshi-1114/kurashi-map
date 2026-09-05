@@ -63,7 +63,12 @@ export function trackToolEntry(
   source: string,
   detail?: Record<string, unknown>,
 ): void {
-  track("tool_entry", { tool, source, ...detail });
+  // パラメータ名を `source` にしないこと。GA4 は `source` / `medium` / `campaign` /
+  // `term` / `content` をトラフィックのアトリビューションに使うため、イベント
+  // パラメータとして同名を送ると流入元の集計を汚すおそれがある（実際、この
+  // プロパティのパラメータ候補には我々が一度も送っていない medium / campaign /
+  // term / content が並んでおり、その一覧の `source` は GA4 自身のもの）。
+  track("tool_entry", { tool, tool_source: source, ...detail });
 }
 
 /** 街診断の実行（重み・地方の組み合わせ変更ごとに1回）。 */
