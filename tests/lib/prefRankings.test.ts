@@ -23,13 +23,17 @@ describe("prefRankings", () => {
   });
 
   it("getPrefRankingBySlug / hasPrefRanking は定義の有無をそのまま返す", () => {
-    expect(getPrefRankingBySlug("vacancy-high")?.slug).toBe("vacancy-high");
+    expect(getPrefRankingBySlug("aging-high")?.slug).toBe("aging-high");
     expect(getPrefRankingBySlug("rent-cheap")).toBeNull();
     expect(hasPrefRanking("aging-high")).toBe(true);
     // 家賃・地価・財政力指数は県値を出す重み／概念が無いため意図的に非対象
     expect(hasPrefRanking("rent-high")).toBe(false);
     expect(hasPrefRanking("land-price-high")).toBe(false);
     expect(hasPrefRanking("fiscal-strong")).toBe(false);
+    // 空き家率は市区町村集計が人口1.5万人未満の町村を含まず、合算すると総務省公表と
+    // 1位が入れ替わる（徳島21.24%/和歌山21.17% → 20.4%/20.7%）。県表の公表値を
+    // 取得するまでは収録しない
+    expect(hasPrefRanking("vacancy-high")).toBe(false);
   });
 
   it("集計方法（method）を全定義が持つ（honesty: ページに必ず出す）", () => {
@@ -65,33 +69,6 @@ describe("prefRankings", () => {
     it("counts が欠損を弾く（aggregate は絞り込み済みの配列しか受け取らない）", () => {
       expect(aging.counts(small)).toBe(true);
       expect(aging.counts(muni({ code: "01203" }))).toBe(false);
-    });
-  });
-
-  describe("空き家率: 調査対象外（rate=-1）を合算から外す", () => {
-    const vacancy = getPrefRankingBySlug("vacancy-high")!;
-    const counted = muni({
-      code: "30201",
-      pref: "wakayama",
-      vacancy: { rate: 20, vacant: 200, total: 1000, source: "住宅・土地統計調査", asOf: "2023" },
-    });
-    const excluded = muni({
-      code: "30301",
-      pref: "wakayama",
-      // 人口1.5万人未満の町村は市区町村集計の対象外（rate=-1 センチネル）
-      vacancy: { rate: -1, vacant: 0, total: 0, source: "住宅・土地統計調査（対象外）", asOf: "2023" },
-    });
-
-    it("実経路（buildPrefRankingRows）で対象外の 0 を分母に混ぜない", () => {
-      const rows = buildPrefRankingRows(vacancy, [counted, excluded]);
-      expect(rows[0].value).toBeCloseTo(20, 6);
-      expect(rows[0].covered).toBe(1);
-      expect(rows[0].total).toBe(2);
-    });
-
-    it("counts は対象外を数えない（カバレッジ表示の母数）", () => {
-      expect(vacancy.counts(counted)).toBe(true);
-      expect(vacancy.counts(excluded)).toBe(false);
     });
   });
 

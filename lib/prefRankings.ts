@@ -7,19 +7,25 @@
 // **県内市区町村の実数を合算して県の値そのもの**を出す。
 //
 // honesty 方針:
-// - 実数（空き家数・住宅総数など）が保存されている指標だけを対象にする。
+// - 実数（人口・65歳以上人口など）が保存されている指標だけを対象にする。
 //   家賃平均・地価・財政力指数は、県値を出すのに必要な重み（借家数・標準地数）や
 //   概念（県の財政力指数は市町村の合成ではない）が無いため **収録しない**。
 //   「中央値を県の値として見せる」ことはしない。
+// - **合算が公表値を再現できることを確認できた指標だけを載せる。** これは
+//   「公表値があるかどうか」ではなく「合算で再現できるか」が基準。市区町村集計に
+//   調査対象外があると系統的にずれ、順位まで入れ替わることがある。
+//   実例: 空き家率（住宅・土地統計調査）は市区町村集計が人口1.5万人未満の町村を
+//   含まず、それが空き家率の高い過疎地に偏るため、合算すると徳島 21.24%・和歌山
+//   21.17%（総務省公表）が 20.4%・20.7% となり **1位が逆転した**。カバレッジを
+//   併記しても「1位は和歌山県」と表示される以上は誤りとして読まれるので収録しない。
+//   復活させるなら住宅・土地統計調査の *都道府県表* の公表値を取得すること。
 // - 各指標は集計方法（method）とカバレッジ（covered/total）を必ずページに出す。
-//   調査対象外の自治体がある指標（空き家率など）は合算の母数から外れるため。
 
 import type { Municipality } from "./types";
 import { PREFS } from "./prefs";
 import { prefNameOf } from "./site";
 import { formatAsOfJa } from "./format";
 import { groupByPref, muniLevelOnly, POPULATION_FRESHNESS } from "./rankings";
-import { hasVacancy } from "./vacancy";
 import { hasAgeData } from "./ageStats";
 import { hasForeignData } from "./foreignResidents";
 import { hasChildcareCapacity } from "./childcare";
@@ -134,7 +140,7 @@ export const PREF_RANKINGS: PrefRankingDef[] = [
     columnLabel: "人口密度",
     order: "desc",
     lead: "都道府県ごとの人口密度を、県内の市区町村の人口と面積をそれぞれ合算して求めた順位です。",
-    method: `県内市区町村の人口（${POPULATION_FRESHNESS}）の合計を、面積（国土地理院「全国都道府県市区町村別面積調」）の合計で割って算出しています。市区町村ごとの密度を平均したものではありません。`,
+    method: `県内市区町村の人口（${POPULATION_FRESHNESS}）の合計を、面積（国土地理院「全国都道府県市区町村別面積調」）の合計で割って算出しています。市区町村ごとの密度を平均したものではありません。境界未定地域の扱いにより、都道府県として公表される面積とわずかに差が出る場合があります（順位には影響しません）。`,
     // 面積未収録・人口0の除外は populationDensity が持つ（市区町村ランキングの
     // qualifies と同じ式。ここで再実装しない）。
     counts: (m) => populationDensity(m) != null,
@@ -176,32 +182,6 @@ export const PREF_RANKINGS: PrefRankingDef[] = [
       {
         q: "高齢化率はどう計算していますか？",
         a: "65歳以上人口 ÷ 総人口 × 100 です。都道府県の値は、県内市区町村の実人数をそれぞれ合算してから割っています（率の平均ではありません）。出典は総務省「住民基本台帳に基づく人口・世帯数調査」で、外国人住民を含む総計です。",
-      },
-    ],
-  },
-  {
-    slug: "vacancy-high",
-    title: "都道府県の空き家率ランキング",
-    seoTitle: "都道府県別 空き家率ランキング",
-    shortLabel: "都道府県の空き家率",
-    columnLabel: "空き家率",
-    order: "desc",
-    lead: "都道府県ごとの空き家率を、県内市区町村の空き家数と住宅総数を合算して求めた順位です。",
-    method:
-      "県内市区町村の空き家数の合計を、住宅総数の合計で割って算出しています（住宅・土地統計調査）。同調査の市区町村集計は人口1.5万人未満の町村を含まないため、それらは合算の対象外です（各行のカバレッジを併記しています）。",
-    counts: (m) => hasVacancy(m.vacancy),
-    // 非null断定は counts（hasVacancy）が保証する。
-    aggregate: (munis) => ratioPct(munis, (m) => m.vacancy!.vacant, (m) => m.vacancy!.total),
-    display: (v) => `${v.toFixed(1)}%`,
-    sourceOf: (munis) => sourceFrom(munis, (m) => (hasVacancy(m.vacancy) ? m.vacancy : null)),
-    faq: [
-      {
-        q: "すべての市区町村が集計に入っていますか？",
-        a: "いいえ。住宅・土地統計調査の市区町村別集計は人口1.5万人未満の町村を対象としていないため、それらは合算に含まれません。各都道府県の行に「対象 N / 全 M 自治体」としてカバレッジを表示しています。",
-      },
-      {
-        q: "空き家率には別荘なども含まれますか？",
-        a: "住宅・土地統計調査の「空き家」には、賃貸・売却用の住宅のほか二次的住宅（別荘など）が含まれます。観光地を抱える自治体で高く出るのはこのためです。",
       },
     ],
   },
