@@ -613,3 +613,34 @@
   font-weight: 600;
   color: var(--text-muted);
 }
+
+/* ---- 県ハブ: 住みやすさスコアの同点バンド ----
+   順位ではなく「同じ点数の自治体のまとまり」を見せるレイアウト。
+   点数を左に固定し、その右に同点の自治体チップを並べる。 */
+.pref-liv-bands { list-style: none; margin: 16px 0 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.pref-liv-band {
+  display: grid;
+  grid-template-columns: 4.2rem 1fr;
+  gap: 12px;
+  align-items: start;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface-strong);
+}
+.pref-liv-score {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  gap: 2px;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
+}
+.pref-liv-score b { font-size: var(--text-xl); font-weight: 800; line-height: 1.1; }
+.pref-liv-unit { font-size: var(--text-2xs); font-weight: 700; }
+.pref-liv-band .pref-chip-grid { margin-top: 0; }
+
+@media (max-width: 480px) {
+  .pref-liv-band { grid-template-columns: 1fr; gap: 6px; }
+  .pref-liv-score { justify-content: flex-start; }
+}

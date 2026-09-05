@@ -210,3 +210,40 @@ export function buildRecommendations(_m: Municipality, liv: Livability): Recomme
   }
   return recs.slice(0, 4);
 }
+
+export type LivabilityBand = {
+  /** そのバンドの総合スコア（0..100） */
+  score: number;
+  /** 同じスコアの自治体（コード順） */
+  munis: Municipality[];
+};
+
+/**
+ * 総合スコアの高い順に「同点をまとめたバンド」を返す。
+ *
+ * **順位（1位・2位…）として見せてはいけない**のがこの関数の存在理由。
+ * スコアは5軸それぞれ星1〜5の平均×20なので取りうる値が17段階しかなく、
+ * 全国では最高84点に9自治体、80点に39自治体が同点で並ぶ。順位表にすると
+ * 同点の中から配列順（＝データの並び順）で先頭の1件が「1位」になってしまい、
+ * 実質ランダムな順位を事実であるかのように提示することになる。
+ * 同点は同点としてまとめて出し、スコアの値そのものを併記する。
+ *
+ * @param maxBands 返すバンド数の上限（上位から）
+ */
+export function livabilityBands(munis: Municipality[], maxBands = 3): LivabilityBand[] {
+  const byScore = new Map<number, Municipality[]>();
+  for (const m of munis) {
+    const score = computeLivability(m).score;
+    if (score == null) continue;
+    const list = byScore.get(score);
+    if (list) list.push(m);
+    else byScore.set(score, [m]);
+  }
+  return [...byScore.entries()]
+    .sort((a, b) => b[0] - a[0])
+    .slice(0, maxBands)
+    .map(([score, list]) => ({
+      score,
+      munis: list.slice().sort((a, b) => a.code.localeCompare(b.code)),
+    }));
+}
