@@ -606,12 +606,18 @@ html, body {
 }
 .site-header-nav a:hover,
 .site-header-nav a:focus-visible { color: var(--accent); background: var(--accent-soft); }
+/* 診断リンクの長短ラベル。SP はブランド名＋3導線で幅がぎりぎり（375px で実測 405px 超過）
+   なので短縮形に切り替える。ブランド名を隠す選択肢は取らない（.app-header と違い、
+   site-header はどの幅でもブランド名を出す設計。.brand-name のコメント参照）。 */
+.site-header-nav-short { display: none; }
 @media (max-width: 560px) {
   .site-header-inner { padding: 8px 16px; gap: 10px; }
   .site-header-nav a { padding: 6px 8px; font-size: var(--text-xs); }
   /* 幅が足りないので副次の導線は隠す（同じリンクが共通フッターにある）。
      セレクタを .site-header-nav a より詳細度で上回らせること（a を含める）。 */
   .site-header-nav a.site-header-nav-optional { display: none; }
+  .site-header-nav-long { display: none; }
+  .site-header-nav-short { display: inline; }
 }
 
 /* ============================================================

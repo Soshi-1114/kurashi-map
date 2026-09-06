@@ -50,7 +50,9 @@ export type ToolSource =
   | "pref_ranking" // 県別ランキング（/ranking/{指標}/{県}）のヒーロー
   | "pref_ranking_top3" // 同上の「上位3件を比較する」
   | "prefecture_ranking" // 都道府県ランキング（/ranking/{指標}/prefecture）のヒーロー
-  | "pref_hub"; // 県ハブ（/area/{県}）
+  | "pref_hub" // 県ハブ（/area/{県}）
+  | "home" // トップのヒーローアクション
+  | "header"; // サイト共通ヘッダー（SiteHeader）
 
 /**
  * 比較ページで横並びにできる自治体数の上限。
