@@ -22,6 +22,8 @@ import { fileURLToPath } from "node:url";
 //   - *.googletagmanager.com / *.google-analytics.com … GA4(gtag.js / collect)
 // img-src の h.accesstrade.net / *.a8.net は ASP のインプレッション計測 1x1 画像
 // （AT: sp/rr、A8: www1x.a8.net/0.gif。サブドメイン可変のためワイルドカード）。
+// a.image.accesstrade.net は AT の sp/rr がリダイレクトする画像ホスト。未許可だと
+// リダイレクト後の取得が CSP 違反になり imp 計上が不確実になる（2026-09 本番で観測）。
 // worker-src: MapLibre GL v6 は WebWorker を同一オリジンの実URL（/vendor/maplibre/、
 // scripts/copy-maplibre-worker.mjs が配置）でロードするため 'self' が必須。blob: は予備。
 const csp = [
@@ -34,7 +36,7 @@ const csp = [
   // 本番ビルドには含めない（NODE_ENV は next dev で development / next start で production）。
   `script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : ""} https://www.googletagmanager.com https://www.google-analytics.com`,
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob: https://tiles.openfreemap.org https://*.gsi.go.jp https://www.googletagmanager.com https://www.google-analytics.com https://h.accesstrade.net https://*.a8.net",
+  "img-src 'self' data: blob: https://tiles.openfreemap.org https://*.gsi.go.jp https://www.googletagmanager.com https://www.google-analytics.com https://h.accesstrade.net https://a.image.accesstrade.net https://*.a8.net",
   "connect-src 'self' https://tiles.openfreemap.org https://*.gsi.go.jp https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com",
   "font-src 'self' data:",
   "worker-src 'self' blob:",
