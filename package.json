@@ -19,7 +19,7 @@
     "gsc:analyze": "tsx --env-file=.env.local scripts/gsc/analyze.ts"
   },
   "dependencies": {
-    "lucide-react": "^1.38.0",
+    "lucide-react": "^1.40.0",
     "maplibre-gl": "^6.4.1",
     "next": "^15.5.25",
     "react": "^19.2.8",
@@ -31,11 +31,11 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.3",
-    "@testing-library/user-event": "^14.6.6",
+    "@testing-library/user-event": "^14.6.7",
     "@turf/turf": "^7.4.0",
-    "@types/node": "^26.4.0",
+    "@types/node": "^26.4.1",
     "@types/react": "^19.2.18",
-    "@types/react-dom": "^19.2.5",
+    "@types/react-dom": "^19.2.7",
     "eslint": "^9.39.5",
     "eslint-config-next": "^16.3.4",
     "google-auth-library": "^11.0.2",
