@@ -33,6 +33,7 @@ export function supportUrl(): string | null {
  * NEXT_PUBLIC_* はビルド時の静的置換なので process.env[動的キー] は使えない。
  * 提携する会社を増やすときは data/denki-plans.json に offer を足すのと併せて
  * ここに 1 行追加する（どのみち JSON 編集＝デプロイが必要なので追加摩擦はない）。
+ * ASP の申請・承認状況と、承認後の点灯手順は docs/monetization.md を参照。
  */
 function denkiAffLinks(): Record<string, string | undefined> {
   return {
@@ -88,7 +89,8 @@ export type KasaiLinkInfo = {
  * 火災保険（一括見積もり等）導線のリンク。null なら導線は表示しない。
  *
  * ハザード情報（災害リスクカード・/map/hazard）と文脈が一致する唯一の収益導線として、
- * ASP 提携確定後に env を設定して点灯する。素リンクのフォールバックは持たない
+ * ASP 提携確定後に env を設定して点灯する（A8×ウェブクルー 2026-09 承認。台帳は
+ * docs/monetization.md）。素リンクのフォールバックは持たない
  * （中立に案内できる公式サイトが存在しないため、未提携時は導線ごと出さない）。
  * env には ASP 発行のリンクをそのまま設定し、加工しない（UTM を足すと ASP 計測を壊す）。
  */

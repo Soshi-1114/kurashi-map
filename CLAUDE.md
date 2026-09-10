@@ -56,3 +56,5 @@ push / PR ごとに CI（`.github/workflows/test.yml`）が typecheck・test・l
 `.github/workflows/` の GitHub Actions がスケジュールでデータを更新し（`data-update-annual.yml`・`data-update-quarterly.yml`）、`main` にコミットします。一部の出典 URL／バージョン（CFA 待機児童 Excel、L01 地価公示の年度）はワークフロー内の env 変数で、毎年手動更新が必要です。Vercel の自動デプロイは無効（`vercel.json` の `deploymentEnabled: false`）で、デプロイは `deploy-preview.yml` の手動実行です。
 
 ワークフローの仕様・更新頻度・手動更新箇所・手動実行手順・既知の注意点は **[`docs/data-update.md`](docs/data-update.md)** にまとめています。出典の年度更新やデータ更新 Action を触る時はまずこちらを参照。
+
+収益導線（ふるさと納税・火災保険・電気プラン）の ASP 提携状況と承認後の点灯手順は **[`docs/monetization.md`](docs/monetization.md)** の台帳を参照（リンクの実値は env のみ。コミットしない）。

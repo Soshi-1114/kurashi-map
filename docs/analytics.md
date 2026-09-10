@@ -215,8 +215,8 @@ KurashiMap は Google Analytics 4（gtag.js）でページビューに加えて�
 「キーイベントとしてマーク」すると、コンバージョンとして扱われ獲得レポート等に紐づく。
 
 - **キーイベント化済み**（2026-09-04 時点）: `select_municipality`・`share`・`shindan_run`
-- **点灯待ち**: `kasai_link_click` は AT 提携→env 設定で発火し始めた後に、`denki_offer_click` は
-  /denki に提携オファーを掲載した時点で、同様にキーイベント化する（GA4 の UI は
+- **点灯待ち**: `kasai_link_click` は A8×ウェブクルー提携（2026-09 承認）の env 設定で発火し始めた後に、
+  `denki_offer_click` は /denki に提携オファー（AT×東急でんき。`docs/monetization.md`）を掲載した時点で、同様にキーイベント化する（GA4 の UI は
   発火済みイベントへの星付けのみ。未発火のイベント名は一覧に出ない）。
 
 ---

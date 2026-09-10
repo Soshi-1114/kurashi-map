@@ -50,7 +50,8 @@ export function KasaiLink({
           >
             見積もりを比較する
             <ExternalLink size={15} aria-hidden="true" />
-            {/* AT のインプレッション計測ピクセル（生成リンクコードと同じ対で描画） */}
+            {/* ASP のインプレッション計測ピクセル（AT は URL から導出、A8 は env の 0.gif。
+                生成リンクコードと同じ対で描画） */}
             {link.impressionPixel && (
               // eslint-disable-next-line @next/next/no-img-element
               <img src={link.impressionPixel} width={1} height={1} alt="" aria-hidden="true" />
