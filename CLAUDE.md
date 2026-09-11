@@ -2,7 +2,7 @@
 
 このファイルは、本リポジトリで作業する Claude Code (claude.ai/code) に向けたガイダンスです。
 
-KurashiMap は、市区町村別の住みやすさ関連データ（家賃・地価・人口・子育て・災害リスク・生活インフラ）を地図上で比較できる、一般向け無料Webサービスです。Next.js 14 App Router + SSG、TypeScript、MapLibre GL を使用。全47都道府県・1,918自治体を政府統計の実データで収録しています（推計値・プレースホルダは一切なし）。
+KurashiMap は、市区町村別の住みやすさ関連データ（家賃・地価・人口・子育て・災害リスク・生活インフラ）を地図上で比較できる、一般向け無料Webサービスです。Next.js 15 App Router + SSG、TypeScript、MapLibre GL を使用。全47都道府県・1,918自治体を政府統計の実データで収録しています（推計値・プレースホルダは一切なし）。
 
 ## コマンド
 
@@ -56,3 +56,5 @@ push / PR ごとに CI（`.github/workflows/test.yml`）が typecheck・test・l
 `.github/workflows/` の GitHub Actions がスケジュールでデータを更新し（`data-update-annual.yml`・`data-update-quarterly.yml`）、`main` にコミットします。一部の出典 URL／バージョン（CFA 待機児童 Excel、L01 地価公示の年度）はワークフロー内の env 変数で、毎年手動更新が必要です。Vercel の自動デプロイは無効（`vercel.json` の `deploymentEnabled: false`）で、デプロイは `deploy-preview.yml` の手動実行です。
 
 ワークフローの仕様・更新頻度・手動更新箇所・手動実行手順・既知の注意点は **[`docs/data-update.md`](docs/data-update.md)** にまとめています。出典の年度更新やデータ更新 Action を触る時はまずこちらを参照。
+
+新しいデータ軸・ページ種別（ランキング等）を追加する前に、**[`docs/new-metric-criteria.md`](docs/new-metric-criteria.md)** の採用基準（凍結期間・SERP競合・GSC需要・カバレッジ）を必ず通すこと。
