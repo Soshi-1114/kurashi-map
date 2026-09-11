@@ -7,7 +7,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import { listSummaryAcrossPrefs } from "@/lib/metrics";
 import type { MuniSearchItem } from "@/lib/useMuniCombobox";
-import { GENERAL_MAP, MAP_HUBS } from "@/lib/siteNav";
+import { GENERAL_MAP, MAP_HUBS, shindanHref } from "@/lib/siteNav";
 import { SITE, absoluteUrl } from "@/lib/site";
 
 const HOME_TITLE = "市区町村の住みやすさを地図で比較｜家賃・地価・子育て・災害リスク｜KurashiMap";
@@ -56,13 +56,14 @@ export default async function HomePage() {
         <div className="home-hero-inner">
           <h1 className="home-hero-title">データで、暮らす場所を考える。</h1>
           <p className="home-hero-sub">
-            全国1,918エリア（市区町村と政令指定都市の行政区）を、家賃相場・地価・人口増減・待機児童・災害リスク・空き家率・外国人住民比率の公的データで調べて比較できます。推計値は使いません。
+            候補の街を、数字で見比べる。全国1,918の市区町村・行政区を、家賃・地価・人口・子育て・災害リスクなどの公的データだけで比較できます。推計値は使いません。
           </p>
           <HeroSearch munis={searchMunis} />
           <p className="home-hero-actions">
             <a href="#home-explore" className="home-hero-action">都道府県から探す</a>
             <Link href="/ranking" className="home-hero-action">ランキングから探す</Link>
             <Link href="/compare" className="home-hero-action">自治体を比較する</Link>
+            <Link href={shindanHref("home")} className="home-hero-action">条件から診断する</Link>
           </p>
         </div>
       </section>

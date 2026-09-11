@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { SITE } from "@/lib/site";
+import { shindanHref } from "@/lib/siteNav";
 
 // スクロールするページ用のページヘッダー（サーバーコンポーネント＝リンクは HTML に載る）。
 // 全画面地図のピラーページは地図内のフローティングヘッダー（MapView の .app-header。
@@ -16,8 +17,14 @@ export default function SiteHeader() {
         <nav className="site-header-nav" aria-label="サイト内メニュー">
           <Link href="/ranking">ランキング</Link>
           <Link href="/compare">自治体を比較</Link>
-          <Link href="/denki" prefetch={false}>電気代</Link>
-          {/* SP では横幅が足りないため隠す。共通フッター（SiteFooter）に同じ導線がある */}
+          {/* SP は横幅制約でラベルを短縮する（ブランド名は隠さない設計のため。globals.css 参照） */}
+          <Link href={shindanHref("header")} prefetch={false}>
+            <span className="site-header-nav-long">住む街診断</span>
+            <span className="site-header-nav-short">診断</span>
+          </Link>
+          {/* SP では横幅が足りないため隠す。共通フッター（SiteFooter）に同じ導線がある。
+              電気代は SEO 流入を狙わない内部送客用の道具なので、SP では診断を優先する */}
+          <Link href="/denki" className="site-header-nav-optional" prefetch={false}>電気代</Link>
           <Link href="/about" className="site-header-nav-optional">このサイトについて</Link>
         </nav>
       </div>
