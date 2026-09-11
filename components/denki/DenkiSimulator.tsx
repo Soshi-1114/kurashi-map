@@ -199,6 +199,10 @@ export default function DenkiSimulator() {
                 }
               >
                 公式サイトで詳細を見る
+                {r.link.impressionPixel && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={r.link.impressionPixel} width={1} height={1} alt="" aria-hidden="true" />
+                )}
               </a>
             )}
           </li>

@@ -36,7 +36,7 @@ export function supportUrl(): string | null {
  */
 function denkiAffLinks(): Record<string, string | undefined> {
   return {
-    // 例: "looop-denki": process.env.NEXT_PUBLIC_DENKI_AFF_LOOOP,
+    "tokyu-b": process.env.NEXT_PUBLIC_DENKI_AFF_TOKYU,
   };
 }
 
@@ -44,6 +44,7 @@ function denkiAffLinks(): Record<string, string | undefined> {
  * 電気プランの外部リンク URL を返す。
  * - env にアフィリエイトリンクがあればそれを使う（ASP 計測を壊さないよう UTM は付けない）
  * - なければ公式サイトへの素リンク + UTM（導線を非表示にせず、ツールとしての有用性を保つ）
+ * - AT のリンクなら imp 計測ピクセル（sp/rr）を対で返す（kasai/furusato と同じ契約）
  *
  * @param links テスト用の注入口（既定は env 由来の denkiAffLinks()）
  */
@@ -51,10 +52,10 @@ export function denkiOfferUrl(
   offerId: string,
   officialUrl: string,
   links: Record<string, string | undefined> = denkiAffLinks(),
-): { url: string; isAffiliate: boolean } {
+): { url: string; isAffiliate: boolean; impressionPixel: string | null } {
   const aff = links[offerId]?.trim();
-  if (aff) return { url: aff, isAffiliate: true };
-  return { url: withUtm(officialUrl, "denki"), isAffiliate: false };
+  if (aff) return { url: aff, isAffiliate: true, impressionPixel: atImpressionPixel(aff) };
+  return { url: withUtm(officialUrl, "denki"), isAffiliate: false, impressionPixel: null };
 }
 
 /**

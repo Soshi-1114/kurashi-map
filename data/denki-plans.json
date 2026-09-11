@@ -1,5 +1,5 @@
 {
-  "asOf": "2026-08",
+  "asOf": "2026-09",
   "plans": [
     {
       "offerId": "baseline-hokkaido",
@@ -627,6 +627,34 @@
       "sourceAsOf": "2026-08-18",
       "notes": ["燃料費調整相当額に上限なし（燃料高騰時は大手の従量電灯より高くなる場合がある）"],
       "sourceNotes": ["適用時期の公式表記は北海道が2025年11月検針日から、他エリアは2024年4月検針日から"]
+    },
+    {
+      "offerId": "tokyu-b",
+      "company": "東急でんき",
+      "planName": "従量電灯B",
+      "kind": "offer",
+      "areas": {
+        "tokyo": {
+          "basic": { "type": "ampere", "yenPerMonth": { "30": 858.0, "40": 1144.0, "50": 1430.0 } },
+          "tiers": [
+            { "upTo": 120, "yenPerKwh": 31.39 },
+            { "upTo": 300, "yenPerKwh": 31.89 },
+            { "upTo": null, "yenPerKwh": 36.14 }
+          ]
+        }
+      },
+      "officialUrl": "https://www.tokyu-ps.co.jp/home/denkigas/plan/",
+      "sourceUrl": "https://www.tokyu-ps.jp/agreement/pdf/pricedefinition_lv_20240604.pdf",
+      "sourceAsOf": "2026-09-11",
+      "notes": [
+        "東京電力エリアのみ",
+        "燃料費等調整は東急でんき独自の単価（試算に含まない）",
+        "ガスセット等の割引・特典は試算に含まない"
+      ],
+      "sourceNotes": [
+        "料金定義書（2024年6月4日実施）の従量電灯B。プランページの掲載単価とも一致を確認（2026-09-11）",
+        "契約電流は20〜60Aだが、収録は AMPERES（30/40/50A）のみ"
+      ]
     }
   ]
 }

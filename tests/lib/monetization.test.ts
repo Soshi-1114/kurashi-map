@@ -145,6 +145,20 @@ describe("denkiOfferUrl", () => {
     const { isAffiliate } = denkiOfferUrl("looop", "https://example.com/plan", { looop: "  " });
     expect(isAffiliate).toBe(false);
   });
+  it("AT の提携リンクなら imp 計測ピクセル（sp/rr）を対で返す", () => {
+    const { impressionPixel } = denkiOfferUrl("tokyu-b", "https://example.com/plan", {
+      "tokyu-b": "https://h.accesstrade.net/sp/cc?rk=01abc",
+    });
+    expect(impressionPixel).toBe("https://h.accesstrade.net/sp/rr?rk=01abc");
+  });
+  it("AT 以外の提携リンク・素リンクではピクセルは null", () => {
+    const aff = denkiOfferUrl("looop", "https://example.com/plan", {
+      looop: "https://aff.example/track?id=abc",
+    });
+    expect(aff.impressionPixel).toBeNull();
+    const plain = denkiOfferUrl("unknown-offer", "https://example.com/plan");
+    expect(plain.impressionPixel).toBeNull();
+  });
 });
 
 describe("kasaiHokenLink", () => {
