@@ -27,7 +27,7 @@ KurashiMap は Google Analytics 4（gtag.js）でページビューに加えて�
 | `furusato_link_click` | ふるさと納税リンクをクリックした時 | `components/area/FurusatoLink.tsx` |
 | `kasai_link_impression` | 火災保険導線が50%視認された時（1要素1回） | `components/monetization/KasaiLink.tsx` |
 | `kasai_link_click` | 火災保険の外部リンクをクリックした時（キーイベント候補） | `components/monetization/KasaiLink.tsx` |
-| `tool_entry` | 他ページから道具のページ（比較・診断）に着地した時（`?from=` があるときのみ1回） | `lib/useToolEntry.ts`（`CompareClient` / `ShindanClient` から呼ぶ） |
+| `tool_entry` | 他ページから道具のページ（比較・診断・電気代）に着地した時（`?from=` があるときのみ1回） | `lib/useToolEntry.ts`（`CompareClient` / `ShindanClient` / `DenkiSimulator` から呼ぶ） |
 | `shindan_run` | 街診断の重み・地方の組み合わせを変更した時 | `components/shindan/ShindanClient.tsx` |
 | `shindan_result_click` | 診断結果から自治体詳細へ遷移した時 | `components/shindan/ShindanClient.tsx` |
 | `denki_simulate` | 電気代シミュレーターの入力を確定した時（連続入力は 1s debounce） | `components/denki/DenkiSimulator.tsx` |
@@ -61,11 +61,11 @@ KurashiMap は Google Analytics 4（gtag.js）でページビューに加えて�
 | | `municipality_name` | 文字列 | `千代田区` | |
 | `furusato_link_click` | `municipality_code` | 文字列 | `13101` | 表示中の自治体コード |
 | | `placement` | 文字列 | `area` / `ranking` / `ranking-top` / `future-view` | 掲載面。`ranking-top`=ランキング順位台の直後（1位自治体）、`ranking`=ページ最下部の帯、`future-view`=詳細ページの将来人口カード内 |
-| `kasai_link_impression` / `kasai_link_click` | `placement` | 文字列 | `area` / `hazard-map` / `map-panel` / `shindan` | 掲載面（面ごとのCTR分析用）。`area`=詳細ページ災害カード直下、`map-panel`=地図の自治体パネル（災害オーバーレイ表示中のみ）、`shindan`=診断で災害重視時の結果下 |
+| `kasai_link_impression` / `kasai_link_click` | `placement` | 文字列 | `area` / `hazard-map` / `map-panel` / `shindan` / `pref-hazard` | 掲載面（面ごとのCTR分析用）。`area`=詳細ページ災害カード直下、`map-panel`=地図の自治体パネル（災害オーバーレイ表示中のみ）、`shindan`=診断で災害重視時の結果下、`pref-hazard`=県ハブの災害リスク一覧直下 |
 | `kasai_link_impression` / `kasai_link_click` | `municipality_code` | 文字列 | `13101` | 表示中の自治体コード（自治体面のみ） |
 | | `municipality_name` | 文字列 | `千代田区` | 寄付先名（行政区は親の政令市名） |
-| `tool_entry` | `tool` | 文字列 | `compare` / `shindan` | 着地した道具のページ |
-| | `tool_source` | 文字列 | `ranking` / `ranking_row` / `ranking_top3` / `pref_ranking` / `pref_ranking_top3` / `prefecture_ranking` / `pref_hub` / `home` / `header` | 送り元の導線。`home`=トップのヒーローアクション、`header`=サイト共通ヘッダー（SiteHeader）。語彙は `lib/siteNav.ts` の `ToolSource` 型で閉じている（`pref_ranking`=県別ランキング、`prefecture_ranking`=都道府県ランキング）。**`source` という名前は使わない** — GA4 が `source`/`medium`/`campaign` をアトリビューションに使うため、同名で送ると流入元の集計を汚す |
+| `tool_entry` | `tool` | 文字列 | `compare` / `shindan` / `denki` | 着地した道具のページ |
+| | `tool_source` | 文字列 | `ranking` / `ranking_row` / `ranking_top3` / `pref_ranking` / `pref_ranking_top3` / `prefecture_ranking` / `pref_hub` / `home` / `header` / `compare` / `shindan_result` | 送り元の導線。`compare`=比較ページ、`shindan_result`=診断結果（道具間の相互導線）。`home`=トップのヒーローアクション、`header`=サイト共通ヘッダー（SiteHeader）。語彙は `lib/siteNav.ts` の `ToolSource` 型で閉じている（`pref_ranking`=県別ランキング、`prefecture_ranking`=都道府県ランキング）。**`source` という名前は使わない** — GA4 が `source`/`medium`/`campaign` をアトリビューションに使うため、同名で送ると流入元の集計を汚す |
 | | `municipality_codes` | 文字列 | `13101,27100` | 比較のみ。着地時に選択済みの自治体コード |
 | | `count` | 数値 | `3` | 比較のみ。同上の件数 |
 | `shindan_run` | `weights` | 文字列 | `210120` | SHINDAN_AXES 順の重み6桁（0-2） |

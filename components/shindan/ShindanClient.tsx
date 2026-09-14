@@ -15,6 +15,7 @@ import {
 import { REGIONS, getPrefByCode } from "@/lib/prefs";
 import { trackShindanRun, trackShindanResultClick } from "@/lib/analytics";
 import { useToolEntry } from "@/lib/useToolEntry";
+import { denkiHref } from "@/lib/siteNav";
 import { kasaiHokenLink } from "@/lib/monetization";
 import { KasaiLink } from "@/components/monetization/KasaiLink";
 
@@ -169,6 +170,13 @@ export default function ShindanClient({ entries }: { entries: ShindanEntry[] }) 
           </ol>
           <p className="sd-note">
             適合スコアは、重視した軸の住みやすさ評価（1〜5・政府統計の実データから算出した目安）を重み付き平均して100点換算した値です。重視した指標のデータがない自治体は対象外です。アクセス・生活インフラは施設の実数で測るため、規模の大きい自治体ほど高く出る傾向があります。
+          </p>
+          {/* 道具間の相互導線。1位の自治体コードで供給エリアを初期選択する
+              （着地側が tool_entry を計測。内部リンクなので広告表記は不要） */}
+          <p className="sd-crosslink">
+            <Link href={denkiHref(results[0]?.entry.code ?? null, "shindan_result")}>
+              電気代の目安もエリア別に試算する →
+            </Link>
           </p>
           {/* 「災害の少なさ」を重視した人にだけ出す文脈一致の火災保険導線
               （env 未設定なら KASAI_LINK が null で出ない） */}

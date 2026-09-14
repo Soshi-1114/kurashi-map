@@ -20,7 +20,7 @@ import { trackToolEntry } from "./analytics";
  * @param detail 面ごとの追加パラメータ（比較の municipality_codes / count など）。
  *   「着地した瞬間」を1回数えるだけなので、初回マウント時点の値を使う。
  */
-export function useToolEntry(tool: "compare" | "shindan", detail?: Record<string, unknown>): void {
+export function useToolEntry(tool: "compare" | "shindan" | "denki", detail?: Record<string, unknown>): void {
   const fired = useRef(false);
   useEffect(() => {
     if (fired.current) return;

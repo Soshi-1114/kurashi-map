@@ -52,7 +52,9 @@ export type ToolSource =
   | "prefecture_ranking" // 都道府県ランキング（/ranking/{指標}/prefecture）のヒーロー
   | "pref_hub" // 県ハブ（/area/{県}）
   | "home" // トップのヒーローアクション
-  | "header"; // サイト共通ヘッダー（SiteHeader）
+  | "header" // サイト共通ヘッダー（SiteHeader）
+  | "compare" // 比較ページ（道具間の相互導線）
+  | "shindan_result"; // 街診断の結果セクション（道具間の相互導線）
 
 /**
  * 比較ページで横並びにできる自治体数の上限。
@@ -71,4 +73,10 @@ export function compareHref(codes: string[], from: ToolSource): string {
 /** 街診断（/shindan）へ送るURL。 */
 export function shindanHref(from: ToolSource): string {
   return `/shindan?from=${encodeURIComponent(from)}`;
+}
+
+/** 電気代シミュレーター（/denki）へ送るURL。code があれば供給エリアを初期選択する。 */
+export function denkiHref(code: string | null, from: ToolSource): string {
+  const codeParam = code ? `code=${encodeURIComponent(code)}&` : "";
+  return `/denki?${codeParam}from=${encodeURIComponent(from)}`;
 }

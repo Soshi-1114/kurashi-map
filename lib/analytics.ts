@@ -59,7 +59,7 @@ export function trackApplyFilter(params: MapFilters): void {
  * （detail は比較の municipality_codes / count のような面ごとの追加情報）。
  */
 export function trackToolEntry(
-  tool: "compare" | "shindan",
+  tool: "compare" | "shindan" | "denki",
   source: string,
   detail?: Record<string, unknown>,
 ): void {

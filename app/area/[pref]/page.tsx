@@ -18,6 +18,8 @@ import { SITE, absoluteUrl } from "@/lib/site";
 import { hasRent, rentBand } from "@/lib/rentColor";
 import { livabilityBands } from "@/lib/livabilityScore";
 import { buildPrefHazardRows } from "@/lib/prefHazardTable";
+import { kasaiHokenLink } from "@/lib/monetization";
+import { KasaiLink } from "@/components/monetization/KasaiLink";
 import { PREF_RANKINGS } from "@/lib/prefRankings";
 import { HAZARD_MAX_LEVEL_DISCLAIMER } from "@/lib/hazardScale";
 import { hasLandPrice } from "@/lib/landPrice";
@@ -147,6 +149,8 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
   // 区域指定の進み具合を安全性と取り違えさせるため。
   const hazardRows = buildPrefHazardRows(muni);
   const hazardEvaluated = hazardRows.filter((r) => r.evaluated).length;
+  // 火災保険導線（env 未設定なら null で災害リスク一覧の直下にも出ない）
+  const kasai = kasaiHokenLink();
 
   // 全自治体一覧（行政コード順 = 行政の標準的な並び）。displayName で区はフルネーム表示。
   const listed = [...all].sort((a, b) => a.code.localeCompare(b.code));
@@ -519,6 +523,9 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
               <MapIcon size={15} aria-hidden="true" />{prefName}の災害リスクを地図で見る
             </Link>
           </div>
+          {/* 浸水・土砂の想定一覧を見た直後というハザード文脈一致の火災保険導線
+              （自治体詳細の災害カード直下と同じ契約。env 未設定なら null で出ない） */}
+          {kasai && <KasaiLink link={kasai} placement="pref-hazard" />}
         </section>
       )}
 

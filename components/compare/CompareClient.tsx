@@ -15,7 +15,7 @@ import { useMuniCombobox } from "@/lib/useMuniCombobox";
 import { muniContextLabel } from "@/lib/muniLabel";
 import { barWidthPct } from "@/lib/format";
 import { getPrefBySlug } from "@/lib/prefs";
-import { MAX_COMPARE } from "@/lib/siteNav";
+import { MAX_COMPARE, denkiHref } from "@/lib/siteNav";
 import { useToolEntry } from "@/lib/useToolEntry";
 
 /** 平均列の種類。県平均は選択自治体がすべて同一県のときだけ選べる。 */
@@ -251,6 +251,12 @@ export default function CompareClient({
               <MobileGroupRows key={group} group={group} selected={selected} averages={averages} avgLabel={avgLabel} />
             ))}
           </div>
+
+          {/* 道具間の相互導線。生活費の比較という文脈が続くので電気代シミュレーターへ。
+              先頭の自治体コードで供給エリアを初期選択する（着地側が tool_entry を計測） */}
+          <p className="cmp-crosslink">
+            <Link href={denkiHref(codes[0] ?? null, "compare")}>電気代の目安もエリア別に試算する →</Link>
+          </p>
         </>
       )}
     </div>

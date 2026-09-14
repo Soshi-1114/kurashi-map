@@ -149,6 +149,15 @@
   line-height: var(--leading-relaxed);
   color: var(--text-muted);
 }
+/* 道具間の相互導線（診断結果 → 電気代シミュレーター） */
+.sd-crosslink {
+  margin: 12px 0 0;
+  font-size: var(--text-sm);
+}
+.sd-crosslink a {
+  font-weight: 600;
+  color: var(--accent);
+}
 
 /* ---- FAQ・フッター ---- */
 .sd-faq-section { margin-top: 32px; }

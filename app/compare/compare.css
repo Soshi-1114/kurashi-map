@@ -117,6 +117,16 @@
   font-size: var(--text-sm);
 }
 
+/* 道具間の相互導線（比較 → 電気代シミュレーター） */
+.cmp-crosslink {
+  margin: 16px 0 0;
+  font-size: var(--text-sm);
+}
+.cmp-crosslink a {
+  font-weight: 600;
+  color: var(--accent);
+}
+
 /* 比較テーブル（SP は横スクロール・1列目は sticky） */
 .cmp-scroll {
   margin-top: 20px;
