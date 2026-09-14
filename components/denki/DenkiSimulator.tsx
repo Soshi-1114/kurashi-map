@@ -23,6 +23,7 @@ import {
 } from "@/lib/denkiSim";
 import { yen } from "@/lib/format";
 import { denkiOfferUrl } from "@/lib/monetization";
+import { useToolEntry } from "@/lib/useToolEntry";
 import {
   trackDenkiSimulate,
   trackDenkiOfferImpression,
@@ -33,6 +34,9 @@ export default function DenkiSimulator() {
   const params = useSearchParams();
   const code = params.get("code");
   const preset = code ? areaForMuni(code) : null;
+
+  // 送客導線（?from=）からの着地を1回だけ計測（比較・診断と同じ機構）
+  useToolEntry("denki", code ? { municipality_code: code } : undefined);
 
   const [area, setArea] = useState<DenkiArea>(preset?.area ?? "tokyo");
   const [householdSize, setHouseholdSize] = useState<HouseholdSize>(2);
