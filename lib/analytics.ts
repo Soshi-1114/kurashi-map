@@ -85,6 +85,26 @@ export function trackShindanResultClick(code: string, position: number): void {
   track("shindan_result_click", { municipality_code: code, position });
 }
 
+/** 街診断の結果一覧が表示された。結果表示から遷移までの分母を補う。 */
+export function trackShindanResultImpression(params: {
+  resultCount: number;
+  eligibleCount: number;
+  weights: string;
+  regions: string;
+}): void {
+  track("shindan_result_impression", params);
+}
+
+/** 街診断の結果一覧が画面内に到達した。表示だけで終わったケースと区別する。 */
+export function trackShindanResultScroll(params: { resultCount: number; weights: string; regions: string }): void {
+  track("shindan_result_scroll", params);
+}
+
+/** 街診断の結果から比較ページへ遷移した。 */
+export function trackShindanCompareClick(code: string, position: number): void {
+  track("shindan_compare_click", { municipality_code: code, position });
+}
+
 /** ページ共有（GA4 推奨イベント）。method はOS共有シートかURLコピーか。 */
 export function trackShare(params: { method: "web_share" | "copy"; contentType: string; itemId: string }): void {
   track("share", {

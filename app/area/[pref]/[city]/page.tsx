@@ -36,7 +36,7 @@ import { getRankPositions } from "@/lib/rankingStats";
 import { buildFaq } from "@/lib/faq";
 import { SITE, prefNameOf, absoluteUrl } from "@/lib/site";
 import { getAmbiguousNames } from "@/lib/muniLabel";
-import { buildMuniTitle } from "@/lib/muniMeta";
+import { buildMuniTitle, TITLE_POPULATION_YEAR_TEST_CODES } from "@/lib/muniMeta";
 import { hasRent, rentBand } from "@/lib/rentColor";
 import { isWaitlistDisclosed } from "@/lib/waitlist";
 import {
@@ -120,6 +120,7 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
   const title = buildMuniTitle(m, {
     prefName,
     ambiguous: (await getAmbiguousNames()).has(fullName),
+    populationYear: TITLE_POPULATION_YEAR_TEST_CODES.has(m.code) ? "2025年" : undefined,
   });
 
   // description には実数値を2〜3個含める。title に出した人口・家賃を実数（丸めなし）で

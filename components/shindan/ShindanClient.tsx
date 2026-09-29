@@ -4,7 +4,7 @@
 // （?w=210120&r=kanto）と同期し、結果を共有・ブックマーク可能にする（/compare の
 // ?codes= と同方針）。スコア計算はサーバーで前計算した軸スコア（ShindanEntry）の
 // 重み付き平均のみで、フルデータはクライアントに配らない。
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { MapPin, ArrowUpRight } from "lucide-react";
 import {
@@ -13,7 +13,13 @@ import {
   type ShindanEntry, type ShindanWeights, type ShindanWeight,
 } from "@/lib/shindan";
 import { REGIONS, getPrefByCode } from "@/lib/prefs";
-import { trackShindanRun, trackShindanResultClick } from "@/lib/analytics";
+import {
+  trackShindanRun,
+  trackShindanResultClick,
+  trackShindanResultImpression,
+  trackShindanResultScroll,
+  trackShindanCompareClick,
+} from "@/lib/analytics";
 import { useToolEntry } from "@/lib/useToolEntry";
 import { denkiHref } from "@/lib/siteNav";
 import { kasaiHokenLink } from "@/lib/monetization";
@@ -71,6 +77,41 @@ export default function ShindanClient({ entries }: { entries: ShindanEntry[] }) 
     [entries, weights, regions],
   );
   const active = hasAnyWeight(weights);
+  const resultKey = `${encodeWeights(weights)}|${regions.join(",")}`;
+  const resultsRef = useRef<HTMLElement | null>(null);
+  const observedResultKeys = useRef(new Set<string>());
+
+  useEffect(() => {
+    if (!active || results.length === 0) return;
+    trackShindanResultImpression({
+      resultCount: results.length,
+      eligibleCount,
+      weights: encodeWeights(weights),
+      regions: regions.join(","),
+    });
+  }, [active, eligibleCount, regions, results.length, weights]);
+
+  useEffect(() => {
+    if (
+      !active ||
+      results.length === 0 ||
+      !resultsRef.current ||
+      typeof IntersectionObserver === "undefined" ||
+      observedResultKeys.current.has(resultKey)
+    ) return;
+    const node = resultsRef.current;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting || observedResultKeys.current.has(resultKey)) return;
+        observedResultKeys.current.add(resultKey);
+        trackShindanResultScroll({ resultCount: results.length, weights: encodeWeights(weights), regions: regions.join(",") });
+        observer.disconnect();
+      },
+      { threshold: 0.25 },
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [active, regions, resultKey, results.length, weights]);
 
   return (
     <div>
@@ -128,7 +169,7 @@ export default function ShindanClient({ entries }: { entries: ShindanEntry[] }) 
           条件に合う自治体が見つかりませんでした。重視する条件を減らすか、エリアを広げてお試しください（重視した指標のデータがある自治体のみが対象です）。
         </p>
       ) : (
-        <section className="sd-results" aria-label="診断結果" aria-live="polite">
+        <section ref={resultsRef} className="sd-results" aria-label="診断結果" aria-live="polite">
           <h2 className="sd-results-h">
             あなたの条件に合う市区町村 トップ{results.length}
             <span className="sd-results-sub">該当 {eligibleCount.toLocaleString()} 自治体から適合スコア順</span>
@@ -161,7 +202,12 @@ export default function ShindanClient({ entries }: { entries: ShindanEntry[] }) 
                     <strong>{r.score}</strong>
                     <small>適合スコア</small>
                   </span>
-                  <Link href={`/compare?codes=${r.entry.code}`} className="sd-compare" aria-label={`${r.entry.name}を比較ページで見る`}>
+                  <Link
+                    href={`/compare?codes=${r.entry.code}`}
+                    className="sd-compare"
+                    aria-label={`${r.entry.name}を比較ページで見る`}
+                    onClick={() => trackShindanCompareClick(r.entry.code, i)}
+                  >
                     比較<ArrowUpRight size={12} aria-hidden="true" />
                   </Link>
                 </li>

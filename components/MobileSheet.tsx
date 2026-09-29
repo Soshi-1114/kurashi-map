@@ -99,7 +99,7 @@ export default function MobileSheet({ municipality, kasai, onClose }: Props) {
     measure();
     window.addEventListener("resize", measure);
     return () => window.removeEventListener("resize", measure);
-  }, [municipality?.code, stage]);
+  }, [municipality, municipality?.code, stage]);
 
   // 凡例・地図コントロール・レイヤーパネルが現在の可視シート高に追従できるよう、
   // 祖先 .map-root に CSS変数 --sheet-h を書き込む（CSS は calc(var(--sheet-h)+…) で読む）。

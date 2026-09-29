@@ -20,6 +20,14 @@ export type TitleMuni = Pick<
 /** title 本文（" - サイト名" を除く部分）の目安上限。テストの回帰検出用。 */
 export const TITLE_BODY_BUDGET = 35;
 
+/** 2025年人口ラベルの小規模CTRテスト対象。14日後に効果を判定して削除・展開する。 */
+export const TITLE_POPULATION_YEAR_TEST_CODES = new Set([
+  "26100", // 京都市
+  "08542", // 五霞町
+  "40130", // 福岡市
+  "34100", // 広島市
+]);
+
 /**
  * 詳細ページの title を「人口 → 家賃 → 在留外国人割合」の順に実数値で組み立てる。
  *
@@ -35,13 +43,13 @@ export const TITLE_BODY_BUDGET = 35;
  */
 export function buildMuniTitle(
   m: TitleMuni,
-  { prefName, ambiguous }: { prefName: string; ambiguous: boolean },
+  { prefName, ambiguous, populationYear }: { prefName: string; ambiguous: boolean; populationYear?: string },
 ): string {
   const fullName = m.displayName ?? m.name;
   const namePart = ambiguous ? `${fullName}（${prefName}）` : fullName;
 
   const metrics = [
-    m.population > 0 ? `人口${compactPopulation(m.population)}` : null,
+    m.population > 0 ? `人口${populationYear ? `（${populationYear}）` : ""}${compactPopulation(m.population)}` : null,
     hasRent(m.rent.value) ? `家賃${compactYen(m.rent.value)}` : null,
   ].filter((s) => s !== null);
   const metricsPart = metrics.length > 0 ? `${metrics.join("・")}｜` : "住みやすさ・";
