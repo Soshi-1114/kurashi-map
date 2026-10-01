@@ -638,8 +638,8 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
       cancelStart();
       cleanup?.();
     };
-    // flyToCode（useCallback []）と shelterRefreshRef（ref）は安定しており再実行を招かない
-  }, [byCode, flyToCode, shelterRefreshRef]);
+    // flyToCode / flyToStationPoint（useCallback）と shelterRefreshRef（ref）は安定している。
+  }, [byCode, flyToCode, flyToStationPoint, shelterRefreshRef]);
 
   // 選択中の災害種別（複数可）に応じて、種別ごとの実区域ラスタの可視性を切り替える。
   // ズーム閾値（HAZARD_ZONE_ZOOM）未満ではラスタは minzoom により自動で出ない。
