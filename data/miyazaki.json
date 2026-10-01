@@ -1899,7 +1899,7 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "floodLevel": 3,
+      "floodLevel": 2,
       "landslideLevel": 2,
       "tsunamiLevel": 7,
       "tsunamiDepth": "10.0m以上 ～ 20.0m未満",
@@ -1907,7 +1907,7 @@
       "stormSurgeDepth": "3m以上5m未満",
       "liquefactionLevel": 1,
       "liquefactionLabel": "非常に液状化しやすい",
-      "note": "浸水想定 最大3〜5m（小丸川） / 土砂災害特別警戒区域（土石流） / 津波浸水想定 最大10.0m以上 ～ 20.0m未満 / 高潮浸水想定 最大3m以上5m未満 / 液状化: 非常に液状化しやすい",
+      "note": "浸水想定 最大0.5〜3m（小丸川） / 土砂災害特別警戒区域（土石流） / 津波浸水想定 最大10.0m以上 ～ 20.0m未満 / 高潮浸水想定 最大3m以上5m未満 / 液状化: 非常に液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/027/028/029）",
       "asOf": "2024"
     },
@@ -2567,7 +2567,7 @@
       "stormSurgeDepth": "",
       "liquefactionLevel": 3,
       "liquefactionLabel": "やや液状化しやすい",
-      "note": "浸水想定 最大10〜20m（川走川） / 土砂災害特別警戒区域（急傾斜地） / 液状化: やや液状化しやすい",
+      "note": "浸水想定 最大10〜20m（川走川・五ヶ瀬川） / 土砂災害特別警戒区域（急傾斜地） / 液状化: やや液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/027/028/029）",
       "asOf": "2024"
     },

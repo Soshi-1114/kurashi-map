@@ -43,7 +43,7 @@
     },
     "amenities": {
       "stations": 16,
-      "preschools": 273,
+      "preschools": 274,
       "medicalFacilities": 456,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -153,7 +153,7 @@
     },
     "amenities": {
       "stations": 0,
-      "preschools": 93,
+      "preschools": 91,
       "medicalFacilities": 98,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -359,7 +359,7 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "floodLevel": 3,
+      "floodLevel": 2,
       "landslideLevel": 2,
       "tsunamiLevel": 6,
       "tsunamiDepth": "5m以上 ～ 10m未満",
@@ -367,13 +367,13 @@
       "stormSurgeDepth": "",
       "liquefactionLevel": 1,
       "liquefactionLabel": "非常に液状化しやすい",
-      "note": "浸水想定 最大3〜5m（安謝川） / 土砂災害特別警戒区域（急傾斜地） / 津波浸水想定 最大5m以上 ～ 10m未満 / 液状化: 非常に液状化しやすい",
+      "note": "浸水想定 最大0.5〜3m（安謝川） / 土砂災害特別警戒区域（急傾斜地） / 津波浸水想定 最大5m以上 ～ 10m未満 / 液状化: 非常に液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/027/028/029）",
       "asOf": "2024"
     },
     "amenities": {
       "stations": 3,
-      "preschools": 106,
+      "preschools": 105,
       "medicalFacilities": 147,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -593,7 +593,7 @@
     },
     "amenities": {
       "stations": 0,
-      "preschools": 70,
+      "preschools": 71,
       "medicalFacilities": 55,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -703,7 +703,7 @@
     },
     "amenities": {
       "stations": 0,
-      "preschools": 148,
+      "preschools": 147,
       "medicalFacilities": 154,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -2231,13 +2231,13 @@
       "hasLandslideRisk": true,
       "floodLevel": 4,
       "landslideLevel": 2,
-      "tsunamiLevel": 6,
-      "tsunamiDepth": "5m以上 ～ 10m未満",
+      "tsunamiLevel": 7,
+      "tsunamiDepth": "10m以上 ～ 20m未満",
       "stormSurgeLevel": 0,
       "stormSurgeDepth": "",
       "liquefactionLevel": 1,
       "liquefactionLabel": "非常に液状化しやすい",
-      "note": "浸水想定 最大5〜10m（比謝川） / 土砂災害特別警戒区域（急傾斜地） / 津波浸水想定 最大5m以上 ～ 10m未満 / 液状化: 非常に液状化しやすい",
+      "note": "浸水想定 最大5〜10m（比謝川） / 土砂災害特別警戒区域（急傾斜地） / 津波浸水想定 最大10m以上 ～ 20m未満 / 液状化: 非常に液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/027/028/029）",
       "asOf": "2024"
     },
@@ -2463,7 +2463,7 @@
     },
     "amenities": {
       "stations": 0,
-      "preschools": 41,
+      "preschools": 42,
       "medicalFacilities": 32,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -2683,7 +2683,7 @@
     },
     "amenities": {
       "stations": 0,
-      "preschools": 29,
+      "preschools": 31,
       "medicalFacilities": 21,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -3001,13 +3001,13 @@
       "hasLandslideRisk": true,
       "floodLevel": 4,
       "landslideLevel": 2,
-      "tsunamiLevel": 3,
-      "tsunamiDepth": "1m以上 ～ 2m未満",
+      "tsunamiLevel": 1,
+      "tsunamiDepth": "0.01m以上 ～ 0.3m未満",
       "stormSurgeLevel": 0,
       "stormSurgeDepth": "",
       "liquefactionLevel": 2,
       "liquefactionLabel": "液状化しやすい",
-      "note": "浸水想定 最大5〜10m（国場川） / 土砂災害特別警戒区域（急傾斜地） / 津波浸水想定 最大1m以上 ～ 2m未満 / 液状化: 液状化しやすい",
+      "note": "浸水想定 最大5〜10m（国場川） / 土砂災害特別警戒区域（急傾斜地） / 津波浸水想定 最大0.01m以上 ～ 0.3m未満 / 液状化: 液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/027/028/029）",
       "asOf": "2024"
     },
@@ -4107,7 +4107,7 @@
       "stormSurgeDepth": "",
       "liquefactionLevel": 1,
       "liquefactionLabel": "非常に液状化しやすい",
-      "note": "土砂災害特別警戒区域（地すべり・急傾斜地） / 津波浸水想定 最大10m以上 ～ 20m未満 / 液状化: 非常に液状化しやすい",
+      "note": "土砂災害特別警戒区域（急傾斜地） / 津波浸水想定 最大10m以上 ～ 20m未満 / 液状化: 非常に液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/027/028/029）",
       "asOf": "2024"
     },

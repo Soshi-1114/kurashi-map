@@ -37,7 +37,7 @@
       "stormSurgeDepth": "",
       "liquefactionLevel": 1,
       "liquefactionLabel": "非常に液状化しやすい",
-      "note": "浸水想定 最大20m〜（高梁川・倉敷川） / 土砂災害特別警戒区域（土石流） / 津波浸水想定 最大5m以上 ～ 10m未満 / 液状化: 非常に液状化しやすい",
+      "note": "浸水想定 最大20m〜（笹ヶ瀬川・高梁川・倉敷川） / 土砂災害特別警戒区域（土石流） / 津波浸水想定 最大5m以上 ～ 10m未満 / 液状化: 非常に液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/027/028/029）",
       "asOf": "2024"
     },
@@ -153,7 +153,7 @@
     },
     "amenities": {
       "stations": 25,
-      "preschools": 264,
+      "preschools": 265,
       "medicalFacilities": 606,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -363,11 +363,11 @@
       "landslideLevel": 2,
       "tsunamiLevel": 6,
       "tsunamiDepth": "5m以上 ～ 10m未満",
-      "stormSurgeLevel": 3,
-      "stormSurgeDepth": "1m以上3m未満",
+      "stormSurgeLevel": 5,
+      "stormSurgeDepth": "3m以上5m未満",
       "liquefactionLevel": 1,
       "liquefactionLabel": "非常に液状化しやすい",
-      "note": "浸水想定 最大20m〜（倉敷川） / 土砂災害特別警戒区域（土石流） / 津波浸水想定 最大5m以上 ～ 10m未満 / 高潮浸水想定 最大1m以上3m未満 / 液状化: 非常に液状化しやすい",
+      "note": "浸水想定 最大20m〜（倉敷川） / 土砂災害特別警戒区域（土石流） / 津波浸水想定 最大5m以上 ～ 10m未満 / 高潮浸水想定 最大3m以上5m未満 / 液状化: 非常に液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/027/028/029）",
       "asOf": "2024"
     },
@@ -1137,7 +1137,7 @@
       "stormSurgeDepth": "",
       "liquefactionLevel": 1,
       "liquefactionLabel": "非常に液状化しやすい",
-      "note": "浸水想定 最大5〜10m（吉井川） / 土砂災害特別警戒区域（土石流・急傾斜地） / 津波浸水想定 最大5m以上 ～ 10m未満 / 液状化: 非常に液状化しやすい",
+      "note": "浸水想定 最大5〜10m（干田川・吉井川） / 土砂災害特別警戒区域（土石流・急傾斜地） / 津波浸水想定 最大5m以上 ～ 10m未満 / 液状化: 非常に液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/027/028/029）",
       "asOf": "2024"
     },
@@ -1901,13 +1901,13 @@
       "hasLandslideRisk": true,
       "floodLevel": 3,
       "landslideLevel": 2,
-      "tsunamiLevel": 4,
-      "tsunamiDepth": "2m以上 ～ 3m未満",
+      "tsunamiLevel": 5,
+      "tsunamiDepth": "3m以上 ～ 4m未満",
       "stormSurgeLevel": 0,
       "stormSurgeDepth": "",
       "liquefactionLevel": 2,
       "liquefactionLabel": "液状化しやすい",
-      "note": "浸水想定 最大3〜5m（里見川） / 土砂災害特別警戒区域（土石流・急傾斜地） / 津波浸水想定 最大2m以上 ～ 3m未満 / 液状化: 液状化しやすい",
+      "note": "浸水想定 最大3〜5m（里見川） / 土砂災害特別警戒区域（土石流・急傾斜地） / 津波浸水想定 最大3m以上 ～ 4m未満 / 液状化: 液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/027/028/029）",
       "asOf": "2024"
     },

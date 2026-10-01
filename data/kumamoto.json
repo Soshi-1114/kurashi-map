@@ -249,7 +249,7 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "floodLevel": 6,
+      "floodLevel": 5,
       "landslideLevel": 2,
       "tsunamiLevel": 0,
       "tsunamiDepth": "",
@@ -257,7 +257,7 @@
       "stormSurgeDepth": "",
       "liquefactionLevel": 3,
       "liquefactionLabel": "やや液状化しやすい",
-      "note": "浸水想定 最大20m〜（鹿目川・球磨川） / 土砂災害特別警戒区域（土石流） / 液状化: やや液状化しやすい",
+      "note": "浸水想定 最大10〜20m（鹿目川・球磨川） / 土砂災害特別警戒区域（土石流） / 液状化: やや液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/027/028/029）",
       "asOf": "2024"
     },
@@ -472,12 +472,12 @@
       "floodLevel": 5,
       "landslideLevel": 2,
       "tsunamiLevel": 3,
-      "tsunamiDepth": "1.0m以上 ～ 2.0m未満",
+      "tsunamiDepth": "1m以上 ～ 2m未満",
       "stormSurgeLevel": 0,
       "stormSurgeDepth": "",
       "liquefactionLevel": 1,
       "liquefactionLabel": "非常に液状化しやすい",
-      "note": "浸水想定 最大10〜20m（水俣川・湯出川） / 土砂災害特別警戒区域（急傾斜地） / 津波浸水想定 最大1.0m以上 ～ 2.0m未満 / 液状化: 非常に液状化しやすい",
+      "note": "浸水想定 最大10〜20m（水俣川・湯出川） / 土砂災害特別警戒区域（急傾斜地） / 津波浸水想定 最大1m以上 ～ 2m未満 / 液状化: 非常に液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/027/028/029）",
       "asOf": "2024"
     },
@@ -807,7 +807,7 @@
       "stormSurgeDepth": "",
       "liquefactionLevel": 2,
       "liquefactionLabel": "液状化しやすい",
-      "note": "浸水想定 最大20m〜（菊池川・迫間川・生味川） / 土砂災害特別警戒区域（急傾斜地） / 液状化: 液状化しやすい",
+      "note": "浸水想定 最大20m〜（菊池川・上生川） / 土砂災害特別警戒区域（急傾斜地） / 液状化: 液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/027/028/029）",
       "asOf": "2024"
     },
@@ -1473,7 +1473,7 @@
     },
     "amenities": {
       "stations": 7,
-      "preschools": 7,
+      "preschools": 6,
       "medicalFacilities": 68,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -2243,7 +2243,7 @@
     },
     "amenities": {
       "stations": 2,
-      "preschools": 5,
+      "preschools": 6,
       "medicalFacilities": 60,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -3227,7 +3227,7 @@
       "stormSurgeDepth": "",
       "liquefactionLevel": 2,
       "liquefactionLabel": "液状化しやすい",
-      "note": "浸水想定 最大5〜10m（秋津川・木山川） / 土砂災害特別警戒区域（急傾斜地） / 液状化: 液状化しやすい",
+      "note": "浸水想定 最大5〜10m（木山川） / 土砂災害特別警戒区域（急傾斜地） / 液状化: 液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/027/028/029）",
       "asOf": "2024"
     },
@@ -3771,13 +3771,13 @@
       "hasLandslideRisk": true,
       "floodLevel": 3,
       "landslideLevel": 2,
-      "tsunamiLevel": 4,
-      "tsunamiDepth": "2.0m以上 ～ 5.0m未満",
+      "tsunamiLevel": 3,
+      "tsunamiDepth": "1.0m以上 ～ 2.0m未満",
       "stormSurgeLevel": 0,
       "stormSurgeDepth": "",
       "liquefactionLevel": 1,
       "liquefactionLabel": "非常に液状化しやすい",
-      "note": "浸水想定 最大3〜5m（津奈木川） / 土砂災害特別警戒区域（土石流・急傾斜地） / 津波浸水想定 最大2.0m以上 ～ 5.0m未満 / 液状化: 非常に液状化しやすい",
+      "note": "浸水想定 最大3〜5m（津奈木川） / 土砂災害特別警戒区域（土石流・急傾斜地） / 津波浸水想定 最大1.0m以上 ～ 2.0m未満 / 液状化: 非常に液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/027/028/029）",
       "asOf": "2024"
     },
@@ -4767,7 +4767,7 @@
       "stormSurgeDepth": "",
       "liquefactionLevel": 3,
       "liquefactionLabel": "やや液状化しやすい",
-      "note": "浸水想定 最大20m〜（野間川・銅山川・球磨川） / 土砂災害特別警戒区域（土石流） / 液状化: やや液状化しやすい",
+      "note": "浸水想定 最大20m〜（銅山川・球磨川） / 土砂災害特別警戒区域（土石流） / 液状化: やや液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/027/028/029）",
       "asOf": "2024"
     },

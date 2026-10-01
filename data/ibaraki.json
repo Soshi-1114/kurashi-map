@@ -587,7 +587,7 @@
       "stormSurgeDepth": "",
       "liquefactionLevel": 1,
       "liquefactionLabel": "非常に液状化しやすい",
-      "note": "浸水想定 最大10〜20m（西仁連川・鬼怒川） / 土砂災害特別警戒区域（急傾斜地） / 液状化: 非常に液状化しやすい",
+      "note": "浸水想定 最大10〜20m（西仁連川・飯沼川・鬼怒川） / 土砂災害特別警戒区域（急傾斜地） / 液状化: 非常に液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/027/028/029）",
       "asOf": "2024"
     },
@@ -3007,7 +3007,7 @@
       "stormSurgeDepth": "",
       "liquefactionLevel": 1,
       "liquefactionLabel": "非常に液状化しやすい",
-      "note": "浸水想定 最大5〜10m（霞ヶ浦・利根川） / 土砂災害警戒区域（急傾斜地） / 津波浸水想定 最大5.0m以上 ～ 10.0m未満 / 液状化: 非常に液状化しやすい",
+      "note": "浸水想定 最大5〜10m（利根川） / 土砂災害警戒区域（急傾斜地） / 津波浸水想定 最大5.0m以上 ～ 10.0m未満 / 液状化: 非常に液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/027/028/029）",
       "asOf": "2024"
     },
@@ -3117,7 +3117,7 @@
       "stormSurgeDepth": "",
       "liquefactionLevel": 1,
       "liquefactionLabel": "非常に液状化しやすい",
-      "note": "浸水想定 最大3〜5m（霞ヶ浦） / 土砂災害特別警戒区域（急傾斜地） / 津波浸水想定 最大1.0m以上 ～ 2.0m未満 / 液状化: 非常に液状化しやすい",
+      "note": "浸水想定 最大3〜5m（園部川・霞ヶ浦） / 土砂災害特別警戒区域（急傾斜地） / 津波浸水想定 最大1.0m以上 ～ 2.0m未満 / 液状化: 非常に液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/027/028/029）",
       "asOf": "2024"
     },
@@ -3881,13 +3881,13 @@
       "hasLandslideRisk": true,
       "floodLevel": 4,
       "landslideLevel": 2,
-      "tsunamiLevel": 7,
-      "tsunamiDepth": "10.0m以上 ～ 20.0m未満",
+      "tsunamiLevel": 6,
+      "tsunamiDepth": "5.0m以上 ～ 10.0m未満",
       "stormSurgeLevel": 0,
       "stormSurgeDepth": "",
       "liquefactionLevel": 1,
       "liquefactionLabel": "非常に液状化しやすい",
-      "note": "浸水想定 最大5〜10m（久慈川） / 土砂災害特別警戒区域（急傾斜地） / 津波浸水想定 最大10.0m以上 ～ 20.0m未満 / 液状化: 非常に液状化しやすい",
+      "note": "浸水想定 最大5〜10m（久慈川） / 土砂災害特別警戒区域（急傾斜地） / 津波浸水想定 最大5.0m以上 ～ 10.0m未満 / 液状化: 非常に液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/027/028/029）",
       "asOf": "2024"
     },

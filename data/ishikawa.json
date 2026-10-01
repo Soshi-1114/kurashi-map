@@ -1137,7 +1137,7 @@
       "stormSurgeDepth": "",
       "liquefactionLevel": 3,
       "liquefactionLabel": "やや液状化しやすい",
-      "note": "浸水想定 最大5〜10m（手取川・高橋川・十人川） / 液状化: やや液状化しやすい",
+      "note": "浸水想定 最大5〜10m（手取川・高橋川） / 液状化: やや液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/027/028/029）",
       "asOf": "2024"
     },
@@ -1792,12 +1792,12 @@
       "floodLevel": 5,
       "landslideLevel": 2,
       "tsunamiLevel": 2,
-      "tsunamiDepth": "0.5m以上 ～ 1m未満",
+      "tsunamiDepth": "0.3m以上 ～ 0.5m未満",
       "stormSurgeLevel": 0,
       "stormSurgeDepth": "",
       "liquefactionLevel": 2,
       "liquefactionLabel": "液状化しやすい",
-      "note": "浸水想定 最大10〜20m（羽咋川・伊久留川・長曽川） / 土砂災害特別警戒区域（急傾斜地） / 津波浸水想定 最大0.5m以上 ～ 1m未満 / 液状化: 液状化しやすい",
+      "note": "浸水想定 最大10〜20m（羽咋川・伊久留川・長曽川） / 土砂災害特別警戒区域（急傾斜地） / 津波浸水想定 最大0.3m以上 ～ 0.5m未満 / 液状化: 液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/027/028/029）",
       "asOf": "2024"
     },
