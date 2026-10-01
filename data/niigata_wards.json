@@ -272,7 +272,7 @@
     },
     "amenities": {
       "stations": 7,
-      "preschools": 101,
+      "preschools": 103,
       "medicalFacilities": 400,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -371,7 +371,7 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "floodLevel": 4,
+      "floodLevel": 5,
       "landslideLevel": 2,
       "tsunamiLevel": 5,
       "tsunamiDepth": "3m以上 ～ 5m未満",
@@ -379,13 +379,13 @@
       "stormSurgeDepth": "",
       "liquefactionLevel": 1,
       "liquefactionLabel": "非常に液状化しやすい",
-      "note": "浸水想定 最大5〜10m（信濃川・鳥屋野潟・阿賀野川） / 土砂災害特別警戒区域（急傾斜地） / 津波浸水想定 最大3m以上 ～ 5m未満 / 液状化: 非常に液状化しやすい",
+      "note": "浸水想定 最大10〜20m（信濃川・阿賀野川・早出川） / 土砂災害特別警戒区域（急傾斜地） / 津波浸水想定 最大3m以上 ～ 5m未満 / 液状化: 非常に液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/027/028/029）",
       "asOf": "2024"
     },
     "amenities": {
       "stations": 1,
-      "preschools": 37,
+      "preschools": 35,
       "medicalFacilities": 88,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"

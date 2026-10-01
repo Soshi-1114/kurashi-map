@@ -153,7 +153,7 @@
     },
     "amenities": {
       "stations": 12,
-      "preschools": 171,
+      "preschools": 170,
       "medicalFacilities": 429,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -373,7 +373,7 @@
     },
     "amenities": {
       "stations": 9,
-      "preschools": 294,
+      "preschools": 292,
       "medicalFacilities": 642,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -1907,7 +1907,7 @@
       "stormSurgeDepth": "",
       "liquefactionLevel": 1,
       "liquefactionLabel": "非常に液状化しやすい",
-      "note": "浸水想定 最大5〜10m（利根川） / 液状化: 非常に液状化しやすい",
+      "note": "浸水想定 最大5〜10m（利根川・伝右川） / 液状化: 非常に液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/029）",
       "asOf": "2024"
     },
@@ -2133,7 +2133,7 @@
     },
     "amenities": {
       "stations": 1,
-      "preschools": 18,
+      "preschools": 20,
       "medicalFacilities": 91,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -2463,7 +2463,7 @@
     },
     "amenities": {
       "stations": 3,
-      "preschools": 55,
+      "preschools": 56,
       "medicalFacilities": 156,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -2573,7 +2573,7 @@
     },
     "amenities": {
       "stations": 1,
-      "preschools": 35,
+      "preschools": 34,
       "medicalFacilities": 77,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -3343,7 +3343,7 @@
     },
     "amenities": {
       "stations": 3,
-      "preschools": 34,
+      "preschools": 33,
       "medicalFacilities": 128,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -3777,7 +3777,7 @@
       "stormSurgeDepth": "",
       "liquefactionLevel": 1,
       "liquefactionLabel": "非常に液状化しやすい",
-      "note": "浸水想定 最大10〜20m（利根川） / 液状化: 非常に液状化しやすい",
+      "note": "浸水想定 最大10〜20m（午の堀川・利根川） / 液状化: 非常に液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/029）",
       "asOf": "2024"
     },
@@ -4217,13 +4217,13 @@
       "stormSurgeDepth": "",
       "liquefactionLevel": 2,
       "liquefactionLabel": "液状化しやすい",
-      "note": "浸水想定 最大10〜20m（荒川） / 液状化: 液状化しやすい",
+      "note": "浸水想定 最大10〜20m（入間川・荒川） / 液状化: 液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/029）",
       "asOf": "2024"
     },
     "amenities": {
       "stations": 1,
-      "preschools": 31,
+      "preschools": 33,
       "medicalFacilities": 132,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -4437,7 +4437,7 @@
       "stormSurgeDepth": "",
       "liquefactionLevel": 3,
       "liquefactionLabel": "やや液状化しやすい",
-      "note": "浸水想定 最大5〜10m（利根川） / 液状化: やや液状化しやすい",
+      "note": "浸水想定 最大5〜10m（利根川・赤堀川） / 液状化: やや液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/029）",
       "asOf": "2024"
     },
