@@ -43,7 +43,7 @@
     },
     "amenities": {
       "stations": 150,
-      "preschools": 822,
+      "preschools": 823,
       "medicalFacilities": 2655,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -252,12 +252,12 @@
       "floodLevel": 5,
       "landslideLevel": 0,
       "tsunamiLevel": 1,
-      "tsunamiDepth": "1.0～2.0m",
+      "tsunamiDepth": "0.01～0.3m",
       "stormSurgeLevel": 7,
       "stormSurgeDepth": "10m以上20m未満",
       "liquefactionLevel": 1,
       "liquefactionLabel": "非常に液状化しやすい",
-      "note": "浸水想定 最大10〜20m（兵庫県） / 津波浸水想定 最大1.0～2.0m / 高潮浸水想定 最大10m以上20m未満 / 液状化: 非常に液状化しやすい",
+      "note": "浸水想定 最大10〜20m（兵庫県） / 津波浸水想定 最大0.01～0.3m / 高潮浸水想定 最大10m以上20m未満 / 液状化: 非常に液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/027/028/029）",
       "asOf": "2024"
     },
@@ -373,7 +373,7 @@
     },
     "amenities": {
       "stations": 18,
-      "preschools": 210,
+      "preschools": 213,
       "medicalFacilities": 425,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -813,7 +813,7 @@
     },
     "amenities": {
       "stations": 5,
-      "preschools": 68,
+      "preschools": 69,
       "medicalFacilities": 310,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -1247,7 +1247,7 @@
       "stormSurgeDepth": "5m以上10m未満",
       "liquefactionLevel": 1,
       "liquefactionLabel": "非常に液状化しやすい",
-      "note": "浸水想定 最大10〜20m（兵庫県） / 土砂災害特別警戒区域（土石流） / 高潮浸水想定 最大5m以上10m未満 / 液状化: 非常に液状化しやすい",
+      "note": "浸水想定 最大10〜20m（兵庫県） / 土砂災害特別警戒区域（急傾斜地・土石流） / 高潮浸水想定 最大5m以上10m未満 / 液状化: 非常に液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/027/028/029）",
       "asOf": "2024"
     },
@@ -1473,7 +1473,7 @@
     },
     "amenities": {
       "stations": 13,
-      "preschools": 60,
+      "preschools": 61,
       "medicalFacilities": 369,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -1687,7 +1687,7 @@
       "stormSurgeDepth": "5m以上10m未満",
       "liquefactionLevel": 1,
       "liquefactionLabel": "非常に液状化しやすい",
-      "note": "浸水想定 最大10〜20m（兵庫県） / 土砂災害特別警戒区域（土石流・急傾斜地） / 高潮浸水想定 最大5m以上10m未満 / 液状化: 非常に液状化しやすい",
+      "note": "浸水想定 最大10〜20m（兵庫県） / 土砂災害特別警戒区域（急傾斜地） / 高潮浸水想定 最大5m以上10m未満 / 液状化: 非常に液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/027/028/029）",
       "asOf": "2024"
     },

@@ -46,7 +46,7 @@
     },
     "amenities": {
       "stations": 10,
-      "preschools": 58,
+      "preschools": 56,
       "medicalFacilities": 211,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -379,13 +379,13 @@
       "stormSurgeDepth": "5m以上10m未満",
       "liquefactionLevel": 2,
       "liquefactionLabel": "液状化しやすい",
-      "note": "浸水想定 最大0.5〜3m（正蓮寺川） / 津波浸水想定 最大0.01～0.3m / 高潮浸水想定 最大5m以上10m未満 / 液状化: 液状化しやすい",
+      "note": "浸水想定 最大0.5〜3m（大和川） / 津波浸水想定 最大0.01～0.3m / 高潮浸水想定 最大5m以上10m未満 / 液状化: 液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/027/028/029）",
       "asOf": "2024"
     },
     "amenities": {
       "stations": 12,
-      "preschools": 71,
+      "preschools": 74,
       "medicalFacilities": 268,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -724,7 +724,7 @@
     },
     "amenities": {
       "stations": 13,
-      "preschools": 54,
+      "preschools": 57,
       "medicalFacilities": 273,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -1176,7 +1176,7 @@
     },
     "amenities": {
       "stations": 6,
-      "preschools": 36,
+      "preschools": 35,
       "medicalFacilities": 166,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -1402,7 +1402,7 @@
     },
     "amenities": {
       "stations": 7,
-      "preschools": 46,
+      "preschools": 47,
       "medicalFacilities": 170,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -1509,13 +1509,13 @@
       "stormSurgeDepth": "3m以上5m未満",
       "liquefactionLevel": 1,
       "liquefactionLabel": "非常に液状化しやすい",
-      "note": "浸水想定 最大5〜10m（寝屋川・淀川） / 津波浸水想定 最大0.01～0.3m / 高潮浸水想定 最大3m以上5m未満 / 液状化: 非常に液状化しやすい",
+      "note": "浸水想定 最大5〜10m（寝屋川・淀川・大和川） / 津波浸水想定 最大0.01～0.3m / 高潮浸水想定 最大3m以上5m未満 / 液状化: 非常に液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/027/028/029）",
       "asOf": "2024"
     },
     "amenities": {
       "stations": 9,
-      "preschools": 68,
+      "preschools": 70,
       "medicalFacilities": 266,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -2306,7 +2306,7 @@
     },
     "amenities": {
       "stations": 14,
-      "preschools": 50,
+      "preschools": 51,
       "medicalFacilities": 195,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -2419,7 +2419,7 @@
     },
     "amenities": {
       "stations": 7,
-      "preschools": 60,
+      "preschools": 59,
       "medicalFacilities": 340,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -2645,7 +2645,7 @@
     },
     "amenities": {
       "stations": 34,
-      "preschools": 85,
+      "preschools": 82,
       "medicalFacilities": 757,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -2758,7 +2758,7 @@
     },
     "amenities": {
       "stations": 22,
-      "preschools": 199,
+      "preschools": 198,
       "medicalFacilities": 290,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -2871,7 +2871,7 @@
     },
     "amenities": {
       "stations": 1,
-      "preschools": 50,
+      "preschools": 47,
       "medicalFacilities": 135,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -3097,7 +3097,7 @@
     },
     "amenities": {
       "stations": 10,
-      "preschools": 65,
+      "preschools": 67,
       "medicalFacilities": 213,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -3323,7 +3323,7 @@
     },
     "amenities": {
       "stations": 6,
-      "preschools": 76,
+      "preschools": 78,
       "medicalFacilities": 257,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"

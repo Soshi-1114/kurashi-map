@@ -153,7 +153,7 @@
       "stormSurgeDepth": "10m以上20m未満",
       "liquefactionLevel": 1,
       "liquefactionLabel": "非常に液状化しやすい",
-      "note": "浸水想定 最大3〜5m（遠賀川・曲川） / 土砂災害特別警戒区域（急傾斜地） / 津波浸水想定 最大2m以上 ～ 5m未満 / 高潮浸水想定 最大10m以上20m未満 / 液状化: 非常に液状化しやすい",
+      "note": "浸水想定 最大3〜5m（遠賀川） / 土砂災害特別警戒区域（急傾斜地） / 津波浸水想定 最大2m以上 ～ 5m未満 / 高潮浸水想定 最大10m以上20m未満 / 液状化: 非常に液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/027/028/029）",
       "asOf": "2024"
     },
@@ -718,7 +718,7 @@
       "stormSurgeDepth": "10m以上20m未満",
       "liquefactionLevel": 1,
       "liquefactionLabel": "非常に液状化しやすい",
-      "note": "浸水想定 最大5〜10m（曲川・遠賀川） / 土砂災害特別警戒区域（急傾斜地） / 津波浸水想定 最大1m以上 ～ 2m未満 / 高潮浸水想定 最大10m以上20m未満 / 液状化: 非常に液状化しやすい",
+      "note": "浸水想定 最大5〜10m（遠賀川） / 土砂災害特別警戒区域（急傾斜地） / 津波浸水想定 最大1m以上 ～ 2m未満 / 高潮浸水想定 最大10m以上20m未満 / 液状化: 非常に液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/027/028/029）",
       "asOf": "2024"
     },
@@ -1392,17 +1392,17 @@
       "landslideLevel": 2,
       "tsunamiLevel": 2,
       "tsunamiDepth": "0.3m以上 ～ 1m未満",
-      "stormSurgeLevel": 6,
-      "stormSurgeDepth": "5m以上10m未満",
+      "stormSurgeLevel": 5,
+      "stormSurgeDepth": "3m以上5m未満",
       "liquefactionLevel": 2,
       "liquefactionLabel": "液状化しやすい",
-      "note": "浸水想定 最大5〜10m（樋井川） / 土砂災害特別警戒区域（急傾斜地） / 津波浸水想定 最大0.3m以上 ～ 1m未満 / 高潮浸水想定 最大5m以上10m未満 / 液状化: 液状化しやすい",
+      "note": "浸水想定 最大5〜10m（樋井川） / 土砂災害特別警戒区域（急傾斜地） / 津波浸水想定 最大0.3m以上 ～ 1m未満 / 高潮浸水想定 最大3m以上5m未満 / 液状化: 液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/027/028/029）",
       "asOf": "2024"
     },
     "amenities": {
       "stations": 6,
-      "preschools": 43,
+      "preschools": 42,
       "medicalFacilities": 185,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -1515,7 +1515,7 @@
     },
     "amenities": {
       "stations": 6,
-      "preschools": 93,
+      "preschools": 94,
       "medicalFacilities": 383,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"

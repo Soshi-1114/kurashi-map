@@ -37,7 +37,7 @@
       "stormSurgeDepth": "",
       "liquefactionLevel": 1,
       "liquefactionLabel": "非常に液状化しやすい",
-      "note": "浸水想定 最大10〜20m（烏川圏域・利根川） / 土砂災害特別警戒区域（急傾斜地） / 液状化: 非常に液状化しやすい",
+      "note": "浸水想定 最大10〜20m（利根川上流圏域・烏川圏域・利根川） / 土砂災害特別警戒区域（急傾斜地） / 液状化: 非常に液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/029）",
       "asOf": "2024"
     },
@@ -593,7 +593,7 @@
     },
     "amenities": {
       "stations": 2,
-      "preschools": 27,
+      "preschools": 26,
       "medicalFacilities": 67,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -1467,7 +1467,7 @@
       "stormSurgeDepth": "",
       "liquefactionLevel": 3,
       "liquefactionLabel": "やや液状化しやすい",
-      "note": "浸水想定 最大5〜10m（利根川上流圏域・烏川圏域・利根川） / 土砂災害警戒区域（土石流） / 液状化: やや液状化しやすい",
+      "note": "浸水想定 最大5〜10m（利根川上流圏域・利根川） / 土砂災害警戒区域（土石流） / 液状化: やや液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/029）",
       "asOf": "2024"
     },
@@ -2903,7 +2903,7 @@
     },
     "amenities": {
       "stations": 0,
-      "preschools": 2,
+      "preschools": 3,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"

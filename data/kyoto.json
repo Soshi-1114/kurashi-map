@@ -43,7 +43,7 @@
     },
     "amenities": {
       "stations": 142,
-      "preschools": 713,
+      "preschools": 716,
       "medicalFacilities": 2507,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -1027,7 +1027,7 @@
       "stormSurgeDepth": "",
       "liquefactionLevel": 2,
       "liquefactionLabel": "液状化しやすい",
-      "note": "浸水想定 最大10〜20m（小泉川・小畑川） / 土砂災害特別警戒区域（急傾斜地） / 液状化: 液状化しやすい",
+      "note": "浸水想定 最大10〜20m（小泉川・小畑川） / 土砂災害特別警戒区域（土石流・急傾斜地） / 液状化: 液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/027/028/029）",
       "asOf": "2024"
     },
@@ -1143,7 +1143,7 @@
     },
     "amenities": {
       "stations": 4,
-      "preschools": 20,
+      "preschools": 21,
       "medicalFacilities": 70,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"

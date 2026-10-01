@@ -373,7 +373,7 @@
     },
     "amenities": {
       "stations": 3,
-      "preschools": 14,
+      "preschools": 15,
       "medicalFacilities": 59,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -1577,7 +1577,7 @@
       "stormSurgeDepth": "",
       "liquefactionLevel": 3,
       "liquefactionLabel": "やや液状化しやすい",
-      "note": "浸水想定 最大10〜20m（大谷川・重信川） / 土砂災害特別警戒区域（急傾斜地） / 液状化: やや液状化しやすい",
+      "note": "浸水想定 最大10〜20m（重信川） / 土砂災害特別警戒区域（急傾斜地） / 液状化: やや液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/027/028/029）",
       "asOf": "2024"
     },
