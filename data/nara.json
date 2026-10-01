@@ -37,13 +37,13 @@
       "stormSurgeDepth": "",
       "liquefactionLevel": 3,
       "liquefactionLabel": "やや液状化しやすい",
-      "note": "浸水想定 最大10〜20m（山田川・秋篠川・能登川） / 土砂災害特別警戒区域（急傾斜地） / 液状化: やや液状化しやすい",
+      "note": "浸水想定 最大10〜20m（山田川・富雄川・秋篠川） / 土砂災害特別警戒区域（急傾斜地） / 液状化: やや液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/029）",
       "asOf": "2024"
     },
     "amenities": {
       "stations": 17,
-      "preschools": 130,
+      "preschools": 131,
       "medicalFacilities": 611,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -477,7 +477,7 @@
       "stormSurgeDepth": "",
       "liquefactionLevel": 1,
       "liquefactionLabel": "非常に液状化しやすい",
-      "note": "浸水想定 最大5〜10m（飛鳥川・葛城川・曽我川） / 土砂災害特別警戒区域（土石流） / 液状化: 非常に液状化しやすい",
+      "note": "浸水想定 最大5〜10m（曽我川） / 土砂災害特別警戒区域（土石流） / 液状化: 非常に液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/029）",
       "asOf": "2024"
     },
@@ -593,7 +593,7 @@
     },
     "amenities": {
       "stations": 7,
-      "preschools": 25,
+      "preschools": 26,
       "medicalFacilities": 76,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -923,7 +923,7 @@
     },
     "amenities": {
       "stations": 17,
-      "preschools": 44,
+      "preschools": 43,
       "medicalFacilities": 158,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -1907,7 +1907,7 @@
       "stormSurgeDepth": "",
       "liquefactionLevel": 1,
       "liquefactionLabel": "非常に液状化しやすい",
-      "note": "浸水想定 最大5〜10m（大和川） / 液状化: 非常に液状化しやすい",
+      "note": "浸水想定 最大5〜10m（曽我川） / 液状化: 非常に液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/029）",
       "asOf": "2024"
     },
@@ -2017,7 +2017,7 @@
       "stormSurgeDepth": "",
       "liquefactionLevel": 2,
       "liquefactionLabel": "液状化しやすい",
-      "note": "浸水想定 最大5〜10m（大和川・曽我川） / 液状化: 液状化しやすい",
+      "note": "浸水想定 最大5〜10m（曽我川） / 液状化: 液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/029）",
       "asOf": "2024"
     },
@@ -2127,7 +2127,7 @@
       "stormSurgeDepth": "",
       "liquefactionLevel": 2,
       "liquefactionLabel": "液状化しやすい",
-      "note": "浸水想定 最大5〜10m（飛鳥川・曽我川） / 液状化: 液状化しやすい",
+      "note": "浸水想定 最大5〜10m（曽我川） / 液状化: 液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/029）",
       "asOf": "2024"
     },
@@ -2457,7 +2457,7 @@
       "stormSurgeDepth": "",
       "liquefactionLevel": 3,
       "liquefactionLabel": "やや液状化しやすい",
-      "note": "浸水想定 最大5〜10m（葛城川・曽我川） / 土砂災害特別警戒区域（土石流） / 液状化: やや液状化しやすい",
+      "note": "浸水想定 最大5〜10m（曽我川） / 土砂災害特別警戒区域（土石流） / 液状化: やや液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/029）",
       "asOf": "2024"
     },
@@ -2573,7 +2573,7 @@
     },
     "amenities": {
       "stations": 1,
-      "preschools": 2,
+      "preschools": 1,
       "medicalFacilities": 8,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -3337,7 +3337,7 @@
       "stormSurgeDepth": "",
       "liquefactionLevel": 3,
       "liquefactionLabel": "やや液状化しやすい",
-      "note": "浸水想定 最大10〜20m（紀の川） / 土砂災害特別警戒区域（土石流・急傾斜地） / 液状化: やや液状化しやすい",
+      "note": "浸水想定 最大10〜20m（トンボ川・紀の川） / 土砂災害特別警戒区域（土石流・急傾斜地） / 液状化: やや液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/029）",
       "asOf": "2024"
     },

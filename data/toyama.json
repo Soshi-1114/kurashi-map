@@ -1239,7 +1239,7 @@
     "hazard": {
       "hasFloodRisk": true,
       "hasLandslideRisk": true,
-      "floodLevel": 4,
+      "floodLevel": 5,
       "landslideLevel": 2,
       "tsunamiLevel": 1,
       "tsunamiDepth": "0.01m以上 ～ 0.3m未満",
@@ -1247,7 +1247,7 @@
       "stormSurgeDepth": "",
       "liquefactionLevel": 1,
       "liquefactionLabel": "非常に液状化しやすい",
-      "note": "浸水想定 最大5〜10m（常願寺川・白岩川） / 土砂災害特別警戒区域（急傾斜地・土石流） / 津波浸水想定 最大0.01m以上 ～ 0.3m未満 / 液状化: 非常に液状化しやすい",
+      "note": "浸水想定 最大10〜20m（常願寺川・白岩川） / 土砂災害特別警戒区域（土石流） / 津波浸水想定 最大0.01m以上 ～ 0.3m未満 / 液状化: 非常に液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/027/028/029）",
       "asOf": "2024"
     },

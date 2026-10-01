@@ -376,7 +376,7 @@
       "stormSurgeDepth": "5m以上10m未満",
       "liquefactionLevel": 1,
       "liquefactionLabel": "非常に液状化しやすい",
-      "note": "浸水想定 最大0.5〜3m（帷子川・大岡川） / 土砂災害特別警戒区域（急傾斜地） / 津波浸水想定 最大5m以上 ～ 10m未満 / 高潮浸水想定 最大5m以上10m未満 / 液状化: 非常に液状化しやすい",
+      "note": "浸水想定 最大0.5〜3m（帷子川） / 土砂災害特別警戒区域（急傾斜地） / 津波浸水想定 最大5m以上 ～ 10m未満 / 高潮浸水想定 最大5m以上10m未満 / 液状化: 非常に液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/027/028/029）",
       "asOf": "2024"
     },
@@ -724,7 +724,7 @@
     "displayName": "横浜市磯子区",
     "amenities": {
       "stations": 7,
-      "preschools": 13,
+      "preschools": 11,
       "medicalFacilities": 214,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -1176,7 +1176,7 @@
     "displayName": "横浜市港南区",
     "amenities": {
       "stations": 6,
-      "preschools": 23,
+      "preschools": 25,
       "medicalFacilities": 319,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -2193,7 +2193,7 @@
     "displayName": "川崎市幸区",
     "amenities": {
       "stations": 5,
-      "preschools": 99,
+      "preschools": 98,
       "medicalFacilities": 212,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -2306,7 +2306,7 @@
     "displayName": "川崎市中原区",
     "amenities": {
       "stations": 9,
-      "preschools": 167,
+      "preschools": 169,
       "medicalFacilities": 403,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -2749,7 +2749,7 @@
       "stormSurgeDepth": "",
       "liquefactionLevel": 3,
       "liquefactionLabel": "やや液状化しやすい",
-      "note": "浸水想定 最大5〜10m（三沢川・鶴見川） / 土砂災害特別警戒区域（急傾斜地） / 液状化: やや液状化しやすい",
+      "note": "浸水想定 最大5〜10m（三沢川） / 土砂災害特別警戒区域（急傾斜地） / 液状化: やや液状化しやすい",
       "source": "国土数値情報（reinfolib XKT025/026/027/028/029）",
       "asOf": "2024"
     },
@@ -2871,7 +2871,7 @@
     "displayName": "相模原市緑区",
     "amenities": {
       "stations": 5,
-      "preschools": 101,
+      "preschools": 102,
       "medicalFacilities": 187,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
@@ -3097,7 +3097,7 @@
     "displayName": "相模原市南区",
     "amenities": {
       "stations": 8,
-      "preschools": 142,
+      "preschools": 141,
       "medicalFacilities": 358,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
       "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
