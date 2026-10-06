@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { MAP_HUBS, mapHubByHref, compareHref, shindanHref } from "@/lib/siteNav";
+import { MAP_HUBS, mapHubByHref, compareHref, shindanHref, parseToolSource, parseCompareAttribution } from "@/lib/siteNav";
 import { RANKINGS } from "@/lib/rankings";
 
 describe("mapHubByHref / RankingDef.mapHub", () => {
@@ -24,8 +24,23 @@ describe("mapHubByHref / RankingDef.mapHub", () => {
     );
   });
 
-  it("compareHref: from はURLエンコードする（クエリ壊れの防止）", () => {
-    expect(compareHref(["11203"], "a&b=c")).toBe("/compare?codes=11203&from=a%26b%3Dc");
+  it("parseToolSource: 外部入力は許可済みの送客元だけ通す", () => {
+    expect(parseToolSource("pref_ranking_top3")).toBe("pref_ranking_top3");
+    expect(parseToolSource("a&b=c")).toBeNull();
+    expect(parseToolSource(null)).toBeNull();
+  });
+
+  it("compareHref: 比較導線の実験情報は許可したページ・variantだけ渡す", () => {
+    const href = compareHref(["27100", "40130"], "pref_ranking_top3", {
+      experimentId: "compare-link-2026-09", variant: "baseline", originPath: "/ranking/population-growth/osaka",
+    });
+    const params = new URLSearchParams(href.split("?")[1]);
+    expect(params.get("codes")).toBe("27100,40130");
+    expect(parseCompareAttribution(params)).toEqual({
+      experimentId: "compare-link-2026-09", variant: "baseline", originPath: "/ranking/population-growth/osaka",
+    });
+    params.set("origin_path", "https://outside.example/");
+    expect(parseCompareAttribution(params)).toBeNull();
   });
 
   it("shindanHref: from を計測用に付ける（着地側 useToolEntry が tool_entry として送る）", () => {

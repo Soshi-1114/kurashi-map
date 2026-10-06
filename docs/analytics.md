@@ -27,9 +27,18 @@ KurashiMap は Google Analytics 4（gtag.js）でページビューに加えて�
 | `furusato_link_click` | ふるさと納税リンクをクリックした時 | `components/area/FurusatoLink.tsx` |
 | `kasai_link_impression` | 火災保険導線が50%視認された時（1要素1回） | `components/monetization/KasaiLink.tsx` |
 | `kasai_link_click` | 火災保険の外部リンクをクリックした時（キーイベント候補） | `components/monetization/KasaiLink.tsx` |
-| `tool_entry` | 他ページから道具のページ（比較・診断・電気代）に着地した時（`?from=` があるときのみ1回） | `lib/useToolEntry.ts`（`CompareClient` / `ShindanClient` / `DenkiSimulator` から呼ぶ） |
+| `tool_entry` | 許可済みの`?from=`値を伴って他ページから道具のページ（比較・診断・電気代）に着地した時のみ1回 | `lib/useToolEntry.ts`（`CompareClient` / `ShindanClient` / `DenkiSimulator` から呼ぶ） |
+| `compare_ready` | 2件以上の自治体詳細取得が完了し、比較表を描画した時（コード集合ごとに1回） | `components/compare/CompareClient.tsx` |
+| `compare_view` | 完成した比較表の見出しが画面内に入った時（コード集合ごとに1回） | `components/compare/CompareClient.tsx` |
+| `compare_cta_view` / `compare_cta_click` | 比較導線の基準期間の視認 / クリック（人口増加の大阪・福岡のみ） | `components/ranking/TrackedCompareLink.tsx` |
+
+比較導線イベントには、対象2ページに限り`experiment_id`・`variant`・`origin_path`を付ける。比較ページへの遷移後もallowlistで検証した値を保持し、`tool_entry`・`compare_ready`・`compare_view`で同じ入口を集計できるようにする。自由入力URLはイベントへ送らない。
+
+結果視認の定義を変更した診断イベントと比較成果イベントには`measurement_version=2026-10-06`を付ける。旧定義で記録した期間とは分けて集計する。
 | `shindan_run` | 街診断の重み・地方の組み合わせを変更した時 | `components/shindan/ShindanClient.tsx` |
+| `shindan_result_impression` / `shindan_result_scroll` | 結果生成 / 先頭結果カードの50%視認 | `components/shindan/ShindanClient.tsx` |
 | `shindan_result_click` | 診断結果から自治体詳細へ遷移した時 | `components/shindan/ShindanClient.tsx` |
+| `shindan_compare_click` | 診断結果から比較へ遷移した時 | `components/shindan/ShindanClient.tsx` |
 | `denki_simulate` | 電気代シミュレーターの入力を確定した時（連続入力は 1s debounce） | `components/denki/DenkiSimulator.tsx` |
 | `denki_offer_impression` | 電気代の比較結果リストを表示した時（エリアごとに1回。掲載オファー0件の間は送らない） | `components/denki/DenkiSimulator.tsx` |
 | `denki_offer_click` | 電気プランの外部リンクをクリックした時（キーイベント候補） | `components/denki/DenkiSimulator.tsx` |
@@ -68,9 +77,17 @@ KurashiMap は Google Analytics 4（gtag.js）でページビューに加えて�
 | | `tool_source` | 文字列 | `ranking` / `ranking_row` / `ranking_top3` / `pref_ranking` / `pref_ranking_top3` / `prefecture_ranking` / `pref_hub` / `home` / `header` / `compare` / `shindan_result` | 送り元の導線。`compare`=比較ページ、`shindan_result`=診断結果（道具間の相互導線）。`home`=トップのヒーローアクション、`header`=サイト共通ヘッダー（SiteHeader）。語彙は `lib/siteNav.ts` の `ToolSource` 型で閉じている（`pref_ranking`=県別ランキング、`prefecture_ranking`=都道府県ランキング）。**`source` という名前は使わない** — GA4 が `source`/`medium`/`campaign` をアトリビューションに使うため、同名で送ると流入元の集計を汚す |
 | | `municipality_codes` | 文字列 | `13101,27100` | 比較のみ。着地時に選択済みの自治体コード |
 | | `count` | 数値 | `3` | 比較のみ。同上の件数 |
+| `compare_ready` / `compare_view` | `count` | 数値 | `2` / `3` | 取得完了した比較対象の件数。1件以下は送らない |
+| | `tool_source` | 文字列 | `pref_ranking_top3` | 入口URLの `from`。直接訪問では付けない |
+| `compare_cta_view` / `compare_cta_click` | `experiment_id` | 文字列 | `compare-link-2026-09` | 基準期間と変更後を結ぶ実験ID |
+| | `variant` | 文字列 | `baseline` | UI変更前の値 |
+| | `page_path` | 文字列 | `/ranking/population-growth/osaka` | 対象URLのパスのみ |
+| | `tool_source` | 文字列 | `pref_ranking_top3` | 既存の送客元分類 |
 | `shindan_run` | `weights` | 文字列 | `210120` | SHINDAN_AXES 順の重み6桁（0-2） |
 | | `regions` | 文字列 | `kanto,tokai` | 選択した地方（空=全国） |
 | | `result_count` | 数値 | `312` | 条件に該当した自治体数 |
+| `shindan_result_impression` / `shindan_result_scroll` | `result_count` | 数値 | `10` | 結果一覧の表示件数 |
+| `shindan_result_impression` | `eligible_count` | 数値 | `312` | 条件に該当した自治体数 |
 | `shindan_result_click` | `municipality_code` | 文字列 | `11203` | 遷移先の自治体コード |
 | | `position` | 数値 | `0` | 結果リスト内の順位（0始まり） |
 | `denki_simulate` | `area` | 文字列 | `tokyo` `kansai` | 供給エリア（10種） |

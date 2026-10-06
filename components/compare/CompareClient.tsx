@@ -6,7 +6,7 @@
 // から取得する（トップ地図の詳細パネルと同じ2段階配信方針）。
 // 表示は2構造: PC=指標×自治体のテーブル、SP=指標単位の縦型リスト（CSSで切替）。
 // 単一テーブルの display 上書きはテーブルセマンティクスを壊すため採らない。
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import type { Municipality, MuniSummary } from "@/lib/types";
@@ -15,8 +15,9 @@ import { useMuniCombobox } from "@/lib/useMuniCombobox";
 import { muniContextLabel } from "@/lib/muniLabel";
 import { barWidthPct } from "@/lib/format";
 import { getPrefBySlug } from "@/lib/prefs";
-import { MAX_COMPARE, denkiHref } from "@/lib/siteNav";
+import { MAX_COMPARE, denkiHref, parseCompareAttribution, parseToolSource } from "@/lib/siteNav";
 import { useToolEntry } from "@/lib/useToolEntry";
+import { ANALYTICS_MEASUREMENT_VERSION, trackCompareReady, trackCompareView } from "@/lib/analytics";
 
 /** 平均列の種類。県平均は選択自治体がすべて同一県のときだけ選べる。 */
 type AvgKind = "national" | "pref";
@@ -67,9 +68,25 @@ export default function CompareClient({
   const byCode = useMemo(() => new Map(munis.map((m) => [m.code, m])), [munis]);
   const known = useMemo(() => new Set(munis.map((m) => m.code)), [munis]);
   const codes = useMemo(() => parseCodes(searchParams.get("codes"), known), [searchParams, known]);
+  // 比較対象を増減するとURLのfromが落ちるため、同じページ滞在中は入口を保持する。
+  const entrySource = useRef(parseToolSource(searchParams.get("from")));
+  const [entryAttribution] = useState(() => parseCompareAttribution(new URLSearchParams(searchParams.toString())));
+  const desktopTableRef = useRef<HTMLTableSectionElement | null>(null);
+  const mobileTableRef = useRef<HTMLHeadingElement | null>(null);
+  const readyKeys = useRef(new Set<string>());
+  const viewedKeys = useRef(new Set<string>());
 
   // 他ページからの送客を1回だけ計測する（?from=ranking_row 等）。
-  useToolEntry("compare", { municipality_codes: codes.join(","), count: codes.length });
+  useToolEntry("compare", {
+    municipality_codes: codes.join(","),
+    count: codes.length,
+    measurement_version: ANALYTICS_MEASUREMENT_VERSION,
+    ...(entryAttribution ? {
+      experiment_id: entryAttribution.experimentId,
+      variant: entryAttribution.variant,
+      origin_path: entryAttribution.originPath,
+    } : {}),
+  });
 
   // 取得済みフルデータ（code → Municipality）。一度取得したものは保持する。
   const [detail, setDetail] = useState<Record<string, DetailState>>({});
@@ -111,6 +128,30 @@ export default function CompareClient({
   const { query, setQuery, filtered, activeIndex, setActiveIndex, pick, onKeyDown } = useMuniCombobox(pickable, onPick);
 
   const selected = codes.map((code) => ({ code, summary: byCode.get(code), state: detail[code] }));
+  const comparisonKey = [...codes].sort().join(",");
+  const comparisonReady = codes.length >= 2 && codes.every((code) => {
+    const state = detail[code];
+    return state != null && state !== "loading" && state !== "error" && state.code === code;
+  });
+
+  useEffect(() => {
+    if (!comparisonReady) return;
+    if (!readyKeys.current.has(comparisonKey)) {
+      readyKeys.current.add(comparisonKey);
+      trackCompareReady(codes.length, entrySource.current, entryAttribution);
+    }
+    if (viewedKeys.current.has(comparisonKey) || typeof IntersectionObserver === "undefined") return;
+    const observer = new IntersectionObserver((entries) => {
+      if (!entries.some((entry) => entry.isIntersecting) || viewedKeys.current.has(comparisonKey)) return;
+      viewedKeys.current.add(comparisonKey);
+      trackCompareView(codes.length, entrySource.current, entryAttribution);
+      observer.disconnect();
+    }, { threshold: 0.5 });
+    for (const node of [desktopTableRef.current, mobileTableRef.current]) {
+      if (node) observer.observe(node);
+    }
+    return () => observer.disconnect();
+  }, [comparisonReady, comparisonKey, codes.length]);
 
   // ---- 平均列の切替（全国平均／県平均） ----
   // 県平均は選択自治体がすべて同一県のときだけ意味を持つ（県をまたぐ比較では全国平均のみ）。
@@ -219,7 +260,7 @@ export default function CompareClient({
           {/* PC: 指標×自治体のテーブル（SPではCSSで非表示） */}
           <div className="cmp-scroll">
             <table className="cmp-table">
-              <thead>
+              <thead ref={desktopTableRef}>
                 <tr>
                   <th scope="col" className="cmp-rowlabel">
                     指標
@@ -247,8 +288,8 @@ export default function CompareClient({
           {/* SP: 指標単位の縦型リスト（PCではCSSで非表示）。「何を比較しているか」を
               常に見失わないよう、指標名 → 自治体ごとの値・バー → 平均 の順で縦に流す */}
           <div className="cmp-mrows">
-            {COMPARE_GROUPS.map((group) => (
-              <MobileGroupRows key={group} group={group} selected={selected} averages={averages} avgLabel={avgLabel} />
+            {COMPARE_GROUPS.map((group, i) => (
+              <MobileGroupRows key={group} group={group} selected={selected} averages={averages} avgLabel={avgLabel} firstHeadingRef={i === 0 ? mobileTableRef : undefined} />
             ))}
           </div>
 
@@ -324,18 +365,20 @@ function MobileGroupRows({
   selected,
   averages,
   avgLabel,
+  firstHeadingRef,
 }: {
   group: (typeof COMPARE_GROUPS)[number];
   selected: Array<{ code: string; summary: MuniSummary | undefined; state: DetailState | undefined }>;
   averages: NationalAverages;
   avgLabel: string;
+  firstHeadingRef?: React.RefObject<HTMLHeadingElement | null>;
 }) {
   const rows = COMPARE_ROWS.filter((r) => r.group === group);
   const resolved = resolveSelected(selected);
 
   return (
     <section className="cmp-mgroup">
-      <h3 className="cmp-mgroup-title">{group}</h3>
+      <h3 ref={firstHeadingRef} className="cmp-mgroup-title">{group}</h3>
       {rows.map((row) => {
         const { cells, avgValue, rowMax } = computeRow(row, resolved, averages);
         const avgText = row.nationalAvgText?.(averages);
