@@ -111,6 +111,7 @@
   --text-xs: 12px;
   --text-sm: 13px;
   --text-base: 14px;  /* 本文 */
+  --text-reading: 16px; /* 自治体の説明・出典など、連続して読む本文 */
   --text-md: 15px;
   --text-lg: 17px;
   --text-xl: 19px;
@@ -123,6 +124,29 @@
   --leading-snug: 1.5;
   --leading-normal: 1.7;
   --leading-relaxed: 1.85;
+}
+
+/* データを読む面では14pxのUI基準を本文へ流用せず、読みやすい行長と行間を保つ。 */
+.rk-lead,
+.ad-lead,
+.ad-overview-text,
+.cmp-lead {
+  font-size: var(--text-reading);
+  line-height: var(--leading-relaxed);
+}
+
+.rk-root,
+.ad-root,
+.cmp-client {
+  font-variant-numeric: proportional-nums;
+}
+
+.rk-kpi-value,
+.ad-kpi-value,
+.ad-metric-primary,
+.cmp-cell-text,
+.cmp-mrow-value {
+  font-variant-numeric: tabular-nums;
 }
 html, body {
   margin: 0;
