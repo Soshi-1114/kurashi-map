@@ -70,7 +70,7 @@ export default function CompareClient({
   const codes = useMemo(() => parseCodes(searchParams.get("codes"), known), [searchParams, known]);
   // 比較対象を増減するとURLのfromが落ちるため、同じページ滞在中は入口を保持する。
   const entrySource = useRef(parseToolSource(searchParams.get("from")));
-  const entryAttribution = useRef(parseCompareAttribution(new URLSearchParams(searchParams.toString())));
+  const [entryAttribution] = useState(() => parseCompareAttribution(new URLSearchParams(searchParams.toString())));
   const desktopTableRef = useRef<HTMLTableSectionElement | null>(null);
   const mobileTableRef = useRef<HTMLHeadingElement | null>(null);
   const readyKeys = useRef(new Set<string>());
@@ -81,10 +81,10 @@ export default function CompareClient({
     municipality_codes: codes.join(","),
     count: codes.length,
     measurement_version: ANALYTICS_MEASUREMENT_VERSION,
-    ...(entryAttribution.current ? {
-      experiment_id: entryAttribution.current.experimentId,
-      variant: entryAttribution.current.variant,
-      origin_path: entryAttribution.current.originPath,
+    ...(entryAttribution ? {
+      experiment_id: entryAttribution.experimentId,
+      variant: entryAttribution.variant,
+      origin_path: entryAttribution.originPath,
     } : {}),
   });
 
@@ -138,13 +138,13 @@ export default function CompareClient({
     if (!comparisonReady) return;
     if (!readyKeys.current.has(comparisonKey)) {
       readyKeys.current.add(comparisonKey);
-      trackCompareReady(codes.length, entrySource.current, entryAttribution.current);
+      trackCompareReady(codes.length, entrySource.current, entryAttribution);
     }
     if (viewedKeys.current.has(comparisonKey) || typeof IntersectionObserver === "undefined") return;
     const observer = new IntersectionObserver((entries) => {
       if (!entries.some((entry) => entry.isIntersecting) || viewedKeys.current.has(comparisonKey)) return;
       viewedKeys.current.add(comparisonKey);
-      trackCompareView(codes.length, entrySource.current, entryAttribution.current);
+      trackCompareView(codes.length, entrySource.current, entryAttribution);
       observer.disconnect();
     }, { threshold: 0.5 });
     for (const node of [desktopTableRef.current, mobileTableRef.current]) {
