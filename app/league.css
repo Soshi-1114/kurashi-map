@@ -163,6 +163,24 @@
 .rk-podium-card.is-1 { order: 2; padding-top: var(--space-8); }
 .rk-podium-card.is-2 { order: 1; }
 .rk-podium-card.is-3 { order: 3; }
+.rk-podium-compare {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  border: 1px solid var(--rk-border);
+  border-radius: var(--rk-radius);
+  background: var(--rk-subtle);
+}
+.rk-podium-compare-copy { display: flex; flex-direction: column; gap: 3px; }
+.rk-podium-compare-copy strong { font-size: var(--text-sm); color: var(--text); }
+.rk-podium-compare-copy span { font-size: var(--text-xs); color: var(--text-muted); }
+@media (max-width: 640px) {
+  .rk-podium-compare { align-items: stretch; flex-direction: column; }
+  .rk-podium-compare .rk-action { justify-content: center; }
+}
 /* 上端の帯は1位のみ（順位の強調はブランドカラーで行い、金銀銅では飾らない）。 */
 .rk-podium-card.is-1::before {
   content: "";

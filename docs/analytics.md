@@ -30,7 +30,7 @@ KurashiMap は Google Analytics 4（gtag.js）でページビューに加えて�
 | `tool_entry` | 許可済みの`?from=`値を伴って他ページから道具のページ（比較・診断・電気代）に着地した時のみ1回 | `lib/useToolEntry.ts`（`CompareClient` / `ShindanClient` / `DenkiSimulator` から呼ぶ） |
 | `compare_ready` | 2件以上の自治体詳細取得が完了し、比較表を描画した時（コード集合ごとに1回） | `components/compare/CompareClient.tsx` |
 | `compare_view` | 完成した比較表の見出しが画面内に入った時（コード集合ごとに1回） | `components/compare/CompareClient.tsx` |
-| `compare_cta_view` / `compare_cta_click` | 比較導線の基準期間の視認 / クリック（人口増加の大阪・福岡のみ） | `components/ranking/TrackedCompareLink.tsx` |
+| `compare_cta_view` / `compare_cta_click` | 比較導線の視認 / クリック（人口増加の大阪・福岡のみ） | `components/ranking/TrackedCompareLink.tsx` |
 
 比較導線イベントには、対象2ページに限り`experiment_id`・`variant`・`origin_path`を付ける。比較ページへの遷移後もallowlistで検証した値を保持し、`tool_entry`・`compare_ready`・`compare_view`で同じ入口を集計できるようにする。自由入力URLはイベントへ送らない。
 
@@ -79,8 +79,8 @@ KurashiMap は Google Analytics 4（gtag.js）でページビューに加えて�
 | | `count` | 数値 | `3` | 比較のみ。同上の件数 |
 | `compare_ready` / `compare_view` | `count` | 数値 | `2` / `3` | 取得完了した比較対象の件数。1件以下は送らない |
 | | `tool_source` | 文字列 | `pref_ranking_top3` | 入口URLの `from`。直接訪問では付けない |
-| `compare_cta_view` / `compare_cta_click` | `experiment_id` | 文字列 | `compare-link-2026-09` | 基準期間と変更後を結ぶ実験ID |
-| | `variant` | 文字列 | `baseline` | UI変更前の値 |
+| `compare_cta_view` / `compare_cta_click` | `experiment_id` | 文字列 | `compare-cta-placement-2026-10` | 上位3自治体直後へ配置する変更の識別子 |
+| | `variant` | 文字列 | `treatment` | CTAをランキング上位3自治体の直後へ配置 |
 | | `page_path` | 文字列 | `/ranking/population-growth/osaka` | 対象URLのパスのみ |
 | | `tool_source` | 文字列 | `pref_ranking_top3` | 既存の送客元分類 |
 | `shindan_run` | `weights` | 文字列 | `210120` | SHINDAN_AXES 順の重み6桁（0-2） |

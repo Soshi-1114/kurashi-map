@@ -57,21 +57,22 @@ export type ToolSource =
   | "shindan_result"; // 街診断の結果セクション（道具間の相互導線）
 
 export type CompareAttribution = {
-  experimentId: "compare-link-2026-09";
+  experimentId: "compare-link-2026-09" | "compare-cta-placement-2026-10";
   variant: "baseline" | "treatment";
   originPath: "/ranking/population-growth/osaka" | "/ranking/population-growth/fukuoka";
 };
 
 /** URLパラメータから、事前定義した比較導線実験の値だけを受け入れる。 */
 export function parseCompareAttribution(params: URLSearchParams): CompareAttribution | null {
-  if (params.get("experiment_id") !== "compare-link-2026-09") return null;
+  const experimentId = params.get("experiment_id");
+  if (experimentId !== "compare-link-2026-09" && experimentId !== "compare-cta-placement-2026-10") return null;
   const variant = params.get("variant");
   const originPath = params.get("origin_path");
   if ((variant !== "baseline" && variant !== "treatment") ||
       (originPath !== "/ranking/population-growth/osaka" && originPath !== "/ranking/population-growth/fukuoka")) {
     return null;
   }
-  return { experimentId: "compare-link-2026-09", variant, originPath };
+  return { experimentId, variant, originPath };
 }
 
 const TOOL_SOURCES: readonly ToolSource[] = [

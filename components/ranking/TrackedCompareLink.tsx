@@ -5,21 +5,23 @@ import Link from "next/link";
 import { Scale } from "lucide-react";
 import { ANALYTICS_MEASUREMENT_VERSION, track } from "@/lib/analytics";
 
-/** 比較導線の変更前基準値を、実験対象ページだけで計測する。 */
+/** 比較導線の視認・クリックを、実験対象ページだけで計測する。 */
 export default function TrackedCompareLink({
   href,
   count,
   pagePath,
+  className = "rk-action rk-action-ghost",
 }: {
   href: string;
   count: number;
   pagePath: string;
+  className?: string;
 }) {
   const linkRef = useRef<HTMLAnchorElement | null>(null);
   const seen = useRef(false);
   const params = {
-    experiment_id: "compare-link-2026-09",
-    variant: "baseline",
+    experiment_id: "compare-cta-placement-2026-10",
+    variant: "treatment",
     page_path: pagePath,
     tool_source: "pref_ranking_top3",
     measurement_version: ANALYTICS_MEASUREMENT_VERSION,
@@ -44,7 +46,7 @@ export default function TrackedCompareLink({
     <Link
       ref={linkRef}
       href={href}
-      className="rk-action rk-action-ghost"
+      className={className}
       onClick={() => track("compare_cta_click", params)}
     >
       <Scale size={15} aria-hidden="true" />上位{count}件を比較する
