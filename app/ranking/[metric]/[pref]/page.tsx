@@ -139,6 +139,7 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
   if (ranked.length === 0) notFound();
   const prefName = pref.nameJa;
   const isList = Boolean(def.membershipList);
+  const trackCompareCta = def.slug === "population-growth" && (pref.slug === "osaka" || pref.slug === "fukuoka");
 
   // データ鮮度ラベル・導入文・FAQ（定義のある指標のみ）。
   const freshness = def.freshnessLabel?.(ranked[0] ?? null) ?? null;
@@ -262,24 +263,10 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
           </Link>
           {/* 県内の上位を1クリックで比較ページへ（ランキング＝情報意図から、
               比較＝選択意図の道具へ渡す導線）。一覧型は順位ではないため出さない。 */}
-          {!isList && podium.length >= 2 && (
-            def.slug === "population-growth" && (pref.slug === "osaka" || pref.slug === "fukuoka") ? (
-              <TrackedCompareLink
-                href={compareHref(podium.map((m) => m.code), "pref_ranking_top3", {
-                  experimentId: "compare-link-2026-09",
-                  variant: "baseline",
-                  originPath: pref.slug === "osaka"
-                    ? "/ranking/population-growth/osaka"
-                    : "/ranking/population-growth/fukuoka",
-                })}
-                count={podium.length}
-                pagePath={`/ranking/${def.slug}/${pref.slug}`}
-              />
-            ) : (
-              <Link href={compareHref(podium.map((m) => m.code), "pref_ranking_top3")} className="rk-action rk-action-ghost">
-                <Scale size={15} aria-hidden="true" />上位{podium.length}件を比較する
-              </Link>
-            )
+          {!isList && podium.length >= 2 && !trackCompareCta && (
+            <Link href={compareHref(podium.map((m) => m.code), "pref_ranking_top3")} className="rk-action rk-action-ghost">
+              <Scale size={15} aria-hidden="true" />上位{podium.length}件を比較する
+            </Link>
           )}
           <Link href={shindanHref("pref_ranking")} className="rk-action rk-action-ghost">
             <Compass size={15} aria-hidden="true" />条件から街を診断する
@@ -417,6 +404,27 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
               </li>
             ))}
           </ol>
+        )}
+
+        {!isList && podium.length >= 2 && trackCompareCta && (
+          <div className="rk-podium-compare">
+            <div className="rk-podium-compare-copy">
+              <strong>上位{podium.length}自治体を比べる</strong>
+              <span>家賃や人口、子育てなどの住環境データを横並びで確認できます。</span>
+            </div>
+            <TrackedCompareLink
+              href={compareHref(podium.map((m) => m.code), "pref_ranking_top3", {
+                experimentId: "compare-cta-placement-2026-10",
+                variant: "treatment",
+                originPath: pref.slug === "osaka"
+                  ? "/ranking/population-growth/osaka"
+                  : "/ranking/population-growth/fukuoka",
+              })}
+              count={podium.length}
+              pagePath={`/ranking/${def.slug}/${pref.slug}`}
+              className="rk-action rk-action-primary"
+            />
+          </div>
         )}
 
         {ladder.length > 0 && ladderOl(ladder, 4)}
