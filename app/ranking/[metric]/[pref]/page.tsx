@@ -22,6 +22,7 @@ import type { Municipality } from "@/lib/types";
 import PageShell from "@/components/PageShell";
 import { FurusatoBand } from "@/components/monetization/FurusatoBand";
 import { ShareButton } from "@/components/ShareButton";
+import TrackedCompareLink from "@/components/ranking/TrackedCompareLink";
 
 type Params = { metric: string; pref: string };
 
@@ -262,9 +263,23 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
           {/* 県内の上位を1クリックで比較ページへ（ランキング＝情報意図から、
               比較＝選択意図の道具へ渡す導線）。一覧型は順位ではないため出さない。 */}
           {!isList && podium.length >= 2 && (
-            <Link href={compareHref(podium.map((m) => m.code), "pref_ranking_top3")} className="rk-action rk-action-ghost">
-              <Scale size={15} aria-hidden="true" />上位{podium.length}件を比較する
-            </Link>
+            def.slug === "population-growth" && (pref.slug === "osaka" || pref.slug === "fukuoka") ? (
+              <TrackedCompareLink
+                href={compareHref(podium.map((m) => m.code), "pref_ranking_top3", {
+                  experimentId: "compare-link-2026-09",
+                  variant: "baseline",
+                  originPath: pref.slug === "osaka"
+                    ? "/ranking/population-growth/osaka"
+                    : "/ranking/population-growth/fukuoka",
+                })}
+                count={podium.length}
+                pagePath={`/ranking/${def.slug}/${pref.slug}`}
+              />
+            ) : (
+              <Link href={compareHref(podium.map((m) => m.code), "pref_ranking_top3")} className="rk-action rk-action-ghost">
+                <Scale size={15} aria-hidden="true" />上位{podium.length}件を比較する
+              </Link>
+            )
           )}
           <Link href={shindanHref("pref_ranking")} className="rk-action rk-action-ghost">
             <Compass size={15} aria-hidden="true" />条件から街を診断する

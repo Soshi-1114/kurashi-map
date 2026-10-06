@@ -5,6 +5,9 @@
 // honesty 方針と同様、計測も「実際に起きたこと」だけを送る。推測値や水増しはしない。
 
 import type { MapFilters } from "./mapFilters";
+import type { CompareAttribution, ToolSource } from "./siteNav";
+
+export const ANALYTICS_MEASUREMENT_VERSION = "2026-10-06";
 
 type GtagFn = (command: "event", eventName: string, params?: Record<string, unknown>) => void;
 
@@ -60,7 +63,7 @@ export function trackApplyFilter(params: MapFilters): void {
  */
 export function trackToolEntry(
   tool: "compare" | "shindan" | "denki",
-  source: string,
+  source: ToolSource,
   detail?: Record<string, unknown>,
 ): void {
   // パラメータ名を `source` にしないこと。GA4 は `source` / `medium` / `campaign` /
@@ -69,6 +72,25 @@ export function trackToolEntry(
   // プロパティのパラメータ候補には我々が一度も送っていない medium / campaign /
   // term / content が並んでおり、その一覧の `source` は GA4 自身のもの）。
   track("tool_entry", { tool, tool_source: source, ...detail });
+}
+
+/** 2件以上の自治体データを取得し、比較表を描画できた。 */
+export function trackCompareReady(count: number, source: ToolSource | null, attribution: CompareAttribution | null = null): void {
+  track("compare_ready", { count, measurement_version: ANALYTICS_MEASUREMENT_VERSION, ...(source ? { tool_source: source } : {}), ...compareAttributionParams(attribution) });
+}
+
+/** 完成した比較表の先頭を実際に視認した。 */
+export function trackCompareView(count: number, source: ToolSource | null, attribution: CompareAttribution | null = null): void {
+  track("compare_view", { count, measurement_version: ANALYTICS_MEASUREMENT_VERSION, ...(source ? { tool_source: source } : {}), ...compareAttributionParams(attribution) });
+}
+
+function compareAttributionParams(attribution: CompareAttribution | null): Record<string, string> {
+  if (!attribution) return {};
+  return {
+    experiment_id: attribution.experimentId,
+    variant: attribution.variant,
+    origin_path: attribution.originPath,
+  };
 }
 
 /** 街診断の実行（重み・地方の組み合わせ変更ごとに1回）。 */
@@ -92,12 +114,23 @@ export function trackShindanResultImpression(params: {
   weights: string;
   regions: string;
 }): void {
-  track("shindan_result_impression", params);
+  track("shindan_result_impression", {
+    measurement_version: ANALYTICS_MEASUREMENT_VERSION,
+    result_count: params.resultCount,
+    eligible_count: params.eligibleCount,
+    weights: params.weights,
+    regions: params.regions,
+  });
 }
 
 /** 街診断の結果一覧が画面内に到達した。表示だけで終わったケースと区別する。 */
 export function trackShindanResultScroll(params: { resultCount: number; weights: string; regions: string }): void {
-  track("shindan_result_scroll", params);
+  track("shindan_result_scroll", {
+    measurement_version: ANALYTICS_MEASUREMENT_VERSION,
+    result_count: params.resultCount,
+    weights: params.weights,
+    regions: params.regions,
+  });
 }
 
 /** 街診断の結果から比較ページへ遷移した。 */

@@ -12,6 +12,7 @@
 
 import { useEffect, useRef } from "react";
 import { trackToolEntry } from "./analytics";
+import { parseToolSource } from "./siteNav";
 
 /**
  * `?from=` があれば `tool_entry` を1回だけ送る。
@@ -24,7 +25,7 @@ export function useToolEntry(tool: "compare" | "shindan" | "denki", detail?: Rec
   const fired = useRef(false);
   useEffect(() => {
     if (fired.current) return;
-    const from = new URLSearchParams(window.location.search).get("from");
+    const from = parseToolSource(new URLSearchParams(window.location.search).get("from"));
     if (!from) return;
     fired.current = true;
     trackToolEntry(tool, from, detail);

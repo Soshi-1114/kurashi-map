@@ -56,6 +56,34 @@ export type ToolSource =
   | "compare" // 比較ページ（道具間の相互導線）
   | "shindan_result"; // 街診断の結果セクション（道具間の相互導線）
 
+export type CompareAttribution = {
+  experimentId: "compare-link-2026-09";
+  variant: "baseline" | "treatment";
+  originPath: "/ranking/population-growth/osaka" | "/ranking/population-growth/fukuoka";
+};
+
+/** URLパラメータから、事前定義した比較導線実験の値だけを受け入れる。 */
+export function parseCompareAttribution(params: URLSearchParams): CompareAttribution | null {
+  if (params.get("experiment_id") !== "compare-link-2026-09") return null;
+  const variant = params.get("variant");
+  const originPath = params.get("origin_path");
+  if ((variant !== "baseline" && variant !== "treatment") ||
+      (originPath !== "/ranking/population-growth/osaka" && originPath !== "/ranking/population-growth/fukuoka")) {
+    return null;
+  }
+  return { experimentId: "compare-link-2026-09", variant, originPath };
+}
+
+const TOOL_SOURCES: readonly ToolSource[] = [
+  "ranking", "ranking_row", "ranking_top3", "pref_ranking", "pref_ranking_top3",
+  "prefecture_ranking", "pref_hub", "home", "header", "compare", "shindan_result",
+];
+
+/** 外部入力の `from` 値を閉じた語彙に正規化する。不明値は計測から除外する。 */
+export function parseToolSource(value: string | null): ToolSource | null {
+  return value && TOOL_SOURCES.includes(value as ToolSource) ? (value as ToolSource) : null;
+}
+
 /**
  * 比較ページで横並びにできる自治体数の上限。
  * ここに置くのは、上限を知る必要があるのがクライアント（CompareClient のピッカー）
@@ -65,9 +93,16 @@ export type ToolSource =
 export const MAX_COMPARE = 3;
 
 /** 比較ページ（/compare）へ送るURL。codes は MAX_COMPARE 件に丸める。 */
-export function compareHref(codes: string[], from: ToolSource): string {
+export function compareHref(codes: string[], from: ToolSource, attribution?: CompareAttribution): string {
   const capped = codes.slice(0, MAX_COMPARE);
-  return `/compare?codes=${capped.join(",")}&from=${encodeURIComponent(from)}`;
+  const base = `/compare?codes=${capped.join(",")}&from=${encodeURIComponent(from)}`;
+  if (!attribution) return base;
+  const query = new URLSearchParams({
+    experiment_id: attribution.experimentId,
+    variant: attribution.variant,
+    origin_path: attribution.originPath,
+  });
+  return `${base}&${query.toString()}`;
 }
 
 /** 街診断（/shindan）へ送るURL。 */

@@ -78,7 +78,7 @@ export default function ShindanClient({ entries }: { entries: ShindanEntry[] }) 
   );
   const active = hasAnyWeight(weights);
   const resultKey = `${encodeWeights(weights)}|${regions.join(",")}`;
-  const resultsRef = useRef<HTMLElement | null>(null);
+  const firstResultRef = useRef<HTMLLIElement | null>(null);
   const observedResultKeys = useRef(new Set<string>());
 
   useEffect(() => {
@@ -95,11 +95,13 @@ export default function ShindanClient({ entries }: { entries: ShindanEntry[] }) 
     if (
       !active ||
       results.length === 0 ||
-      !resultsRef.current ||
+      !firstResultRef.current ||
       typeof IntersectionObserver === "undefined" ||
       observedResultKeys.current.has(resultKey)
     ) return;
-    const node = resultsRef.current;
+    // 結果section全体の25%は長いリストでは画面内に入らない。
+    // 先頭カードの半分が見えた時だけ「結果を視認」とする。
+    const node = firstResultRef.current;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (!entry.isIntersecting || observedResultKeys.current.has(resultKey)) return;
@@ -107,7 +109,7 @@ export default function ShindanClient({ entries }: { entries: ShindanEntry[] }) 
         trackShindanResultScroll({ resultCount: results.length, weights: encodeWeights(weights), regions: regions.join(",") });
         observer.disconnect();
       },
-      { threshold: 0.25 },
+      { threshold: 0.5 },
     );
     observer.observe(node);
     return () => observer.disconnect();
@@ -169,7 +171,7 @@ export default function ShindanClient({ entries }: { entries: ShindanEntry[] }) 
           条件に合う自治体が見つかりませんでした。重視する条件を減らすか、エリアを広げてお試しください（重視した指標のデータがある自治体のみが対象です）。
         </p>
       ) : (
-        <section ref={resultsRef} className="sd-results" aria-label="診断結果" aria-live="polite">
+        <section className="sd-results" aria-label="診断結果" aria-live="polite">
           <h2 className="sd-results-h">
             あなたの条件に合う市区町村 トップ{results.length}
             <span className="sd-results-sub">該当 {eligibleCount.toLocaleString()} 自治体から適合スコア順</span>
@@ -178,7 +180,7 @@ export default function ShindanClient({ entries }: { entries: ShindanEntry[] }) 
             {results.map((r, i) => {
               const pref = getPrefByCode(r.entry.code);
               return (
-                <li key={r.entry.code} className="sd-row">
+                <li key={r.entry.code} ref={i === 0 ? firstResultRef : undefined} className="sd-row">
                   <span className="sd-rank">{i + 1}</span>
                   <div className="sd-row-main">
                     <Link
