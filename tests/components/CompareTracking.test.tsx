@@ -16,6 +16,7 @@ vi.mock("next/navigation", () => ({
   useSearchParams: () => mocked.params,
 }));
 vi.mock("@/lib/analytics", () => ({
+  ANALYTICS_MEASUREMENT_VERSION: "2026-10-06",
   trackToolEntry: vi.fn(),
   trackCompareReady: mocked.ready,
   trackCompareView: mocked.view,
