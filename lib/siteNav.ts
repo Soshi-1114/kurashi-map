@@ -54,7 +54,9 @@ export type ToolSource =
   | "home" // トップのヒーローアクション
   | "header" // サイト共通ヘッダー（SiteHeader）
   | "compare" // 比較ページ（道具間の相互導線）
-  | "shindan_result"; // 街診断の結果セクション（道具間の相互導線）
+  | "shindan_result" // 街診断の結果セクション（道具間の相互導線）
+  | "area_detail" // 自治体詳細の比較候補
+  | "map"; // 地図パネルの比較候補
 
 export type CompareAttribution = {
   experimentId: "compare-link-2026-09" | "compare-cta-placement-2026-10";
@@ -77,7 +79,7 @@ export function parseCompareAttribution(params: URLSearchParams): CompareAttribu
 
 const TOOL_SOURCES: readonly ToolSource[] = [
   "ranking", "ranking_row", "ranking_top3", "pref_ranking", "pref_ranking_top3",
-  "prefecture_ranking", "pref_hub", "home", "header", "compare", "shindan_result",
+  "prefecture_ranking", "pref_hub", "home", "header", "compare", "shindan_result", "area_detail", "map",
 ];
 
 /** 外部入力の `from` 値を閉じた語彙に正規化する。不明値は計測から除外する。 */

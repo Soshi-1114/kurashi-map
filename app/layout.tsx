@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { SITE, absoluteUrl } from "@/lib/site";
 import WebVitals from "@/components/WebVitals";
+import { CompareSelectionProvider } from "@/components/compare/CompareSelectionProvider";
 import "./globals.css";
 
 // Google Analytics 4 の測定ID（gtag.js による閲覧トラッキング）。
@@ -92,7 +93,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(siteLdJson) }}
         />
         <WebVitals />
-        {children}
+        <CompareSelectionProvider>{children}</CompareSelectionProvider>
       </body>
     </html>
   );

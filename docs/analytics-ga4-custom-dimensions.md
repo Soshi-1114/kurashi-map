@@ -21,6 +21,8 @@
 | 比較導線variant | `variant` | 同上 | イベント |
 | 比較導線ページ | `page_path` | 同上 | イベント |
 | 比較対象数 | `count` | `tool_entry`, `compare_ready`, `compare_view` | イベント・カスタム指標 |
+| 比較候補数 | `count` | `compare_candidate_start` | イベント・カスタム指標 |
+| 比較候補の追加元 | `tool_source` | `compare_candidate_add`, `compare_candidate_remove`, `compare_candidate_start` | イベント |
 | 比較導線元ページ | `origin_path` | `tool_entry`, `compare_ready`, `compare_view`, `compare_cta_view`, `compare_cta_click` | イベント |
 | 計測定義版 | `measurement_version` | `tool_entry`, `compare_ready`, `compare_view`, `compare_cta_view`, `compare_cta_click`, 診断結果イベント | イベント |
 

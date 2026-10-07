@@ -347,8 +347,12 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
                         href={compareHref([m.code], "ranking_row")}
                         className="rk-row-compare"
                         aria-label={`${m.displayName ?? m.name}を比較に追加`}
+                        data-compare-add={m.code}
+                        data-compare-name={m.displayName ?? m.name}
+                        data-compare-pref={prefNameOf(m.pref)}
+                        data-compare-source="ranking_row"
                       >
-                        比較
+                        ＋追加
                       </Link>
                     </td>
                   </tr>

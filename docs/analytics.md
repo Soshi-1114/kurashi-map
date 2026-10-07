@@ -30,6 +30,8 @@ KurashiMap は Google Analytics 4（gtag.js）でページビューに加えて�
 | `tool_entry` | 許可済みの`?from=`値を伴って他ページから道具のページ（比較・診断・電気代）に着地した時のみ1回 | `lib/useToolEntry.ts`（`CompareClient` / `ShindanClient` / `DenkiSimulator` から呼ぶ） |
 | `compare_ready` | 2件以上の自治体詳細取得が完了し、比較表を描画した時（コード集合ごとに1回） | `components/compare/CompareClient.tsx` |
 | `compare_view` | 完成した比較表の見出しが画面内に入った時（コード集合ごとに1回） | `components/compare/CompareClient.tsx` |
+| `compare_candidate_add` / `compare_candidate_remove` | ランキング・詳細・地図から候補を追加 / 解除 | `components/compare/CompareSelectionProvider.tsx` |
+| `compare_candidate_start` | 候補バーから比較を開始した時 | `components/compare/CompareSelectionProvider.tsx` |
 | `compare_cta_view` / `compare_cta_click` | 比較導線の視認 / クリック（人口増加の大阪・福岡のみ） | `components/ranking/TrackedCompareLink.tsx` |
 
 比較導線イベントには、対象2ページに限り`experiment_id`・`variant`・`origin_path`を付ける。比較ページへの遷移後もallowlistで検証した値を保持し、`tool_entry`・`compare_ready`・`compare_view`で同じ入口を集計できるようにする。自由入力URLはイベントへ送らない。

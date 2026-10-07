@@ -4,6 +4,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import CompareClient from "@/components/compare/CompareClient";
 import { muni, muniSummary } from "../_fixtures";
 import type { NationalAverages } from "@/lib/compareMetrics";
+import { CompareSelectionProvider } from "@/components/compare/CompareSelectionProvider";
 
 const mocked = vi.hoisted(() => ({
   params: new URLSearchParams("codes=11203,11201&from=pref_ranking_top3&experiment_id=compare-link-2026-09&variant=baseline&origin_path=%2Franking%2Fpopulation-growth%2Fosaka"),
@@ -12,6 +13,7 @@ const mocked = vi.hoisted(() => ({
 }));
 
 vi.mock("next/navigation", () => ({
+  usePathname: () => "/compare",
   useRouter: () => ({ replace: vi.fn() }),
   useSearchParams: () => mocked.params,
 }));
@@ -20,6 +22,7 @@ vi.mock("@/lib/analytics", () => ({
   trackToolEntry: vi.fn(),
   trackCompareReady: mocked.ready,
   trackCompareView: mocked.view,
+  trackToolEntry: vi.fn(),
 }));
 
 const averages: NationalAverages = {
@@ -58,7 +61,7 @@ afterEach(() => {
 });
 
 function setup() {
-  return render(<CompareClient munis={summaries} nationalAverages={averages} prefAverages={{}} />);
+  return render(<CompareSelectionProvider><CompareClient munis={summaries} nationalAverages={averages} prefAverages={{}} /></CompareSelectionProvider>);
 }
 
 describe("比較成果の計測", () => {
@@ -87,7 +90,7 @@ describe("比較成果の計測", () => {
     expect(mocked.view).toHaveBeenCalledWith(2, "pref_ranking_top3", {
       experimentId: "compare-link-2026-09", variant: "baseline", originPath: "/ranking/population-growth/osaka",
     });
-    result.rerender(<CompareClient munis={summaries} nationalAverages={averages} prefAverages={{}} />);
+    result.rerender(<CompareSelectionProvider><CompareClient munis={summaries} nationalAverages={averages} prefAverages={{}} /></CompareSelectionProvider>);
     expect(mocked.ready).toHaveBeenCalledTimes(1);
     expect(mocked.view).toHaveBeenCalledTimes(1);
   });

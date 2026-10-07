@@ -18,7 +18,6 @@ import {
   Map as MapIcon,
   Landmark,
   ArrowLeft,
-  ArrowUpRight,
   Search,
   BarChart3,
   Sparkles,
@@ -92,6 +91,7 @@ import { furunaviMunicipalPageUrl } from "@/lib/furunaviMunicipals";
 import PageShell from "@/components/PageShell";
 import SectionNav, { type SectionNavItem } from "@/components/area/SectionNav";
 import { ShareButton } from "@/components/ShareButton";
+import { CompareCandidateButton } from "@/components/compare/CompareSelectionProvider";
 
 type Params = { pref: string; city: string };
 
@@ -475,9 +475,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
           </h1>
           <p className="ad-lead">{buildSummary(m)}</p>
           <div className="ad-hero-actions">
-            <Link href={`/compare?codes=${m.code}`} className="ad-compare-add ad-compare-add-hero">
-              この自治体を比較ページで見る<ArrowUpRight size={13} aria-hidden="true" />
-            </Link>
+            <CompareCandidateButton code={m.code} name={heading} pref={prefName} source="area_detail" />
             <ShareButton
               className="ad-share-hero"
               title={`${prefName}${heading}の住みやすさ｜${SITE.name}`}
