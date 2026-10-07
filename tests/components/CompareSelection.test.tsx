@@ -37,7 +37,7 @@ describe("比較候補の操作", () => {
     await user.click(addButtons[2]);
     await waitFor(() => expect(screen.getByText("3件選択中")).toBeTruthy());
     expect(screen.getByRole("link", { name: "3件を比較" }).getAttribute("href"))
-      .toBe("/compare?codes=11201,11202,11203&from=ranking_row");
+      .toBe("/compare?codes=11201,11202,11203&from=ranking");
     expect(screen.getByRole("button", { name: "3件選択済み" }).hasAttribute("disabled")).toBe(true);
     expect(JSON.parse(sessionStorage.getItem("kurashimap.compare-candidates.v1") ?? "[]")).toHaveLength(3);
   });

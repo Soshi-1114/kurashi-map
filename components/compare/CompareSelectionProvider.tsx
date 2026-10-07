@@ -9,6 +9,20 @@ import { track } from "@/lib/analytics";
 
 const STORAGE_KEY = "kurashimap.compare-candidates.v1";
 
+function compareStartSource(pathname: string | null): ToolSource {
+  if (!pathname || pathname === "/") return "home";
+  if (pathname === "/map" || pathname.startsWith("/map/")) return "map";
+  const segments = pathname.split("/").filter(Boolean);
+  if (segments[0] === "area" && segments.length >= 3) return "area_detail";
+  if (segments[0] === "area" && segments.length === 2) return "pref_hub";
+  if (segments[0] === "ranking") {
+    if (segments[2] === "prefecture") return "prefecture_ranking";
+    if (segments.length >= 3) return "pref_ranking";
+    return "ranking";
+  }
+  return "header";
+}
+
 type CompareSelection = {
   candidates: CompareCandidate[];
   ready: boolean;
@@ -72,6 +86,7 @@ export function CompareSelectionProvider({ children }: { children: React.ReactNo
 
   const value = useMemo(() => ({ candidates, ready, toggle, replace }), [candidates, ready, toggle, replace]);
   const hideBar = pathname === "/compare" || pathname === "/map" || pathname?.startsWith("/map/");
+  const startSource = compareStartSource(pathname);
 
   return (
     <Context.Provider value={value}>
@@ -105,11 +120,11 @@ export function CompareSelectionProvider({ children }: { children: React.ReactNo
               <div className="compare-selection-actions">
                 <button type="button" onClick={() => replace([])} aria-label="比較候補をすべて解除">すべて解除</button>
                 <Link
-                  href={compareHref(candidates.map((item) => item.code), candidates.at(-1)?.source ?? "home")}
+                  href={compareHref(candidates.map((item) => item.code), startSource)}
                   onClick={() => track("compare_candidate_start", {
                     count: candidates.length,
                     municipality_codes: candidates.map((item) => item.code).join(","),
-                    tool_source: candidates.at(-1)?.source ?? "home",
+                    tool_source: startSource,
                   })}
                 >
                   {candidates.length === 1 ? "もう1件選ぶ" : `${candidates.length}件を比較`}
