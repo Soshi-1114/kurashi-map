@@ -15,9 +15,10 @@ import { useMuniCombobox } from "@/lib/useMuniCombobox";
 import { muniContextLabel } from "@/lib/muniLabel";
 import { barWidthPct } from "@/lib/format";
 import { getPrefBySlug } from "@/lib/prefs";
-import { MAX_COMPARE, denkiHref, parseCompareAttribution, parseToolSource } from "@/lib/siteNav";
+import { MAX_COMPARE, compareHref, denkiHref, parseCompareAttribution, parseToolSource } from "@/lib/siteNav";
 import { useToolEntry } from "@/lib/useToolEntry";
-import { ANALYTICS_MEASUREMENT_VERSION, trackCompareReady, trackCompareView } from "@/lib/analytics";
+import { ANALYTICS_MEASUREMENT_VERSION, trackCompareReady, trackCompareView, trackToolEntry } from "@/lib/analytics";
+import { useCompareSelection } from "./CompareSelectionProvider";
 
 /** 平均列の種類。県平均は選択自治体がすべて同一県のときだけ選べる。 */
 type AvgKind = "national" | "pref";
@@ -64,6 +65,7 @@ export default function CompareClient({
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { candidates: savedCandidates, ready: candidatesReady, replace: replaceCandidates } = useCompareSelection();
 
   const byCode = useMemo(() => new Map(munis.map((m) => [m.code, m])), [munis]);
   const known = useMemo(() => new Set(munis.map((m) => m.code)), [munis]);
@@ -75,6 +77,7 @@ export default function CompareClient({
   const mobileTableRef = useRef<HTMLHeadingElement | null>(null);
   const readyKeys = useRef(new Set<string>());
   const viewedKeys = useRef(new Set<string>());
+  const restoredEntry = useRef(false);
 
   // 他ページからの送客を1回だけ計測する（?from=ranking_row 等）。
   useToolEntry("compare", {
@@ -103,7 +106,10 @@ export default function CompareClient({
 
   const setCodes = useCallback(
     (next: string[]) => {
-      router.replace(next.length ? `/compare?codes=${next.join(",")}` : "/compare", { scroll: false });
+      const source = entrySource.current;
+      router.replace(next.length
+        ? `/compare?codes=${next.join(",")}${source ? `&from=${encodeURIComponent(source)}` : ""}`
+        : "/compare?codes=", { scroll: false });
     },
     [router],
   );
@@ -118,6 +124,38 @@ export default function CompareClient({
     (code: string) => setCodes(codes.filter((c) => c !== code)),
     [codes, setCodes],
   );
+
+  const hasExplicitCodes = searchParams.has("codes");
+  useEffect(() => {
+    if (!candidatesReady) return;
+    if (hasExplicitCodes) {
+      const savedByCode = new Map(savedCandidates.map((candidate) => [candidate.code, candidate]));
+      replaceCandidates(codes.flatMap((code) => {
+        const summary = byCode.get(code);
+        if (!summary) return [];
+        return [{
+          code,
+          name: summary.displayName ?? summary.name,
+          pref: summary.pref,
+          source: savedByCode.get(code)?.source ?? entrySource.current ?? "compare",
+        }];
+      }));
+      return;
+    }
+    if (savedCandidates.length > 0) {
+      const source = savedCandidates.at(-1)?.source ?? "home";
+      entrySource.current = source;
+      if (!restoredEntry.current) {
+        restoredEntry.current = true;
+        trackToolEntry("compare", source, {
+          municipality_codes: savedCandidates.map((candidate) => candidate.code).join(","),
+          count: savedCandidates.length,
+          measurement_version: ANALYTICS_MEASUREMENT_VERSION,
+        });
+      }
+      router.replace(compareHref(savedCandidates.map((candidate) => candidate.code), source), { scroll: false });
+    }
+  }, [byCode, candidatesReady, codes, hasExplicitCodes, replaceCandidates, router, savedCandidates]);
 
   // ---- ピッカー（コンボボックス。状態機械は useMuniCombobox を共有） ----
   const pickable = useMemo(

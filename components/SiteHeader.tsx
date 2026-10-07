@@ -15,8 +15,9 @@ export default function SiteHeader() {
           <span className="brand-name">{SITE.name}</span>
         </Link>
         <nav className="site-header-nav" aria-label="サイト内メニュー">
-          <Link href="/ranking">ランキング</Link>
-          <Link href="/compare">自治体を比較</Link>
+          <Link href="/map" prefetch={false}><span className="site-header-nav-long">地図で探す</span><span className="site-header-nav-short">地図</span></Link>
+          <Link href="/ranking"><span className="site-header-nav-long">ランキング</span><span className="site-header-nav-short">順位</span></Link>
+          <Link href="/compare"><span className="site-header-nav-long">自治体を比較</span><span className="site-header-nav-short">比較</span></Link>
           {/* SP は横幅制約でラベルを短縮する（ブランド名は隠さない設計のため。globals.css 参照） */}
           <Link href={shindanHref("header")} prefetch={false}>
             <span className="site-header-nav-long">住む街診断</span>

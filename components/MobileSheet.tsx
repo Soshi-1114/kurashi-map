@@ -8,6 +8,8 @@ import { hasRent } from "@/lib/rentColor";
 import { MetricCards } from "./AreaPanel";
 import { KasaiLink } from "./monetization/KasaiLink";
 import type { KasaiLinkInfo } from "@/lib/monetization";
+import { CompareCandidateButton } from "./compare/CompareSelectionProvider";
+import { prefNameOf } from "@/lib/site";
 
 type Stage = "peek" | "half" | "full";
 
@@ -247,6 +249,7 @@ export default function MobileSheet({ municipality, kasai, onClose }: Props) {
           {stage !== "peek" && (
             <div ref={halfContentRef} style={{ marginTop: "var(--space-3)" }}>
               <MetricCards m={m} />
+              <CompareCandidateButton code={m.code} name={heading} pref={prefNameOf(m.pref)} source="map" />
               {kasai && <KasaiLink link={kasai} municipalityCode={m.code} placement="map-panel" />}
             </div>
           )}
