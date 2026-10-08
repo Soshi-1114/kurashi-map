@@ -14,6 +14,8 @@ import { hasFuturePopulation, futureTotal, futurePopSource, futurePopAsOf } from
 import { floodLevelOf, landslideLevelOf, floodGraded, floodLevelLabel, landslideLevelLabel } from "@/lib/hazardScale";
 import type { KasaiLinkInfo } from "@/lib/monetization";
 import { KasaiLink } from "./monetization/KasaiLink";
+import { CompareCandidateButton } from "./compare/CompareSelectionProvider";
+import { prefNameOf } from "@/lib/site";
 
 type Props = {
   municipality: Municipality | null;
@@ -56,6 +58,7 @@ export default function AreaPanel({ municipality, selectedCode, related, kasai, 
         <div className="summary-block">{buildSummary(m)}</div>
         <MetricCards m={m} />
         {kasai && <KasaiLink link={kasai} municipalityCode={m.code} placement="map-panel" />}
+        <CompareCandidateButton code={m.code} name={m.name} pref={prefNameOf(m.pref)} source="map" />
         <Link href={`/area/${m.pref}/${m.code}`} className="cta-button">
           詳細を見る →
         </Link>

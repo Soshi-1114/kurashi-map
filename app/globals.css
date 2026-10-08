@@ -635,8 +635,9 @@ html, body {
    site-header はどの幅でもブランド名を出す設計。.brand-name のコメント参照）。 */
 .site-header-nav-short { display: none; }
 @media (max-width: 560px) {
-  .site-header-inner { padding: 8px 16px; gap: 10px; }
-  .site-header-nav a { padding: 6px 8px; font-size: var(--text-xs); }
+  .site-header-inner { padding: 8px 12px; gap: 5px; }
+  .site-header-nav { gap: 0; }
+  .site-header-nav a { padding: 6px 5px; font-size: 11px; }
   /* 幅が足りないので副次の導線は隠す（同じリンクが共通フッターにある）。
      セレクタを .site-header-nav a より詳細度で上回らせること（a を含める）。 */
   .site-header-nav a.site-header-nav-optional { display: none; }
@@ -709,9 +710,23 @@ html, body {
   padding: clamp(18px, 4vw, 48px) 22px clamp(14px, 3vw, 40px);
 }
 .home-hero-inner {
-  max-width: 760px;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: clamp(24px, 4vw, 56px);
+  max-width: 1120px;
   margin: 0 auto;
-  text-align: center;
+  text-align: left;
+}
+.home-hero-copy { min-width: 0; }
+.home-hero-copy .home-search { margin-left: 0; }
+.home-hero-copy .home-hero-actions { justify-content: flex-start; }
+.home-hero-copy .home-hero-sub { margin-left: 0; }
+.home-hero .home-mapcta {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
 }
 .home-hero-title {
   margin: 0 0 6px;
@@ -782,6 +797,11 @@ html, body {
 }
 @media (max-width: 768px) {
   .home-hero-action { font-size: var(--text-xs); }
+  .home-hero-inner { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .home-hero-inner, .home-hero-copy { text-align: left; }
+  .home-hero-copy .home-hero-actions { justify-content: flex-start; }
+  .home-mapcta-hubs { min-width: 0; flex-wrap: nowrap; overflow-x: auto; padding: 2px 2px 8px; }
+  .home-mapcta-hubs li { flex: none; }
 }
 
 /* トップの地図導線カード（地図本体は /map へ移設。docs/home-renewal-plan-2026-08.md PR-2）。
@@ -803,7 +823,7 @@ html, body {
 .home-mapcta-img {
   display: block;
   width: 100%;
-  height: clamp(220px, 36dvh, 400px);
+  height: clamp(220px, 32dvh, 360px);
   object-fit: cover;
 }
 .home-mapcta-body {
@@ -823,6 +843,69 @@ html, body {
 @media (max-width: 768px) {
   .home-mapcta-img { height: clamp(180px, 30dvh, 280px); }
   .home-mapcta-sub { font-size: var(--text-xs); }
+}
+
+/* 比較候補はページ遷移後も画面下に残し、本文やフッターの操作を隠さない。 */
+.compare-selection-root { display: contents; }
+.compare-selection-root:has(.compare-selection-bar) {
+  display: block;
+  padding-bottom: calc(80px + env(safe-area-inset-bottom));
+}
+.compare-selection-bar {
+  position: fixed;
+  z-index: 80;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--border-strong);
+  background: var(--surface-strong);
+  box-shadow: var(--shadow-md);
+}
+.compare-selection-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+.compare-selection-names { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.compare-selection-names > strong { flex: none; }
+.compare-selection-names ul { display: flex; flex-wrap: wrap; gap: 5px; margin: 0; padding: 0; list-style: none; }
+.compare-selection-names li { display: inline-flex; align-items: center; gap: 4px; min-width: 0; padding: 2px 4px 2px 9px; border-radius: var(--radius-pill); background: var(--surface-muted); color: var(--text-muted); font-size: var(--text-xs); }
+.compare-selection-names li span { max-width: 12em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.compare-selection-names li button { width: 28px; height: 28px; border: 0; border-radius: 50%; background: transparent; color: inherit; font-size: var(--text-base); cursor: pointer; }
+.compare-selection-names li button:hover { background: var(--surface-muted-hover); color: var(--text); }
+.compare-selection-actions { display: flex; align-items: center; gap: 10px; flex: none; }
+.compare-selection-actions button {
+  min-height: 44px; padding: 0 10px; border: 0; background: transparent;
+  color: var(--text-muted); font: inherit; font-size: var(--text-sm); cursor: pointer;
+}
+.compare-selection-actions a,
+.compare-candidate-toggle {
+  display: inline-flex; align-items: center; justify-content: center; min-height: 44px;
+  padding: 0 16px; border: 1px solid var(--accent); border-radius: var(--radius-sm);
+  background: var(--accent); color: #fff; font: inherit; font-size: var(--text-sm);
+  font-weight: 700; text-decoration: none; cursor: pointer;
+}
+.compare-selection-actions a:hover,
+.compare-candidate-toggle:hover:not(:disabled) { background: var(--accent-hover); border-color: var(--accent-hover); }
+.compare-candidate-toggle[aria-pressed="true"] { background: var(--color-primary-bg); color: var(--accent); }
+.compare-candidate-toggle:disabled { cursor: not-allowed; opacity: .6; }
+.area-panel .compare-candidate-toggle,
+.sheet-content > .compare-candidate-toggle { width: 100%; margin: 10px 0; }
+@media (max-width: 560px) {
+  .compare-selection-bar { padding-right: 12px; padding-left: 12px; }
+  .compare-selection-root:has(.compare-selection-bar) { padding-bottom: calc(126px + env(safe-area-inset-bottom)); }
+  .compare-selection-inner { align-items: stretch; flex-direction: column; gap: 3px; }
+  .compare-selection-names { justify-content: space-between; gap: 6px; }
+  .compare-selection-names ul { flex-wrap: nowrap; overflow-x: auto; }
+  .compare-selection-names li span { max-width: 26vw; }
+  .compare-selection-actions { gap: 3px; }
+  .compare-selection-actions { justify-content: flex-end; }
+  .compare-selection-actions button { min-height: 36px; padding: 0 5px; font-size: var(--text-xs); }
+  .compare-selection-actions a { padding: 0 10px; white-space: nowrap; }
 }
 
 /* 地図下の回遊コンテンツ（トップのみ。ドロワーの .home-links とは独立の通常フロー） */

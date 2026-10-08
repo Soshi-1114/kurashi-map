@@ -26,6 +26,8 @@ describe("mapHubByHref / RankingDef.mapHub", () => {
 
   it("parseToolSource: 外部入力は許可済みの送客元だけ通す", () => {
     expect(parseToolSource("pref_ranking_top3")).toBe("pref_ranking_top3");
+    expect(parseToolSource("area_detail")).toBe("area_detail");
+    expect(parseToolSource("map")).toBe("map");
     expect(parseToolSource("a&b=c")).toBeNull();
     expect(parseToolSource(null)).toBeNull();
   });

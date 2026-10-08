@@ -54,41 +54,35 @@ export default async function HomePage() {
           その直下に地図（/map へ移設）への導線カードを据える。 */}
       <section className="home-hero">
         <div className="home-hero-inner">
-          <h1 className="home-hero-title">データで、暮らす場所を考える。</h1>
-          <p className="home-hero-sub">
-            候補の街を、数字で見比べる。全国1,918の市区町村・行政区を、家賃・地価・人口・子育て・災害リスクなどの公的データだけで比較できます。推計値は使いません。
-          </p>
-          <HeroSearch munis={searchMunis} />
-          <p className="home-hero-actions">
-            <a href="#home-explore" className="home-hero-action">都道府県から探す</a>
-            <Link href="/ranking" className="home-hero-action">ランキングから探す</Link>
-            <Link href="/compare" className="home-hero-action">自治体を比較する</Link>
-            <Link href={shindanHref("home")} className="home-hero-action">条件から診断する</Link>
-          </p>
+          <div className="home-hero-copy">
+            <h1 className="home-hero-title">暮らす街を、データで見比べる。</h1>
+            <p className="home-hero-sub">
+              全国1,918の市区町村・行政区を、公的データで比較。家賃、地価、人口、子育て、災害リスクを確かめられます。推計値は使いません。
+            </p>
+            <HeroSearch munis={searchMunis} />
+            <p className="home-hero-actions">
+              <a href="#home-explore" className="home-hero-action">都道府県から探す</a>
+              <Link href="/ranking" className="home-hero-action">ランキング</Link>
+              <Link href="/compare" className="home-hero-action">自治体を比較</Link>
+              <Link href={shindanHref("home")} className="home-hero-action">住む街診断</Link>
+            </p>
+          </div>
+          <section className="home-mapcta" aria-label="地図から探す">
+            <Link href={GENERAL_MAP.href} className="home-mapcta-card">
+              {/* eslint-disable-next-line @next/next/no-img-element -- ビルド時生成の静的SVG（最適化不要） */}
+              <img src="/initial-view.svg" alt="" className="home-mapcta-img" />
+              <span className="home-mapcta-body">
+                <span className="home-mapcta-title">地図で街を探す</span>
+                <span className="home-mapcta-sub">指標の色分け、災害リスク、自治体ごとの詳細を地図で確認できます。</span>
+              </span>
+            </Link>
+            <ul className="home-chip-row home-mapcta-hubs">
+              {MAP_HUBS.map((hub) => (
+                <li key={hub.href}><Link href={hub.href} className="home-chip">{hub.label}</Link></li>
+              ))}
+            </ul>
+          </section>
         </div>
-      </section>
-
-      {/* 地図への導線。地図本体は /map へ移設（操作性の悪い埋め込み協調ジェスチャ地図を
-          廃止。docs/home-renewal-plan-2026-08.md PR-2）。プレビュー画像＋大きなタップ領域の
-          カードで全画面地図へ、指標別ハブへはチップで直行できるようにする。 */}
-      <section className="home-mapcta" aria-label="地図から探す">
-        <Link href={GENERAL_MAP.href} className="home-mapcta-card">
-          {/* eslint-disable-next-line @next/next/no-img-element -- ビルド時生成の静的SVG（最適化不要） */}
-          <img src="/initial-view.svg" alt="" className="home-mapcta-img" />
-          <span className="home-mapcta-body">
-            <span className="home-mapcta-title">住みやすさマップを開く</span>
-            <span className="home-mapcta-sub">
-              家賃・地価・人口増減を色分け表示。災害リスクの重ね合わせや、自治体クリックで詳細データも。
-            </span>
-          </span>
-        </Link>
-        <ul className="home-chip-row home-mapcta-hubs">
-          {MAP_HUBS.map((hub) => (
-            <li key={hub.href}>
-              <Link href={hub.href} className="home-chip">{hub.label}</Link>
-            </li>
-          ))}
-        </ul>
       </section>
 
       {/* できること・回遊リンク帯（サーバーレンダリング＝クロール可能） */}
