@@ -56,6 +56,12 @@
 }
 .rk-eyebrow svg { flex: none; }
 .rk-title { margin: 14px 0 0; }
+.rk-root .rk-title {
+  max-width: 22ch;
+  font-size: clamp(30px, 4vw, 42px);
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
 .rk-title-sub {
   display: block;
   margin-top: 7px;
@@ -402,7 +408,7 @@
   gap: 8px;
   min-height: 48px;
   padding: 4px 0;
-  font-size: var(--text-base);
+  font-size: var(--text-reading);
   font-weight: 500;
   color: var(--text);
 }
@@ -427,7 +433,7 @@
   flex-direction: column;
   gap: 11px;
 }
-.rk-intro p { margin: 0; font-size: var(--text-sm); color: var(--text-muted); line-height: 1.85; }
+.rk-intro p { margin: 0; font-size: var(--text-reading); color: var(--text-muted); line-height: 1.85; }
 .rk-intro a { font-weight: 700; }
 
 /* ---- 統計表（globals .pref-table を継承しつつラップを共通化） ---- */
@@ -471,7 +477,7 @@
   gap: 12px;
   padding: 16px 18px;
   font-weight: 700;
-  font-size: var(--text-base);
+  font-size: var(--text-reading);
   color: var(--text);
   cursor: pointer;
   list-style: none;

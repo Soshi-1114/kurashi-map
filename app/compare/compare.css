@@ -3,7 +3,13 @@
    （.page-root / .page-hero / .h1 / .card / .btn / .chip）に委譲し、
    ここには比較テーブル固有のレイアウトだけを置く。 */
 
-.cmp-title { margin: 0 0 8px; }
+.cmp-title {
+  max-width: 20ch;
+  margin: 0 0 8px;
+  font-size: clamp(30px, 4vw, 42px);
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
 /* 比較例セクションの見出し（以前はトップ用の .home-links-h を借用していた） */
 .cmp-h2 {
   margin-top: var(--space-8);
@@ -158,8 +164,12 @@
   white-space: nowrap;
 }
 .cmp-table thead th a {
+  display: inline-block;
+  max-width: 12em;
   color: var(--accent);
   font-size: var(--text-sm);
+  line-height: 1.5;
+  white-space: normal;
   text-decoration: none;
 }
 .cmp-table thead th a:hover {
@@ -185,6 +195,11 @@
   color: var(--text);
   letter-spacing: 0.02em;
 }
+
+/* 数値比較を読みやすくし、列見出しと指標名を同じ強さで競わせない。 */
+.cmp-table td { font-size: var(--text-reading); }
+.cmp-table .cmp-rowlabel { font-size: var(--text-sm); }
+.cmp-cell-text { font-variant-numeric: tabular-nums; }
 /* 全国平均（参考）列: 選択自治体ではなく参照用の数値であることを背景色で区別する */
 .cmp-avg-col {
   background: var(--surface-subtle);
@@ -286,6 +301,7 @@
     font-weight: 700;
     color: var(--text-muted);
   }
+  .cmp-mrow-label { font-size: var(--text-base); font-weight: 700; }
   .cmp-mrow-list {
     list-style: none;
     margin: 0;
@@ -314,6 +330,7 @@
     font-size: var(--text-sm);
     font-variant-numeric: tabular-nums;
   }
+  .cmp-mrow-value { font-size: var(--text-reading); font-variant-numeric: tabular-nums; }
   .cmp-mrow-value .cmp-cell { gap: 4px; }
 }
 
