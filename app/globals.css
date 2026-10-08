@@ -797,10 +797,11 @@ html, body {
 }
 @media (max-width: 768px) {
   .home-hero-action { font-size: var(--text-xs); }
-  .home-hero-inner { grid-template-columns: 1fr; gap: 20px; }
+  .home-hero-inner { grid-template-columns: minmax(0, 1fr); gap: 20px; }
   .home-hero-inner, .home-hero-copy { text-align: left; }
   .home-hero-copy .home-hero-actions { justify-content: flex-start; }
-  .home-mapcta-hubs { flex-wrap: nowrap; overflow-x: auto; padding: 2px 2px 8px; }
+  .home-mapcta-hubs { min-width: 0; flex-wrap: nowrap; overflow-x: auto; padding: 2px 2px 8px; }
+  .home-mapcta-hubs li { flex: none; }
 }
 
 /* トップの地図導線カード（地図本体は /map へ移設。docs/home-renewal-plan-2026-08.md PR-2）。
