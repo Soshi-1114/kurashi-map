@@ -111,7 +111,7 @@
    ========================================================================== */
 .ad-hero {
   display: grid;
-  grid-template-columns: 1fr minmax(300px, 360px);
+  grid-template-columns: 1fr;
   gap: var(--ad-gap);
   align-items: stretch;
 }
@@ -155,6 +155,7 @@
   line-height: 1.75;
   font-weight: 500;
 }
+.ad-hero-hazard-note { margin: 0; max-width: 70ch; color: var(--text-muted); font-size: var(--text-sm); line-height: 1.6; }
 /* 「この自治体の特徴」— ラベルチップ＋客観1文を罫線区切りで密に並べる */
 .ad-highlights {
   list-style: none;
@@ -206,6 +207,11 @@
 
 /* ---- 住みやすさ総合スコア（Hero 右） ---- */
 .ad-score {
+  max-width: 480px;
+  margin-top: var(--space-6);
+  border: 1px solid var(--ad-border);
+  border-radius: var(--ad-radius);
+  background: var(--color-primary-subtle);
   padding: var(--space-5);
   display: flex;
   flex-direction: column;
@@ -412,6 +418,7 @@
   gap: var(--ad-gap);
   margin-top: var(--space-5);
 }
+.ad-kpi-asof { grid-area: asof; color: var(--text-muted); font-size: var(--text-2xs); line-height: 1.5; }
 .ad-kpi {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -419,11 +426,12 @@
     "icon label"
     "icon value"
     "icon sub"
-    "icon compare";
+    "icon compare"
+    "icon asof";
   column-gap: var(--space-4);
   row-gap: 2px;
-  align-content: center;
-  padding: var(--space-5);
+  align-content: start;
+  padding: var(--space-4);
   transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
 }
 .ad-kpi:hover {
@@ -433,7 +441,7 @@
 }
 .ad-kpi-icon {
   grid-area: icon;
-  align-self: center;
+  align-self: start;
   display: grid;
   place-items: center;
   width: 48px;
@@ -460,6 +468,8 @@
   color: var(--text-faint);
 }
 .ad-kpi-unit {
+  display: inline-block;
+  white-space: nowrap;
   font-size: var(--text-sm);
   font-weight: 700;
   color: var(--text-muted);
@@ -1015,7 +1025,7 @@
    レスポンシブ
    ========================================================================== */
 @media (max-width: 1024px) {
-  .ad-hero { grid-template-columns: 1fr minmax(280px, 320px); }
+  .ad-hero { grid-template-columns: 1fr; }
   .ad-kpis { grid-template-columns: repeat(2, 1fr); }
   .ad-overview { grid-template-columns: 1fr; }
 }
@@ -1046,7 +1056,8 @@
       "label"
       "value"
       "sub"
-      "compare";
+      "compare"
+      "asof";
     padding: var(--space-4);
   }
   .ad-kpi-icon { display: none; }

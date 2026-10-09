@@ -51,6 +51,8 @@ export type CompareRowDef = {
   key: string;
   label: string;
   group: CompareGroup;
+  /** Definition or source that should remain beside the value in both layouts. */
+  note?: string;
   /** 表示文字列（欠損は「データなし／対象外／非公表／未収録」等を返す） */
   value: (m: Municipality) => string;
   /** 全国平均（参考）列の表示文字列。母集団の意味が異なる/存在しない指標は省略する */
@@ -88,6 +90,7 @@ function numericRow(opts: {
   key: string;
   label: string;
   group: CompareGroup;
+  note?: string;
   raw: (m: Municipality) => number | null;
   format: (v: number) => string;
   fallback?: string;
@@ -99,6 +102,7 @@ function numericRow(opts: {
     key: opts.key,
     label: opts.label,
     group: opts.group,
+    note: opts.note,
     value: (m) => {
       const v = opts.raw(m);
       return v != null ? opts.format(v) : fallback;
@@ -122,6 +126,7 @@ export const COMPARE_ROWS: CompareRowDef[] = [
     key: "population",
     label: "人口",
     group: "基本",
+    note: "2025年国勢調査",
     raw: (m) => (m.population > 0 ? m.population : null),
     format: (v) => `${v.toLocaleString()}人`,
   }),
@@ -152,6 +157,7 @@ export const COMPARE_ROWS: CompareRowDef[] = [
     key: "agingRate",
     label: "高齢化率（65歳以上）",
     group: "基本",
+    note: "住民基本台帳・2026年1月時点",
     raw: (m) => elderlyRatioPct(m.ageStats),
     format: (v) => `${v.toFixed(1)}%`,
     nationalAvg: { raw: (n) => n.agingRate },
@@ -186,6 +192,7 @@ export const COMPARE_ROWS: CompareRowDef[] = [
     key: "rent",
     label: "家賃平均（民営借家）",
     group: "住まい",
+    note: "2023年住宅・土地統計調査。家賃階級の中点から算出した値",
     raw: (m) => (hasRent(m.rent.value) ? m.rent.value : null),
     format: (v) => `${v.toLocaleString()}円/月`,
     fallback: "データなし",
@@ -195,6 +202,7 @@ export const COMPARE_ROWS: CompareRowDef[] = [
     key: "landPrice",
     label: "地価（住宅地）",
     group: "住まい",
+    note: "2026年地価公示・住宅地の標準地平均",
     raw: (m) => (hasLandPrice(m.landPrice.value) ? m.landPrice.value : null),
     format: (v) => `${v.toLocaleString()}円/㎡`,
     fallback: "対象外",
@@ -204,6 +212,7 @@ export const COMPARE_ROWS: CompareRowDef[] = [
     key: "vacancy",
     label: "空き家率",
     group: "住まい",
+    note: "2023年住宅・土地統計調査・空き家数÷住宅総数",
     raw: (m) => (hasVacancy(m.vacancy) ? m.vacancy.rate : null),
     format: (v) => `${v.toFixed(1)}%`,
     fallback: "対象外",
@@ -255,6 +264,7 @@ export const COMPARE_ROWS: CompareRowDef[] = [
     key: "flood",
     label: "最大浸水深（洪水）",
     group: "災害リスク",
+    note: "自治体内で確認された最大区分。自治体全域の危険度ではありません",
     value: floodText,
   },
   {

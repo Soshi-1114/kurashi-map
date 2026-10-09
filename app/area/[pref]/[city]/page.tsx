@@ -44,7 +44,7 @@ import {
 } from "@/lib/childcare";
 import { hasLandPrice } from "@/lib/landPrice";
 import { hasVacancy, vacancyRateText } from "@/lib/vacancy";
-import { isAmenitiesCounted, coverageReason } from "@/lib/coverage";
+import { isAmenitiesCounted, isHazardEvaluated, coverageReason } from "@/lib/coverage";
 import { hasForeignData, foreignRatioPct, hasForeignRatio } from "@/lib/foreignResidents";
 import {
   hasFuturePopulation,
@@ -322,7 +322,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
   const dataset = {
     "@type": "Dataset",
     name: `${prefName}${heading}の生活統計データ（家賃・地価・人口・災害リスク・外国人比率）`,
-    description: `${prefName}${heading}の家賃平均・公示地価・人口・待機児童数・災害リスク（浸水／土砂／津波／高潮／液状化）・在留外国人比率を、政府統計（総務省・国土交通省・こども家庭庁・出入国在留管理庁）および国土数値情報の実データでまとめた統計データセット。推計値は使用していません。`,
+    description: `${prefName}${heading}の家賃平均・公示地価・人口・待機児童数・災害リスク（浸水／土砂／津波／高潮／液状化）・在留外国人比率を、政府統計（総務省・国土交通省・こども家庭庁・出入国在留管理庁）および国土数値情報の実データでまとめた統計データセット。欠損は独自推計で補わず、将来人口は公的推計と明示しています。`,
     url: absoluteUrl(`/area/${m.pref}/${m.code}`),
     identifier: m.code,
     keywords: ["家賃平均", "公示地価", "人口", "待機児童", "災害リスク", "外国人住民比率", heading, prefName],
@@ -474,6 +474,9 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
             <span className="ad-title-sub">の住みやすさ</span>
           </h1>
           <p className="ad-lead">{buildSummary(m)}</p>
+          {isHazardEvaluated(m.hazard.source) && m.hazard.hasFloodRisk && (
+            <p className="ad-hero-hazard-note">浸水深は市内で確認された最大区分です。市内全域や特定地点の危険度を示すものではありません。</p>
+          )}
           <div className="ad-hero-actions">
             <CompareCandidateButton code={m.code} name={heading} pref={prefName} source="area_detail" />
             <ShareButton
@@ -487,8 +490,62 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
           </div>
         </div>
 
-        <ScorePanel liv={liv} />
       </header>
+      {/* ② KPIカード */}
+      <Reveal>
+        <div className="ad-kpis">
+          <KpiCard
+            icon={Home}
+            tone="ad-tone-rent"
+            label="家賃平均"
+            value={hasRent(m.rent.value) ? m.rent.value.toLocaleString() : null}
+            unit="円/月"
+            sub={hasRent(m.rent.value) ? `県内で${rentBand(m.rent.value)}` : undefined}
+            compare={rentCompare}
+            asOf={hasRent(m.rent.value) ? `${formatAsOfJa(m.rent.asOf)}・家賃階級別集計から算出` : undefined}
+          />
+          <KpiCard
+            icon={Users}
+            tone="ad-tone-pop"
+            label="人口"
+            value={m.population.toLocaleString()}
+            unit="人"
+            sub={`人口トレンド: ${m.populationTrend}${density != null ? `・人口密度 ${densityText(density)}` : ""}${hasAgeData(m.ageStats) ? `・高齢化率 ${elderlyRatioText(m.ageStats)}` : ""}`}
+            compare={popCompare}
+            asOf={POPULATION_FRESHNESS}
+          />
+          <KpiCard
+            icon={JapaneseYen}
+            tone="ad-tone-rent"
+            label="地価（住宅地）"
+            value={hasLandPrice(m.landPrice.value) ? m.landPrice.value.toLocaleString() : null}
+            unit="円/㎡"
+            compare={landCompare}
+            nodataLabel="対象外"
+            asOf={hasLandPrice(m.landPrice.value) ? landPriceSurveyLabel(m.landPrice.source, m.landPrice.asOf) : undefined}
+          />
+          <KpiCard
+            icon={Baby}
+            tone="ad-tone-kids"
+            label="待機児童"
+            value={isWaitlistDisclosed(m.waitlistChildren) ? `${m.waitlistChildren.value}` : null}
+            unit="人"
+            sub={
+              isWaitlistDisclosed(m.waitlistChildren) && m.waitlistChildren.value === 0
+                ? "待機児童ゼロ"
+                : undefined
+            }
+            nodataLabel="非公表"
+            asOf={isWaitlistDisclosed(m.waitlistChildren) ? formatAsOfJa(m.waitlistChildren.asOf) : undefined}
+          />
+        </div>
+      </Reveal>
+      <p className="ad-honesty">
+        <Info size={16} aria-hidden="true" />
+        数値は政府統計・国土数値情報の実データです。データのない項目は推計で埋めず「データなし／対象外」と明示しています。
+        {asOfSummary ? `主なデータの基準時点: ${asOfSummary}。` : ""}
+      </p>
+      <ScorePanel liv={liv} />
       {/* ページ内ナビ（sticky）。長い詳細ページのどこに何があるかを示す。
           タブではないのでコンテンツは隠さない。 */}
       <SectionNav items={navItems} municipalityCode={m.code} />
@@ -524,56 +581,6 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
           </Section>
         </Reveal>
       )}
-      {/* ② KPIカード */}
-      <Reveal>
-        <div className="ad-kpis">
-          <KpiCard
-            icon={Home}
-            tone="ad-tone-rent"
-            label="家賃平均"
-            value={hasRent(m.rent.value) ? m.rent.value.toLocaleString() : null}
-            unit="円/月"
-            sub={hasRent(m.rent.value) ? `県内で${rentBand(m.rent.value)}` : undefined}
-            compare={rentCompare}
-          />
-          <KpiCard
-            icon={Users}
-            tone="ad-tone-pop"
-            label="人口"
-            value={m.population.toLocaleString()}
-            unit="人"
-            sub={`人口トレンド: ${m.populationTrend}${density != null ? `・人口密度 ${densityText(density)}` : ""}${hasAgeData(m.ageStats) ? `・高齢化率 ${elderlyRatioText(m.ageStats)}` : ""}`}
-            compare={popCompare}
-          />
-          <KpiCard
-            icon={JapaneseYen}
-            tone="ad-tone-rent"
-            label="地価（住宅地）"
-            value={hasLandPrice(m.landPrice.value) ? m.landPrice.value.toLocaleString() : null}
-            unit="円/㎡"
-            compare={landCompare}
-            nodataLabel="対象外"
-          />
-          <KpiCard
-            icon={Baby}
-            tone="ad-tone-kids"
-            label="待機児童"
-            value={isWaitlistDisclosed(m.waitlistChildren) ? `${m.waitlistChildren.value}` : null}
-            unit="人"
-            sub={
-              isWaitlistDisclosed(m.waitlistChildren) && m.waitlistChildren.value === 0
-                ? "待機児童ゼロ"
-                : undefined
-            }
-            nodataLabel="非公表"
-          />
-        </div>
-      </Reveal>
-      <p className="ad-honesty">
-        <Info size={16} aria-hidden="true" />
-        数値は政府統計・国土数値情報の実データです。データのない項目は推計で埋めず「データなし／対象外」と明示しています。
-        {asOfSummary ? `主なデータの基準時点: ${asOfSummary}。` : ""}
-      </p>
       {/* ③ 詳細情報グリッド */}
       <Section icon={Wallet} tone="ad-tone-rent" title="詳細データ" id="data">
         <div className="ad-metric-grid">
@@ -923,8 +930,8 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
         <Section
           icon={Users}
           tone="ad-tone-pop"
-          title={`人口規模が近い${prefName}の自治体`}
-          sub={`${m.name}（人口${m.population.toLocaleString()}人）と規模が近い自治体`}
+          title={`${prefName}内のほかの自治体`}
+          sub={`${m.name}（人口${m.population.toLocaleString()}人）との人口差が小さい順に表示`}
           id={compareAnchor("closePop")}
         >
           <AreaLinkList>

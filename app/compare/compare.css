@@ -122,6 +122,21 @@
   color: var(--text-muted);
   font-size: var(--text-sm);
 }
+.cmp-next-step { max-width: 600px; padding: 12px 16px; border-left: 3px solid var(--accent); background: var(--color-primary-subtle); color: var(--text); font-weight: 600; }
+.cmp-retry { border: 1px solid var(--color-danger); border-radius: var(--radius-sm); padding: 10px 14px; margin: 12px 0; }
+.cmp-retry p { margin: 4px 0; }
+.cmp-retry button { margin-left: 8px; min-height: 44px; color: var(--accent); background: transparent; border: 0; font: inherit; font-weight: 700; cursor: pointer; }
+.cmp-avg-explain { max-width: 720px; margin: 12px 0 6px; color: var(--text-muted); font-size: var(--text-sm); line-height: 1.6; }
+.cmp-group-nav { display: flex; flex-wrap: wrap; gap: 6px; margin: 16px 0 8px; }
+.cmp-group-nav a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; border: 1px solid var(--border-strong); border-radius: var(--radius-pill); background: var(--surface-strong); color: var(--text); text-decoration: none; font-weight: 600; font-size: var(--text-sm); }
+.cmp-group-nav a:focus-visible, .cmp-group-nav a:hover { border-color: var(--accent); color: var(--accent); }
+.cmp-group-nav.is-mobile { display: none; }
+.cmp-row-note { display: block; margin-top: 4px; color: var(--text-muted); font-size: var(--text-xs); font-weight: 400; line-height: 1.4; }
+.cmp-group, .cmp-mgroup-title { scroll-margin-top: 85px; }
+@media (max-width: 768px) {
+  .cmp-group-nav.is-desktop { display: none; }
+  .cmp-group-nav.is-mobile { display: flex; }
+}
 
 /* 道具間の相互導線（比較 → 電気代シミュレーター） */
 .cmp-crosslink {

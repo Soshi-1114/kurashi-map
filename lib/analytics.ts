@@ -7,7 +7,7 @@
 import type { MapFilters } from "./mapFilters";
 import type { CompareAttribution, ToolSource } from "./siteNav";
 
-export const ANALYTICS_MEASUREMENT_VERSION = "2026-10-06";
+export const ANALYTICS_MEASUREMENT_VERSION = "2026-10-09";
 
 type GtagFn = (command: "event", eventName: string, params?: Record<string, unknown>) => void;
 

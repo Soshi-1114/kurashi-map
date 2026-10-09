@@ -29,14 +29,12 @@ KurashiMap は Google Analytics 4（gtag.js）でページビューに加えて�
 | `kasai_link_click` | 火災保険の外部リンクをクリックした時（キーイベント候補） | `components/monetization/KasaiLink.tsx` |
 | `tool_entry` | 許可済みの`?from=`値を伴って他ページから道具のページ（比較・診断・電気代）に着地した時のみ1回 | `lib/useToolEntry.ts`（`CompareClient` / `ShindanClient` / `DenkiSimulator` から呼ぶ） |
 | `compare_ready` | 2件以上の自治体詳細取得が完了し、比較表を描画した時（コード集合ごとに1回） | `components/compare/CompareClient.tsx` |
-| `compare_view` | 完成した比較表の見出しが画面内に入った時（コード集合ごとに1回） | `components/compare/CompareClient.tsx` |
+| `compare_view` | 完成した比較表の先頭見出しが50%以上画面内に入った時（コード集合ごとに1回） | `components/compare/CompareClient.tsx` |
 | `compare_candidate_add` / `compare_candidate_remove` | ランキング・詳細・地図から候補を追加 / 解除 | `components/compare/CompareSelectionProvider.tsx` |
-| `compare_candidate_start` | 候補バーから比較を開始した時 | `components/compare/CompareSelectionProvider.tsx` |
+| `compare_candidate_start` | 候補バーまたは地図内の比較入口から開始した時 | `components/compare/CompareSelectionProvider.tsx` / `components/map/MapCompareControls.tsx` |
+| `compare_section_select` | 比較ページで指標グループのアンカーを選んだ時 | `components/compare/CompareClient.tsx` |
+| `compare_retry` | 比較ページで取得失敗した自治体を再読み込みした時 | `components/compare/CompareClient.tsx` |
 | `compare_cta_view` / `compare_cta_click` | 比較導線の視認 / クリック（人口増加の大阪・福岡のみ） | `components/ranking/TrackedCompareLink.tsx` |
-
-比較導線イベントには、対象2ページに限り`experiment_id`・`variant`・`origin_path`を付ける。比較ページへの遷移後もallowlistで検証した値を保持し、`tool_entry`・`compare_ready`・`compare_view`で同じ入口を集計できるようにする。自由入力URLはイベントへ送らない。
-
-結果視認の定義を変更した診断イベントと比較成果イベントには`measurement_version=2026-10-06`を付ける。旧定義で記録した期間とは分けて集計する。
 | `shindan_run` | 街診断の重み・地方の組み合わせを変更した時 | `components/shindan/ShindanClient.tsx` |
 | `shindan_result_impression` / `shindan_result_scroll` | 結果生成 / 先頭結果カードの50%視認 | `components/shindan/ShindanClient.tsx` |
 | `shindan_result_click` | 診断結果から自治体詳細へ遷移した時 | `components/shindan/ShindanClient.tsx` |
@@ -44,6 +42,10 @@ KurashiMap は Google Analytics 4（gtag.js）でページビューに加えて�
 | `denki_simulate` | 電気代シミュレーターの入力を確定した時（連続入力は 1s debounce） | `components/denki/DenkiSimulator.tsx` |
 | `denki_offer_impression` | 電気代の比較結果リストを表示した時（エリアごとに1回。掲載オファー0件の間は送らない） | `components/denki/DenkiSimulator.tsx` |
 | `denki_offer_click` | 電気プランの外部リンクをクリックした時（キーイベント候補） | `components/denki/DenkiSimulator.tsx` |
+
+比較導線イベントには、対象2ページに限り`experiment_id`・`variant`・`origin_path`を付ける。比較ページへの遷移後もallowlistで検証した値を保持し、`tool_entry`・`compare_ready`・`compare_view`で同じ入口を集計できるようにする。自由入力URLはイベントへ送らない。
+
+結果視認の定義を変更した診断イベントと比較成果イベントには`measurement_version=2026-10-09`を付ける。`2026-10-06`以前の期間とは分けて集計する。
 
 ※ 自治体詳細ページの電気代導線（`DenkiTeaser`、サーバコンポーネント）は専用イベントを持たない。
 流入は `/denki` の page_view（`?code=` 付き）と `denki_simulate` の `municipality_code` で見る。

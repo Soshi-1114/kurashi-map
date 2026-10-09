@@ -20,7 +20,7 @@ import { ShareButton } from "@/components/ShareButton";
 
 const TITLE = `自治体を比較｜家賃・人口・災害リスクを横並びで確認 - ${SITE.name}`;
 const DESC =
-  `全国1,747市区町村から最大${MAX_COMPARE}つを選んで、人口・人口増減率・家賃相場・地価・空き家率・待機児童・生活インフラ・災害リスクを横並びで比較できます。政府統計の実データのみ使用し、推計値は使いません。`;
+  `全国1,747市区町村から最大${MAX_COMPARE}つを選んで、人口・人口増減率・家賃相場・地価・空き家率・待機児童・生活インフラ・災害リスクを横並びで比較できます。欠損は独自推計で補いません。`;
 
 export const metadata: Metadata = {
   title: TITLE,

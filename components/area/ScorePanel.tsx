@@ -19,7 +19,7 @@ const AXIS_ICON: Record<AxisKey, LucideIcon> = {
 export function ScorePanel({ liv }: { liv: Livability }) {
   return (
     <div className="ad-score">
-      <span className="ad-score-caption">住みやすさ総合スコア</span>
+      <span className="ad-score-caption">KurashiMap独自スコア（目安）</span>
       {liv.score !== null ? (
         <>
           <p className="ad-score-number">
