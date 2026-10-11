@@ -49,6 +49,7 @@ import LayersPanel from "./map/LayersPanel";
 import MuniSearch from "./map/MuniSearch";
 import AreaPanel from "./AreaPanel";
 import MobileSheet from "./MobileSheet";
+import MapCompareControls from "./map/MapCompareControls";
 
 type Props = {
   summary: MuniSummary[];
@@ -135,6 +136,8 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
   const [belowHazardZoom, setBelowHazardZoom] = useState(true);
   // 選択中自治体のフル詳細（/api/muni/[code] で取得）。サマリには無い人口/地価等を含む
   const [selectedDetail, setSelectedDetail] = useState<Municipality | null>(null);
+  const [detailError, setDetailError] = useState(false);
+  const [detailRetry, setDetailRetry] = useState(0);
   // スクリーンリーダー向けの選択アナウンス（視覚的には非表示のライブリージョンで読み上げる）。
   const [announcement, setAnnouncement] = useState("");
 
@@ -726,12 +729,13 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
     if (!selectedCode) { setSelectedDetail(null); return; }
     let aborted = false;
     setSelectedDetail(null);
+    setDetailError(false);
     fetch(`/api/muni/${selectedCode}`)
-      .then((r) => (r.ok ? r.json() : null))
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
       .then((d: Municipality | null) => { if (!aborted) setSelectedDetail(d); })
-      .catch(() => { if (!aborted) setSelectedDetail(null); });
+      .catch(() => { if (!aborted) setDetailError(true); });
     return () => { aborted = true; };
-  }, [selectedCode]);
+  }, [selectedCode, detailRetry]);
 
   // 選択の変化をスクリーンリーダーに読み上げる（地図はマウス/視覚前提のため、
   // 選択結果が非視覚利用者に伝わらないのを補う）。サマリから即時にアナウンスできる
@@ -962,12 +966,14 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
       {/* 凡例（選択中の指標に追従）。初回描画完了まで出さず「凡例だけ先行」を防ぐ */}
       {firstPaintReady && <MetricLegend metricKey={activeMetric} overlays={overlays} belowHazardZoom={belowHazardZoom} />}
 
+      {!selectedCode && <div className="map-compare-dock"><MapCompareControls compact /></div>}
+
       {/* パネル / シート。火災保険導線は災害オーバーレイ表示中のみ渡す（ハザードを
           見ている文脈でだけ出す。/map/hazard は初期オーバーレイで最初から文脈に入る） */}
       {!isMobile ? (
-        <AreaPanel municipality={selectedDetail} selectedCode={selectedCode} related={relatedNearby} kasai={overlays.size > 0 ? kasai : null} onClose={() => setSelectedCode(null)} />
+        <AreaPanel municipality={selectedDetail} selectedCode={selectedCode} activeMetric={activeMetric} detailError={detailError} onRetry={() => setDetailRetry((n) => n + 1)} related={relatedNearby} kasai={overlays.size > 0 ? kasai : null} onClose={() => setSelectedCode(null)} />
       ) : (
-        <MobileSheet municipality={selectedDetail} kasai={overlays.size > 0 ? kasai : null} onClose={() => setSelectedCode(null)} />
+        <MobileSheet municipality={selectedDetail} selectedCode={selectedCode} activeMetric={activeMetric} detailError={detailError} onRetry={() => setDetailRetry((n) => n + 1)} kasai={overlays.size > 0 ? kasai : null} onClose={() => setSelectedCode(null)} />
       )}
     </div>
   );

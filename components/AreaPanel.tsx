@@ -16,11 +16,18 @@ import type { KasaiLinkInfo } from "@/lib/monetization";
 import { KasaiLink } from "./monetization/KasaiLink";
 import { CompareCandidateButton } from "./compare/CompareSelectionProvider";
 import { prefNameOf } from "@/lib/site";
+import type { MapMetricKey } from "@/lib/mapMetrics";
+import { selectedMapMetric } from "@/lib/selectedMapMetric";
+import MapCompareControls from "./map/MapCompareControls";
+import { getPrefByCode } from "@/lib/prefs";
 
 type Props = {
   municipality: Municipality | null;
   // 選択中だが詳細取得待ちの間は空状態を出さない（クリック直後のチラつき防止）
   selectedCode?: string | null;
+  activeMetric: MapMetricKey | "none";
+  detailError: boolean;
+  onRetry: () => void;
   // 同県・同階層で家賃が近い自治体（CTA 下の余白に置くクイックリンク）
   related?: MuniSummary[];
   /** 火災保険導線。災害オーバーレイ表示中のみ非 null（文脈一致の面でだけ出す）。 */
@@ -28,9 +35,17 @@ type Props = {
   onClose: () => void;
 };
 
-export default function AreaPanel({ municipality, selectedCode, related, kasai, onClose }: Props) {
+export default function AreaPanel({ municipality, selectedCode, activeMetric, detailError, onRetry, related, kasai, onClose }: Props) {
   if (!municipality) {
-    if (selectedCode) return null; // 取得中
+    if (selectedCode) return detailError ? (
+      <aside className="area-panel map-detail-error" aria-label="自治体データの取得エラー" role="alert">
+        <p>自治体のデータを取得できませんでした。</p>
+        <button type="button" onClick={onRetry}>再読み込み</button>
+        {getPrefByCode(selectedCode) && <Link href={`/area/${getPrefByCode(selectedCode)!.slug}/${selectedCode}`}>自治体ページを見る</Link>}
+        <button type="button" onClick={onClose}>閉じる</button>
+        <MapCompareControls compact />
+      </aside>
+    ) : null;
     // 未選択時：操作を促す空状態ガイド（AreaPanel は PC のみ描画される）
     return (
       <div className="area-hint" role="note">
@@ -42,6 +57,7 @@ export default function AreaPanel({ municipality, selectedCode, related, kasai, 
     );
   }
   const m = municipality;
+  const selectedMetric = selectedMapMetric(m, activeMetric);
   return (
     <aside className="area-panel" aria-label={`${m.name}の詳細情報`}>
       <div className="panel-head">
@@ -55,13 +71,19 @@ export default function AreaPanel({ municipality, selectedCode, related, kasai, 
         </p>
       </div>
       <div className="panel-body">
+        <div className="map-selected-metric">
+          <span>{selectedMetric.label}</span>
+          <strong>{selectedMetric.value}</strong>
+          <small>{selectedMetric.note}</small>
+        </div>
         <div className="summary-block">{buildSummary(m)}</div>
+        <div className="map-panel-actions">
+          <Link href={`/area/${m.pref}/${m.code}`} className="cta-button">詳細を見る</Link>
+          <CompareCandidateButton code={m.code} name={m.name} pref={prefNameOf(m.pref)} source="map" />
+        </div>
+        <MapCompareControls />
         <MetricCards m={m} />
         {kasai && <KasaiLink link={kasai} municipalityCode={m.code} placement="map-panel" />}
-        <CompareCandidateButton code={m.code} name={m.name} pref={prefNameOf(m.pref)} source="map" />
-        <Link href={`/area/${m.pref}/${m.code}`} className="cta-button">
-          詳細を見る →
-        </Link>
         {related && related.length > 0 && (
           <div className="panel-related">
             <div className="panel-related-title">家賃が近い近隣の自治体</div>

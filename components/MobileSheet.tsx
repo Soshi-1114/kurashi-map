@@ -4,17 +4,24 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import type { Municipality } from "@/lib/types";
 import { buildSummary } from "@/lib/summary";
-import { hasRent } from "@/lib/rentColor";
 import { MetricCards } from "./AreaPanel";
 import { KasaiLink } from "./monetization/KasaiLink";
 import type { KasaiLinkInfo } from "@/lib/monetization";
 import { CompareCandidateButton } from "./compare/CompareSelectionProvider";
 import { prefNameOf } from "@/lib/site";
+import type { MapMetricKey } from "@/lib/mapMetrics";
+import { selectedMapMetric } from "@/lib/selectedMapMetric";
+import MapCompareControls from "./map/MapCompareControls";
+import { getPrefByCode } from "@/lib/prefs";
 
 type Stage = "peek" | "half" | "full";
 
 type Props = {
   municipality: Municipality | null;
+  selectedCode?: string | null;
+  activeMetric: MapMetricKey | "none";
+  detailError: boolean;
+  onRetry: () => void;
   /** 火災保険導線。災害オーバーレイ表示中のみ非 null（文脈一致の面でだけ出す）。 */
   kasai?: KasaiLinkInfo | null;
   onClose: () => void;
@@ -58,7 +65,7 @@ function stageVisiblePx(stage: Stage, halfPx: number, sheetPx: number): number {
 function stageTranslate(stage: Stage, halfPx: number, sheetPx: number): number {
   return sheetPx - stageVisiblePx(stage, halfPx, sheetPx);
 }
-export default function MobileSheet({ municipality, kasai, onClose }: Props) {
+export default function MobileSheet({ municipality, selectedCode, activeMetric, detailError, onRetry, kasai, onClose }: Props) {
   const [stage, setStage] = useState<Stage>("half");
   // ドラッグ中の translateY（null = 非ドラッグ）
   const [dragY, setDragY] = useState<number | null>(null);
@@ -66,6 +73,7 @@ export default function MobileSheet({ municipality, kasai, onClose }: Props) {
   const dragStartTranslate = useRef(0);
   const sheetRef = useRef<HTMLDivElement | null>(null);
   const halfContentRef = useRef<HTMLDivElement | null>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
   // half 段の高さ（実測）。「自治体名＋指標カード」がちょうど収まる高さに合わせる。
   const [halfPx, setHalfPx] = useState(HALF_PX_FALLBACK);
   // シート箱の実高（72vh の解決値）。translate 計算の基準。未計測時は null。
@@ -129,8 +137,37 @@ export default function MobileSheet({ municipality, kasai, onClose }: Props) {
     };
   }, [stage, municipality, halfPx]);
 
-  if (!municipality) return null;
+  useEffect(() => {
+    if (stage !== "full" || !municipality) return;
+    previousFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    const sheet = sheetRef.current;
+    const focusables = () => Array.from(sheet?.querySelectorAll<HTMLElement>("button:not(:disabled), a[href], input:not(:disabled)") ?? []);
+    focusables()[0]?.focus();
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") { event.preventDefault(); setStage("half"); return; }
+      if (event.key !== "Tab") return;
+      const items = focusables();
+      if (!items.length) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => { document.removeEventListener("keydown", onKeyDown); previousFocusRef.current?.focus(); };
+  }, [stage, municipality]);
+
+  if (!municipality) return selectedCode && detailError ? (
+    <div className="map-mobile-error" role="alert">
+      <p>自治体のデータを取得できませんでした。</p>
+      <button type="button" onClick={onRetry}>再読み込み</button>
+      {getPrefByCode(selectedCode) && <Link href={`/area/${getPrefByCode(selectedCode)!.slug}/${selectedCode}`}>自治体ページを見る</Link>}
+      <button type="button" onClick={onClose}>閉じる</button>
+      <MapCompareControls compact />
+    </div>
+  ) : null;
   const m = municipality;
+  const selectedMetric = selectedMapMetric(m, activeMetric);
 
   // タップ: peek→half→full→half（peek へはドラッグで畳む）
   const toggle = () =>
@@ -223,13 +260,8 @@ export default function MobileSheet({ municipality, kasai, onClose }: Props) {
           <div className="panel-head-top">
             <div style={{ minWidth: 0, flex: 1 }}>
               <h2 className="panel-title" style={{ fontSize: "var(--text-lg)" }}>{heading}</h2>
-              <p className="panel-sub" style={{ margin: "var(--space-1) 0 0" }}>
-                {hasRent(m.rent.value) ? (
-                  <>家賃 <strong style={{ color: "var(--text)", fontVariantNumeric: "tabular-nums" }}>{m.rent.value.toLocaleString()}</strong> 円/月</>
-                ) : (
-                  <>家賃 <strong style={{ color: "var(--text-muted)" }}>データなし</strong></>
-                )}
-                <span className="trend-chip">{m.populationTrend}</span>
+              <p className="panel-sub map-sheet-metric" style={{ margin: "var(--space-1) 0 0" }}>
+                {selectedMetric.label} <strong>{selectedMetric.value}</strong>
               </p>
             </div>
             <div style={{ display: "flex", gap: 2, flexShrink: 0 }}>
@@ -248,8 +280,13 @@ export default function MobileSheet({ municipality, kasai, onClose }: Props) {
               half 高の実測はこの要素の下端を基準にする（ref）。 */}
           {stage !== "peek" && (
             <div ref={halfContentRef} style={{ marginTop: "var(--space-3)" }}>
+              <p className="map-metric-note">{selectedMetric.note}</p>
+              <div className="map-sheet-actions">
+                <Link href={`/area/${m.pref}/${m.code}`} className="cta-button">詳細を見る</Link>
+                <CompareCandidateButton code={m.code} name={heading} pref={prefNameOf(m.pref)} source="map" />
+              </div>
+              <MapCompareControls compact />
               <MetricCards m={m} />
-              <CompareCandidateButton code={m.code} name={heading} pref={prefNameOf(m.pref)} source="map" />
               {kasai && <KasaiLink link={kasai} municipalityCode={m.code} placement="map-panel" />}
             </div>
           )}
@@ -265,9 +302,6 @@ export default function MobileSheet({ municipality, kasai, onClose }: Props) {
                   災害メモ: {m.hazard.note}
                 </p>
               )}
-              <Link href={`/area/${m.pref}/${m.code}`} className="cta-button">
-                詳細を見る →
-              </Link>
             </div>
           )}
         </div>

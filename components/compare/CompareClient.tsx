@@ -17,7 +17,7 @@ import { barWidthPct } from "@/lib/format";
 import { getPrefBySlug } from "@/lib/prefs";
 import { MAX_COMPARE, compareHref, denkiHref, parseCompareAttribution, parseToolSource } from "@/lib/siteNav";
 import { useToolEntry } from "@/lib/useToolEntry";
-import { ANALYTICS_MEASUREMENT_VERSION, trackCompareReady, trackCompareView, trackToolEntry } from "@/lib/analytics";
+import { ANALYTICS_MEASUREMENT_VERSION, track, trackCompareReady, trackCompareView, trackToolEntry } from "@/lib/analytics";
 import { useCompareSelection } from "./CompareSelectionProvider";
 
 /** 平均列の種類。県平均は選択自治体がすべて同一県のときだけ選べる。 */
@@ -93,6 +93,14 @@ export default function CompareClient({
 
   // 取得済みフルデータ（code → Municipality）。一度取得したものは保持する。
   const [detail, setDetail] = useState<Record<string, DetailState>>({});
+  const retryDetail = useCallback((code: string) => {
+    track("compare_retry", { measurement_version: ANALYTICS_MEASUREMENT_VERSION });
+    setDetail((current) => {
+      const next = { ...current };
+      delete next[code];
+      return next;
+    });
+  }, []);
   useEffect(() => {
     for (const code of codes) {
       if (detail[code]) continue;
@@ -180,7 +188,7 @@ export default function CompareClient({
     }
     if (viewedKeys.current.has(comparisonKey) || typeof IntersectionObserver === "undefined") return;
     const observer = new IntersectionObserver((entries) => {
-      if (!entries.some((entry) => entry.isIntersecting) || viewedKeys.current.has(comparisonKey)) return;
+      if (!entries.some((entry) => entry.isIntersecting && entry.intersectionRatio >= 0.5) || viewedKeys.current.has(comparisonKey)) return;
       viewedKeys.current.add(comparisonKey);
       trackCompareView(codes.length, entrySource.current, entryAttribution);
       observer.disconnect();
@@ -189,7 +197,7 @@ export default function CompareClient({
       if (node) observer.observe(node);
     }
     return () => observer.disconnect();
-  }, [comparisonReady, comparisonKey, codes.length]);
+  }, [comparisonReady, comparisonKey, codes.length, entryAttribution]);
 
   // ---- 平均列の切替（全国平均／県平均） ----
   // 県平均は選択自治体がすべて同一県のときだけ意味を持つ（県をまたぐ比較では全国平均のみ）。
@@ -209,6 +217,7 @@ export default function CompareClient({
   return (
     <div className="cmp-client">
       <div className="cmp-picker">
+        {codes.length === 1 && <p className="cmp-next-step" role="status">{selected[0]?.summary?.displayName ?? selected[0]?.summary?.name ?? "1件"}を選択中です。もう1つ自治体を追加すると比較できます。</p>}
         <div className="cmp-search" role="presentation">
           <input
             type="search"
@@ -274,6 +283,13 @@ export default function CompareClient({
         </p>
       ) : (
         <>
+          {selected.some(({ state }) => state === "error") && (
+            <div className="cmp-retry" role="alert">
+              {selected.filter(({ state }) => state === "error").map(({ code, summary }) => (
+                <p key={code}>{summary?.displayName ?? summary?.name ?? code}のデータを取得できませんでした。<button type="button" onClick={() => retryDetail(code)}>再読み込み</button></p>
+              ))}
+            </div>
+          )}
           {prefAvgAvailable && (
             <div className="cmp-avg-toggle" role="group" aria-label="平均の比較基準">
               <button
@@ -294,6 +310,13 @@ export default function CompareClient({
               </button>
             </div>
           )}
+          <p className="cmp-avg-explain">{avgLabel}は対象自治体ごとの値を単純平均した参考値です。外国人住民比率のみ人口で加重しています。集計対象外の自治体は平均に含めません。</p>
+          <nav className="cmp-group-nav is-desktop" aria-label="比較する指標へ移動">
+            {COMPARE_GROUPS.map((group, index) => <a key={group} href={`#cmp-desktop-${index}`} onClick={() => track("compare_section_select", { section: group, measurement_version: ANALYTICS_MEASUREMENT_VERSION })}>{group}</a>)}
+          </nav>
+          <nav className="cmp-group-nav is-mobile" aria-label="比較する指標へ移動">
+            {COMPARE_GROUPS.map((group, index) => <a key={group} href={`#cmp-mobile-${index}`} onClick={() => track("compare_section_select", { section: group, measurement_version: ANALYTICS_MEASUREMENT_VERSION })}>{group}</a>)}
+          </nav>
 
           {/* PC: 指標×自治体のテーブル（SPではCSSで非表示） */}
           <div className="cmp-scroll">
@@ -316,8 +339,8 @@ export default function CompareClient({
                 </tr>
               </thead>
               <tbody>
-                {COMPARE_GROUPS.map((group) => (
-                  <GroupRows key={group} group={group} selected={selected} averages={averages} />
+                {COMPARE_GROUPS.map((group, index) => (
+                  <GroupRows key={group} group={group} index={index} selected={selected} averages={averages} />
                 ))}
               </tbody>
             </table>
@@ -327,7 +350,7 @@ export default function CompareClient({
               常に見失わないよう、指標名 → 自治体ごとの値・バー → 平均 の順で縦に流す */}
           <div className="cmp-mrows">
             {COMPARE_GROUPS.map((group, i) => (
-              <MobileGroupRows key={group} group={group} selected={selected} averages={averages} avgLabel={avgLabel} firstHeadingRef={i === 0 ? mobileTableRef : undefined} />
+              <MobileGroupRows key={group} group={group} index={i} selected={selected} averages={averages} avgLabel={avgLabel} firstHeadingRef={i === 0 ? mobileTableRef : undefined} />
             ))}
           </div>
 
@@ -349,10 +372,12 @@ function resolveSelected(selected: Array<{ code: string; state: DetailState | un
 
 function GroupRows({
   group,
+  index,
   selected,
   averages,
 }: {
   group: (typeof COMPARE_GROUPS)[number];
+  index: number;
   selected: Array<{ code: string; state: DetailState | undefined }>;
   averages: NationalAverages;
 }) {
@@ -361,7 +386,7 @@ function GroupRows({
 
   return (
     <>
-      <tr className="cmp-group">
+      <tr className="cmp-group" id={`cmp-desktop-${index}`}>
         {/* +1=指標ラベル列、+1=平均（参考）列。選択自治体列数とずれないよう常にセットで揃える */}
         <th colSpan={selected.length + 2} scope="colgroup">
           {group}
@@ -373,6 +398,7 @@ function GroupRows({
           <tr key={row.key}>
             <th scope="row" className="cmp-rowlabel">
               {row.label}
+              {row.note && <small className="cmp-row-note">{row.note}</small>}
             </th>
             {selected.map(({ code, state }, i) => (
               <td key={code}>
@@ -400,12 +426,14 @@ function GroupRows({
 /** SP用: 指標単位で自治体を縦に並べる比較ビュー（テーブルと同じ計算・同じ CompareCell を共有） */
 function MobileGroupRows({
   group,
+  index,
   selected,
   averages,
   avgLabel,
   firstHeadingRef,
 }: {
   group: (typeof COMPARE_GROUPS)[number];
+  index: number;
   selected: Array<{ code: string; summary: MuniSummary | undefined; state: DetailState | undefined }>;
   averages: NationalAverages;
   avgLabel: string;
@@ -416,13 +444,13 @@ function MobileGroupRows({
 
   return (
     <section className="cmp-mgroup">
-      <h3 ref={firstHeadingRef} className="cmp-mgroup-title">{group}</h3>
+      <h3 ref={firstHeadingRef} id={`cmp-mobile-${index}`} className="cmp-mgroup-title">{group}</h3>
       {rows.map((row) => {
         const { cells, avgValue, rowMax } = computeRow(row, resolved, averages);
         const avgText = row.nationalAvgText?.(averages);
         return (
           <div key={row.key} className="cmp-mrow">
-            <p className="cmp-mrow-label">{row.label}</p>
+            <p className="cmp-mrow-label">{row.label}{row.note && <small className="cmp-row-note">{row.note}</small>}</p>
             <ul className="cmp-mrow-list">
               {selected.map(({ code, summary, state }, i) => (
                 <li key={code} className="cmp-mrow-item">

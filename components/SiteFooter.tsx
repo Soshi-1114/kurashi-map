@@ -45,7 +45,7 @@ export default function SiteFooter() {
             </div>
           ))}
         </nav>
-        <p className="site-footer-copy">© KurashiMap — 政府統計の実データのみを収録しています（推計値は使いません）</p>
+        <p className="site-footer-copy">© KurashiMap — 欠損は独自推計で補わず、将来人口は公的推計と明示しています</p>
       </div>
     </footer>
   );

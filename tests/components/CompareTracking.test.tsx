@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { act, cleanup, render, waitFor } from "@testing-library/react";
+import { act, cleanup, fireEvent, render, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import CompareClient from "@/components/compare/CompareClient";
 import { muni, muniSummary } from "../_fixtures";
@@ -10,6 +10,7 @@ const mocked = vi.hoisted(() => ({
   params: new URLSearchParams("codes=11203,11201&from=pref_ranking_top3&experiment_id=compare-link-2026-09&variant=baseline&origin_path=%2Franking%2Fpopulation-growth%2Fosaka"),
   ready: vi.fn(),
   view: vi.fn(),
+  track: vi.fn(),
 }));
 
 vi.mock("next/navigation", () => ({
@@ -18,11 +19,11 @@ vi.mock("next/navigation", () => ({
   useSearchParams: () => mocked.params,
 }));
 vi.mock("@/lib/analytics", () => ({
-  ANALYTICS_MEASUREMENT_VERSION: "2026-10-06",
+  ANALYTICS_MEASUREMENT_VERSION: "2026-10-09",
   trackToolEntry: vi.fn(),
   trackCompareReady: mocked.ready,
   trackCompareView: mocked.view,
-  trackToolEntry: vi.fn(),
+  track: mocked.track,
 }));
 
 const averages: NationalAverages = {
@@ -86,7 +87,9 @@ describe("比較成果の計測", () => {
     const observer = observers.at(-1)!;
     expect(observer.nodes).toContain(result.container.querySelector(".cmp-table thead"));
     expect(observer.nodes).toContain(result.container.querySelector(".cmp-mgroup-title"));
-    act(() => observer.callback([{ isIntersecting: true } as IntersectionObserverEntry], observer as unknown as IntersectionObserver));
+    act(() => observer.callback([{ isIntersecting: true, intersectionRatio: 0.25 } as IntersectionObserverEntry], observer as unknown as IntersectionObserver));
+    expect(mocked.view).not.toHaveBeenCalled();
+    act(() => observer.callback([{ isIntersecting: true, intersectionRatio: 0.5 } as IntersectionObserverEntry], observer as unknown as IntersectionObserver));
     expect(mocked.view).toHaveBeenCalledWith(2, "pref_ranking_top3", {
       experimentId: "compare-link-2026-09", variant: "baseline", originPath: "/ranking/population-growth/osaka",
     });
@@ -95,7 +98,7 @@ describe("比較成果の計測", () => {
     expect(mocked.view).toHaveBeenCalledTimes(1);
   });
 
-  it("1件・取得エラー・無効コードでは成立を送らない", async () => {
+  it("1件・取得エラーでは成立を送らず、失敗した自治体だけ再取得する", async () => {
     mocked.params = new URLSearchParams("codes=11203,99999&from=ranking_row");
     vi.stubGlobal("fetch", vi.fn(() => Promise.resolve({ ok: true, json: () => Promise.resolve(data.get("11203")) })));
     const one = setup();
@@ -104,14 +107,21 @@ describe("比較成果の計測", () => {
     one.unmount();
 
     mocked.params = new URLSearchParams("codes=11203,11201&from=ranking_row");
+    let failedAttempts = 0;
     vi.stubGlobal("fetch", vi.fn((url: string) => Promise.resolve(
       url.endsWith("11201")
-        ? { ok: false, status: 500 }
+        ? failedAttempts++ === 0
+          ? { ok: false, status: 500 }
+          : { ok: true, json: () => Promise.resolve(data.get("11201")) }
         : { ok: true, json: () => Promise.resolve(data.get("11203")) },
     )));
     const failed = setup();
     await waitFor(() => expect(failed.container.textContent).toContain("取得エラー"));
     expect(mocked.ready).not.toHaveBeenCalled();
     expect(mocked.view).not.toHaveBeenCalled();
+    fireEvent.click(failed.getByRole("button", { name: "再読み込み" }));
+    await waitFor(() => expect(mocked.ready).toHaveBeenCalledTimes(1));
+    expect(failedAttempts).toBe(2);
+    expect((fetch as ReturnType<typeof vi.fn>).mock.calls.filter(([url]) => String(url).endsWith("11203"))).toHaveLength(1);
   });
 });

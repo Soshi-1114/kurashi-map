@@ -16,7 +16,7 @@ describe("AreaPanel の火災保険導線", () => {
 
   it("kasai を渡すと広告表記つきで描画され、リンク先と自治体コードを持つ", () => {
     const m = muni();
-    const { container } = render(<CompareSelectionProvider><AreaPanel municipality={m} kasai={kasai} onClose={() => {}} /></CompareSelectionProvider>);
+    const { container } = render(<CompareSelectionProvider><AreaPanel municipality={m} activeMetric="rent" detailError={false} onRetry={() => {}} kasai={kasai} onClose={() => {}} /></CompareSelectionProvider>);
     const a = container.querySelector('a[href="https://px.a8.net/svt/ejp?a8mat=abc"]');
     expect(a).not.toBeNull();
     expect(a?.getAttribute("rel")).toContain("sponsored");
@@ -24,7 +24,7 @@ describe("AreaPanel の火災保険導線", () => {
   });
 
   it("kasai が無ければ（=災害オーバーレイ非表示）導線を出さない", () => {
-    const { container } = render(<CompareSelectionProvider><AreaPanel municipality={muni()} onClose={() => {}} /></CompareSelectionProvider>);
+    const { container } = render(<CompareSelectionProvider><AreaPanel municipality={muni()} activeMetric="rent" detailError={false} onRetry={() => {}} onClose={() => {}} /></CompareSelectionProvider>);
     expect(container.querySelector('a[href*="px.a8.net"]')).toBeNull();
   });
 });

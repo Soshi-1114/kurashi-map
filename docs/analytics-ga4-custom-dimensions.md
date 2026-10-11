@@ -27,3 +27,11 @@
 | 計測定義版 | `measurement_version` | `tool_entry`, `compare_ready`, `compare_view`, `compare_cta_view`, `compare_cta_click`, 診断結果イベント | イベント |
 
 `tool_source` は既存の「道具への送客元」を使用する。GA4での新規定義登録は確認後に実施する。カスタム定義は登録前のイベントには遡及しないため、登録・本番受信・通常レポート反映の後を基準期間とする。`origin_path`は許可済みの大阪・福岡人口増加ランキングの値だけを送る。
+
+## 2026-10-10 比較画面の操作計測
+
+| 表示名 | パラメータ | 対象イベント | 範囲 |
+| --- | --- | --- | --- |
+| 比較した指標グループ | `section` | `compare_section_select` | イベント |
+
+`compare_retry`はイベント名だけで再試行回数を確認できる。両イベントには`measurement_version=2026-10-09`を送る。`section`のGA4カスタム定義は未登録のため、公開時に受信と登録状況を確認する。
