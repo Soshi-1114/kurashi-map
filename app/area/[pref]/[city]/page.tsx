@@ -30,7 +30,7 @@ import {
   housingSurveyLabel, landPriceSurveyLabel, freshnessPrefix,
 } from "@/lib/rankings";
 import { mapHrefForCode } from "@/lib/mapDeepLink";
-import { muniLastModified } from "@/lib/dataFreshness";
+import { verifiedLastModified } from "@/lib/pageRevisions";
 import { getRankPositions } from "@/lib/rankingStats";
 import { buildFaq } from "@/lib/faq";
 import { SITE, prefNameOf, absoluteUrl } from "@/lib/site";
@@ -318,7 +318,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
     hasAgeData(m.ageStats) && { "@type": "PropertyValue", name: "高齢化率（65歳以上人口の割合）", unitText: "%", value: Number((elderlyRatioPct(m.ageStats) ?? 0).toFixed(1)) },
   ].filter(Boolean);
 
-  const lastModified = muniLastModified(m);
+  const lastModified = verifiedLastModified(`/area/${m.pref}/${m.code}`);
   const dataset = {
     "@type": "Dataset",
     name: `${prefName}${heading}の生活統計データ（家賃・地価・人口・災害リスク・外国人比率）`,
@@ -334,7 +334,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
       name: `${prefName}${heading}`,
       containedInPlace: { "@type": "AdministrativeArea", name: prefName },
     },
-    // 収録指標のうち最も新しい asOf を更新日として明示（鮮度シグナル）。
+    // 実際の本番公開日を確認できた場合にだけ更新日を明示する。
     ...(lastModified ? { dateModified: lastModified.toISOString().slice(0, 10) } : {}),
     variableMeasured,
   };

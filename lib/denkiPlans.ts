@@ -48,9 +48,8 @@ export type DenkiPlansFile = { asOf: string; plans: DenkiPlan[] };
 /** 料金プランデータ（検証はテストで実施済みの前提で型キャストする）。 */
 export const DENKI_PLANS = plansJson as DenkiPlansFile;
 
-/** プランデータの確認時点（asOf: YYYY-MM）を Date に変換する。sitemap の lastModified 用。
- *  asOf の日付化は parseAsOf に一元化（形式は validateDenkiPlans が YYYY-MM を強制。
- *  万一パース不能でも sitemap 側の withTemplateRevision がテンプレ改訂日で下支えする）。 */
+/** プランデータの確認時点（asOf: YYYY-MM）を Date に変換する。
+ *  ページの公開日ではないため sitemap には使用しない。 */
 export function denkiPlansLastModified(file: DenkiPlansFile = DENKI_PLANS): Date {
   return parseAsOf(file.asOf) ?? new Date(0);
 }

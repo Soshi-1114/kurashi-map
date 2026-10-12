@@ -4,119 +4,84 @@ import { listAllAcrossPrefs } from "@/lib/metrics";
 import { PREFS } from "@/lib/prefs";
 import { RANKINGS, muniLevelOnly } from "@/lib/rankings";
 import { PREF_RANKINGS } from "@/lib/prefRankings";
-import {
-  TEMPLATE_REVISED_AT,
-  latestLastModified,
-  muniLastModified,
-  withTemplateRevision,
-} from "@/lib/dataFreshness";
+import { revisionField } from "@/lib/pageRevisions";
 import { absoluteUrl } from "@/lib/site";
 import { GENERAL_MAP, MAP_HUBS } from "@/lib/siteNav";
-import { denkiPlansLastModified } from "@/lib/denkiPlans";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const all = await listAllAcrossPrefs();
-  // lastModified はデータの実 vintage（asOf）から導く。テンプレート改訂日
-  // （TEMPLATE_REVISED_AT）を効かせるのは URL 数の少ない /denki・/map/* のみ。
-  // 理由と運用は lib/dataFreshness.ts のコメントが正典。
-  const fallback = new Date();
-  const siteLatest = latestLastModified(all) ?? fallback;
-
-  // 県ごとに自治体をまとめ、県単位の最新 asOf を1度だけ算出（ハブ + 各自治体で共有）。
+  // 県別ランキングに対象データがあるか判定するために県ごとにまとめる。
   const byPref = new Map<string, Municipality[]>();
   for (const m of all) {
     const g = byPref.get(m.pref);
     if (g) g.push(m);
     else byPref.set(m.pref, [m]);
   }
-  const prefLatest = new Map<string, Date>();
-  for (const [slug, munis] of byPref) {
-    prefLatest.set(slug, latestLastModified(munis) ?? siteLatest);
-  }
-  // prefLatest は byPref の全キーに値を入れているので、既知 slug では必ずヒットする。
-  // ?? siteLatest は型を Date に絞るためのフォールバック。
-  const prefDate = (slug: string): Date => prefLatest.get(slug) ?? siteLatest;
-
   const entries: MetadataRoute.Sitemap = [
     {
       // トップの canonical は末尾スラッシュ付き（absoluteUrl("/") = https://kurashimap.jp/）。
       // sitemap の loc も揃えて重複（slash有無）判定のノイズを避ける。
       url: absoluteUrl("/"),
-      lastModified: siteLatest,
-      changeFrequency: "weekly",
+      ...revisionField("/"),
       priority: 1,
     },
     // 汎用の全画面地図（「地図で見る」ディープリンクの既定の行き先）。
     {
       url: absoluteUrl(GENERAL_MAP.href),
-      lastModified: withTemplateRevision(siteLatest, TEMPLATE_REVISED_AT.mapHub),
-      changeFrequency: "monthly",
+      ...revisionField(GENERAL_MAP.href),
       priority: 0.9,
     },
     // 指標別 地図ハブ（ピラーページ群）。一覧は lib/siteNav.ts が単一ソース。
     ...MAP_HUBS.map((hub) => ({
       url: absoluteUrl(hub.href),
-      lastModified: withTemplateRevision(siteLatest, TEMPLATE_REVISED_AT.mapHub),
-      changeFrequency: "monthly" as const,
+      ...revisionField(hub.href),
       priority: hub.sitemapPriority,
     })),
     // 自治体比較ページ（選択状態はクエリなので URL はベースの1件のみ）。
     {
       url: absoluteUrl("/compare"),
-      lastModified: siteLatest,
-      changeFrequency: "monthly",
+      ...revisionField("/compare"),
       priority: 0.7,
     },
     // 住む街診断（回答状態はクエリなので URL はベースの1件のみ）。
     {
       url: absoluteUrl("/shindan"),
-      lastModified: siteLatest,
-      changeFrequency: "monthly",
+      ...revisionField("/shindan"),
       priority: 0.7,
     },
     // 電気代シミュレーター（横断ツール。?code= プリセットは同一ページの状態なので URL は1件）。
-    // lastModified は料金プランデータの確認時点（data/denki-plans.json の asOf）と
-    // テンプレート改訂日の新しい方。priority は全自治体詳細から導線が張られる
-    // ツールピラーとして /map/* と同格の 0.8。
     {
       url: absoluteUrl("/denki"),
-      lastModified: withTemplateRevision(denkiPlansLastModified(), TEMPLATE_REVISED_AT.denki),
-      changeFrequency: "monthly",
+      ...revisionField("/denki"),
       priority: 0.8,
     },
     // サイトについて（データの出典・更新方針。E-E-A-T ページ）。
     {
       url: absoluteUrl("/about"),
-      lastModified: siteLatest,
-      changeFrequency: "monthly",
+      ...revisionField("/about"),
       priority: 0.5,
     },
     // プライバシーポリシー（GA4 開示。更新頻度は低い）。
     {
       url: absoluteUrl("/privacy"),
-      lastModified: siteLatest,
-      changeFrequency: "yearly",
+      ...revisionField("/privacy"),
       priority: 0.3,
     },
-    // ランキング一覧 + 各ランキング（比較系クエリの入口）。中身は全データ由来なのでサイト最新。
+    // ランキング一覧 + 各ランキング（比較系クエリの入口）。
     {
       url: absoluteUrl("/ranking"),
-      lastModified: siteLatest,
-      changeFrequency: "weekly",
+      ...revisionField("/ranking"),
       priority: 0.8,
     },
     ...RANKINGS.map((r) => ({
       url: absoluteUrl(`/ranking/${r.slug}`),
-      lastModified: siteLatest,
-      changeFrequency: "monthly" as const,
+      ...revisionField(`/ranking/${r.slug}`),
       priority: 0.8,
     })),
     // 都道府県ランキング（47都道府県を1本に並べたページ。実数合算で県の値を出す指標のみ）。
-    // 全国版と同じく全データ由来なのでサイト最新、優先度も全国版と同格に置く。
     ...PREF_RANKINGS.map((r) => ({
       url: absoluteUrl(`/ranking/${r.slug}/prefecture`),
-      lastModified: siteLatest,
-      changeFrequency: "monthly" as const,
+      ...revisionField(`/ranking/${r.slug}/prefecture`),
       priority: 0.8,
     })),
     // 県別ランキング（県 × 指標。該当データのある組み合わせのみ）
@@ -124,22 +89,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       const munis = muniLevelOnly(byPref.get(p.slug) ?? []);
       return RANKINGS.filter((r) => munis.some((m) => r.qualifies(m))).map((r) => ({
         url: absoluteUrl(`/ranking/${r.slug}/${p.slug}`),
-        lastModified: prefDate(p.slug),
-        changeFrequency: "monthly" as const,
+        ...revisionField(`/ranking/${r.slug}/${p.slug}`),
         priority: 0.6,
       }));
     }),
     // 県別ハブページ（全自治体への内部リンク集約・検索の入口）
     ...PREFS.map((p) => ({
       url: absoluteUrl(`/area/${p.slug}`),
-      lastModified: prefDate(p.slug),
-      changeFrequency: "monthly" as const,
+      ...revisionField(`/area/${p.slug}`),
       priority: 0.8,
     })),
     ...all.map((m) => ({
       url: absoluteUrl(`/area/${m.pref}/${m.code}`),
-      lastModified: muniLastModified(m) ?? prefDate(m.pref),
-      changeFrequency: "monthly" as const,
+      ...revisionField(`/area/${m.pref}/${m.code}`),
       priority: 0.7,
     })),
   ];
