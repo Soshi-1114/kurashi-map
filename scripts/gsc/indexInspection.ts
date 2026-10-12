@@ -2,6 +2,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { getAccessToken } from "./auth";
+import { readCohortRows } from "./cohortCsv";
 
 export type InspectionRecord = {
   url: string;
@@ -19,8 +20,8 @@ export type InspectionRecord = {
 
 export function readCohort(file: string, site: string): string[] {
   const origin = new URL(site).origin;
-  const rows = fs.readFileSync(file, "utf8").replace(/^\uFEFF/, "").split(/\r?\n/);
-  const urls = rows.slice(1).filter(Boolean).map((line) => line.split(",", 1)[0]);
+  const urls = readCohortRows(file).map((row) => row.url.trim());
+  if (!urls.length) throw new Error("cohort にURLがありません");
   if (urls.some((url) => new URL(url).origin !== origin)) throw new Error("cohort に別originのURLがあります");
   return [...new Set(urls)];
 }
@@ -60,7 +61,7 @@ export async function inspectUrl(url: string, siteUrl: string, token: string,
       if (!response.ok) return { url, checkedAt, error: `HTTP ${response.status}` };
       const result = (await response.json() as { inspectionResult?: { indexStatusResult?: Record<string, string> } })
         .inspectionResult?.indexStatusResult;
-      if (!result) return { url, checkedAt, error: "missing indexStatusResult" };
+      if (!result?.verdict) return { url, checkedAt, error: "missing indexStatusResult" };
       return {
         url, checkedAt,
         verdict: result.verdict,
@@ -80,6 +81,29 @@ export async function inspectUrl(url: string, siteUrl: string, token: string,
   return { url, checkedAt, error: "retry exhausted" };
 }
 
+export async function runInspections(cohort: string[], output: string, siteUrl: string, dependencies = {
+  authorize: getAccessToken,
+  inspect: inspectUrl,
+  wait: (ms: number): Promise<void> => new Promise((resolve) => setTimeout(resolve, ms)),
+}): Promise<{ complete: boolean; summary: Record<string, number> }> {
+  const previous = readRecords(output);
+  const latestPrevious = new Map(previous.map((record) => [record.url, record]));
+  const completed = new Set([...latestPrevious.values()].filter((r) => !r.error).map((r) => r.url));
+  const pending = cohort.filter((url) => !completed.has(url));
+  const token = pending.length ? await dependencies.authorize() : "";
+  fs.mkdirSync(path.dirname(output), { recursive: true });
+  for (const [index, url] of pending.entries()) {
+    const record = await dependencies.inspect(url, siteUrl, token);
+    fs.appendFileSync(output, `${JSON.stringify(record)}\n`);
+    if (["HTTP 429", "HTTP 401", "HTTP 403"].includes(record.error ?? "")) break;
+    if ((index + 1) % 25 === 0) process.stderr.write(`inspected ${index + 1}/${pending.length}\n`);
+    await dependencies.wait(120);
+  }
+  const records = readRecords(output);
+  const latest = new Map(records.map((record) => [record.url, record]));
+  return { complete: cohort.every((url) => latest.has(url) && !latest.get(url)?.error), summary: summarize(records) };
+}
+
 async function main() {
   const args = new Map(process.argv.slice(2).map((arg) => {
     const [key, ...value] = arg.replace(/^--/, "").split("=");
@@ -91,24 +115,16 @@ async function main() {
   const limit = Number(args.get("limit") ?? "370");
   if (!Number.isInteger(limit) || limit < 1 || limit > 2000) throw new Error("limit は1〜2000を指定してください");
   const siteOrigin = siteUrl.startsWith("sc-domain:") ? `https://${siteUrl.slice(10)}` : siteUrl;
-  const cohort = readCohort(input, siteOrigin).slice(0, limit);
+  const allUrls = readCohort(input, siteOrigin);
+  const cohort = allUrls.slice(0, limit);
   const previous = readRecords(output);
-  const completed = new Set(previous.filter((r) => !r.error).map((r) => r.url));
-  const pending = cohort.filter((url) => !completed.has(url));
-  const token = pending.length ? await getAccessToken() : "";
-  fs.mkdirSync(path.dirname(output), { recursive: true });
-  for (const [index, url] of pending.entries()) {
-    const record = await inspectUrl(url, siteUrl, token);
-    fs.appendFileSync(output, `${JSON.stringify(record)}\n`);
-    if (record.error === "HTTP 429") {
-      process.stderr.write("quota/rate limit: stopped; remaining URLs can be resumed later\n");
-      process.exitCode = 1;
-      break;
-    }
-    if ((index + 1) % 25 === 0) process.stdout.write(`inspected ${index + 1}/${pending.length}\n`);
-    await new Promise((resolve) => setTimeout(resolve, 120));
+  if (previous.some((record) => !allUrls.includes(record.url))) throw new Error("出力ファイルに別cohortのURLがあります。新しい出力先を指定してください");
+  const result = await runInspections(cohort, output, siteUrl);
+  process.stdout.write(`${JSON.stringify(result.summary, null, 2)}\n`);
+  if (!result.complete) {
+    process.stderr.write("inspection incomplete: failed and remaining URLs can be resumed later\n");
+    process.exitCode = 1;
   }
-  process.stdout.write(`${JSON.stringify(summarize(readRecords(output)), null, 2)}\n`);
 }
 
 if (process.argv[1] && /indexInspection\.[cm]?[jt]s$/.test(process.argv[1])) {
