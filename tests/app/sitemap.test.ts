@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import sitemap from "@/app/sitemap";
-import { verifiedLastModified, type PageRevision } from "@/lib/pageRevisions";
+import { PAGE_REVISIONS, validatePageRevisions, verifiedLastModified, type PageRevision } from "@/lib/pageRevisions";
 import { absoluteUrl } from "@/lib/site";
 import { MAP_HUBS } from "@/lib/siteNav";
 
@@ -23,6 +23,16 @@ describe("sitemap", () => {
       expect(entry.lastModified).toEqual(expected);
     }
   });
+
+  it("実際の履歴に不正日付・証跡不足・存在しないURLを登録しない", async () => {
+    expect(validatePageRevisions(PAGE_REVISIONS)).toEqual([]);
+    const urls = new Set((await entriesP).map((entry) => entry.url));
+    for (const revision of PAGE_REVISIONS) {
+      if ("paths" in revision.scope) {
+        for (const path of revision.scope.paths) expect(urls.has(absoluteUrl(path))).toBe(true);
+      }
+    }
+  });
 });
 
 describe("verifiedLastModified", () => {
@@ -43,6 +53,7 @@ describe("verifiedLastModified", () => {
       { scope: { paths: ["/map"] }, publishedAt: "2999-01-01", evidence: "deployment-b" },
     ];
     expect(verifiedLastModified("/map", records)).toBeUndefined();
+    expect(validatePageRevisions(records)).toHaveLength(3);
   });
 
   it("テンプレートの同時更新を許容し、対象外のURLは変えない", () => {

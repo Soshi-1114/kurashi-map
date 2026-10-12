@@ -24,16 +24,33 @@ function affects(path: string, revision: PageRevision): boolean {
     : TEMPLATES[revision.scope.template].test(path);
 }
 
-export function verifiedLastModified(path: string, revisions: readonly PageRevision[] = PAGE_REVISIONS): Date | undefined {
+function publicationDate(revision: PageRevision, now: Date): Date | undefined {
+  const raw = revision.publishedAt;
+  if (!revision.evidence.trim() || !/^\d{4}-\d{2}-\d{2}$/.test(raw) || raw > now.toISOString().slice(0, 10)) return undefined;
+  const parsed = new Date(`${raw}T00:00:00Z`);
+  return !Number.isNaN(parsed.getTime()) && parsed.toISOString().slice(0, 10) === raw ? parsed : undefined;
+}
+
+/** 設定ミスをCIで検出する。出力時も不正な履歴は採用しない。 */
+export function validatePageRevisions(revisions: readonly PageRevision[], now = new Date()): string[] {
+  return revisions.flatMap((revision, index) => {
+    const errors: string[] = [];
+    if (!publicationDate(revision, now)) errors.push(`revision ${index}: 公開日または証跡が不正です`);
+    if ("paths" in revision.scope) {
+      if (!revision.scope.paths.length || revision.scope.paths.some((path) => !/^\/(?!\/)[^?#]*$/.test(path))) {
+        errors.push(`revision ${index}: canonicalのパスを指定してください`);
+      }
+    }
+    return errors;
+  });
+}
+
+export function verifiedLastModified(path: string, revisions: readonly PageRevision[] = PAGE_REVISIONS, now = new Date()): Date | undefined {
   let latest: Date | undefined;
-  const today = new Date().toISOString().slice(0, 10);
   for (const revision of revisions) {
-    if (!affects(path, revision) || !revision.evidence.trim()) continue;
-    const raw = revision.publishedAt;
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(raw) || raw > today) continue;
-    const parsed = new Date(`${raw}T00:00:00Z`);
-    if (Number.isNaN(parsed.getTime()) || parsed.toISOString().slice(0, 10) !== raw) continue;
-    if (!latest || parsed > latest) latest = parsed;
+    if (!affects(path, revision)) continue;
+    const parsed = publicationDate(revision, now);
+    if (parsed && (!latest || parsed > latest)) latest = parsed;
   }
   return latest;
 }
