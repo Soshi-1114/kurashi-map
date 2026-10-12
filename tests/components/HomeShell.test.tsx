@@ -1,11 +1,12 @@
 // @vitest-environment jsdom
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { cleanup, render, screen, waitFor } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import HomeShell from "@/components/HomeShell";
 
 vi.mock("@/components/MapView", () => ({
-  default: ({ onMenuClick }: { onMenuClick: () => void }) => <button onClick={onMenuClick}>メニューを開く</button>,
+  default: ({ onMenuClick, menuOpen, menuId }: { onMenuClick: (opener: HTMLButtonElement) => void; menuOpen: boolean; menuId: string }) =>
+    <button aria-expanded={menuOpen} aria-controls={menuId} onClick={(event) => onMenuClick(event.currentTarget)}>メニューを開く</button>,
 }));
 
 afterEach(() => { cleanup(); vi.unstubAllGlobals(); });
@@ -19,10 +20,14 @@ describe("地図メニューのキーボード操作", () => {
     expect(container.querySelector("aside")).not.toHaveAttribute("inert");
     expect(screen.getByRole("button", { name: "メニューを閉じる" })).toHaveFocus();
     expect(container.querySelector(".home-map")).toHaveAttribute("inert");
+    const opener = screen.getByRole("button", { name: "メニューを開く" });
+    expect(opener).toHaveAttribute("aria-expanded", "true");
+    expect(opener.getAttribute("aria-controls")).toBe(container.querySelector("aside")?.id);
   });
 
   it("Tabでメニュー内を循環し、Escapeで起点へ戻る", async () => {
-    vi.stubGlobal("requestAnimationFrame", (callback: FrameRequestCallback) => setTimeout(() => callback(0), 0));
+    vi.stubGlobal("requestAnimationFrame", (callback: FrameRequestCallback) => window.setTimeout(() => callback(0), 0));
+    vi.stubGlobal("cancelAnimationFrame", (id: number) => window.clearTimeout(id));
     const user = userEvent.setup();
     render(<HomeShell summary={[]}><a href="/about">データの説明</a><div hidden><a href="/privacy">非選択パネル</a></div></HomeShell>);
     const open = screen.getByRole("button", { name: "メニューを開く" });
@@ -33,5 +38,17 @@ describe("地図メニューのキーボード操作", () => {
     expect(screen.getByRole("button", { name: "メニューを閉じる" })).toHaveFocus();
     await user.keyboard("{Escape}");
     await waitFor(() => expect(open).toHaveFocus());
+  });
+
+  it("クリックでボタンにfocusが移らなくても、閉じると起点へ戻る", async () => {
+    vi.stubGlobal("requestAnimationFrame", (callback: FrameRequestCallback) => window.setTimeout(() => callback(0), 0));
+    vi.stubGlobal("cancelAnimationFrame", (id: number) => window.clearTimeout(id));
+    render(<HomeShell summary={[]}><a href="/about">データの説明</a></HomeShell>);
+    const opener = screen.getByRole("button", { name: "メニューを開く" });
+    expect(document.activeElement).toBe(document.body);
+    fireEvent.click(opener);
+    fireEvent.click(screen.getByRole("button", { name: "メニューを閉じる" }));
+    await waitFor(() => expect(opener).toHaveFocus());
+    expect(opener).toHaveAttribute("aria-expanded", "false");
   });
 });

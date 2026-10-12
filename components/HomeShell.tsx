@@ -1,14 +1,13 @@
 "use client";
 
-// 全画面地図ページ（汎用 /map・指標別 /map/*）の器。PC ではマップ(100dvh ヒーロー)＋
-// その下にリンク帯がスクロールで続く。SP ではページをスクロールさせず、マップは全画面の
-// まま。ヘッダーのメニューからリンク帯をドロワーとして重ねて表示する
+// 全画面地図ページ（汎用 /map・指標別 /map/*）の器。PC/SPとも地図を全画面で保ち、
+// ヘッダーのメニューから説明とリンク帯をドロワーとして重ねて表示する
 // （地図のパン操作と競合させない）。
 //
 // children（HomeLinks）はサーバー側で描画され DOM に常に存在する＝クロール可能。
 // SP で閉じている間も display:none にはせず、画面外に退避させるだけにする。
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
 import type { ComponentProps, ReactNode } from "react";
 import MapView from "@/components/MapView";
 import type { MuniSummary } from "@/lib/types";
@@ -35,15 +34,28 @@ export default function HomeShell({
   const closeButton = useRef<HTMLButtonElement>(null);
   const navPanel = useRef<HTMLElement>(null);
   const returnFocus = useRef<HTMLElement | null>(null);
+  const restoreFrame = useRef<number | null>(null);
+  const menuId = useId();
 
-  function openNav() {
-    returnFocus.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+  function openNav(opener: HTMLElement) {
+    if (restoreFrame.current !== null) cancelAnimationFrame(restoreFrame.current);
+    restoreFrame.current = null;
+    returnFocus.current = opener;
     setNavOpen(true);
   }
 
   const closeNav = useCallback(() => {
+    if (restoreFrame.current !== null) cancelAnimationFrame(restoreFrame.current);
     setNavOpen(false);
-    requestAnimationFrame(() => returnFocus.current?.focus());
+    const opener = returnFocus.current;
+    restoreFrame.current = requestAnimationFrame(() => {
+      restoreFrame.current = null;
+      if (opener?.isConnected) opener.focus({ preventScroll: true });
+    });
+  }, []);
+
+  useEffect(() => () => {
+    if (restoreFrame.current !== null) cancelAnimationFrame(restoreFrame.current);
   }, []);
 
   useEffect(() => {
@@ -75,7 +87,7 @@ export default function HomeShell({
   return (
     <div className={`home-root ${navOpen ? "is-nav-open" : ""}`}>
       <div className="home-map" inert={navOpen}>
-        <MapView summary={summary} onMenuClick={openNav} menuLabel={menuLabel} initialMetric={initialMetric} initialOverlays={initialOverlays} />
+        <MapView summary={summary} onMenuClick={openNav} menuLabel={menuLabel} menuOpen={navOpen} menuId={menuId} initialMetric={initialMetric} initialOverlays={initialOverlays} />
       </div>
 
       <div
@@ -84,7 +96,7 @@ export default function HomeShell({
         aria-hidden="true"
       />
 
-      <aside ref={navPanel} className="home-links" aria-label={navLabel} inert={!navOpen} role="dialog" aria-modal={navOpen}>
+      <aside ref={navPanel} id={menuId} className="home-links" aria-label={navLabel} inert={!navOpen} role="dialog" aria-modal={navOpen}>
         <button
           ref={closeButton}
           type="button"
