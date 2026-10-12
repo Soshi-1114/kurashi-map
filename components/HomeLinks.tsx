@@ -30,9 +30,34 @@ const RANKING_PICKS: Array<{ category: RankingCategory; slugs: string[] }> = [
   { category: "子育て・生活", slugs: ["waitlist-zero", "childcare-capacity"] },
 ];
 
-export default function HomeLinks({ popular }: { popular: PopularMuni[] }) {
+export default function HomeLinks({ popular, generalMapIntro = false }: { popular: PopularMuni[]; generalMapIntro?: boolean }) {
   return (
     <div className="home-links-inner">
+      {generalMapIntro && (
+        <>
+          <h1 className="home-links-lead-title">全国の自治体を地図で比較</h1>
+          <p className="home-links-lead">
+            家賃・地価・人口などの公的データを、地図の色分けで比べられます。
+            地域を検索するか自治体を選ぶと、詳しい数値を確認できます。
+          </p>
+          <section className="home-links-block">
+            <h2 className="home-links-h">地図の使い方</h2>
+            <p className="home-links-lead">
+              地域を検索し、指標を切り替えて地図を確認してください。
+              自治体を選ぶと詳細・出典を確認でき、候補を比較に追加できます。
+              災害リスクは地図に重ねて表示します。
+            </p>
+          </section>
+          <section className="home-links-block">
+            <h2 className="home-links-h">数値の意味を確かめる</h2>
+            <p className="home-links-lead">
+              統計の基準時点や出典は指標・自治体ごとに異なります。
+              家賃は現在の募集価格ではありません。「データなし」「対象外」「区別非公表」はゼロを意味しません。
+              詳しくは<Link href="/about">データと出典の説明</Link>をご覧ください。
+            </p>
+          </section>
+        </>
+      )}
       <section className="home-links-block">
         <h2 className="home-links-h">KurashiMapでできること</h2>
         <dl className="home-cando">
