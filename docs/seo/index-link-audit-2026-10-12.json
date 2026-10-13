@@ -1,0 +1,931 @@
+{
+  "auditedAt": "2026-10-12T08:43:36.244Z",
+  "origin": "https://kurashimap.jp",
+  "scope": "top + prefecture hubs + national rankings",
+  "seedPages": 73,
+  "complete": true,
+  "seedErrors": [],
+  "queryLinksObserved": 2709,
+  "canonicalMismatches": [],
+  "targets": 93,
+  "linkedFromSeeds": 93,
+  "results": [
+    {
+      "url": "https://kurashimap.jp/area/aichi/23228",
+      "depth": 2,
+      "referrers": [
+        "/area/aichi",
+        "/ranking/foreign-ratio-high"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/area/chiba/12208",
+      "depth": 2,
+      "referrers": [
+        "/area/chiba"
+      ],
+      "referrerCount": 1
+    },
+    {
+      "url": "https://kurashimap.jp/area/hokkaido/01227",
+      "depth": 2,
+      "referrers": [
+        "/area/hokkaido",
+        "/ranking/rent-cheap",
+        "/ranking/vacancy-high",
+        "/ranking/land-price-low",
+        "/ranking/population-decline",
+        "/ranking/aging-high",
+        "/ranking/fiscal-weak",
+        "/ranking/future-population-decline"
+      ],
+      "referrerCount": 8
+    },
+    {
+      "url": "https://kurashimap.jp/area/hokkaido/01661",
+      "depth": 2,
+      "referrers": [
+        "/area/hokkaido"
+      ],
+      "referrerCount": 1
+    },
+    {
+      "url": "https://kurashimap.jp/area/ibaraki/08232",
+      "depth": 2,
+      "referrers": [
+        "/area/ibaraki",
+        "/ranking/fiscal-strong"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/area/ishikawa/17207",
+      "depth": 2,
+      "referrers": [
+        "/area/ishikawa"
+      ],
+      "referrerCount": 1
+    },
+    {
+      "url": "https://kurashimap.jp/area/iwate/03402",
+      "depth": 2,
+      "referrers": [
+        "/area/iwate"
+      ],
+      "referrerCount": 1
+    },
+    {
+      "url": "https://kurashimap.jp/area/kyoto/26208",
+      "depth": 2,
+      "referrers": [
+        "/area/kyoto",
+        "/ranking/land-price-high",
+        "/ranking/population-density"
+      ],
+      "referrerCount": 3
+    },
+    {
+      "url": "https://kurashimap.jp/area/mie/24471",
+      "depth": 2,
+      "referrers": [
+        "/area/mie",
+        "/ranking/childcare-capacity",
+        "/ranking/population-decline",
+        "/ranking/aging-high",
+        "/ranking/future-population-decline"
+      ],
+      "referrerCount": 5
+    },
+    {
+      "url": "https://kurashimap.jp/area/nagano/20324",
+      "depth": 2,
+      "referrers": [
+        "/area/nagano"
+      ],
+      "referrerCount": 1
+    },
+    {
+      "url": "https://kurashimap.jp/area/okayama/33211",
+      "depth": 2,
+      "referrers": [
+        "/area/okayama",
+        "/ranking/rent-cheap",
+        "/ranking/vacancy-high"
+      ],
+      "referrerCount": 3
+    },
+    {
+      "url": "https://kurashimap.jp/area/okinawa/47301",
+      "depth": 2,
+      "referrers": [
+        "/area/okinawa"
+      ],
+      "referrerCount": 1
+    },
+    {
+      "url": "https://kurashimap.jp/area/osaka/27127",
+      "depth": 2,
+      "referrers": [
+        "/area/osaka"
+      ],
+      "referrerCount": 1
+    },
+    {
+      "url": "https://kurashimap.jp/area/saitama/11212",
+      "depth": 2,
+      "referrers": [
+        "/area/saitama"
+      ],
+      "referrerCount": 1
+    },
+    {
+      "url": "https://kurashimap.jp/area/tokyo/13210",
+      "depth": 2,
+      "referrers": [
+        "/area/tokyo",
+        "/ranking/rent-high",
+        "/ranking/land-price-high",
+        "/ranking/population-density",
+        "/ranking/population-growth",
+        "/ranking/aging-low",
+        "/ranking/fiscal-strong",
+        "/ranking/future-population-resilient"
+      ],
+      "referrerCount": 8
+    },
+    {
+      "url": "https://kurashimap.jp/area/tottori/31389",
+      "depth": 2,
+      "referrers": [
+        "/area/tottori"
+      ],
+      "referrerCount": 1
+    },
+    {
+      "url": "https://kurashimap.jp/area/gifu",
+      "depth": 1,
+      "referrers": [
+        "/",
+        "/ranking/rent-cheap",
+        "/ranking/vacancy-high",
+        "/ranking/land-price-low",
+        "/ranking/waitlist-zero",
+        "/ranking/childcare-capacity",
+        "/ranking/stations",
+        "/ranking/medical-facilities",
+        "/ranking/preschools",
+        "/ranking/population-most",
+        "/ranking/population-density-low",
+        "/ranking/population-growth",
+        "/ranking/population-decline",
+        "/ranking/aging-high",
+        "/ranking/aging-low",
+        "/ranking/future-population-decline",
+        "/ranking/foreign-ratio-high"
+      ],
+      "referrerCount": 17
+    },
+    {
+      "url": "https://kurashimap.jp/area/iwate",
+      "depth": 1,
+      "referrers": [
+        "/",
+        "/ranking/rent-cheap",
+        "/ranking/vacancy-high",
+        "/ranking/vacancy-low",
+        "/ranking/land-price-low",
+        "/ranking/waitlist-zero",
+        "/ranking/childcare-capacity",
+        "/ranking/stations",
+        "/ranking/medical-facilities",
+        "/ranking/preschools",
+        "/ranking/population-most",
+        "/ranking/population-density-low",
+        "/ranking/population-decline",
+        "/ranking/aging-high",
+        "/ranking/fiscal-strong",
+        "/ranking/fiscal-weak",
+        "/ranking/future-population-decline",
+        "/ranking/foreign-ratio-low"
+      ],
+      "referrerCount": 18
+    },
+    {
+      "url": "https://kurashimap.jp/area/shimane",
+      "depth": 1,
+      "referrers": [
+        "/",
+        "/ranking/vacancy-high",
+        "/ranking/land-price-low",
+        "/ranking/waitlist-zero",
+        "/ranking/stations",
+        "/ranking/preschools",
+        "/ranking/population-growth",
+        "/ranking/aging-high",
+        "/ranking/fiscal-weak"
+      ],
+      "referrerCount": 9
+    },
+    {
+      "url": "https://kurashimap.jp/area/shizuoka",
+      "depth": 1,
+      "referrers": [
+        "/",
+        "/ranking/rent-high",
+        "/ranking/vacancy-high",
+        "/ranking/waitlist-zero",
+        "/ranking/childcare-capacity",
+        "/ranking/stations",
+        "/ranking/medical-facilities",
+        "/ranking/preschools",
+        "/ranking/population-most",
+        "/ranking/aging-high",
+        "/ranking/aging-low",
+        "/ranking/fiscal-strong",
+        "/ranking/future-population-decline",
+        "/ranking/foreign-ratio-high"
+      ],
+      "referrerCount": 14
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/population-decline",
+      "depth": 2,
+      "referrers": [
+        "/ranking",
+        "/ranking/rent-cheap",
+        "/ranking/rent-high",
+        "/ranking/vacancy-high",
+        "/ranking/vacancy-low",
+        "/ranking/land-price-high",
+        "/ranking/land-price-low",
+        "/ranking/waitlist-zero",
+        "/ranking/childcare-capacity",
+        "/ranking/stations",
+        "/ranking/medical-facilities",
+        "/ranking/preschools",
+        "/ranking/population-most",
+        "/ranking/population-density",
+        "/ranking/population-density-low",
+        "/ranking/population-growth",
+        "/ranking/aging-high",
+        "/ranking/aging-low",
+        "/ranking/fiscal-strong",
+        "/ranking/fiscal-weak",
+        "/ranking/future-population-decline",
+        "/ranking/future-population-resilient",
+        "/ranking/foreign-ratio-high",
+        "/ranking/foreign-ratio-low"
+      ],
+      "referrerCount": 24
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/aging-high/gifu",
+      "depth": 2,
+      "referrers": [
+        "/area/gifu",
+        "/ranking/aging-high"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/aging-high/nagasaki",
+      "depth": 2,
+      "referrers": [
+        "/area/nagasaki",
+        "/ranking/aging-high"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/aging-high/shimane",
+      "depth": 2,
+      "referrers": [
+        "/area/shimane",
+        "/ranking/aging-high"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/childcare-capacity/fukushima",
+      "depth": 2,
+      "referrers": [
+        "/area/fukushima",
+        "/ranking/childcare-capacity"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/childcare-capacity/hiroshima",
+      "depth": 2,
+      "referrers": [
+        "/area/hiroshima",
+        "/ranking/childcare-capacity"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/childcare-capacity/iwate",
+      "depth": 2,
+      "referrers": [
+        "/area/iwate",
+        "/ranking/childcare-capacity"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/childcare-capacity/kagawa",
+      "depth": 2,
+      "referrers": [
+        "/area/kagawa",
+        "/ranking/childcare-capacity"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/childcare-capacity/kochi",
+      "depth": 2,
+      "referrers": [
+        "/area/kochi",
+        "/ranking/childcare-capacity"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/childcare-capacity/kumamoto",
+      "depth": 2,
+      "referrers": [
+        "/area/kumamoto",
+        "/ranking/childcare-capacity"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/childcare-capacity/kyoto",
+      "depth": 2,
+      "referrers": [
+        "/area/kyoto",
+        "/ranking/childcare-capacity"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/childcare-capacity/nagasaki",
+      "depth": 2,
+      "referrers": [
+        "/area/nagasaki",
+        "/ranking/childcare-capacity"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/childcare-capacity/shimane",
+      "depth": 2,
+      "referrers": [
+        "/area/shimane",
+        "/ranking/childcare-capacity"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/childcare-capacity/toyama",
+      "depth": 2,
+      "referrers": [
+        "/area/toyama",
+        "/ranking/childcare-capacity"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/childcare-capacity/yamanashi",
+      "depth": 2,
+      "referrers": [
+        "/area/yamanashi",
+        "/ranking/childcare-capacity"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/fiscal-strong/nagasaki",
+      "depth": 2,
+      "referrers": [
+        "/area/nagasaki",
+        "/ranking/fiscal-strong"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/fiscal-strong/shimane",
+      "depth": 2,
+      "referrers": [
+        "/area/shimane",
+        "/ranking/fiscal-strong"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/fiscal-weak/gifu",
+      "depth": 2,
+      "referrers": [
+        "/area/gifu",
+        "/ranking/fiscal-weak"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/fiscal-weak/kyoto",
+      "depth": 2,
+      "referrers": [
+        "/area/kyoto",
+        "/ranking/fiscal-weak"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/fiscal-weak/nagasaki",
+      "depth": 2,
+      "referrers": [
+        "/area/nagasaki",
+        "/ranking/fiscal-weak"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/fiscal-weak/shimane",
+      "depth": 2,
+      "referrers": [
+        "/area/shimane",
+        "/ranking/fiscal-weak"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/foreign-ratio-low/oita",
+      "depth": 2,
+      "referrers": [
+        "/area/oita",
+        "/ranking/foreign-ratio-low"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/foreign-ratio-low/wakayama",
+      "depth": 2,
+      "referrers": [
+        "/area/wakayama",
+        "/ranking/foreign-ratio-low"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/future-population-resilient/oita",
+      "depth": 2,
+      "referrers": [
+        "/area/oita",
+        "/ranking/future-population-resilient"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/land-price-high/okinawa",
+      "depth": 2,
+      "referrers": [
+        "/area/okinawa",
+        "/ranking/land-price-high"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/land-price-low/fukushima",
+      "depth": 2,
+      "referrers": [
+        "/area/fukushima",
+        "/ranking/land-price-low"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/land-price-low/okinawa",
+      "depth": 2,
+      "referrers": [
+        "/area/okinawa",
+        "/ranking/land-price-low"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/medical-facilities/kyoto",
+      "depth": 2,
+      "referrers": [
+        "/area/kyoto",
+        "/ranking/medical-facilities"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/medical-facilities/shimane",
+      "depth": 2,
+      "referrers": [
+        "/area/shimane",
+        "/ranking/medical-facilities"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/population-decline/aichi",
+      "depth": 2,
+      "referrers": [
+        "/area/aichi",
+        "/ranking/population-decline"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/population-decline/fukuoka",
+      "depth": 2,
+      "referrers": [
+        "/area/fukuoka",
+        "/ranking/population-decline"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/population-decline/hokkaido",
+      "depth": 2,
+      "referrers": [
+        "/area/hokkaido",
+        "/ranking/population-decline"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/population-decline/ishikawa",
+      "depth": 2,
+      "referrers": [
+        "/area/ishikawa",
+        "/ranking/population-decline"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/population-decline/nagano",
+      "depth": 2,
+      "referrers": [
+        "/area/nagano",
+        "/ranking/population-decline"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/population-decline/nagasaki",
+      "depth": 2,
+      "referrers": [
+        "/area/nagasaki",
+        "/ranking/population-decline"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/population-decline/nara",
+      "depth": 2,
+      "referrers": [
+        "/area/nara",
+        "/ranking/population-decline"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/population-decline/tokushima",
+      "depth": 2,
+      "referrers": [
+        "/area/tokushima",
+        "/ranking/population-decline"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/population-decline/yamagata",
+      "depth": 2,
+      "referrers": [
+        "/area/yamagata",
+        "/ranking/population-decline"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/population-density-low/hyogo",
+      "depth": 2,
+      "referrers": [
+        "/area/hyogo",
+        "/ranking/population-density-low"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/population-density-low/kagawa",
+      "depth": 2,
+      "referrers": [
+        "/area/kagawa",
+        "/ranking/population-density-low"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/population-density-low/kyoto",
+      "depth": 2,
+      "referrers": [
+        "/area/kyoto",
+        "/ranking/population-density-low"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/population-density-low/nagasaki",
+      "depth": 2,
+      "referrers": [
+        "/area/nagasaki",
+        "/ranking/population-density-low"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/population-density/gifu",
+      "depth": 2,
+      "referrers": [
+        "/area/gifu",
+        "/ranking/population-density"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/population-density/hyogo",
+      "depth": 2,
+      "referrers": [
+        "/area/hyogo",
+        "/ranking/population-density"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/population-density/kyoto",
+      "depth": 2,
+      "referrers": [
+        "/area/kyoto",
+        "/ranking/population-density"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/population-density/nagasaki",
+      "depth": 2,
+      "referrers": [
+        "/area/nagasaki",
+        "/ranking/population-density"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/population-density/wakayama",
+      "depth": 2,
+      "referrers": [
+        "/area/wakayama",
+        "/ranking/population-density"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/population-growth/gunma",
+      "depth": 2,
+      "referrers": [
+        "/area/gunma",
+        "/ranking/population-growth"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/population-growth/hokkaido",
+      "depth": 2,
+      "referrers": [
+        "/area/hokkaido",
+        "/ranking/population-growth"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/population-growth/kochi",
+      "depth": 2,
+      "referrers": [
+        "/area/kochi",
+        "/ranking/population-growth"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/population-growth/saga",
+      "depth": 2,
+      "referrers": [
+        "/area/saga",
+        "/ranking/population-growth"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/population-growth/shizuoka",
+      "depth": 2,
+      "referrers": [
+        "/area/shizuoka",
+        "/ranking/population-growth"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/population-growth/tottori",
+      "depth": 2,
+      "referrers": [
+        "/area/tottori",
+        "/ranking/population-growth"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/population-most/gifu",
+      "depth": 2,
+      "referrers": [
+        "/area/gifu",
+        "/ranking/population-most"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/population-most/gunma",
+      "depth": 2,
+      "referrers": [
+        "/area/gunma",
+        "/ranking/population-most"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/population-most/okinawa",
+      "depth": 2,
+      "referrers": [
+        "/area/okinawa",
+        "/ranking/population-most"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/preschools/gifu",
+      "depth": 2,
+      "referrers": [
+        "/area/gifu",
+        "/ranking/preschools"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/preschools/kyoto",
+      "depth": 2,
+      "referrers": [
+        "/area/kyoto",
+        "/ranking/preschools"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/preschools/nagasaki",
+      "depth": 2,
+      "referrers": [
+        "/area/nagasaki",
+        "/ranking/preschools"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/preschools/shimane",
+      "depth": 2,
+      "referrers": [
+        "/area/shimane",
+        "/ranking/preschools"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/rent-high/chiba",
+      "depth": 2,
+      "referrers": [
+        "/area/chiba",
+        "/ranking/rent-high"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/rent-high/nara",
+      "depth": 2,
+      "referrers": [
+        "/area/nara",
+        "/ranking/rent-high"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/stations/gifu",
+      "depth": 2,
+      "referrers": [
+        "/area/gifu",
+        "/ranking/stations"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/stations/kyoto",
+      "depth": 2,
+      "referrers": [
+        "/area/kyoto",
+        "/ranking/stations"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/stations/nagasaki",
+      "depth": 2,
+      "referrers": [
+        "/area/nagasaki",
+        "/ranking/stations"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/stations/shimane",
+      "depth": 2,
+      "referrers": [
+        "/area/shimane",
+        "/ranking/stations"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/vacancy-high/hyogo",
+      "depth": 2,
+      "referrers": [
+        "/area/hyogo",
+        "/ranking/vacancy-high"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/vacancy-high/kyoto",
+      "depth": 2,
+      "referrers": [
+        "/area/kyoto",
+        "/ranking/vacancy-high"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/vacancy-high/nagasaki",
+      "depth": 2,
+      "referrers": [
+        "/area/nagasaki",
+        "/ranking/vacancy-high"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/vacancy-low/hyogo",
+      "depth": 2,
+      "referrers": [
+        "/area/hyogo",
+        "/ranking/vacancy-low"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/vacancy-low/kagawa",
+      "depth": 2,
+      "referrers": [
+        "/area/kagawa",
+        "/ranking/vacancy-low"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/vacancy-low/kyoto",
+      "depth": 2,
+      "referrers": [
+        "/area/kyoto",
+        "/ranking/vacancy-low"
+      ],
+      "referrerCount": 2
+    },
+    {
+      "url": "https://kurashimap.jp/ranking/vacancy-low/tokushima",
+      "depth": 2,
+      "referrers": [
+        "/area/tokushima",
+        "/ranking/vacancy-low"
+      ],
+      "referrerCount": 2
+    }
+  ]
+}
