@@ -47,8 +47,8 @@ export default async function GeneralMapPage() {
   return (
     <main className="home-main">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }} />
-      <HomeShell summary={summary}>
-        <HomeLinks popular={popular} />
+      <HomeShell summary={summary} navLabel="地図の使い方・エリア・ランキング" menuLabel="使い方・エリア">
+        <HomeLinks popular={popular} generalMapIntro />
       </HomeShell>
     </main>
   );

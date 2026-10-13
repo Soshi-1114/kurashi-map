@@ -53,7 +53,10 @@ import MapCompareControls from "./map/MapCompareControls";
 
 type Props = {
   summary: MuniSummary[];
-  onMenuClick?: () => void;
+  onMenuClick?: (opener: HTMLButtonElement) => void;
+  menuLabel?: string;
+  menuOpen?: boolean;
+  menuId?: string;
   initialMetric?: MapMetricKey | "none";
   /** 初期表示で点灯する災害等オーバーレイ（ハザードのピラーページで指定）。既定はなし。 */
   initialOverlays?: readonly OverlayKey[];
@@ -62,7 +65,7 @@ type Props = {
 // 火災保険導線（env 未設定なら null）。NEXT_PUBLIC はビルド時定数なのでモジュール評価1回でよい。
 const KASAI_LINK = kasaiHokenLink();
 
-export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_MAP_METRIC, initialOverlays }: Props) {
+export default function MapView({ summary, onMenuClick, menuLabel = "エリア・ランキング", menuOpen = false, menuId, initialMetric = DEFAULT_MAP_METRIC, initialOverlays }: Props) {
   const kasai = KASAI_LINK;
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<MapLibreMap | null>(null);
@@ -928,13 +931,16 @@ export default function MapView({ summary, onMenuClick, initialMetric = DEFAULT_
           {onMenuClick && (
             <button
               className="app-header-menu-btn"
-              aria-label="エリア・ランキングのメニューを開く"
-              onClick={onMenuClick}
+              aria-label={`${menuLabel}のメニューを開く`}
+              aria-haspopup="dialog"
+              aria-expanded={menuOpen}
+              aria-controls={menuId}
+              onClick={(event) => onMenuClick(event.currentTarget)}
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
                 <path d="M4 6h16M4 12h16M4 18h16" />
               </svg>
-              <span className="menu-btn-label">エリア・ランキング</span>
+              <span className="menu-btn-label">{menuLabel}</span>
             </button>
           )}
         </header>
