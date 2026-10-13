@@ -51,4 +51,16 @@ describe("地図メニューのキーボード操作", () => {
     await waitFor(() => expect(opener).toHaveFocus());
     expect(opener).toHaveAttribute("aria-expanded", "false");
   });
+
+  it("スクロール後に開き直すと説明の先頭に戻る", async () => {
+    const user = userEvent.setup();
+    const { container } = render(<HomeShell summary={[]}><a href="/about">データの説明</a></HomeShell>);
+    const opener = screen.getByRole("button", { name: "メニューを開く" });
+    await user.click(opener);
+    const content = container.querySelector<HTMLElement>(".home-nav-content")!;
+    content.scrollTop = 400;
+    await user.click(screen.getByRole("button", { name: "メニューを閉じる" }));
+    await user.click(opener);
+    expect(content.scrollTop).toBe(0);
+  });
 });

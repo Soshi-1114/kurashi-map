@@ -33,6 +33,7 @@ export default function HomeShell({
   const [navOpen, setNavOpen] = useState(false);
   const closeButton = useRef<HTMLButtonElement>(null);
   const navPanel = useRef<HTMLElement>(null);
+  const navContent = useRef<HTMLDivElement>(null);
   const returnFocus = useRef<HTMLElement | null>(null);
   const restoreFrame = useRef<number | null>(null);
   const menuId = useId();
@@ -41,6 +42,7 @@ export default function HomeShell({
     if (restoreFrame.current !== null) cancelAnimationFrame(restoreFrame.current);
     restoreFrame.current = null;
     returnFocus.current = opener;
+    if (navContent.current) navContent.current.scrollTop = 0;
     setNavOpen(true);
   }
 
@@ -97,18 +99,20 @@ export default function HomeShell({
       />
 
       <aside ref={navPanel} id={menuId} className="home-links" aria-label={navLabel} inert={!navOpen} role="dialog" aria-modal={navOpen}>
-        <button
-          ref={closeButton}
-          type="button"
-          className="home-nav-close"
-          aria-label="メニューを閉じる"
-          onClick={closeNav}
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
-            <path d="M6 6l12 12M18 6L6 18" />
-          </svg>
-        </button>
-        {children}
+        <div className="home-nav-toolbar">
+          <button
+            ref={closeButton}
+            type="button"
+            className="home-nav-close"
+            aria-label="メニューを閉じる"
+            onClick={closeNav}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+              <path d="M6 6l12 12M18 6L6 18" />
+            </svg>
+          </button>
+        </div>
+        <div ref={navContent} className="home-nav-content">{children}</div>
       </aside>
     </div>
   );
