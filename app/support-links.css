@@ -91,7 +91,16 @@
     align-items: stretch;
     min-height: 0; /* 縦積み時は高さ固定を解除 */
   }
-  .ad-linkrow-btn { justify-content: center; }
+  /* デスクトップの220pxは横幅用。縦積みでは本文の高さに適用しない。 */
+  .ad-linkrow-text { flex: 0 1 auto; }
+  .ad-linkrow-btn {
+    justify-content: center;
+    max-width: 100%;
+    box-sizing: border-box;
+    white-space: normal;
+    text-align: center;
+  }
+  .ad-linkrow-btn svg { flex-shrink: 0; }
 }
 
 /* モーション抑制 */
