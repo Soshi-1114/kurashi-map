@@ -250,3 +250,24 @@ KurashiMap は Google Analytics 4（gtag.js）でページビューに加えて�
   イベントは `<ページ>_` 接頭辞（`denki_simulate` 等）で統一する。
 - パラメータ名を変えた／増やした場合は、本ドキュメントの一覧と GA4 のカスタム定義も更新する。
 - 測定ID を変える場合は `app/layout.tsx` の `GA_MEASUREMENT_ID` を変更する。
+
+### 火災保険（A8）の導線分析（2026-10-24追加）
+
+- `kasai_link_render`: 導線がクライアントでマウントされた時に1回。画面外の掲載も含む。ASPのインプレッション数とは別の指標。
+- `kasai_link_impression`: 導線の50%以上が画面内に入った時に1回。滞在時間の条件はない。
+- `kasai_link_click`: 外部の見積もりリンクをクリックした時。
+
+3イベントに `placement`、自治体面では `municipality_code`、および `measurement_version=2026-10-24` と `cta_variant=context-v1` を送る。同じ表示の再レンダーでは掲載・視認を再送せず、地図パネルの自治体切り替えでは新しく計測する。広告URLやASP識別子は送信しない。50%判定の修正はPR #237で反映済み。今回の変更は掲載数計測と文言・モバイル表示の改善。`cta_variant` はGA4でイベントスコープのカスタムディメンションとして登録してから版別に分析する。
+
+GA4の探索ではイベント名を行、`placement` を列、イベント数を値にして比較する。視認率は `kasai_link_impression / kasai_link_render`、視認ベースのクリック率は `kasai_link_click / kasai_link_impression`。クリックは毎回、視認は各掲載1回のためユニークユーザーCTRとは異なる。GA4のページパスでページごとの違いも確認する。
+
+管理画面でイベントスコープのカスタムディメンション `placement`、`measurement_version` が未登録なら登録する（このコード変更では管理画面の設定は変更していない）。デプロイ後、DebugView等で3イベントを確認してから蓄積分を分析する。過去データには遡及しない。gtag未ロード時やブロック時は送信されないため、ASPの数値との完全一致は期待しない。
+
+### ふるさと納税・電気の導線改善（2026-10-24）
+
+- ふるさと納税: `furusato_link_render`（マウント時1回）、既存の`furusato_link_impression`（50%以上視認1回）/`furusato_link_click`に`measurement_version=2026-10-24`と`cta_variant=donation-v1`を付与。`kind`、`placement`、自治体情報は継続。リンク先・自治体・掲載面の変更時に掲載/視認を計測し直す。`portal`では自治体ページへの直行を示唆しない。
+- 電気の入口: 自治体概要の後の`DenkiTeaser`で`denki_entry_view`（50%以上視認1回）と`denki_entry_click`を送る。`placement=area-overview`、`municipality_code`、`area`、`cta_variant=estimate-v1`、`measurement_version=2026-10-24`。`/denki?code=...&from=area_detail`で着地側の既存`tool_entry`にも接続。自治体を切り替えた時は入口の視認を再計測。
+- 電気の外部導線: `denki_offer_view`を各プランのリンクが50%以上画面内に入った時に1回送る。`offer_id`、`area`、`is_affiliate`、`position`、`cta_variant=conditions-v1`、`measurement_version=2026-10-24`。既存の`denki_offer_click`にも同じ版・文言識別を付与する。エリア・プラン・表示位置が変わる場合は新しい視認として扱う。
+- 旧`denki_offer_impression`は結果リストの描画イベントとして継続し、プラン単位の視認の分母としては使わない。プラン単位のクリック率は`denki_offer_click / denki_offer_view`を同じ期間・版・`offer_id`・`is_affiliate`で比較。入口の視認/クリック、着地、試算、外部リンク視認/クリックをそれぞれ区別する。
+
+必要に応じて`cta_variant`をイベントスコープのカスタムディメンションに登録する。未提携の電気会社への公式リンクは`is_affiliate=false`として区別し、ASPの成果とは扱わない。個別入力値・広告URL・ASP識別子を新イベントへ送信しない。既存`denki_simulate`の入力パラメータ契約は変更しない。
