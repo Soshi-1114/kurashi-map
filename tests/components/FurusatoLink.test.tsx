@@ -24,7 +24,7 @@ describe("FurusatoLink", () => {
     const { container, getByText } = render(
       <FurusatoLink link={municipal} targetName="札幌市" municipalityCode="01100" />,
     );
-    getByText("札幌市のふるさと納税を見る");
+    getByText("ふるさと納税で札幌市を応援する");
     expect(container.textContent).toContain("広告");
     const a = container.querySelector("a");
     expect(a?.getAttribute("href")).toBe(municipal.url);
@@ -42,15 +42,15 @@ describe("FurusatoLink", () => {
     const { container, getByText } = render(
       <FurusatoLink link={portal} targetName="札幌市" municipalityCode="01100" />,
     );
-    getByText("ふるさと納税で札幌市を応援する");
-    expect(container.textContent).toContain("寄付先は移動先で選択できます");
+    getByText("寄付先を選んで、ふるさと納税で地域を応援");
+    expect(container.textContent).toContain("寄付先の自治体は移動先で選べます");
     expect(container.querySelector("img[width='1']")).toBeNull();
   });
 
   it("targetName なし（ランキング等の共通面）: 自治体に紐付かない中立文言", () => {
     const portal: FurusatoLinkInfo = { url: "https://example.com/", kind: "portal", impressionPixel: null };
     const { getByText } = render(<FurusatoLink link={portal} placement="ranking" />);
-    getByText("ふるさと納税で自治体を応援する");
+    getByText("寄付先を選んで、ふるさと納税で地域を応援");
   });
 
   it("クリックで furusato_link_click を kind / placement / 自治体情報つきで送る", () => {
@@ -61,6 +61,8 @@ describe("FurusatoLink", () => {
     );
     fireEvent.click(container.querySelector("a")!);
     expect(gtag).toHaveBeenCalledWith("event", "furusato_link_click", {
+      measurement_version: "2026-10-24",
+      cta_variant: "donation-v1",
       kind: "municipal",
       placement: "area",
       municipality_code: "01100",
@@ -90,10 +92,12 @@ describe("FurusatoLink", () => {
     expect(observe).toHaveBeenCalled();
 
     act(() => callback([{ isIntersecting: false, intersectionRatio: 0 }]));
-    expect(gtag).not.toHaveBeenCalled();
+    expect(gtag.mock.calls.map(call => call[1])).toEqual(["furusato_link_render"]);
 
     act(() => callback([{ isIntersecting: true, intersectionRatio: 0.5 }]));
     expect(gtag).toHaveBeenCalledWith("event", "furusato_link_impression", {
+      measurement_version: "2026-10-24",
+      cta_variant: "donation-v1",
       kind: "municipal",
       placement: "area",
       municipality_code: "01100",
@@ -102,8 +106,22 @@ describe("FurusatoLink", () => {
 
     // 2度目の到達では送らない（1要素1回）
     act(() => callback([{ isIntersecting: true, intersectionRatio: 0.5 }]));
-    expect(gtag).toHaveBeenCalledTimes(1);
+    expect(gtag).toHaveBeenCalledTimes(2);
     expect(disconnect).toHaveBeenCalled();
+  });
+
+  it("リンクの着地をボタンで区別し、自治体切り替え時は掲載を再計測する", () => {
+    window.gtag = vi.fn();
+    const { rerender, getByRole, container } = render(<FurusatoLink link={municipal} targetName="札幌市" municipalityCode="01100" />);
+    expect(getByRole("link", { name: "ふるなびで札幌市を見る" }).getAttribute("href")).toBe(municipal.url);
+    rerender(<FurusatoLink link={municipal} targetName="札幌市" municipalityCode="01100" />);
+    expect(window.gtag).toHaveBeenCalledTimes(1);
+    rerender(<FurusatoLink link={municipal} targetName="函館市" municipalityCode="01202" />);
+    expect(window.gtag).toHaveBeenCalledTimes(2);
+    rerender(<FurusatoLink link={{ ...municipal, kind: "portal" }} targetName="函館市" municipalityCode="01202" />);
+    expect(getByRole("link", { name: "ふるなびで寄付先を探す" })).toBeTruthy();
+    expect(container.textContent).not.toContain("ふるなびで函館市を見る");
+    expect(container.textContent).not.toMatch(/返礼品|還元|お得|セール/);
   });
 
   it("IntersectionObserver がない環境（jsdom 素の状態）でも描画が壊れない", () => {

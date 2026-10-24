@@ -10,13 +10,18 @@
 // - 返礼品の紹介・強調をしない（特定自治体を対象とした返礼品誘引広告は成果却下）
 // - 「お得」「還元」「セール」等の訴求をしない（2025年10月以降ポイント還元も制度上禁止）
 // - 広告であることを明示する（「広告」表記 + rel="sponsored"）
+import { useEffect, useRef } from "react";
 import { Gift, ExternalLink } from "lucide-react";
 import { track } from "@/lib/analytics";
 import { useImpressionOnce } from "@/lib/useImpression";
 import type { FurusatoLinkInfo } from "@/lib/monetization";
 import { AdLinkRow } from "./AdLinkRow";
 
-export function FurusatoLink({
+export function FurusatoLink(props: Parameters<typeof FurusatoLinkContent>[0]) {
+  return <FurusatoLinkContent key={JSON.stringify([props.placement, props.municipalityCode, props.targetName, props.link.kind, props.link.url])} {...props} />;
+}
+
+function FurusatoLinkContent({
   link,
   targetName,
   municipalityCode,
@@ -33,21 +38,31 @@ export function FurusatoLink({
   // portal（固定リンク）は着地がポータルのトップ等になるため、
   // 自治体のページに着くと誤解させない文言にする。
   const isPortal = link.kind === "portal";
-  const copy = targetName
-    ? isPortal
-      ? `ふるさと納税で${targetName}を応援する`
-      : `${targetName}のふるさと納税を見る`
-    : "ふるさと納税で自治体を応援する";
+  const copy = !isPortal && targetName
+    ? `ふるさと納税で${targetName}を応援する`
+    : "寄付先を選んで、ふるさと納税で地域を応援";
   const sub = isPortal
-    ? "※広告・外部サイト「ふるなび」へ移動します。寄付先は移動先で選択できます"
-    : "※広告・外部サイト「ふるなび」へ移動します";
+    ? "広告・ふるなびトップへ移動します。寄付先の自治体は移動先で選べます。"
+    : "この地域への寄付を検討している方へ。広告・ふるなびの自治体ページに移動します。";
+  const actionLabel = isPortal
+    ? "ふるなびで寄付先を探す"
+    : targetName ? `ふるなびで${targetName}を見る` : "ふるなびの自治体ページを見る";
   const eventParams = {
+    measurement_version: "2026-10-24",
+    cta_variant: "donation-v1",
     kind: link.kind,
     placement,
     ...(municipalityCode ? { municipality_code: municipalityCode } : {}),
     ...(targetName ? { municipality_name: targetName } : {}),
   };
-  // 視認計測（50% 到達で1回だけ）。クリックと合わせて面ごとの真の CTR を出す分母。
+  const initialParams = useRef(eventParams);
+  const rendered = useRef(false);
+  useEffect(() => {
+    if (rendered.current) return;
+    rendered.current = true;
+    track("furusato_link_render", initialParams.current);
+  }, []);
+  // 視認計測（50% 到達で1回だけ）。クリックと合わせて面ごとの視認ベースのCTRを見る分母。
   const impressionRef = useImpressionOnce<HTMLDivElement>("furusato_link_impression", eventParams);
   return (
     <div ref={impressionRef}>
@@ -67,7 +82,7 @@ export function FurusatoLink({
             className="ad-linkrow-btn ad-linkrow-btn--solid"
             onClick={() => track("furusato_link_click", eventParams)}
           >
-            ふるさと納税を見る
+            {actionLabel}
             <ExternalLink size={15} aria-hidden="true" />
             {/* AT のインプレッション計測ピクセル（生成リンクコードと同じ対で描画） */}
             {link.impressionPixel && (

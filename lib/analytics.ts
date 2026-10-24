@@ -166,7 +166,7 @@ export function trackDenkiSimulate(params: {
   });
 }
 
-/** 電気料金の比較結果リスト表示（エリアごとに1回）。オファー別 CTR の分母。 */
+/** 電気料金の比較結果リスト描画（エリア切り替えごと）。旧来の集計を継続し、プラン別の視認は denki_offer_view を使う。 */
 export function trackDenkiOfferImpression(params: { area: string; offerCount: number; hasAffiliate: boolean }): void {
   track("denki_offer_impression", {
     area: params.area,
@@ -174,6 +174,9 @@ export function trackDenkiOfferImpression(params: { area: string; offerCount: nu
     has_affiliate: params.hasAffiliate,
   });
 }
+
+/** プラン別の視認とクリックを同じ版で比較する。 */
+export const DENKI_OFFER_CTA_PARAMS = { measurement_version: "2026-10-24", cta_variant: "conditions-v1" } as const;
 
 /** 電気プランの外部リンククリック。オファー別 CTR の分子・キーイベント候補。 */
 export function trackDenkiOfferClick(params: {
@@ -183,6 +186,7 @@ export function trackDenkiOfferClick(params: {
   position: number;
 }): void {
   track("denki_offer_click", {
+    ...DENKI_OFFER_CTA_PARAMS,
     offer_id: params.offerId,
     area: params.area,
     is_affiliate: params.isAffiliate,

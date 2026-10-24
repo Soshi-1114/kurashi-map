@@ -55,7 +55,7 @@ export type ToolSource =
   | "header" // サイト共通ヘッダー（SiteHeader）
   | "compare" // 比較ページ（道具間の相互導線）
   | "shindan_result" // 街診断の結果セクション（道具間の相互導線）
-  | "area_detail" // 自治体詳細の比較候補
+  | "area_detail" // 自治体詳細の比較候補・電気代試算
   | "map"; // 地図パネルの比較候補
 
 export type CompareAttribution = {

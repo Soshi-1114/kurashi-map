@@ -22,12 +22,12 @@ import {
   type HouseholdSize,
 } from "@/lib/denkiSim";
 import { yen } from "@/lib/format";
+import DenkiOfferLink from "./DenkiOfferLink";
 import { denkiOfferUrl } from "@/lib/monetization";
 import { useToolEntry } from "@/lib/useToolEntry";
 import {
   trackDenkiSimulate,
   trackDenkiOfferImpression,
-  trackDenkiOfferClick,
 } from "@/lib/analytics";
 
 export default function DenkiSimulator() {
@@ -159,6 +159,8 @@ export default function DenkiSimulator() {
         <p className="dnk-ad-note">当ページはアフィリエイト広告を含みます。</p>
       )}
 
+      <p className="dnk-kwh-note">試算は基本料金・電力量料金の目安です。燃料費調整額・再エネ賦課金・割引は含みません。契約前に各社の最新条件をご確認ください。</p>
+
       <ul className="dnk-results">
         {rows.map((r, i) => (
           <li key={r.offerId} className={`dnk-row${r.kind === "baseline" ? " dnk-row-baseline" : ""}`}>
@@ -188,26 +190,8 @@ export default function DenkiSimulator() {
               </ul>
             )}
             {r.link && (
-              <a
-                className="dnk-link"
-                href={r.link.url}
-                target="_blank"
-                rel={r.link.isAffiliate ? "sponsored noopener noreferrer" : "noopener noreferrer"}
-                onClick={() =>
-                  trackDenkiOfferClick({
-                    offerId: r.offerId,
-                    area,
-                    isAffiliate: r.link!.isAffiliate,
-                    position: i,
-                  })
-                }
-              >
-                公式サイトで詳細を見る
-                {r.link.impressionPixel && (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={r.link.impressionPixel} width={1} height={1} alt="" aria-hidden="true" />
-                )}
-              </a>
+              <DenkiOfferLink key={`${area}:${r.offerId}:${i}`} link={r.link} company={r.company} planName={r.planName}
+                offerId={r.offerId} area={area} position={i} />
             )}
           </li>
         ))}

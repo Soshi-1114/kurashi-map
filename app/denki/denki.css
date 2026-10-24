@@ -144,11 +144,28 @@
   font-size: var(--text-xs);
   color: var(--text-muted);
 }
+.dnk-offer-action { margin-top: var(--space-3); }
 .dnk-link {
-  display: inline-block;
-  margin-top: var(--space-2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 16px;
+  box-sizing: border-box;
+  max-width: 100%;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-md);
+  color: var(--accent);
+  background: var(--surface-strong);
   font-size: var(--text-sm);
+  font-weight: 700;
+  text-decoration: none;
 }
+.dnk-link:hover { background: var(--accent-soft); }
+.dnk-link svg { flex-shrink: 0; }
+.dnk-link-note { font-size: var(--text-xs); color: var(--text-muted); line-height: 1.7; margin: 8px 0 0; }
+@media (max-width: 640px) { .dnk-link { width: 100%; } }
 
 .dnk-assumptions {
   background: var(--surface-muted);

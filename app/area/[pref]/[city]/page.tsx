@@ -565,6 +565,10 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
       <Reveal>
         <OverviewCard m={m} liv={liv} />
       </Reveal>
+      {/* 自治体の概要を確認した後に、生活費の試算へ進める内部導線。 */}
+      <section className="ad-support-section" aria-label="電気代の目安を調べる">
+        <DenkiTeaser municipalityCode={m.code} municipalityName={m.name} />
+      </section>
       {/* データで見る（他自治体との相対比較。ページ固有の可視テキストを増やす） */}
       {insights.length > 0 && (
         <Reveal>
@@ -1026,21 +1030,13 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
           })}
         </ul>
       </Section>
-      {/* 生活関連の導線（データ可視化エリアとは視覚的に分離）。
-          ページ最下部では到達率が低いため、ランキング直後・FAQ の手前に置く
-          （到達・クリックは GA4 の furusato_link_impression / _click で計測）。
-          電気代シミュレーターは内部リンクで常時表示。
-          ふるさと納税はアクセストレード×ふるなび提携済み（2026-08）。
-          env（商品リンクテンプレート or 固定リンク）の設定で点灯する */}
-      <Reveal>
-        <section className="ad-support-section" aria-label="生活関連の参考リンク">
-          {/* 供給エリア名（自治体固有情報）を添えて /denki にプリセット遷移 */}
-          <DenkiTeaser municipalityCode={m.code} municipalityName={m.name} />
-          {support && (
+      {support && (
+        <Reveal>
+          <section className="ad-support-section" aria-label="サイトを支援する">
             <SupportBanner url={support} municipalityCode={m.code} municipalityName={m.name} />
-          )}
-        </section>
-      </Reveal>
+          </section>
+        </Reveal>
+      )}
       {/* FAQ（Accordion・デフォルト閉じる） */}
       <Section icon={Info} tone="ad-tone-infra" title={`${m.name}のよくある質問`} id="details">
         <div className="ad-faq">
