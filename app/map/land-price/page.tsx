@@ -1,3 +1,4 @@
+import { serializeJsonLd } from "@/lib/jsonLd";
 // ピラーページ /map/land-price。「地価 マップ」「土地 安い 地域 地図」の検索意図を
 // 獲得するハブ（構成は /map/foreign-ratio と共通テンプレート）。
 
@@ -62,7 +63,7 @@ export default async function LandPriceMapPage() {
   const cfg = await loadConfig();
   return (
     <main className="home-main">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(hubLdJson(cfg)) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(hubLdJson(cfg)) }} />
       <HomeShell summary={summary} initialMetric="landPrice" navLabel="地価の地図から探す">
         <MetricMapHubBody {...cfg} />
       </HomeShell>

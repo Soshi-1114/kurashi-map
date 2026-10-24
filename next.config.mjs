@@ -48,7 +48,7 @@ const csp = [
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false, // "X-Powered-By: Next.js"（バージョン露出）を返さない
-  // Next 15 は複数 lockfile 環境でワークスペースルートを推定し警告を出す。
+  // 複数 lockfile 環境でワークスペースルートを誤推定しないよう固定する。
   // ファイルトレースの基準をこのプロジェクトroot に固定する（このリポジトリ = 単一パッケージ）。
   outputFileTracingRoot: path.dirname(fileURLToPath(import.meta.url)),
   // 本サイトは next/image を使わない（地図・OG画像はいずれも別経路）。
@@ -66,7 +66,7 @@ const nextConfig = {
   },
   // 旧トップ地図のディープリンク互換（/?code=13104・/?pref=saitama）。地図は /map へ
   // 移設したため恒久（308）リダイレクトで引き継ぐ（外部サイト・ブックマークに残った
-  // 旧URL対策）。クエリは宛先に自動で引き継がれる。middleware（国別アクセス制御専用）
+  // 旧URL対策）。クエリは宛先に自動で引き継がれる。proxy（国別アクセス制御専用）
   // には混ぜず、宣言的なルーティングはこの層に置く。
   async redirects() {
     return [

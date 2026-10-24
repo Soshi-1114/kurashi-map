@@ -1,3 +1,4 @@
+import { serializeJsonLd } from "@/lib/jsonLd";
 import StockpileEntry from "@/components/bousai/StockpileEntry";
 // ピラーページ /map/hazard。「ハザードマップ 地図」「洪水 浸水想定 地図」等の検索意図と、
 // エリア詳細の災害リスクカードからの「ハザードマップを地図で見る」導線の受け皿。
@@ -94,7 +95,7 @@ export default async function HazardMapPage() {
 
   return (
     <main className="home-main">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(ldJson) }} />
       <HomeShell
         summary={summary}
         initialMetric="none"

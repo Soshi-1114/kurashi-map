@@ -32,7 +32,7 @@ function forbidden(): NextResponse {
   });
 }
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const country = request.headers.get('x-vercel-ip-country');
   if (country && DENIED_COUNTRIES.includes(country)) {
     return forbidden();
@@ -55,6 +55,6 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  // 静的アセットは除外して middleware 実行回数を抑える（ページ・API・データ配信はすべて対象）
+  // 静的アセットは除外して proxy 実行回数を抑える（ページ・API・データ配信はすべて対象）
   matcher: ['/((?!_next/static|_next/image|favicon\\.ico).*)'],
 };

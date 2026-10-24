@@ -1,3 +1,4 @@
+import { serializeJsonLd } from "@/lib/jsonLd";
 // ピラーページ /map/rent。「家賃相場 地図」「家賃 安い 地域 マップ」の検索意図を
 // 獲得するハブ。全国コロプレスを初期表示し、家賃ランキング・県別・自治体ページへ
 // 放射状に内部リンクする（構成は /map/foreign-ratio と共通テンプレート）。
@@ -63,7 +64,7 @@ export default async function RentMapPage() {
   const cfg = await loadConfig();
   return (
     <main className="home-main">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(hubLdJson(cfg)) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(hubLdJson(cfg)) }} />
       <HomeShell summary={summary} initialMetric="rent" navLabel="家賃相場の地図から探す">
         <MetricMapHubBody {...cfg} />
       </HomeShell>

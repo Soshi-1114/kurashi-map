@@ -1,3 +1,4 @@
+import { serializeJsonLd } from "@/lib/jsonLd";
 // プライバシーポリシー。GA4（gtag.js）による閲覧計測の開示を主目的とし、
 // Cookie・外部送信・第三者提供・外部リンクの扱いを明示する。
 // 収益化とは独立した「アクセス解析の開示」として作成（誠実性方針）。
@@ -58,7 +59,7 @@ export default function PrivacyPage() {
 
   return (
     <PageShell width="narrow" trail={[{ name: SITE.name, href: "/" }, { name: "プライバシーポリシー" }]}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(ldJson) }} />
 
 
       <header className="detail-hero">

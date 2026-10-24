@@ -1,3 +1,4 @@
+import { serializeJsonLd } from "@/lib/jsonLd";
 // サイトについて・データの出典と更新方針。E-E-A-T（運営の透明性）と
 // 「◯◯ データ 出典」系クエリの受け皿を兼ねるページ。
 // 基準時点はビルド時に実データ（サンプル自治体の asOf）から取り、表示と実データの
@@ -149,7 +150,7 @@ export default async function AboutPage() {
 
   return (
     <PageShell width="narrow" trail={[{ name: SITE.name, href: "/" }, { name: "このサイトについて" }]}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(ldJson) }} />
 
 
       <header className="detail-hero">

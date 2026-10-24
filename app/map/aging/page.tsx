@@ -1,3 +1,4 @@
+import { serializeJsonLd } from "@/lib/jsonLd";
 // ピラーページ /map/aging。「高齢化率 マップ」「高齢化率 市町村別」の検索意図を獲得する
 // ハブ（2026-07 キーワード調査: サジェスト「高齢化率 ランキング」実在・地図化した競合は
 // 表形式サイトのみ）。全国コロプレスを初期表示し、高齢化率ランキング・県別・自治体ページへ
@@ -66,7 +67,7 @@ export default async function AgingMapPage() {
   const cfg = await loadConfig();
   return (
     <main className="home-main">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(hubLdJson(cfg)) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(hubLdJson(cfg)) }} />
       <HomeShell summary={summary} initialMetric="aging" navLabel="高齢化率の地図から探す">
         <MetricMapHubBody {...cfg} />
       </HomeShell>

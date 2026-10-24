@@ -18,9 +18,7 @@ on:
         default: ""
 
 permissions:
-  contents: write        # data ブランチの push
-  pull-requests: write   # 更新 PR の作成
-  issues: write          # 失敗通知 issue の作成
+  contents: read
 
 concurrency:
   group: data-update-quarterly
@@ -33,7 +31,9 @@ jobs:
     outputs:
       prefs: ${{ steps.set.outputs.prefs }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
       - id: set
         # inputs は env 経由（シェルへの直接補間を避ける）
         env:
@@ -71,9 +71,11 @@ jobs:
       matrix:
         pref: ${{ fromJson(needs.resolve-prefs.outputs.prefs) }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
 
-      - uses: actions/setup-node@v7
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
         with:
           node-version: 22
           cache: npm
@@ -85,7 +87,7 @@ jobs:
       # reinfolib の一時エラーを引きやすかった）。key は run ごとに一意にして常に保存し、
       # restore-keys の前方一致で最新キャッシュを復元する。
       - name: Restore reinfolib tile cache (${{ matrix.pref }})
-        uses: actions/cache/restore@v6
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
         with:
           path: .cache/reinfolib-tiles/${{ matrix.pref }}
           key: reinfolib-tiles-${{ matrix.pref }}-v1-${{ github.run_id }}-${{ github.run_attempt }}
@@ -106,7 +108,7 @@ jobs:
 
       # main へは push せず、変更後データをアーティファクトに退避（集約ジョブが回収）。
       - name: Upload fetched data
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: data-${{ matrix.pref }}
           path: |
@@ -118,7 +120,7 @@ jobs:
       # fetch が失敗しても、そこまでに取得済みのタイルは保存して再実行を軽くする。
       - name: Save reinfolib tile cache (${{ matrix.pref }})
         if: always()
-        uses: actions/cache/save@v6
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
         with:
           path: .cache/reinfolib-tiles/${{ matrix.pref }}
           key: reinfolib-tiles-${{ matrix.pref }}-v1-${{ github.run_id }}-${{ github.run_attempt }}
@@ -128,16 +130,19 @@ jobs:
     needs: [resolve-prefs, fetch]
     if: always()
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
-      - uses: actions/setup-node@v7
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
         with:
           node-version: 22
 
       - name: Download all pref data artifacts
-        uses: actions/download-artifact@v8
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8
         with:
           path: /tmp/incoming
           pattern: data-*
@@ -202,6 +207,9 @@ jobs:
     needs: [resolve-prefs, fetch, open-pr]
     if: failure()
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
     timeout-minutes: 5
     steps:
       - name: Create failure issue

@@ -1,3 +1,4 @@
+import { serializeJsonLd } from "@/lib/jsonLd";
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { SITE, absoluteUrl } from "@/lib/site";
@@ -90,7 +91,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </Script>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteLdJson) }}
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(siteLdJson) }}
         />
         <WebVitals />
         <CompareSelectionProvider>{children}</CompareSelectionProvider>

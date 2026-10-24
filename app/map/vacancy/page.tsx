@@ -1,3 +1,4 @@
+import { serializeJsonLd } from "@/lib/jsonLd";
 // ピラーページ /map/vacancy。「空き家率 市町村別」「空き家率 マップ」の検索意図を
 // 獲得するハブ（2026-07 SERP調査: 空き家率×市町村の地図は大手ポータル不在の空白領域）。
 // 全国コロプレスを初期表示し、空き家率ランキング・県別・自治体ページへ放射状に
@@ -66,7 +67,7 @@ export default async function VacancyMapPage() {
   const cfg = await loadConfig();
   return (
     <main className="home-main">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(hubLdJson(cfg)) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(hubLdJson(cfg)) }} />
       <HomeShell summary={summary} initialMetric="vacancy" navLabel="空き家率の地図から探す">
         <MetricMapHubBody {...cfg} />
       </HomeShell>

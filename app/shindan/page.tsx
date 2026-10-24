@@ -1,3 +1,4 @@
+import { serializeJsonLd } from "@/lib/jsonLd";
 import "./shindan.css";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -87,7 +88,7 @@ export default async function ShindanPage() {
 
   return (
     <PageShell trail={[{ name: SITE.name, href: "/" }, { name: "住む街診断" }]}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(ldJson) }} />
 
       <header>
         <h1 className="sd-title">住む街診断</h1>

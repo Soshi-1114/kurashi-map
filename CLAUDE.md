@@ -2,13 +2,13 @@
 
 このファイルは、本リポジトリで作業する Claude Code (claude.ai/code) に向けたガイダンスです。
 
-KurashiMap は、市区町村別の住みやすさ関連データ（家賃・地価・人口・子育て・災害リスク・生活インフラ）を地図上で比較できる、一般向け無料Webサービスです。Next.js 15 App Router + SSG、TypeScript、MapLibre GL を使用。全47都道府県・1,918自治体を政府統計の実データで収録しています（推計値・プレースホルダは一切なし）。
+KurashiMap は、市区町村別の住みやすさ関連データ（家賃・地価・人口・子育て・災害リスク・生活インフラ）を地図上で比較できる、一般向け無料Webサービスです。Next.js 16 App Router + SSG、TypeScript、MapLibre GL を使用。全47都道府県・1,918自治体を政府統計の実データで収録しています（推計値・プレースホルダは一切なし）。
 
 ## コマンド
 
 ```bash
-npm run dev          # next dev → http://localhost:3000
-npm run build        # next build — 全自治体の詳細ページを静的生成
+npm run dev          # next dev --webpack → http://localhost:3000
+npm run build        # next build --webpack — 全自治体の詳細ページを静的生成
 npm run lint         # eslint .（flat config: eslint.config.mjs）
 npm run typecheck    # tsc --noEmit
 npm run test         # vitest run（全テストを1回実行）
@@ -17,7 +17,7 @@ npx vitest run tests/lib/rentColor.test.ts   # 単一テストファイルの実
 node scripts/validate-data.mjs               # 県別 data/*.json のスキーマ検証（CI でも実行。denki-plans.json は npm run test 側で検証）
 ```
 
-push / PR ごとに CI（`.github/workflows/test.yml`）が typecheck・test・lint・データ検証を実行します。
+push / PR ごとに CI（`.github/workflows/test.yml`）が typecheck・test・lint・データ検証・依存監査を実行します。
 
 テストは既定で `node` 環境で実行され（vitest.config.ts）、Next と同様に `@/...` をリポジトリルートに解決します。React コンポーネントのテストは各ファイル冒頭の `// @vitest-environment jsdom` プラグマで `jsdom` に切り替えて（vitest 3 で `environmentMatchGlobs` が削除されたため）、Testing Library でレンダリングしてテストします（jest-dom マッチャは `tests/setup.ts` で登録）。なお `tsconfig.json` は `tests/` を Next の型対象から *除外* しているため、テストファイルは vitest 実行時のみ型付けされます。
 

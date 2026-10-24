@@ -1,3 +1,4 @@
+import { serializeJsonLd } from "@/lib/jsonLd";
 import StockpileEntry from "@/components/bousai/StockpileEntry";
 import "./area-detail.css";
 import Link from "next/link";
@@ -462,7 +463,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
         { name: m.name },
       ]}
     >
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(ldJson) }} />
       {/* ① Hero */}
       <header className="ad-hero" id="overview">
         <div className="ad-hero-main">
