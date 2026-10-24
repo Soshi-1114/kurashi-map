@@ -1,3 +1,4 @@
+import StockpileEntry from "@/components/bousai/StockpileEntry";
 import "./area-detail.css";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -716,6 +717,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
               link={{ href: mapHrefForCode(m.code, "/map/hazard"), label: "ハザードマップを地図で見る" }}
             >
               <DisasterCard m={m} />
+              <StockpileEntry placement="area" />
               {/* 火災保険（水災補償）。浸水想定を見た直後というハザード文脈一致の導線
                   （env 未設定なら kasai が null で導線ごと出ない） */}
               {kasai && <KasaiLink link={kasai} municipalityCode={m.code} placement="area" />}

@@ -9,9 +9,9 @@ describe("sitemap", () => {
 
   it("全URLを一度だけ掲載し、地図ハブも欠けない", async () => {
     const entries = await entriesP;
-    expect(entries.length).toBe(3139);
+    expect(entries.length).toBe(3140);
     expect(new Set(entries.map((e) => e.url)).size).toBe(entries.length);
-    for (const path of ["/", "/map", ...MAP_HUBS.map((h) => h.href), "/ranking", "/compare"]) {
+    for (const path of ["/", "/map", ...MAP_HUBS.map((h) => h.href), "/ranking", "/compare", "/bousai/stockpile"]) {
       expect(entries.some((e) => e.url === absoluteUrl(path))).toBe(true);
     }
   }, 20_000);

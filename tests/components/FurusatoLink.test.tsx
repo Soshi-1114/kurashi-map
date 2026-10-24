@@ -72,7 +72,7 @@ describe("FurusatoLink", () => {
     const gtag = vi.fn();
     window.gtag = gtag;
     // jsdom には IntersectionObserver がないためスタブし、コールバックを手で発火させる
-    let callback: (entries: Array<{ isIntersecting: boolean }>) => void = () => {};
+    let callback: (entries: Array<{ isIntersecting: boolean; intersectionRatio: number }>) => void = () => {};
     const observe = vi.fn();
     const disconnect = vi.fn();
     vi.stubGlobal(
@@ -89,10 +89,10 @@ describe("FurusatoLink", () => {
     render(<FurusatoLink link={municipal} targetName="札幌市" municipalityCode="01100" />);
     expect(observe).toHaveBeenCalled();
 
-    act(() => callback([{ isIntersecting: false }]));
+    act(() => callback([{ isIntersecting: false, intersectionRatio: 0 }]));
     expect(gtag).not.toHaveBeenCalled();
 
-    act(() => callback([{ isIntersecting: true }]));
+    act(() => callback([{ isIntersecting: true, intersectionRatio: 0.5 }]));
     expect(gtag).toHaveBeenCalledWith("event", "furusato_link_impression", {
       kind: "municipal",
       placement: "area",
@@ -101,7 +101,7 @@ describe("FurusatoLink", () => {
     });
 
     // 2度目の到達では送らない（1要素1回）
-    act(() => callback([{ isIntersecting: true }]));
+    act(() => callback([{ isIntersecting: true, intersectionRatio: 0.5 }]));
     expect(gtag).toHaveBeenCalledTimes(1);
     expect(disconnect).toHaveBeenCalled();
   });

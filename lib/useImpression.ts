@@ -27,7 +27,7 @@ export function useImpressionOnce<T extends HTMLElement>(
     if (!el || sent.current || typeof IntersectionObserver === "undefined") return;
     const io = new IntersectionObserver(
       (entries) => {
-        if (sent.current || !entries.some((e) => e.isIntersecting)) return;
+        if (sent.current || !entries.some((e) => e.isIntersecting && e.intersectionRatio >= 0.5)) return;
         sent.current = true;
         track(eventName, paramsRef.current);
         io.disconnect();
