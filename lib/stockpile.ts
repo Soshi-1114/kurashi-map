@@ -18,7 +18,12 @@ export type StockpileState = { version: 1; people: number | null; days: 3 | 7; w
 export const emptyStockpile = (): StockpileState => ({ version: 1, people: null, days: 7, water: null, statuses: {} });
 export function waterAmounts(people: number, days: 3 | 7, water: number | null) {
   const required = people * days * 3;
-  return { required, shortage: water === null ? null : Math.max(0, Math.round((required - water) * 10) / 10) };
+  if (water === null) return { required, shortage: null };
+  if (water >= required) return { required, shortage: 0 };
+  // 浮動小数点の差（9 - 8.2など）をならして0.1L単位で切り上げる。
+  // 端数がどれだけ小さくても、実際に不足している時は0Lにしない。
+  const shortage = Math.max(0.1, Math.ceil(Number((required - water).toFixed(10)) * 10) / 10);
+  return { required, shortage };
 }
 export function parseStockpile(raw: string): StockpileState | null {
   try {

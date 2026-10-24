@@ -44,33 +44,22 @@
 .stock-empty { padding: 24px 0; }
 .stock-sources { border-top: 1px solid var(--border); margin-top: 48px; padding-top: 24px; font-size: 14px; }
 .stock-sources li { margin: 12px 0; }
-.stock-print-only { display: none; }
+.stock-print-only, .stock-print-context { display: none; }
 @media (max-width: 600px) { .stock-water { grid-template-columns: 1fr; } .stock-options { display: grid; grid-template-columns: repeat(3, 1fr); } .stock-options label { padding: 10px 6px; justify-content: center; font-size: 13px; } }
 @media print {
   body { background: white !important; color: black !important; }
-  body:has(.stock-root) :is(.site-header, .site-footer, .breadcrumb), .stock-root :is(button, .stock-save, .stock-reset, .stock-actions, details) { display: none !important; }
-  .stock-root { max-width: none; padding: 0; }
+  body:has(.stock-root) :is(.site-header, .site-footer, .breadcrumb),
+  .stock-root :is(button, .stock-save, .stock-reset, .stock-actions, details, .stock-scope, .stock-intro > p, .stock-conditions, .stock-water),
+  .stock-tool > section:has(.stock-items) { display: none !important; }
+  .stock-root { margin: 0; width: auto; max-width: none; padding: 0; font-size: 11pt; }
   .stock-intro { margin: 0 0 16px; }
-  .stock-intro h1 { font-size: 24px; }
-  .stock-list { display: block; background: white; border: 1px solid #777; }
-  .stock-item, .stock-water { break-inside: avoid; }
-  .stock-root fieldset, .stock-root select, .stock-root input { color: black; background: white; }
-  .stock-sources { font-size: 11px; }
-}
-@media print {
-  .stock-root { margin: 0; width: auto; font-size: 11pt; }
-  .stock-root :is(.stock-scope, .stock-intro > p), .stock-tool > section:has(.stock-items) { display: none; }
   .stock-intro h1 { font-size: 20px; line-height: 1.2; }
   .stock-intro h1 br { display: none; }
-  .stock-conditions { padding: 8px; gap: 6px 16px; }
-  .stock-conditions p { display: none; }
+  .stock-print-context { display: block; }
   .stock-tool > section { margin-top: 16px; }
-  .stock-water { padding: 8px 0; gap: 4px 20px; }
-  .stock-water p { margin: 2px 0; font-size: 10pt; }
-  .stock-amount strong { font-size: 26px; }
-  .stock-list { padding: 8px 16px; margin-top: 8px; }
-  .stock-list h3 { margin: 8px 0; }
-  .stock-list li { margin: 4px 0; }
-  .stock-sources { margin-top: 16px; padding-top: 8px; }
+  .stock-list { display: block; background: white; border: 1px solid #777; padding: 8px 16px; margin-top: 8px; }
+  .stock-list h3 { margin: 8px 0; break-after: avoid; }
+  .stock-list li { margin: 4px 0; break-inside: avoid; }
+  .stock-sources { font-size: 11px; margin-top: 16px; padding-top: 8px; }
   .stock-sources li { margin: 4px 0; }
 }

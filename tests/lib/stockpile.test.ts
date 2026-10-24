@@ -7,6 +7,12 @@ describe("家庭備蓄", () => {
     expect(waterAmounts(1, 3, 30).shortage).toBe(0);
     expect(waterAmounts(1, 3, 8.8).shortage).toBe(0.2);
   });
+  it("水のわずかな不足をゼロにせず、小数1桁で切り上げる", () => {
+    expect(waterAmounts(1, 3, 8.99).shortage).toBe(0.1);
+    expect(waterAmounts(1, 3, 8.21).shortage).toBe(0.8);
+    expect(waterAmounts(1, 3, 8.2).shortage).toBe(0.8);
+    expect(waterAmounts(1, 3, 8.19).shortage).toBe(0.9);
+  });
   it("保存状態を検証し、不正・旧形式・範囲外は復元しない", () => {
     const state = { ...emptyStockpile(), people: 2, water: 8, statuses: { food: "needed" } };
     expect(parseStockpile(JSON.stringify(state))).toEqual(state);
