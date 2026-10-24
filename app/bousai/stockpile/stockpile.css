@@ -47,7 +47,10 @@
 .stock-print-only, .stock-print-context { display: none; }
 @media (max-width: 600px) { .stock-water { grid-template-columns: 1fr; } .stock-options { display: grid; grid-template-columns: repeat(3, 1fr); } .stock-options label { padding: 10px 6px; justify-content: center; font-size: 13px; } }
 @media print {
-  body { background: white !important; color: black !important; }
+  html:has(.stock-root), body:has(.stock-root) { height: auto; min-height: 0; overflow: visible; }
+  body:has(.stock-root) { background: white !important; color: black !important; }
+  .compare-selection-root:has(.stock-root) { display: block; padding-bottom: 0; }
+  body:has(.stock-root) :is(.compare-selection-bar, nextjs-portal) { display: none !important; }
   body:has(.stock-root) :is(.site-header, .site-footer, .breadcrumb),
   .stock-root :is(button, .stock-save, .stock-reset, .stock-actions, details, .stock-scope, .stock-intro > p, .stock-conditions, .stock-water),
   .stock-tool > section:has(.stock-items) { display: none !important; }
