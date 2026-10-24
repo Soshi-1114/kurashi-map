@@ -1,3 +1,4 @@
+import StockpileEntry from "@/components/bousai/StockpileEntry";
 // ピラーページ /map/hazard。「ハザードマップ 地図」「洪水 浸水想定 地図」等の検索意図と、
 // エリア詳細の災害リスクカードからの「ハザードマップを地図で見る」導線の受け皿。
 // 他の /map/* がコロプレス指標のハブなのに対し、ここは災害オーバーレイ（GSI 公式ラスタ）を
@@ -116,6 +117,8 @@ function HazardHub({ popular, prefsWithData }: { popular: Municipality[]; prefsW
       <p className="home-links-lead">
         地図の自治体をクリックすると、その市区町村の災害リスク評価を確認できます。評価は自治体の区域内で確認された<strong>最大の区分</strong>を示すもので、自治体内のすべての場所が同じリスクという意味ではありません。区域の詳細は地図の拡大表示でご確認ください。
       </p>
+
+      <StockpileEntry placement="hazard-map" />
 
       <section className="home-links-block">
         <h2 className="home-links-h">表示できる災害の種類</h2>

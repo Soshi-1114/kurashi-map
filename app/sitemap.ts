@@ -61,6 +61,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    { url: absoluteUrl("/bousai/stockpile"), changeFrequency: "monthly", priority: 0.6 },
     // サイトについて（データの出典・更新方針。E-E-A-T ページ）。
     {
       url: absoluteUrl("/about"),
