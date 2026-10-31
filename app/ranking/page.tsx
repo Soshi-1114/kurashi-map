@@ -1,3 +1,4 @@
+import { serializeJsonLd } from "@/lib/jsonLd";
 import "../league.css";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -100,7 +101,7 @@ export default async function RankingIndexPage() {
 
   return (
     <PageShell innerClassName="rk-root" trail={[{ name: SITE.name, href: "/" }, { name: "ランキング" }]}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(ldJson) }} />
 
 
       <header className="rk-hero rk-reveal">

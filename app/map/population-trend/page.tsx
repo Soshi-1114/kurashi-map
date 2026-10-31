@@ -1,3 +1,4 @@
+import { serializeJsonLd } from "@/lib/jsonLd";
 // ピラーページ /map/population-trend。「人口減少 地図」「人口 増えている 街」の
 // 検索意図を獲得するハブ（構成は /map/foreign-ratio と共通テンプレート）。
 
@@ -64,7 +65,7 @@ export default async function PopulationTrendMapPage() {
   const cfg = await loadConfig();
   return (
     <main className="home-main">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(hubLdJson(cfg)) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(hubLdJson(cfg)) }} />
       <HomeShell summary={summary} initialMetric="populationTrend" navLabel="人口増減の地図から探す">
         <MetricMapHubBody {...cfg} />
       </HomeShell>

@@ -1,3 +1,4 @@
+import { serializeJsonLd } from "@/lib/jsonLd";
 // ピラーページ /map/foreign-ratio。「外国人 割合 地図」「在留外国人 ヒートマップ」
 // 「外国人 多い 地域 地図」の検索意図（=地図で見る）を獲得するハブ。全国コロプレスを
 // 初期表示し、都道府県別ランキング・全国ランキング・自治体ページへ放射状に内部リンクする。
@@ -92,7 +93,7 @@ export default async function ForeignRatioMapPage() {
 
   return (
     <main className="home-main">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(ldJson) }} />
       <HomeShell summary={summary} initialMetric="foreignRatio" navLabel="外国人住民の割合の地図から探す">
         <ForeignRatioHub high={high} low={low} prefsWithData={prefsWithData} asOfJa={asOfJa} />
       </HomeShell>

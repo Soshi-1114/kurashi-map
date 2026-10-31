@@ -1,3 +1,4 @@
+import { serializeJsonLd } from "@/lib/jsonLd";
 import "../league.css";
 import "./denki.css";
 import type { Metadata } from "next";
@@ -118,7 +119,7 @@ export default function DenkiPage() {
 
   return (
     <PageShell trail={[{ name: SITE.name, href: "/" }, { name: "電気代シミュレーション" }]}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(ldJson) }} />
 
       <header className="dnk-hero">
         <h1 className="dnk-title">電気代シミュレーション</h1>

@@ -1,3 +1,4 @@
+import { serializeJsonLd } from "@/lib/jsonLd";
 // ピラーページ /map/future-population。「2050年 人口予測 マップ」「将来人口 市区町村」の
 // 検索意図を獲得するハブ。全国コロプレスを初期表示し、将来推計人口ランキング・県別・
 // 自治体ページへ放射状に内部リンクする（構成は /map/rent と共通テンプレート）。
@@ -74,7 +75,7 @@ export default async function FuturePopulationMapPage() {
   const cfg = await loadConfig();
   return (
     <main className="home-main">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(hubLdJson(cfg)) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(hubLdJson(cfg)) }} />
       <HomeShell summary={summary} initialMetric="futurePopulation" navLabel="2050年推計人口の地図から探す">
         <MetricMapHubBody {...cfg} />
       </HomeShell>

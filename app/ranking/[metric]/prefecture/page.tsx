@@ -1,3 +1,4 @@
+import { serializeJsonLd } from "@/lib/jsonLd";
 // 都道府県ランキング（47都道府県を1本に並べる）。
 //
 // URL は /ranking/{metric}/prefecture。同階層の [pref]（= /ranking/{metric}/{県}）は
@@ -137,7 +138,7 @@ export default async function PrefectureRankingPage(props: { params: Promise<Par
         { name: "都道府県別" },
       ]}
     >
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(ldJson) }} />
 
       <header className="rk-hero rk-reveal">
         <span className="rk-eyebrow"><Database size={14} aria-hidden="true" />都道府県ランキング</span>

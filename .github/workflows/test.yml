@@ -19,9 +19,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
 
-      - uses: actions/setup-node@v7
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
         with:
           node-version: 22
           cache: npm
@@ -40,9 +42,6 @@ jobs:
       - name: Validate data JSONs
         run: node scripts/validate-data.mjs
 
-      # 依存の既知脆弱性を可視化する。現状 next 14.2 系に major 昇格でしか直せない
-      # 勧告が残るため、ゲートはブロッキングにせず情報提供に留める（恒久 red 回避）。
-      # 恒久対応は Dependabot のセキュリティ更新 PR で行う。
-      - name: Security audit (informational)
-        run: npm audit --audit-level=high || true
+      - name: Security audit
+        run: npm audit --audit-level=high
 

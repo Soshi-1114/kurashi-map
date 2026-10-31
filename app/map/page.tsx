@@ -1,3 +1,4 @@
+import { serializeJsonLd } from "@/lib/jsonLd";
 // 汎用の全画面地図ページ（住みやすさマップ）。トップの埋め込み地図に対する
 // 「地図体験の本体」で、「地図で見る」ディープリンク（?code= / ?pref=）の既定の行き先。
 // 指標別ハブ（/map/rent 等）と同じ HomeShell 構成（全画面地図＋ドロワーのリンク帯）で、
@@ -46,7 +47,7 @@ export default async function GeneralMapPage() {
 
   return (
     <main className="home-main">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(ldJson) }} />
       <HomeShell summary={summary} navLabel="地図の使い方・エリア・ランキング" menuLabel="使い方・エリア">
         <HomeLinks popular={popular} generalMapIntro />
       </HomeShell>

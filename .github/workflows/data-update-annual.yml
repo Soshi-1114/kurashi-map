@@ -2,7 +2,8 @@ name: Data Update (annual / e-Stat + NLNI + CFA)
 
 # 年次更新（CFA Excel 公開後を想定して 3 月）。
 # 全国まとめ取得方式: 人口/家賃(e-Stat)と待機児童(CFA)は全国を1回でまとめ取得、
-# 地価(L01)は県別 zip のため逐次取得。1ジョブで data/*.json を生成し単一 PR を自動作成。
+# 地価(L01)は県別 zip のため逐次取得。読み取り専用ジョブで data/*.json を生成し、
+# 別ジョブが単一 PR を自動作成する。
 # （旧: 県別47ジョブが各自 e-Stat へ接続 → 毎回2-3県が接続タイムアウト＋CFAを47回DL。
 #  本方式で接続バースト・冗長 DL・push レースをまとめて解消）。
 # preview への反映が必要な時は Deploy Preview ワークフローを手動実行する。
@@ -18,9 +19,7 @@ on:
         default: ""
 
 permissions:
-  contents: write        # data ブランチの push
-  pull-requests: write   # 更新 PR の作成
-  issues: write          # 失敗通知 issue の作成
+  contents: read
 
 concurrency:
   group: data-update-annual
@@ -39,9 +38,11 @@ jobs:
     # 実績は全県で 1h 前後だが、地価の県別逐次 DL が遅い時のマージンを持たせる。
     timeout-minutes: 240
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
 
-      - uses: actions/setup-node@v7
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
         with:
           node-version: 22
           cache: npm
@@ -52,6 +53,7 @@ jobs:
       # 以降のステップとスクリプトが同じ値を参照し、同期ずれを構造的に防ぐ。
       - name: バージョン設定を読み込み
         run: |
+          # shellcheck disable=SC2016 # JavaScript のテンプレートリテラル
           node -e 'import("./scripts/_lib/versions.mjs").then(m=>{for(const[k,v]of Object.entries(m.VERSIONS))console.log(`${k}=${v}`)})' >> "$GITHUB_ENV"
           echo "読み込んだ年度設定:"; grep -E '^(CFA_|L01_|GSI_|FOREIGN_|MEDICAL_|S12_)' "$GITHUB_ENV" || true
 
@@ -63,6 +65,7 @@ jobs:
           PREF_INPUT: ${{ inputs.pref }}
         run: |
           if [[ -n "$PREF_INPUT" ]]; then
+            # shellcheck disable=SC2016 # JavaScript のテンプレートリテラル
             node -e 'import("./scripts/_lib/prefs.mjs").then((m) => { if (!m.PREFS[process.argv[1]]) { console.error(`未知の pref slug: ${process.argv[1]}`); process.exit(1); } })' "$PREF_INPUT"
             echo "estat=--pref=$PREF_INPUT" >> "$GITHUB_OUTPUT"
             echo "prefs=$PREF_INPUT" >> "$GITHUB_OUTPUT"
@@ -191,6 +194,30 @@ jobs:
       - name: Validate data JSONs
         run: node scripts/validate-data.mjs
 
+      - name: Upload fetched data
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: annual-data
+          path: data/*.json
+          retention-days: 1
+
+  open-pr:
+    needs: update
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8
+        with:
+          name: annual-data
+          path: data
+
+      - name: Validate data JSONs
+        run: node scripts/validate-data.mjs
+
       - name: 差分があれば単一 PR を作成
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -210,10 +237,17 @@ jobs:
             --title "chore(data): 年次データ更新 (e-Stat / NLNI L01 / CFA)" \
             --body "annual ワークフロー (run ${{ github.run_id }}) による年次データ更新。人口/家賃/待機児童を全国一括取得、地価を県別取得して集約した単一 PR です。マージ後、必要なら Deploy Preview を手動実行してください。"
 
+  notify-failure:
+    needs: [update, open-pr]
+    if: failure()
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    steps:
       # 年1回のスケジュール実行なので、失敗に気づかないと翌年まで古いデータのままになる。
       # issue を立てて通知する（Watch していれば通知が届く）。
       - name: 失敗時に通知 issue を作成
-        if: failure()
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |

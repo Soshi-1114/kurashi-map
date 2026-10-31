@@ -8,7 +8,7 @@
 
 ## 技術スタック
 
-- Next.js 15（App Router、SSG）
+- Next.js 16（App Router、SSG）
 - TypeScript
 - MapLibre GL JS（地図基盤は OpenFreeMap Positron）
 - デプロイ: Vercel

@@ -1,3 +1,4 @@
+import { serializeJsonLd } from "@/lib/jsonLd";
 import "./compare.css";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -104,7 +105,7 @@ export default async function ComparePage() {
 
   return (
     <PageShell trail={[{ name: SITE.name, href: "/" }, { name: "自治体を比較" }]}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(ldJson) }} />
 
       <header className="cmp-hero">
         <h1 className="cmp-title">自治体を比較する</h1>
