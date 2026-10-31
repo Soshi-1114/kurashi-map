@@ -295,6 +295,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
   // スパイが右列しか現在地にできない（SectionNav.tsx の only の経緯コメント参照）。
   const navItems: SectionNavItem[] = [
     { id: "overview", label: "概要" },
+    { id: "denki-quick", label: "電気代" },
     { id: "rent", label: "環境", only: "pc" },
     { id: "rent", label: "家賃", only: "sp" },
     { id: "kids", label: "子育て・生活環境", only: "sp" },

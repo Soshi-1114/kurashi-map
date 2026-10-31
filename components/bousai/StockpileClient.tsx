@@ -1,13 +1,14 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { track } from "@/lib/analytics";
+import { QUICK_ENTRY_VERSION, takeQuickEntry, type QuickEntry } from "@/lib/quickEntry";
 import { STOCKPILE_ITEMS, STOCKPILE_KEY, STOCKPILE_SOURCES, emptyStockpile, parseStockpile, stockpileLists, stockpileText, waterAmounts, type StockpileState, type StockStatus } from "@/lib/stockpile";
 
 const labels: Record<StockStatus, string> = { unknown: "未確認", needed: "要準備", ready: "準備済み" };
 function event(action: string, detail: Record<string, unknown> = {}) {
   const from = new URLSearchParams(window.location.search).get("from");
   const entryPlacement = from === "area" || from === "hazard-map" ? from : "direct";
-  track(`stockpile_${action}`, { measurement_version: "2026-10-24", entry_placement: entryPlacement, ...detail });
+  track(`stockpile_${action}`, { measurement_version: QUICK_ENTRY_VERSION, entry_placement: entryPlacement, ...detail });
 }
 export default function StockpileClient() {
   const [state, setState] = useState<StockpileState>(emptyStockpile);
@@ -18,20 +19,33 @@ export default function StockpileClient() {
   const [message, setMessage] = useState("");
   const [resetting, setResetting] = useState(false);
   const [showList, setShowList] = useState(false);
+  const [pendingDraft, setPendingDraft] = useState<Extract<QuickEntry, { tool: "stockpile" }> | null>(null);
+  const restored = useRef(false);
   const started = useRef(false);
   const copyDetails = useRef<HTMLDetailsElement>(null);
   const copyText = useRef<HTMLTextAreaElement>(null);
   useEffect(() => {
+    if (restored.current) return;
+    restored.current = true;
+    const draft = takeQuickEntry("stockpile", window.location.search);
     // SSRと初回描画を一致させ、マウント後に端末内の保存内容を復元する。
     /* eslint-disable react-hooks/set-state-in-effect */
     try {
       const raw = localStorage.getItem(STOCKPILE_KEY);
       if (raw) {
+        if (draft) setPendingDraft(draft);
         const saved = parseStockpile(raw);
         if (saved) { setState(saved); setWaterInput(saved.water?.toString() ?? ""); setSaveMessage("この端末に保存した内容を復元しました。"); }
         else setSaveMessage("保存内容を読み込めませんでした。新しく確認を始められます。");
+      } else if (draft) {
+        setState({ ...emptyStockpile(), people: draft.people, days: draft.days });
+        started.current = true;
+        event("start");
       }
-    } catch { setSaveMessage("この環境では端末内保存を利用できません。チェックとコピーは利用できます。"); }
+    } catch {
+      setSaveMessage("この環境では端末内保存を利用できません。チェックとコピーは利用できます。");
+      if (draft) { setState({ ...emptyStockpile(), people: draft.people, days: draft.days }); started.current = true; event("start"); }
+    }
     setLoaded(true);
     /* eslint-enable react-hooks/set-state-in-effect */
   }, []);
@@ -78,13 +92,16 @@ export default function StockpileClient() {
     }
     setShowList(false);
     setResetting(false);
+    setPendingDraft(null);
     started.current = false;
     setMessage("入力内容をリセットしました。");
     event("reset");
   }
   return <div className="stock-tool" aria-busy={!loaded}>
+    <p className="stock-scope">自宅で過ごすための備蓄の目安です。避難できるか・在宅避難できるかは判定しません。災害時は自治体の避難情報に従ってください。</p>
     <p className="stock-save">入力はこの端末のブラウザに自動保存されます。共有端末では利用後にリセットしてください。</p>
     <p className="stock-save" role="status">{saveMessage}</p>
+    {pendingDraft && <div className="stock-scope"><p>この端末に保存内容があるため、入口の条件はまだ適用していません。入口では{pendingDraft.people}人・{pendingDraft.days}日分を選んでいます。</p><p>条件を変更すると各項目は「未確認」に戻ります。手持ちの水の量は引き継ぎます。</p><button type="button" onClick={() => { update({ people: pendingDraft.people, days: pendingDraft.days }, "conditions"); setPendingDraft(null); setShowList(false); }}>入口で選んだ条件に変更する</button><button type="button" onClick={() => setPendingDraft(null)}>入口の条件を適用しない</button></div>}
     <fieldset className="stock-conditions" disabled={!loaded}>
       <legend>まず、家庭の人数と備える日数を選ぶ</legend>
       <label>家庭の人数<select value={state.people ?? ""} onChange={e => update({ people: e.target.value ? Number(e.target.value) : null }, "conditions")}>

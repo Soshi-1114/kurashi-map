@@ -1,7 +1,6 @@
 .stock-root { max-width: 920px; }
-.stock-intro { margin: 32px 0; max-width: 660px; }
-.stock-intro h1 { font-size: clamp(30px, 5vw, 46px); line-height: 1.4; letter-spacing: -.025em; margin-bottom: 16px; }
-.stock-intro > p:first-of-type { color: var(--accent); font-weight: 700; }
+.stock-intro { margin: 24px 0; max-width: 660px; }
+.stock-intro h1 { font-size: clamp(28px, 5vw, 36px); line-height: 1.4; letter-spacing: -.025em; margin-bottom: 8px; }
 .stock-root p { line-height: 1.8; }
 .stock-scope { border-left: 4px solid var(--accent); padding: 16px 20px; background: var(--surface-subtle); }
 .stock-scope p { margin: 8px 0; }
