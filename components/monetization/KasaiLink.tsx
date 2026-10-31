@@ -17,6 +17,7 @@ import { track } from "@/lib/analytics";
 import { useImpressionOnce } from "@/lib/useImpression";
 import type { KasaiLinkInfo } from "@/lib/monetization";
 import { AdLinkRow } from "./AdLinkRow";
+import "./affiliate-context.css";
 
 export function KasaiLink(props: Parameters<typeof KasaiLinkContent>[0]) {
   // 地図内で自治体が切り替わったら、新しい掲載として視認計測も開始する。
@@ -35,8 +36,8 @@ function KasaiLinkContent({
   placement?: "area" | "hazard-map" | "map-panel" | "shindan" | "pref-hazard";
 }) {
   const eventParams = {
-    measurement_version: "2026-10-24",
-    cta_variant: "context-v1",
+    measurement_version: "2026-10-31",
+    cta_variant: "context-v2",
     placement,
     ...(municipalityCode ? { municipality_code: municipalityCode } : {}),
   };
@@ -46,8 +47,8 @@ function KasaiLinkContent({
     if (rendered.current) return;
     rendered.current = true;
     track("kasai_link_render", {
-      measurement_version: "2026-10-24",
-      cta_variant: "context-v1",
+      measurement_version: "2026-10-31",
+      cta_variant: "context-v2",
       placement,
       ...(municipalityCode ? { municipality_code: municipalityCode } : {}),
     });
@@ -55,7 +56,8 @@ function KasaiLinkContent({
   // 視認計測（50% 到達で1回だけ）。クリックと合わせて掲載面ごとの視認ベースのCTRを見る分母。
   const impressionRef = useImpressionOnce<HTMLDivElement>("kasai_link_impression", eventParams);
   return (
-    <div ref={impressionRef}>
+    <div ref={impressionRef} className="affiliate-context" role="region" aria-label="広告：持ち家の補償を確認する">
+      <h4>持ち家の補償を確認したい方へ</h4>
       <AdLinkRow
         icon={<ShieldCheck size={18} aria-hidden="true" className="ad-linkrow-icon" />}
         copy="持ち家の火災保険を新しく検討する方へ"

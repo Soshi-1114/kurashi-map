@@ -18,10 +18,7 @@ import RankFaq from "@/components/RankFaq";
 import RankSources, { RANKING_SOURCES_TEXT } from "@/components/RankSources";
 import { RankBadge } from "@/components/RankBadge";
 import PageShell from "@/components/PageShell";
-import { FurusatoBand } from "@/components/monetization/FurusatoBand";
-import { FurusatoLink } from "@/components/monetization/FurusatoLink";
-import { furusatoLink } from "@/lib/monetization";
-import { furunaviMunicipalPageUrl } from "@/lib/furunaviMunicipals";
+import FurusatoRankingEntry from "@/components/monetization/FurusatoRankingEntry";
 import { ShareButton } from "@/components/ShareButton";
 
 type Params = { metric: string };
@@ -104,10 +101,6 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
   // データ鮮度ラベル（指標の asOf 由来）。
   const top1 = ranked[0] ?? null;
 
-  // 1位自治体のふるさと納税リンク（ふるなび未掲載なら null で導線ごと非表示）。
-  // 最下部の固定バンドとは別に、1位が話題の中心になっている順位台の直後へ置く
-  // （2026-09 実測: 全導線がページ最下部にあり露出330→クリック1だった）。
-  const topFurusato = top1 ? furusatoLink(furunaviMunicipalPageUrl(top1.code)) : null;
   const top1Name = top1 ? `${prefNameOf(top1.pref)}${top1.displayName ?? top1.name}` : "—";
   const freshness = def.freshnessLabel?.(top1) ?? null;
   // 薄ページ対策の導入文・FAQ（定義があるランキングのみ）。{top1} は1位自治体名に置換。
@@ -264,20 +257,6 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
           </ol>
         )}
 
-        {/* 1位自治体のふるさと納税導線。順位台の直後＝1位が話題の中心にある位置に置く
-            （ページ最下部の FurusatoBand とは掲載面を分けて GA4 で CTR を比べる）。
-            一覧型は「1位」が存在しないため出さない。 */}
-        {!isList && topFurusato && top1 && (
-          <div className="ad-support-section" aria-label="生活関連の参考リンク">
-            <FurusatoLink
-              link={topFurusato}
-              targetName={top1.displayName ?? top1.name}
-              municipalityCode={top1.code}
-              placement="ranking-top"
-            />
-          </div>
-        )}
-
         {ladder.length > 0 && (
           <ol className="rk-ladder" start={4}>
             {ladder.map((m, i) => (
@@ -295,6 +274,8 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
           </ol>
         )}
       </section>
+
+      <FurusatoRankingEntry candidates={ranked.slice(0, TOP_CARDS)} pagePath={`/ranking/${def.slug}`} />
 
       <section className="rk-section">
         <div className="rk-section-head">
@@ -388,9 +369,6 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
         rankings={others}
         href={(r) => `/ranking/${r.slug}`}
       />
-
-      {/* ふるさと納税の導線（検索流入の主戦場）。FAQ・出典より上=ランキング直後に置く */}
-      <FurusatoBand />
 
       <RankFaq faq={faq} />
 

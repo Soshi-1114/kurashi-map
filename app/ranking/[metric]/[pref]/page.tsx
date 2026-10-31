@@ -21,7 +21,7 @@ import RankSources, { RANKING_SOURCES_TEXT } from "@/components/RankSources";
 import { RankBadge } from "@/components/RankBadge";
 import type { Municipality } from "@/lib/types";
 import PageShell from "@/components/PageShell";
-import { FurusatoBand } from "@/components/monetization/FurusatoBand";
+import FurusatoRankingEntry from "@/components/monetization/FurusatoRankingEntry";
 import { ShareButton } from "@/components/ShareButton";
 import TrackedCompareLink from "@/components/ranking/TrackedCompareLink";
 
@@ -430,6 +430,8 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
 
         {ladder.length > 0 && ladderOl(ladder, 4)}
 
+        <FurusatoRankingEntry candidates={ranked.slice(0, TOP_CARDS)} pagePath={`/ranking/${def.slug}/${pref.slug}`} />
+
         {rest.length > 0 && (
           <details className="rk-more">
             <summary className="rk-more-summary">
@@ -452,9 +454,6 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
         href={(r) => `/ranking/${r.slug}/${pref.slug}`}
         labelPrefix={`${prefName}の`}
       />
-
-      {/* ふるさと納税の導線（検索流入の主戦場）。FAQ・出典より上=ランキング直後に置く */}
-      <FurusatoBand />
 
       <RankFaq faq={faq} />
 
