@@ -25,6 +25,7 @@ import { yen } from "@/lib/format";
 import DenkiOfferLink from "./DenkiOfferLink";
 import { denkiOfferUrl } from "@/lib/monetization";
 import { useToolEntry } from "@/lib/useToolEntry";
+import { takeQuickEntry } from "@/lib/quickEntry";
 import {
   trackDenkiSimulate,
   trackDenkiOfferImpression,
@@ -43,6 +44,22 @@ export default function DenkiSimulator() {
   const [ampere, setAmpere] = useState<Ampere>(defaultAmpere(2));
   // 使用量の上書き（空文字 = 世帯人数からの目安を使う）
   const [kwhInput, setKwhInput] = useState<string>("");
+  const [loaded, setLoaded] = useState(false);
+  const restored = useRef(false);
+  useEffect(() => {
+    if (restored.current) return;
+    restored.current = true;
+    const draft = takeQuickEntry("denki", window.location.search);
+    /* eslint-disable react-hooks/set-state-in-effect */
+    if (draft && preset && [preset.area, preset.altArea].includes(draft.area)) {
+      const size = draft.people as HouseholdSize;
+      setArea(draft.area);
+      setHouseholdSize(size);
+      setAmpere(defaultAmpere(size));
+    }
+    setLoaded(true);
+    /* eslint-enable react-hooks/set-state-in-effect */
+  }, [preset]);
 
   const overridden = kwhInput.trim() !== "" && Number(kwhInput) > 0;
   const kwh = overridden ? Number(kwhInput) : HOUSEHOLD_KWH[householdSize];
@@ -62,6 +79,7 @@ export default function DenkiSimulator() {
   // シミュレーション実行の計測（連続入力は 1s debounce で確定値に寄せ、初回マウント時は送らない）
   const mounted = useRef(false);
   useEffect(() => {
+    if (!loaded) return;
     if (!mounted.current) {
       mounted.current = true;
       return;
@@ -77,16 +95,18 @@ export default function DenkiSimulator() {
       });
     }, 1000);
     return () => clearTimeout(t);
-  }, [area, householdSize, kwh, ampere, overridden, code]);
+  }, [area, householdSize, kwh, ampere, overridden, code, loaded]);
 
   // 結果リストの表示計測（エリアごとに1回。掲載オファーが無い間は送らない）
   const impressedArea = useRef<DenkiArea | null>(null);
   useEffect(() => {
-    if (offerCount === 0 || impressedArea.current === area) return;
+    if (!loaded || offerCount === 0 || impressedArea.current === area) return;
     impressedArea.current = area;
     trackDenkiOfferImpression({ area, offerCount, hasAffiliate });
-  }, [area, offerCount, hasAffiliate]);
+  }, [area, offerCount, hasAffiliate, loaded]);
 
+  // 入口の条件を適用する前の既定値で広告や結果を描画しない。
+  if (!loaded) return <p role="status">条件を読み込み中…</p>;
   return (
     <div className="dnk-sim">
       {preset?.altArea && (

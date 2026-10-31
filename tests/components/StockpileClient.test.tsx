@@ -2,10 +2,32 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { cleanup, fireEvent, render, screen, within, waitFor } from "@testing-library/react";
 import StockpileClient from "@/components/bousai/StockpileClient";
+import { saveQuickEntry } from "@/lib/quickEntry";
 import { STOCKPILE_KEY, emptyStockpile } from "@/lib/stockpile";
-beforeEach(() => { localStorage.clear(); window.gtag = vi.fn(); });
+beforeEach(() => { localStorage.clear(); sessionStorage.clear(); window.history.replaceState({}, "", "/bousai/stockpile"); window.gtag = vi.fn(); });
 afterEach(() => { cleanup(); vi.restoreAllMocks(); delete window.gtag; });
 describe("備蓄チェックの操作", () => {
+  it("入口の条件を引き継ぎ、保存済みの記録は明示的な変更まで保護する", () => {
+    const saved = { ...emptyStockpile(), people: 3, water: 12, statuses: { food: "ready" } };
+    localStorage.setItem(STOCKPILE_KEY, JSON.stringify(saved));
+    saveQuickEntry({ tool: "stockpile", people: 2, days: 3, from: "area" });
+    window.history.replaceState({}, "", "/bousai/stockpile?from=area&quick=1");
+    render(<StockpileClient />);
+    expect((screen.getByLabelText("家庭の人数") as HTMLSelectElement).value).toBe("3");
+    expect(JSON.parse(localStorage.getItem(STOCKPILE_KEY)!).statuses.food).toBe("ready");
+    fireEvent.click(screen.getByRole("button", { name: "入口で選んだ条件に変更する" }));
+    expect((screen.getByLabelText("家庭の人数") as HTMLSelectElement).value).toBe("2");
+    expect(JSON.parse(localStorage.getItem(STOCKPILE_KEY)!)).toMatchObject({ people: 2, days: 3, water: 12, statuses: {} });
+  });
+  it("保存がなければ入口の条件で開始し、開くだけでは永続保存しない", () => {
+    saveQuickEntry({ tool: "stockpile", people: 2, days: 3, from: "hazard-map" });
+    window.history.replaceState({}, "", "/bousai/stockpile?from=hazard-map&quick=1");
+    render(<StockpileClient />);
+    expect((screen.getByLabelText("家庭の人数") as HTMLSelectElement).value).toBe("2");
+    expect((screen.getByLabelText("備える日数") as HTMLSelectElement).value).toBe("3");
+    expect(localStorage.getItem(STOCKPILE_KEY)).toBeNull();
+    expect(vi.mocked(window.gtag!).mock.calls.filter(c => c[1] === "stockpile_start")).toHaveLength(1);
+  });
   it("人数未選択では計算せず、入力から不足量・リスト・コピーまで利用できる", async () => {
     const writeText = vi.fn().mockResolvedValue(undefined);
     Object.defineProperty(navigator, "clipboard", { configurable: true, value: { writeText } });
@@ -22,7 +44,7 @@ describe("備蓄チェックの操作", () => {
     await waitFor(() => expect(writeText).toHaveBeenCalled());
     expect(writeText.mock.calls[0][0]).toContain("2人・3日分");
     expect(JSON.parse(localStorage.getItem(STOCKPILE_KEY)!).water).toBe(8);
-    expect(window.gtag).toHaveBeenCalledWith("event", "stockpile_copy", { measurement_version: "2026-10-24", entry_placement: "direct" });
+    expect(window.gtag).toHaveBeenCalledWith("event", "stockpile_copy", { measurement_version: "2026-10-31", entry_placement: "direct" });
     fireEvent.change(screen.getByLabelText("備える日数"), { target: { value: "7" } });
     expect((within(food).getByLabelText("未確認") as HTMLInputElement).checked).toBe(true);
   });
