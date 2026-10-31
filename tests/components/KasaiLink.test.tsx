@@ -39,7 +39,7 @@ describe("KasaiLink", () => {
     const { container } = render(<KasaiLink link={link} municipalityCode="11203" placement="area" />);
     fireEvent.click(container.querySelector("a")!);
     expect(gtag).toHaveBeenCalledWith("event", "kasai_link_click", {
-      measurement_version: "2026-10-24", cta_variant: "context-v1",
+      measurement_version: "2026-10-31", cta_variant: "context-v2",
       placement: "area",
       municipality_code: "11203",
     });
@@ -50,7 +50,7 @@ describe("KasaiLink", () => {
     window.gtag = gtag;
     const { container } = render(<KasaiLink link={link} placement="hazard-map" />);
     fireEvent.click(container.querySelector("a")!);
-    expect(gtag).toHaveBeenCalledWith("event", "kasai_link_click", { placement: "hazard-map", measurement_version: "2026-10-24", cta_variant: "context-v1" });
+    expect(gtag).toHaveBeenCalledWith("event", "kasai_link_click", { placement: "hazard-map", measurement_version: "2026-10-31", cta_variant: "context-v2" });
   });
 
   it("掲載と50%視認を分離し、自治体切り替え時は新しく計測する", () => {
@@ -74,7 +74,7 @@ describe("KasaiLink", () => {
     rerender(<KasaiLink link={link} municipalityCode="13101" />);
     act(() => notify([{ isIntersecting: true, intersectionRatio: 0.5 }]));
     expect(gtag).toHaveBeenLastCalledWith("event", "kasai_link_impression", {
-      measurement_version: "2026-10-24", cta_variant: "context-v1", placement: "area", municipality_code: "13101",
+      measurement_version: "2026-10-31", cta_variant: "context-v2", placement: "area", municipality_code: "13101",
     });
     expect(gtag).toHaveBeenCalledTimes(4);
   });
