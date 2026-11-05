@@ -18,7 +18,7 @@ import type { FurusatoLinkInfo } from "@/lib/monetization";
 import { AdLinkRow } from "./AdLinkRow";
 
 export function FurusatoLink(props: Parameters<typeof FurusatoLinkContent>[0]) {
-  return <FurusatoLinkContent key={JSON.stringify([props.placement, props.municipalityCode, props.targetName, props.link.kind, props.link.url])} {...props} />;
+  return <FurusatoLinkContent key={JSON.stringify([props.placement, props.municipalityCode, props.targetName, props.link.kind, props.link.url, props.ctaVariant])} {...props} />;
 }
 
 function FurusatoLinkContent({
@@ -26,6 +26,7 @@ function FurusatoLinkContent({
   targetName,
   municipalityCode,
   placement = "area",
+  ctaVariant = "donation-context-v2",
 }: {
   /** サーバー側で解決済みのリンク情報（furusatoLink の非 null 戻り値） */
   link: FurusatoLinkInfo;
@@ -34,6 +35,7 @@ function FurusatoLinkContent({
   municipalityCode?: string;
   /** 掲載面。GA4 の click / impression を面ごとに分けて CTR を見るための次元 */
   placement?: "area" | "ranking" | "ranking-top" | "future-view";
+  ctaVariant?: "donation-context-v2" | "donation-select-v1";
 }) {
   // portal（固定リンク）は着地がポータルのトップ等になるため、
   // 自治体のページに着くと誤解させない文言にする。
@@ -48,8 +50,8 @@ function FurusatoLinkContent({
     ? "ふるなびで寄付先を探す"
     : targetName ? `ふるなびで${targetName}を見る` : "ふるなびの自治体ページを見る";
   const eventParams = {
-    measurement_version: "2026-10-24",
-    cta_variant: "donation-v1",
+    measurement_version: "2026-10-31",
+    cta_variant: ctaVariant,
     kind: link.kind,
     placement,
     ...(municipalityCode ? { municipality_code: municipalityCode } : {}),

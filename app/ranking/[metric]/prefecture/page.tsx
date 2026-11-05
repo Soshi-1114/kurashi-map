@@ -246,6 +246,8 @@ export default async function PrefectureRankingPage(props: { params: Promise<Par
         </div>
       </section>
 
+      <FurusatoBand />
+
       <section className="rk-section">
         <div className="rk-section-head">
           <span className="rk-section-icon"><MapIcon size={20} aria-hidden="true" /></span>
@@ -264,8 +266,6 @@ export default async function PrefectureRankingPage(props: { params: Promise<Par
           ))}
         </ul>
       </section>
-
-      <FurusatoBand />
 
       <RankFaq faq={def.faq ?? []} />
 

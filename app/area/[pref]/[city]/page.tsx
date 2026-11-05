@@ -300,7 +300,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
     { id: "rent", label: "家賃", only: "sp" },
     { id: "kids", label: "子育て・生活環境", only: "sp" },
     // 災害リスクは全幅カード化（外国人比率とは別の行）に伴い、PC/SP ともラベルを分離
-    { id: "hazard", label: "災害リスク" },
+    { id: "hazard", label: "災害・備え" },
     { id: "foreign", label: "外国人比率", only: "sp" },
     { id: "fiscal", label: "財政" },
     { id: "future-pop", label: "将来人口" },
@@ -723,11 +723,9 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
               link={{ href: mapHrefForCode(m.code, "/map/hazard"), label: "ハザードマップを地図で見る" }}
             >
               <DisasterCard m={m} />
-              <StockpileEntry placement="area" />
-              {/* 火災保険（水災補償）。浸水想定を見た直後というハザード文脈一致の導線
-                  （env 未設定なら kasai が null で導線ごと出ない） */}
-              {kasai && <KasaiLink link={kasai} municipalityCode={m.code} placement="area" />}
             </MetricCard>
+            <StockpileEntry placement="area" />
+            {kasai && <KasaiLink link={kasai} municipalityCode={m.code} placement="area" />}
           </div>
 
           {/* 外国人比率 */}
@@ -881,11 +879,6 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
                     </span>
                   </p>
                   <SourceLine source={fp.source} asOf={fp.asOf} estimated />
-                  {/* 人口減少の推計を見た直後の「地域を応援する」文脈導線（最下部の広告連結から移設）。
-                      env 未設定・ふるなび未掲載自治体なら furusato が null で出ない */}
-                  {furusato && (
-                    <FurusatoLink link={furusato} targetName={donee.name} municipalityCode={m.code} placement="future-view" />
-                  )}
                 </>
               ) : (
                 <NoData
@@ -897,6 +890,11 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
           </div>
         </div>
       </Section>
+      {furusato && hasFuturePopulation(fp) && (
+        <section className="ad-support-section" aria-label="広告：この地域へのふるさと納税">
+          <FurusatoLink link={furusato} targetName={donee.name} municipalityCode={m.code} placement="future-view" />
+        </section>
+      )}
       {/* 家賃が近い自治体 */}
       {related.length > 0 && (
         <Section icon={Home} tone="ad-tone-rent" title="家賃水準が近い自治体" sub={`${m.name}と家賃平均が近い${prefName}の自治体`} id={compareAnchor("related")}>

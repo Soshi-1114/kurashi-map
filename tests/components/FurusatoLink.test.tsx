@@ -61,8 +61,8 @@ describe("FurusatoLink", () => {
     );
     fireEvent.click(container.querySelector("a")!);
     expect(gtag).toHaveBeenCalledWith("event", "furusato_link_click", {
-      measurement_version: "2026-10-24",
-      cta_variant: "donation-v1",
+      measurement_version: "2026-10-31",
+      cta_variant: "donation-context-v2",
       kind: "municipal",
       placement: "area",
       municipality_code: "01100",
@@ -96,8 +96,8 @@ describe("FurusatoLink", () => {
 
     act(() => callback([{ isIntersecting: true, intersectionRatio: 0.5 }]));
     expect(gtag).toHaveBeenCalledWith("event", "furusato_link_impression", {
-      measurement_version: "2026-10-24",
-      cta_variant: "donation-v1",
+      measurement_version: "2026-10-31",
+      cta_variant: "donation-context-v2",
       kind: "municipal",
       placement: "area",
       municipality_code: "01100",
