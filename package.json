@@ -16,6 +16,7 @@
     "test:watch": "vitest",
     "build:initial-view": "node scripts/build-initial-view-svg.mjs",
     "indexnow": "node scripts/indexnow-submit.mjs",
+    "analytics:report": "node --import tsx scripts/analytics/reportCli.ts",
     "gsc:analyze": "tsx --env-file=.env.local scripts/gsc/analyze.ts",
     "gsc:inspect": "tsx --env-file=.env.local scripts/gsc/indexInspection.ts",
     "gsc:inspect:diff": "tsx scripts/gsc/indexInspectionDiff.ts",
