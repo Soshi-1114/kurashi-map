@@ -81,8 +81,9 @@ export function OgFrame({ children }: { children: ReactNode }) {
       }}
     >
       <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+        {/* Satori は数値の寸法が必要。文字列だと SVG 描画に失敗して全 OG が500になる。 */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={LOGO_URI} width="46" height="46" alt="" />
+        <img src={LOGO_URI} width={46} height={46} alt="" />
         <div style={{ fontSize: 28, fontWeight: 800, letterSpacing: "-0.01em" }}>{SITE.name}</div>
       </div>
 
