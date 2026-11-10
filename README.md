@@ -177,3 +177,12 @@ reports/gsc/2026-08-10/
 ## ライセンス
 
 未定（内部開発用）。
+
+### GA4・GSCの固定条件での評価
+
+```sh
+npm run analytics:report -- --end=2026-11-03 --days=28
+npm run analytics:report -- --input=reports/gsc/analytics/取得ディレクトリ/source.json
+```
+
+本番ホスト・確定期間に絞った全体推移、比較導線、電気・備蓄の固定評価を保存します。再生成はAPI通信・認証情報不要です。[実行条件・評価上の注意](docs/analytics/evaluation-tooling.md)を参照してください。
