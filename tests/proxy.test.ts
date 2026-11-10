@@ -12,6 +12,11 @@ function requestOf(opts: { country?: string; ua?: string; path?: string } = {}):
 }
 
 describe('proxy (geo block)', () => {
+  it('ads.txt は国外の一般UA・広告クローラーにも公開し、中国の拒否は維持する', () => {
+    expect(proxy(requestOf({ country: 'US', ua: 'Mozilla/5.0', path: '/ads.txt' })).status).toBe(200);
+    expect(proxy(requestOf({ country: 'US', ua: 'Mediapartners-Google', path: '/ads.txt' })).status).toBe(200);
+    expect(proxy(requestOf({ country: 'CN', ua: 'Mediapartners-Google', path: '/ads.txt' })).status).toBe(403);
+  });
   it('JP からのリクエストは通す', () => {
     expect(proxy(requestOf({ country: 'JP' })).status).toBe(200);
   });

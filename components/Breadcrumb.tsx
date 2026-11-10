@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import Link from "next/link";
+import Link from "@/components/SiteLink";
 
 export type Crumb = {
   name: string;

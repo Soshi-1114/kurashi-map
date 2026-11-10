@@ -1,5 +1,5 @@
 "use client";
-import Link from "next/link";
+import Link from "@/components/SiteLink";
 import { useRef, useState } from "react";
 import { useImpressionOnce } from "@/lib/useImpression";
 import { track } from "@/lib/analytics";

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Link from "next/link";
+import Link from "@/components/SiteLink";
 import { Scale } from "lucide-react";
 import { ANALYTICS_MEASUREMENT_VERSION, track } from "@/lib/analytics";
 

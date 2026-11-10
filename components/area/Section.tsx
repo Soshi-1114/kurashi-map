@@ -1,6 +1,6 @@
 // セクション共通レイアウト（アイコンチップ＋見出し＋任意のリンク）。
 // スクロールインの fade-up を Reveal で付与する。
-import Link from "next/link";
+import Link from "@/components/SiteLink";
 import type { ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
 import { ArrowRight } from "lucide-react";

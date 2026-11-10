@@ -1,3 +1,4 @@
+import DisplayAd from "@/components/monetization/DisplayAd";
 import { serializeJsonLd } from "@/lib/jsonLd";
 // 都道府県ランキング（47都道府県を1本に並べる）。
 //
@@ -10,7 +11,7 @@ import { serializeJsonLd } from "@/lib/jsonLd";
 // 集計方法とカバレッジ（対象N/全M自治体）を必ず本文に出すのが honesty 上の要件。
 
 import "../../../league.css";
-import Link from "next/link";
+import Link from "@/components/SiteLink";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import {
@@ -245,6 +246,8 @@ export default async function PrefectureRankingPage(props: { params: Promise<Par
           </div>
         </div>
       </section>
+
+      <DisplayAd placement="ranking" />
 
       <section className="rk-section">
         <div className="rk-section-head">

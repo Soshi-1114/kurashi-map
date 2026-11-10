@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/SiteLink";
 import ReactDOM from "react-dom";
 import HomeLinks, { getPopularMunis } from "@/components/HomeLinks";
 import HeroSearch from "@/components/home/HeroSearch";

@@ -1,6 +1,7 @@
+import DisplayAd from "@/components/monetization/DisplayAd";
 import { serializeJsonLd } from "@/lib/jsonLd";
 import "../../../league.css";
-import Link from "next/link";
+import Link from "@/components/SiteLink";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import {
@@ -444,6 +445,8 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
           </details>
         )}
       </section>
+
+      <DisplayAd placement="ranking" />
 
       <RankLinkList
         title={`${prefName}のほかのランキング`}

@@ -2,7 +2,7 @@
 // コンポーネント。メニュー・ピラー・ランキングの「都道府県別に見る」で共有し、
 // 全国の県が分類なしに並ぶ探しづらさを解消する。リンク先・装飾クラスは呼び出し側で指定。
 
-import Link from "next/link";
+import Link from "@/components/SiteLink";
 import { prefsByRegion, type PrefEntry } from "@/lib/prefs";
 
 export default function PrefRegionLinks({

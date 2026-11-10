@@ -3,7 +3,7 @@
 // 家賃・地価・人口増減などへ横展開するための server component 群。
 // ページ側は MetricHubConfig を組み立てて hubMetadata / hubLdJson / MetricMapHubBody を使う。
 
-import Link from "next/link";
+import Link from "@/components/SiteLink";
 import type { Metadata } from "next";
 import PrefRegionLinks from "@/components/PrefRegionLinks";
 import type { PREFS } from "@/lib/prefs";

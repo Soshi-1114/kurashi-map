@@ -4,7 +4,7 @@ import { serializeJsonLd } from "@/lib/jsonLd";
 // 基準時点はビルド時に実データ（サンプル自治体の asOf）から取り、表示と実データの
 // 乖離を防ぐ（誠実性方針）。次回更新予定は lib/rankings の NEXT_UPDATE と同期。
 
-import Link from "next/link";
+import Link from "@/components/SiteLink";
 import type { Metadata } from "next";
 import { getMunicipality } from "@/lib/metrics";
 import { NEXT_UPDATE, formatAsOfJa } from "@/lib/rankings";

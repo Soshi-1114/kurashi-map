@@ -6,7 +6,7 @@ import { serializeJsonLd } from "@/lib/jsonLd";
 // 中立性: 在留外国人比率は多様性・国際性の客観指標として中立に提示（評価・誘導表現なし）。
 // honesty: 数値はすべて実データ（出入国在留管理庁「在留外国人統計」＋国勢調査人口）。
 
-import Link from "next/link";
+import Link from "@/components/SiteLink";
 import type { Metadata } from "next";
 import ReactDOM from "react-dom";
 import HomeShell from "@/components/HomeShell";

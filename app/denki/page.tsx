@@ -3,7 +3,7 @@ import "../league.css";
 import "./denki.css";
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import Link from "next/link";
+import Link from "@/components/SiteLink";
 import { Database } from "lucide-react";
 import { SITE, absoluteUrl } from "@/lib/site";
 import { DENKI_AREAS, DENKI_AREA_LABELS } from "@/lib/denki";

@@ -8,7 +8,7 @@
 // コンポーネントもサーバーで HTML に描画されるため、47県のリンクは初期HTMLに
 // すべて含まれる＝クロール可能。
 import { useId, useRef, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/SiteLink";
 import { prefsByRegion } from "@/lib/prefs";
 
 // 初期選択の地方。空パネルを見せないため既定で1つ開いておく。

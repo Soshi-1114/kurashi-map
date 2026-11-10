@@ -1,7 +1,8 @@
+import DisplayAd from "@/components/monetization/DisplayAd";
 import { serializeJsonLd } from "@/lib/jsonLd";
 import StockpileEntry from "@/components/bousai/StockpileEntry";
 import "./area-detail.css";
-import Link from "next/link";
+import Link from "@/components/SiteLink";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import {
@@ -588,6 +589,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
           </Section>
         </Reveal>
       )}
+      {insights.length > 0 && <DisplayAd placement="area" />}
       {/* ③ 詳細情報グリッド */}
       <Section icon={Wallet} tone="ad-tone-rent" title="詳細データ" id="data">
         <div className="ad-metric-grid">
@@ -897,6 +899,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
           </div>
         </div>
       </Section>
+      {insights.length === 0 && <DisplayAd placement="area" />}
       {/* 家賃が近い自治体 */}
       {related.length > 0 && (
         <Section icon={Home} tone="ad-tone-rent" title="家賃水準が近い自治体" sub={`${m.name}と家賃平均が近い${prefName}の自治体`} id={compareAnchor("related")}>

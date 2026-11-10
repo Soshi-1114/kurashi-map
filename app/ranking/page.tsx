@@ -1,6 +1,6 @@
 import { serializeJsonLd } from "@/lib/jsonLd";
 import "../league.css";
-import Link from "next/link";
+import Link from "@/components/SiteLink";
 import type { Metadata } from "next";
 import { Trophy, ArrowUpRight, Wallet, Home, JapaneseYen, Baby, Users, Globe2, ShieldCheck, TrendingUp, TrendingDown, Landmark, MapPin } from "lucide-react";
 import { listAllAcrossPrefs } from "@/lib/metrics";
