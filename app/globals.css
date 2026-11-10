@@ -1284,6 +1284,17 @@ button { font-family: inherit; }
   to { opacity: 1; transform: translateY(0); }
 }
 .is-panel-open .map-layers { right: calc(380px + 30px); }
+@media (min-width: 769px) {
+  /* 一覧の内在幅でポップオーバーが拡張しないよう、地図の空き幅内に固定する。
+     詳細パネル表示時は、その幅380pxとパネル間の余白も差し引く。 */
+  .map-layers { width: min(424px, calc(100% - 28px)); }
+  .is-panel-open .map-layers { width: min(424px, calc(100% - 424px)); }
+  .layers-panel {
+    width: 100%;
+    min-width: 0;
+  }
+  .layers-panel .filter-row { flex-wrap: wrap; }
+}
 /* モバイル用シートヘッダー・scrim は PC では出さない */
 .layers-scrim { display: none; }
 .layers-head { display: none; }
