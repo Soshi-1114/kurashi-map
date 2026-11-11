@@ -4,6 +4,7 @@ import Script from "next/script";
 import { SITE, absoluteUrl } from "@/lib/site";
 import WebVitals from "@/components/WebVitals";
 import { CompareSelectionProvider } from "@/components/compare/CompareSelectionProvider";
+import { getAdsenseConfig } from "@/lib/adsense";
 import "./globals.css";
 
 // Google Analytics 4 の測定ID（gtag.js による閲覧トラッキング）。
@@ -12,6 +13,7 @@ const GA_MEASUREMENT_ID = "G-HL76L0RDWK";
 // サイト共通のメタデフォルト。各ページ（area/ranking）は title・description・canonical を
 // 上書きする。ここは主にトップページと、明示指定のないページのフォールバックを担う。
 export const metadata: Metadata = {
+  other: getAdsenseConfig().clientId ? { "google-adsense-account": getAdsenseConfig().clientId! } : {},
   metadataBase: new URL(SITE.baseUrl),
   title: `${SITE.name}｜市区町村の住みやすさを地図で比較`,
   description: SITE.description,

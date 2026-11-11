@@ -4,7 +4,7 @@
 // ラベル接頭辞だけが違い、マークアップは同一のため。
 // 対象が空なら何も描画しない（呼び出し側で length チェックをしない）。
 
-import Link from "next/link";
+import Link from "@/components/SiteLink";
 import { ArrowUpRight, Trophy } from "lucide-react";
 import { splitRankingTitle, type RankingDef } from "@/lib/rankings";
 

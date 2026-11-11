@@ -1,6 +1,6 @@
 import { serializeJsonLd } from "@/lib/jsonLd";
 import "./shindan.css";
-import Link from "next/link";
+import Link from "@/components/SiteLink";
 import type { Metadata } from "next";
 import { listAllAcrossPrefs } from "@/lib/metrics";
 import { muniLevelOnly } from "@/lib/rankings";

@@ -1,6 +1,6 @@
 import { serializeJsonLd } from "@/lib/jsonLd";
 import "./compare.css";
-import Link from "next/link";
+import Link from "@/components/SiteLink";
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { listSummaryAcrossPrefs, listAllAcrossPrefs } from "@/lib/metrics";

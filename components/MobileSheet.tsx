@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/SiteLink";
 import type { Municipality } from "@/lib/types";
 import { buildSummary } from "@/lib/summary";
 import { MetricCards } from "./AreaPanel";

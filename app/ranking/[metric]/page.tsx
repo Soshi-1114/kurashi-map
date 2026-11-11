@@ -1,6 +1,7 @@
+import DisplayAd from "@/components/monetization/DisplayAd";
 import { serializeJsonLd } from "@/lib/jsonLd";
 import "../../league.css";
-import Link from "next/link";
+import Link from "@/components/SiteLink";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import {
@@ -363,6 +364,8 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
           </div>
         </div>
       </section>
+
+      <DisplayAd placement="ranking" />
 
       {prefsWithData.length > 0 && (
         <section className="rk-section">

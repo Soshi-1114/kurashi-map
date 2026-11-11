@@ -9,7 +9,7 @@ import StockpileEntry from "@/components/bousai/StockpileEntry";
 // honesty: 区域表示は国土地理院ハザードマップポータルの公式タイルそのもの。自治体単位の
 // 評価値（詳細ページの災害リスク）は区域内最大区分であることを本文でも明示する。
 
-import Link from "next/link";
+import Link from "@/components/SiteLink";
 import type { Metadata } from "next";
 import ReactDOM from "react-dom";
 import HomeShell from "@/components/HomeShell";

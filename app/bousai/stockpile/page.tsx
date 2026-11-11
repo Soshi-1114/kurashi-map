@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/SiteLink";
 import PageShell from "@/components/PageShell";
 import StockpileClient from "@/components/bousai/StockpileClient";
 import { STOCKPILE_SOURCES } from "@/lib/stockpile";

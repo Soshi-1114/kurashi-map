@@ -7,7 +7,7 @@
 // 表示は2構造: PC=指標×自治体のテーブル、SP=指標単位の縦型リスト（CSSで切替）。
 // 単一テーブルの display 上書きはテーブルセマンティクスを壊すため採らない。
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/SiteLink";
 import { useRouter, useSearchParams } from "next/navigation";
 import type { Municipality, MuniSummary } from "@/lib/types";
 import { COMPARE_ROWS, COMPARE_GROUPS, type CompareRowDef, type NationalAverages } from "@/lib/compareMetrics";

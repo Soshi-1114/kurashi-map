@@ -2,7 +2,7 @@
 // トップページでは地図下のコンテンツとして通常フローに表示する（メインコピーは
 // ファーストビューのヒーロー側が持つため、ここには置かない）。
 
-import Link from "next/link";
+import Link from "@/components/SiteLink";
 import { RANKINGS, muniLevelOnly, type RankingCategory } from "@/lib/rankings";
 import { listAllAcrossPrefs } from "@/lib/metrics";
 import { MAP_HUBS } from "@/lib/siteNav";

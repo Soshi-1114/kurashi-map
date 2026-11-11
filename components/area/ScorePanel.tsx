@@ -1,6 +1,6 @@
 // Hero 右カラムの「住みやすさ総合スコア」。総合点＋5段階星＋5軸の内訳を表示。
 // スコアは実データ指標のみから算出（lib/livabilityScore.ts）。対象外指標は「データなし」。
-import Link from "next/link";
+import Link from "@/components/SiteLink";
 import type { Livability } from "@/lib/livabilityScore";
 import { scoreBandLabel } from "@/lib/livabilityScore";
 import { Stars } from "./Stars";

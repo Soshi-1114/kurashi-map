@@ -5,7 +5,7 @@
 // ?codes= と同方針）。スコア計算はサーバーで前計算した軸スコア（ShindanEntry）の
 // 重み付き平均のみで、フルデータはクライアントに配らない。
 import { useEffect, useMemo, useRef, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/SiteLink";
 import { MapPin, ArrowUpRight } from "lucide-react";
 import {
   SHINDAN_AXES, EMPTY_WEIGHTS, hasAnyWeight, runShindan,

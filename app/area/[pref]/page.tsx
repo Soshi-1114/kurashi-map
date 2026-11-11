@@ -1,6 +1,7 @@
+import DisplayAd from "@/components/monetization/DisplayAd";
 import { serializeJsonLd } from "@/lib/jsonLd";
 import "../../league.css";
-import Link from "next/link";
+import Link from "@/components/SiteLink";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Wallet, MapIcon, BarChart3, ArrowLeft, ArrowUpRight, Building2, Users, Compass, Star, ShieldAlert } from "lucide-react";
@@ -325,6 +326,8 @@ export default async function PrefPage(props: { params: Promise<Params> }) {
           </ul>
         </section>
       )}
+
+      <DisplayAd placement="area" />
 
       {livBands.length > 0 && (
         <section className="rk-section">

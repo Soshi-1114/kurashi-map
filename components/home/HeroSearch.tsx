@@ -17,10 +17,16 @@ import { comboboxHitSuffix } from "@/lib/muniLabel";
 import { mapHrefForCode } from "@/lib/mapDeepLink";
 import { SearchHistoryHeader } from "@/components/SearchHistoryHeader";
 import { SearchHitLabel } from "@/components/SearchHitLabel";
+import { getAdsenseConfig, navigateDocument } from "@/lib/adsense";
+import { hasAdsForPath } from "@/lib/adsensePolicy.mjs";
 
 export default function HeroSearch({ munis }: { munis: MuniSearchItem[] }) {
   const router = useRouter();
-  const onPick = useCallback((m: MuniSearchItem) => router.push(`/area/${m.pref}/${m.code}`), [router]);
+  const onPick = useCallback((m: MuniSearchItem) => {
+    const href = `/area/${m.pref}/${m.code}`;
+    if (hasAdsForPath(getAdsenseConfig(), href)) navigateDocument(href);
+    else router.push(href);
+  }, [router]);
   // townSearch: 町丁名（例: 日の里）やひらがな、stationSearch: 駅名（例: 品川駅）でも
   // 自治体を引けるようにする
   const { query, setQuery, filtered, isHistory, activeIndex, setActiveIndex, pick, close, recordHistory, clearHistory, onKeyDown, onFocus, onBlur, inputRef } =

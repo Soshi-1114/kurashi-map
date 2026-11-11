@@ -23,7 +23,7 @@ const ALLOWED_BOT_UA =
   /googlebot|google-inspectiontool|google-extended|googleother|adsbot-google|apis-google|mediapartners-google|storebot-google|bingbot|bingpreview|msnbot|applebot|duckduckbot|yeti|linespider|twitterbot|facebookexternalhit|slackbot|discordbot|linkedinbot|gptbot|oai-searchbot|chatgpt-user|claudebot|claude-web|perplexitybot|amazonbot/i;
 
 // クロールの起点となるファイルは国・UA を問わず公開（DENIED_COUNTRIES は除く）
-const PUBLIC_PATHS = ['/robots.txt', '/sitemap.xml'];
+const PUBLIC_PATHS = ['/robots.txt', '/sitemap.xml', '/ads.txt'];
 
 function forbidden(): NextResponse {
   return new NextResponse('403 Forbidden: Access from your region is not available.', {

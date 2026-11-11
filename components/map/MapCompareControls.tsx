@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import Link from "@/components/SiteLink";
 import { track } from "@/lib/analytics";
 import { compareHref, MAX_COMPARE } from "@/lib/siteNav";
 import { useCompareSelection } from "@/components/compare/CompareSelectionProvider";

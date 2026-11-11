@@ -1,10 +1,10 @@
 import { serializeJsonLd } from "@/lib/jsonLd";
 // プライバシーポリシー。GA4（gtag.js）による閲覧計測の開示を主目的とし、
 // Cookie・外部送信・第三者提供・外部リンクの扱いを明示する。
-// 収益化とは独立した「アクセス解析の開示」として作成（誠実性方針）。
+// Google AdSense 導入準備を含め、実際の外部送信を開示する。
 // レイアウト・クラスは /about（detail-*）に合わせる。
 
-import Link from "next/link";
+import Link from "@/components/SiteLink";
 import type { Metadata } from "next";
 import { SITE, absoluteUrl } from "@/lib/site";
 import PageShell from "@/components/PageShell";
@@ -15,7 +15,7 @@ const DESC =
   "KurashiMapのプライバシーポリシー。Google アナリティクス（GA4）によるアクセス解析、Cookie の利用、収集する情報の範囲と利用目的、外部サイトへのリンクの扱いを開示しています。";
 
 // 最終更新日（ポリシー改定時に手動更新）。
-const LAST_UPDATED = "2026年8月29日";
+const LAST_UPDATED = "2026年11月11日";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -99,12 +99,31 @@ export default function PrivacyPage() {
       <section className="detail-section">
         <h2 className="detail-h2">Cookie の利用と無効化</h2>
         <p className="detail-p">
-          Cookie は、ウェブサイトが利用者のブラウザに保存する小さなテキストデータです。当サイトでは上記のアクセス解析のために Cookie を利用します。Cookie には氏名等の個人情報は含まれません。
+          Cookie は、ウェブサイトが利用者のブラウザに保存する小さなテキストデータです。当サイトでは上記のアクセス解析、および広告を配信する場合には広告配信・効果測定のために Cookie を利用します。Cookie には氏名等の個人情報は含まれません。
         </p>
         <p className="detail-p">
           利用者はブラウザの設定によって Cookie の受け入れを拒否・削除できます。また、Google アナリティクスによる計測を無効にしたい場合は、Google 社が提供する
           <a href="https://tools.google.com/dlpage/gaoptout?hl=ja" target="_blank" rel="noopener noreferrer">Google アナリティクス オプトアウト アドオン</a>
           を利用できます。Cookie を無効化しても、当サイトの閲覧そのものは通常どおり可能です。
+        </p>
+      </section>
+
+      <section className="detail-section" id="advertising">
+        <h2 className="detail-h2">Google AdSenseによる広告配信について</h2>
+        <p className="detail-p">
+          当サイトでは、ランキングや地域の詳細などの閲覧ページに、Google LLCが提供するGoogle AdSenseによる広告を掲載する場合があります。Googleおよび第三者の広告配信事業者は、当サイトや他のサイトへの過去のアクセスに基づき、Cookie等を使用して広告を配信することがあります。広告配信時には、IPアドレス、ブラウザ・端末の情報、閲覧ページ、広告の表示・操作等の情報がGoogleや広告配信事業者に送信され、広告の配信、効果測定、不正防止等に利用される場合があります。
+        </p>
+        <p className="detail-p">
+          Googleおよびそのパートナーが広告Cookieを使用することで、当サイトや他のサイトへのアクセス情報に基づくパーソナライズ広告が配信される場合があります。利用者は
+          <a href="https://myadcenter.google.com/" target="_blank" rel="noopener noreferrer">Googleの広告設定</a>
+          でパーソナライズ広告を管理できます。第三者による広告Cookieの利用については、
+          <a href="https://optout.aboutads.info/" target="_blank" rel="noopener noreferrer">業界団体のオプトアウトページ</a>
+          も利用できます。Googleによる情報の取り扱いは
+          <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer">Googleの広告に関するポリシー</a>
+          をご確認ください。
+        </p>
+        <p className="detail-p">
+          同意管理の対象地域では、Googleの同意メッセージを通じて選択内容を管理できます。同意設定が利用可能な場合は、広告ページ末尾の「プライバシーとCookieの設定」から選択を変更できます。広告の有無は掲載データの内容・順位に影響しません。
         </p>
       </section>
 

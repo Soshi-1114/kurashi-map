@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/SiteLink";
 import { hasRent } from "@/lib/rentColor";
 import { hasLandPrice } from "@/lib/landPrice";
 

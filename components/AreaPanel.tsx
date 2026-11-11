@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import Link from "@/components/SiteLink";
 import type { Municipality, MuniSummary } from "@/lib/types";
 import { formatAsOfJa } from "@/lib/format";
 import { buildSummary } from "@/lib/summary";

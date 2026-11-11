@@ -1,5 +1,6 @@
-import Link from "next/link";
+import Link from "@/components/SiteLink";
 import { GENERAL_MAP, MAP_HUBS, type NavLink } from "@/lib/siteNav";
+import AdPrivacySettings from "@/components/monetization/AdPrivacySettings";
 
 // 全ページ共通フッター（サーバーコンポーネント＝リンクは初期HTMLに載る）。
 // 内部リンクグラフの底上げが目的。設置は PageShell が担い、PageShell を使わない
@@ -46,6 +47,7 @@ export default function SiteFooter() {
             </div>
           ))}
         </nav>
+        <AdPrivacySettings />
         <p className="site-footer-copy">© KurashiMap — 欠損は独自推計で補わず、将来人口は公的推計と明示しています</p>
       </div>
     </footer>

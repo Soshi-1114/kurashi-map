@@ -1,5 +1,6 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { DEFAULT_ADSENSE_CLIENT_ID, resolveAdsenseConfig } from "./lib/adsensePolicy.mjs";
 
 /** @type {import('next').NextConfig} */
 
@@ -45,7 +46,22 @@ const csp = [
   "upgrade-insecure-requests",
 ].join("; ");
 
+// Vercel の production ビルドだけで配信を許可する。利用者向け env からは上書きしない。
+const adsProduction = process.env.VERCEL_ENV === "production";
+const ads = resolveAdsenseConfig({
+  enabled: process.env.NEXT_PUBLIC_ADSENSE_ENABLED,
+  production: String(adsProduction),
+  clientId: process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID ?? DEFAULT_ADSENSE_CLIENT_ID,
+  rankingSlot: process.env.NEXT_PUBLIC_ADSENSE_RANKING_SLOT_ID,
+  areaSlot: process.env.NEXT_PUBLIC_ADSENSE_AREA_SLOT_ID,
+});
+// AdSense は変動する配信先の許可リストをサポートしない。広告ページだけ fetch 制限を
+// 外し SSG を維持する（明示的に選択されたトレードオフ）。操作ページの CSP は従来どおり。
+// https://support.google.com/adsense/answer/16283098
+const adsCsp = "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests";
+
 const nextConfig = {
+  env: { NEXT_PUBLIC_ADSENSE_PRODUCTION: String(adsProduction) },
   reactStrictMode: true,
   poweredByHeader: false, // "X-Powered-By: Next.js"（バージョン露出）を返さない
   // 複数 lockfile 環境でワークスペースルートを誤推定しないよう固定する。
@@ -62,6 +78,10 @@ const nextConfig = {
         source: "/:path*",
         headers: [{ key: "Content-Security-Policy", value: csp }],
       },
+      ...(ads.enabled && ads.production ? [
+        ...(ads.slots.ranking ? ["/ranking/:metric", "/ranking/:metric/:pref"] : []),
+        ...(ads.slots.area ? ["/area/:pref", "/area/:pref/:city(\\d{5})"] : []),
+      ].map(source => ({ source, headers: [{ key: "Content-Security-Policy", value: adsCsp }] })) : []),
     ];
   },
   // 旧トップ地図のディープリンク互換（/?code=13104・/?pref=saitama）。地図は /map へ

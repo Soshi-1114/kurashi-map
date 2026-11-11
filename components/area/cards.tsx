@@ -1,6 +1,6 @@
 // 詳細ページの再利用カード群（KPI・指標カード・回遊カード・ランキング・類似エリア・
 // データなし・出典行）。すべて素の className（area-detail.css）で配色する server component。
-import Link from "next/link";
+import Link from "@/components/SiteLink";
 import type { ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
 import { ArrowRight, ChevronRight, MinusCircle } from "lucide-react";
