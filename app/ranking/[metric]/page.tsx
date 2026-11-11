@@ -24,6 +24,7 @@ import { FurusatoLink } from "@/components/monetization/FurusatoLink";
 import { furusatoLink } from "@/lib/monetization";
 import { furunaviMunicipalPageUrl } from "@/lib/furunaviMunicipals";
 import { ShareButton } from "@/components/ShareButton";
+import { populationSearchCopy } from "@/lib/populationSearchCopy";
 
 type Params = { metric: string };
 
@@ -35,7 +36,7 @@ export function generateStaticParams() {
   return RANKINGS.map((r) => ({ metric: r.slug }));
 }
 
-async function rankedFor(def: RankingDef, limit: number) {
+async function rankedFor(def: RankingDef, limit?: number) {
   const munis = muniLevelOnly(await listAllAcrossPrefs());
   return rankBy(def, munis, limit);
 }
@@ -44,15 +45,16 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
   const params = await props.params;
   const def = getRankingBySlug(params.metric);
   if (!def) return { title: "見つかりません | KurashiMap" };
-  const top = await rankedFor(def, 1);
+  const top = await rankedFor(def, def.slug === "population-most" ? undefined : 1);
   const top1 = top[0] ? `${prefNameOf(top[0].pref)}${top[0].displayName ?? top[0].name}` : "—";
   const freshness = def.freshnessLabel?.(top[0] ?? null) ?? null;
   // 「｜日本一は{1位}」のような答えフレーズは 1位が実在するときだけ title 末尾に足す。
   const answer = top[0] && def.seoTitleAnswer ? `｜${def.seoTitleAnswer(top[0])}` : "";
-  const title = `${def.seoTitle ?? def.title}${answer}${freshness ? `【${freshness}】` : "【全国】"}｜${SITE.name}`;
+  const searchCopy = populationSearchCopy({ metric: def.slug, top: top[0], count: top.length, shown: Math.min(TOP_TABLE, top.length) });
+  const title = `${searchCopy?.title ?? `${def.seoTitle ?? def.title}${answer}`}${freshness ? `【${freshness}】` : "【全国】"}｜${SITE.name}`;
   // description 末尾にデータの基準年度を追記（文中に同じ年が既出ならスキップ）。
   const description = appendFreshness(
-    def.metaDescription ? def.metaDescription(top[0] ?? null) : def.description.replace("{top1}", top1),
+    searchCopy?.description ?? (def.metaDescription ? def.metaDescription(top[0] ?? null) : def.description.replace("{top1}", top1)),
     freshness,
   );
   const url = absoluteUrl(`/ranking/${def.slug}`);
@@ -86,6 +88,7 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
   const fullRanked = rankBy(def, allMunis);
   const ranked = fullRanked.slice(0, TOP_TABLE);
   if (ranked.length === 0) notFound();
+  const searchCopy = populationSearchCopy({ metric: def.slug, top: ranked[0], count: fullRanked.length, shown: ranked.length });
   const podium = ranked.slice(0, 3);          // トップ3＝順位台
   const ladder = ranked.slice(3, TOP_CARDS);  // 4位以降＝序列ラダー
   // membershipList 型（例: 待機児童ゼロ）は「条件に該当する自治体の一覧」で、並び順は
@@ -159,9 +162,9 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
 
       <header className="rk-hero rk-reveal">
         <span className="rk-eyebrow"><Database size={14} aria-hidden="true" />全国ランキング</span>
-        <h1 className="rk-title">{def.title}</h1>
+        <h1 className="rk-title">{searchCopy?.title ?? def.title}</h1>
         <p className="rk-lead">
-          {def.lead}データのある自治体のみを対象に、政府統計の実データで集計しています（推計値は含みません）。
+          {searchCopy?.lead ?? `${def.lead}データのある自治体のみを対象に、政府統計の実データで集計しています（推計値は含みません）。`}
         </p>
         <ul className="rk-hero-meta">
           <li className="rk-meta-pill">
