@@ -12,6 +12,13 @@ function requestOf(opts: { country?: string; ua?: string; path?: string } = {}):
 }
 
 describe('proxy (geo block)', () => {
+  it.each(['/', '/area/saitama/11203', '/robots.txt', '/ads.txt'])(
+    'AdSense所有権確認クローラーが国外から %s にアクセスできる', path => {
+      expect(proxy(requestOf({ country: 'US', ua: 'Google-Display-Ads-Bot', path })).status).toBe(200);
+      expect(proxy(requestOf({ country: 'IE', ua: 'Mozilla/5.0 (compatible; Google-Display-Ads-Bot/1.0)', path })).status).toBe(200);
+      expect(proxy(requestOf({ country: 'CN', ua: 'Google-Display-Ads-Bot', path })).status).toBe(403);
+    },
+  );
   it('ads.txt は国外の一般UA・広告クローラーにも公開し、中国の拒否は維持する', () => {
     expect(proxy(requestOf({ country: 'US', ua: 'Mozilla/5.0', path: '/ads.txt' })).status).toBe(200);
     expect(proxy(requestOf({ country: 'US', ua: 'Mediapartners-Google', path: '/ads.txt' })).status).toBe(200);

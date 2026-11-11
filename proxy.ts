@@ -19,8 +19,10 @@ const DENIED_COUNTRIES = ['CN'];
 // GoogleOther（発見・調査用）・Google-Extended・Storebot-Google も許可
 // （403 を返すとインデックス評価に不利）。
 // AI 検索系（OpenAI / Anthropic / Perplexity / Amazon）は AIO 経由の流入元として許可。
+// AdSense の所有権確認は Mediapartners-Google とは別の Google-Display-Ads-Bot が行う。
+// https://support.google.com/adsense/answer/99376
 const ALLOWED_BOT_UA =
-  /googlebot|google-inspectiontool|google-extended|googleother|adsbot-google|apis-google|mediapartners-google|storebot-google|bingbot|bingpreview|msnbot|applebot|duckduckbot|yeti|linespider|twitterbot|facebookexternalhit|slackbot|discordbot|linkedinbot|gptbot|oai-searchbot|chatgpt-user|claudebot|claude-web|perplexitybot|amazonbot/i;
+  /googlebot|google-inspectiontool|google-extended|googleother|google-display-ads-bot|adsbot-google|apis-google|mediapartners-google|storebot-google|bingbot|bingpreview|msnbot|applebot|duckduckbot|yeti|linespider|twitterbot|facebookexternalhit|slackbot|discordbot|linkedinbot|gptbot|oai-searchbot|chatgpt-user|claudebot|claude-web|perplexitybot|amazonbot/i;
 
 // クロールの起点となるファイルは国・UA を問わず公開（DENIED_COUNTRIES は除く）
 const PUBLIC_PATHS = ['/robots.txt', '/sitemap.xml', '/ads.txt'];
