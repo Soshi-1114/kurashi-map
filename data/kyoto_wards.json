@@ -6,7 +6,7 @@
     "level": "ward",
     "parentCode": "26100",
     "displayName": "京都市北区",
-    "population": 114349,
+    "population": 114210,
     "populationTrend": "微減",
     "rent": {
       "value": 58026,
@@ -47,9 +47,9 @@
     "amenities": {
       "stations": 4,
       "preschools": 45,
-      "medicalFacilities": 205,
+      "medicalFacilities": 202,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 4173,
@@ -63,7 +63,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.40345,
+    "populationChangeRate": -2.52208,
     "vacancy": {
       "rate": 12.7,
       "vacant": 8290,
@@ -119,7 +119,7 @@
     "level": "ward",
     "parentCode": "26100",
     "displayName": "京都市上京区",
-    "population": 83091,
+    "population": 83053,
     "populationTrend": "横ばい",
     "rent": {
       "value": 63032,
@@ -162,7 +162,7 @@
       "preschools": 36,
       "medicalFacilities": 149,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 5436,
@@ -176,7 +176,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -0.88391,
+    "populationChangeRate": -0.92924,
     "vacancy": {
       "rate": 13.2,
       "vacant": 7370,
@@ -232,7 +232,7 @@
     "level": "ward",
     "parentCode": "26100",
     "displayName": "京都市左京区",
-    "population": 162387,
+    "population": 162180,
     "populationTrend": "微減",
     "rent": {
       "value": 63938,
@@ -273,9 +273,9 @@
     "amenities": {
       "stations": 26,
       "preschools": 78,
-      "medicalFacilities": 301,
+      "medicalFacilities": 298,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 10217,
@@ -289,7 +289,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.19948,
+    "populationChangeRate": -2.32415,
     "vacancy": {
       "rate": 11.4,
       "vacant": 11170,
@@ -345,7 +345,7 @@
     "level": "ward",
     "parentCode": "26100",
     "displayName": "京都市中京区",
-    "population": 111400,
+    "population": 111231,
     "populationTrend": "横ばい",
     "rent": {
       "value": 79552,
@@ -386,9 +386,9 @@
     "amenities": {
       "stations": 10,
       "preschools": 133,
-      "medicalFacilities": 367,
+      "medicalFacilities": 375,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 5604,
@@ -402,7 +402,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 0.82543,
+    "populationChangeRate": 0.67247,
     "vacancy": {
       "rate": 10.8,
       "vacant": 7470,
@@ -458,7 +458,7 @@
     "level": "ward",
     "parentCode": "26100",
     "displayName": "京都市東山区",
-    "population": 35193,
+    "population": 35127,
     "populationTrend": "減少",
     "rent": {
       "value": 61851,
@@ -499,9 +499,9 @@
     "amenities": {
       "stations": 10,
       "preschools": 15,
-      "medicalFacilities": 69,
+      "medicalFacilities": 64,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2462,
@@ -515,7 +515,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.84952,
+    "populationChangeRate": -4.02983,
     "vacancy": {
       "rate": 16.4,
       "vacant": 3890,
@@ -571,7 +571,7 @@
     "level": "ward",
     "parentCode": "26100",
     "displayName": "京都市下京区",
-    "population": 84519,
+    "population": 84410,
     "populationTrend": "微増",
     "rent": {
       "value": 69855,
@@ -612,9 +612,9 @@
     "amenities": {
       "stations": 12,
       "preschools": 40,
-      "medicalFacilities": 291,
+      "medicalFacilities": 310,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 5185,
@@ -628,7 +628,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 2.09582,
+    "populationChangeRate": 1.96415,
     "vacancy": {
       "rate": 15.7,
       "vacant": 9040,
@@ -684,7 +684,7 @@
     "level": "ward",
     "parentCode": "26100",
     "displayName": "京都市南区",
-    "population": 102742,
+    "population": 102653,
     "populationTrend": "横ばい",
     "rent": {
       "value": 61060,
@@ -725,9 +725,9 @@
     "amenities": {
       "stations": 8,
       "preschools": 42,
-      "medicalFacilities": 131,
+      "medicalFacilities": 135,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 7485,
@@ -741,7 +741,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 0.75017,
+    "populationChangeRate": 0.66289,
     "vacancy": {
       "rate": 13.9,
       "vacant": 8280,
@@ -797,7 +797,7 @@
     "level": "ward",
     "parentCode": "26100",
     "displayName": "京都市右京区",
-    "population": 196376,
+    "population": 196189,
     "populationTrend": "微減",
     "rent": {
       "value": 61333,
@@ -838,9 +838,9 @@
     "amenities": {
       "stations": 27,
       "preschools": 81,
-      "medicalFacilities": 262,
+      "medicalFacilities": 257,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 7657,
@@ -854,7 +854,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.80677,
+    "populationChangeRate": -2.89933,
     "vacancy": {
       "rate": 10.2,
       "vacant": 11240,
@@ -910,7 +910,7 @@
     "level": "ward",
     "parentCode": "26100",
     "displayName": "京都市伏見区",
-    "population": 270182,
+    "population": 269891,
     "populationTrend": "微減",
     "rent": {
       "value": 51541,
@@ -951,9 +951,9 @@
     "amenities": {
       "stations": 25,
       "preschools": 110,
-      "medicalFacilities": 353,
+      "medicalFacilities": 350,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 13650,
@@ -967,7 +967,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.76011,
+    "populationChangeRate": -2.86484,
     "vacancy": {
       "rate": 12.7,
       "vacant": 19470,
@@ -1023,7 +1023,7 @@
     "level": "ward",
     "parentCode": "26100",
     "displayName": "京都市山科区",
-    "population": 128356,
+    "population": 128186,
     "populationTrend": "減少",
     "rent": {
       "value": 57040,
@@ -1064,9 +1064,9 @@
     "amenities": {
       "stations": 10,
       "preschools": 59,
-      "medicalFacilities": 184,
+      "medicalFacilities": 185,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 3512,
@@ -1080,7 +1080,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.99256,
+    "populationChangeRate": -5.11839,
     "vacancy": {
       "rate": 13.7,
       "vacant": 10470,
@@ -1136,7 +1136,7 @@
     "level": "ward",
     "parentCode": "26100",
     "displayName": "京都市西京区",
-    "population": 143118,
+    "population": 142932,
     "populationTrend": "減少",
     "rent": {
       "value": 63273,
@@ -1177,9 +1177,9 @@
     "amenities": {
       "stations": 8,
       "preschools": 77,
-      "medicalFacilities": 195,
+      "medicalFacilities": 197,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 3242,
@@ -1193,7 +1193,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.48421,
+    "populationChangeRate": -4.60834,
     "vacancy": {
       "rate": 11.7,
       "vacant": 8610,

@@ -3,7 +3,7 @@
     "code": "32201",
     "pref": "shimane",
     "name": "松江市",
-    "population": 193586,
+    "population": 193397,
     "populationTrend": "減少",
     "rent": {
       "value": 47902,
@@ -44,9 +44,9 @@
     "amenities": {
       "stations": 17,
       "preschools": 157,
-      "medicalFacilities": 306,
+      "medicalFacilities": 307,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2381,
@@ -60,7 +60,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.92594,
+    "populationChangeRate": -5.01876,
     "vacancy": {
       "rate": 11.9,
       "vacant": 11510,
@@ -113,7 +113,7 @@
     "code": "32202",
     "pref": "shimane",
     "name": "浜田市",
-    "population": 48876,
+    "population": 48819,
     "populationTrend": "減少",
     "rent": {
       "value": 39713,
@@ -154,9 +154,9 @@
     "amenities": {
       "stations": 8,
       "preschools": 28,
-      "medicalFacilities": 84,
+      "medicalFacilities": 82,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 765,
@@ -170,7 +170,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.4704,
+    "populationChangeRate": -10.57481,
     "vacancy": {
       "rate": 22.8,
       "vacant": 6920,
@@ -223,7 +223,7 @@
     "code": "32203",
     "pref": "shimane",
     "name": "出雲市",
-    "population": 169539,
+    "population": 169401,
     "populationTrend": "微減",
     "rent": {
       "value": 49579,
@@ -266,7 +266,7 @@
       "preschools": 82,
       "medicalFacilities": 231,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 5666,
@@ -280,7 +280,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.87296,
+    "populationChangeRate": -1.95283,
     "vacancy": {
       "rate": 12,
       "vacant": 8980,
@@ -333,7 +333,7 @@
     "code": "32204",
     "pref": "shimane",
     "name": "益田市",
-    "population": 41489,
+    "population": 41457,
     "populationTrend": "減少",
     "rent": {
       "value": 37005,
@@ -374,9 +374,9 @@
     "amenities": {
       "stations": 8,
       "preschools": 36,
-      "medicalFacilities": 75,
+      "medicalFacilities": 73,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 558,
@@ -390,7 +390,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.80837,
+    "populationChangeRate": -7.87947,
     "vacancy": {
       "rate": 18.5,
       "vacant": 4090,
@@ -443,7 +443,7 @@
     "code": "32205",
     "pref": "shimane",
     "name": "大田市",
-    "population": 29815,
+    "population": 29752,
     "populationTrend": "減少",
     "rent": {
       "value": 40192,
@@ -484,9 +484,9 @@
     "amenities": {
       "stations": 10,
       "preschools": 23,
-      "medicalFacilities": 50,
+      "medicalFacilities": 48,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 598,
@@ -500,7 +500,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.22791,
+    "populationChangeRate": -9.41972,
     "vacancy": {
       "rate": 25.7,
       "vacant": 4550,
@@ -553,7 +553,7 @@
     "code": "32206",
     "pref": "shimane",
     "name": "安来市",
-    "population": 33567,
+    "population": 33523,
     "populationTrend": "減少",
     "rent": {
       "value": 40777,
@@ -594,9 +594,9 @@
     "amenities": {
       "stations": 2,
       "preschools": 23,
-      "medicalFacilities": 42,
+      "medicalFacilities": 41,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 323,
@@ -610,7 +610,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.43014,
+    "populationChangeRate": -9.54886,
     "vacancy": {
       "rate": 16.4,
       "vacant": 2520,
@@ -663,7 +663,7 @@
     "code": "32207",
     "pref": "shimane",
     "name": "江津市",
-    "population": 20420,
+    "population": 20412,
     "populationTrend": "減少",
     "rent": {
       "value": 42633,
@@ -704,9 +704,9 @@
     "amenities": {
       "stations": 14,
       "preschools": 11,
-      "medicalFacilities": 34,
+      "medicalFacilities": 35,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 429,
@@ -720,7 +720,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.05884,
+    "populationChangeRate": -11.09369,
     "vacancy": {
       "rate": 28.3,
       "vacant": 3640,
@@ -773,7 +773,7 @@
     "code": "32209",
     "pref": "shimane",
     "name": "雲南市",
-    "population": 32730,
+    "population": 32700,
     "populationTrend": "減少",
     "rent": {
       "value": 37039,
@@ -816,7 +816,7 @@
       "preschools": 20,
       "medicalFacilities": 44,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 346,
@@ -830,7 +830,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.10101,
+    "populationChangeRate": -9.18433,
     "vacancy": {
       "rate": 15.4,
       "vacant": 2260,
@@ -883,7 +883,7 @@
     "code": "32343",
     "pref": "shimane",
     "name": "奥出雲町",
-    "population": 10351,
+    "population": 10376,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -924,9 +924,9 @@
     "amenities": {
       "stations": 7,
       "preschools": 6,
-      "medicalFacilities": 14,
+      "medicalFacilities": 13,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 177,
@@ -940,7 +940,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -12.64242,
+    "populationChangeRate": -12.43143,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -993,7 +993,7 @@
     "code": "32386",
     "pref": "shimane",
     "name": "飯南町",
-    "population": 4127,
+    "population": 4125,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1003,10 +1003,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 5735,
+      "value": 5620,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -1034,9 +1034,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 4,
-      "medicalFacilities": 9,
+      "medicalFacilities": 8,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 60,
@@ -1050,7 +1050,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.83177,
+    "populationChangeRate": -9.87546,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1103,7 +1103,7 @@
     "code": "32441",
     "pref": "shimane",
     "name": "川本町",
-    "population": 2953,
+    "population": 2946,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1146,7 +1146,7 @@
       "preschools": 3,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 44,
@@ -1160,7 +1160,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.08251,
+    "populationChangeRate": -9.29803,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1213,7 +1213,7 @@
     "code": "32448",
     "pref": "shimane",
     "name": "美郷町",
-    "population": 3771,
+    "population": 3768,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1223,10 +1223,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 5198,
+      "value": 5070,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -1254,9 +1254,9 @@
     "amenities": {
       "stations": 10,
       "preschools": 2,
-      "medicalFacilities": 9,
+      "medicalFacilities": 8,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 36,
@@ -1270,7 +1270,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -13.40987,
+    "populationChangeRate": -13.47876,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1323,7 +1323,7 @@
     "code": "32449",
     "pref": "shimane",
     "name": "邑南町",
-    "population": 9135,
+    "population": 9119,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1333,10 +1333,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 4214,
+      "value": 4200,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -1364,9 +1364,9 @@
     "amenities": {
       "stations": 4,
       "preschools": 9,
-      "medicalFacilities": 21,
+      "medicalFacilities": 22,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 118,
@@ -1380,7 +1380,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.11512,
+    "populationChangeRate": -10.27256,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1433,7 +1433,7 @@
     "code": "32501",
     "pref": "shimane",
     "name": "津和野町",
-    "population": 6100,
+    "population": 6093,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1476,7 +1476,7 @@
       "preschools": 6,
       "medicalFacilities": 9,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 59,
@@ -1490,7 +1490,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.27273,
+    "populationChangeRate": -11.37455,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1543,7 +1543,7 @@
     "code": "32505",
     "pref": "shimane",
     "name": "吉賀町",
-    "population": 5301,
+    "population": 5299,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1586,7 +1586,7 @@
       "preschools": 4,
       "medicalFacilities": 10,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 219,
@@ -1600,7 +1600,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -12.76946,
+    "populationChangeRate": -12.80237,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1663,10 +1663,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 6000,
+      "value": 5983,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -1696,7 +1696,7 @@
       "preschools": 1,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 22,
@@ -1763,7 +1763,7 @@
     "code": "32526",
     "pref": "shimane",
     "name": "西ノ島町",
-    "population": 2401,
+    "population": 2400,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1773,10 +1773,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 13433,
+      "value": 13267,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -1806,7 +1806,7 @@
       "preschools": 2,
       "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 34,
@@ -1820,7 +1820,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -13.88092,
+    "populationChangeRate": -13.91679,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1873,7 +1873,7 @@
     "code": "32527",
     "pref": "shimane",
     "name": "知夫村",
-    "population": 575,
+    "population": 574,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1886,7 +1886,7 @@
       "value": 3900,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -1916,7 +1916,7 @@
       "preschools": 1,
       "medicalFacilities": 2,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 6,
@@ -1930,7 +1930,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.30599,
+    "populationChangeRate": -9.46372,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1983,7 +1983,7 @@
     "code": "32528",
     "pref": "shimane",
     "name": "隠岐の島町",
-    "population": 12377,
+    "population": 12379,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2024,9 +2024,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 10,
-      "medicalFacilities": 20,
+      "medicalFacilities": 19,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 99,
@@ -2040,7 +2040,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.86124,
+    "populationChangeRate": -7.84635,
     "vacancy": {
       "rate": -1,
       "vacant": 0,

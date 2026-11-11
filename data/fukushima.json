@@ -3,7 +3,7 @@
     "code": "07201",
     "pref": "fukushima",
     "name": "福島市",
-    "population": 265803,
+    "population": 265537,
     "populationTrend": "減少",
     "rent": {
       "value": 47698,
@@ -44,9 +44,9 @@
     "amenities": {
       "stations": 27,
       "preschools": 118,
-      "medicalFacilities": 398,
+      "medicalFacilities": 396,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2560,
@@ -60,7 +60,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.97468,
+    "populationChangeRate": -6.06877,
     "vacancy": {
       "rate": 13,
       "vacant": 18080,
@@ -113,7 +113,7 @@
     "code": "07202",
     "pref": "fukushima",
     "name": "会津若松市",
-    "population": 109015,
+    "population": 108941,
     "populationTrend": "減少",
     "rent": {
       "value": 43321,
@@ -154,9 +154,9 @@
     "amenities": {
       "stations": 15,
       "preschools": 58,
-      "medicalFacilities": 159,
+      "medicalFacilities": 146,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1182,
@@ -170,7 +170,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.12326,
+    "populationChangeRate": -7.18631,
     "vacancy": {
       "rate": 18.3,
       "vacant": 10790,
@@ -223,7 +223,7 @@
     "code": "07203",
     "pref": "fukushima",
     "name": "郡山市",
-    "population": 313125,
+    "population": 312873,
     "populationTrend": "減少",
     "rent": {
       "value": 52089,
@@ -264,9 +264,9 @@
     "amenities": {
       "stations": 15,
       "preschools": 125,
-      "medicalFacilities": 412,
+      "medicalFacilities": 415,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 4019,
@@ -280,7 +280,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.44533,
+    "populationChangeRate": -4.52223,
     "vacancy": {
       "rate": 13.9,
       "vacant": 22770,
@@ -333,7 +333,7 @@
     "code": "07204",
     "pref": "fukushima",
     "name": "いわき市",
-    "population": 306495,
+    "population": 306165,
     "populationTrend": "減少",
     "rent": {
       "value": 46051,
@@ -374,9 +374,9 @@
     "amenities": {
       "stations": 15,
       "preschools": 144,
-      "medicalFacilities": 405,
+      "medicalFacilities": 398,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 4100,
@@ -390,7 +390,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.94038,
+    "populationChangeRate": -8.0395,
     "vacancy": {
       "rate": 15.3,
       "vacant": 25170,
@@ -436,7 +436,7 @@
     "code": "07205",
     "pref": "fukushima",
     "name": "白河市",
-    "population": 55388,
+    "population": 55322,
     "populationTrend": "減少",
     "rent": {
       "value": 46222,
@@ -479,7 +479,7 @@
       "preschools": 28,
       "medicalFacilities": 84,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 993,
@@ -493,7 +493,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.89684,
+    "populationChangeRate": -7.00778,
     "vacancy": {
       "rate": 16,
       "vacant": 4420,
@@ -546,7 +546,7 @@
     "code": "07207",
     "pref": "fukushima",
     "name": "須賀川市",
-    "population": 71122,
+    "population": 71073,
     "populationTrend": "減少",
     "rent": {
       "value": 48459,
@@ -587,9 +587,9 @@
     "amenities": {
       "stations": 3,
       "preschools": 39,
-      "medicalFacilities": 92,
+      "medicalFacilities": 90,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 657,
@@ -603,7 +603,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.16055,
+    "populationChangeRate": -5.22589,
     "vacancy": {
       "rate": 11.3,
       "vacant": 3490,
@@ -656,7 +656,7 @@
     "code": "07208",
     "pref": "fukushima",
     "name": "喜多方市",
-    "population": 41739,
+    "population": 41660,
     "populationTrend": "減少",
     "rent": {
       "value": 38852,
@@ -697,9 +697,9 @@
     "amenities": {
       "stations": 6,
       "preschools": 43,
-      "medicalFacilities": 49,
+      "medicalFacilities": 46,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 382,
@@ -713,7 +713,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.74933,
+    "populationChangeRate": -6.92583,
     "vacancy": {
       "rate": 19.9,
       "vacant": 3900,
@@ -766,7 +766,7 @@
     "code": "07209",
     "pref": "fukushima",
     "name": "相馬市",
-    "population": 31883,
+    "population": 31841,
     "populationTrend": "減少",
     "rent": {
       "value": 45096,
@@ -807,9 +807,9 @@
     "amenities": {
       "stations": 2,
       "preschools": 14,
-      "medicalFacilities": 43,
+      "medicalFacilities": 42,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 341,
@@ -823,7 +823,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.55299,
+    "populationChangeRate": -8.67345,
     "vacancy": {
       "rate": 18.8,
       "vacant": 3040,
@@ -869,7 +869,7 @@
     "code": "07210",
     "pref": "fukushima",
     "name": "二本松市",
-    "population": 49291,
+    "population": 49234,
     "populationTrend": "減少",
     "rent": {
       "value": 43357,
@@ -910,9 +910,9 @@
     "amenities": {
       "stations": 3,
       "preschools": 36,
-      "medicalFacilities": 61,
+      "medicalFacilities": 59,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 743,
@@ -926,7 +926,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.96535,
+    "populationChangeRate": -8.07177,
     "vacancy": {
       "rate": 14,
       "vacant": 3120,
@@ -979,7 +979,7 @@
     "code": "07211",
     "pref": "fukushima",
     "name": "田村市",
-    "population": 31836,
+    "population": 31812,
     "populationTrend": "減少",
     "rent": {
       "value": 37607,
@@ -1022,7 +1022,7 @@
       "preschools": 20,
       "medicalFacilities": 45,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 421,
@@ -1036,7 +1036,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.4771,
+    "populationChangeRate": -9.54534,
     "vacancy": {
       "rate": 12.1,
       "vacant": 1620,
@@ -1089,7 +1089,7 @@
     "code": "07212",
     "pref": "fukushima",
     "name": "南相馬市",
-    "population": 54128,
+    "population": 54066,
     "populationTrend": "減少",
     "rent": {
       "value": 42312,
@@ -1130,9 +1130,9 @@
     "amenities": {
       "stations": 5,
       "preschools": 29,
-      "medicalFacilities": 67,
+      "medicalFacilities": 66,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 692,
@@ -1146,7 +1146,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.2654,
+    "populationChangeRate": -8.37048,
     "vacancy": {
       "rate": 22,
       "vacant": 6730,
@@ -1192,7 +1192,7 @@
     "code": "07213",
     "pref": "fukushima",
     "name": "伊達市",
-    "population": 54134,
+    "population": 54107,
     "populationTrend": "減少",
     "rent": {
       "value": 44058,
@@ -1233,9 +1233,9 @@
     "amenities": {
       "stations": 11,
       "preschools": 27,
-      "medicalFacilities": 61,
+      "medicalFacilities": 60,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 684,
@@ -1249,7 +1249,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.05014,
+    "populationChangeRate": -7.0965,
     "vacancy": {
       "rate": 13.3,
       "vacant": 3180,
@@ -1302,7 +1302,7 @@
     "code": "07214",
     "pref": "fukushima",
     "name": "本宮市",
-    "population": 29641,
+    "population": 29610,
     "populationTrend": "微減",
     "rent": {
       "value": 47056,
@@ -1345,7 +1345,7 @@
       "preschools": 14,
       "medicalFacilities": 30,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 398,
@@ -1359,7 +1359,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.96785,
+    "populationChangeRate": -2.07038,
     "vacancy": {
       "rate": 12.2,
       "vacant": 1550,
@@ -1412,7 +1412,7 @@
     "code": "07301",
     "pref": "fukushima",
     "name": "桑折町",
-    "population": 10705,
+    "population": 10706,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1455,7 +1455,7 @@
       "preschools": 2,
       "medicalFacilities": 14,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 58,
@@ -1469,7 +1469,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.57998,
+    "populationChangeRate": -6.57125,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1522,7 +1522,7 @@
     "code": "07303",
     "pref": "fukushima",
     "name": "国見町",
-    "population": 7706,
+    "population": 7696,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1565,7 +1565,7 @@
       "preschools": 2,
       "medicalFacilities": 7,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 69,
@@ -1579,7 +1579,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.79986,
+    "populationChangeRate": -10.91562,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1632,7 +1632,7 @@
     "code": "07308",
     "pref": "fukushima",
     "name": "川俣町",
-    "population": 10847,
+    "population": 10841,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1673,9 +1673,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 2,
-      "medicalFacilities": 19,
+      "medicalFacilities": 17,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 177,
@@ -1689,7 +1689,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.87099,
+    "populationChangeRate": -10.9203,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1742,7 +1742,7 @@
     "code": "07322",
     "pref": "fukushima",
     "name": "大玉村",
-    "population": 8942,
+    "population": 8931,
     "populationTrend": "横ばい",
     "rent": {
       "value": 0,
@@ -1785,7 +1785,7 @@
       "preschools": 3,
       "medicalFacilities": 2,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 36,
@@ -1799,7 +1799,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 0.47191,
+    "populationChangeRate": 0.34831,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1852,7 +1852,7 @@
     "code": "07342",
     "pref": "fukushima",
     "name": "鏡石町",
-    "population": 12017,
+    "population": 12009,
     "populationTrend": "微減",
     "rent": {
       "value": 0,
@@ -1895,7 +1895,7 @@
       "preschools": 6,
       "medicalFacilities": 12,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 137,
@@ -1909,7 +1909,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.44358,
+    "populationChangeRate": -2.50852,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1972,10 +1972,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 6800,
+      "value": 6700,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -2005,7 +2005,7 @@
       "preschools": 3,
       "medicalFacilities": 9,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 89,
@@ -2082,10 +2082,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 6980,
+      "value": 6898,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -2115,7 +2115,7 @@
       "preschools": 2,
       "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 29,
@@ -2195,7 +2195,7 @@
       "value": 5150,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -2225,7 +2225,7 @@
       "preschools": 0,
       "medicalFacilities": 1,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1,
@@ -2292,7 +2292,7 @@
     "code": "07367",
     "pref": "fukushima",
     "name": "只見町",
-    "population": 3467,
+    "population": 3463,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2302,10 +2302,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 4927,
+      "value": 4780,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -2335,7 +2335,7 @@
       "preschools": 3,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 78,
@@ -2349,7 +2349,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -14.26805,
+    "populationChangeRate": -14.36696,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2402,7 +2402,7 @@
     "code": "07368",
     "pref": "fukushima",
     "name": "南会津町",
-    "population": 12603,
+    "population": 12599,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2445,7 +2445,7 @@
       "preschools": 8,
       "medicalFacilities": 21,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 106,
@@ -2459,7 +2459,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -12.78804,
+    "populationChangeRate": -12.81572,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2512,7 +2512,7 @@
     "code": "07402",
     "pref": "fukushima",
     "name": "北塩原村",
-    "population": 2184,
+    "population": 2183,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2522,10 +2522,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 4650,
+      "value": 4525,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -2553,9 +2553,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 3,
-      "medicalFacilities": 4,
+      "medicalFacilities": 2,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 72,
@@ -2569,7 +2569,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -14.55399,
+    "populationChangeRate": -14.59311,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2622,7 +2622,7 @@
     "code": "07405",
     "pref": "fukushima",
     "name": "西会津町",
-    "population": 5063,
+    "population": 5058,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2665,7 +2665,7 @@
       "preschools": 1,
       "medicalFacilities": 9,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 34,
@@ -2679,7 +2679,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -12.25303,
+    "populationChangeRate": -12.33969,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2732,7 +2732,7 @@
     "code": "07407",
     "pref": "fukushima",
     "name": "磐梯町",
-    "population": 3033,
+    "population": 3028,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2775,7 +2775,7 @@
       "preschools": 2,
       "medicalFacilities": 1,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 33,
@@ -2789,7 +2789,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.69958,
+    "populationChangeRate": -8.85009,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2842,7 +2842,7 @@
     "code": "07408",
     "pref": "fukushima",
     "name": "猪苗代町",
-    "population": 11964,
+    "population": 11951,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2885,7 +2885,7 @@
       "preschools": 6,
       "medicalFacilities": 14,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 119,
@@ -2899,7 +2899,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.71783,
+    "populationChangeRate": -11.81375,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2952,7 +2952,7 @@
     "code": "07421",
     "pref": "fukushima",
     "name": "会津坂下町",
-    "population": 13578,
+    "population": 13552,
     "populationTrend": "減少",
     "rent": {
       "value": 40190,
@@ -2993,9 +2993,9 @@
     "amenities": {
       "stations": 4,
       "preschools": 6,
-      "medicalFacilities": 17,
+      "medicalFacilities": 16,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 150,
@@ -3009,7 +3009,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.88851,
+    "populationChangeRate": -10.06106,
     "vacancy": {
       "rate": 14.1,
       "vacant": 870,
@@ -3062,7 +3062,7 @@
     "code": "07422",
     "pref": "fukushima",
     "name": "湯川村",
-    "population": 2834,
+    "population": 2831,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3105,7 +3105,7 @@
       "preschools": 2,
       "medicalFacilities": 1,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 10,
@@ -3119,7 +3119,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.01688,
+    "populationChangeRate": -8.11425,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3172,7 +3172,7 @@
     "code": "07423",
     "pref": "fukushima",
     "name": "柳津町",
-    "population": 2611,
+    "population": 2610,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3182,10 +3182,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 5650,
+      "value": 5467,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -3215,7 +3215,7 @@
       "preschools": 2,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 11,
@@ -3229,7 +3229,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -15.25479,
+    "populationChangeRate": -15.28724,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3282,7 +3282,7 @@
     "code": "07444",
     "pref": "fukushima",
     "name": "三島町",
-    "population": 1217,
+    "population": 1215,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3292,10 +3292,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 3523,
+      "value": 3450,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -3325,7 +3325,7 @@
       "preschools": 1,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 4,
@@ -3339,7 +3339,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -16.18457,
+    "populationChangeRate": -16.32231,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3402,10 +3402,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 3310,
+      "value": 3213,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -3435,7 +3435,7 @@
       "preschools": 2,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 12,
@@ -3502,7 +3502,7 @@
     "code": "07446",
     "pref": "fukushima",
     "name": "昭和村",
-    "population": 1067,
+    "population": 1063,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3512,10 +3512,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 2947,
+      "value": 2937,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -3545,7 +3545,7 @@
       "preschools": 1,
       "medicalFacilities": 2,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 5,
@@ -3559,7 +3559,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -14.36597,
+    "populationChangeRate": -14.687,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3612,7 +3612,7 @@
     "code": "07447",
     "pref": "fukushima",
     "name": "会津美里町",
-    "population": 17292,
+    "population": 17278,
     "populationTrend": "減少",
     "rent": {
       "value": 42344,
@@ -3655,7 +3655,7 @@
       "preschools": 7,
       "medicalFacilities": 13,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 67,
@@ -3669,7 +3669,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.05648,
+    "populationChangeRate": -9.13011,
     "vacancy": {
       "rate": 20.5,
       "vacant": 1590,
@@ -3722,7 +3722,7 @@
     "code": "07461",
     "pref": "fukushima",
     "name": "西郷村",
-    "population": 20859,
+    "population": 20740,
     "populationTrend": "横ばい",
     "rent": {
       "value": 49478,
@@ -3765,7 +3765,7 @@
       "preschools": 8,
       "medicalFacilities": 17,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 435,
@@ -3779,7 +3779,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 0.2451,
+    "populationChangeRate": -0.3268,
     "vacancy": {
       "rate": 12.6,
       "vacant": 1210,
@@ -3875,7 +3875,7 @@
       "preschools": 2,
       "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 189,
@@ -3942,7 +3942,7 @@
     "code": "07465",
     "pref": "fukushima",
     "name": "中島村",
-    "population": 4504,
+    "population": 4500,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3985,7 +3985,7 @@
       "preschools": 2,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 87,
@@ -3999,7 +3999,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.79939,
+    "populationChangeRate": -7.88127,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4052,7 +4052,7 @@
     "code": "07466",
     "pref": "fukushima",
     "name": "矢吹町",
-    "population": 16468,
+    "population": 16463,
     "populationTrend": "減少",
     "rent": {
       "value": 39760,
@@ -4095,7 +4095,7 @@
       "preschools": 11,
       "medicalFacilities": 20,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 372,
@@ -4109,7 +4109,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.73766,
+    "populationChangeRate": -4.76659,
     "vacancy": {
       "rate": 13.4,
       "vacant": 920,
@@ -4162,7 +4162,7 @@
     "code": "07481",
     "pref": "fukushima",
     "name": "棚倉町",
-    "population": 11981,
+    "population": 11976,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4205,7 +4205,7 @@
       "preschools": 4,
       "medicalFacilities": 14,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 206,
@@ -4219,7 +4219,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.2076,
+    "populationChangeRate": -10.24507,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4282,10 +4282,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 9410,
+      "value": 9020,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -4315,7 +4315,7 @@
       "preschools": 2,
       "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 51,
@@ -4382,7 +4382,7 @@
     "code": "07483",
     "pref": "fukushima",
     "name": "塙町",
-    "population": 7416,
+    "population": 7405,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4425,7 +4425,7 @@
       "preschools": 3,
       "medicalFacilities": 10,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 142,
@@ -4439,7 +4439,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.67213,
+    "populationChangeRate": -10.80463,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4492,7 +4492,7 @@
     "code": "07484",
     "pref": "fukushima",
     "name": "鮫川村",
-    "population": 2628,
+    "population": 2626,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4502,10 +4502,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 4800,
+      "value": 4653,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -4533,9 +4533,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 2,
-      "medicalFacilities": 3,
+      "medicalFacilities": 2,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 22,
@@ -4549,7 +4549,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -13.80781,
+    "populationChangeRate": -13.8734,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4602,7 +4602,7 @@
     "code": "07501",
     "pref": "fukushima",
     "name": "石川町",
-    "population": 13253,
+    "population": 13244,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4645,7 +4645,7 @@
       "preschools": 6,
       "medicalFacilities": 18,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 148,
@@ -4659,7 +4659,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.49877,
+    "populationChangeRate": -9.56023,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4712,7 +4712,7 @@
     "code": "07502",
     "pref": "fukushima",
     "name": "玉川村",
-    "population": 5702,
+    "population": 5698,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4755,7 +4755,7 @@
       "preschools": 2,
       "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 68,
@@ -4769,7 +4769,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.79474,
+    "populationChangeRate": -10.85732,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4822,7 +4822,7 @@
     "code": "07503",
     "pref": "fukushima",
     "name": "平田村",
-    "population": 5201,
+    "population": 5198,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4865,7 +4865,7 @@
       "preschools": 3,
       "medicalFacilities": 8,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 137,
@@ -4879,7 +4879,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.72777,
+    "populationChangeRate": -10.77927,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4975,7 +4975,7 @@
       "preschools": 2,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 44,
@@ -5042,7 +5042,7 @@
     "code": "07505",
     "pref": "fukushima",
     "name": "古殿町",
-    "population": 4144,
+    "population": 4137,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -5052,10 +5052,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 6033,
+      "value": 5973,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -5085,7 +5085,7 @@
       "preschools": 2,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 122,
@@ -5099,7 +5099,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -14.11399,
+    "populationChangeRate": -14.25907,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -5152,7 +5152,7 @@
     "code": "07521",
     "pref": "fukushima",
     "name": "三春町",
-    "population": 15818,
+    "population": 15808,
     "populationTrend": "減少",
     "rent": {
       "value": 30714,
@@ -5195,7 +5195,7 @@
       "preschools": 9,
       "medicalFacilities": 19,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 97,
@@ -5209,7 +5209,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.05136,
+    "populationChangeRate": -7.11012,
     "vacancy": {
       "rate": 11.1,
       "vacant": 750,
@@ -5262,7 +5262,7 @@
     "code": "07522",
     "pref": "fukushima",
     "name": "小野町",
-    "population": 8334,
+    "population": 8329,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -5303,9 +5303,9 @@
     "amenities": {
       "stations": 2,
       "preschools": 1,
-      "medicalFacilities": 13,
+      "medicalFacilities": 12,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 216,
@@ -5319,7 +5319,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -12.00507,
+    "populationChangeRate": -12.05786,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -5372,7 +5372,7 @@
     "code": "07541",
     "pref": "fukushima",
     "name": "広野町",
-    "population": 4783,
+    "population": 4777,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -5415,7 +5415,7 @@
       "preschools": 2,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 68,
@@ -5429,7 +5429,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.62232,
+    "populationChangeRate": -11.73319,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -5475,7 +5475,7 @@
     "code": "07542",
     "pref": "fukushima",
     "name": "楢葉町",
-    "population": 4543,
+    "population": 4536,
     "populationTrend": "増加",
     "rent": {
       "value": 0,
@@ -5516,9 +5516,9 @@
     "amenities": {
       "stations": 3,
       "preschools": 2,
-      "medicalFacilities": 7,
+      "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 166,
@@ -5532,7 +5532,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 22.45283,
+    "populationChangeRate": 22.26415,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -5578,7 +5578,7 @@
     "code": "07543",
     "pref": "fukushima",
     "name": "富岡町",
-    "population": 2890,
+    "population": 2894,
     "populationTrend": "増加",
     "rent": {
       "value": 0,
@@ -5621,7 +5621,7 @@
       "preschools": 2,
       "medicalFacilities": 9,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 204,
@@ -5635,7 +5635,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 35.80827,
+    "populationChangeRate": 35.99624,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -5681,7 +5681,7 @@
     "code": "07544",
     "pref": "fukushima",
     "name": "川内村",
-    "population": 1705,
+    "population": 1702,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -5691,10 +5691,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 3637,
+      "value": 3583,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -5724,7 +5724,7 @@
       "preschools": 2,
       "medicalFacilities": 2,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 32,
@@ -5738,7 +5738,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -16.58513,
+    "populationChangeRate": -16.7319,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -5784,7 +5784,7 @@
     "code": "07545",
     "pref": "fukushima",
     "name": "大熊町",
-    "population": 1534,
+    "population": 1533,
     "populationTrend": "増加",
     "rent": {
       "value": 0,
@@ -5794,10 +5794,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 10700,
+      "value": 11000,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -5827,7 +5827,7 @@
       "preschools": 1,
       "medicalFacilities": 2,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 56,
@@ -5841,7 +5841,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 81.1098,
+    "populationChangeRate": 80.99174,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -5888,7 +5888,7 @@
     "pref": "fukushima",
     "name": "双葉町",
     "population": 211,
-    "populationTrend": "横ばい",
+    "populationTrend": "データなし",
     "rent": {
       "value": 0,
       "unit": "円/月",
@@ -5930,7 +5930,7 @@
       "preschools": 0,
       "medicalFacilities": 1,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 30,
@@ -5989,7 +5989,7 @@
     "code": "07547",
     "pref": "fukushima",
     "name": "浪江町",
-    "population": 2573,
+    "population": 2574,
     "populationTrend": "増加",
     "rent": {
       "value": 0,
@@ -6032,7 +6032,7 @@
       "preschools": 4,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 64,
@@ -6046,7 +6046,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 33.80135,
+    "populationChangeRate": 33.85335,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -6092,7 +6092,7 @@
     "code": "07548",
     "pref": "fukushima",
     "name": "葛尾村",
-    "population": 419,
+    "population": 418,
     "populationTrend": "横ばい",
     "rent": {
       "value": 0,
@@ -6102,10 +6102,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 3365,
+      "value": 3335,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -6135,7 +6135,7 @@
       "preschools": 1,
       "medicalFacilities": 2,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 25,
@@ -6149,7 +6149,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -0.2381,
+    "populationChangeRate": -0.47619,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -6195,7 +6195,7 @@
     "code": "07561",
     "pref": "fukushima",
     "name": "新地町",
-    "population": 7483,
+    "population": 7480,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -6236,9 +6236,9 @@
     "amenities": {
       "stations": 2,
       "preschools": 3,
-      "medicalFacilities": 7,
+      "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 84,
@@ -6252,7 +6252,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.33839,
+    "populationChangeRate": -5.37634,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -6298,8 +6298,8 @@
     "code": "07564",
     "pref": "fukushima",
     "name": "飯舘村",
-    "population": 1373,
-    "populationTrend": "増加",
+    "population": 1353,
+    "populationTrend": "微増",
     "rent": {
       "value": 0,
       "unit": "円/月",
@@ -6308,10 +6308,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 4443,
+      "value": 4400,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -6341,7 +6341,7 @@
       "preschools": 2,
       "medicalFacilities": 2,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 64,
@@ -6355,7 +6355,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 4.17299,
+    "populationChangeRate": 2.65554,
     "vacancy": {
       "rate": -1,
       "vacant": 0,

@@ -3,7 +3,7 @@
     "code": "11100",
     "pref": "saitama",
     "name": "さいたま市",
-    "population": 1345016,
+    "population": 1344865,
     "populationTrend": "微増",
     "rent": {
       "value": 71176,
@@ -44,9 +44,9 @@
     "amenities": {
       "stations": 40,
       "preschools": 733,
-      "medicalFacilities": 1796,
+      "medicalFacilities": 1804,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 38754,
@@ -60,7 +60,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 1.58539,
+    "populationChangeRate": 1.57399,
     "vacancy": {
       "rate": 8.6,
       "vacant": 56500,
@@ -113,7 +113,7 @@
     "code": "11201",
     "pref": "saitama",
     "name": "川越市",
-    "population": 354793,
+    "population": 354567,
     "populationTrend": "横ばい",
     "rent": {
       "value": 60972,
@@ -154,9 +154,9 @@
     "amenities": {
       "stations": 12,
       "preschools": 170,
-      "medicalFacilities": 429,
+      "medicalFacilities": 424,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 12621,
@@ -170,7 +170,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 0.06261,
+    "populationChangeRate": -0.00113,
     "vacancy": {
       "rate": 9.2,
       "vacant": 15840,
@@ -223,7 +223,7 @@
     "code": "11202",
     "pref": "saitama",
     "name": "熊谷市",
-    "population": 188262,
+    "population": 188037,
     "populationTrend": "減少",
     "rent": {
       "value": 51533,
@@ -264,9 +264,9 @@
     "amenities": {
       "stations": 9,
       "preschools": 58,
-      "medicalFacilities": 273,
+      "medicalFacilities": 271,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 6182,
@@ -280,7 +280,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.16488,
+    "populationChangeRate": -3.28061,
     "vacancy": {
       "rate": 14.6,
       "vacant": 13730,
@@ -333,7 +333,7 @@
     "code": "11203",
     "pref": "saitama",
     "name": "川口市",
-    "population": 592007,
+    "population": 591712,
     "populationTrend": "横ばい",
     "rent": {
       "value": 73473,
@@ -374,9 +374,9 @@
     "amenities": {
       "stations": 9,
       "preschools": 292,
-      "medicalFacilities": 642,
+      "medicalFacilities": 645,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 54460,
@@ -390,7 +390,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -0.38147,
+    "populationChangeRate": -0.43111,
     "vacancy": {
       "rate": 8.2,
       "vacant": 24410,
@@ -443,7 +443,7 @@
     "code": "11206",
     "pref": "saitama",
     "name": "行田市",
-    "population": 76179,
+    "population": 76111,
     "populationTrend": "減少",
     "rent": {
       "value": 49271,
@@ -484,9 +484,9 @@
     "amenities": {
       "stations": 5,
       "preschools": 22,
-      "medicalFacilities": 80,
+      "medicalFacilities": 78,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2700,
@@ -500,7 +500,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.10111,
+    "populationChangeRate": -3.18761,
     "vacancy": {
       "rate": 13.2,
       "vacant": 4910,
@@ -553,7 +553,7 @@
     "code": "11207",
     "pref": "saitama",
     "name": "秩父市",
-    "population": 54646,
+    "population": 54609,
     "populationTrend": "減少",
     "rent": {
       "value": 43948,
@@ -594,9 +594,9 @@
     "amenities": {
       "stations": 11,
       "preschools": 29,
-      "medicalFacilities": 94,
+      "medicalFacilities": 93,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 862,
@@ -610,7 +610,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.42578,
+    "populationChangeRate": -8.48778,
     "vacancy": {
       "rate": 20.2,
       "vacant": 5910,
@@ -663,7 +663,7 @@
     "code": "11208",
     "pref": "saitama",
     "name": "所沢市",
-    "population": 342575,
+    "population": 342537,
     "populationTrend": "横ばい",
     "rent": {
       "value": 65598,
@@ -704,9 +704,9 @@
     "amenities": {
       "stations": 13,
       "preschools": 90,
-      "medicalFacilities": 411,
+      "medicalFacilities": 414,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 9069,
@@ -720,7 +720,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 0.03241,
+    "populationChangeRate": 0.02132,
     "vacancy": {
       "rate": 8.5,
       "vacant": 14420,
@@ -773,7 +773,7 @@
     "code": "11209",
     "pref": "saitama",
     "name": "飯能市",
-    "population": 77669,
+    "population": 77707,
     "populationTrend": "減少",
     "rent": {
       "value": 57122,
@@ -816,7 +816,7 @@
       "preschools": 24,
       "medicalFacilities": 87,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1654,
@@ -830,7 +830,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.34988,
+    "populationChangeRate": -3.3026,
     "vacancy": {
       "rate": 11.9,
       "vacant": 4660,
@@ -883,7 +883,7 @@
     "code": "11210",
     "pref": "saitama",
     "name": "加須市",
-    "population": 109633,
+    "population": 109480,
     "populationTrend": "微減",
     "rent": {
       "value": 49910,
@@ -924,9 +924,9 @@
     "amenities": {
       "stations": 4,
       "preschools": 38,
-      "medicalFacilities": 107,
+      "medicalFacilities": 106,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 4417,
@@ -940,7 +940,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.78279,
+    "populationChangeRate": -1.91986,
     "vacancy": {
       "rate": 11.1,
       "vacant": 5580,
@@ -993,7 +993,7 @@
     "code": "11211",
     "pref": "saitama",
     "name": "本庄市",
-    "population": 76392,
+    "population": 76337,
     "populationTrend": "微減",
     "rent": {
       "value": 47283,
@@ -1036,7 +1036,7 @@
       "preschools": 36,
       "medicalFacilities": 105,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 3560,
@@ -1050,7 +1050,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.77081,
+    "populationChangeRate": -2.84082,
     "vacancy": {
       "rate": 10.3,
       "vacant": 3900,
@@ -1103,7 +1103,7 @@
     "code": "11212",
     "pref": "saitama",
     "name": "東松山市",
-    "population": 91615,
+    "population": 91816,
     "populationTrend": "横ばい",
     "rent": {
       "value": 51184,
@@ -1144,9 +1144,9 @@
     "amenities": {
       "stations": 2,
       "preschools": 27,
-      "medicalFacilities": 119,
+      "medicalFacilities": 115,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 4535,
@@ -1160,7 +1160,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -0.19174,
+    "populationChangeRate": 0.02724,
     "vacancy": {
       "rate": 10.9,
       "vacant": 4970,
@@ -1213,8 +1213,8 @@
     "code": "11214",
     "pref": "saitama",
     "name": "春日部市",
-    "population": 222817,
-    "populationTrend": "減少",
+    "population": 223939,
+    "populationTrend": "微減",
     "rent": {
       "value": 56907,
       "unit": "円/月",
@@ -1254,9 +1254,9 @@
     "amenities": {
       "stations": 9,
       "preschools": 59,
-      "medicalFacilities": 258,
+      "medicalFacilities": 256,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 7571,
@@ -1270,7 +1270,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.03535,
+    "populationChangeRate": -2.54709,
     "vacancy": {
       "rate": 6.3,
       "vacant": 6660,
@@ -1323,7 +1323,7 @@
     "code": "11215",
     "pref": "saitama",
     "name": "狭山市",
-    "population": 142751,
+    "population": 142970,
     "populationTrend": "減少",
     "rent": {
       "value": 51618,
@@ -1364,9 +1364,9 @@
     "amenities": {
       "stations": 4,
       "preschools": 44,
-      "medicalFacilities": 152,
+      "medicalFacilities": 153,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 4124,
@@ -1380,7 +1380,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.00003,
+    "populationChangeRate": -3.85275,
     "vacancy": {
       "rate": 9.5,
       "vacant": 6920,
@@ -1433,7 +1433,7 @@
     "code": "11216",
     "pref": "saitama",
     "name": "羽生市",
-    "population": 52238,
+    "population": 52198,
     "populationTrend": "微減",
     "rent": {
       "value": 48000,
@@ -1474,9 +1474,9 @@
     "amenities": {
       "stations": 5,
       "preschools": 16,
-      "medicalFacilities": 65,
+      "medicalFacilities": 64,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2848,
@@ -1490,7 +1490,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.18043,
+    "populationChangeRate": -1.2561,
     "vacancy": {
       "rate": 11.8,
       "vacant": 2950,
@@ -1543,7 +1543,7 @@
     "code": "11217",
     "pref": "saitama",
     "name": "鴻巣市",
-    "population": 115548,
+    "population": 115494,
     "populationTrend": "微減",
     "rent": {
       "value": 53013,
@@ -1586,7 +1586,7 @@
       "preschools": 30,
       "medicalFacilities": 129,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 3241,
@@ -1600,7 +1600,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.09563,
+    "populationChangeRate": -1.14185,
     "vacancy": {
       "rate": 9.5,
       "vacant": 5100,
@@ -1653,7 +1653,7 @@
     "code": "11218",
     "pref": "saitama",
     "name": "深谷市",
-    "population": 138493,
+    "population": 138393,
     "populationTrend": "微減",
     "rent": {
       "value": 52597,
@@ -1694,9 +1694,9 @@
     "amenities": {
       "stations": 7,
       "preschools": 50,
-      "medicalFacilities": 167,
+      "medicalFacilities": 166,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 4579,
@@ -1710,7 +1710,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.96435,
+    "populationChangeRate": -2.03514,
     "vacancy": {
       "rate": 11.6,
       "vacant": 7430,
@@ -1763,8 +1763,8 @@
     "code": "11219",
     "pref": "saitama",
     "name": "上尾市",
-    "population": 224800,
-    "populationTrend": "横ばい",
+    "population": 224634,
+    "populationTrend": "微減",
     "rent": {
       "value": 57089,
       "unit": "円/月",
@@ -1804,9 +1804,9 @@
     "amenities": {
       "stations": 4,
       "preschools": 65,
-      "medicalFacilities": 218,
+      "medicalFacilities": 221,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 6472,
@@ -1820,7 +1820,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -0.94298,
+    "populationChangeRate": -1.01613,
     "vacancy": {
       "rate": 8.2,
       "vacant": 8730,
@@ -1873,7 +1873,7 @@
     "code": "11221",
     "pref": "saitama",
     "name": "草加市",
-    "population": 251122,
+    "population": 251360,
     "populationTrend": "微増",
     "rent": {
       "value": 68173,
@@ -1914,9 +1914,9 @@
     "amenities": {
       "stations": 4,
       "preschools": 56,
-      "medicalFacilities": 257,
+      "medicalFacilities": 256,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 13098,
@@ -1930,7 +1930,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 1.1349,
+    "populationChangeRate": 1.23075,
     "vacancy": {
       "rate": 11.5,
       "vacant": 14940,
@@ -1983,7 +1983,7 @@
     "code": "11222",
     "pref": "saitama",
     "name": "越谷市",
-    "population": 341602,
+    "population": 341497,
     "populationTrend": "横ばい",
     "rent": {
       "value": 65034,
@@ -2024,9 +2024,9 @@
     "amenities": {
       "stations": 8,
       "preschools": 206,
-      "medicalFacilities": 396,
+      "medicalFacilities": 401,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 10265,
@@ -2040,7 +2040,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -0.00556,
+    "populationChangeRate": -0.0363,
     "vacancy": {
       "rate": 6.2,
       "vacant": 9570,
@@ -2093,7 +2093,7 @@
     "code": "11223",
     "pref": "saitama",
     "name": "蕨市",
-    "population": 75510,
+    "population": 75454,
     "populationTrend": "微増",
     "rent": {
       "value": 67113,
@@ -2134,9 +2134,9 @@
     "amenities": {
       "stations": 1,
       "preschools": 20,
-      "medicalFacilities": 91,
+      "medicalFacilities": 90,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 11094,
@@ -2150,7 +2150,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 1.65179,
+    "populationChangeRate": 1.5764,
     "vacancy": {
       "rate": 10.1,
       "vacant": 4270,
@@ -2203,7 +2203,7 @@
     "code": "11224",
     "pref": "saitama",
     "name": "戸田市",
-    "population": 139164,
+    "population": 139232,
     "populationTrend": "微減",
     "rent": {
       "value": 77278,
@@ -2244,9 +2244,9 @@
     "amenities": {
       "stations": 3,
       "preschools": 54,
-      "medicalFacilities": 165,
+      "medicalFacilities": 163,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 9843,
@@ -2260,7 +2260,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.23138,
+    "populationChangeRate": -1.18312,
     "vacancy": {
       "rate": 7.2,
       "vacant": 5020,
@@ -2313,7 +2313,7 @@
     "code": "11225",
     "pref": "saitama",
     "name": "入間市",
-    "population": 140180,
+    "population": 140150,
     "populationTrend": "減少",
     "rent": {
       "value": 55422,
@@ -2354,9 +2354,9 @@
     "amenities": {
       "stations": 5,
       "preschools": 36,
-      "medicalFacilities": 146,
+      "medicalFacilities": 145,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 3712,
@@ -2370,7 +2370,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.75624,
+    "populationChangeRate": -3.77684,
     "vacancy": {
       "rate": 8.1,
       "vacant": 5410,
@@ -2423,7 +2423,7 @@
     "code": "11227",
     "pref": "saitama",
     "name": "朝霞市",
-    "population": 147109,
+    "population": 147233,
     "populationTrend": "増加",
     "rent": {
       "value": 79079,
@@ -2466,7 +2466,7 @@
       "preschools": 56,
       "medicalFacilities": 156,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 5599,
@@ -2480,7 +2480,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 4.27124,
+    "populationChangeRate": 4.35914,
     "vacancy": {
       "rate": 6.9,
       "vacant": 4720,
@@ -2533,7 +2533,7 @@
     "code": "11228",
     "pref": "saitama",
     "name": "志木市",
-    "population": 75032,
+    "population": 75036,
     "populationTrend": "横ばい",
     "rent": {
       "value": 70669,
@@ -2574,9 +2574,9 @@
     "amenities": {
       "stations": 1,
       "preschools": 34,
-      "medicalFacilities": 77,
+      "medicalFacilities": 78,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2643,
@@ -2590,7 +2590,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -0.41674,
+    "populationChangeRate": -0.41144,
     "vacancy": {
       "rate": 5.2,
       "vacant": 1830,
@@ -2643,7 +2643,7 @@
     "code": "11229",
     "pref": "saitama",
     "name": "和光市",
-    "population": 83636,
+    "population": 83591,
     "populationTrend": "横ばい",
     "rent": {
       "value": 78272,
@@ -2686,7 +2686,7 @@
       "preschools": 26,
       "medicalFacilities": 82,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 3475,
@@ -2700,7 +2700,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -0.42029,
+    "populationChangeRate": -0.47387,
     "vacancy": {
       "rate": 7.8,
       "vacant": 3450,
@@ -2753,7 +2753,7 @@
     "code": "11230",
     "pref": "saitama",
     "name": "新座市",
-    "population": 164698,
+    "population": 164882,
     "populationTrend": "横ばい",
     "rent": {
       "value": 67167,
@@ -2794,9 +2794,9 @@
     "amenities": {
       "stations": 2,
       "preschools": 48,
-      "medicalFacilities": 132,
+      "medicalFacilities": 138,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 5666,
@@ -2810,7 +2810,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -0.7945,
+    "populationChangeRate": -0.68366,
     "vacancy": {
       "rate": 7.5,
       "vacant": 6120,
@@ -2863,7 +2863,7 @@
     "code": "11231",
     "pref": "saitama",
     "name": "桶川市",
-    "population": 73010,
+    "population": 72962,
     "populationTrend": "微減",
     "rent": {
       "value": 59768,
@@ -2904,9 +2904,9 @@
     "amenities": {
       "stations": 1,
       "preschools": 23,
-      "medicalFacilities": 82,
+      "medicalFacilities": 83,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1466,
@@ -2920,7 +2920,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.32515,
+    "populationChangeRate": -2.38936,
     "vacancy": {
       "rate": 11.5,
       "vacant": 4020,
@@ -2973,7 +2973,7 @@
     "code": "11232",
     "pref": "saitama",
     "name": "久喜市",
-    "population": 147159,
+    "population": 147464,
     "populationTrend": "微減",
     "rent": {
       "value": 53991,
@@ -3014,9 +3014,9 @@
     "amenities": {
       "stations": 7,
       "preschools": 45,
-      "medicalFacilities": 184,
+      "medicalFacilities": 181,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 5053,
@@ -3030,7 +3030,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.27318,
+    "populationChangeRate": -2.07063,
     "vacancy": {
       "rate": 9.7,
       "vacant": 6850,
@@ -3083,7 +3083,7 @@
     "code": "11233",
     "pref": "saitama",
     "name": "北本市",
-    "population": 64222,
+    "population": 64319,
     "populationTrend": "微減",
     "rent": {
       "value": 53858,
@@ -3124,9 +3124,9 @@
     "amenities": {
       "stations": 1,
       "preschools": 23,
-      "medicalFacilities": 80,
+      "medicalFacilities": 79,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1276,
@@ -3140,7 +3140,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.50151,
+    "populationChangeRate": -1.35274,
     "vacancy": {
       "rate": 8.6,
       "vacant": 2620,
@@ -3193,7 +3193,7 @@
     "code": "11234",
     "pref": "saitama",
     "name": "八潮市",
-    "population": 93386,
+    "population": 93410,
     "populationTrend": "横ばい",
     "rent": {
       "value": 69146,
@@ -3236,7 +3236,7 @@
       "preschools": 26,
       "medicalFacilities": 87,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 5566,
@@ -3250,7 +3250,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 0.02464,
+    "populationChangeRate": 0.05034,
     "vacancy": {
       "rate": 5.3,
       "vacant": 2460,
@@ -3303,7 +3303,7 @@
     "code": "11235",
     "pref": "saitama",
     "name": "富士見市",
-    "population": 112824,
+    "population": 112751,
     "populationTrend": "横ばい",
     "rent": {
       "value": 65216,
@@ -3344,9 +3344,9 @@
     "amenities": {
       "stations": 3,
       "preschools": 33,
-      "medicalFacilities": 128,
+      "medicalFacilities": 132,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 4006,
@@ -3360,7 +3360,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 0.86269,
+    "populationChangeRate": 0.79743,
     "vacancy": {
       "rate": 7.6,
       "vacant": 4270,
@@ -3413,7 +3413,7 @@
     "code": "11237",
     "pref": "saitama",
     "name": "三郷市",
-    "population": 140579,
+    "population": 140568,
     "populationTrend": "微減",
     "rent": {
       "value": 62772,
@@ -3454,9 +3454,9 @@
     "amenities": {
       "stations": 3,
       "preschools": 41,
-      "medicalFacilities": 132,
+      "medicalFacilities": 134,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 8076,
@@ -3470,7 +3470,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.10169,
+    "populationChangeRate": -1.10943,
     "vacancy": {
       "rate": 9.9,
       "vacant": 6870,
@@ -3523,7 +3523,7 @@
     "code": "11238",
     "pref": "saitama",
     "name": "蓮田市",
-    "population": 60443,
+    "population": 60368,
     "populationTrend": "微減",
     "rent": {
       "value": 61252,
@@ -3564,9 +3564,9 @@
     "amenities": {
       "stations": 1,
       "preschools": 18,
-      "medicalFacilities": 71,
+      "medicalFacilities": 70,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1168,
@@ -3580,7 +3580,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.7171,
+    "populationChangeRate": -1.83905,
     "vacancy": {
       "rate": 8.8,
       "vacant": 2500,
@@ -3633,7 +3633,7 @@
     "code": "11239",
     "pref": "saitama",
     "name": "坂戸市",
-    "population": 99389,
+    "population": 99273,
     "populationTrend": "横ばい",
     "rent": {
       "value": 51457,
@@ -3674,9 +3674,9 @@
     "amenities": {
       "stations": 4,
       "preschools": 26,
-      "medicalFacilities": 122,
+      "medicalFacilities": 128,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 4282,
@@ -3690,7 +3690,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -0.88357,
+    "populationChangeRate": -0.99925,
     "vacancy": {
       "rate": 14,
       "vacant": 7330,
@@ -3743,7 +3743,7 @@
     "code": "11240",
     "pref": "saitama",
     "name": "幸手市",
-    "population": 47634,
+    "population": 47754,
     "populationTrend": "減少",
     "rent": {
       "value": 48326,
@@ -3784,9 +3784,9 @@
     "amenities": {
       "stations": 1,
       "preschools": 11,
-      "medicalFacilities": 63,
+      "medicalFacilities": 61,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1821,
@@ -3800,7 +3800,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.85759,
+    "populationChangeRate": -4.6179,
     "vacancy": {
       "rate": 12.4,
       "vacant": 2940,
@@ -3853,7 +3853,7 @@
     "code": "11241",
     "pref": "saitama",
     "name": "鶴ヶ島市",
-    "population": 70693,
+    "population": 70627,
     "populationTrend": "横ばい",
     "rent": {
       "value": 56893,
@@ -3894,9 +3894,9 @@
     "amenities": {
       "stations": 2,
       "preschools": 19,
-      "medicalFacilities": 76,
+      "medicalFacilities": 74,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2415,
@@ -3910,7 +3910,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 0.82148,
+    "populationChangeRate": 0.72736,
     "vacancy": {
       "rate": 6.8,
       "vacant": 2340,
@@ -3963,7 +3963,7 @@
     "code": "11242",
     "pref": "saitama",
     "name": "日高市",
-    "population": 53431,
+    "population": 53231,
     "populationTrend": "微減",
     "rent": {
       "value": 46234,
@@ -4006,7 +4006,7 @@
       "preschools": 14,
       "medicalFacilities": 39,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1437,
@@ -4020,7 +4020,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.08902,
+    "populationChangeRate": -2.45552,
     "vacancy": {
       "rate": 9.2,
       "vacant": 2240,
@@ -4073,7 +4073,7 @@
     "code": "11243",
     "pref": "saitama",
     "name": "吉川市",
-    "population": 71328,
+    "population": 71291,
     "populationTrend": "横ばい",
     "rent": {
       "value": 62928,
@@ -4114,9 +4114,9 @@
     "amenities": {
       "stations": 2,
       "preschools": 22,
-      "medicalFacilities": 78,
+      "medicalFacilities": 76,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2649,
@@ -4130,7 +4130,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -0.90443,
+    "populationChangeRate": -0.95583,
     "vacancy": {
       "rate": 8.6,
       "vacant": 2670,
@@ -4183,7 +4183,7 @@
     "code": "11245",
     "pref": "saitama",
     "name": "ふじみ野市",
-    "population": 112433,
+    "population": 112322,
     "populationTrend": "微減",
     "rent": {
       "value": 65769,
@@ -4224,9 +4224,9 @@
     "amenities": {
       "stations": 1,
       "preschools": 33,
-      "medicalFacilities": 132,
+      "medicalFacilities": 131,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 4165,
@@ -4240,7 +4240,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.02467,
+    "populationChangeRate": -1.12239,
     "vacancy": {
       "rate": 10.1,
       "vacant": 5580,
@@ -4293,7 +4293,7 @@
     "code": "11246",
     "pref": "saitama",
     "name": "白岡市",
-    "population": 51485,
+    "population": 51461,
     "populationTrend": "微減",
     "rent": {
       "value": 65433,
@@ -4334,9 +4334,9 @@
     "amenities": {
       "stations": 2,
       "preschools": 12,
-      "medicalFacilities": 57,
+      "medicalFacilities": 56,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1076,
@@ -4350,7 +4350,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.39618,
+    "populationChangeRate": -1.44214,
     "vacancy": {
       "rate": 7.4,
       "vacant": 1670,
@@ -4403,7 +4403,7 @@
     "code": "11301",
     "pref": "saitama",
     "name": "伊奈町",
-    "population": 44450,
+    "population": 44498,
     "populationTrend": "横ばい",
     "rent": {
       "value": 60847,
@@ -4446,7 +4446,7 @@
       "preschools": 12,
       "medicalFacilities": 39,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 934,
@@ -4460,7 +4460,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -0.87197,
+    "populationChangeRate": -0.76492,
     "vacancy": {
       "rate": 6.8,
       "vacant": 1360,
@@ -4513,7 +4513,7 @@
     "code": "11324",
     "pref": "saitama",
     "name": "三芳町",
-    "population": 37481,
+    "population": 37440,
     "populationTrend": "微減",
     "rent": {
       "value": 68843,
@@ -4556,7 +4556,7 @@
       "preschools": 9,
       "medicalFacilities": 28,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1155,
@@ -4570,7 +4570,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.47958,
+    "populationChangeRate": -2.58625,
     "vacancy": {
       "rate": 8.7,
       "vacant": 1440,
@@ -4623,7 +4623,7 @@
     "code": "11326",
     "pref": "saitama",
     "name": "毛呂山町",
-    "population": 33221,
+    "population": 33251,
     "populationTrend": "減少",
     "rent": {
       "value": 49177,
@@ -4664,9 +4664,9 @@
     "amenities": {
       "stations": 4,
       "preschools": 11,
-      "medicalFacilities": 34,
+      "medicalFacilities": 33,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1003,
@@ -4680,7 +4680,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.06515,
+    "populationChangeRate": -5.98032,
     "vacancy": {
       "rate": 13.7,
       "vacant": 2570,
@@ -4733,7 +4733,7 @@
     "code": "11327",
     "pref": "saitama",
     "name": "越生町",
-    "population": 10231,
+    "population": 10254,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4776,7 +4776,7 @@
       "preschools": 3,
       "medicalFacilities": 12,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 203,
@@ -4790,7 +4790,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.23547,
+    "populationChangeRate": -7.02693,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4843,7 +4843,7 @@
     "code": "11341",
     "pref": "saitama",
     "name": "滑川町",
-    "population": 19908,
+    "population": 19911,
     "populationTrend": "横ばい",
     "rent": {
       "value": 50933,
@@ -4884,9 +4884,9 @@
     "amenities": {
       "stations": 2,
       "preschools": 10,
-      "medicalFacilities": 17,
+      "medicalFacilities": 18,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 782,
@@ -4900,7 +4900,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 0.89195,
+    "populationChangeRate": 0.90716,
     "vacancy": {
       "rate": 10.9,
       "vacant": 990,
@@ -4953,7 +4953,7 @@
     "code": "11342",
     "pref": "saitama",
     "name": "嵐山町",
-    "population": 17346,
+    "population": 17332,
     "populationTrend": "減少",
     "rent": {
       "value": 49174,
@@ -4996,7 +4996,7 @@
       "preschools": 5,
       "medicalFacilities": 20,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 900,
@@ -5010,7 +5010,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.03538,
+    "populationChangeRate": -3.11365,
     "vacancy": {
       "rate": 13.3,
       "vacant": 1110,
@@ -5063,7 +5063,7 @@
     "code": "11343",
     "pref": "saitama",
     "name": "小川町",
-    "population": 26273,
+    "population": 26272,
     "populationTrend": "減少",
     "rent": {
       "value": 50694,
@@ -5104,9 +5104,9 @@
     "amenities": {
       "stations": 4,
       "preschools": 7,
-      "medicalFacilities": 43,
+      "medicalFacilities": 41,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 540,
@@ -5120,7 +5120,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.8916,
+    "populationChangeRate": -7.89511,
     "vacancy": {
       "rate": 14.4,
       "vacant": 1950,
@@ -5173,7 +5173,7 @@
     "code": "11346",
     "pref": "saitama",
     "name": "川島町",
-    "population": 17882,
+    "population": 17873,
     "populationTrend": "減少",
     "rent": {
       "value": 37533,
@@ -5214,9 +5214,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 3,
-      "medicalFacilities": 22,
+      "medicalFacilities": 23,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 552,
@@ -5230,7 +5230,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.72009,
+    "populationChangeRate": -7.76654,
     "vacancy": {
       "rate": 12.9,
       "vacant": 1070,
@@ -5283,7 +5283,7 @@
     "code": "11347",
     "pref": "saitama",
     "name": "吉見町",
-    "population": 16840,
+    "population": 16823,
     "populationTrend": "減少",
     "rent": {
       "value": 54595,
@@ -5324,9 +5324,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 2,
-      "medicalFacilities": 10,
+      "medicalFacilities": 9,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 277,
@@ -5340,7 +5340,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.43184,
+    "populationChangeRate": -7.52529,
     "vacancy": {
       "rate": 10.4,
       "vacant": 780,
@@ -5393,7 +5393,7 @@
     "code": "11348",
     "pref": "saitama",
     "name": "鳩山町",
-    "population": 12649,
+    "population": 12639,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -5434,9 +5434,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 3,
-      "medicalFacilities": 12,
+      "medicalFacilities": 13,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 174,
@@ -5450,7 +5450,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.71829,
+    "populationChangeRate": -6.79204,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -5503,7 +5503,7 @@
     "code": "11349",
     "pref": "saitama",
     "name": "ときがわ町",
-    "population": 9806,
+    "population": 9767,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -5544,9 +5544,9 @@
     "amenities": {
       "stations": 1,
       "preschools": 5,
-      "medicalFacilities": 11,
+      "medicalFacilities": 10,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 272,
@@ -5560,7 +5560,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.96395,
+    "populationChangeRate": -7.33397,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -5613,7 +5613,7 @@
     "code": "11361",
     "pref": "saitama",
     "name": "横瀬町",
-    "population": 7227,
+    "population": 7230,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -5656,7 +5656,7 @@
       "preschools": 3,
       "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 89,
@@ -5670,7 +5670,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.42474,
+    "populationChangeRate": -9.38714,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -5766,7 +5766,7 @@
       "preschools": 3,
       "medicalFacilities": 12,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 116,
@@ -5833,7 +5833,7 @@
     "code": "11363",
     "pref": "saitama",
     "name": "長瀞町",
-    "population": 6101,
+    "population": 6112,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -5843,10 +5843,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 15850,
+      "value": 15725,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -5876,7 +5876,7 @@
       "preschools": 4,
       "medicalFacilities": 8,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 53,
@@ -5890,7 +5890,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.37168,
+    "populationChangeRate": -10.21008,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -5943,7 +5943,7 @@
     "code": "11365",
     "pref": "saitama",
     "name": "小鹿野町",
-    "population": 9431,
+    "population": 9465,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -5986,7 +5986,7 @@
       "preschools": 4,
       "medicalFacilities": 16,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 164,
@@ -6000,7 +6000,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -13.69876,
+    "populationChangeRate": -13.38763,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -6053,7 +6053,7 @@
     "code": "11369",
     "pref": "saitama",
     "name": "東秩父村",
-    "population": 2293,
+    "population": 2289,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -6063,10 +6063,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 8173,
+      "value": 8067,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -6096,7 +6096,7 @@
       "preschools": 1,
       "medicalFacilities": 1,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 12,
@@ -6110,7 +6110,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -15.35622,
+    "populationChangeRate": -15.50388,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -6163,7 +6163,7 @@
     "code": "11381",
     "pref": "saitama",
     "name": "美里町",
-    "population": 10317,
+    "population": 10318,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -6206,7 +6206,7 @@
       "preschools": 6,
       "medicalFacilities": 12,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 254,
@@ -6220,7 +6220,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.54045,
+    "populationChangeRate": -6.53139,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -6273,7 +6273,7 @@
     "code": "11383",
     "pref": "saitama",
     "name": "神川町",
-    "population": 12488,
+    "population": 12480,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -6316,7 +6316,7 @@
       "preschools": 4,
       "medicalFacilities": 12,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 774,
@@ -6330,7 +6330,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.51995,
+    "populationChangeRate": -6.57983,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -6383,7 +6383,7 @@
     "code": "11385",
     "pref": "saitama",
     "name": "上里町",
-    "population": 29618,
+    "population": 29611,
     "populationTrend": "微減",
     "rent": {
       "value": 46790,
@@ -6424,9 +6424,9 @@
     "amenities": {
       "stations": 1,
       "preschools": 10,
-      "medicalFacilities": 33,
+      "medicalFacilities": 32,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1562,
@@ -6440,7 +6440,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.38935,
+    "populationChangeRate": -2.41242,
     "vacancy": {
       "rate": 11.5,
       "vacant": 1580,
@@ -6493,7 +6493,7 @@
     "code": "11408",
     "pref": "saitama",
     "name": "寄居町",
-    "population": 30680,
+    "population": 30683,
     "populationTrend": "減少",
     "rent": {
       "value": 42791,
@@ -6536,7 +6536,7 @@
       "preschools": 8,
       "medicalFacilities": 40,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1211,
@@ -6550,7 +6550,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.23259,
+    "populationChangeRate": -5.22333,
     "vacancy": {
       "rate": 14.9,
       "vacant": 2410,
@@ -6603,7 +6603,7 @@
     "code": "11442",
     "pref": "saitama",
     "name": "宮代町",
-    "population": 33535,
+    "population": 33542,
     "populationTrend": "微減",
     "rent": {
       "value": 51563,
@@ -6644,9 +6644,9 @@
     "amenities": {
       "stations": 4,
       "preschools": 10,
-      "medicalFacilities": 26,
+      "medicalFacilities": 25,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 686,
@@ -6660,7 +6660,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.79225,
+    "populationChangeRate": -1.77175,
     "vacancy": {
       "rate": 12.2,
       "vacant": 2060,
@@ -6713,7 +6713,7 @@
     "code": "11464",
     "pref": "saitama",
     "name": "杉戸町",
-    "population": 42582,
+    "population": 42574,
     "populationTrend": "微減",
     "rent": {
       "value": 48976,
@@ -6756,7 +6756,7 @@
       "preschools": 11,
       "medicalFacilities": 36,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 937,
@@ -6770,7 +6770,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.8806,
+    "populationChangeRate": -2.89885,
     "vacancy": {
       "rate": 10.7,
       "vacant": 2210,
@@ -6823,7 +6823,7 @@
     "code": "11465",
     "pref": "saitama",
     "name": "松伏町",
-    "population": 26877,
+    "population": 26889,
     "populationTrend": "減少",
     "rent": {
       "value": 63333,
@@ -6864,9 +6864,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 8,
-      "medicalFacilities": 23,
+      "medicalFacilities": 21,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 787,
@@ -6880,7 +6880,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.91403,
+    "populationChangeRate": -4.87158,
     "vacancy": {
       "rate": 6.3,
       "vacant": 740,

@@ -3,7 +3,7 @@
     "code": "08201",
     "pref": "ibaraki",
     "name": "水戸市",
-    "population": 265773,
+    "population": 265692,
     "populationTrend": "微減",
     "rent": {
       "value": 50654,
@@ -44,9 +44,9 @@
     "amenities": {
       "stations": 9,
       "preschools": 110,
-      "medicalFacilities": 426,
+      "medicalFacilities": 425,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 5061,
@@ -60,7 +60,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.81466,
+    "populationChangeRate": -1.84458,
     "vacancy": {
       "rate": 18,
       "vacant": 26880,
@@ -113,7 +113,7 @@
     "code": "08202",
     "pref": "ibaraki",
     "name": "日立市",
-    "population": 158763,
+    "population": 158681,
     "populationTrend": "減少",
     "rent": {
       "value": 43891,
@@ -154,9 +154,9 @@
     "amenities": {
       "stations": 5,
       "preschools": 59,
-      "medicalFacilities": 183,
+      "medicalFacilities": 180,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1881,
@@ -170,7 +170,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.02251,
+    "populationChangeRate": -9.0695,
     "vacancy": {
       "rate": 16.7,
       "vacant": 15270,
@@ -223,7 +223,7 @@
     "code": "08203",
     "pref": "ibaraki",
     "name": "土浦市",
-    "population": 141588,
+    "population": 141509,
     "populationTrend": "横ばい",
     "rent": {
       "value": 49445,
@@ -266,7 +266,7 @@
       "preschools": 46,
       "medicalFacilities": 195,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 6930,
@@ -280,7 +280,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -0.34208,
+    "populationChangeRate": -0.39768,
     "vacancy": {
       "rate": 12.5,
       "vacant": 9470,
@@ -333,7 +333,7 @@
     "code": "08204",
     "pref": "ibaraki",
     "name": "古河市",
-    "population": 136308,
+    "population": 136253,
     "populationTrend": "微減",
     "rent": {
       "value": 49903,
@@ -376,7 +376,7 @@
       "preschools": 56,
       "medicalFacilities": 144,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 6721,
@@ -390,7 +390,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.17878,
+    "populationChangeRate": -2.21825,
     "vacancy": {
       "rate": 14.4,
       "vacant": 9610,
@@ -443,7 +443,7 @@
     "code": "08205",
     "pref": "ibaraki",
     "name": "石岡市",
-    "population": 67416,
+    "population": 67339,
     "populationTrend": "減少",
     "rent": {
       "value": 48496,
@@ -484,9 +484,9 @@
     "amenities": {
       "stations": 2,
       "preschools": 25,
-      "medicalFacilities": 89,
+      "medicalFacilities": 85,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1850,
@@ -500,7 +500,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.72642,
+    "populationChangeRate": -7.83181,
     "vacancy": {
       "rate": 19.3,
       "vacant": 6780,
@@ -553,7 +553,7 @@
     "code": "08207",
     "pref": "ibaraki",
     "name": "結城市",
-    "population": 48173,
+    "population": 48145,
     "populationTrend": "減少",
     "rent": {
       "value": 46143,
@@ -594,9 +594,9 @@
     "amenities": {
       "stations": 3,
       "preschools": 18,
-      "medicalFacilities": 56,
+      "medicalFacilities": 55,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 3373,
@@ -610,7 +610,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.88103,
+    "populationChangeRate": -4.93632,
     "vacancy": {
       "rate": 16.8,
       "vacant": 3840,
@@ -663,7 +663,7 @@
     "code": "08208",
     "pref": "ibaraki",
     "name": "龍ケ崎市",
-    "population": 73931,
+    "population": 73904,
     "populationTrend": "減少",
     "rent": {
       "value": 46537,
@@ -704,9 +704,9 @@
     "amenities": {
       "stations": 4,
       "preschools": 28,
-      "medicalFacilities": 89,
+      "medicalFacilities": 88,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 3875,
@@ -720,7 +720,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.257,
+    "populationChangeRate": -3.29233,
     "vacancy": {
       "rate": 10.9,
       "vacant": 4010,
@@ -773,7 +773,7 @@
     "code": "08210",
     "pref": "ibaraki",
     "name": "下妻市",
-    "population": 40785,
+    "population": 40750,
     "populationTrend": "減少",
     "rent": {
       "value": 44516,
@@ -816,7 +816,7 @@
       "preschools": 15,
       "medicalFacilities": 46,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 3561,
@@ -830,7 +830,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.08269,
+    "populationChangeRate": -4.165,
     "vacancy": {
       "rate": 14.4,
       "vacant": 2690,
@@ -883,7 +883,7 @@
     "code": "08211",
     "pref": "ibaraki",
     "name": "常総市",
-    "population": 57983,
+    "population": 57918,
     "populationTrend": "減少",
     "rent": {
       "value": 44609,
@@ -926,7 +926,7 @@
       "preschools": 26,
       "medicalFacilities": 56,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 7431,
@@ -940,7 +940,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.68652,
+    "populationChangeRate": -4.79337,
     "vacancy": {
       "rate": 12.8,
       "vacant": 3270,
@@ -993,7 +993,7 @@
     "code": "08212",
     "pref": "ibaraki",
     "name": "常陸太田市",
-    "population": 43813,
+    "population": 43769,
     "populationTrend": "減少",
     "rent": {
       "value": 42574,
@@ -1036,7 +1036,7 @@
       "preschools": 19,
       "medicalFacilities": 46,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 314,
@@ -1050,7 +1050,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.8535,
+    "populationChangeRate": -9.94404,
     "vacancy": {
       "rate": 15,
       "vacant": 3370,
@@ -1103,7 +1103,7 @@
     "code": "08214",
     "pref": "ibaraki",
     "name": "高萩市",
-    "population": 25028,
+    "population": 25001,
     "populationTrend": "減少",
     "rent": {
       "value": 41494,
@@ -1144,9 +1144,9 @@
     "amenities": {
       "stations": 1,
       "preschools": 8,
-      "medicalFacilities": 32,
+      "medicalFacilities": 31,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 297,
@@ -1160,7 +1160,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.64295,
+    "populationChangeRate": -9.74042,
     "vacancy": {
       "rate": 18.6,
       "vacant": 2590,
@@ -1213,7 +1213,7 @@
     "code": "08215",
     "pref": "ibaraki",
     "name": "北茨城市",
-    "population": 38436,
+    "population": 38386,
     "populationTrend": "減少",
     "rent": {
       "value": 41033,
@@ -1254,9 +1254,9 @@
     "amenities": {
       "stations": 3,
       "preschools": 11,
-      "medicalFacilities": 33,
+      "medicalFacilities": 32,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 738,
@@ -1270,7 +1270,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.05005,
+    "populationChangeRate": -8.16966,
     "vacancy": {
       "rate": 20.4,
       "vacant": 4250,
@@ -1323,7 +1323,7 @@
     "code": "08216",
     "pref": "ibaraki",
     "name": "笠間市",
-    "population": 71510,
+    "population": 71424,
     "populationTrend": "微減",
     "rent": {
       "value": 44418,
@@ -1364,9 +1364,9 @@
     "amenities": {
       "stations": 7,
       "preschools": 21,
-      "medicalFacilities": 79,
+      "medicalFacilities": 78,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1452,
@@ -1380,7 +1380,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.2727,
+    "populationChangeRate": -2.39023,
     "vacancy": {
       "rate": 15.4,
       "vacant": 5330,
@@ -1433,7 +1433,7 @@
     "code": "08217",
     "pref": "ibaraki",
     "name": "取手市",
-    "population": 103461,
+    "population": 103381,
     "populationTrend": "微減",
     "rent": {
       "value": 52830,
@@ -1474,9 +1474,9 @@
     "amenities": {
       "stations": 9,
       "preschools": 36,
-      "medicalFacilities": 119,
+      "medicalFacilities": 122,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 3809,
@@ -1490,7 +1490,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.01699,
+    "populationChangeRate": -1.09353,
     "vacancy": {
       "rate": 13,
       "vacant": 6890,
@@ -1543,7 +1543,7 @@
     "code": "08219",
     "pref": "ibaraki",
     "name": "牛久市",
-    "population": 82524,
+    "population": 82508,
     "populationTrend": "微減",
     "rent": {
       "value": 56335,
@@ -1584,9 +1584,9 @@
     "amenities": {
       "stations": 2,
       "preschools": 27,
-      "medicalFacilities": 101,
+      "medicalFacilities": 99,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2086,
@@ -1600,7 +1600,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.51267,
+    "populationChangeRate": -2.53157,
     "vacancy": {
       "rate": 9.9,
       "vacant": 3880,
@@ -1653,7 +1653,7 @@
     "code": "08220",
     "pref": "ibaraki",
     "name": "つくば市",
-    "population": 268991,
+    "population": 268832,
     "populationTrend": "増加",
     "rent": {
       "value": 57347,
@@ -1694,9 +1694,9 @@
     "amenities": {
       "stations": 6,
       "preschools": 123,
-      "medicalFacilities": 356,
+      "medicalFacilities": 358,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 15073,
@@ -1710,7 +1710,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 11.31153,
+    "populationChangeRate": 11.24574,
     "vacancy": {
       "rate": 8.1,
       "vacant": 10680,
@@ -1763,7 +1763,7 @@
     "code": "08221",
     "pref": "ibaraki",
     "name": "ひたちなか市",
-    "population": 151721,
+    "population": 151618,
     "populationTrend": "減少",
     "rent": {
       "value": 52279,
@@ -1804,9 +1804,9 @@
     "amenities": {
       "stations": 14,
       "preschools": 35,
-      "medicalFacilities": 165,
+      "medicalFacilities": 167,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2991,
@@ -1820,7 +1820,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.10382,
+    "populationChangeRate": -3.16961,
     "vacancy": {
       "rate": 12.5,
       "vacant": 9440,
@@ -1873,7 +1873,7 @@
     "code": "08222",
     "pref": "ibaraki",
     "name": "鹿嶋市",
-    "population": 63997,
+    "population": 63954,
     "populationTrend": "減少",
     "rent": {
       "value": 39618,
@@ -1914,9 +1914,9 @@
     "amenities": {
       "stations": 7,
       "preschools": 29,
-      "medicalFacilities": 69,
+      "medicalFacilities": 68,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1477,
@@ -1930,7 +1930,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.41075,
+    "populationChangeRate": -4.47498,
     "vacancy": {
       "rate": 20.6,
       "vacant": 7420,
@@ -1983,7 +1983,7 @@
     "code": "08223",
     "pref": "ibaraki",
     "name": "潮来市",
-    "population": 25141,
+    "population": 25158,
     "populationTrend": "減少",
     "rent": {
       "value": 40297,
@@ -2024,9 +2024,9 @@
     "amenities": {
       "stations": 2,
       "preschools": 19,
-      "medicalFacilities": 27,
+      "medicalFacilities": 29,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 651,
@@ -2040,7 +2040,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.92262,
+    "populationChangeRate": -8.86103,
     "vacancy": {
       "rate": 14.3,
       "vacant": 1780,
@@ -2093,7 +2093,7 @@
     "code": "08224",
     "pref": "ibaraki",
     "name": "守谷市",
-    "population": 70192,
+    "population": 70199,
     "populationTrend": "微増",
     "rent": {
       "value": 65221,
@@ -2134,9 +2134,9 @@
     "amenities": {
       "stations": 4,
       "preschools": 30,
-      "medicalFacilities": 95,
+      "medicalFacilities": 96,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1597,
@@ -2150,7 +2150,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 2.58839,
+    "populationChangeRate": 2.59862,
     "vacancy": {
       "rate": 6.4,
       "vacant": 1920,
@@ -2203,7 +2203,7 @@
     "code": "08225",
     "pref": "ibaraki",
     "name": "常陸大宮市",
-    "population": 35735,
+    "population": 35708,
     "populationTrend": "減少",
     "rent": {
       "value": 44231,
@@ -2246,7 +2246,7 @@
       "preschools": 21,
       "medicalFacilities": 41,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 599,
@@ -2260,7 +2260,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.99483,
+    "populationChangeRate": -9.06359,
     "vacancy": {
       "rate": 16.3,
       "vacant": 2990,
@@ -2313,7 +2313,7 @@
     "code": "08226",
     "pref": "ibaraki",
     "name": "那珂市",
-    "population": 51531,
+    "population": 51527,
     "populationTrend": "減少",
     "rent": {
       "value": 54444,
@@ -2354,9 +2354,9 @@
     "amenities": {
       "stations": 9,
       "preschools": 16,
-      "medicalFacilities": 54,
+      "medicalFacilities": 55,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 435,
@@ -2370,7 +2370,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.68397,
+    "populationChangeRate": -3.69145,
     "vacancy": {
       "rate": 9.9,
       "vacant": 2310,
@@ -2423,7 +2423,7 @@
     "code": "08227",
     "pref": "ibaraki",
     "name": "筑西市",
-    "population": 94838,
+    "population": 94761,
     "populationTrend": "減少",
     "rent": {
       "value": 43365,
@@ -2464,9 +2464,9 @@
     "amenities": {
       "stations": 11,
       "preschools": 51,
-      "medicalFacilities": 139,
+      "medicalFacilities": 137,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 4850,
@@ -2480,7 +2480,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.87079,
+    "populationChangeRate": -5.94722,
     "vacancy": {
       "rate": 13.8,
       "vacant": 6010,
@@ -2533,7 +2533,7 @@
     "code": "08228",
     "pref": "ibaraki",
     "name": "坂東市",
-    "population": 51344,
+    "population": 51306,
     "populationTrend": "微減",
     "rent": {
       "value": 46481,
@@ -2576,7 +2576,7 @@
       "preschools": 18,
       "medicalFacilities": 51,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 5054,
@@ -2590,7 +2590,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.76217,
+    "populationChangeRate": -1.83488,
     "vacancy": {
       "rate": 12.4,
       "vacant": 2520,
@@ -2643,7 +2643,7 @@
     "code": "08229",
     "pref": "ibaraki",
     "name": "稲敷市",
-    "population": 35390,
+    "population": 35353,
     "populationTrend": "減少",
     "rent": {
       "value": 42203,
@@ -2684,9 +2684,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 12,
-      "medicalFacilities": 33,
+      "medicalFacilities": 34,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1991,
@@ -2700,7 +2700,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.34706,
+    "populationChangeRate": -9.44184,
     "vacancy": {
       "rate": 15.9,
       "vacant": 2720,
@@ -2753,7 +2753,7 @@
     "code": "08230",
     "pref": "ibaraki",
     "name": "かすみがうら市",
-    "population": 38413,
+    "population": 38396,
     "populationTrend": "減少",
     "rent": {
       "value": 49451,
@@ -2794,9 +2794,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 13,
-      "medicalFacilities": 37,
+      "medicalFacilities": 35,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2162,
@@ -2810,7 +2810,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.17592,
+    "populationChangeRate": -4.21833,
     "vacancy": {
       "rate": 13.4,
       "vacant": 2350,
@@ -2863,7 +2863,7 @@
     "code": "08231",
     "pref": "ibaraki",
     "name": "桜川市",
-    "population": 35207,
+    "population": 35256,
     "populationTrend": "減少",
     "rent": {
       "value": 38077,
@@ -2904,9 +2904,9 @@
     "amenities": {
       "stations": 3,
       "preschools": 11,
-      "medicalFacilities": 42,
+      "medicalFacilities": 41,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 913,
@@ -2920,7 +2920,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.00716,
+    "populationChangeRate": -9.88191,
     "vacancy": {
       "rate": 15.4,
       "vacant": 2350,
@@ -2973,7 +2973,7 @@
     "code": "08232",
     "pref": "ibaraki",
     "name": "神栖市",
-    "population": 93286,
+    "population": 93309,
     "populationTrend": "微減",
     "rent": {
       "value": 50840,
@@ -3014,9 +3014,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 37,
-      "medicalFacilities": 78,
+      "medicalFacilities": 80,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 3671,
@@ -3030,7 +3030,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.27125,
+    "populationChangeRate": -2.24716,
     "vacancy": {
       "rate": 15.8,
       "vacant": 7660,
@@ -3083,7 +3083,7 @@
     "code": "08233",
     "pref": "ibaraki",
     "name": "行方市",
-    "population": 29217,
+    "population": 29212,
     "populationTrend": "減少",
     "rent": {
       "value": 39653,
@@ -3124,9 +3124,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 16,
-      "medicalFacilities": 22,
+      "medicalFacilities": 18,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1436,
@@ -3140,7 +3140,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.22169,
+    "populationChangeRate": -9.23722,
     "vacancy": {
       "rate": 15.2,
       "vacant": 1880,
@@ -3193,7 +3193,7 @@
     "code": "08234",
     "pref": "ibaraki",
     "name": "鉾田市",
-    "population": 43386,
+    "population": 43331,
     "populationTrend": "減少",
     "rent": {
       "value": 45247,
@@ -3234,9 +3234,9 @@
     "amenities": {
       "stations": 6,
       "preschools": 17,
-      "medicalFacilities": 38,
+      "medicalFacilities": 39,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 4210,
@@ -3250,7 +3250,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.58614,
+    "populationChangeRate": -5.70583,
     "vacancy": {
       "rate": 20.2,
       "vacant": 4110,
@@ -3303,7 +3303,7 @@
     "code": "08235",
     "pref": "ibaraki",
     "name": "つくばみらい市",
-    "population": 52070,
+    "population": 52100,
     "populationTrend": "増加",
     "rent": {
       "value": 61056,
@@ -3344,9 +3344,9 @@
     "amenities": {
       "stations": 2,
       "preschools": 26,
-      "medicalFacilities": 51,
+      "medicalFacilities": 50,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1166,
@@ -3360,7 +3360,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 4.40728,
+    "populationChangeRate": 4.46744,
     "vacancy": {
       "rate": 6.9,
       "vacant": 1570,
@@ -3413,7 +3413,7 @@
     "code": "08236",
     "pref": "ibaraki",
     "name": "小美玉市",
-    "population": 46754,
+    "population": 46714,
     "populationTrend": "減少",
     "rent": {
       "value": 45490,
@@ -3454,9 +3454,9 @@
     "amenities": {
       "stations": 1,
       "preschools": 22,
-      "medicalFacilities": 38,
+      "medicalFacilities": 39,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2402,
@@ -3470,7 +3470,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.32985,
+    "populationChangeRate": -4.4117,
     "vacancy": {
       "rate": 16.5,
       "vacant": 3630,
@@ -3523,7 +3523,7 @@
     "code": "08302",
     "pref": "ibaraki",
     "name": "茨城町",
-    "population": 29438,
+    "population": 29429,
     "populationTrend": "減少",
     "rent": {
       "value": 42481,
@@ -3566,7 +3566,7 @@
       "preschools": 15,
       "medicalFacilities": 32,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1040,
@@ -3580,7 +3580,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.25139,
+    "populationChangeRate": -6.28005,
     "vacancy": {
       "rate": 10.6,
       "vacant": 1420,
@@ -3633,7 +3633,7 @@
     "code": "08309",
     "pref": "ibaraki",
     "name": "大洗町",
-    "population": 14456,
+    "population": 14444,
     "populationTrend": "減少",
     "rent": {
       "value": 39345,
@@ -3674,9 +3674,9 @@
     "amenities": {
       "stations": 1,
       "preschools": 8,
-      "medicalFacilities": 16,
+      "medicalFacilities": 15,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1181,
@@ -3690,7 +3690,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.01145,
+    "populationChangeRate": -8.08781,
     "vacancy": {
       "rate": 18.5,
       "vacant": 1400,
@@ -3743,7 +3743,7 @@
     "code": "08310",
     "pref": "ibaraki",
     "name": "城里町",
-    "population": 16363,
+    "population": 16373,
     "populationTrend": "減少",
     "rent": {
       "value": 33229,
@@ -3784,9 +3784,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 6,
-      "medicalFacilities": 17,
+      "medicalFacilities": 15,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 145,
@@ -3800,7 +3800,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.5817,
+    "populationChangeRate": -9.52644,
     "vacancy": {
       "rate": 14.6,
       "vacant": 1200,
@@ -3853,7 +3853,7 @@
     "code": "08341",
     "pref": "ibaraki",
     "name": "東海村",
-    "population": 37806,
+    "population": 37783,
     "populationTrend": "横ばい",
     "rent": {
       "value": 51909,
@@ -3894,9 +3894,9 @@
     "amenities": {
       "stations": 1,
       "preschools": 20,
-      "medicalFacilities": 35,
+      "medicalFacilities": 33,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 469,
@@ -3910,7 +3910,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -0.22433,
+    "populationChangeRate": -0.28503,
     "vacancy": {
       "rate": 10.2,
       "vacant": 1720,
@@ -3963,7 +3963,7 @@
     "code": "08364",
     "pref": "ibaraki",
     "name": "大子町",
-    "population": 13706,
+    "population": 13698,
     "populationTrend": "減少",
     "rent": {
       "value": 30583,
@@ -4006,7 +4006,7 @@
       "preschools": 6,
       "medicalFacilities": 13,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 131,
@@ -4020,7 +4020,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -12.90036,
+    "populationChangeRate": -12.95119,
     "vacancy": {
       "rate": 19.2,
       "vacant": 1420,
@@ -4073,7 +4073,7 @@
     "code": "08442",
     "pref": "ibaraki",
     "name": "美浦村",
-    "population": 13542,
+    "population": 13585,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4116,7 +4116,7 @@
       "preschools": 3,
       "medicalFacilities": 11,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 694,
@@ -4130,7 +4130,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.25928,
+    "populationChangeRate": -6.9648,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4183,7 +4183,7 @@
     "code": "08443",
     "pref": "ibaraki",
     "name": "阿見町",
-    "population": 49689,
+    "population": 49667,
     "populationTrend": "微増",
     "rent": {
       "value": 42243,
@@ -4224,9 +4224,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 15,
-      "medicalFacilities": 57,
+      "medicalFacilities": 56,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1617,
@@ -4240,7 +4240,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 2.33971,
+    "populationChangeRate": 2.2944,
     "vacancy": {
       "rate": 17,
       "vacant": 4410,
@@ -4293,7 +4293,7 @@
     "code": "08447",
     "pref": "ibaraki",
     "name": "河内町",
-    "population": 7156,
+    "population": 7149,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4336,7 +4336,7 @@
       "preschools": 3,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 207,
@@ -4350,7 +4350,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -13.06038,
+    "populationChangeRate": -13.14543,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4403,7 +4403,7 @@
     "code": "08521",
     "pref": "ibaraki",
     "name": "八千代町",
-    "population": 20050,
+    "population": 20090,
     "populationTrend": "減少",
     "rent": {
       "value": 46232,
@@ -4446,7 +4446,7 @@
       "preschools": 10,
       "medicalFacilities": 14,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2204,
@@ -4460,7 +4460,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.64187,
+    "populationChangeRate": -4.45163,
     "vacancy": {
       "rate": 12.2,
       "vacant": 850,
@@ -4513,7 +4513,7 @@
     "code": "08542",
     "pref": "ibaraki",
     "name": "五霞町",
-    "population": 7502,
+    "population": 7507,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4556,7 +4556,7 @@
       "preschools": 4,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 406,
@@ -4570,7 +4570,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.30261,
+    "populationChangeRate": -7.24083,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4623,7 +4623,7 @@
     "code": "08546",
     "pref": "ibaraki",
     "name": "境町",
-    "population": 23926,
+    "population": 23885,
     "populationTrend": "微減",
     "rent": {
       "value": 48248,
@@ -4664,9 +4664,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 12,
-      "medicalFacilities": 23,
+      "medicalFacilities": 22,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2047,
@@ -4680,7 +4680,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.13632,
+    "populationChangeRate": -1.30573,
     "vacancy": {
       "rate": 9.4,
       "vacant": 900,
@@ -4733,7 +4733,7 @@
     "code": "08564",
     "pref": "ibaraki",
     "name": "利根町",
-    "population": 14868,
+    "population": 14852,
     "populationTrend": "減少",
     "rent": {
       "value": 51111,
@@ -4774,9 +4774,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 6,
-      "medicalFacilities": 13,
+      "medicalFacilities": 12,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1610,
@@ -4790,7 +4790,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.07692,
+    "populationChangeRate": -3.18123,
     "vacancy": {
       "rate": 9.5,
       "vacant": 660,

@@ -6,7 +6,7 @@
     "level": "ward",
     "parentCode": "22100",
     "displayName": "静岡市葵区",
-    "population": 238244,
+    "population": 237966,
     "populationTrend": "減少",
     "rent": {
       "value": 61036,
@@ -47,9 +47,9 @@
     "amenities": {
       "stations": 12,
       "preschools": 118,
-      "medicalFacilities": 417,
+      "medicalFacilities": 415,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 4312,
@@ -63,7 +63,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.43367,
+    "populationChangeRate": -4.54518,
     "vacancy": {
       "rate": 16.4,
       "vacant": 20150,
@@ -119,7 +119,7 @@
     "level": "ward",
     "parentCode": "22100",
     "displayName": "静岡市駿河区",
-    "population": 205146,
+    "population": 204879,
     "populationTrend": "減少",
     "rent": {
       "value": 58598,
@@ -160,9 +160,9 @@
     "amenities": {
       "stations": 3,
       "preschools": 68,
-      "medicalFacilities": 263,
+      "medicalFacilities": 261,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 6992,
@@ -176,7 +176,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.69908,
+    "populationChangeRate": -3.82442,
     "vacancy": {
       "rate": 14.2,
       "vacant": 15940,
@@ -232,7 +232,7 @@
     "level": "ward",
     "parentCode": "22100",
     "displayName": "静岡市清水区",
-    "population": 216230,
+    "population": 215936,
     "populationTrend": "減少",
     "rent": {
       "value": 55740,
@@ -273,9 +273,9 @@
     "amenities": {
       "stations": 13,
       "preschools": 90,
-      "medicalFacilities": 250,
+      "medicalFacilities": 244,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 4802,
@@ -289,7 +289,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.42068,
+    "populationChangeRate": -6.54791,
     "vacancy": {
       "rate": 14.9,
       "vacant": 16580,
@@ -297,7 +297,7 @@
       "source": "住宅・土地統計調査（居住世帯の有無別住宅数）",
       "asOf": "2023"
     },
-    "areaKm2": 265.12,
+    "areaKm2": 265.14,
     "futurePopulation": {
       "base2020": 231066,
       "total": {
@@ -345,7 +345,7 @@
     "level": "ward",
     "parentCode": "22130",
     "displayName": "浜松市中央区",
-    "population": 591381,
+    "population": 591034,
     "populationTrend": "微減",
     "rent": {
       "value": 0,
@@ -386,9 +386,9 @@
     "amenities": {
       "stations": 17,
       "preschools": 180,
-      "medicalFacilities": 861,
+      "medicalFacilities": 863,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 27057,
@@ -402,7 +402,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.72331,
+    "populationChangeRate": -2.78039,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -451,7 +451,7 @@
     "level": "ward",
     "parentCode": "22130",
     "displayName": "浜松市浜名区",
-    "population": 150707,
+    "population": 150578,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -492,9 +492,9 @@
     "amenities": {
       "stations": 22,
       "preschools": 61,
-      "medicalFacilities": 168,
+      "medicalFacilities": 166,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 4616,
@@ -508,7 +508,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.427,
+    "populationChangeRate": -3.50966,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -557,7 +557,7 @@
     "level": "ward",
     "parentCode": "22130",
     "displayName": "浜松市天竜区",
-    "population": 23662,
+    "population": 23642,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -598,9 +598,9 @@
     "amenities": {
       "stations": 17,
       "preschools": 15,
-      "medicalFacilities": 36,
+      "medicalFacilities": 34,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 508,
@@ -614,7 +614,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.46449,
+    "populationChangeRate": -11.53933,
     "vacancy": {
       "rate": -1,
       "vacant": 0,

@@ -6,7 +6,7 @@
     "level": "ward",
     "parentCode": "28100",
     "displayName": "神戸市東灘区",
-    "population": 211921,
+    "population": 211504,
     "populationTrend": "横ばい",
     "rent": {
       "value": 71316,
@@ -47,9 +47,9 @@
     "amenities": {
       "stations": 17,
       "preschools": 120,
-      "medicalFacilities": 409,
+      "medicalFacilities": 413,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 9200,
@@ -63,7 +63,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -0.7684,
+    "populationChangeRate": -0.96365,
     "vacancy": {
       "rate": 10.6,
       "vacant": 11950,
@@ -119,7 +119,7 @@
     "level": "ward",
     "parentCode": "28100",
     "displayName": "神戸市灘区",
-    "population": 137283,
+    "population": 137037,
     "populationTrend": "横ばい",
     "rent": {
       "value": 66456,
@@ -162,7 +162,7 @@
       "preschools": 92,
       "medicalFacilities": 261,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 5619,
@@ -176,7 +176,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 0.39196,
+    "populationChangeRate": 0.21207,
     "vacancy": {
       "rate": 11.8,
       "vacant": 9440,
@@ -232,7 +232,7 @@
     "level": "ward",
     "parentCode": "28100",
     "displayName": "神戸市兵庫区",
-    "population": 111844,
+    "population": 111678,
     "populationTrend": "微増",
     "rent": {
       "value": 60040,
@@ -275,7 +275,7 @@
       "preschools": 48,
       "medicalFacilities": 183,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 9127,
@@ -289,7 +289,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 2.4738,
+    "populationChangeRate": 2.3217,
     "vacancy": {
       "rate": 24.7,
       "vacant": 20500,
@@ -345,7 +345,7 @@
     "level": "ward",
     "parentCode": "28100",
     "displayName": "神戸市長田区",
-    "population": 93096,
+    "population": 92901,
     "populationTrend": "微減",
     "rent": {
       "value": 51764,
@@ -386,9 +386,9 @@
     "amenities": {
       "stations": 12,
       "preschools": 48,
-      "medicalFacilities": 169,
+      "medicalFacilities": 167,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 8948,
@@ -402,7 +402,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.78814,
+    "populationChangeRate": -1.99386,
     "vacancy": {
       "rate": 17.5,
       "vacant": 10300,
@@ -458,7 +458,7 @@
     "level": "ward",
     "parentCode": "28100",
     "displayName": "神戸市須磨区",
-    "population": 152654,
+    "population": 152394,
     "populationTrend": "減少",
     "rent": {
       "value": 54096,
@@ -501,7 +501,7 @@
       "preschools": 80,
       "medicalFacilities": 219,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 3834,
@@ -515,7 +515,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.82122,
+    "populationChangeRate": -3.98503,
     "vacancy": {
       "rate": 11,
       "vacant": 9090,
@@ -571,7 +571,7 @@
     "level": "ward",
     "parentCode": "28100",
     "displayName": "神戸市垂水区",
-    "population": 206825,
+    "population": 206457,
     "populationTrend": "減少",
     "rent": {
       "value": 51870,
@@ -612,9 +612,9 @@
     "amenities": {
       "stations": 10,
       "preschools": 127,
-      "medicalFacilities": 295,
+      "medicalFacilities": 290,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 3431,
@@ -628,7 +628,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.93726,
+    "populationChangeRate": -4.10818,
     "vacancy": {
       "rate": 12.4,
       "vacant": 13470,
@@ -684,7 +684,7 @@
     "level": "ward",
     "parentCode": "28100",
     "displayName": "神戸市北区",
-    "population": 203615,
+    "population": 203183,
     "populationTrend": "減少",
     "rent": {
       "value": 49667,
@@ -727,7 +727,7 @@
       "preschools": 102,
       "medicalFacilities": 274,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 3688,
@@ -741,7 +741,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.26711,
+    "populationChangeRate": -3.47234,
     "vacancy": {
       "rate": 13.5,
       "vacant": 14010,
@@ -797,7 +797,7 @@
     "level": "ward",
     "parentCode": "28100",
     "displayName": "神戸市中央区",
-    "population": 152124,
+    "population": 151949,
     "populationTrend": "増加",
     "rent": {
       "value": 68200,
@@ -838,9 +838,9 @@
     "amenities": {
       "stations": 37,
       "preschools": 90,
-      "medicalFacilities": 552,
+      "medicalFacilities": 545,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 16884,
@@ -854,7 +854,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 3.12233,
+    "populationChangeRate": 3.0037,
     "vacancy": {
       "rate": 13.2,
       "vacant": 14090,
@@ -910,7 +910,7 @@
     "level": "ward",
     "parentCode": "28100",
     "displayName": "神戸市西区",
-    "population": 228268,
+    "population": 227894,
     "populationTrend": "減少",
     "rent": {
       "value": 54580,
@@ -951,9 +951,9 @@
     "amenities": {
       "stations": 8,
       "preschools": 116,
-      "medicalFacilities": 293,
+      "medicalFacilities": 292,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 4569,
@@ -967,7 +967,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.4412,
+    "populationChangeRate": -4.59776,
     "vacancy": {
       "rate": 13.3,
       "vacant": 15520,

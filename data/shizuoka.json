@@ -3,7 +3,7 @@
     "code": "22100",
     "pref": "shizuoka",
     "name": "静岡市",
-    "population": 659620,
+    "population": 658781,
     "populationTrend": "減少",
     "rent": {
       "value": 58692,
@@ -44,9 +44,9 @@
     "amenities": {
       "stations": 28,
       "preschools": 276,
-      "medicalFacilities": 930,
+      "medicalFacilities": 920,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 16106,
@@ -60,7 +60,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.87014,
+    "populationChangeRate": -4.99114,
     "vacancy": {
       "rate": 15.2,
       "vacant": 52700,
@@ -68,7 +68,7 @@
       "source": "住宅・土地統計調査（居住世帯の有無別住宅数）",
       "asOf": "2023"
     },
-    "areaKm2": 1411.93,
+    "areaKm2": 1411.96,
     "futurePopulation": {
       "base2020": 693389,
       "total": {
@@ -113,7 +113,7 @@
     "code": "22130",
     "pref": "shizuoka",
     "name": "浜松市",
-    "population": 765750,
+    "population": 765254,
     "populationTrend": "減少",
     "rent": {
       "value": 54851,
@@ -154,9 +154,9 @@
     "amenities": {
       "stations": 56,
       "preschools": 256,
-      "medicalFacilities": 1065,
+      "medicalFacilities": 1063,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 32181,
@@ -170,7 +170,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.15764,
+    "populationChangeRate": -3.22036,
     "vacancy": {
       "rate": 12.8,
       "vacant": 47400,
@@ -223,7 +223,7 @@
     "code": "22203",
     "pref": "shizuoka",
     "name": "沼津市",
-    "population": 179438,
+    "population": 179139,
     "populationTrend": "減少",
     "rent": {
       "value": 53787,
@@ -264,9 +264,9 @@
     "amenities": {
       "stations": 5,
       "preschools": 81,
-      "medicalFacilities": 280,
+      "medicalFacilities": 275,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 6225,
@@ -280,7 +280,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.25276,
+    "populationChangeRate": -5.41064,
     "vacancy": {
       "rate": 17.2,
       "vacant": 17320,
@@ -333,7 +333,7 @@
     "code": "22205",
     "pref": "shizuoka",
     "name": "熱海市",
-    "population": 31433,
+    "population": 31330,
     "populationTrend": "減少",
     "rent": {
       "value": 56111,
@@ -374,9 +374,9 @@
     "amenities": {
       "stations": 7,
       "preschools": 15,
-      "medicalFacilities": 62,
+      "medicalFacilities": 60,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1513,
@@ -390,7 +390,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.11214,
+    "populationChangeRate": -8.41324,
     "vacancy": {
       "rate": 53.4,
       "vacant": 21080,
@@ -443,7 +443,7 @@
     "code": "22206",
     "pref": "shizuoka",
     "name": "三島市",
-    "population": 103085,
+    "population": 103044,
     "populationTrend": "減少",
     "rent": {
       "value": 57724,
@@ -484,9 +484,9 @@
     "amenities": {
       "stations": 7,
       "preschools": 49,
-      "medicalFacilities": 165,
+      "medicalFacilities": 163,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1793,
@@ -500,7 +500,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.35876,
+    "populationChangeRate": -4.3968,
     "vacancy": {
       "rate": 12.6,
       "vacant": 6510,
@@ -553,7 +553,7 @@
     "code": "22207",
     "pref": "shizuoka",
     "name": "富士宮市",
-    "population": 119185,
+    "population": 119089,
     "populationTrend": "減少",
     "rent": {
       "value": 44411,
@@ -596,7 +596,7 @@
       "preschools": 53,
       "medicalFacilities": 150,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 3698,
@@ -610,7 +610,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.96304,
+    "populationChangeRate": -7.03798,
     "vacancy": {
       "rate": 15.8,
       "vacant": 9590,
@@ -663,7 +663,7 @@
     "code": "22208",
     "pref": "shizuoka",
     "name": "伊東市",
-    "population": 61192,
+    "population": 61183,
     "populationTrend": "減少",
     "rent": {
       "value": 50450,
@@ -704,9 +704,9 @@
     "amenities": {
       "stations": 8,
       "preschools": 32,
-      "medicalFacilities": 93,
+      "medicalFacilities": 91,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1257,
@@ -720,7 +720,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.56426,
+    "populationChangeRate": -6.578,
     "vacancy": {
       "rate": 39.5,
       "vacant": 20450,
@@ -773,7 +773,7 @@
     "code": "22209",
     "pref": "shizuoka",
     "name": "島田市",
-    "population": 91266,
+    "population": 91161,
     "populationTrend": "減少",
     "rent": {
       "value": 51214,
@@ -814,9 +814,9 @@
     "amenities": {
       "stations": 15,
       "preschools": 40,
-      "medicalFacilities": 101,
+      "medicalFacilities": 102,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2252,
@@ -830,7 +830,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.65216,
+    "populationChangeRate": -4.76186,
     "vacancy": {
       "rate": 12.2,
       "vacant": 4940,
@@ -883,7 +883,7 @@
     "code": "22210",
     "pref": "shizuoka",
     "name": "富士市",
-    "population": 237793,
+    "population": 237650,
     "populationTrend": "減少",
     "rent": {
       "value": 50415,
@@ -924,9 +924,9 @@
     "amenities": {
       "stations": 20,
       "preschools": 103,
-      "medicalFacilities": 307,
+      "medicalFacilities": 305,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 8539,
@@ -940,7 +940,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.09668,
+    "populationChangeRate": -3.15495,
     "vacancy": {
       "rate": 14,
       "vacant": 15950,
@@ -993,7 +993,7 @@
     "code": "22211",
     "pref": "shizuoka",
     "name": "磐田市",
-    "population": 160548,
+    "population": 160456,
     "populationTrend": "減少",
     "rent": {
       "value": 51211,
@@ -1036,7 +1036,7 @@
       "preschools": 82,
       "medicalFacilities": 202,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 10513,
@@ -1050,7 +1050,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.67428,
+    "populationChangeRate": -3.72948,
     "vacancy": {
       "rate": 10.7,
       "vacant": 7840,
@@ -1103,7 +1103,7 @@
     "code": "22212",
     "pref": "shizuoka",
     "name": "焼津市",
-    "population": 130935,
+    "population": 130848,
     "populationTrend": "減少",
     "rent": {
       "value": 51153,
@@ -1144,9 +1144,9 @@
     "amenities": {
       "stations": 2,
       "preschools": 45,
-      "medicalFacilities": 138,
+      "medicalFacilities": 139,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 6385,
@@ -1160,7 +1160,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.31875,
+    "populationChangeRate": -4.38233,
     "vacancy": {
       "rate": 12.6,
       "vacant": 7630,
@@ -1213,7 +1213,7 @@
     "code": "22213",
     "pref": "shizuoka",
     "name": "掛川市",
-    "population": 111662,
+    "population": 111544,
     "populationTrend": "微減",
     "rent": {
       "value": 49916,
@@ -1254,9 +1254,9 @@
     "amenities": {
       "stations": 10,
       "preschools": 56,
-      "medicalFacilities": 128,
+      "medicalFacilities": 129,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 5856,
@@ -1270,7 +1270,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.86375,
+    "populationChangeRate": -2.9664,
     "vacancy": {
       "rate": 17.1,
       "vacant": 9090,
@@ -1323,7 +1323,7 @@
     "code": "22214",
     "pref": "shizuoka",
     "name": "藤枝市",
-    "population": 134513,
+    "population": 134425,
     "populationTrend": "減少",
     "rent": {
       "value": 53662,
@@ -1366,7 +1366,7 @@
       "preschools": 58,
       "medicalFacilities": 168,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2439,
@@ -1380,7 +1380,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.83154,
+    "populationChangeRate": -4.8938,
     "vacancy": {
       "rate": 9.9,
       "vacant": 5990,
@@ -1433,7 +1433,7 @@
     "code": "22215",
     "pref": "shizuoka",
     "name": "御殿場市",
-    "population": 81142,
+    "population": 80965,
     "populationTrend": "減少",
     "rent": {
       "value": 54818,
@@ -1476,7 +1476,7 @@
       "preschools": 37,
       "medicalFacilities": 89,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 3430,
@@ -1490,7 +1490,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.31769,
+    "populationChangeRate": -6.52204,
     "vacancy": {
       "rate": 18.3,
       "vacant": 7090,
@@ -1543,7 +1543,7 @@
     "code": "22216",
     "pref": "shizuoka",
     "name": "袋井市",
-    "population": 86597,
+    "population": 86503,
     "populationTrend": "微減",
     "rent": {
       "value": 48574,
@@ -1584,9 +1584,9 @@
     "amenities": {
       "stations": 2,
       "preschools": 51,
-      "medicalFacilities": 91,
+      "medicalFacilities": 88,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 6496,
@@ -1600,7 +1600,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.442,
+    "populationChangeRate": -1.54898,
     "vacancy": {
       "rate": 13.9,
       "vacant": 5490,
@@ -1653,7 +1653,7 @@
     "code": "22219",
     "pref": "shizuoka",
     "name": "下田市",
-    "population": 17924,
+    "population": 17906,
     "populationTrend": "減少",
     "rent": {
       "value": 47341,
@@ -1694,9 +1694,9 @@
     "amenities": {
       "stations": 3,
       "preschools": 7,
-      "medicalFacilities": 33,
+      "medicalFacilities": 31,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 441,
@@ -1710,7 +1710,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.19259,
+    "populationChangeRate": -11.28177,
     "vacancy": {
       "rate": 31.3,
       "vacant": 4170,
@@ -1763,7 +1763,7 @@
     "code": "22220",
     "pref": "shizuoka",
     "name": "裾野市",
-    "population": 47341,
+    "population": 47314,
     "populationTrend": "減少",
     "rent": {
       "value": 52321,
@@ -1804,9 +1804,9 @@
     "amenities": {
       "stations": 2,
       "preschools": 21,
-      "medicalFacilities": 54,
+      "medicalFacilities": 55,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1007,
@@ -1820,7 +1820,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.01224,
+    "populationChangeRate": -7.06527,
     "vacancy": {
       "rate": 21.4,
       "vacant": 5160,
@@ -1873,7 +1873,7 @@
     "code": "22221",
     "pref": "shizuoka",
     "name": "湖西市",
-    "population": 55211,
+    "population": 55167,
     "populationTrend": "減少",
     "rent": {
       "value": 48887,
@@ -1914,9 +1914,9 @@
     "amenities": {
       "stations": 7,
       "preschools": 24,
-      "medicalFacilities": 59,
+      "medicalFacilities": 58,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 4484,
@@ -1930,7 +1930,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.6195,
+    "populationChangeRate": -4.69552,
     "vacancy": {
       "rate": 15.2,
       "vacant": 4160,
@@ -1983,7 +1983,7 @@
     "code": "22222",
     "pref": "shizuoka",
     "name": "伊豆市",
-    "population": 25746,
+    "population": 25708,
     "populationTrend": "減少",
     "rent": {
       "value": 41405,
@@ -2026,7 +2026,7 @@
       "preschools": 17,
       "medicalFacilities": 29,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 554,
@@ -2040,7 +2040,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.66974,
+    "populationChangeRate": -8.80454,
     "vacancy": {
       "rate": 32.9,
       "vacant": 5680,
@@ -2093,7 +2093,7 @@
     "code": "22223",
     "pref": "shizuoka",
     "name": "御前崎市",
-    "population": 28464,
+    "population": 28442,
     "populationTrend": "減少",
     "rent": {
       "value": 47236,
@@ -2136,7 +2136,7 @@
       "preschools": 17,
       "medicalFacilities": 25,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1332,
@@ -2150,7 +2150,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.48471,
+    "populationChangeRate": -8.55544,
     "vacancy": {
       "rate": 19.5,
       "vacant": 2770,
@@ -2203,7 +2203,7 @@
     "code": "22224",
     "pref": "shizuoka",
     "name": "菊川市",
-    "population": 45535,
+    "population": 45478,
     "populationTrend": "減少",
     "rent": {
       "value": 50180,
@@ -2244,9 +2244,9 @@
     "amenities": {
       "stations": 1,
       "preschools": 26,
-      "medicalFacilities": 47,
+      "medicalFacilities": 46,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 4112,
@@ -2260,7 +2260,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.71657,
+    "populationChangeRate": -4.83584,
     "vacancy": {
       "rate": 15,
       "vacant": 3170,
@@ -2313,7 +2313,7 @@
     "code": "22225",
     "pref": "shizuoka",
     "name": "伊豆の国市",
-    "population": 44154,
+    "population": 44124,
     "populationTrend": "減少",
     "rent": {
       "value": 50163,
@@ -2354,9 +2354,9 @@
     "amenities": {
       "stations": 5,
       "preschools": 18,
-      "medicalFacilities": 61,
+      "medicalFacilities": 59,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 783,
@@ -2370,7 +2370,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.66191,
+    "populationChangeRate": -5.72601,
     "vacancy": {
       "rate": 22,
       "vacant": 5190,
@@ -2423,7 +2423,7 @@
     "code": "22226",
     "pref": "shizuoka",
     "name": "牧之原市",
-    "population": 40343,
+    "population": 40303,
     "populationTrend": "減少",
     "rent": {
       "value": 42559,
@@ -2466,7 +2466,7 @@
       "preschools": 23,
       "medicalFacilities": 49,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2958,
@@ -2480,7 +2480,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.26174,
+    "populationChangeRate": -7.35368,
     "vacancy": {
       "rate": 16,
       "vacant": 3140,
@@ -2533,7 +2533,7 @@
     "code": "22301",
     "pref": "shizuoka",
     "name": "東伊豆町",
-    "population": 10225,
+    "population": 10217,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2576,7 +2576,7 @@
       "preschools": 4,
       "medicalFacilities": 15,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 563,
@@ -2590,7 +2590,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.99408,
+    "populationChangeRate": -11.06372,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2643,7 +2643,7 @@
     "code": "22302",
     "pref": "shizuoka",
     "name": "河津町",
-    "population": 6140,
+    "population": 6129,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2686,7 +2686,7 @@
       "preschools": 2,
       "medicalFacilities": 11,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 99,
@@ -2700,7 +2700,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.62591,
+    "populationChangeRate": -10.78603,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2753,7 +2753,7 @@
     "code": "22304",
     "pref": "shizuoka",
     "name": "南伊豆町",
-    "population": 7005,
+    "population": 6997,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2796,7 +2796,7 @@
       "preschools": 2,
       "medicalFacilities": 11,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 77,
@@ -2810,7 +2810,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.0702,
+    "populationChangeRate": -11.17177,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2863,7 +2863,7 @@
     "code": "22305",
     "pref": "shizuoka",
     "name": "松崎町",
-    "population": 5231,
+    "population": 5230,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2873,10 +2873,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 18450,
+      "value": 18200,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -2904,9 +2904,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 3,
-      "medicalFacilities": 10,
+      "medicalFacilities": 9,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 50,
@@ -2920,7 +2920,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -13.36535,
+    "populationChangeRate": -13.38191,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2973,7 +2973,7 @@
     "code": "22306",
     "pref": "shizuoka",
     "name": "西伊豆町",
-    "population": 6086,
+    "population": 6085,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2983,10 +2983,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 21875,
+      "value": 21550,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -3014,9 +3014,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 5,
-      "medicalFacilities": 10,
+      "medicalFacilities": 9,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 163,
@@ -3030,7 +3030,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -14.16079,
+    "populationChangeRate": -14.17489,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3083,7 +3083,7 @@
     "code": "22325",
     "pref": "shizuoka",
     "name": "函南町",
-    "population": 34768,
+    "population": 34757,
     "populationTrend": "減少",
     "rent": {
       "value": 58679,
@@ -3124,9 +3124,9 @@
     "amenities": {
       "stations": 4,
       "preschools": 15,
-      "medicalFacilities": 44,
+      "medicalFacilities": 43,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 499,
@@ -3140,7 +3140,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.50633,
+    "populationChangeRate": -5.53623,
     "vacancy": {
       "rate": 23.1,
       "vacant": 4520,
@@ -3193,7 +3193,7 @@
     "code": "22341",
     "pref": "shizuoka",
     "name": "清水町",
-    "population": 31094,
+    "population": 31080,
     "populationTrend": "微減",
     "rent": {
       "value": 57442,
@@ -3234,9 +3234,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 17,
-      "medicalFacilities": 49,
+      "medicalFacilities": 52,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1603,
@@ -3250,7 +3250,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.9426,
+    "populationChangeRate": -1.98675,
     "vacancy": {
       "rate": 12.4,
       "vacant": 1740,
@@ -3303,7 +3303,7 @@
     "code": "22342",
     "pref": "shizuoka",
     "name": "長泉町",
-    "population": 43257,
+    "population": 43245,
     "populationTrend": "横ばい",
     "rent": {
       "value": 73717,
@@ -3344,9 +3344,9 @@
     "amenities": {
       "stations": 2,
       "preschools": 23,
-      "medicalFacilities": 55,
+      "medicalFacilities": 54,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 657,
@@ -3360,7 +3360,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -0.1823,
+    "populationChangeRate": -0.20999,
     "vacancy": {
       "rate": 13.8,
       "vacant": 2800,
@@ -3413,7 +3413,7 @@
     "code": "22344",
     "pref": "shizuoka",
     "name": "小山町",
-    "population": 17146,
+    "population": 17100,
     "populationTrend": "減少",
     "rent": {
       "value": 36667,
@@ -3454,9 +3454,9 @@
     "amenities": {
       "stations": 2,
       "preschools": 12,
-      "medicalFacilities": 16,
+      "medicalFacilities": 15,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 513,
@@ -3470,7 +3470,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.65834,
+    "populationChangeRate": -7.90607,
     "vacancy": {
       "rate": 19.3,
       "vacant": 1460,
@@ -3523,7 +3523,7 @@
     "code": "22424",
     "pref": "shizuoka",
     "name": "吉田町",
-    "population": 27753,
+    "population": 27735,
     "populationTrend": "減少",
     "rent": {
       "value": 45082,
@@ -3566,7 +3566,7 @@
       "preschools": 6,
       "medicalFacilities": 27,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2783,
@@ -3580,7 +3580,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.03195,
+    "populationChangeRate": -4.09419,
     "vacancy": {
       "rate": 12.8,
       "vacant": 1670,
@@ -3633,7 +3633,7 @@
     "code": "22429",
     "pref": "shizuoka",
     "name": "川根本町",
-    "population": 5318,
+    "population": 5334,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3643,10 +3643,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 9053,
+      "value": 8788,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -3676,7 +3676,7 @@
       "preschools": 4,
       "medicalFacilities": 10,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 120,
@@ -3690,7 +3690,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -14.30873,
+    "populationChangeRate": -14.05092,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3743,7 +3743,7 @@
     "code": "22461",
     "pref": "shizuoka",
     "name": "森町",
-    "population": 15945,
+    "population": 15944,
     "populationTrend": "減少",
     "rent": {
       "value": 50727,
@@ -3786,7 +3786,7 @@
       "preschools": 12,
       "medicalFacilities": 15,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 619,
@@ -3800,7 +3800,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.66128,
+    "populationChangeRate": -8.66701,
     "vacancy": {
       "rate": 13.2,
       "vacant": 920,

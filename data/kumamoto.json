@@ -3,7 +3,7 @@
     "code": "43100",
     "pref": "kumamoto",
     "name": "熊本市",
-    "population": 730854,
+    "population": 730882,
     "populationTrend": "微減",
     "rent": {
       "value": 50581,
@@ -44,9 +44,9 @@
     "amenities": {
       "stations": 70,
       "preschools": 390,
-      "medicalFacilities": 1143,
+      "medicalFacilities": 1134,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 11631,
@@ -60,7 +60,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.08423,
+    "populationChangeRate": -1.08044,
     "vacancy": {
       "rate": 13.2,
       "vacant": 51000,
@@ -113,7 +113,7 @@
     "code": "43202",
     "pref": "kumamoto",
     "name": "八代市",
-    "population": 115453,
+    "population": 115362,
     "populationTrend": "減少",
     "rent": {
       "value": 41957,
@@ -154,9 +154,9 @@
     "amenities": {
       "stations": 15,
       "preschools": 18,
-      "medicalFacilities": 181,
+      "medicalFacilities": 180,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 4468,
@@ -170,7 +170,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.18687,
+    "populationChangeRate": -6.26082,
     "vacancy": {
       "rate": 16.2,
       "vacant": 9450,
@@ -223,7 +223,7 @@
     "code": "43203",
     "pref": "kumamoto",
     "name": "人吉市",
-    "population": 28803,
+    "population": 28779,
     "populationTrend": "減少",
     "rent": {
       "value": 39373,
@@ -264,9 +264,9 @@
     "amenities": {
       "stations": 6,
       "preschools": 11,
-      "medicalFacilities": 69,
+      "medicalFacilities": 68,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 385,
@@ -280,7 +280,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.40967,
+    "populationChangeRate": -7.48682,
     "vacancy": {
       "rate": 18.7,
       "vacant": 3000,
@@ -333,7 +333,7 @@
     "code": "43204",
     "pref": "kumamoto",
     "name": "荒尾市",
-    "population": 47347,
+    "population": 47306,
     "populationTrend": "減少",
     "rent": {
       "value": 40488,
@@ -376,7 +376,7 @@
       "preschools": 11,
       "medicalFacilities": 68,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 532,
@@ -390,7 +390,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.85592,
+    "populationChangeRate": -6.93658,
     "vacancy": {
       "rate": 17.8,
       "vacant": 4460,
@@ -443,7 +443,7 @@
     "code": "43205",
     "pref": "kumamoto",
     "name": "水俣市",
-    "population": 20806,
+    "population": 20782,
     "populationTrend": "減少",
     "rent": {
       "value": 31394,
@@ -486,7 +486,7 @@
       "preschools": 8,
       "medicalFacilities": 39,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 193,
@@ -500,7 +500,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.67806,
+    "populationChangeRate": -11.77994,
     "vacancy": {
       "rate": 25.3,
       "vacant": 3180,
@@ -553,7 +553,7 @@
     "code": "43206",
     "pref": "kumamoto",
     "name": "玉名市",
-    "population": 60562,
+    "population": 60524,
     "populationTrend": "減少",
     "rent": {
       "value": 41464,
@@ -596,7 +596,7 @@
       "preschools": 9,
       "medicalFacilities": 90,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1533,
@@ -610,7 +610,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.80165,
+    "populationChangeRate": -5.86076,
     "vacancy": {
       "rate": 17.2,
       "vacant": 5310,
@@ -663,7 +663,7 @@
     "code": "43208",
     "pref": "kumamoto",
     "name": "山鹿市",
-    "population": 45561,
+    "population": 45496,
     "populationTrend": "減少",
     "rent": {
       "value": 34587,
@@ -704,9 +704,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 8,
-      "medicalFacilities": 68,
+      "medicalFacilities": 64,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 626,
@@ -720,7 +720,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.06578,
+    "populationChangeRate": -7.19837,
     "vacancy": {
       "rate": 19.4,
       "vacant": 4640,
@@ -773,7 +773,7 @@
     "code": "43210",
     "pref": "kumamoto",
     "name": "菊池市",
-    "population": 44764,
+    "population": 44706,
     "populationTrend": "減少",
     "rent": {
       "value": 37603,
@@ -816,7 +816,7 @@
       "preschools": 5,
       "medicalFacilities": 60,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1622,
@@ -830,7 +830,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.55912,
+    "populationChangeRate": -3.68407,
     "vacancy": {
       "rate": 13.5,
       "vacant": 2920,
@@ -883,7 +883,7 @@
     "code": "43211",
     "pref": "kumamoto",
     "name": "宇土市",
-    "population": 34526,
+    "population": 34542,
     "populationTrend": "減少",
     "rent": {
       "value": 45913,
@@ -926,7 +926,7 @@
       "preschools": 6,
       "medicalFacilities": 34,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 522,
@@ -940,7 +940,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.41836,
+    "populationChangeRate": -4.37407,
     "vacancy": {
       "rate": 13.5,
       "vacant": 2150,
@@ -993,7 +993,7 @@
     "code": "43212",
     "pref": "kumamoto",
     "name": "上天草市",
-    "population": 21404,
+    "population": 21389,
     "populationTrend": "減少",
     "rent": {
       "value": 33627,
@@ -1003,10 +1003,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 10930,
+      "value": 10805,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -1034,9 +1034,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 3,
-      "medicalFacilities": 31,
+      "medicalFacilities": 30,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 216,
@@ -1050,7 +1050,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -12.86081,
+    "populationChangeRate": -12.92187,
     "vacancy": {
       "rate": 26.4,
       "vacant": 3450,
@@ -1103,7 +1103,7 @@
     "code": "43213",
     "pref": "kumamoto",
     "name": "宇城市",
-    "population": 54556,
+    "population": 54513,
     "populationTrend": "減少",
     "rent": {
       "value": 41937,
@@ -1144,9 +1144,9 @@
     "amenities": {
       "stations": 5,
       "preschools": 5,
-      "medicalFacilities": 76,
+      "medicalFacilities": 75,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1146,
@@ -1160,7 +1160,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.34142,
+    "populationChangeRate": -4.41682,
     "vacancy": {
       "rate": 14,
       "vacant": 3550,
@@ -1213,7 +1213,7 @@
     "code": "43214",
     "pref": "kumamoto",
     "name": "阿蘇市",
-    "population": 22959,
+    "population": 22927,
     "populationTrend": "減少",
     "rent": {
       "value": 34196,
@@ -1254,9 +1254,9 @@
     "amenities": {
       "stations": 8,
       "preschools": 4,
-      "medicalFacilities": 32,
+      "medicalFacilities": 31,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 861,
@@ -1270,7 +1270,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.90614,
+    "populationChangeRate": -8.0345,
     "vacancy": {
       "rate": 18.9,
       "vacant": 2360,
@@ -1323,7 +1323,7 @@
     "code": "43215",
     "pref": "kumamoto",
     "name": "天草市",
-    "population": 68105,
+    "population": 68028,
     "populationTrend": "減少",
     "rent": {
       "value": 38694,
@@ -1364,9 +1364,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 8,
-      "medicalFacilities": 122,
+      "medicalFacilities": 114,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 734,
@@ -1380,7 +1380,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.13156,
+    "populationChangeRate": -10.23317,
     "vacancy": {
       "rate": 24.4,
       "vacant": 9790,
@@ -1433,7 +1433,7 @@
     "code": "43216",
     "pref": "kumamoto",
     "name": "合志市",
-    "population": 64344,
+    "population": 64314,
     "populationTrend": "増加",
     "rent": {
       "value": 53321,
@@ -1474,9 +1474,9 @@
     "amenities": {
       "stations": 7,
       "preschools": 6,
-      "medicalFacilities": 68,
+      "medicalFacilities": 69,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 836,
@@ -1490,7 +1490,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 4.1637,
+    "populationChangeRate": 4.11513,
     "vacancy": {
       "rate": 7.6,
       "vacant": 1900,
@@ -1543,7 +1543,7 @@
     "code": "43348",
     "pref": "kumamoto",
     "name": "美里町",
-    "population": 8035,
+    "population": 8030,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1553,10 +1553,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 5050,
+      "value": 5180,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -1586,7 +1586,7 @@
       "preschools": 3,
       "medicalFacilities": 11,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 125,
@@ -1600,7 +1600,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -14.44847,
+    "populationChangeRate": -14.5017,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1653,7 +1653,7 @@
     "code": "43364",
     "pref": "kumamoto",
     "name": "玉東町",
-    "population": 4862,
+    "population": 4864,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1666,7 +1666,7 @@
       "value": 12500,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -1696,7 +1696,7 @@
       "preschools": 1,
       "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 72,
@@ -1710,7 +1710,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.62735,
+    "populationChangeRate": -3.58771,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1763,7 +1763,7 @@
     "code": "43367",
     "pref": "kumamoto",
     "name": "南関町",
-    "population": 8045,
+    "population": 8068,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1773,10 +1773,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 9113,
+      "value": 6917,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -1806,7 +1806,7 @@
       "preschools": 1,
       "medicalFacilities": 10,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 285,
@@ -1820,7 +1820,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.40205,
+    "populationChangeRate": -10.1459,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1873,7 +1873,7 @@
     "code": "43368",
     "pref": "kumamoto",
     "name": "長洲町",
-    "population": 14531,
+    "population": 14534,
     "populationTrend": "減少",
     "rent": {
       "value": 34537,
@@ -1916,7 +1916,7 @@
       "preschools": 2,
       "medicalFacilities": 14,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 914,
@@ -1930,7 +1930,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.47099,
+    "populationChangeRate": -5.45147,
     "vacancy": {
       "rate": 14.5,
       "vacant": 1030,
@@ -1983,7 +1983,7 @@
     "code": "43369",
     "pref": "kumamoto",
     "name": "和水町",
-    "population": 8477,
+    "population": 8462,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1993,10 +1993,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 4810,
+      "value": 4796,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -2024,9 +2024,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 9,
+      "medicalFacilities": 10,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 134,
@@ -2040,7 +2040,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.25926,
+    "populationChangeRate": -9.41982,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2093,7 +2093,7 @@
     "code": "43403",
     "pref": "kumamoto",
     "name": "大津町",
-    "population": 36941,
+    "population": 36915,
     "populationTrend": "増加",
     "rent": {
       "value": 45822,
@@ -2134,9 +2134,9 @@
     "amenities": {
       "stations": 2,
       "preschools": 5,
-      "medicalFacilities": 36,
+      "medicalFacilities": 35,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1249,
@@ -2150,7 +2150,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 4.9848,
+    "populationChangeRate": 4.9109,
     "vacancy": {
       "rate": 8,
       "vacant": 1280,
@@ -2203,7 +2203,7 @@
     "code": "43404",
     "pref": "kumamoto",
     "name": "菊陽町",
-    "population": 44548,
+    "population": 44532,
     "populationTrend": "微増",
     "rent": {
       "value": 53050,
@@ -2244,9 +2244,9 @@
     "amenities": {
       "stations": 2,
       "preschools": 6,
-      "medicalFacilities": 60,
+      "medicalFacilities": 61,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1160,
@@ -2260,7 +2260,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 2.79438,
+    "populationChangeRate": 2.75746,
     "vacancy": {
       "rate": 6.7,
       "vacant": 1370,
@@ -2313,7 +2313,7 @@
     "code": "43423",
     "pref": "kumamoto",
     "name": "南小国町",
-    "population": 3444,
+    "population": 3462,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2323,10 +2323,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 9667,
+      "value": 9633,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -2356,7 +2356,7 @@
       "preschools": 0,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 232,
@@ -2370,7 +2370,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.16,
+    "populationChangeRate": -7.68,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2423,7 +2423,7 @@
     "code": "43424",
     "pref": "kumamoto",
     "name": "小国町",
-    "population": 5880,
+    "population": 5865,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2433,10 +2433,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 9717,
+      "value": 9633,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -2464,9 +2464,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 1,
-      "medicalFacilities": 7,
+      "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 102,
@@ -2480,7 +2480,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.7739,
+    "populationChangeRate": -11.00152,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2533,7 +2533,7 @@
     "code": "43425",
     "pref": "kumamoto",
     "name": "産山村",
-    "population": 1195,
+    "population": 1190,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2543,10 +2543,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 3105,
+      "value": 3100,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -2576,7 +2576,7 @@
       "preschools": 0,
       "medicalFacilities": 2,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 57,
@@ -2590,7 +2590,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -13.53111,
+    "populationChangeRate": -13.89291,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2643,7 +2643,7 @@
     "code": "43428",
     "pref": "kumamoto",
     "name": "高森町",
-    "population": 5367,
+    "population": 5363,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2656,7 +2656,7 @@
       "value": 8900,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -2684,9 +2684,9 @@
     "amenities": {
       "stations": 1,
       "preschools": 1,
-      "medicalFacilities": 6,
+      "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 150,
@@ -2700,7 +2700,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.28969,
+    "populationChangeRate": -7.35878,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2753,7 +2753,7 @@
     "code": "43432",
     "pref": "kumamoto",
     "name": "西原村",
-    "population": 6852,
+    "population": 6826,
     "populationTrend": "増加",
     "rent": {
       "value": 0,
@@ -2763,10 +2763,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 16367,
+      "value": 16533,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -2796,7 +2796,7 @@
       "preschools": 0,
       "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 233,
@@ -2810,7 +2810,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 6.62932,
+    "populationChangeRate": 6.22471,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2863,7 +2863,7 @@
     "code": "43433",
     "pref": "kumamoto",
     "name": "南阿蘇村",
-    "population": 9172,
+    "population": 9164,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2873,10 +2873,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 6371,
+      "value": 6414,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -2904,9 +2904,9 @@
     "amenities": {
       "stations": 10,
       "preschools": 0,
-      "medicalFacilities": 11,
+      "medicalFacilities": 12,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 216,
@@ -2920,7 +2920,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.75071,
+    "populationChangeRate": -6.83205,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2973,7 +2973,7 @@
     "code": "43441",
     "pref": "kumamoto",
     "name": "御船町",
-    "population": 16574,
+    "population": 16527,
     "populationTrend": "微増",
     "rent": {
       "value": 43559,
@@ -3016,7 +3016,7 @@
       "preschools": 1,
       "medicalFacilities": 18,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 224,
@@ -3030,7 +3030,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 1.66227,
+    "populationChangeRate": 1.37398,
     "vacancy": {
       "rate": 10.6,
       "vacant": 770,
@@ -3083,7 +3083,7 @@
     "code": "43442",
     "pref": "kumamoto",
     "name": "嘉島町",
-    "population": 10104,
+    "population": 10080,
     "populationTrend": "増加",
     "rent": {
       "value": 0,
@@ -3124,9 +3124,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 1,
-      "medicalFacilities": 21,
+      "medicalFacilities": 23,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 197,
@@ -3140,7 +3140,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 5.83429,
+    "populationChangeRate": 5.58291,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3193,7 +3193,7 @@
     "code": "43443",
     "pref": "kumamoto",
     "name": "益城町",
-    "population": 33542,
+    "population": 33519,
     "populationTrend": "増加",
     "rent": {
       "value": 45093,
@@ -3234,9 +3234,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 5,
-      "medicalFacilities": 32,
+      "medicalFacilities": 31,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 275,
@@ -3250,7 +3250,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 3.17441,
+    "populationChangeRate": 3.10366,
     "vacancy": {
       "rate": 7.3,
       "vacant": 950,
@@ -3303,7 +3303,7 @@
     "code": "43444",
     "pref": "kumamoto",
     "name": "甲佐町",
-    "population": 9450,
+    "population": 9433,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3313,10 +3313,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 12967,
+      "value": 12767,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -3344,9 +3344,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 10,
+      "medicalFacilities": 9,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 157,
@@ -3360,7 +3360,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.73115,
+    "populationChangeRate": -6.89893,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3413,7 +3413,7 @@
     "code": "43447",
     "pref": "kumamoto",
     "name": "山都町",
-    "population": 11670,
+    "population": 11665,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3423,10 +3423,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 7210,
+      "value": 7130,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -3454,9 +3454,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 3,
-      "medicalFacilities": 20,
+      "medicalFacilities": 19,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 205,
@@ -3470,7 +3470,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -13.57476,
+    "populationChangeRate": -13.61179,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3523,7 +3523,7 @@
     "code": "43468",
     "pref": "kumamoto",
     "name": "氷川町",
-    "population": 9984,
+    "population": 9972,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3533,10 +3533,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 11725,
+      "value": 11667,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -3564,9 +3564,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 3,
-      "medicalFacilities": 14,
+      "medicalFacilities": 13,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 292,
@@ -3580,7 +3580,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.00541,
+    "populationChangeRate": -10.11357,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3633,7 +3633,7 @@
     "code": "43482",
     "pref": "kumamoto",
     "name": "芦北町",
-    "population": 13880,
+    "population": 13867,
     "populationTrend": "減少",
     "rent": {
       "value": 27519,
@@ -3676,7 +3676,7 @@
       "preschools": 1,
       "medicalFacilities": 25,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 91,
@@ -3690,7 +3690,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.48524,
+    "populationChangeRate": -11.56814,
     "vacancy": {
       "rate": 17.9,
       "vacant": 1250,
@@ -3743,7 +3743,7 @@
     "code": "43484",
     "pref": "kumamoto",
     "name": "津奈木町",
-    "population": 3827,
+    "population": 3811,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3753,10 +3753,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 9767,
+      "value": 9700,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -3786,7 +3786,7 @@
       "preschools": 0,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 20,
@@ -3800,7 +3800,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.03761,
+    "populationChangeRate": -10.41373,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3853,7 +3853,7 @@
     "code": "43501",
     "pref": "kumamoto",
     "name": "錦町",
-    "population": 9617,
+    "population": 9611,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3863,10 +3863,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 7333,
+      "value": 7423,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -3894,9 +3894,9 @@
     "amenities": {
       "stations": 3,
       "preschools": 2,
-      "medicalFacilities": 12,
+      "medicalFacilities": 11,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 148,
@@ -3910,7 +3910,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.52216,
+    "populationChangeRate": -6.58048,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3963,7 +3963,7 @@
     "code": "43505",
     "pref": "kumamoto",
     "name": "多良木町",
-    "population": 7876,
+    "population": 7867,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3973,10 +3973,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 5767,
+      "value": 5733,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -4006,7 +4006,7 @@
       "preschools": 1,
       "medicalFacilities": 13,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 82,
@@ -4020,7 +4020,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -13.22168,
+    "populationChangeRate": -13.32085,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4073,7 +4073,7 @@
     "code": "43506",
     "pref": "kumamoto",
     "name": "湯前町",
-    "population": 3254,
+    "population": 3251,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4083,10 +4083,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 4825,
+      "value": 4750,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -4114,9 +4114,9 @@
     "amenities": {
       "stations": 1,
       "preschools": 1,
-      "medicalFacilities": 5,
+      "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 20,
@@ -4130,7 +4130,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.28398,
+    "populationChangeRate": -10.36669,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4183,7 +4183,7 @@
     "code": "43507",
     "pref": "kumamoto",
     "name": "水上村",
-    "population": 1782,
+    "population": 1779,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4193,10 +4193,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 4200,
+      "value": 4150,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -4224,9 +4224,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 5,
+      "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 20,
@@ -4240,7 +4240,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -12.34629,
+    "populationChangeRate": -12.49385,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4293,7 +4293,7 @@
     "code": "43510",
     "pref": "kumamoto",
     "name": "相良村",
-    "population": 3774,
+    "population": 3768,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4303,10 +4303,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 4733,
+      "value": 4683,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -4336,7 +4336,7 @@
       "preschools": 1,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 41,
@@ -4350,7 +4350,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.27273,
+    "populationChangeRate": -7.42015,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4403,7 +4403,7 @@
     "code": "43511",
     "pref": "kumamoto",
     "name": "五木村",
-    "population": 810,
+    "population": 812,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4413,10 +4413,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 3997,
+      "value": 2525,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -4446,7 +4446,7 @@
       "preschools": 0,
       "medicalFacilities": 1,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 6,
@@ -4460,7 +4460,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -12.99678,
+    "populationChangeRate": -12.78195,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4513,7 +4513,7 @@
     "code": "43512",
     "pref": "kumamoto",
     "name": "山江村",
-    "population": 2922,
+    "population": 2914,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4523,10 +4523,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 5500,
+      "value": 5517,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -4556,7 +4556,7 @@
       "preschools": 1,
       "medicalFacilities": 0,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 8,
@@ -4570,7 +4570,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.75911,
+    "populationChangeRate": -10.00618,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4623,7 +4623,7 @@
     "code": "43513",
     "pref": "kumamoto",
     "name": "球磨村",
-    "population": 2266,
+    "population": 2263,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4633,10 +4633,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 3617,
+      "value": 3567,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -4666,7 +4666,7 @@
       "preschools": 0,
       "medicalFacilities": 2,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 5,
@@ -4680,7 +4680,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.86395,
+    "populationChangeRate": -6.98726,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4733,7 +4733,7 @@
     "code": "43514",
     "pref": "kumamoto",
     "name": "あさぎり町",
-    "population": 13201,
+    "population": 13188,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4743,10 +4743,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 5905,
+      "value": 5795,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -4776,7 +4776,7 @@
       "preschools": 3,
       "medicalFacilities": 17,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 248,
@@ -4790,7 +4790,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.05042,
+    "populationChangeRate": -10.139,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4843,7 +4843,7 @@
     "code": "43531",
     "pref": "kumamoto",
     "name": "苓北町",
-    "population": 6164,
+    "population": 6150,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4853,10 +4853,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 12217,
+      "value": 12083,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -4886,7 +4886,7 @@
       "preschools": 0,
       "medicalFacilities": 11,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 99,
@@ -4900,7 +4900,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -13.35395,
+    "populationChangeRate": -13.55075,
     "vacancy": {
       "rate": -1,
       "vacant": 0,

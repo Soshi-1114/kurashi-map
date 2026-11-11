@@ -3,7 +3,7 @@
     "code": "25201",
     "pref": "shiga",
     "name": "大津市",
-    "population": 343051,
+    "population": 342879,
     "populationTrend": "横ばい",
     "rent": {
       "value": 54308,
@@ -44,9 +44,9 @@
     "amenities": {
       "stations": 45,
       "preschools": 210,
-      "medicalFacilities": 467,
+      "medicalFacilities": 466,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 6311,
@@ -60,7 +60,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -0.5851,
+    "populationChangeRate": -0.63494,
     "vacancy": {
       "rate": 10.9,
       "vacant": 18460,
@@ -113,7 +113,7 @@
     "code": "25202",
     "pref": "shiga",
     "name": "彦根市",
-    "population": 111647,
+    "population": 111549,
     "populationTrend": "微減",
     "rent": {
       "value": 50570,
@@ -154,9 +154,9 @@
     "amenities": {
       "stations": 12,
       "preschools": 61,
-      "medicalFacilities": 142,
+      "medicalFacilities": 137,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 4476,
@@ -170,7 +170,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.75984,
+    "populationChangeRate": -1.84607,
     "vacancy": {
       "rate": 14.8,
       "vacant": 8370,
@@ -223,7 +223,7 @@
     "code": "25203",
     "pref": "shiga",
     "name": "長浜市",
-    "population": 108085,
+    "population": 108044,
     "populationTrend": "減少",
     "rent": {
       "value": 48596,
@@ -264,9 +264,9 @@
     "amenities": {
       "stations": 10,
       "preschools": 53,
-      "medicalFacilities": 145,
+      "medicalFacilities": 143,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 4316,
@@ -280,7 +280,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.8849,
+    "populationChangeRate": -4.92098,
     "vacancy": {
       "rate": 18.5,
       "vacant": 9690,
@@ -333,7 +333,7 @@
     "code": "25204",
     "pref": "shiga",
     "name": "近江八幡市",
-    "population": 79393,
+    "population": 79546,
     "populationTrend": "微減",
     "rent": {
       "value": 52213,
@@ -376,7 +376,7 @@
       "preschools": 46,
       "medicalFacilities": 88,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2466,
@@ -390,7 +390,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.13136,
+    "populationChangeRate": -1.94275,
     "vacancy": {
       "rate": 10.6,
       "vacant": 3880,
@@ -443,7 +443,7 @@
     "code": "25206",
     "pref": "shiga",
     "name": "草津市",
-    "population": 148731,
+    "population": 148660,
     "populationTrend": "増加",
     "rent": {
       "value": 54182,
@@ -484,9 +484,9 @@
     "amenities": {
       "stations": 3,
       "preschools": 106,
-      "medicalFacilities": 215,
+      "medicalFacilities": 212,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 4076,
@@ -500,7 +500,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 3.34786,
+    "populationChangeRate": 3.29852,
     "vacancy": {
       "rate": 6.7,
       "vacant": 4980,
@@ -553,7 +553,7 @@
     "code": "25207",
     "pref": "shiga",
     "name": "守山市",
-    "population": 84539,
+    "population": 84478,
     "populationTrend": "微増",
     "rent": {
       "value": 56806,
@@ -594,9 +594,9 @@
     "amenities": {
       "stations": 1,
       "preschools": 55,
-      "medicalFacilities": 110,
+      "medicalFacilities": 114,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1403,
@@ -610,7 +610,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 1.56543,
+    "populationChangeRate": 1.49214,
     "vacancy": {
       "rate": 8.3,
       "vacant": 2950,
@@ -663,7 +663,7 @@
     "code": "25208",
     "pref": "shiga",
     "name": "栗東市",
-    "population": 69129,
+    "population": 69143,
     "populationTrend": "横ばい",
     "rent": {
       "value": 57309,
@@ -704,9 +704,9 @@
     "amenities": {
       "stations": 2,
       "preschools": 40,
-      "medicalFacilities": 88,
+      "medicalFacilities": 87,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1926,
@@ -720,7 +720,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 0.449,
+    "populationChangeRate": 0.46934,
     "vacancy": {
       "rate": 7.2,
       "vacant": 2090,
@@ -773,7 +773,7 @@
     "code": "25209",
     "pref": "shiga",
     "name": "甲賀市",
-    "population": 84982,
+    "population": 84920,
     "populationTrend": "減少",
     "rent": {
       "value": 47139,
@@ -814,9 +814,9 @@
     "amenities": {
       "stations": 16,
       "preschools": 49,
-      "medicalFacilities": 89,
+      "medicalFacilities": 90,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 5126,
@@ -830,7 +830,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.82082,
+    "populationChangeRate": -3.89099,
     "vacancy": {
       "rate": 11.7,
       "vacant": 4550,
@@ -883,8 +883,8 @@
     "code": "25210",
     "pref": "shiga",
     "name": "野洲市",
-    "population": 50013,
-    "populationTrend": "横ばい",
+    "population": 49986,
+    "populationTrend": "微減",
     "rent": {
       "value": 56265,
       "unit": "円/月",
@@ -924,9 +924,9 @@
     "amenities": {
       "stations": 1,
       "preschools": 25,
-      "medicalFacilities": 67,
+      "medicalFacilities": 66,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1291,
@@ -940,7 +940,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -0.98984,
+    "populationChangeRate": -1.0433,
     "vacancy": {
       "rate": 8.6,
       "vacant": 1900,
@@ -993,7 +993,7 @@
     "code": "25211",
     "pref": "shiga",
     "name": "湖南市",
-    "population": 53614,
+    "population": 53527,
     "populationTrend": "微減",
     "rent": {
       "value": 48977,
@@ -1036,7 +1036,7 @@
       "preschools": 32,
       "medicalFacilities": 52,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 4546,
@@ -1050,7 +1050,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.55343,
+    "populationChangeRate": -1.71318,
     "vacancy": {
       "rate": 15,
       "vacant": 3890,
@@ -1103,7 +1103,7 @@
     "code": "25212",
     "pref": "shiga",
     "name": "高島市",
-    "population": 43130,
+    "population": 43103,
     "populationTrend": "減少",
     "rent": {
       "value": 42247,
@@ -1144,9 +1144,9 @@
     "amenities": {
       "stations": 6,
       "preschools": 26,
-      "medicalFacilities": 68,
+      "medicalFacilities": 69,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 943,
@@ -1160,7 +1160,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.00132,
+    "populationChangeRate": -7.05953,
     "vacancy": {
       "rate": 23.1,
       "vacant": 5480,
@@ -1213,7 +1213,7 @@
     "code": "25213",
     "pref": "shiga",
     "name": "東近江市",
-    "population": 109923,
+    "population": 109836,
     "populationTrend": "微減",
     "rent": {
       "value": 48609,
@@ -1254,9 +1254,9 @@
     "amenities": {
       "stations": 14,
       "preschools": 62,
-      "medicalFacilities": 123,
+      "medicalFacilities": 125,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 5414,
@@ -1270,7 +1270,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.56694,
+    "populationChangeRate": -2.64406,
     "vacancy": {
       "rate": 17.5,
       "vacant": 9180,
@@ -1323,7 +1323,7 @@
     "code": "25214",
     "pref": "shiga",
     "name": "米原市",
-    "population": 35339,
+    "population": 35471,
     "populationTrend": "減少",
     "rent": {
       "value": 54352,
@@ -1366,7 +1366,7 @@
       "preschools": 20,
       "medicalFacilities": 38,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 735,
@@ -1380,7 +1380,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.06649,
+    "populationChangeRate": -4.71189,
     "vacancy": {
       "rate": 14.6,
       "vacant": 2240,
@@ -1433,7 +1433,7 @@
     "code": "25383",
     "pref": "shiga",
     "name": "日野町",
-    "population": 20010,
+    "population": 19998,
     "populationTrend": "減少",
     "rent": {
       "value": 39265,
@@ -1476,7 +1476,7 @@
       "preschools": 12,
       "medicalFacilities": 20,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1067,
@@ -1490,7 +1490,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.55066,
+    "populationChangeRate": -4.6079,
     "vacancy": {
       "rate": 10.8,
       "vacant": 970,
@@ -1543,7 +1543,7 @@
     "code": "25384",
     "pref": "shiga",
     "name": "竜王町",
-    "population": 10935,
+    "population": 10922,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1584,9 +1584,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 5,
-      "medicalFacilities": 13,
+      "medicalFacilities": 14,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 281,
@@ -1600,7 +1600,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.24404,
+    "populationChangeRate": -7.35431,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1653,7 +1653,7 @@
     "code": "25425",
     "pref": "shiga",
     "name": "愛荘町",
-    "population": 20415,
+    "population": 20434,
     "populationTrend": "微減",
     "rent": {
       "value": 47923,
@@ -1696,7 +1696,7 @@
       "preschools": 9,
       "medicalFacilities": 18,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1331,
@@ -1710,7 +1710,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.28785,
+    "populationChangeRate": -2.19691,
     "vacancy": {
       "rate": 12.5,
       "vacant": 1160,
@@ -1763,7 +1763,7 @@
     "code": "25441",
     "pref": "shiga",
     "name": "豊郷町",
-    "population": 6800,
+    "population": 6819,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1804,9 +1804,9 @@
     "amenities": {
       "stations": 1,
       "preschools": 4,
-      "medicalFacilities": 7,
+      "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 287,
@@ -1820,7 +1820,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.65508,
+    "populationChangeRate": -4.38867,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1873,7 +1873,7 @@
     "code": "25442",
     "pref": "shiga",
     "name": "甲良町",
-    "population": 5715,
+    "population": 5709,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1916,7 +1916,7 @@
       "preschools": 4,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 114,
@@ -1930,7 +1930,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.16976,
+    "populationChangeRate": -10.26407,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1983,7 +1983,7 @@
     "code": "25443",
     "pref": "shiga",
     "name": "多賀町",
-    "population": 6988,
+    "population": 6984,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2026,7 +2026,7 @@
       "preschools": 5,
       "medicalFacilities": 8,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 71,
@@ -2040,7 +2040,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.93181,
+    "populationChangeRate": -3.9868,
     "vacancy": {
       "rate": -1,
       "vacant": 0,

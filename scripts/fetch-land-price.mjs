@@ -27,6 +27,8 @@ console.log(`pref: ${pref.slug} (${pref.nameJa}, code=${pref.code})`);
 // 既定は scripts/_lib/versions.mjs の単一ソース（CI は env で上書き）。
 const L01_VERSION = version("L01_VERSION");
 const L01_ASOF = version("L01_ASOF");
+const L02_VERSION = version("L02_VERSION");
+const L02_ASOF = version("L02_ASOF");
 
 const L01_PATH =
   process.env.L01_GEOJSON ||
@@ -45,7 +47,7 @@ if (!existsSync(L01_PATH)) {
 //   unzip -o /tmp/L02_25_{code}.zip -d /tmp/L02_25_{code}
 const L02_PATH =
   process.env.L02_GEOJSON ||
-  `/tmp/L02_25_${pref.code}/L02-25_${pref.code}.geojson`;
+  `/tmp/L02_${L02_VERSION}_${pref.code}/L02-${L02_VERSION}_${pref.code}.geojson`;
 
 // 住宅地ポイントを code→価格[] でグルーピング
 function groupResidential(features, { useField, codeField, priceField }) {
@@ -107,7 +109,7 @@ async function main() {
       }
       const a2 = collect(groups2, m.code);
       if (a2) {
-        m.landPrice = { value: mean(a2), unit: "円/㎡", source: "地価調査（住宅地平均）", asOf: "2025", isEstimated: false };
+        m.landPrice = { value: mean(a2), unit: "円/㎡", source: "地価調査（住宅地平均）", asOf: L02_ASOF, isEstimated: false };
         fromL02++; continue;
       }
       missing.push(`${m.code} ${m.name}`);

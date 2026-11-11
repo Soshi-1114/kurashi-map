@@ -6,7 +6,7 @@
     "level": "ward",
     "parentCode": "01100",
     "displayName": "札幌市中央区",
-    "population": 255882,
+    "population": 255523,
     "populationTrend": "微増",
     "rent": {
       "value": 62707,
@@ -47,9 +47,9 @@
     "amenities": {
       "stations": 44,
       "preschools": 92,
-      "medicalFacilities": 731,
+      "medicalFacilities": 740,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 4707,
@@ -63,7 +63,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 2.89609,
+    "populationChangeRate": 2.75173,
     "vacancy": {
       "rate": 18.4,
       "vacant": 32100,
@@ -119,7 +119,7 @@
     "level": "ward",
     "parentCode": "01100",
     "displayName": "札幌市北区",
-    "population": 285798,
+    "population": 285318,
     "populationTrend": "微減",
     "rent": {
       "value": 51183,
@@ -160,9 +160,9 @@
     "amenities": {
       "stations": 14,
       "preschools": 120,
-      "medicalFacilities": 374,
+      "medicalFacilities": 371,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 4557,
@@ -176,7 +176,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.21836,
+    "populationChangeRate": -1.38427,
     "vacancy": {
       "rate": 15.1,
       "vacant": 24740,
@@ -232,7 +232,7 @@
     "level": "ward",
     "parentCode": "01100",
     "displayName": "札幌市東区",
-    "population": 261249,
+    "population": 261091,
     "populationTrend": "微減",
     "rent": {
       "value": 50110,
@@ -275,7 +275,7 @@
       "preschools": 92,
       "medicalFacilities": 293,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2952,
@@ -289,7 +289,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.55626,
+    "populationChangeRate": -1.6158,
     "vacancy": {
       "rate": 14.4,
       "vacant": 21830,
@@ -345,7 +345,7 @@
     "level": "ward",
     "parentCode": "01100",
     "displayName": "札幌市白石区",
-    "population": 210753,
+    "population": 210483,
     "populationTrend": "横ばい",
     "rent": {
       "value": 52745,
@@ -386,9 +386,9 @@
     "amenities": {
       "stations": 9,
       "preschools": 80,
-      "medicalFacilities": 231,
+      "medicalFacilities": 226,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2673,
@@ -402,7 +402,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -0.51077,
+    "populationChangeRate": -0.63823,
     "vacancy": {
       "rate": 14.2,
       "vacant": 18240,
@@ -458,7 +458,7 @@
     "level": "ward",
     "parentCode": "01100",
     "displayName": "札幌市豊平区",
-    "population": 230960,
+    "population": 230892,
     "populationTrend": "微増",
     "rent": {
       "value": 52938,
@@ -499,9 +499,9 @@
     "amenities": {
       "stations": 8,
       "preschools": 81,
-      "medicalFacilities": 286,
+      "medicalFacilities": 283,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2722,
@@ -515,7 +515,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 2.51312,
+    "populationChangeRate": 2.48293,
     "vacancy": {
       "rate": 13.5,
       "vacant": 19050,
@@ -571,7 +571,7 @@
     "level": "ward",
     "parentCode": "01100",
     "displayName": "札幌市南区",
-    "population": 132525,
+    "population": 132396,
     "populationTrend": "微減",
     "rent": {
       "value": 48884,
@@ -612,9 +612,9 @@
     "amenities": {
       "stations": 3,
       "preschools": 49,
-      "medicalFacilities": 149,
+      "medicalFacilities": 146,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1534,
@@ -628,7 +628,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.3951,
+    "populationChangeRate": -2.49011,
     "vacancy": {
       "rate": 14.1,
       "vacant": 10100,
@@ -684,7 +684,7 @@
     "level": "ward",
     "parentCode": "01100",
     "displayName": "札幌市西区",
-    "population": 217774,
+    "population": 217523,
     "populationTrend": "横ばい",
     "rent": {
       "value": 53518,
@@ -725,9 +725,9 @@
     "amenities": {
       "stations": 8,
       "preschools": 86,
-      "medicalFacilities": 303,
+      "medicalFacilities": 301,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1820,
@@ -741,7 +741,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 0.33819,
+    "populationChangeRate": 0.22254,
     "vacancy": {
       "rate": 11.4,
       "vacant": 13560,
@@ -797,7 +797,7 @@
     "level": "ward",
     "parentCode": "01100",
     "displayName": "札幌市厚別区",
-    "population": 122003,
+    "population": 121892,
     "populationTrend": "微減",
     "rent": {
       "value": 48436,
@@ -838,9 +838,9 @@
     "amenities": {
       "stations": 7,
       "preschools": 45,
-      "medicalFacilities": 158,
+      "medicalFacilities": 160,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1195,
@@ -854,7 +854,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.46236,
+    "populationChangeRate": -2.55111,
     "vacancy": {
       "rate": 10.4,
       "vacant": 6520,
@@ -910,7 +910,7 @@
     "level": "ward",
     "parentCode": "01100",
     "displayName": "札幌市手稲区",
-    "population": 139146,
+    "population": 139030,
     "populationTrend": "微減",
     "rent": {
       "value": 50267,
@@ -951,9 +951,9 @@
     "amenities": {
       "stations": 5,
       "preschools": 53,
-      "medicalFacilities": 162,
+      "medicalFacilities": 161,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1173,
@@ -967,7 +967,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.43926,
+    "populationChangeRate": -2.5206,
     "vacancy": {
       "rate": 8.9,
       "vacant": 6030,
@@ -1023,7 +1023,7 @@
     "level": "ward",
     "parentCode": "01100",
     "displayName": "札幌市清田区",
-    "population": 107944,
+    "population": 107848,
     "populationTrend": "減少",
     "rent": {
       "value": 51200,
@@ -1064,9 +1064,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 41,
-      "medicalFacilities": 128,
+      "medicalFacilities": 130,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 996,
@@ -1080,7 +1080,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.92595,
+    "populationChangeRate": -4.01139,
     "vacancy": {
       "rate": 7.4,
       "vacant": 3620,

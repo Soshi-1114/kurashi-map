@@ -39,7 +39,7 @@ export type Municipality = {
   parentCode?: string;   // ward の親市コード 例 "11100"
   displayName?: string;  // 表示用フルネーム 例 "さいたま市浦和区"。指定無ければ name にフォールバック
   population: number;
-  populationTrend: "増加" | "微増" | "横ばい" | "微減" | "減少";
+  populationTrend: "増加" | "微増" | "横ばい" | "微減" | "減少" | "データなし";
   // 5年間（2020→2025 国勢調査）の人口増減率（%）。ランキング用。
   // populationTrend はこの率の5区分（fetch-population-2025.mjs trendOf）。
   populationChangeRate?: number;

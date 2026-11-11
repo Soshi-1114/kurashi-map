@@ -3,7 +3,7 @@
     "code": "46201",
     "pref": "kagoshima",
     "name": "鹿児島市",
-    "population": 580970,
+    "population": 580549,
     "populationTrend": "微減",
     "rent": {
       "value": 49183,
@@ -44,9 +44,9 @@
     "amenities": {
       "stations": 62,
       "preschools": 268,
-      "medicalFacilities": 983,
+      "medicalFacilities": 977,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 5689,
@@ -60,7 +60,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.04981,
+    "populationChangeRate": -2.12079,
     "vacancy": {
       "rate": 15.3,
       "vacant": 51080,
@@ -113,7 +113,7 @@
     "code": "46203",
     "pref": "kagoshima",
     "name": "鹿屋市",
-    "population": 96073,
+    "population": 96025,
     "populationTrend": "減少",
     "rent": {
       "value": 37791,
@@ -154,9 +154,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 73,
-      "medicalFacilities": 120,
+      "medicalFacilities": 119,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1499,
@@ -170,7 +170,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.96854,
+    "populationChangeRate": -5.01602,
     "vacancy": {
       "rate": 19.3,
       "vacant": 10690,
@@ -223,7 +223,7 @@
     "code": "46204",
     "pref": "kagoshima",
     "name": "枕崎市",
-    "population": 17948,
+    "population": 17922,
     "populationTrend": "減少",
     "rent": {
       "value": 33282,
@@ -264,9 +264,9 @@
     "amenities": {
       "stations": 3,
       "preschools": 11,
-      "medicalFacilities": 31,
+      "medicalFacilities": 29,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 643,
@@ -280,7 +280,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.40783,
+    "populationChangeRate": -10.53761,
     "vacancy": {
       "rate": 23.8,
       "vacant": 2880,
@@ -333,7 +333,7 @@
     "code": "46206",
     "pref": "kagoshima",
     "name": "阿久根市",
-    "population": 17289,
+    "population": 17274,
     "populationTrend": "減少",
     "rent": {
       "value": 31655,
@@ -376,7 +376,7 @@
       "preschools": 10,
       "medicalFacilities": 24,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 309,
@@ -390,7 +390,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.28023,
+    "populationChangeRate": -10.35807,
     "vacancy": {
       "rate": 28.2,
       "vacant": 2930,
@@ -443,7 +443,7 @@
     "code": "46208",
     "pref": "kagoshima",
     "name": "出水市",
-    "population": 49506,
+    "population": 49477,
     "populationTrend": "減少",
     "rent": {
       "value": 35865,
@@ -486,7 +486,7 @@
       "preschools": 34,
       "medicalFacilities": 68,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1375,
@@ -500,7 +500,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.78517,
+    "populationChangeRate": -4.84094,
     "vacancy": {
       "rate": 18.5,
       "vacant": 5140,
@@ -553,7 +553,7 @@
     "code": "46210",
     "pref": "kagoshima",
     "name": "指宿市",
-    "population": 35839,
+    "population": 35793,
     "populationTrend": "減少",
     "rent": {
       "value": 33924,
@@ -594,9 +594,9 @@
     "amenities": {
       "stations": 11,
       "preschools": 28,
-      "medicalFacilities": 62,
+      "medicalFacilities": 60,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 848,
@@ -610,7 +610,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.13104,
+    "populationChangeRate": -8.24896,
     "vacancy": {
       "rate": 24.8,
       "vacant": 5550,
@@ -663,7 +663,7 @@
     "code": "46213",
     "pref": "kagoshima",
     "name": "西之表市",
-    "population": 14186,
+    "population": 14183,
     "populationTrend": "減少",
     "rent": {
       "value": 35725,
@@ -706,7 +706,7 @@
       "preschools": 12,
       "medicalFacilities": 14,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 154,
@@ -720,7 +720,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.54909,
+    "populationChangeRate": -3.56949,
     "vacancy": {
       "rate": 17.1,
       "vacant": 1410,
@@ -773,7 +773,7 @@
     "code": "46214",
     "pref": "kagoshima",
     "name": "垂水市",
-    "population": 12251,
+    "population": 12236,
     "populationTrend": "減少",
     "rent": {
       "value": 35549,
@@ -816,7 +816,7 @@
       "preschools": 12,
       "medicalFacilities": 15,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 561,
@@ -830,7 +830,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.3467,
+    "populationChangeRate": -11.45524,
     "vacancy": {
       "rate": 29.9,
       "vacant": 2540,
@@ -883,7 +883,7 @@
     "code": "46215",
     "pref": "kagoshima",
     "name": "薩摩川内市",
-    "population": 87673,
+    "population": 87618,
     "populationTrend": "減少",
     "rent": {
       "value": 32657,
@@ -924,9 +924,9 @@
     "amenities": {
       "stations": 9,
       "preschools": 65,
-      "medicalFacilities": 145,
+      "medicalFacilities": 144,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 793,
@@ -940,7 +940,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.11888,
+    "populationChangeRate": -5.1784,
     "vacancy": {
       "rate": 26.4,
       "vacant": 14760,
@@ -993,7 +993,7 @@
     "code": "46216",
     "pref": "kagoshima",
     "name": "日置市",
-    "population": 45021,
+    "population": 44975,
     "populationTrend": "減少",
     "rent": {
       "value": 39386,
@@ -1036,7 +1036,7 @@
       "preschools": 30,
       "medicalFacilities": 70,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 530,
@@ -1050,7 +1050,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.52145,
+    "populationChangeRate": -4.61901,
     "vacancy": {
       "rate": 18.9,
       "vacant": 4450,
@@ -1103,7 +1103,7 @@
     "code": "46217",
     "pref": "kagoshima",
     "name": "曽於市",
-    "population": 29861,
+    "population": 29845,
     "populationTrend": "減少",
     "rent": {
       "value": 33596,
@@ -1144,9 +1144,9 @@
     "amenities": {
       "stations": 3,
       "preschools": 28,
-      "medicalFacilities": 38,
+      "medicalFacilities": 37,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 788,
@@ -1160,7 +1160,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.35425,
+    "populationChangeRate": -10.40228,
     "vacancy": {
       "rate": 22.3,
       "vacant": 4000,
@@ -1213,7 +1213,7 @@
     "code": "46218",
     "pref": "kagoshima",
     "name": "霧島市",
-    "population": 120429,
+    "population": 120330,
     "populationTrend": "微減",
     "rent": {
       "value": 34292,
@@ -1254,9 +1254,9 @@
     "amenities": {
       "stations": 12,
       "preschools": 88,
-      "medicalFacilities": 170,
+      "medicalFacilities": 165,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1453,
@@ -1270,7 +1270,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.19759,
+    "populationChangeRate": -2.27799,
     "vacancy": {
       "rate": 22.7,
       "vacant": 16780,
@@ -1323,7 +1323,7 @@
     "code": "46219",
     "pref": "kagoshima",
     "name": "いちき串木野市",
-    "population": 25422,
+    "population": 25401,
     "populationTrend": "減少",
     "rent": {
       "value": 36913,
@@ -1364,9 +1364,9 @@
     "amenities": {
       "stations": 3,
       "preschools": 13,
-      "medicalFacilities": 45,
+      "medicalFacilities": 44,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 547,
@@ -1380,7 +1380,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.52274,
+    "populationChangeRate": -7.59913,
     "vacancy": {
       "rate": 22.2,
       "vacant": 3030,
@@ -1433,7 +1433,7 @@
     "code": "46220",
     "pref": "kagoshima",
     "name": "南さつま市",
-    "population": 30087,
+    "population": 30065,
     "populationTrend": "減少",
     "rent": {
       "value": 41544,
@@ -1474,9 +1474,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 18,
-      "medicalFacilities": 54,
+      "medicalFacilities": 52,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 363,
@@ -1490,7 +1490,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.514,
+    "populationChangeRate": -8.5809,
     "vacancy": {
       "rate": 31.3,
       "vacant": 6010,
@@ -1498,7 +1498,7 @@
       "source": "住宅・土地統計調査（居住世帯の有無別住宅数）",
       "asOf": "2023"
     },
-    "areaKm2": 283.59,
+    "areaKm2": 283.6,
     "futurePopulation": {
       "base2020": 32887,
       "total": {
@@ -1543,7 +1543,7 @@
     "code": "46221",
     "pref": "kagoshima",
     "name": "志布志市",
-    "population": 27122,
+    "population": 27085,
     "populationTrend": "減少",
     "rent": {
       "value": 35096,
@@ -1584,9 +1584,9 @@
     "amenities": {
       "stations": 2,
       "preschools": 29,
-      "medicalFacilities": 37,
+      "medicalFacilities": 35,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 934,
@@ -1600,7 +1600,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.52498,
+    "populationChangeRate": -7.65113,
     "vacancy": {
       "rate": 25.2,
       "vacant": 4170,
@@ -1653,7 +1653,7 @@
     "code": "46222",
     "pref": "kagoshima",
     "name": "奄美市",
-    "population": 38416,
+    "population": 38380,
     "populationTrend": "減少",
     "rent": {
       "value": 36604,
@@ -1694,9 +1694,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 28,
-      "medicalFacilities": 54,
+      "medicalFacilities": 52,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 236,
@@ -1710,7 +1710,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.18531,
+    "populationChangeRate": -7.27229,
     "vacancy": {
       "rate": 17.8,
       "vacant": 4180,
@@ -1763,7 +1763,7 @@
     "code": "46223",
     "pref": "kagoshima",
     "name": "南九州市",
-    "population": 29901,
+    "population": 29870,
     "populationTrend": "減少",
     "rent": {
       "value": 31201,
@@ -1806,7 +1806,7 @@
       "preschools": 32,
       "medicalFacilities": 50,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 883,
@@ -1820,7 +1820,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.61004,
+    "populationChangeRate": -9.70375,
     "vacancy": {
       "rate": 25.6,
       "vacant": 4610,
@@ -1828,7 +1828,7 @@
       "source": "住宅・土地統計調査（居住世帯の有無別住宅数）",
       "asOf": "2023"
     },
-    "areaKm2": 357.93,
+    "areaKm2": 357.78,
     "futurePopulation": {
       "base2020": 33080,
       "total": {
@@ -1873,7 +1873,7 @@
     "code": "46224",
     "pref": "kagoshima",
     "name": "伊佐市",
-    "population": 21397,
+    "population": 21375,
     "populationTrend": "減少",
     "rent": {
       "value": 31264,
@@ -1916,7 +1916,7 @@
       "preschools": 26,
       "medicalFacilities": 34,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 284,
@@ -1930,7 +1930,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -12.49744,
+    "populationChangeRate": -12.58741,
     "vacancy": {
       "rate": 32,
       "vacant": 4950,
@@ -1983,7 +1983,7 @@
     "code": "46225",
     "pref": "kagoshima",
     "name": "姶良市",
-    "population": 76919,
+    "population": 76868,
     "populationTrend": "横ばい",
     "rent": {
       "value": 42228,
@@ -2024,9 +2024,9 @@
     "amenities": {
       "stations": 5,
       "preschools": 48,
-      "medicalFacilities": 110,
+      "medicalFacilities": 111,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 803,
@@ -2040,7 +2040,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 0.74789,
+    "populationChangeRate": 0.68109,
     "vacancy": {
       "rate": 18.4,
       "vacant": 7380,
@@ -2093,7 +2093,7 @@
     "code": "46303",
     "pref": "kagoshima",
     "name": "三島村",
-    "population": 363,
+    "population": 361,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2103,10 +2103,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 1900,
+      "value": 1890,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -2136,7 +2136,7 @@
       "preschools": 0,
       "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 7,
@@ -2150,7 +2150,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.37037,
+    "populationChangeRate": -10.8642,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2213,10 +2213,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 1500,
+      "value": 1490,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -2246,7 +2246,7 @@
       "preschools": 0,
       "medicalFacilities": 7,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 15,
@@ -2313,7 +2313,7 @@
     "code": "46392",
     "pref": "kagoshima",
     "name": "さつま町",
-    "population": 17580,
+    "population": 17566,
     "populationTrend": "減少",
     "rent": {
       "value": 27441,
@@ -2354,9 +2354,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 19,
-      "medicalFacilities": 29,
+      "medicalFacilities": 28,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 536,
@@ -2370,7 +2370,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -13.15516,
+    "populationChangeRate": -13.22432,
     "vacancy": {
       "rate": 29,
       "vacant": 3430,
@@ -2433,10 +2433,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 5675,
+      "value": 5600,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -2466,7 +2466,7 @@
       "preschools": 10,
       "medicalFacilities": 10,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 113,
@@ -2533,7 +2533,7 @@
     "code": "46452",
     "pref": "kagoshima",
     "name": "湧水町",
-    "population": 8297,
+    "population": 8293,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2576,7 +2576,7 @@
       "preschools": 7,
       "medicalFacilities": 12,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 129,
@@ -2590,7 +2590,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.01415,
+    "populationChangeRate": -9.05801,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2643,7 +2643,7 @@
     "code": "46468",
     "pref": "kagoshima",
     "name": "大崎町",
-    "population": 11188,
+    "population": 11177,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2686,7 +2686,7 @@
       "preschools": 12,
       "medicalFacilities": 9,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 642,
@@ -2700,7 +2700,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.66492,
+    "populationChangeRate": -9.75373,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2753,7 +2753,7 @@
     "code": "46482",
     "pref": "kagoshima",
     "name": "東串良町",
-    "population": 5890,
+    "population": 5889,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2763,10 +2763,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 5203,
+      "value": 5177,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -2794,9 +2794,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 4,
-      "medicalFacilities": 9,
+      "medicalFacilities": 7,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 240,
@@ -2810,7 +2810,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.56357,
+    "populationChangeRate": -5.57961,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2863,7 +2863,7 @@
     "code": "46490",
     "pref": "kagoshima",
     "name": "錦江町",
-    "population": 5753,
+    "population": 5743,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2906,7 +2906,7 @@
       "preschools": 7,
       "medicalFacilities": 15,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 112,
@@ -2920,7 +2920,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -17.1515,
+    "populationChangeRate": -17.29551,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2973,7 +2973,7 @@
     "code": "46491",
     "pref": "kagoshima",
     "name": "南大隅町",
-    "population": 5352,
+    "population": 5346,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3014,9 +3014,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 3,
-      "medicalFacilities": 10,
+      "medicalFacilities": 9,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 58,
@@ -3030,7 +3030,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -17.42015,
+    "populationChangeRate": -17.51273,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3083,7 +3083,7 @@
     "code": "46492",
     "pref": "kagoshima",
     "name": "肝付町",
-    "population": 12783,
+    "population": 12766,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3126,7 +3126,7 @@
       "preschools": 11,
       "medicalFacilities": 17,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 140,
@@ -3140,7 +3140,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.14972,
+    "populationChangeRate": -10.26921,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3193,7 +3193,7 @@
     "code": "46501",
     "pref": "kagoshima",
     "name": "中種子町",
-    "population": 6843,
+    "population": 6832,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3236,7 +3236,7 @@
       "preschools": 2,
       "medicalFacilities": 8,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 64,
@@ -3250,7 +3250,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.23199,
+    "populationChangeRate": -9.3779,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3303,7 +3303,7 @@
     "code": "46502",
     "pref": "kagoshima",
     "name": "南種子町",
-    "population": 4968,
+    "population": 4967,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3346,7 +3346,7 @@
       "preschools": 3,
       "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 21,
@@ -3360,7 +3360,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.76033,
+    "populationChangeRate": -8.7787,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3413,7 +3413,7 @@
     "code": "46505",
     "pref": "kagoshima",
     "name": "屋久島町",
-    "population": 10707,
+    "population": 10693,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3454,9 +3454,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 11,
-      "medicalFacilities": 15,
+      "medicalFacilities": 14,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 149,
@@ -3470,7 +3470,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.70653,
+    "populationChangeRate": -9.82459,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3523,7 +3523,7 @@
     "code": "46523",
     "pref": "kagoshima",
     "name": "大和村",
-    "population": 1290,
+    "population": 1289,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3533,10 +3533,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 3450,
+      "value": 3445,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -3566,7 +3566,7 @@
       "preschools": 3,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 7,
@@ -3580,7 +3580,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.42522,
+    "populationChangeRate": -5.49853,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3633,7 +3633,7 @@
     "code": "46524",
     "pref": "kagoshima",
     "name": "宇検村",
-    "population": 1550,
+    "population": 1549,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3643,10 +3643,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 4060,
+      "value": 4045,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -3676,7 +3676,7 @@
       "preschools": 2,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 30,
@@ -3690,7 +3690,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.38001,
+    "populationChangeRate": -4.4417,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3743,7 +3743,7 @@
     "code": "46525",
     "pref": "kagoshima",
     "name": "瀬戸内町",
-    "population": 7652,
+    "population": 7651,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3784,9 +3784,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 8,
-      "medicalFacilities": 15,
+      "medicalFacilities": 14,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 40,
@@ -3800,7 +3800,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.46103,
+    "populationChangeRate": -10.47274,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3853,7 +3853,7 @@
     "code": "46527",
     "pref": "kagoshima",
     "name": "龍郷町",
-    "population": 5683,
+    "population": 5678,
     "populationTrend": "微減",
     "rent": {
       "value": 0,
@@ -3896,7 +3896,7 @@
       "preschools": 6,
       "medicalFacilities": 11,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 32,
@@ -3910,7 +3910,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.30359,
+    "populationChangeRate": -2.38955,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3963,7 +3963,7 @@
     "code": "46529",
     "pref": "kagoshima",
     "name": "喜界町",
-    "population": 5997,
+    "population": 5970,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4006,7 +4006,7 @@
       "preschools": 4,
       "medicalFacilities": 7,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 59,
@@ -4020,7 +4020,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.53387,
+    "populationChangeRate": -9.94117,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4073,7 +4073,7 @@
     "code": "46530",
     "pref": "kagoshima",
     "name": "徳之島町",
-    "population": 9288,
+    "population": 9284,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4114,9 +4114,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 11,
-      "medicalFacilities": 9,
+      "medicalFacilities": 10,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 74,
@@ -4130,7 +4130,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.46556,
+    "populationChangeRate": -8.50498,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4183,7 +4183,7 @@
     "code": "46531",
     "pref": "kagoshima",
     "name": "天城町",
-    "population": 5199,
+    "population": 5196,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4224,9 +4224,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 6,
-      "medicalFacilities": 6,
+      "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 40,
@@ -4240,7 +4240,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.764,
+    "populationChangeRate": -5.81838,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4293,7 +4293,7 @@
     "code": "46532",
     "pref": "kagoshima",
     "name": "伊仙町",
-    "population": 5407,
+    "population": 5405,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4303,10 +4303,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 3983,
+      "value": 3920,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -4336,7 +4336,7 @@
       "preschools": 15,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 27,
@@ -4350,7 +4350,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.92377,
+    "populationChangeRate": -11.95634,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4403,7 +4403,7 @@
     "code": "46533",
     "pref": "kagoshima",
     "name": "和泊町",
-    "population": 5635,
+    "population": 5623,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4446,7 +4446,7 @@
       "preschools": 5,
       "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 152,
@@ -4460,7 +4460,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.78226,
+    "populationChangeRate": -9.97438,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4513,7 +4513,7 @@
     "code": "46534",
     "pref": "kagoshima",
     "name": "知名町",
-    "population": 5120,
+    "population": 5123,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4554,9 +4554,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 5,
-      "medicalFacilities": 9,
+      "medicalFacilities": 8,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 72,
@@ -4570,7 +4570,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.95652,
+    "populationChangeRate": -10.90435,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4623,7 +4623,7 @@
     "code": "46535",
     "pref": "kagoshima",
     "name": "与論町",
-    "population": 4825,
+    "population": 4822,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4633,10 +4633,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 6850,
+      "value": 6900,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -4666,7 +4666,7 @@
       "preschools": 4,
       "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 29,
@@ -4680,7 +4680,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.6696,
+    "populationChangeRate": -5.72825,
     "vacancy": {
       "rate": -1,
       "vacant": 0,

@@ -3,7 +3,7 @@
     "code": "47201",
     "pref": "okinawa",
     "name": "那覇市",
-    "population": 311073,
+    "population": 310705,
     "populationTrend": "微減",
     "rent": {
       "value": 55684,
@@ -44,9 +44,9 @@
     "amenities": {
       "stations": 16,
       "preschools": 274,
-      "medicalFacilities": 456,
+      "medicalFacilities": 457,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 9299,
@@ -60,7 +60,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.06281,
+    "populationChangeRate": -2.17867,
     "vacancy": {
       "rate": 9.7,
       "vacant": 15810,
@@ -113,7 +113,7 @@
     "code": "47205",
     "pref": "okinawa",
     "name": "宜野湾市",
-    "population": 100158,
+    "population": 100084,
     "populationTrend": "横ばい",
     "rent": {
       "value": 54239,
@@ -154,9 +154,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 91,
-      "medicalFacilities": 98,
+      "medicalFacilities": 99,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2446,
@@ -170,7 +170,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 0.03296,
+    "populationChangeRate": -0.04095,
     "vacancy": {
       "rate": 7,
       "vacant": 3460,
@@ -223,7 +223,7 @@
     "code": "47207",
     "pref": "okinawa",
     "name": "石垣市",
-    "population": 47735,
+    "population": 47673,
     "populationTrend": "横ばい",
     "rent": {
       "value": 52911,
@@ -264,9 +264,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 81,
-      "medicalFacilities": 52,
+      "medicalFacilities": 53,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1071,
@@ -280,7 +280,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 0.20572,
+    "populationChangeRate": 0.07557,
     "vacancy": {
       "rate": 7.4,
       "vacant": 1820,
@@ -333,7 +333,7 @@
     "code": "47208",
     "pref": "okinawa",
     "name": "浦添市",
-    "population": 115716,
+    "population": 115623,
     "populationTrend": "横ばい",
     "rent": {
       "value": 54448,
@@ -376,7 +376,7 @@
       "preschools": 105,
       "medicalFacilities": 147,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2005,
@@ -390,7 +390,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 0.02247,
+    "populationChangeRate": -0.05791,
     "vacancy": {
       "rate": 7.8,
       "vacant": 4050,
@@ -443,7 +443,7 @@
     "code": "47209",
     "pref": "okinawa",
     "name": "名護市",
-    "population": 66084,
+    "population": 66012,
     "populationTrend": "増加",
     "rent": {
       "value": 43107,
@@ -486,7 +486,7 @@
       "preschools": 75,
       "medicalFacilities": 76,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1242,
@@ -500,7 +500,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 3.98087,
+    "populationChangeRate": 3.86758,
     "vacancy": {
       "rate": 9.6,
       "vacant": 3120,
@@ -553,7 +553,7 @@
     "code": "47210",
     "pref": "okinawa",
     "name": "糸満市",
-    "population": 60664,
+    "population": 60634,
     "populationTrend": "横ばい",
     "rent": {
       "value": 46681,
@@ -594,9 +594,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 71,
-      "medicalFacilities": 55,
+      "medicalFacilities": 53,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1661,
@@ -610,7 +610,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -0.56223,
+    "populationChangeRate": -0.61141,
     "vacancy": {
       "rate": 10.7,
       "vacant": 2850,
@@ -663,7 +663,7 @@
     "code": "47211",
     "pref": "okinawa",
     "name": "沖縄市",
-    "population": 141894,
+    "population": 141660,
     "populationTrend": "横ばい",
     "rent": {
       "value": 51585,
@@ -704,9 +704,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 147,
-      "medicalFacilities": 154,
+      "medicalFacilities": 150,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2544,
@@ -720,7 +720,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -0.60104,
+    "populationChangeRate": -0.76496,
     "vacancy": {
       "rate": 6.8,
       "vacant": 4640,
@@ -773,7 +773,7 @@
     "code": "47212",
     "pref": "okinawa",
     "name": "豊見城市",
-    "population": 65669,
+    "population": 65624,
     "populationTrend": "微増",
     "rent": {
       "value": 52717,
@@ -814,9 +814,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 70,
-      "medicalFacilities": 68,
+      "medicalFacilities": 72,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 695,
@@ -830,7 +830,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 1.63592,
+    "populationChangeRate": 1.56627,
     "vacancy": {
       "rate": 7.7,
       "vacant": 2160,
@@ -883,7 +883,7 @@
     "code": "47213",
     "pref": "okinawa",
     "name": "うるま市",
-    "population": 128437,
+    "population": 128243,
     "populationTrend": "微増",
     "rent": {
       "value": 45948,
@@ -924,9 +924,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 128,
-      "medicalFacilities": 100,
+      "medicalFacilities": 99,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2238,
@@ -940,7 +940,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 2.50114,
+    "populationChangeRate": 2.34631,
     "vacancy": {
       "rate": 6.8,
       "vacant": 3730,
@@ -993,7 +993,7 @@
     "code": "47214",
     "pref": "okinawa",
     "name": "宮古島市",
-    "population": 52012,
+    "population": 51946,
     "populationTrend": "微減",
     "rent": {
       "value": 47776,
@@ -1034,9 +1034,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 76,
-      "medicalFacilities": 66,
+      "medicalFacilities": 65,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1415,
@@ -1050,7 +1050,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.73622,
+    "populationChangeRate": -1.86091,
     "vacancy": {
       "rate": 15.2,
       "vacant": 4540,
@@ -1058,7 +1058,7 @@
       "source": "住宅・土地統計調査（居住世帯の有無別住宅数）",
       "asOf": "2023"
     },
-    "areaKm2": 203.9,
+    "areaKm2": 203.92,
     "futurePopulation": {
       "base2020": 52931,
       "total": {
@@ -1103,7 +1103,7 @@
     "code": "47215",
     "pref": "okinawa",
     "name": "南城市",
-    "population": 45350,
+    "population": 45312,
     "populationTrend": "微増",
     "rent": {
       "value": 49019,
@@ -1144,9 +1144,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 45,
-      "medicalFacilities": 30,
+      "medicalFacilities": 32,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 533,
@@ -1160,7 +1160,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 2.96755,
+    "populationChangeRate": 2.88128,
     "vacancy": {
       "rate": 10.9,
       "vacant": 1990,
@@ -1213,7 +1213,7 @@
     "code": "47301",
     "pref": "okinawa",
     "name": "国頭村",
-    "population": 4131,
+    "population": 4132,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1223,10 +1223,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 7553,
+      "value": 7587,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -1256,7 +1256,7 @@
       "preschools": 3,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 73,
@@ -1270,7 +1270,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.54549,
+    "populationChangeRate": -8.52336,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1323,7 +1323,7 @@
     "code": "47302",
     "pref": "okinawa",
     "name": "大宜味村",
-    "population": 2842,
+    "population": 2841,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1333,10 +1333,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 10967,
+      "value": 11333,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -1366,7 +1366,7 @@
       "preschools": 2,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 35,
@@ -1380,7 +1380,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.08538,
+    "populationChangeRate": -8.11772,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1433,7 +1433,7 @@
     "code": "47303",
     "pref": "okinawa",
     "name": "東村",
-    "population": 1512,
+    "population": 1510,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1443,10 +1443,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 4267,
+      "value": 4400,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -1476,7 +1476,7 @@
       "preschools": 3,
       "medicalFacilities": 2,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 22,
@@ -1490,7 +1490,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.38173,
+    "populationChangeRate": -5.50688,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1543,7 +1543,7 @@
     "code": "47306",
     "pref": "okinawa",
     "name": "今帰仁村",
-    "population": 8761,
+    "population": 8755,
     "populationTrend": "微減",
     "rent": {
       "value": 0,
@@ -1553,10 +1553,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 12510,
+      "value": 13350,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -1586,7 +1586,7 @@
       "preschools": 6,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 124,
@@ -1600,7 +1600,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.49539,
+    "populationChangeRate": -1.56285,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1653,7 +1653,7 @@
     "code": "47308",
     "pref": "okinawa",
     "name": "本部町",
-    "population": 11825,
+    "population": 11798,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1694,9 +1694,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 12,
-      "medicalFacilities": 10,
+      "medicalFacilities": 9,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 311,
@@ -1710,7 +1710,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.6265,
+    "populationChangeRate": -5.84198,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1763,8 +1763,8 @@
     "code": "47311",
     "pref": "okinawa",
     "name": "恩納村",
-    "population": 11215,
-    "populationTrend": "増加",
+    "population": 11194,
+    "populationTrend": "微増",
     "rent": {
       "value": 0,
       "unit": "円/月",
@@ -1773,10 +1773,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 38160,
+      "value": 41500,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -1804,9 +1804,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 15,
-      "medicalFacilities": 5,
+      "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1513,
@@ -1820,7 +1820,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 3.18337,
+    "populationChangeRate": 2.99016,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1873,7 +1873,7 @@
     "code": "47313",
     "pref": "okinawa",
     "name": "宜野座村",
-    "population": 6319,
+    "population": 6279,
     "populationTrend": "増加",
     "rent": {
       "value": 0,
@@ -1883,10 +1883,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 17933,
+      "value": 19933,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -1916,7 +1916,7 @@
       "preschools": 6,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 125,
@@ -1930,7 +1930,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 8.3319,
+    "populationChangeRate": 7.64615,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1983,7 +1983,7 @@
     "code": "47314",
     "pref": "okinawa",
     "name": "金武町",
-    "population": 11152,
+    "population": 11139,
     "populationTrend": "増加",
     "rent": {
       "value": 0,
@@ -1993,10 +1993,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 28900,
+      "value": 30900,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -2026,7 +2026,7 @@
       "preschools": 19,
       "medicalFacilities": 11,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 254,
@@ -2040,7 +2040,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 3.20192,
+    "populationChangeRate": 3.08162,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2093,7 +2093,7 @@
     "code": "47315",
     "pref": "okinawa",
     "name": "伊江村",
-    "population": 3727,
+    "population": 3729,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2103,10 +2103,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 10480,
+      "value": 10463,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -2136,7 +2136,7 @@
       "preschools": 5,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 54,
@@ -2150,7 +2150,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.4949,
+    "populationChangeRate": -9.44633,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2203,7 +2203,7 @@
     "code": "47324",
     "pref": "okinawa",
     "name": "読谷村",
-    "population": 41532,
+    "population": 41414,
     "populationTrend": "横ばい",
     "rent": {
       "value": 56068,
@@ -2244,9 +2244,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 37,
-      "medicalFacilities": 33,
+      "medicalFacilities": 34,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1166,
@@ -2260,7 +2260,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 0.79115,
+    "populationChangeRate": 0.50478,
     "vacancy": {
       "rate": 7.4,
       "vacant": 1310,
@@ -2313,7 +2313,7 @@
     "code": "47325",
     "pref": "okinawa",
     "name": "嘉手納町",
-    "population": 13229,
+    "population": 13211,
     "populationTrend": "微減",
     "rent": {
       "value": 0,
@@ -2356,7 +2356,7 @@
       "preschools": 14,
       "medicalFacilities": 9,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 181,
@@ -2370,7 +2370,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.1596,
+    "populationChangeRate": -2.29273,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2423,7 +2423,7 @@
     "code": "47326",
     "pref": "okinawa",
     "name": "北谷町",
-    "population": 28436,
+    "population": 28337,
     "populationTrend": "横ばい",
     "rent": {
       "value": 68943,
@@ -2466,7 +2466,7 @@
       "preschools": 42,
       "medicalFacilities": 32,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1297,
@@ -2480,7 +2480,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 0.8333,
+    "populationChangeRate": 0.48225,
     "vacancy": {
       "rate": 11.3,
       "vacant": 1720,
@@ -2533,7 +2533,7 @@
     "code": "47327",
     "pref": "okinawa",
     "name": "北中城村",
-    "population": 18052,
+    "population": 18003,
     "populationTrend": "横ばい",
     "rent": {
       "value": 67115,
@@ -2574,9 +2574,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 25,
-      "medicalFacilities": 18,
+      "medicalFacilities": 17,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 483,
@@ -2590,7 +2590,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 0.46191,
+    "populationChangeRate": 0.18921,
     "vacancy": {
       "rate": 12.1,
       "vacant": 980,
@@ -2643,7 +2643,7 @@
     "code": "47328",
     "pref": "okinawa",
     "name": "中城村",
-    "population": 22910,
+    "population": 22908,
     "populationTrend": "増加",
     "rent": {
       "value": 57681,
@@ -2686,7 +2686,7 @@
       "preschools": 31,
       "medicalFacilities": 21,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 358,
@@ -2700,7 +2700,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 3.39847,
+    "populationChangeRate": 3.38945,
     "vacancy": {
       "rate": 3.9,
       "vacant": 370,
@@ -2753,7 +2753,7 @@
     "code": "47329",
     "pref": "okinawa",
     "name": "西原町",
-    "population": 35280,
+    "population": 35270,
     "populationTrend": "横ばい",
     "rent": {
       "value": 47679,
@@ -2794,9 +2794,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 30,
-      "medicalFacilities": 33,
+      "medicalFacilities": 31,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 838,
@@ -2810,7 +2810,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 0.8461,
+    "populationChangeRate": 0.81752,
     "vacancy": {
       "rate": 8.9,
       "vacant": 1390,
@@ -2863,7 +2863,7 @@
     "code": "47348",
     "pref": "okinawa",
     "name": "与那原町",
-    "population": 19267,
+    "population": 19259,
     "populationTrend": "微減",
     "rent": {
       "value": 55642,
@@ -2906,7 +2906,7 @@
       "preschools": 24,
       "medicalFacilities": 16,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 225,
@@ -2920,7 +2920,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.17314,
+    "populationChangeRate": -2.21376,
     "vacancy": {
       "rate": 13.1,
       "vacant": 1150,
@@ -2973,7 +2973,7 @@
     "code": "47350",
     "pref": "okinawa",
     "name": "南風原町",
-    "population": 41513,
+    "population": 41483,
     "populationTrend": "微増",
     "rent": {
       "value": 55701,
@@ -3016,7 +3016,7 @@
       "preschools": 38,
       "medicalFacilities": 52,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 306,
@@ -3030,7 +3030,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 2.65331,
+    "populationChangeRate": 2.57913,
     "vacancy": {
       "rate": 4.7,
       "vacant": 760,
@@ -3083,7 +3083,7 @@
     "code": "47353",
     "pref": "okinawa",
     "name": "渡嘉敷村",
-    "population": 621,
+    "population": 626,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3093,10 +3093,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 12800,
+      "value": 13150,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -3126,7 +3126,7 @@
       "preschools": 2,
       "medicalFacilities": 2,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 20,
@@ -3140,7 +3140,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -13.50975,
+    "populationChangeRate": -12.81337,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3193,7 +3193,7 @@
     "code": "47354",
     "pref": "okinawa",
     "name": "座間味村",
-    "population": 830,
+    "population": 825,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3203,10 +3203,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 13700,
+      "value": 14100,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -3236,7 +3236,7 @@
       "preschools": 5,
       "medicalFacilities": 2,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 6,
@@ -3250,7 +3250,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.95067,
+    "populationChangeRate": -7.51121,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3303,7 +3303,7 @@
     "code": "47355",
     "pref": "okinawa",
     "name": "粟国村",
-    "population": 612,
+    "population": 617,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3316,7 +3316,7 @@
       "value": 1960,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -3346,7 +3346,7 @@
       "preschools": 2,
       "medicalFacilities": 2,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 13,
@@ -3360,7 +3360,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.39531,
+    "populationChangeRate": -9.66325,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3413,7 +3413,7 @@
     "code": "47356",
     "pref": "okinawa",
     "name": "渡名喜村",
-    "population": 234,
+    "population": 233,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3426,7 +3426,7 @@
       "value": 1470,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -3456,7 +3456,7 @@
       "preschools": 1,
       "medicalFacilities": 2,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 3,
@@ -3470,7 +3470,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -32.36994,
+    "populationChangeRate": -32.65896,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3523,7 +3523,7 @@
     "code": "47357",
     "pref": "okinawa",
     "name": "南大東村",
-    "population": 1172,
+    "population": 1170,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3536,7 +3536,7 @@
       "value": 5300,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -3566,7 +3566,7 @@
       "preschools": 2,
       "medicalFacilities": 2,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 56,
@@ -3580,7 +3580,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.79377,
+    "populationChangeRate": -8.94942,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3633,7 +3633,7 @@
     "code": "47358",
     "pref": "okinawa",
     "name": "北大東村",
-    "population": 560,
+    "population": 561,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3646,7 +3646,7 @@
       "value": 1530,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -3676,7 +3676,7 @@
       "preschools": 2,
       "medicalFacilities": 2,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 43,
@@ -3690,7 +3690,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.08475,
+    "populationChangeRate": -4.91525,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3743,7 +3743,7 @@
     "code": "47359",
     "pref": "okinawa",
     "name": "伊平屋村",
-    "population": 1050,
+    "population": 1049,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3756,7 +3756,7 @@
       "value": 2445,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -3786,7 +3786,7 @@
       "preschools": 2,
       "medicalFacilities": 2,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 60,
@@ -3800,7 +3800,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.74956,
+    "populationChangeRate": -6.83837,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3853,7 +3853,7 @@
     "code": "47360",
     "pref": "okinawa",
     "name": "伊是名村",
-    "population": 1130,
+    "population": 1134,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3866,7 +3866,7 @@
       "value": 3185,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -3896,7 +3896,7 @@
       "preschools": 2,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 55,
@@ -3910,7 +3910,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -14.52345,
+    "populationChangeRate": -14.22088,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3963,7 +3963,7 @@
     "code": "47361",
     "pref": "okinawa",
     "name": "久米島町",
-    "population": 6417,
+    "population": 6482,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3976,7 +3976,7 @@
       "value": 9305,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -4006,7 +4006,7 @@
       "preschools": 6,
       "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 87,
@@ -4020,7 +4020,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.77586,
+    "populationChangeRate": -9.87208,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4073,7 +4073,7 @@
     "code": "47362",
     "pref": "okinawa",
     "name": "八重瀬町",
-    "population": 32688,
+    "population": 32668,
     "populationTrend": "増加",
     "rent": {
       "value": 54150,
@@ -4114,9 +4114,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 31,
-      "medicalFacilities": 23,
+      "medicalFacilities": 22,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 304,
@@ -4130,7 +4130,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 5.64623,
+    "populationChangeRate": 5.58159,
     "vacancy": {
       "rate": 6.7,
       "vacant": 830,
@@ -4196,7 +4196,7 @@
       "value": 6290,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -4226,7 +4226,7 @@
       "preschools": 2,
       "medicalFacilities": 1,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 21,
@@ -4293,7 +4293,7 @@
     "code": "47381",
     "pref": "okinawa",
     "name": "竹富町",
-    "population": 3963,
+    "population": 3952,
     "populationTrend": "横ばい",
     "rent": {
       "value": 0,
@@ -4303,10 +4303,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 8225,
+      "value": 8450,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -4334,9 +4334,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 10,
-      "medicalFacilities": 16,
+      "medicalFacilities": 15,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 177,
@@ -4350,7 +4350,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 0.53272,
+    "populationChangeRate": 0.25368,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4403,7 +4403,7 @@
     "code": "47382",
     "pref": "okinawa",
     "name": "与那国町",
-    "population": 1510,
+    "population": 1515,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4416,7 +4416,7 @@
       "value": 8200,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -4446,7 +4446,7 @@
       "preschools": 5,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 43,
@@ -4460,7 +4460,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.90453,
+    "populationChangeRate": -9.60621,
     "vacancy": {
       "rate": -1,
       "vacant": 0,

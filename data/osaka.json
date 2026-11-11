@@ -3,7 +3,7 @@
     "code": "27100",
     "pref": "osaka",
     "name": "大阪市",
-    "population": 2808624,
+    "population": 2805371,
     "populationTrend": "微増",
     "rent": {
       "value": 64040,
@@ -44,9 +44,9 @@
     "amenities": {
       "stations": 288,
       "preschools": 1452,
-      "medicalFacilities": 6156,
+      "medicalFacilities": 6211,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 217412,
@@ -60,7 +60,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 2.04228,
+    "populationChangeRate": 1.92409,
     "vacancy": {
       "rate": 16.1,
       "vacant": 294600,
@@ -113,7 +113,7 @@
     "code": "27140",
     "pref": "osaka",
     "name": "堺市",
-    "population": 803333,
+    "population": 802648,
     "populationTrend": "微減",
     "rent": {
       "value": 55000,
@@ -154,9 +154,9 @@
     "amenities": {
       "stations": 45,
       "preschools": 508,
-      "medicalFacilities": 1245,
+      "medicalFacilities": 1240,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 22136,
@@ -170,7 +170,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.76314,
+    "populationChangeRate": -2.84606,
     "vacancy": {
       "rate": 12.9,
       "vacant": 55200,
@@ -223,7 +223,7 @@
     "code": "27202",
     "pref": "osaka",
     "name": "岸和田市",
-    "population": 185734,
+    "population": 185429,
     "populationTrend": "微減",
     "rent": {
       "value": 49579,
@@ -266,7 +266,7 @@
       "preschools": 105,
       "medicalFacilities": 258,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 5020,
@@ -280,7 +280,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.58263,
+    "populationChangeRate": -2.74261,
     "vacancy": {
       "rate": 13.8,
       "vacant": 12550,
@@ -333,7 +333,7 @@
     "code": "27203",
     "pref": "osaka",
     "name": "豊中市",
-    "population": 404479,
+    "population": 404015,
     "populationTrend": "横ばい",
     "rent": {
       "value": 75904,
@@ -374,9 +374,9 @@
     "amenities": {
       "stations": 13,
       "preschools": 280,
-      "medicalFacilities": 696,
+      "medicalFacilities": 700,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 8929,
@@ -390,7 +390,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 0.72742,
+    "populationChangeRate": 0.61187,
     "vacancy": {
       "rate": 13.7,
       "vacant": 28370,
@@ -443,7 +443,7 @@
     "code": "27204",
     "pref": "osaka",
     "name": "池田市",
-    "population": 104148,
+    "population": 104132,
     "populationTrend": "横ばい",
     "rent": {
       "value": 65980,
@@ -484,9 +484,9 @@
     "amenities": {
       "stations": 3,
       "preschools": 50,
-      "medicalFacilities": 171,
+      "medicalFacilities": 172,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2459,
@@ -500,7 +500,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -0.80482,
+    "populationChangeRate": -0.82005,
     "vacancy": {
       "rate": 12.9,
       "vacant": 7300,
@@ -553,7 +553,7 @@
     "code": "27205",
     "pref": "osaka",
     "name": "吹田市",
-    "population": 394503,
+    "population": 394516,
     "populationTrend": "微増",
     "rent": {
       "value": 69419,
@@ -594,9 +594,9 @@
     "amenities": {
       "stations": 17,
       "preschools": 246,
-      "medicalFacilities": 603,
+      "medicalFacilities": 608,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 8454,
@@ -610,7 +610,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 2.31763,
+    "populationChangeRate": 2.321,
     "vacancy": {
       "rate": 12,
       "vacant": 25490,
@@ -663,7 +663,7 @@
     "code": "27206",
     "pref": "osaka",
     "name": "泉大津市",
-    "population": 71688,
+    "population": 71659,
     "populationTrend": "減少",
     "rent": {
       "value": 54365,
@@ -706,7 +706,7 @@
       "preschools": 41,
       "medicalFacilities": 118,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2147,
@@ -720,7 +720,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.6607,
+    "populationChangeRate": -3.69967,
     "vacancy": {
       "rate": 14,
       "vacant": 5300,
@@ -773,7 +773,7 @@
     "code": "27207",
     "pref": "osaka",
     "name": "高槻市",
-    "population": 345475,
+    "population": 344998,
     "populationTrend": "微減",
     "rent": {
       "value": 64093,
@@ -814,9 +814,9 @@
     "amenities": {
       "stations": 5,
       "preschools": 231,
-      "medicalFacilities": 502,
+      "medicalFacilities": 508,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 5367,
@@ -830,7 +830,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.04793,
+    "populationChangeRate": -2.18317,
     "vacancy": {
       "rate": 9.6,
       "vacant": 16270,
@@ -883,7 +883,7 @@
     "code": "27208",
     "pref": "osaka",
     "name": "貝塚市",
-    "population": 78774,
+    "population": 78791,
     "populationTrend": "減少",
     "rent": {
       "value": 44955,
@@ -924,9 +924,9 @@
     "amenities": {
       "stations": 14,
       "preschools": 60,
-      "medicalFacilities": 94,
+      "medicalFacilities": 95,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2342,
@@ -940,7 +940,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.7134,
+    "populationChangeRate": -6.69327,
     "vacancy": {
       "rate": 14.8,
       "vacant": 6350,
@@ -993,7 +993,7 @@
     "code": "27209",
     "pref": "osaka",
     "name": "守口市",
-    "population": 140791,
+    "population": 140715,
     "populationTrend": "微減",
     "rent": {
       "value": 55825,
@@ -1034,9 +1034,9 @@
     "amenities": {
       "stations": 7,
       "preschools": 81,
-      "medicalFacilities": 225,
+      "medicalFacilities": 219,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 3597,
@@ -1050,7 +1050,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.61081,
+    "populationChangeRate": -1.66392,
     "vacancy": {
       "rate": 17.1,
       "vacant": 13820,
@@ -1103,7 +1103,7 @@
     "code": "27210",
     "pref": "osaka",
     "name": "枚方市",
-    "population": 388992,
+    "population": 388860,
     "populationTrend": "微減",
     "rent": {
       "value": 55119,
@@ -1144,9 +1144,9 @@
     "amenities": {
       "stations": 13,
       "preschools": 36,
-      "medicalFacilities": 521,
+      "medicalFacilities": 530,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 7319,
@@ -1160,7 +1160,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.0884,
+    "populationChangeRate": -2.12163,
     "vacancy": {
       "rate": 11.4,
       "vacant": 22320,
@@ -1213,7 +1213,7 @@
     "code": "27211",
     "pref": "osaka",
     "name": "茨木市",
-    "population": 287098,
+    "population": 287688,
     "populationTrend": "横ばい",
     "rent": {
       "value": 70817,
@@ -1254,9 +1254,9 @@
     "amenities": {
       "stations": 11,
       "preschools": 160,
-      "medicalFacilities": 416,
+      "medicalFacilities": 415,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 5730,
@@ -1270,7 +1270,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -0.21965,
+    "populationChangeRate": -0.0146,
     "vacancy": {
       "rate": 9.1,
       "vacant": 12780,
@@ -1323,7 +1323,7 @@
     "code": "27212",
     "pref": "osaka",
     "name": "八尾市",
-    "population": 257600,
+    "population": 257579,
     "populationTrend": "微減",
     "rent": {
       "value": 59437,
@@ -1364,9 +1364,9 @@
     "amenities": {
       "stations": 15,
       "preschools": 180,
-      "medicalFacilities": 358,
+      "medicalFacilities": 356,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 10021,
@@ -1380,7 +1380,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.66095,
+    "populationChangeRate": -2.66889,
     "vacancy": {
       "rate": 13.9,
       "vacant": 18460,
@@ -1433,7 +1433,7 @@
     "code": "27213",
     "pref": "osaka",
     "name": "泉佐野市",
-    "population": 100329,
+    "population": 100236,
     "populationTrend": "横ばい",
     "rent": {
       "value": 51852,
@@ -1474,9 +1474,9 @@
     "amenities": {
       "stations": 11,
       "preschools": 50,
-      "medicalFacilities": 143,
+      "medicalFacilities": 146,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 4421,
@@ -1490,7 +1490,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 0.19774,
+    "populationChangeRate": 0.10486,
     "vacancy": {
       "rate": 12.3,
       "vacant": 6280,
@@ -1543,7 +1543,7 @@
     "code": "27214",
     "pref": "osaka",
     "name": "富田林市",
-    "population": 103296,
+    "population": 103251,
     "populationTrend": "減少",
     "rent": {
       "value": 48378,
@@ -1586,7 +1586,7 @@
       "preschools": 49,
       "medicalFacilities": 146,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2803,
@@ -1600,7 +1600,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.97061,
+    "populationChangeRate": -5.01201,
     "vacancy": {
       "rate": 13,
       "vacant": 6930,
@@ -1653,7 +1653,7 @@
     "code": "27215",
     "pref": "osaka",
     "name": "寝屋川市",
-    "population": 222102,
+    "population": 221975,
     "populationTrend": "減少",
     "rent": {
       "value": 53674,
@@ -1694,9 +1694,9 @@
     "amenities": {
       "stations": 4,
       "preschools": 107,
-      "medicalFacilities": 304,
+      "medicalFacilities": 299,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 4278,
@@ -1710,7 +1710,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.32168,
+    "populationChangeRate": -3.37696,
     "vacancy": {
       "rate": 13.3,
       "vacant": 15450,
@@ -1763,7 +1763,7 @@
     "code": "27216",
     "pref": "osaka",
     "name": "河内長野市",
-    "population": 94871,
+    "population": 94761,
     "populationTrend": "減少",
     "rent": {
       "value": 51538,
@@ -1804,9 +1804,9 @@
     "amenities": {
       "stations": 8,
       "preschools": 52,
-      "medicalFacilities": 141,
+      "medicalFacilities": 139,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1264,
@@ -1820,7 +1820,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.70751,
+    "populationChangeRate": -6.81568,
     "vacancy": {
       "rate": 12.1,
       "vacant": 5820,
@@ -1873,7 +1873,7 @@
     "code": "27217",
     "pref": "osaka",
     "name": "松原市",
-    "population": 114815,
+    "population": 114720,
     "populationTrend": "微減",
     "rent": {
       "value": 54816,
@@ -1914,9 +1914,9 @@
     "amenities": {
       "stations": 4,
       "preschools": 37,
-      "medicalFacilities": 160,
+      "medicalFacilities": 157,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 3153,
@@ -1930,7 +1930,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.40222,
+    "populationChangeRate": -2.48298,
     "vacancy": {
       "rate": 13.4,
       "vacant": 8110,
@@ -1983,7 +1983,7 @@
     "code": "27218",
     "pref": "osaka",
     "name": "大東市",
-    "population": 113642,
+    "population": 113806,
     "populationTrend": "減少",
     "rent": {
       "value": 54108,
@@ -2024,9 +2024,9 @@
     "amenities": {
       "stations": 3,
       "preschools": 65,
-      "medicalFacilities": 137,
+      "medicalFacilities": 138,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 3890,
@@ -2040,7 +2040,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.79613,
+    "populationChangeRate": -4.65874,
     "vacancy": {
       "rate": 14.9,
       "vacant": 9210,
@@ -2093,7 +2093,7 @@
     "code": "27219",
     "pref": "osaka",
     "name": "和泉市",
-    "population": 181715,
+    "population": 181528,
     "populationTrend": "微減",
     "rent": {
       "value": 50753,
@@ -2134,9 +2134,9 @@
     "amenities": {
       "stations": 4,
       "preschools": 87,
-      "medicalFacilities": 221,
+      "medicalFacilities": 222,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 4061,
@@ -2150,7 +2150,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.50682,
+    "populationChangeRate": -1.60817,
     "vacancy": {
       "rate": 11.4,
       "vacant": 9580,
@@ -2203,7 +2203,7 @@
     "code": "27220",
     "pref": "osaka",
     "name": "箕面市",
-    "population": 140586,
+    "population": 140736,
     "populationTrend": "微増",
     "rent": {
       "value": 66293,
@@ -2244,9 +2244,9 @@
     "amenities": {
       "stations": 5,
       "preschools": 53,
-      "medicalFacilities": 239,
+      "medicalFacilities": 244,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 3721,
@@ -2260,7 +2260,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 2.71649,
+    "populationChangeRate": 2.82608,
     "vacancy": {
       "rate": 11.7,
       "vacant": 7710,
@@ -2313,7 +2313,7 @@
     "code": "27221",
     "pref": "osaka",
     "name": "柏原市",
-    "population": 65690,
+    "population": 65794,
     "populationTrend": "減少",
     "rent": {
       "value": 53997,
@@ -2354,9 +2354,9 @@
     "amenities": {
       "stations": 10,
       "preschools": 21,
-      "medicalFacilities": 85,
+      "medicalFacilities": 84,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2324,
@@ -2370,7 +2370,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.48564,
+    "populationChangeRate": -4.33442,
     "vacancy": {
       "rate": 20.8,
       "vacant": 8150,
@@ -2423,7 +2423,7 @@
     "code": "27222",
     "pref": "osaka",
     "name": "羽曳野市",
-    "population": 104183,
+    "population": 104096,
     "populationTrend": "減少",
     "rent": {
       "value": 51764,
@@ -2464,9 +2464,9 @@
     "amenities": {
       "stations": 6,
       "preschools": 37,
-      "medicalFacilities": 120,
+      "medicalFacilities": 117,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2031,
@@ -2480,7 +2480,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.18721,
+    "populationChangeRate": -4.26722,
     "vacancy": {
       "rate": 14.5,
       "vacant": 7580,
@@ -2533,7 +2533,7 @@
     "code": "27223",
     "pref": "osaka",
     "name": "門真市",
-    "population": 111702,
+    "population": 111722,
     "populationTrend": "減少",
     "rent": {
       "value": 48471,
@@ -2574,9 +2574,9 @@
     "amenities": {
       "stations": 6,
       "preschools": 56,
-      "medicalFacilities": 188,
+      "medicalFacilities": 190,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 4668,
@@ -2590,7 +2590,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.73157,
+    "populationChangeRate": -6.71487,
     "vacancy": {
       "rate": 17,
       "vacant": 11670,
@@ -2643,7 +2643,7 @@
     "code": "27224",
     "pref": "osaka",
     "name": "摂津市",
-    "population": 86462,
+    "population": 86426,
     "populationTrend": "微減",
     "rent": {
       "value": 56779,
@@ -2686,7 +2686,7 @@
       "preschools": 67,
       "medicalFacilities": 101,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2415,
@@ -2700,7 +2700,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.13657,
+    "populationChangeRate": -1.17774,
     "vacancy": {
       "rate": 11.4,
       "vacant": 5280,
@@ -2753,7 +2753,7 @@
     "code": "27225",
     "pref": "osaka",
     "name": "高石市",
-    "population": 53524,
+    "population": 53446,
     "populationTrend": "減少",
     "rent": {
       "value": 56288,
@@ -2794,9 +2794,9 @@
     "amenities": {
       "stations": 7,
       "preschools": 27,
-      "medicalFacilities": 92,
+      "medicalFacilities": 90,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 924,
@@ -2810,7 +2810,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.79437,
+    "populationChangeRate": -3.93457,
     "vacancy": {
       "rate": 12,
       "vacant": 3230,
@@ -2863,7 +2863,7 @@
     "code": "27226",
     "pref": "osaka",
     "name": "藤井寺市",
-    "population": 61129,
+    "population": 61091,
     "populationTrend": "減少",
     "rent": {
       "value": 58529,
@@ -2904,9 +2904,9 @@
     "amenities": {
       "stations": 4,
       "preschools": 27,
-      "medicalFacilities": 121,
+      "medicalFacilities": 120,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1408,
@@ -2920,7 +2920,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.01803,
+    "populationChangeRate": -4.07769,
     "vacancy": {
       "rate": 14.4,
       "vacant": 4720,
@@ -2973,7 +2973,7 @@
     "code": "27227",
     "pref": "osaka",
     "name": "東大阪市",
-    "population": 482618,
+    "population": 482700,
     "populationTrend": "微減",
     "rent": {
       "value": 56576,
@@ -3014,9 +3014,9 @@
     "amenities": {
       "stations": 28,
       "preschools": 310,
-      "medicalFacilities": 706,
+      "medicalFacilities": 691,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 25342,
@@ -3030,7 +3030,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.29218,
+    "populationChangeRate": -2.27558,
     "vacancy": {
       "rate": 16.3,
       "vacant": 45790,
@@ -3083,7 +3083,7 @@
     "code": "27228",
     "pref": "osaka",
     "name": "泉南市",
-    "population": 56136,
+    "population": 56107,
     "populationTrend": "減少",
     "rent": {
       "value": 43630,
@@ -3126,7 +3126,7 @@
       "preschools": 23,
       "medicalFacilities": 66,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1397,
@@ -3140,7 +3140,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.59878,
+    "populationChangeRate": -6.64703,
     "vacancy": {
       "rate": 13.5,
       "vacant": 3650,
@@ -3193,7 +3193,7 @@
     "code": "27229",
     "pref": "osaka",
     "name": "四條畷市",
-    "population": 53455,
+    "population": 53449,
     "populationTrend": "減少",
     "rent": {
       "value": 57218,
@@ -3234,9 +3234,9 @@
     "amenities": {
       "stations": 1,
       "preschools": 27,
-      "medicalFacilities": 61,
+      "medicalFacilities": 59,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 872,
@@ -3250,7 +3250,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.12087,
+    "populationChangeRate": -3.13174,
     "vacancy": {
       "rate": 15.5,
       "vacant": 4210,
@@ -3303,7 +3303,7 @@
     "code": "27230",
     "pref": "osaka",
     "name": "交野市",
-    "population": 75573,
+    "population": 75576,
     "populationTrend": "横ばい",
     "rent": {
       "value": 53492,
@@ -3346,7 +3346,7 @@
       "preschools": 42,
       "medicalFacilities": 96,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 854,
@@ -3360,7 +3360,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 0.71968,
+    "populationChangeRate": 0.72368,
     "vacancy": {
       "rate": 11,
       "vacant": 3690,
@@ -3413,7 +3413,7 @@
     "code": "27231",
     "pref": "osaka",
     "name": "大阪狭山市",
-    "population": 57479,
+    "population": 57357,
     "populationTrend": "微減",
     "rent": {
       "value": 54952,
@@ -3454,9 +3454,9 @@
     "amenities": {
       "stations": 3,
       "preschools": 28,
-      "medicalFacilities": 103,
+      "medicalFacilities": 102,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 727,
@@ -3470,7 +3470,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.63601,
+    "populationChangeRate": -1.84478,
     "vacancy": {
       "rate": 12,
       "vacant": 3330,
@@ -3523,7 +3523,7 @@
     "code": "27232",
     "pref": "osaka",
     "name": "阪南市",
-    "population": 47657,
+    "population": 47632,
     "populationTrend": "減少",
     "rent": {
       "value": 42909,
@@ -3564,9 +3564,9 @@
     "amenities": {
       "stations": 5,
       "preschools": 21,
-      "medicalFacilities": 72,
+      "medicalFacilities": 74,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 866,
@@ -3580,7 +3580,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.01799,
+    "populationChangeRate": -7.06677,
     "vacancy": {
       "rate": 15.2,
       "vacant": 3680,
@@ -3633,7 +3633,7 @@
     "code": "27301",
     "pref": "osaka",
     "name": "島本町",
-    "population": 31617,
+    "population": 31733,
     "populationTrend": "微増",
     "rent": {
       "value": 57618,
@@ -3674,9 +3674,9 @@
     "amenities": {
       "stations": 2,
       "preschools": 13,
-      "medicalFacilities": 38,
+      "medicalFacilities": 37,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 351,
@@ -3690,7 +3690,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 2.23106,
+    "populationChangeRate": 2.60614,
     "vacancy": {
       "rate": 6.3,
       "vacant": 870,
@@ -3743,7 +3743,7 @@
     "code": "27321",
     "pref": "osaka",
     "name": "豊能町",
-    "population": 16707,
+    "population": 16684,
     "populationTrend": "減少",
     "rent": {
       "value": 59091,
@@ -3786,7 +3786,7 @@
       "preschools": 5,
       "medicalFacilities": 20,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 164,
@@ -3800,7 +3800,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.60003,
+    "populationChangeRate": -8.72586,
     "vacancy": {
       "rate": 8.9,
       "vacant": 730,
@@ -3853,7 +3853,7 @@
     "code": "27322",
     "pref": "osaka",
     "name": "能勢町",
-    "population": 7893,
+    "population": 7910,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3896,7 +3896,7 @@
       "preschools": 4,
       "medicalFacilities": 10,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 117,
@@ -3910,7 +3910,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -13.06311,
+    "populationChangeRate": -12.87587,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3963,7 +3963,7 @@
     "code": "27341",
     "pref": "osaka",
     "name": "忠岡町",
-    "population": 15640,
+    "population": 15610,
     "populationTrend": "減少",
     "rent": {
       "value": 49647,
@@ -4006,7 +4006,7 @@
       "preschools": 9,
       "medicalFacilities": 24,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 611,
@@ -4020,7 +4020,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.59546,
+    "populationChangeRate": -5.77654,
     "vacancy": {
       "rate": 15.7,
       "vacant": 1250,
@@ -4073,7 +4073,7 @@
     "code": "27361",
     "pref": "osaka",
     "name": "熊取町",
-    "population": 42511,
+    "population": 42561,
     "populationTrend": "微減",
     "rent": {
       "value": 46882,
@@ -4116,7 +4116,7 @@
       "preschools": 14,
       "medicalFacilities": 49,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 559,
@@ -4130,7 +4130,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.86086,
+    "populationChangeRate": -2.74661,
     "vacancy": {
       "rate": 9.9,
       "vacant": 1940,
@@ -4183,7 +4183,7 @@
     "code": "27362",
     "pref": "osaka",
     "name": "田尻町",
-    "population": 8109,
+    "population": 8098,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4226,7 +4226,7 @@
       "preschools": 3,
       "medicalFacilities": 13,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 313,
@@ -4240,7 +4240,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.85345,
+    "populationChangeRate": -3.98387,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4293,7 +4293,7 @@
     "code": "27366",
     "pref": "osaka",
     "name": "岬町",
-    "population": 13065,
+    "population": 13072,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4334,9 +4334,9 @@
     "amenities": {
       "stations": 7,
       "preschools": 8,
-      "medicalFacilities": 16,
+      "medicalFacilities": 15,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 455,
@@ -4350,7 +4350,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.36965,
+    "populationChangeRate": -11.32216,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4403,7 +4403,7 @@
     "code": "27381",
     "pref": "osaka",
     "name": "太子町",
-    "population": 12062,
+    "population": 12058,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4446,7 +4446,7 @@
       "preschools": 6,
       "medicalFacilities": 11,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 178,
@@ -4460,7 +4460,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.27958,
+    "populationChangeRate": -7.31032,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4513,7 +4513,7 @@
     "code": "27382",
     "pref": "osaka",
     "name": "河南町",
-    "population": 14498,
+    "population": 14497,
     "populationTrend": "減少",
     "rent": {
       "value": 47353,
@@ -4556,7 +4556,7 @@
       "preschools": 6,
       "medicalFacilities": 12,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 182,
@@ -4570,7 +4570,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.6384,
+    "populationChangeRate": -7.64477,
     "vacancy": {
       "rate": 15.1,
       "vacant": 1130,
@@ -4623,7 +4623,7 @@
     "code": "27383",
     "pref": "osaka",
     "name": "千早赤阪村",
-    "population": 4273,
+    "population": 4279,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4666,7 +4666,7 @@
       "preschools": 3,
       "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 37,
@@ -4680,7 +4680,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -12.9558,
+    "populationChangeRate": -12.83357,
     "vacancy": {
       "rate": -1,
       "vacant": 0,

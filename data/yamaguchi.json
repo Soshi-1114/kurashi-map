@@ -3,7 +3,7 @@
     "code": "35201",
     "pref": "yamaguchi",
     "name": "下関市",
-    "population": 237892,
+    "population": 237611,
     "populationTrend": "減少",
     "rent": {
       "value": 44343,
@@ -44,9 +44,9 @@
     "amenities": {
       "stations": 24,
       "preschools": 97,
-      "medicalFacilities": 405,
+      "medicalFacilities": 394,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 5628,
@@ -60,7 +60,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.72767,
+    "populationChangeRate": -6.83785,
     "vacancy": {
       "rate": 19.1,
       "vacant": 26490,
@@ -113,7 +113,7 @@
     "code": "35202",
     "pref": "yamaguchi",
     "name": "宇部市",
-    "population": 152811,
+    "population": 152689,
     "populationTrend": "減少",
     "rent": {
       "value": 43298,
@@ -154,9 +154,9 @@
     "amenities": {
       "stations": 17,
       "preschools": 58,
-      "medicalFacilities": 248,
+      "medicalFacilities": 249,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2651,
@@ -170,7 +170,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.00295,
+    "populationChangeRate": -6.078,
     "vacancy": {
       "rate": 19.8,
       "vacant": 17080,
@@ -223,7 +223,7 @@
     "code": "35203",
     "pref": "yamaguchi",
     "name": "山口市",
-    "population": 190438,
+    "population": 190271,
     "populationTrend": "微減",
     "rent": {
       "value": 46133,
@@ -264,9 +264,9 @@
     "amenities": {
       "stations": 31,
       "preschools": 75,
-      "medicalFacilities": 267,
+      "medicalFacilities": 270,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2671,
@@ -280,7 +280,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.81888,
+    "populationChangeRate": -1.90497,
     "vacancy": {
       "rate": 17,
       "vacant": 17910,
@@ -333,7 +333,7 @@
     "code": "35204",
     "pref": "yamaguchi",
     "name": "萩市",
-    "population": 39786,
+    "population": 39745,
     "populationTrend": "減少",
     "rent": {
       "value": 38521,
@@ -376,7 +376,7 @@
       "preschools": 21,
       "medicalFacilities": 77,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 509,
@@ -390,7 +390,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.8457,
+    "populationChangeRate": -10.93757,
     "vacancy": {
       "rate": 24.6,
       "vacant": 6390,
@@ -443,7 +443,7 @@
     "code": "35206",
     "pref": "yamaguchi",
     "name": "防府市",
-    "population": 109723,
+    "population": 109596,
     "populationTrend": "減少",
     "rent": {
       "value": 44590,
@@ -486,7 +486,7 @@
       "preschools": 52,
       "medicalFacilities": 141,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2025,
@@ -500,7 +500,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.73402,
+    "populationChangeRate": -3.84545,
     "vacancy": {
       "rate": 19.9,
       "vacant": 11870,
@@ -553,7 +553,7 @@
     "code": "35207",
     "pref": "yamaguchi",
     "name": "下松市",
-    "population": 55052,
+    "population": 54991,
     "populationTrend": "微減",
     "rent": {
       "value": 47807,
@@ -594,9 +594,9 @@
     "amenities": {
       "stations": 4,
       "preschools": 24,
-      "medicalFacilities": 72,
+      "medicalFacilities": 74,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 906,
@@ -610,7 +610,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.49409,
+    "populationChangeRate": -1.60324,
     "vacancy": {
       "rate": 14.1,
       "vacant": 4090,
@@ -663,7 +663,7 @@
     "code": "35208",
     "pref": "yamaguchi",
     "name": "岩国市",
-    "population": 119618,
+    "population": 119466,
     "populationTrend": "減少",
     "rent": {
       "value": 47337,
@@ -704,9 +704,9 @@
     "amenities": {
       "stations": 28,
       "preschools": 76,
-      "medicalFacilities": 189,
+      "medicalFacilities": 186,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2620,
@@ -720,7 +720,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.36263,
+    "populationChangeRate": -7.48035,
     "vacancy": {
       "rate": 19.7,
       "vacant": 13750,
@@ -773,7 +773,7 @@
     "code": "35210",
     "pref": "yamaguchi",
     "name": "光市",
-    "population": 46329,
+    "population": 46292,
     "populationTrend": "減少",
     "rent": {
       "value": 43006,
@@ -816,7 +816,7 @@
       "preschools": 19,
       "medicalFacilities": 66,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 586,
@@ -830,7 +830,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.96614,
+    "populationChangeRate": -7.04044,
     "vacancy": {
       "rate": 13.1,
       "vacant": 3210,
@@ -883,7 +883,7 @@
     "code": "35211",
     "pref": "yamaguchi",
     "name": "長門市",
-    "population": 28832,
+    "population": 28791,
     "populationTrend": "減少",
     "rent": {
       "value": 37220,
@@ -926,7 +926,7 @@
       "preschools": 13,
       "medicalFacilities": 43,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 609,
@@ -940,7 +940,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.33799,
+    "populationChangeRate": -11.46407,
     "vacancy": {
       "rate": 22.2,
       "vacant": 3980,
@@ -993,7 +993,7 @@
     "code": "35212",
     "pref": "yamaguchi",
     "name": "柳井市",
-    "population": 28533,
+    "population": 28512,
     "populationTrend": "減少",
     "rent": {
       "value": 41850,
@@ -1034,9 +1034,9 @@
     "amenities": {
       "stations": 3,
       "preschools": 14,
-      "medicalFacilities": 55,
+      "medicalFacilities": 56,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 317,
@@ -1050,7 +1050,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.35738,
+    "populationChangeRate": -7.42557,
     "vacancy": {
       "rate": 26.6,
       "vacant": 4760,
@@ -1103,7 +1103,7 @@
     "code": "35213",
     "pref": "yamaguchi",
     "name": "美祢市",
-    "population": 20145,
+    "population": 20133,
     "populationTrend": "減少",
     "rent": {
       "value": 30659,
@@ -1146,7 +1146,7 @@
       "preschools": 14,
       "medicalFacilities": 30,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 315,
@@ -1160,7 +1160,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -13.34366,
+    "populationChangeRate": -13.39528,
     "vacancy": {
       "rate": 24.2,
       "vacant": 3010,
@@ -1213,7 +1213,7 @@
     "code": "35215",
     "pref": "yamaguchi",
     "name": "周南市",
-    "population": 131201,
+    "population": 131125,
     "populationTrend": "減少",
     "rent": {
       "value": 43149,
@@ -1254,9 +1254,9 @@
     "amenities": {
       "stations": 10,
       "preschools": 56,
-      "medicalFacilities": 182,
+      "medicalFacilities": 183,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2213,
@@ -1270,7 +1270,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.60884,
+    "populationChangeRate": -4.6641,
     "vacancy": {
       "rate": 16.9,
       "vacant": 12850,
@@ -1323,7 +1323,7 @@
     "code": "35216",
     "pref": "yamaguchi",
     "name": "山陽小野田市",
-    "population": 56571,
+    "population": 56530,
     "populationTrend": "減少",
     "rent": {
       "value": 42692,
@@ -1364,9 +1364,9 @@
     "amenities": {
       "stations": 14,
       "preschools": 24,
-      "medicalFacilities": 87,
+      "medicalFacilities": 86,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 967,
@@ -1380,7 +1380,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.22451,
+    "populationChangeRate": -6.29248,
     "vacancy": {
       "rate": 16.7,
       "vacant": 5060,
@@ -1433,7 +1433,7 @@
     "code": "35305",
     "pref": "yamaguchi",
     "name": "周防大島町",
-    "population": 12854,
+    "population": 12838,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1476,7 +1476,7 @@
       "preschools": 11,
       "medicalFacilities": 25,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 131,
@@ -1490,7 +1490,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -13.13691,
+    "populationChangeRate": -13.24503,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1543,7 +1543,7 @@
     "code": "35321",
     "pref": "yamaguchi",
     "name": "和木町",
-    "population": 5437,
+    "population": 5433,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1586,7 +1586,7 @@
       "preschools": 2,
       "medicalFacilities": 7,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 104,
@@ -1600,7 +1600,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.89393,
+    "populationChangeRate": -9.96023,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1653,7 +1653,7 @@
     "code": "35341",
     "pref": "yamaguchi",
     "name": "上関町",
-    "population": 1893,
+    "population": 1889,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1663,10 +1663,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 11167,
+      "value": 10780,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -1696,7 +1696,7 @@
       "preschools": 3,
       "medicalFacilities": 8,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 6,
@@ -1710,7 +1710,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -19.17165,
+    "populationChangeRate": -19.34244,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1763,7 +1763,7 @@
     "code": "35343",
     "pref": "yamaguchi",
     "name": "田布施町",
-    "population": 13395,
+    "population": 13380,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1806,7 +1806,7 @@
       "preschools": 6,
       "medicalFacilities": 12,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 91,
@@ -1820,7 +1820,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.51226,
+    "populationChangeRate": -7.61583,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1873,7 +1873,7 @@
     "code": "35344",
     "pref": "yamaguchi",
     "name": "平生町",
-    "population": 10791,
+    "population": 10777,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1914,9 +1914,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 4,
-      "medicalFacilities": 13,
+      "medicalFacilities": 12,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 161,
@@ -1930,7 +1930,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.42589,
+    "populationChangeRate": -9.54339,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1983,7 +1983,7 @@
     "code": "35502",
     "pref": "yamaguchi",
     "name": "阿武町",
-    "population": 2705,
+    "population": 2701,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1993,10 +1993,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 6047,
+      "value": 5970,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -2026,7 +2026,7 @@
       "preschools": 1,
       "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 29,
@@ -2040,7 +2040,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.45663,
+    "populationChangeRate": -11.58756,
     "vacancy": {
       "rate": -1,
       "vacant": 0,

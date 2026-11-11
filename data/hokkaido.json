@@ -3,7 +3,7 @@
     "code": "01100",
     "pref": "hokkaido",
     "name": "札幌市",
-    "population": 1964034,
+    "population": 1961996,
     "populationTrend": "横ばい",
     "rent": {
       "value": 53451,
@@ -44,9 +44,9 @@
     "amenities": {
       "stations": 105,
       "preschools": 739,
-      "medicalFacilities": 2815,
+      "medicalFacilities": 2811,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 24329,
@@ -60,7 +60,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -0.47436,
+    "populationChangeRate": -0.57763,
     "vacancy": {
       "rate": 13.8,
       "vacant": 155800,
@@ -113,7 +113,7 @@
     "code": "01202",
     "pref": "hokkaido",
     "name": "函館市",
-    "population": 230498,
+    "population": 230309,
     "populationTrend": "減少",
     "rent": {
       "value": 45148,
@@ -154,9 +154,9 @@
     "amenities": {
       "stations": 33,
       "preschools": 122,
-      "medicalFacilities": 342,
+      "medicalFacilities": 331,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2228,
@@ -170,7 +170,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.19885,
+    "populationChangeRate": -8.27412,
     "vacancy": {
       "rate": 19.3,
       "vacant": 28210,
@@ -223,7 +223,7 @@
     "code": "01203",
     "pref": "hokkaido",
     "name": "小樽市",
-    "population": 100404,
+    "population": 100269,
     "populationTrend": "減少",
     "rent": {
       "value": 42451,
@@ -264,9 +264,9 @@
     "amenities": {
       "stations": 7,
       "preschools": 14,
-      "medicalFacilities": 161,
+      "medicalFacilities": 163,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1330,
@@ -280,7 +280,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.78895,
+    "populationChangeRate": -9.91024,
     "vacancy": {
       "rate": 17.4,
       "vacant": 11140,
@@ -333,7 +333,7 @@
     "code": "01204",
     "pref": "hokkaido",
     "name": "旭川市",
-    "population": 305701,
+    "population": 305430,
     "populationTrend": "減少",
     "rent": {
       "value": 43417,
@@ -374,9 +374,9 @@
     "amenities": {
       "stations": 21,
       "preschools": 166,
-      "medicalFacilities": 424,
+      "medicalFacilities": 421,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2255,
@@ -390,7 +390,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.16811,
+    "populationChangeRate": -7.2504,
     "vacancy": {
       "rate": 14.1,
       "vacant": 25670,
@@ -443,7 +443,7 @@
     "code": "01205",
     "pref": "hokkaido",
     "name": "室蘭市",
-    "population": 74019,
+    "population": 73913,
     "populationTrend": "減少",
     "rent": {
       "value": 40769,
@@ -486,7 +486,7 @@
       "preschools": 11,
       "medicalFacilities": 91,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 712,
@@ -500,7 +500,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.15258,
+    "populationChangeRate": -10.28125,
     "vacancy": {
       "rate": 20.1,
       "vacant": 9790,
@@ -553,7 +553,7 @@
     "code": "01206",
     "pref": "hokkaido",
     "name": "釧路市",
-    "population": 151326,
+    "population": 151171,
     "populationTrend": "減少",
     "rent": {
       "value": 42259,
@@ -594,9 +594,9 @@
     "amenities": {
       "stations": 10,
       "preschools": 34,
-      "medicalFacilities": 172,
+      "medicalFacilities": 169,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1579,
@@ -610,7 +610,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.33005,
+    "populationChangeRate": -8.42395,
     "vacancy": {
       "rate": 19.1,
       "vacant": 18160,
@@ -663,7 +663,7 @@
     "code": "01207",
     "pref": "hokkaido",
     "name": "帯広市",
-    "population": 160764,
+    "population": 160563,
     "populationTrend": "減少",
     "rent": {
       "value": 46360,
@@ -704,9 +704,9 @@
     "amenities": {
       "stations": 3,
       "preschools": 13,
-      "medicalFacilities": 220,
+      "medicalFacilities": 218,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1777,
@@ -720,7 +720,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.46592,
+    "populationChangeRate": -3.58661,
     "vacancy": {
       "rate": 11.7,
       "vacant": 10810,
@@ -773,7 +773,7 @@
     "code": "01208",
     "pref": "hokkaido",
     "name": "北見市",
-    "population": 108287,
+    "population": 108194,
     "populationTrend": "減少",
     "rent": {
       "value": 41267,
@@ -814,9 +814,9 @@
     "amenities": {
       "stations": 11,
       "preschools": 22,
-      "medicalFacilities": 126,
+      "medicalFacilities": 120,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 973,
@@ -830,7 +830,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.22878,
+    "populationChangeRate": -6.30932,
     "vacancy": {
       "rate": 14.1,
       "vacant": 8890,
@@ -883,7 +883,7 @@
     "code": "01209",
     "pref": "hokkaido",
     "name": "夕張市",
-    "population": 5618,
+    "population": 5610,
     "populationTrend": "減少",
     "rent": {
       "value": 26067,
@@ -926,7 +926,7 @@
       "preschools": 1,
       "medicalFacilities": 9,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 46,
@@ -940,7 +940,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -23.39787,
+    "populationChangeRate": -23.50695,
     "vacancy": {
       "rate": 39.4,
       "vacant": 2180,
@@ -993,7 +993,7 @@
     "code": "01210",
     "pref": "hokkaido",
     "name": "岩見沢市",
-    "population": 73004,
+    "population": 72949,
     "populationTrend": "減少",
     "rent": {
       "value": 42985,
@@ -1034,9 +1034,9 @@
     "amenities": {
       "stations": 7,
       "preschools": 5,
-      "medicalFacilities": 110,
+      "medicalFacilities": 108,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 493,
@@ -1050,7 +1050,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.94644,
+    "populationChangeRate": -8.01579,
     "vacancy": {
       "rate": 15.2,
       "vacant": 6040,
@@ -1103,7 +1103,7 @@
     "code": "01211",
     "pref": "hokkaido",
     "name": "網走市",
-    "population": 32770,
+    "population": 32737,
     "populationTrend": "減少",
     "rent": {
       "value": 37682,
@@ -1144,9 +1144,9 @@
     "amenities": {
       "stations": 7,
       "preschools": 6,
-      "medicalFacilities": 36,
+      "medicalFacilities": 38,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 673,
@@ -1160,7 +1160,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.35873,
+    "populationChangeRate": -8.45102,
     "vacancy": {
       "rate": 17,
       "vacant": 3260,
@@ -1213,7 +1213,7 @@
     "code": "01212",
     "pref": "hokkaido",
     "name": "留萌市",
-    "population": 17360,
+    "population": 17329,
     "populationTrend": "減少",
     "rent": {
       "value": 35377,
@@ -1254,9 +1254,9 @@
     "amenities": {
       "stations": 7,
       "preschools": 2,
-      "medicalFacilities": 29,
+      "medicalFacilities": 28,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 232,
@@ -1270,7 +1270,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -13.69196,
+    "populationChangeRate": -13.84608,
     "vacancy": {
       "rate": 19.3,
       "vacant": 2230,
@@ -1323,7 +1323,7 @@
     "code": "01213",
     "pref": "hokkaido",
     "name": "苫小牧市",
-    "population": 164420,
+    "population": 164286,
     "populationTrend": "減少",
     "rent": {
       "value": 42617,
@@ -1364,9 +1364,9 @@
     "amenities": {
       "stations": 9,
       "preschools": 22,
-      "medicalFacilities": 173,
+      "medicalFacilities": 171,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1869,
@@ -1380,7 +1380,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.3466,
+    "populationChangeRate": -3.42537,
     "vacancy": {
       "rate": 16.8,
       "vacant": 15300,
@@ -1433,7 +1433,7 @@
     "code": "01214",
     "pref": "hokkaido",
     "name": "稚内市",
-    "population": 30068,
+    "population": 30064,
     "populationTrend": "減少",
     "rent": {
       "value": 36054,
@@ -1474,9 +1474,9 @@
     "amenities": {
       "stations": 4,
       "preschools": 5,
-      "medicalFacilities": 29,
+      "medicalFacilities": 28,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 738,
@@ -1490,7 +1490,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.41325,
+    "populationChangeRate": -10.42517,
     "vacancy": {
       "rate": 15,
       "vacant": 2670,
@@ -1543,7 +1543,7 @@
     "code": "01215",
     "pref": "hokkaido",
     "name": "美唄市",
-    "population": 17668,
+    "population": 17641,
     "populationTrend": "減少",
     "rent": {
       "value": 34114,
@@ -1586,7 +1586,7 @@
       "preschools": 2,
       "medicalFacilities": 25,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 127,
@@ -1600,7 +1600,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -13.44731,
+    "populationChangeRate": -13.57958,
     "vacancy": {
       "rate": 21.4,
       "vacant": 2350,
@@ -1653,7 +1653,7 @@
     "code": "01216",
     "pref": "hokkaido",
     "name": "芦別市",
-    "population": 10605,
+    "population": 10581,
     "populationTrend": "減少",
     "rent": {
       "value": 30226,
@@ -1694,9 +1694,9 @@
     "amenities": {
       "stations": 3,
       "preschools": 1,
-      "medicalFacilities": 15,
+      "medicalFacilities": 14,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 65,
@@ -1710,7 +1710,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -15.53166,
+    "populationChangeRate": -15.72282,
     "vacancy": {
       "rate": 28.1,
       "vacant": 2240,
@@ -1763,7 +1763,7 @@
     "code": "01217",
     "pref": "hokkaido",
     "name": "江別市",
-    "population": 119568,
+    "population": 119455,
     "populationTrend": "微減",
     "rent": {
       "value": 42165,
@@ -1804,9 +1804,9 @@
     "amenities": {
       "stations": 5,
       "preschools": 15,
-      "medicalFacilities": 137,
+      "medicalFacilities": 136,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1260,
@@ -1820,7 +1820,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.22918,
+    "populationChangeRate": -1.32253,
     "vacancy": {
       "rate": 10.9,
       "vacant": 6270,
@@ -1873,7 +1873,7 @@
     "code": "01218",
     "pref": "hokkaido",
     "name": "赤平市",
-    "population": 8268,
+    "population": 8261,
     "populationTrend": "減少",
     "rent": {
       "value": 22143,
@@ -1916,7 +1916,7 @@
       "preschools": 1,
       "medicalFacilities": 8,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 134,
@@ -1930,7 +1930,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -14.74531,
+    "populationChangeRate": -14.81749,
     "vacancy": {
       "rate": 30.6,
       "vacant": 1910,
@@ -1983,7 +1983,7 @@
     "code": "01219",
     "pref": "hokkaido",
     "name": "紋別市",
-    "population": 19463,
+    "population": 19424,
     "populationTrend": "減少",
     "rent": {
       "value": 31299,
@@ -2024,9 +2024,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 3,
-      "medicalFacilities": 21,
+      "medicalFacilities": 20,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 913,
@@ -2040,7 +2040,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.25831,
+    "populationChangeRate": -8.44214,
     "vacancy": {
       "rate": 13.7,
       "vacant": 1730,
@@ -2093,7 +2093,7 @@
     "code": "01220",
     "pref": "hokkaido",
     "name": "士別市",
-    "population": 15785,
+    "population": 15761,
     "populationTrend": "減少",
     "rent": {
       "value": 36105,
@@ -2136,7 +2136,7 @@
       "preschools": 3,
       "medicalFacilities": 20,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 185,
@@ -2150,7 +2150,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.60824,
+    "populationChangeRate": -11.74264,
     "vacancy": {
       "rate": 17,
       "vacant": 1600,
@@ -2203,7 +2203,7 @@
     "code": "01221",
     "pref": "hokkaido",
     "name": "名寄市",
-    "population": 24398,
+    "population": 24356,
     "populationTrend": "減少",
     "rent": {
       "value": 44811,
@@ -2244,9 +2244,9 @@
     "amenities": {
       "stations": 7,
       "preschools": 5,
-      "medicalFacilities": 29,
+      "medicalFacilities": 30,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 140,
@@ -2260,7 +2260,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.57107,
+    "populationChangeRate": -10.72502,
     "vacancy": {
       "rate": 16.5,
       "vacant": 2360,
@@ -2313,7 +2313,7 @@
     "code": "01222",
     "pref": "hokkaido",
     "name": "三笠市",
-    "population": 6907,
+    "population": 6901,
     "populationTrend": "減少",
     "rent": {
       "value": 32143,
@@ -2356,7 +2356,7 @@
       "preschools": 1,
       "medicalFacilities": 9,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 57,
@@ -2370,7 +2370,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -14.09204,
+    "populationChangeRate": -14.16667,
     "vacancy": {
       "rate": 39.3,
       "vacant": 2330,
@@ -2423,7 +2423,7 @@
     "code": "01223",
     "pref": "hokkaido",
     "name": "根室市",
-    "population": 21201,
+    "population": 21241,
     "populationTrend": "減少",
     "rent": {
       "value": 35000,
@@ -2464,9 +2464,9 @@
     "amenities": {
       "stations": 9,
       "preschools": 3,
-      "medicalFacilities": 17,
+      "medicalFacilities": 16,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 847,
@@ -2480,7 +2480,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -13.94301,
+    "populationChangeRate": -13.78065,
     "vacancy": {
       "rate": 16.5,
       "vacant": 1990,
@@ -2533,7 +2533,7 @@
     "code": "01224",
     "pref": "hokkaido",
     "name": "千歳市",
-    "population": 98177,
+    "population": 98077,
     "populationTrend": "横ばい",
     "rent": {
       "value": 47706,
@@ -2574,9 +2574,9 @@
     "amenities": {
       "stations": 6,
       "preschools": 22,
-      "medicalFacilities": 103,
+      "medicalFacilities": 102,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1672,
@@ -2590,7 +2590,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 0.23175,
+    "populationChangeRate": 0.12966,
     "vacancy": {
       "rate": 13.4,
       "vacant": 6830,
@@ -2643,7 +2643,7 @@
     "code": "01225",
     "pref": "hokkaido",
     "name": "滝川市",
-    "population": 35845,
+    "population": 35782,
     "populationTrend": "減少",
     "rent": {
       "value": 40913,
@@ -2686,7 +2686,7 @@
       "preschools": 2,
       "medicalFacilities": 48,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 175,
@@ -2700,7 +2700,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.23018,
+    "populationChangeRate": -9.38972,
     "vacancy": {
       "rate": 17.1,
       "vacant": 3790,
@@ -2753,7 +2753,7 @@
     "code": "01226",
     "pref": "hokkaido",
     "name": "砂川市",
-    "population": 14998,
+    "population": 14976,
     "populationTrend": "減少",
     "rent": {
       "value": 34151,
@@ -2794,9 +2794,9 @@
     "amenities": {
       "stations": 2,
       "preschools": 1,
-      "medicalFacilities": 16,
+      "medicalFacilities": 15,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 81,
@@ -2810,7 +2810,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.02584,
+    "populationChangeRate": -9.15929,
     "vacancy": {
       "rate": 18,
       "vacant": 1670,
@@ -2863,7 +2863,7 @@
     "code": "01227",
     "pref": "hokkaido",
     "name": "歌志内市",
-    "population": 2451,
+    "population": 2448,
     "populationTrend": "減少",
     "rent": {
       "value": 22455,
@@ -2906,7 +2906,7 @@
       "preschools": 1,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 24,
@@ -2920,7 +2920,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -17.99933,
+    "populationChangeRate": -18.0997,
     "vacancy": {
       "rate": 36.8,
       "vacant": 740,
@@ -2973,7 +2973,7 @@
     "code": "01228",
     "pref": "hokkaido",
     "name": "深川市",
-    "population": 17720,
+    "population": 17671,
     "populationTrend": "減少",
     "rent": {
       "value": 38502,
@@ -3014,9 +3014,9 @@
     "amenities": {
       "stations": 4,
       "preschools": 2,
-      "medicalFacilities": 28,
+      "medicalFacilities": 29,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 222,
@@ -3030,7 +3030,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.57243,
+    "populationChangeRate": -11.81696,
     "vacancy": {
       "rate": 21.2,
       "vacant": 2380,
@@ -3083,7 +3083,7 @@
     "code": "01229",
     "pref": "hokkaido",
     "name": "富良野市",
-    "population": 19321,
+    "population": 19274,
     "populationTrend": "減少",
     "rent": {
       "value": 43328,
@@ -3126,7 +3126,7 @@
       "preschools": 4,
       "medicalFacilities": 25,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 874,
@@ -3140,7 +3140,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.56561,
+    "populationChangeRate": -8.78804,
     "vacancy": {
       "rate": 16.4,
       "vacant": 1800,
@@ -3193,7 +3193,7 @@
     "code": "01230",
     "pref": "hokkaido",
     "name": "登別市",
-    "population": 41991,
+    "population": 41947,
     "populationTrend": "減少",
     "rent": {
       "value": 40612,
@@ -3234,9 +3234,9 @@
     "amenities": {
       "stations": 3,
       "preschools": 4,
-      "medicalFacilities": 41,
+      "medicalFacilities": 39,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 513,
@@ -3250,7 +3250,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.4846,
+    "populationChangeRate": -9.57944,
     "vacancy": {
       "rate": 18,
       "vacant": 4360,
@@ -3303,7 +3303,7 @@
     "code": "01231",
     "pref": "hokkaido",
     "name": "恵庭市",
-    "population": 70918,
+    "population": 70874,
     "populationTrend": "横ばい",
     "rent": {
       "value": 46777,
@@ -3344,9 +3344,9 @@
     "amenities": {
       "stations": 4,
       "preschools": 11,
-      "medicalFacilities": 78,
+      "medicalFacilities": 77,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1360,
@@ -3360,7 +3360,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 0.83462,
+    "populationChangeRate": 0.77206,
     "vacancy": {
       "rate": 11.7,
       "vacant": 4050,
@@ -3413,7 +3413,7 @@
     "code": "01233",
     "pref": "hokkaido",
     "name": "伊達市",
-    "population": 30108,
+    "population": 30064,
     "populationTrend": "減少",
     "rent": {
       "value": 43194,
@@ -3454,9 +3454,9 @@
     "amenities": {
       "stations": 6,
       "preschools": 2,
-      "medicalFacilities": 46,
+      "medicalFacilities": 44,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 398,
@@ -3470,7 +3470,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.28002,
+    "populationChangeRate": -8.41406,
     "vacancy": {
       "rate": 17,
       "vacant": 2960,
@@ -3523,7 +3523,7 @@
     "code": "01234",
     "pref": "hokkaido",
     "name": "北広島市",
-    "population": 55838,
+    "population": 55772,
     "populationTrend": "減少",
     "rent": {
       "value": 46837,
@@ -3564,9 +3564,9 @@
     "amenities": {
       "stations": 1,
       "preschools": 10,
-      "medicalFacilities": 70,
+      "medicalFacilities": 71,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 722,
@@ -3580,7 +3580,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.01059,
+    "populationChangeRate": -4.12405,
     "vacancy": {
       "rate": 7.8,
       "vacant": 2050,
@@ -3633,7 +3633,7 @@
     "code": "01235",
     "pref": "hokkaido",
     "name": "石狩市",
-    "population": 55771,
+    "population": 55706,
     "populationTrend": "微減",
     "rent": {
       "value": 46674,
@@ -3676,7 +3676,7 @@
       "preschools": 13,
       "medicalFacilities": 55,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1049,
@@ -3690,7 +3690,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.93075,
+    "populationChangeRate": -2.04505,
     "vacancy": {
       "rate": 8.4,
       "vacant": 2210,
@@ -3743,7 +3743,7 @@
     "code": "01236",
     "pref": "hokkaido",
     "name": "北斗市",
-    "population": 40601,
+    "population": 40576,
     "populationTrend": "減少",
     "rent": {
       "value": 43446,
@@ -3784,9 +3784,9 @@
     "amenities": {
       "stations": 9,
       "preschools": 6,
-      "medicalFacilities": 40,
+      "medicalFacilities": 38,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 408,
@@ -3800,7 +3800,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.35402,
+    "populationChangeRate": -8.41046,
     "vacancy": {
       "rate": 14.5,
       "vacant": 3120,
@@ -3853,7 +3853,7 @@
     "code": "01303",
     "pref": "hokkaido",
     "name": "当別町",
-    "population": 14949,
+    "population": 14933,
     "populationTrend": "減少",
     "rent": {
       "value": 32599,
@@ -3896,7 +3896,7 @@
       "preschools": 2,
       "medicalFacilities": 21,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 278,
@@ -3910,7 +3910,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.07565,
+    "populationChangeRate": -6.17617,
     "vacancy": {
       "rate": 13.4,
       "vacant": 1120,
@@ -3963,7 +3963,7 @@
     "code": "01304",
     "pref": "hokkaido",
     "name": "新篠津村",
-    "population": 2734,
+    "population": 2731,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3973,10 +3973,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 3850,
+      "value": 3800,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -4006,7 +4006,7 @@
       "preschools": 0,
       "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 19,
@@ -4020,7 +4020,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.18397,
+    "populationChangeRate": -10.28252,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4073,7 +4073,7 @@
     "code": "01331",
     "pref": "hokkaido",
     "name": "松前町",
-    "population": 5263,
+    "population": 5260,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4083,10 +4083,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 6600,
+      "value": 6350,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -4116,7 +4116,7 @@
       "preschools": 1,
       "medicalFacilities": 7,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 50,
@@ -4130,7 +4130,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -15.92652,
+    "populationChangeRate": -15.97444,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4183,7 +4183,7 @@
     "code": "01332",
     "pref": "hokkaido",
     "name": "福島町",
-    "population": 3184,
+    "population": 3182,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4226,7 +4226,7 @@
       "preschools": 1,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 25,
@@ -4240,7 +4240,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -16.07802,
+    "populationChangeRate": -16.13073,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4293,7 +4293,7 @@
     "code": "01333",
     "pref": "hokkaido",
     "name": "知内町",
-    "population": 3654,
+    "population": 3648,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4303,10 +4303,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 4500,
+      "value": 4350,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -4336,7 +4336,7 @@
       "preschools": 1,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 68,
@@ -4350,7 +4350,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -12.31102,
+    "populationChangeRate": -12.455,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4403,7 +4403,7 @@
     "code": "01334",
     "pref": "hokkaido",
     "name": "木古内町",
-    "population": 3258,
+    "population": 3255,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4446,7 +4446,7 @@
       "preschools": 0,
       "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 23,
@@ -4460,7 +4460,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -14.97912,
+    "populationChangeRate": -15.05741,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4513,7 +4513,7 @@
     "code": "01337",
     "pref": "hokkaido",
     "name": "七飯町",
-    "population": 26966,
+    "population": 26933,
     "populationTrend": "微減",
     "rent": {
       "value": 43550,
@@ -4556,7 +4556,7 @@
       "preschools": 2,
       "medicalFacilities": 27,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 221,
@@ -4570,7 +4570,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.60059,
+    "populationChangeRate": -2.71979,
     "vacancy": {
       "rate": 17.8,
       "vacant": 2690,
@@ -4623,7 +4623,7 @@
     "code": "01343",
     "pref": "hokkaido",
     "name": "鹿部町",
-    "population": 3347,
+    "population": 3348,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4633,10 +4633,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 5267,
+      "value": 5167,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -4666,7 +4666,7 @@
       "preschools": 1,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 197,
@@ -4680,7 +4680,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.98404,
+    "populationChangeRate": -10.95745,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4733,7 +4733,7 @@
     "code": "01345",
     "pref": "hokkaido",
     "name": "森町",
-    "population": 12852,
+    "population": 12833,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4774,9 +4774,9 @@
     "amenities": {
       "stations": 14,
       "preschools": 2,
-      "medicalFacilities": 16,
+      "medicalFacilities": 15,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 634,
@@ -4790,7 +4790,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.36407,
+    "populationChangeRate": -10.49658,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4843,7 +4843,7 @@
     "code": "01346",
     "pref": "hokkaido",
     "name": "八雲町",
-    "population": 14813,
+    "population": 14781,
     "populationTrend": "減少",
     "rent": {
       "value": 41090,
@@ -4886,7 +4886,7 @@
       "preschools": 2,
       "medicalFacilities": 14,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 547,
@@ -4900,7 +4900,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.40086,
+    "populationChangeRate": -6.60306,
     "vacancy": {
       "rate": 16.3,
       "vacant": 1310,
@@ -4953,7 +4953,7 @@
     "code": "01347",
     "pref": "hokkaido",
     "name": "長万部町",
-    "population": 5310,
+    "population": 5305,
     "populationTrend": "増加",
     "rent": {
       "value": 0,
@@ -4996,7 +4996,7 @@
       "preschools": 1,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 325,
@@ -5010,7 +5010,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 3.93423,
+    "populationChangeRate": 3.83637,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -5063,7 +5063,7 @@
     "code": "01361",
     "pref": "hokkaido",
     "name": "江差町",
-    "population": 6259,
+    "population": 6230,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -5106,7 +5106,7 @@
       "preschools": 1,
       "medicalFacilities": 9,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 40,
@@ -5120,7 +5120,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -15.73775,
+    "populationChangeRate": -16.12816,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -5173,7 +5173,7 @@
     "code": "01362",
     "pref": "hokkaido",
     "name": "上ノ国町",
-    "population": 3658,
+    "population": 3656,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -5183,10 +5183,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 5200,
+      "value": 5033,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -5216,7 +5216,7 @@
       "preschools": 0,
       "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 47,
@@ -5230,7 +5230,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -15.04877,
+    "populationChangeRate": -15.09522,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -5283,7 +5283,7 @@
     "code": "01363",
     "pref": "hokkaido",
     "name": "厚沢部町",
-    "population": 3099,
+    "population": 3098,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -5293,10 +5293,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 6200,
+      "value": 6017,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -5326,7 +5326,7 @@
       "preschools": 1,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 50,
@@ -5340,7 +5340,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -13.72494,
+    "populationChangeRate": -13.75278,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -5403,10 +5403,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 6217,
+      "value": 6017,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -5436,7 +5436,7 @@
       "preschools": 0,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 36,
@@ -5503,7 +5503,7 @@
     "code": "01367",
     "pref": "hokkaido",
     "name": "奥尻町",
-    "population": 2049,
+    "population": 2050,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -5513,10 +5513,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 4625,
+      "value": 4525,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -5546,7 +5546,7 @@
       "preschools": 2,
       "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 13,
@@ -5560,7 +5560,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -14.97925,
+    "populationChangeRate": -14.93776,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -5613,7 +5613,7 @@
     "code": "01370",
     "pref": "hokkaido",
     "name": "今金町",
-    "population": 4393,
+    "population": 4387,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -5654,9 +5654,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 1,
-      "medicalFacilities": 7,
+      "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 18,
@@ -5670,7 +5670,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -13.38722,
+    "populationChangeRate": -13.50552,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -5723,7 +5723,7 @@
     "code": "01371",
     "pref": "hokkaido",
     "name": "せたな町",
-    "population": 6371,
+    "population": 6380,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -5766,7 +5766,7 @@
       "preschools": 1,
       "medicalFacilities": 11,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 91,
@@ -5780,7 +5780,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -13.88213,
+    "populationChangeRate": -13.76048,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -5833,7 +5833,7 @@
     "code": "01391",
     "pref": "hokkaido",
     "name": "島牧村",
-    "population": 1170,
+    "population": 1169,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -5843,10 +5843,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 3525,
+      "value": 3475,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -5876,7 +5876,7 @@
       "preschools": 0,
       "medicalFacilities": 1,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 8,
@@ -5890,7 +5890,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -13.71681,
+    "populationChangeRate": -13.79056,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -5943,7 +5943,7 @@
     "code": "01392",
     "pref": "hokkaido",
     "name": "寿都町",
-    "population": 2496,
+    "population": 2495,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -5953,10 +5953,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 5150,
+      "value": 5075,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -5986,7 +5986,7 @@
       "preschools": 0,
       "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 80,
@@ -6000,7 +6000,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -12.05074,
+    "populationChangeRate": -12.08598,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -6053,7 +6053,7 @@
     "code": "01393",
     "pref": "hokkaido",
     "name": "黒松内町",
-    "population": 2643,
+    "population": 2634,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -6063,10 +6063,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 3375,
+      "value": 3325,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -6096,7 +6096,7 @@
       "preschools": 0,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 39,
@@ -6110,7 +6110,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.30276,
+    "populationChangeRate": -5.62522,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -6163,7 +6163,7 @@
     "code": "01394",
     "pref": "hokkaido",
     "name": "蘭越町",
-    "population": 4346,
+    "population": 4293,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -6173,10 +6173,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 8500,
+      "value": 9100,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -6206,7 +6206,7 @@
       "preschools": 1,
       "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 214,
@@ -6220,7 +6220,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.85989,
+    "populationChangeRate": -6.02014,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -6273,7 +6273,7 @@
     "code": "01395",
     "pref": "hokkaido",
     "name": "ニセコ町",
-    "population": 5370,
+    "population": 5324,
     "populationTrend": "増加",
     "rent": {
       "value": 0,
@@ -6283,10 +6283,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 19650,
+      "value": 21800,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -6316,7 +6316,7 @@
       "preschools": 1,
       "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1235,
@@ -6330,7 +6330,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 5.83366,
+    "populationChangeRate": 4.92708,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -6383,7 +6383,7 @@
     "code": "01396",
     "pref": "hokkaido",
     "name": "真狩村",
-    "population": 1965,
+    "population": 1967,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -6393,10 +6393,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 7400,
+      "value": 8500,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -6426,7 +6426,7 @@
       "preschools": 0,
       "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 146,
@@ -6440,7 +6440,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.91198,
+    "populationChangeRate": -3.81418,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -6493,7 +6493,7 @@
     "code": "01397",
     "pref": "hokkaido",
     "name": "留寿都村",
-    "population": 1877,
+    "population": 1876,
     "populationTrend": "微減",
     "rent": {
       "value": 0,
@@ -6503,10 +6503,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 5600,
+      "value": 5800,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -6536,7 +6536,7 @@
       "preschools": 0,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 472,
@@ -6550,7 +6550,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.77917,
+    "populationChangeRate": -1.8315,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -6603,7 +6603,7 @@
     "code": "01398",
     "pref": "hokkaido",
     "name": "喜茂別町",
-    "population": 2008,
+    "population": 2006,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -6613,10 +6613,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 5525,
+      "value": 5825,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -6646,7 +6646,7 @@
       "preschools": 0,
       "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 145,
@@ -6660,7 +6660,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.86456,
+    "populationChangeRate": -6.95733,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -6713,7 +6713,7 @@
     "code": "01399",
     "pref": "hokkaido",
     "name": "京極町",
-    "population": 2809,
+    "population": 2803,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -6723,10 +6723,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 8300,
+      "value": 9250,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -6756,7 +6756,7 @@
       "preschools": 0,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 159,
@@ -6770,7 +6770,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.48827,
+    "populationChangeRate": -4.69228,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -6823,7 +6823,7 @@
     "code": "01400",
     "pref": "hokkaido",
     "name": "倶知安町",
-    "population": 14763,
+    "population": 14728,
     "populationTrend": "微減",
     "rent": {
       "value": 43992,
@@ -6864,9 +6864,9 @@
     "amenities": {
       "stations": 2,
       "preschools": 3,
-      "medicalFacilities": 20,
+      "medicalFacilities": 19,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 4354,
@@ -6880,7 +6880,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.41919,
+    "populationChangeRate": -2.65054,
     "vacancy": {
       "rate": 18.9,
       "vacant": 1730,
@@ -6933,7 +6933,7 @@
     "code": "01401",
     "pref": "hokkaido",
     "name": "共和町",
-    "population": 5989,
+    "population": 5980,
     "populationTrend": "増加",
     "rent": {
       "value": 0,
@@ -6976,7 +6976,7 @@
       "preschools": 2,
       "medicalFacilities": 7,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 97,
@@ -6990,7 +6990,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 3.75953,
+    "populationChangeRate": 3.6036,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -7043,7 +7043,7 @@
     "code": "01402",
     "pref": "hokkaido",
     "name": "岩内町",
-    "population": 10365,
+    "population": 10393,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -7084,9 +7084,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 2,
-      "medicalFacilities": 18,
+      "medicalFacilities": 17,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 185,
@@ -7100,7 +7100,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.01477,
+    "populationChangeRate": -10.77438,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -7153,7 +7153,7 @@
     "code": "01403",
     "pref": "hokkaido",
     "name": "泊村",
-    "population": 1490,
+    "population": 1479,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -7163,10 +7163,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 2950,
+      "value": 2920,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -7196,7 +7196,7 @@
       "preschools": 0,
       "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 12,
@@ -7210,7 +7210,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.03505,
+    "populationChangeRate": -5.73614,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -7263,7 +7263,7 @@
     "code": "01404",
     "pref": "hokkaido",
     "name": "神恵内村",
-    "population": 803,
+    "population": 802,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -7273,10 +7273,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 3000,
+      "value": 2985,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -7306,7 +7306,7 @@
       "preschools": 0,
       "medicalFacilities": 2,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1,
@@ -7320,7 +7320,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.70115,
+    "populationChangeRate": -7.81609,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -7373,7 +7373,7 @@
     "code": "01405",
     "pref": "hokkaido",
     "name": "積丹町",
-    "population": 1498,
+    "population": 1496,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -7383,10 +7383,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 4425,
+      "value": 4350,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -7416,7 +7416,7 @@
       "preschools": 0,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 10,
@@ -7430,7 +7430,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -18.18678,
+    "populationChangeRate": -18.29601,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -7526,7 +7526,7 @@
       "preschools": 0,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 60,
@@ -7593,7 +7593,7 @@
     "code": "01407",
     "pref": "hokkaido",
     "name": "仁木町",
-    "population": 3188,
+    "population": 3184,
     "populationTrend": "横ばい",
     "rent": {
       "value": 0,
@@ -7603,10 +7603,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 6240,
+      "value": 6217,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -7636,7 +7636,7 @@
       "preschools": 0,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 218,
@@ -7650,7 +7650,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 0.25157,
+    "populationChangeRate": 0.12579,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -7703,7 +7703,7 @@
     "code": "01408",
     "pref": "hokkaido",
     "name": "余市町",
-    "population": 16486,
+    "population": 16464,
     "populationTrend": "減少",
     "rent": {
       "value": 39013,
@@ -7744,9 +7744,9 @@
     "amenities": {
       "stations": 1,
       "preschools": 3,
-      "medicalFacilities": 29,
+      "medicalFacilities": 28,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 311,
@@ -7760,7 +7760,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.41111,
+    "populationChangeRate": -8.53333,
     "vacancy": {
       "rate": 19.5,
       "vacant": 1870,
@@ -7813,7 +7813,7 @@
     "code": "01409",
     "pref": "hokkaido",
     "name": "赤井川村",
-    "population": 1067,
+    "population": 1069,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -7826,7 +7826,7 @@
       "value": 3050,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -7854,9 +7854,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 0,
+      "medicalFacilities": 1,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 569,
@@ -7870,7 +7870,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.41202,
+    "populationChangeRate": -8.24034,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -7923,7 +7923,7 @@
     "code": "01423",
     "pref": "hokkaido",
     "name": "南幌町",
-    "population": 7890,
+    "population": 7883,
     "populationTrend": "増加",
     "rent": {
       "value": 0,
@@ -7966,7 +7966,7 @@
       "preschools": 1,
       "medicalFacilities": 8,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 108,
@@ -7980,7 +7980,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 7.80161,
+    "populationChangeRate": 7.70597,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -8033,7 +8033,7 @@
     "code": "01424",
     "pref": "hokkaido",
     "name": "奈井江町",
-    "population": 4543,
+    "population": 4541,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -8076,7 +8076,7 @@
       "preschools": 0,
       "medicalFacilities": 7,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 31,
@@ -8090,7 +8090,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.26953,
+    "populationChangeRate": -11.30859,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -8143,7 +8143,7 @@
     "code": "01425",
     "pref": "hokkaido",
     "name": "上砂川町",
-    "population": 2327,
+    "population": 2319,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -8153,10 +8153,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 1600,
+      "value": 1540,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -8186,7 +8186,7 @@
       "preschools": 0,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 39,
@@ -8200,7 +8200,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -18.09222,
+    "populationChangeRate": -18.37381,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -8253,7 +8253,7 @@
     "code": "01427",
     "pref": "hokkaido",
     "name": "由仁町",
-    "population": 4349,
+    "population": 4341,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -8263,10 +8263,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 4367,
+      "value": 4283,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -8296,7 +8296,7 @@
       "preschools": 1,
       "medicalFacilities": 9,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 63,
@@ -8310,7 +8310,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.80921,
+    "populationChangeRate": -9.97511,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -8363,7 +8363,7 @@
     "code": "01428",
     "pref": "hokkaido",
     "name": "長沼町",
-    "population": 9479,
+    "population": 9468,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -8406,7 +8406,7 @@
       "preschools": 1,
       "medicalFacilities": 13,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 81,
@@ -8420,7 +8420,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.87249,
+    "populationChangeRate": -7.9794,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -8473,7 +8473,7 @@
     "code": "01429",
     "pref": "hokkaido",
     "name": "栗山町",
-    "population": 10405,
+    "population": 10391,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -8514,9 +8514,9 @@
     "amenities": {
       "stations": 1,
       "preschools": 1,
-      "medicalFacilities": 17,
+      "medicalFacilities": 16,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 99,
@@ -8530,7 +8530,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.69163,
+    "populationChangeRate": -7.81583,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -8583,7 +8583,7 @@
     "code": "01430",
     "pref": "hokkaido",
     "name": "月形町",
-    "population": 2993,
+    "population": 2999,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -8593,10 +8593,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 3950,
+      "value": 3800,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -8626,7 +8626,7 @@
       "preschools": 0,
       "medicalFacilities": 7,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 11,
@@ -8640,7 +8640,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -18.91086,
+    "populationChangeRate": -18.74831,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -8693,7 +8693,7 @@
     "code": "01431",
     "pref": "hokkaido",
     "name": "浦臼町",
-    "population": 1533,
+    "population": 1527,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -8703,10 +8703,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 1825,
+      "value": 1775,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -8736,7 +8736,7 @@
       "preschools": 1,
       "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 9,
@@ -8750,7 +8750,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.48961,
+    "populationChangeRate": -11.83603,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -8803,7 +8803,7 @@
     "code": "01432",
     "pref": "hokkaido",
     "name": "新十津川町",
-    "population": 6114,
+    "population": 6100,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -8846,7 +8846,7 @@
       "preschools": 1,
       "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 39,
@@ -8860,7 +8860,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.70635,
+    "populationChangeRate": -5.92227,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -8913,7 +8913,7 @@
     "code": "01433",
     "pref": "hokkaido",
     "name": "妹背牛町",
-    "population": 2291,
+    "population": 2332,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -8923,10 +8923,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 3950,
+      "value": 3850,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -8956,7 +8956,7 @@
       "preschools": 0,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 47,
@@ -8970,7 +8970,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -14.92759,
+    "populationChangeRate": -13.40512,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -9023,7 +9023,7 @@
     "code": "01434",
     "pref": "hokkaido",
     "name": "秩父別町",
-    "population": 2116,
+    "population": 2110,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -9033,10 +9033,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 3125,
+      "value": 3025,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -9066,7 +9066,7 @@
       "preschools": 0,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 7,
@@ -9080,7 +9080,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.14556,
+    "populationChangeRate": -9.40318,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -9133,7 +9133,7 @@
     "code": "01436",
     "pref": "hokkaido",
     "name": "雨竜町",
-    "population": 2147,
+    "population": 2140,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -9143,10 +9143,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 2600,
+      "value": 2530,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -9176,7 +9176,7 @@
       "preschools": 0,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 20,
@@ -9190,7 +9190,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.12976,
+    "populationChangeRate": -10.42277,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -9243,7 +9243,7 @@
     "code": "01437",
     "pref": "hokkaido",
     "name": "北竜町",
-    "population": 1531,
+    "population": 1529,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -9253,10 +9253,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 1805,
+      "value": 1750,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -9286,7 +9286,7 @@
       "preschools": 0,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 10,
@@ -9300,7 +9300,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.1949,
+    "populationChangeRate": -11.3109,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -9353,7 +9353,7 @@
     "code": "01438",
     "pref": "hokkaido",
     "name": "沼田町",
-    "population": 2654,
+    "population": 2653,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -9363,10 +9363,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 3455,
+      "value": 3295,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -9396,7 +9396,7 @@
       "preschools": 0,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 16,
@@ -9410,7 +9410,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.7659,
+    "populationChangeRate": -8.80028,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -9463,7 +9463,7 @@
     "code": "01452",
     "pref": "hokkaido",
     "name": "鷹栖町",
-    "population": 6173,
+    "population": 6188,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -9506,7 +9506,7 @@
       "preschools": 1,
       "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 28,
@@ -9520,7 +9520,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.9997,
+    "populationChangeRate": -5.77128,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -9573,7 +9573,7 @@
     "code": "01453",
     "pref": "hokkaido",
     "name": "東神楽町",
-    "population": 9588,
+    "population": 9586,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -9616,7 +9616,7 @@
       "preschools": 3,
       "medicalFacilities": 9,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 80,
@@ -9630,7 +9630,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.32241,
+    "populationChangeRate": -5.34215,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -9683,7 +9683,7 @@
     "code": "01454",
     "pref": "hokkaido",
     "name": "当麻町",
-    "population": 5826,
+    "population": 5824,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -9693,10 +9693,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 6567,
+      "value": 6467,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -9726,7 +9726,7 @@
       "preschools": 1,
       "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 19,
@@ -9740,7 +9740,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.80187,
+    "populationChangeRate": -7.83352,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -9793,7 +9793,7 @@
     "code": "01455",
     "pref": "hokkaido",
     "name": "比布町",
-    "population": 3261,
+    "population": 3256,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -9803,10 +9803,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 4667,
+      "value": 4567,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -9836,7 +9836,7 @@
       "preschools": 0,
       "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 30,
@@ -9850,7 +9850,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.35795,
+    "populationChangeRate": -7.5,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -9913,10 +9913,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 3825,
+      "value": 3750,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -9944,9 +9944,9 @@
     "amenities": {
       "stations": 4,
       "preschools": 1,
-      "medicalFacilities": 3,
+      "medicalFacilities": 2,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 56,
@@ -10013,7 +10013,7 @@
     "code": "01457",
     "pref": "hokkaido",
     "name": "上川町",
-    "population": 3170,
+    "population": 3165,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -10056,7 +10056,7 @@
       "preschools": 2,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 105,
@@ -10070,7 +10070,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.42857,
+    "populationChangeRate": -9.57143,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -10123,7 +10123,7 @@
     "code": "01458",
     "pref": "hokkaido",
     "name": "東川町",
-    "population": 8726,
+    "population": 8699,
     "populationTrend": "増加",
     "rent": {
       "value": 0,
@@ -10133,10 +10133,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 13067,
+      "value": 14933,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -10166,7 +10166,7 @@
       "preschools": 1,
       "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 585,
@@ -10180,7 +10180,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 4.9555,
+    "populationChangeRate": 4.63074,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -10233,7 +10233,7 @@
     "code": "01459",
     "pref": "hokkaido",
     "name": "美瑛町",
-    "population": 9337,
+    "population": 9327,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -10276,7 +10276,7 @@
       "preschools": 1,
       "medicalFacilities": 8,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 219,
@@ -10290,7 +10290,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.42367,
+    "populationChangeRate": -3.5271,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -10343,7 +10343,7 @@
     "code": "01460",
     "pref": "hokkaido",
     "name": "上富良野町",
-    "population": 9150,
+    "population": 9152,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -10384,9 +10384,9 @@
     "amenities": {
       "stations": 1,
       "preschools": 3,
-      "medicalFacilities": 10,
+      "medicalFacilities": 9,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 163,
@@ -10400,7 +10400,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.57712,
+    "populationChangeRate": -11.55779,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -10453,7 +10453,7 @@
     "code": "01461",
     "pref": "hokkaido",
     "name": "中富良野町",
-    "population": 4285,
+    "population": 4280,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -10463,10 +10463,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 7367,
+      "value": 8167,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -10494,9 +10494,9 @@
     "amenities": {
       "stations": 3,
       "preschools": 1,
-      "medicalFacilities": 4,
+      "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 97,
@@ -10510,7 +10510,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.46546,
+    "populationChangeRate": -9.5711,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -10563,7 +10563,7 @@
     "code": "01462",
     "pref": "hokkaido",
     "name": "南富良野町",
-    "population": 2195,
+    "population": 2190,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -10573,10 +10573,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 1810,
+      "value": 1755,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -10604,9 +10604,9 @@
     "amenities": {
       "stations": 5,
       "preschools": 0,
-      "medicalFacilities": 7,
+      "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 73,
@@ -10620,7 +10620,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.61785,
+    "populationChangeRate": -7.82828,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -10673,7 +10673,7 @@
     "code": "01463",
     "pref": "hokkaido",
     "name": "占冠村",
-    "population": 1487,
+    "population": 1486,
     "populationTrend": "増加",
     "rent": {
       "value": 0,
@@ -10683,10 +10683,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 2475,
+      "value": 2425,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -10716,7 +10716,7 @@
       "preschools": 0,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 569,
@@ -10730,7 +10730,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 13.85911,
+    "populationChangeRate": 13.78254,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -10783,7 +10783,7 @@
     "code": "01464",
     "pref": "hokkaido",
     "name": "和寒町",
-    "population": 2669,
+    "population": 2667,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -10793,10 +10793,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 4550,
+      "value": 5217,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -10826,7 +10826,7 @@
       "preschools": 0,
       "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 15,
@@ -10840,7 +10840,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -16.38471,
+    "populationChangeRate": -16.44737,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -10893,7 +10893,7 @@
     "code": "01465",
     "pref": "hokkaido",
     "name": "剣淵町",
-    "population": 2640,
+    "population": 2642,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -10903,10 +10903,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 2250,
+      "value": 2185,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -10936,7 +10936,7 @@
       "preschools": 0,
       "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 23,
@@ -10950,7 +10950,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.77444,
+    "populationChangeRate": -9.70608,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -11003,7 +11003,7 @@
     "code": "01468",
     "pref": "hokkaido",
     "name": "下川町",
-    "population": 2744,
+    "population": 2742,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -11046,7 +11046,7 @@
       "preschools": 0,
       "medicalFacilities": 2,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 36,
@@ -11060,7 +11060,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -12.22009,
+    "populationChangeRate": -12.28407,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -11113,7 +11113,7 @@
     "code": "01469",
     "pref": "hokkaido",
     "name": "美深町",
-    "population": 3635,
+    "population": 3636,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -11156,7 +11156,7 @@
       "preschools": 1,
       "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 53,
@@ -11170,7 +11170,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -12.30398,
+    "populationChangeRate": -12.27986,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -11223,7 +11223,7 @@
     "code": "01470",
     "pref": "hokkaido",
     "name": "音威子府村",
-    "population": 599,
+    "population": 603,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -11233,10 +11233,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 1390,
+      "value": 1375,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -11266,7 +11266,7 @@
       "preschools": 1,
       "medicalFacilities": 1,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1,
@@ -11280,7 +11280,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -15.15581,
+    "populationChangeRate": -14.58924,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -11343,10 +11343,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 1925,
+      "value": 1875,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -11376,7 +11376,7 @@
       "preschools": 1,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 11,
@@ -11443,7 +11443,7 @@
     "code": "01472",
     "pref": "hokkaido",
     "name": "幌加内町",
-    "population": 1201,
+    "population": 1199,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -11453,10 +11453,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 1600,
+      "value": 1580,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -11486,7 +11486,7 @@
       "preschools": 0,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 15,
@@ -11500,7 +11500,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -12.33577,
+    "populationChangeRate": -12.48175,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -11596,7 +11596,7 @@
       "preschools": 1,
       "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 129,
@@ -11663,7 +11663,7 @@
     "code": "01482",
     "pref": "hokkaido",
     "name": "小平町",
-    "population": 2562,
+    "population": 2556,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -11673,10 +11673,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 3375,
+      "value": 3300,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -11704,9 +11704,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 2,
-      "medicalFacilities": 5,
+      "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 100,
@@ -11720,7 +11720,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -14.42886,
+    "populationChangeRate": -14.62926,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -11773,7 +11773,7 @@
     "code": "01483",
     "pref": "hokkaido",
     "name": "苫前町",
-    "population": 2560,
+    "population": 2554,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -11783,10 +11783,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 3100,
+      "value": 3050,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -11816,7 +11816,7 @@
       "preschools": 1,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 92,
@@ -11830,7 +11830,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -12.80654,
+    "populationChangeRate": -13.0109,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -11883,7 +11883,7 @@
     "code": "01484",
     "pref": "hokkaido",
     "name": "羽幌町",
-    "population": 5642,
+    "population": 5641,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -11926,7 +11926,7 @@
       "preschools": 2,
       "medicalFacilities": 7,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 95,
@@ -11940,7 +11940,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -13.83629,
+    "populationChangeRate": -13.85156,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -11993,7 +11993,7 @@
     "code": "01485",
     "pref": "hokkaido",
     "name": "初山別村",
-    "population": 946,
+    "population": 942,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -12003,10 +12003,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 1850,
+      "value": 1810,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -12036,7 +12036,7 @@
       "preschools": 0,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 14,
@@ -12050,7 +12050,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -12.40741,
+    "populationChangeRate": -12.77778,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -12103,7 +12103,7 @@
     "code": "01486",
     "pref": "hokkaido",
     "name": "遠別町",
-    "population": 2163,
+    "population": 2168,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -12113,10 +12113,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 4225,
+      "value": 4125,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -12146,7 +12146,7 @@
       "preschools": 0,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 105,
@@ -12160,7 +12160,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -14.16667,
+    "populationChangeRate": -13.96825,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -12213,7 +12213,7 @@
     "code": "01487",
     "pref": "hokkaido",
     "name": "天塩町",
-    "population": 2535,
+    "population": 2534,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -12223,10 +12223,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 4425,
+      "value": 4300,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -12256,7 +12256,7 @@
       "preschools": 0,
       "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 87,
@@ -12270,7 +12270,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -14.0678,
+    "populationChangeRate": -14.10169,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -12323,7 +12323,7 @@
     "code": "01511",
     "pref": "hokkaido",
     "name": "猿払村",
-    "population": 2506,
+    "population": 2502,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -12336,7 +12336,7 @@
       "value": 3600,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -12366,7 +12366,7 @@
       "preschools": 0,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 133,
@@ -12380,7 +12380,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.02145,
+    "populationChangeRate": -4.17465,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -12433,7 +12433,7 @@
     "code": "01512",
     "pref": "hokkaido",
     "name": "浜頓別町",
-    "population": 3039,
+    "population": 3046,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -12476,7 +12476,7 @@
       "preschools": 1,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 165,
@@ -12490,7 +12490,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.86195,
+    "populationChangeRate": -11.65893,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -12553,10 +12553,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 2400,
+      "value": 2350,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -12586,7 +12586,7 @@
       "preschools": 0,
       "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 8,
@@ -12653,7 +12653,7 @@
     "code": "01514",
     "pref": "hokkaido",
     "name": "枝幸町",
-    "population": 7025,
+    "population": 7021,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -12696,7 +12696,7 @@
       "preschools": 1,
       "medicalFacilities": 7,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 347,
@@ -12710,7 +12710,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.13814,
+    "populationChangeRate": -7.19101,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -12763,7 +12763,7 @@
     "code": "01516",
     "pref": "hokkaido",
     "name": "豊富町",
-    "population": 3431,
+    "population": 3432,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -12773,10 +12773,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 5283,
+      "value": 5133,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -12806,7 +12806,7 @@
       "preschools": 0,
       "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 63,
@@ -12820,7 +12820,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -13.66381,
+    "populationChangeRate": -13.63865,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -12883,10 +12883,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 7167,
+      "value": 3250,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -12916,7 +12916,7 @@
       "preschools": 0,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 36,
@@ -12983,7 +12983,7 @@
     "code": "01518",
     "pref": "hokkaido",
     "name": "利尻町",
-    "population": 1768,
+    "population": 1766,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -12993,10 +12993,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 2740,
+      "value": 2675,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -13024,9 +13024,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 3,
+      "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 6,
@@ -13040,7 +13040,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.77645,
+    "populationChangeRate": -11.87625,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -13103,10 +13103,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 4550,
+      "value": 4475,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -13136,7 +13136,7 @@
       "preschools": 0,
       "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 6,
@@ -13213,10 +13213,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 4475,
+      "value": 4400,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -13246,7 +13246,7 @@
       "preschools": 0,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 66,
@@ -13313,7 +13313,7 @@
     "code": "01543",
     "pref": "hokkaido",
     "name": "美幌町",
-    "population": 16707,
+    "population": 16691,
     "populationTrend": "減少",
     "rent": {
       "value": 34417,
@@ -13356,7 +13356,7 @@
       "preschools": 2,
       "medicalFacilities": 19,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 247,
@@ -13370,7 +13370,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.64342,
+    "populationChangeRate": -10.72899,
     "vacancy": {
       "rate": 14.8,
       "vacant": 1380,
@@ -13423,7 +13423,7 @@
     "code": "01544",
     "pref": "hokkaido",
     "name": "津別町",
-    "population": 3774,
+    "population": 3776,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -13433,10 +13433,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 4167,
+      "value": 4067,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -13466,7 +13466,7 @@
       "preschools": 1,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 25,
@@ -13480,7 +13480,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -13.69769,
+    "populationChangeRate": -13.65196,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -13533,7 +13533,7 @@
     "code": "01545",
     "pref": "hokkaido",
     "name": "斜里町",
-    "population": 10717,
+    "population": 10671,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -13576,7 +13576,7 @@
       "preschools": 1,
       "medicalFacilities": 10,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 375,
@@ -13590,7 +13590,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.13943,
+    "populationChangeRate": -6.5423,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -13643,7 +13643,7 @@
     "code": "01546",
     "pref": "hokkaido",
     "name": "清里町",
-    "population": 3571,
+    "population": 3569,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -13653,10 +13653,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 3167,
+      "value": 3067,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -13684,9 +13684,9 @@
     "amenities": {
       "stations": 3,
       "preschools": 1,
-      "medicalFacilities": 3,
+      "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 24,
@@ -13700,7 +13700,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.03502,
+    "populationChangeRate": -8.08653,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -13753,7 +13753,7 @@
     "code": "01547",
     "pref": "hokkaido",
     "name": "小清水町",
-    "population": 4195,
+    "population": 4196,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -13763,10 +13763,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 4467,
+      "value": 4367,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -13796,7 +13796,7 @@
       "preschools": 1,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 33,
@@ -13810,7 +13810,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.25806,
+    "populationChangeRate": -9.23643,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -13863,7 +13863,7 @@
     "code": "01549",
     "pref": "hokkaido",
     "name": "訓子府町",
-    "population": 4245,
+    "population": 4239,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -13873,10 +13873,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 4767,
+      "value": 4683,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -13906,7 +13906,7 @@
       "preschools": 1,
       "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 92,
@@ -13920,7 +13920,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.23669,
+    "populationChangeRate": -9.36498,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -13973,7 +13973,7 @@
     "code": "01550",
     "pref": "hokkaido",
     "name": "置戸町",
-    "population": 2469,
+    "population": 2468,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -13983,10 +13983,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 3100,
+      "value": 3025,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -14016,7 +14016,7 @@
       "preschools": 0,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 26,
@@ -14030,7 +14030,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.02703,
+    "populationChangeRate": -11.06306,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -14083,7 +14083,7 @@
     "code": "01552",
     "pref": "hokkaido",
     "name": "佐呂間町",
-    "population": 4339,
+    "population": 4332,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -14093,10 +14093,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 4037,
+      "value": 3967,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -14126,7 +14126,7 @@
       "preschools": 0,
       "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 356,
@@ -14140,7 +14140,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.99487,
+    "populationChangeRate": -11.13846,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -14193,7 +14193,7 @@
     "code": "01555",
     "pref": "hokkaido",
     "name": "遠軽町",
-    "population": 17047,
+    "population": 17031,
     "populationTrend": "減少",
     "rent": {
       "value": 38642,
@@ -14236,7 +14236,7 @@
       "preschools": 3,
       "medicalFacilities": 28,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 187,
@@ -14250,7 +14250,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.40273,
+    "populationChangeRate": -11.48589,
     "vacancy": {
       "rate": 19.3,
       "vacant": 2110,
@@ -14303,7 +14303,7 @@
     "code": "01559",
     "pref": "hokkaido",
     "name": "湧別町",
-    "population": 7538,
+    "population": 7524,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -14313,10 +14313,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 3150,
+      "value": 3100,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -14346,7 +14346,7 @@
       "preschools": 1,
       "medicalFacilities": 7,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 356,
@@ -14360,7 +14360,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.85127,
+    "populationChangeRate": -9.02056,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -14413,7 +14413,7 @@
     "code": "01560",
     "pref": "hokkaido",
     "name": "滝上町",
-    "population": 2097,
+    "population": 2093,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -14456,7 +14456,7 @@
       "preschools": 1,
       "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 53,
@@ -14470,7 +14470,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -13.3829,
+    "populationChangeRate": -13.54812,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -14523,7 +14523,7 @@
     "code": "01561",
     "pref": "hokkaido",
     "name": "興部町",
-    "population": 3356,
+    "population": 3360,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -14566,7 +14566,7 @@
       "preschools": 1,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 211,
@@ -14580,7 +14580,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.49724,
+    "populationChangeRate": -7.38699,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -14633,7 +14633,7 @@
     "code": "01562",
     "pref": "hokkaido",
     "name": "西興部村",
-    "population": 914,
+    "population": 913,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -14643,10 +14643,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 1410,
+      "value": 1400,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -14676,7 +14676,7 @@
       "preschools": 0,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 48,
@@ -14690,7 +14690,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -13.20038,
+    "populationChangeRate": -13.29535,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -14743,7 +14743,7 @@
     "code": "01563",
     "pref": "hokkaido",
     "name": "雄武町",
-    "population": 3861,
+    "population": 3858,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -14786,7 +14786,7 @@
       "preschools": 0,
       "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 302,
@@ -14800,7 +14800,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.04954,
+    "populationChangeRate": -8.12098,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -14853,7 +14853,7 @@
     "code": "01564",
     "pref": "hokkaido",
     "name": "大空町",
-    "population": 6183,
+    "population": 6204,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -14896,7 +14896,7 @@
       "preschools": 2,
       "medicalFacilities": 8,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 46,
@@ -14910,7 +14910,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.73801,
+    "populationChangeRate": -8.42804,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -14963,7 +14963,7 @@
     "code": "01571",
     "pref": "hokkaido",
     "name": "豊浦町",
-    "population": 3409,
+    "population": 3404,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -14973,10 +14973,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 5250,
+      "value": 5017,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -15006,7 +15006,7 @@
       "preschools": 0,
       "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 151,
@@ -15020,7 +15020,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.78252,
+    "populationChangeRate": -10.91337,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -15073,7 +15073,7 @@
     "code": "01575",
     "pref": "hokkaido",
     "name": "壮瞥町",
-    "population": 2349,
+    "population": 2354,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -15116,7 +15116,7 @@
       "preschools": 0,
       "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 102,
@@ -15130,7 +15130,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -14.36384,
+    "populationChangeRate": -14.18155,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -15183,7 +15183,7 @@
     "code": "01578",
     "pref": "hokkaido",
     "name": "白老町",
-    "population": 14582,
+    "population": 14564,
     "populationTrend": "減少",
     "rent": {
       "value": 33443,
@@ -15226,7 +15226,7 @@
       "preschools": 3,
       "medicalFacilities": 13,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 462,
@@ -15240,7 +15240,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.05428,
+    "populationChangeRate": -10.16531,
     "vacancy": {
       "rate": 31.2,
       "vacant": 3440,
@@ -15293,7 +15293,7 @@
     "code": "01581",
     "pref": "hokkaido",
     "name": "厚真町",
-    "population": 4159,
+    "population": 4154,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -15336,7 +15336,7 @@
       "preschools": 0,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 75,
@@ -15350,7 +15350,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.15975,
+    "populationChangeRate": -6.27256,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -15403,7 +15403,7 @@
     "code": "01584",
     "pref": "hokkaido",
     "name": "洞爺湖町",
-    "population": 7826,
+    "population": 7799,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -15444,9 +15444,9 @@
     "amenities": {
       "stations": 1,
       "preschools": 1,
-      "medicalFacilities": 13,
+      "medicalFacilities": 14,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 341,
@@ -15460,7 +15460,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.29685,
+    "populationChangeRate": -7.61668,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -15513,7 +15513,7 @@
     "code": "01585",
     "pref": "hokkaido",
     "name": "安平町",
-    "population": 6955,
+    "population": 6948,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -15554,9 +15554,9 @@
     "amenities": {
       "stations": 6,
       "preschools": 2,
-      "medicalFacilities": 9,
+      "medicalFacilities": 8,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 204,
@@ -15570,7 +15570,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.24523,
+    "populationChangeRate": -5.3406,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -15623,7 +15623,7 @@
     "code": "01586",
     "pref": "hokkaido",
     "name": "むかわ町",
-    "population": 7154,
+    "population": 7146,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -15664,9 +15664,9 @@
     "amenities": {
       "stations": 3,
       "preschools": 1,
-      "medicalFacilities": 8,
+      "medicalFacilities": 7,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 271,
@@ -15680,7 +15680,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.49588,
+    "populationChangeRate": -6.60044,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -15733,7 +15733,7 @@
     "code": "01601",
     "pref": "hokkaido",
     "name": "日高町",
-    "population": 10298,
+    "population": 10290,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -15774,9 +15774,9 @@
     "amenities": {
       "stations": 5,
       "preschools": 2,
-      "medicalFacilities": 13,
+      "medicalFacilities": 12,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 645,
@@ -15790,7 +15790,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.69758,
+    "populationChangeRate": -8.76851,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -15843,7 +15843,7 @@
     "code": "01602",
     "pref": "hokkaido",
     "name": "平取町",
-    "population": 4332,
+    "population": 4331,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -15853,10 +15853,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 2357,
+      "value": 2303,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -15886,7 +15886,7 @@
       "preschools": 0,
       "medicalFacilities": 7,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 140,
@@ -15900,7 +15900,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.29648,
+    "populationChangeRate": -9.31742,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -15953,7 +15953,7 @@
     "code": "01604",
     "pref": "hokkaido",
     "name": "新冠町",
-    "population": 4759,
+    "population": 4756,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -15963,10 +15963,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 6667,
+      "value": 6650,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -15996,7 +15996,7 @@
       "preschools": 1,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 354,
@@ -16010,7 +16010,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.35977,
+    "populationChangeRate": -10.41627,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -16063,7 +16063,7 @@
     "code": "01607",
     "pref": "hokkaido",
     "name": "浦河町",
-    "population": 11120,
+    "population": 11110,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -16106,7 +16106,7 @@
       "preschools": 2,
       "medicalFacilities": 15,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 635,
@@ -16120,7 +16120,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.90128,
+    "populationChangeRate": -7.9841,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -16183,10 +16183,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 5333,
+      "value": 5150,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -16216,7 +16216,7 @@
       "preschools": 1,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 60,
@@ -16283,7 +16283,7 @@
     "code": "01609",
     "pref": "hokkaido",
     "name": "えりも町",
-    "population": 3738,
+    "population": 3732,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -16293,10 +16293,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 6367,
+      "value": 6083,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -16326,7 +16326,7 @@
       "preschools": 1,
       "medicalFacilities": 7,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 72,
@@ -16340,7 +16340,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -14.54047,
+    "populationChangeRate": -14.67764,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -16393,7 +16393,7 @@
     "code": "01610",
     "pref": "hokkaido",
     "name": "新ひだか町",
-    "population": 19573,
+    "population": 19552,
     "populationTrend": "減少",
     "rent": {
       "value": 38634,
@@ -16434,9 +16434,9 @@
     "amenities": {
       "stations": 7,
       "preschools": 2,
-      "medicalFacilities": 27,
+      "medicalFacilities": 26,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 455,
@@ -16450,7 +16450,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.03472,
+    "populationChangeRate": -9.13231,
     "vacancy": {
       "rate": 20.6,
       "vacant": 2690,
@@ -16503,7 +16503,7 @@
     "code": "01631",
     "pref": "hokkaido",
     "name": "音更町",
-    "population": 41997,
+    "population": 41942,
     "populationTrend": "減少",
     "rent": {
       "value": 45914,
@@ -16544,9 +16544,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 7,
-      "medicalFacilities": 39,
+      "medicalFacilities": 40,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 296,
@@ -16560,7 +16560,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.62355,
+    "populationChangeRate": -3.74977,
     "vacancy": {
       "rate": 10.7,
       "vacant": 2200,
@@ -16613,7 +16613,7 @@
     "code": "01632",
     "pref": "hokkaido",
     "name": "士幌町",
-    "population": 5385,
+    "population": 5379,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -16626,7 +16626,7 @@
       "value": 7267,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -16656,7 +16656,7 @@
       "preschools": 1,
       "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 187,
@@ -16670,7 +16670,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.91724,
+    "populationChangeRate": -8.01984,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -16723,7 +16723,7 @@
     "code": "01633",
     "pref": "hokkaido",
     "name": "上士幌町",
-    "population": 4472,
+    "population": 4470,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -16733,10 +16733,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 4933,
+      "value": 4900,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -16764,9 +16764,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 1,
-      "medicalFacilities": 5,
+      "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 256,
@@ -16780,7 +16780,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.40435,
+    "populationChangeRate": -6.44621,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -16833,7 +16833,7 @@
     "code": "01634",
     "pref": "hokkaido",
     "name": "鹿追町",
-    "population": 4861,
+    "population": 4860,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -16846,7 +16846,7 @@
       "value": 4833,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -16876,7 +16876,7 @@
       "preschools": 1,
       "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 115,
@@ -16890,7 +16890,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.69085,
+    "populationChangeRate": -7.70984,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -16943,7 +16943,7 @@
     "code": "01635",
     "pref": "hokkaido",
     "name": "新得町",
-    "population": 5224,
+    "population": 5223,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -16986,7 +16986,7 @@
       "preschools": 1,
       "medicalFacilities": 11,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 330,
@@ -17000,7 +17000,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.19426,
+    "populationChangeRate": -10.21145,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -17053,7 +17053,7 @@
     "code": "01636",
     "pref": "hokkaido",
     "name": "清水町",
-    "population": 8368,
+    "population": 8360,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -17096,7 +17096,7 @@
       "preschools": 1,
       "medicalFacilities": 8,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 350,
@@ -17110,7 +17110,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.98329,
+    "populationChangeRate": -8.07126,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -17163,7 +17163,7 @@
     "code": "01637",
     "pref": "hokkaido",
     "name": "芽室町",
-    "population": 17242,
+    "population": 17212,
     "populationTrend": "減少",
     "rent": {
       "value": 35738,
@@ -17206,7 +17206,7 @@
       "preschools": 2,
       "medicalFacilities": 14,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 93,
@@ -17220,7 +17220,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.46587,
+    "populationChangeRate": -4.63209,
     "vacancy": {
       "rate": 10.9,
       "vacant": 930,
@@ -17273,7 +17273,7 @@
     "code": "01638",
     "pref": "hokkaido",
     "name": "中札内村",
-    "population": 3804,
+    "population": 3801,
     "populationTrend": "微減",
     "rent": {
       "value": 0,
@@ -17286,7 +17286,7 @@
       "value": 7450,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -17316,7 +17316,7 @@
       "preschools": 0,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 98,
@@ -17330,7 +17330,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.05973,
+    "populationChangeRate": -2.13697,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -17383,7 +17383,7 @@
     "code": "01639",
     "pref": "hokkaido",
     "name": "更別村",
-    "population": 3001,
+    "population": 2996,
     "populationTrend": "微減",
     "rent": {
       "value": 0,
@@ -17396,7 +17396,7 @@
       "value": 6700,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -17426,7 +17426,7 @@
       "preschools": 2,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 25,
@@ -17440,7 +17440,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.56494,
+    "populationChangeRate": -2.72727,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -17493,7 +17493,7 @@
     "code": "01641",
     "pref": "hokkaido",
     "name": "大樹町",
-    "population": 5127,
+    "population": 5124,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -17536,7 +17536,7 @@
       "preschools": 0,
       "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 214,
@@ -17550,7 +17550,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.4059,
+    "populationChangeRate": -5.46125,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -17603,7 +17603,7 @@
     "code": "01642",
     "pref": "hokkaido",
     "name": "広尾町",
-    "population": 5506,
+    "population": 5504,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -17644,9 +17644,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 7,
+      "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 126,
@@ -17660,7 +17660,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -13.79364,
+    "populationChangeRate": -13.82496,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -17713,7 +17713,7 @@
     "code": "01643",
     "pref": "hokkaido",
     "name": "幕別町",
-    "population": 24195,
+    "population": 24199,
     "populationTrend": "減少",
     "rent": {
       "value": 43382,
@@ -17756,7 +17756,7 @@
       "preschools": 2,
       "medicalFacilities": 24,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 312,
@@ -17770,7 +17770,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.09718,
+    "populationChangeRate": -6.08166,
     "vacancy": {
       "rate": 10.8,
       "vacant": 1320,
@@ -17823,7 +17823,7 @@
     "code": "01644",
     "pref": "hokkaido",
     "name": "池田町",
-    "population": 5592,
+    "population": 5587,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -17866,7 +17866,7 @@
       "preschools": 1,
       "medicalFacilities": 9,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 35,
@@ -17880,7 +17880,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.15348,
+    "populationChangeRate": -11.23292,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -17933,7 +17933,7 @@
     "code": "01645",
     "pref": "hokkaido",
     "name": "豊頃町",
-    "population": 2704,
+    "population": 2700,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -17946,7 +17946,7 @@
       "value": 2450,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -17976,7 +17976,7 @@
       "preschools": 0,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 96,
@@ -17990,7 +17990,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.52283,
+    "populationChangeRate": -10.6552,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -18043,7 +18043,7 @@
     "code": "01646",
     "pref": "hokkaido",
     "name": "本別町",
-    "population": 5695,
+    "population": 5688,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -18086,7 +18086,7 @@
       "preschools": 1,
       "medicalFacilities": 8,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 81,
@@ -18100,7 +18100,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -13.94681,
+    "populationChangeRate": -14.05258,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -18153,7 +18153,7 @@
     "code": "01647",
     "pref": "hokkaido",
     "name": "足寄町",
-    "population": 5613,
+    "population": 5600,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -18194,9 +18194,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 7,
+      "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 59,
@@ -18210,7 +18210,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -14.47509,
+    "populationChangeRate": -14.67317,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -18263,7 +18263,7 @@
     "code": "01648",
     "pref": "hokkaido",
     "name": "陸別町",
-    "population": 1988,
+    "population": 1992,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -18276,7 +18276,7 @@
       "value": 2950,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -18306,7 +18306,7 @@
       "preschools": 0,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 84,
@@ -18320,7 +18320,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -12.19081,
+    "populationChangeRate": -12.01413,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -18373,7 +18373,7 @@
     "code": "01649",
     "pref": "hokkaido",
     "name": "浦幌町",
-    "population": 3855,
+    "population": 3851,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -18416,7 +18416,7 @@
       "preschools": 0,
       "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 106,
@@ -18430,7 +18430,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -12.12674,
+    "populationChangeRate": -12.21792,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -18483,7 +18483,7 @@
     "code": "01661",
     "pref": "hokkaido",
     "name": "釧路町",
-    "population": 17782,
+    "population": 17830,
     "populationTrend": "減少",
     "rent": {
       "value": 41458,
@@ -18526,7 +18526,7 @@
       "preschools": 2,
       "medicalFacilities": 19,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 130,
@@ -18540,7 +18540,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.92489,
+    "populationChangeRate": -6.67365,
     "vacancy": {
       "rate": 17.3,
       "vacant": 1790,
@@ -18634,9 +18634,9 @@
     "amenities": {
       "stations": 5,
       "preschools": 2,
-      "medicalFacilities": 8,
+      "medicalFacilities": 7,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 261,
@@ -18703,7 +18703,7 @@
     "code": "01663",
     "pref": "hokkaido",
     "name": "浜中町",
-    "population": 5144,
+    "population": 5112,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -18713,10 +18713,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 4067,
+      "value": 4033,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -18746,7 +18746,7 @@
       "preschools": 0,
       "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 284,
@@ -18760,7 +18760,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.59161,
+    "populationChangeRate": -7.17269,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -18813,7 +18813,7 @@
     "code": "01664",
     "pref": "hokkaido",
     "name": "標茶町",
-    "population": 6517,
+    "population": 6516,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -18856,7 +18856,7 @@
       "preschools": 1,
       "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 174,
@@ -18870,7 +18870,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.86169,
+    "populationChangeRate": -9.87552,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -18923,7 +18923,7 @@
     "code": "01665",
     "pref": "hokkaido",
     "name": "弟子屈町",
-    "population": 6247,
+    "population": 6180,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -18964,9 +18964,9 @@
     "amenities": {
       "stations": 4,
       "preschools": 1,
-      "medicalFacilities": 10,
+      "medicalFacilities": 9,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 122,
@@ -18980,7 +18980,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.17973,
+    "populationChangeRate": -11.14306,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -19033,7 +19033,7 @@
     "code": "01667",
     "pref": "hokkaido",
     "name": "鶴居村",
-    "population": 2400,
+    "population": 2394,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -19043,10 +19043,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 8850,
+      "value": 8750,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -19074,9 +19074,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 0,
-      "medicalFacilities": 3,
+      "medicalFacilities": 2,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 57,
@@ -19090,7 +19090,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.1767,
+    "populationChangeRate": -6.41126,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -19143,7 +19143,7 @@
     "code": "01668",
     "pref": "hokkaido",
     "name": "白糠町",
-    "population": 6615,
+    "population": 6603,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -19184,9 +19184,9 @@
     "amenities": {
       "stations": 4,
       "preschools": 2,
-      "medicalFacilities": 9,
+      "medicalFacilities": 8,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 196,
@@ -19200,7 +19200,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.24681,
+    "populationChangeRate": -9.41144,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -19253,7 +19253,7 @@
     "code": "01691",
     "pref": "hokkaido",
     "name": "別海町",
-    "population": 13323,
+    "population": 13281,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -19263,10 +19263,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 5867,
+      "value": 5933,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -19296,7 +19296,7 @@
       "preschools": 5,
       "medicalFacilities": 11,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 665,
@@ -19310,7 +19310,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.35049,
+    "populationChangeRate": -7.64256,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -19363,7 +19363,7 @@
     "code": "01692",
     "pref": "hokkaido",
     "name": "中標津町",
-    "population": 21785,
+    "population": 21783,
     "populationTrend": "減少",
     "rent": {
       "value": 46902,
@@ -19406,7 +19406,7 @@
       "preschools": 5,
       "medicalFacilities": 17,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 368,
@@ -19420,7 +19420,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.32377,
+    "populationChangeRate": -5.33246,
     "vacancy": {
       "rate": 18.2,
       "vacant": 2270,
@@ -19473,7 +19473,7 @@
     "code": "01693",
     "pref": "hokkaido",
     "name": "標津町",
-    "population": 4612,
+    "population": 4610,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -19483,10 +19483,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 5150,
+      "value": 5167,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -19516,7 +19516,7 @@
       "preschools": 2,
       "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 144,
@@ -19530,7 +19530,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.18236,
+    "populationChangeRate": -8.22218,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -19583,7 +19583,7 @@
     "code": "01694",
     "pref": "hokkaido",
     "name": "羅臼町",
-    "population": 4027,
+    "population": 4024,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -19593,10 +19593,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 7633,
+      "value": 7600,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -19626,7 +19626,7 @@
       "preschools": 2,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 122,
@@ -19640,7 +19640,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -14.71834,
+    "populationChangeRate": -14.78187,
     "vacancy": {
       "rate": -1,
       "vacant": 0,

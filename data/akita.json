@@ -3,7 +3,7 @@
     "code": "05201",
     "pref": "akita",
     "name": "秋田市",
-    "population": 293588,
+    "population": 293351,
     "populationTrend": "減少",
     "rent": {
       "value": 47964,
@@ -44,9 +44,9 @@
     "amenities": {
       "stations": 14,
       "preschools": 169,
-      "medicalFacilities": 455,
+      "medicalFacilities": 446,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2103,
@@ -60,7 +60,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.5776,
+    "populationChangeRate": -4.65463,
     "vacancy": {
       "rate": 14.7,
       "vacant": 23010,
@@ -68,7 +68,7 @@
       "source": "住宅・土地統計調査（居住世帯の有無別住宅数）",
       "asOf": "2023"
     },
-    "areaKm2": 906.07,
+    "areaKm2": 906.29,
     "futurePopulation": {
       "base2020": 307672,
       "total": {
@@ -113,7 +113,7 @@
     "code": "05202",
     "pref": "akita",
     "name": "能代市",
-    "population": 45494,
+    "population": 45437,
     "populationTrend": "減少",
     "rent": {
       "value": 33160,
@@ -154,9 +154,9 @@
     "amenities": {
       "stations": 9,
       "preschools": 24,
-      "medicalFacilities": 71,
+      "medicalFacilities": 72,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 366,
@@ -170,7 +170,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.95373,
+    "populationChangeRate": -9.0678,
     "vacancy": {
       "rate": 20.1,
       "vacant": 5130,
@@ -223,7 +223,7 @@
     "code": "05203",
     "pref": "akita",
     "name": "横手市",
-    "population": 77559,
+    "population": 77495,
     "populationTrend": "減少",
     "rent": {
       "value": 45791,
@@ -264,9 +264,9 @@
     "amenities": {
       "stations": 10,
       "preschools": 47,
-      "medicalFacilities": 119,
+      "medicalFacilities": 117,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 566,
@@ -280,7 +280,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.34603,
+    "populationChangeRate": -9.42084,
     "vacancy": {
       "rate": 13.1,
       "vacant": 4590,
@@ -333,7 +333,7 @@
     "code": "05204",
     "pref": "akita",
     "name": "大館市",
-    "population": 63256,
+    "population": 63226,
     "populationTrend": "減少",
     "rent": {
       "value": 44747,
@@ -374,9 +374,9 @@
     "amenities": {
       "stations": 11,
       "preschools": 47,
-      "medicalFacilities": 75,
+      "medicalFacilities": 76,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 556,
@@ -390,7 +390,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.63844,
+    "populationChangeRate": -8.68177,
     "vacancy": {
       "rate": 17,
       "vacant": 5530,
@@ -443,7 +443,7 @@
     "code": "05206",
     "pref": "akita",
     "name": "男鹿市",
-    "population": 21600,
+    "population": 21566,
     "populationTrend": "減少",
     "rent": {
       "value": 32903,
@@ -484,9 +484,9 @@
     "amenities": {
       "stations": 4,
       "preschools": 10,
-      "medicalFacilities": 36,
+      "medicalFacilities": 33,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 123,
@@ -500,7 +500,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -14.12897,
+    "populationChangeRate": -14.26413,
     "vacancy": {
       "rate": 23.2,
       "vacant": 3050,
@@ -553,7 +553,7 @@
     "code": "05207",
     "pref": "akita",
     "name": "湯沢市",
-    "population": 37448,
+    "population": 37420,
     "populationTrend": "減少",
     "rent": {
       "value": 40069,
@@ -594,9 +594,9 @@
     "amenities": {
       "stations": 6,
       "preschools": 21,
-      "medicalFacilities": 58,
+      "medicalFacilities": 55,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 227,
@@ -610,7 +610,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.03086,
+    "populationChangeRate": -11.09738,
     "vacancy": {
       "rate": 14.1,
       "vacant": 2390,
@@ -663,7 +663,7 @@
     "code": "05209",
     "pref": "akita",
     "name": "鹿角市",
-    "population": 25640,
+    "population": 25622,
     "populationTrend": "減少",
     "rent": {
       "value": 36951,
@@ -706,7 +706,7 @@
       "preschools": 12,
       "medicalFacilities": 29,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 237,
@@ -720,7 +720,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.85369,
+    "populationChangeRate": -11.91557,
     "vacancy": {
       "rate": 22.3,
       "vacant": 3090,
@@ -773,7 +773,7 @@
     "code": "05210",
     "pref": "akita",
     "name": "由利本荘市",
-    "population": 69212,
+    "population": 69154,
     "populationTrend": "減少",
     "rent": {
       "value": 39909,
@@ -814,9 +814,9 @@
     "amenities": {
       "stations": 19,
       "preschools": 29,
-      "medicalFacilities": 89,
+      "medicalFacilities": 92,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 378,
@@ -830,7 +830,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.3554,
+    "populationChangeRate": -7.43304,
     "vacancy": {
       "rate": 16.3,
       "vacant": 5510,
@@ -838,7 +838,7 @@
       "source": "住宅・土地統計調査（居住世帯の有無別住宅数）",
       "asOf": "2023"
     },
-    "areaKm2": 1209.59,
+    "areaKm2": 1209.61,
     "futurePopulation": {
       "base2020": 74707,
       "total": {
@@ -883,7 +883,7 @@
     "code": "05211",
     "pref": "akita",
     "name": "潟上市",
-    "population": 30257,
+    "population": 30235,
     "populationTrend": "減少",
     "rent": {
       "value": 39701,
@@ -926,7 +926,7 @@
       "preschools": 19,
       "medicalFacilities": 30,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 152,
@@ -940,7 +940,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.61223,
+    "populationChangeRate": -4.68159,
     "vacancy": {
       "rate": 14.9,
       "vacant": 2170,
@@ -993,7 +993,7 @@
     "code": "05212",
     "pref": "akita",
     "name": "大仙市",
-    "population": 71092,
+    "population": 71040,
     "populationTrend": "減少",
     "rent": {
       "value": 47180,
@@ -1034,9 +1034,9 @@
     "amenities": {
       "stations": 11,
       "preschools": 39,
-      "medicalFacilities": 106,
+      "medicalFacilities": 103,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 417,
@@ -1050,7 +1050,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.45384,
+    "populationChangeRate": -8.5208,
     "vacancy": {
       "rate": 12.6,
       "vacant": 4050,
@@ -1103,7 +1103,7 @@
     "code": "05213",
     "pref": "akita",
     "name": "北秋田市",
-    "population": 26459,
+    "population": 26531,
     "populationTrend": "減少",
     "rent": {
       "value": 34414,
@@ -1146,7 +1146,7 @@
       "preschools": 12,
       "medicalFacilities": 41,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 230,
@@ -1160,7 +1160,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -12.38161,
+    "populationChangeRate": -12.14319,
     "vacancy": {
       "rate": 17.4,
       "vacant": 2240,
@@ -1213,7 +1213,7 @@
     "code": "05214",
     "pref": "akita",
     "name": "にかほ市",
-    "population": 21181,
+    "population": 21166,
     "populationTrend": "減少",
     "rent": {
       "value": 39435,
@@ -1254,9 +1254,9 @@
     "amenities": {
       "stations": 5,
       "preschools": 13,
-      "medicalFacilities": 24,
+      "medicalFacilities": 25,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 231,
@@ -1270,7 +1270,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.61809,
+    "populationChangeRate": -9.6821,
     "vacancy": {
       "rate": 16.4,
       "vacant": 1620,
@@ -1323,7 +1323,7 @@
     "code": "05215",
     "pref": "akita",
     "name": "仙北市",
-    "population": 21666,
+    "population": 21644,
     "populationTrend": "減少",
     "rent": {
       "value": 37429,
@@ -1366,7 +1366,7 @@
       "preschools": 15,
       "medicalFacilities": 31,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 146,
@@ -1380,7 +1380,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.96262,
+    "populationChangeRate": -12.05201,
     "vacancy": {
       "rate": 15.5,
       "vacant": 1550,
@@ -1433,7 +1433,7 @@
     "code": "05303",
     "pref": "akita",
     "name": "小坂町",
-    "population": 4213,
+    "population": 4209,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1476,7 +1476,7 @@
       "preschools": 2,
       "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 68,
@@ -1490,7 +1490,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.86192,
+    "populationChangeRate": -11.94561,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1543,7 +1543,7 @@
     "code": "05327",
     "pref": "akita",
     "name": "上小阿仁村",
-    "population": 1705,
+    "population": 1703,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1553,10 +1553,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 2510,
+      "value": 2480,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -1586,7 +1586,7 @@
       "preschools": 2,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 20,
@@ -1600,7 +1600,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -17.35337,
+    "populationChangeRate": -17.45032,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1653,7 +1653,7 @@
     "code": "05346",
     "pref": "akita",
     "name": "藤里町",
-    "population": 2525,
+    "population": 2526,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1663,10 +1663,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 3050,
+      "value": 2975,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -1696,7 +1696,7 @@
       "preschools": 2,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 17,
@@ -1710,7 +1710,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -12.81077,
+    "populationChangeRate": -12.77624,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1763,7 +1763,7 @@
     "code": "05348",
     "pref": "akita",
     "name": "三種町",
-    "population": 13140,
+    "population": 13124,
     "populationTrend": "減少",
     "rent": {
       "value": 24931,
@@ -1773,10 +1773,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 4039,
+      "value": 4000,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -1806,7 +1806,7 @@
       "preschools": 6,
       "medicalFacilities": 14,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 91,
@@ -1820,7 +1820,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -13.85866,
+    "populationChangeRate": -13.96355,
     "vacancy": {
       "rate": 21.3,
       "vacant": 1510,
@@ -1873,7 +1873,7 @@
     "code": "05349",
     "pref": "akita",
     "name": "八峰町",
-    "population": 5635,
+    "population": 5631,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1883,10 +1883,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 3900,
+      "value": 3800,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -1914,9 +1914,9 @@
     "amenities": {
       "stations": 6,
       "preschools": 4,
-      "medicalFacilities": 7,
+      "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 52,
@@ -1930,7 +1930,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -14.32264,
+    "populationChangeRate": -14.38346,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1983,7 +1983,7 @@
     "code": "05361",
     "pref": "akita",
     "name": "五城目町",
-    "population": 7255,
+    "population": 7250,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2026,7 +2026,7 @@
       "preschools": 4,
       "medicalFacilities": 9,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 10,
@@ -2040,7 +2040,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -15.02694,
+    "populationChangeRate": -15.0855,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2093,7 +2093,7 @@
     "code": "05363",
     "pref": "akita",
     "name": "八郎潟町",
-    "population": 4954,
+    "population": 4951,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2136,7 +2136,7 @@
       "preschools": 2,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 14,
@@ -2150,7 +2150,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.26634,
+    "populationChangeRate": -11.32008,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2203,7 +2203,7 @@
     "code": "05366",
     "pref": "akita",
     "name": "井川町",
-    "population": 4013,
+    "population": 4006,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2213,10 +2213,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 6215,
+      "value": 6150,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -2244,9 +2244,9 @@
     "amenities": {
       "stations": 1,
       "preschools": 2,
-      "medicalFacilities": 6,
+      "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2,
@@ -2260,7 +2260,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -12.11126,
+    "populationChangeRate": -12.26456,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2313,7 +2313,7 @@
     "code": "05368",
     "pref": "akita",
     "name": "大潟村",
-    "population": 2825,
+    "population": 2824,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2326,7 +2326,7 @@
       "value": 8300,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -2356,7 +2356,7 @@
       "preschools": 2,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 15,
@@ -2370,7 +2370,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.17735,
+    "populationChangeRate": -6.21056,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2423,7 +2423,7 @@
     "code": "05434",
     "pref": "akita",
     "name": "美郷町",
-    "population": 16810,
+    "population": 16786,
     "populationTrend": "減少",
     "rent": {
       "value": 29091,
@@ -2466,7 +2466,7 @@
       "preschools": 6,
       "medicalFacilities": 15,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 71,
@@ -2480,7 +2480,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.68678,
+    "populationChangeRate": -9.81572,
     "vacancy": {
       "rate": 3.6,
       "vacant": 170,
@@ -2533,7 +2533,7 @@
     "code": "05463",
     "pref": "akita",
     "name": "羽後町",
-    "population": 12280,
+    "population": 12279,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2543,10 +2543,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 5795,
+      "value": 5740,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -2576,7 +2576,7 @@
       "preschools": 8,
       "medicalFacilities": 12,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 136,
@@ -2590,7 +2590,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.17541,
+    "populationChangeRate": -11.18264,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2643,7 +2643,7 @@
     "code": "05464",
     "pref": "akita",
     "name": "東成瀬村",
-    "population": 2293,
+    "population": 2294,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2653,10 +2653,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 3275,
+      "value": 3225,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -2686,7 +2686,7 @@
       "preschools": 1,
       "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 105,
@@ -2700,7 +2700,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -15.1997,
+    "populationChangeRate": -15.16272,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
