@@ -101,7 +101,7 @@ describe("data/denki-plans.json", () => {
     }
   });
 
-  it("沖縄は offer 0件（調査時点 2026-08 で固定単価公表の新電力提供なし。提供が始まったらこのテストを外す）", () => {
+  it("今回の収録対象では沖縄の offer は0件", () => {
     expect(DENKI_PLANS.plans.filter((p) => p.kind === "offer" && p.areas.okinawa).length).toBe(0);
   });
 
@@ -111,20 +111,41 @@ describe("data/denki-plans.json", () => {
     DENKI_PLANS.plans.find((p) => p.offerId === offerId)!.areas[area]!;
 
   it.each<{ name: string; offerId: string; area: DenkiArea; kwh: number; ampere: Ampere; expected: number }>([
-    // 935.25 + 120×29.80 + 140×36.40 = 9,607.25 → 9,607
-    { name: "東京電力 従量電灯B（東京）30A・260kWh", offerId: "baseline-tokyo", area: "tokyo", kwh: 260, ampere: 30, expected: 9607 },
-    // 522.58 + 105×20.21 + 140×25.61 = 6,230.03 → 6,230
-    { name: "関西電力 従量電灯A（関西）260kWh", offerId: "baseline-kansai", area: "kansai", kwh: 260, ampere: 30, expected: 6230 },
-    // 935.25 + 120×29.80 + 140×34.85 = 9,390.25 → 9,390
-    { name: "ENEOSでんき Vプラン（東京）30A・260kWh", offerId: "eneos-v", area: "tokyo", kwh: 260, ampere: 30, expected: 9390 },
-    // 522.58 + 105×20.21 + 140×24.24 = 6,038.23 → 6,038
-    { name: "idemitsuでんき Sプラン（関西）260kWh", offerId: "idemitsu-s", area: "kansai", kwh: 260, ampere: 30, expected: 6038 },
-    // 1,617.44 + 120×34.74 + 160×40.78 + 20×44.35 = 13,198.04 → 13,198
-    { name: "TERASELでんき TERASELプラン（北海道）40A・300kWh", offerId: "terasel-b", area: "hokkaido", kwh: 300, ampere: 40, expected: 13198 },
-    // 667.00 + 109×30.66 + 140×36.08 = 9,060.14 → 9,060
-    { name: "TERASELでんき 超TERASELプラン（四国）260kWh", offerId: "terasel-cho", area: "shikoku", kwh: 260, ampere: 30, expected: 9060 },
-    // 1,581.20 + 120×20.39 + 180×20.52 + 130×24.24 = 10,872.80 → 10,873
-    { name: "ミツウロコでんき 従量電灯B（九州）50A・430kWh", offerId: "mitsuuroko-juryo", area: "kyushu", kwh: 430, ampere: 50, expected: 10873 },
+    // 2026-11-11に各公式表を照合。式は円未満を最後に四捨五入。
+    // 1176.18 + 120×29.85 + 140×36.45 = 9861.18
+    { name: "東京電力 従量電灯B（東京）30A・260kWh", offerId: "baseline-tokyo", area: "tokyo", kwh: 260, ampere: 30, expected: 9861 },
+    // 763.81 + 105×20.89 + 140×26.29 = 6637.86
+    { name: "関西電力 従量電灯A（関西）260kWh", offerId: "baseline-kansai", area: "kansai", kwh: 260, ampere: 30, expected: 6638 },
+    // 1176.18 + 120×29.85 + 140×34.90 = 9644.18
+    { name: "ENEOSでんき Vプラン（東京）30A・260kWh", offerId: "eneos-v", area: "tokyo", kwh: 260, ampere: 30, expected: 9644 },
+    // 763.81 + 105×20.89 + 140×24.92 = 6446.06
+    { name: "idemitsuでんき SプランA（関西）260kWh", offerId: "idemitsu-s", area: "kansai", kwh: 260, ampere: 30, expected: 6446 },
+    // 2233.84 + 120×34.82 + 160×40.86 + 20×44.43 = 13838.44
+    { name: "TERASELでんき TERASELプラン（北海道）40A・300kWh", offerId: "terasel-b", area: "hokkaido", kwh: 300, ampere: 40, expected: 13838 },
+    // 953.13 + 109×31.42 + 140×36.85 = 9536.91
+    { name: "TERASELでんき 超TERASELプラン（四国）260kWh", offerId: "terasel-cho", area: "shikoku", kwh: 260, ampere: 30, expected: 9537 },
+    // 2208.45 + 120×20.35 + 180×20.48 + 130×24.20 = 11482.85
+    { name: "ミツウロコでんき 従量電灯B（九州）50A・430kWh", offerId: "mitsuuroko-juryo", area: "kyushu", kwh: 430, ampere: 50, expected: 11483 },
+    // 1716.30 + 120×35.77 + 160×42.06 + 20×45.78 = 13653.90
+    { name: "北海道電力 従量電灯B 30A・300kWh", offerId: "baseline-hokkaido", area: "hokkaido", kwh: 300, ampere: 30, expected: 13654 },
+    // 1642.84 + 120×31.01 + 180×37.76 + 100×41.71 = 16331.84
+    { name: "東北電力 従量電灯B 40A・400kWh", offerId: "baseline-tohoku", area: "tohoku", kwh: 400, ampere: 40, expected: 16332 },
+    // 2239.60 + 120×21.25 + 180×25.73 + 100×28.68 = 12289.00
+    { name: "中部電力 従量電灯B 50A・400kWh", offerId: "baseline-chubu", area: "chubu", kwh: 400, ampere: 50, expected: 12289 },
+    // 907.50 + 120×30.86 + 180×34.75 + 100×36.46 = 14511.70（ネクストと区別）
+    { name: "北陸電力 従量電灯B 30A・400kWh", offerId: "baseline-hokuriku", area: "hokuriku", kwh: 400, ampere: 30, expected: 14512 },
+    // 983.37 + 105×33.32 + 180×40.00 + 100×42.12 = 15893.97
+    { name: "中国電力 従量電灯A 400kWh", offerId: "baseline-chugoku", area: "chugoku", kwh: 400, ampere: 30, expected: 15894 },
+    // 953.13 + 109×31.42 + 180×38.04 + 100×41.55 = 15380.11
+    { name: "四国電力 従量電灯A 400kWh", offerId: "baseline-shikoku", area: "shikoku", kwh: 400, ampere: 30, expected: 15380 },
+    // 1325.07 + 120×18.33 + 180×23.93 + 100×26.93 = 10525.07
+    { name: "九州電力 従量電灯B 30A・400kWh", offerId: "baseline-kyushu", area: "kyushu", kwh: 400, ampere: 30, expected: 10525 },
+    // 767.82 + 110×42.06 + 180×47.60 + 100×49.58 = 18920.42
+    { name: "沖縄電力 従量電灯 400kWh", offerId: "baseline-okinawa", area: "okinawa", kwh: 400, ampere: 30, expected: 18920 },
+    // 1096.44 + 120×31.39 + 180×31.89 + 100×36.14 = 14217.44
+    { name: "東急でんき 従量電灯B 30A・400kWh", offerId: "tokyu-b", area: "tokyo", kwh: 400, ampere: 30, expected: 14217 },
+    // 873.37 + 105×33.32 + 140×39.06 = 9840.37（大手の最低料金とは異なる）
+    { name: "idemitsuでんき SプランA（中国）260kWh", offerId: "idemitsu-s", area: "chugoku", kwh: 260, ampere: 30, expected: 9840 },
   ])("スポットチェック: $name", ({ offerId, area, kwh, ampere, expected }) => {
     expect(estimateMonthly(pricingOf(offerId, area), kwh, ampere)).toBe(expected);
   });
