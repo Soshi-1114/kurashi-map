@@ -3,7 +3,7 @@
     "code": "02201",
     "pref": "aomori",
     "name": "青森市",
-    "population": 256180,
+    "population": 255953,
     "populationTrend": "減少",
     "rent": {
       "value": 46329,
@@ -44,9 +44,9 @@
     "amenities": {
       "stations": 21,
       "preschools": 159,
-      "medicalFacilities": 341,
+      "medicalFacilities": 334,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1572,
@@ -60,7 +60,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.90863,
+    "populationChangeRate": -6.99112,
     "vacancy": {
       "rate": 15.1,
       "vacant": 20260,
@@ -68,7 +68,7 @@
       "source": "住宅・土地統計調査（居住世帯の有無別住宅数）",
       "asOf": "2023"
     },
-    "areaKm2": 824.61,
+    "areaKm2": 824.66,
     "futurePopulation": {
       "base2020": 275192,
       "total": {
@@ -113,7 +113,7 @@
     "code": "02202",
     "pref": "aomori",
     "name": "弘前市",
-    "population": 155952,
+    "population": 155880,
     "populationTrend": "減少",
     "rent": {
       "value": 43581,
@@ -154,9 +154,9 @@
     "amenities": {
       "stations": 18,
       "preschools": 107,
-      "medicalFacilities": 253,
+      "medicalFacilities": 249,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1082,
@@ -170,7 +170,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.42821,
+    "populationChangeRate": -7.47094,
     "vacancy": {
       "rate": 15.8,
       "vacant": 12690,
@@ -223,7 +223,7 @@
     "code": "02203",
     "pref": "aomori",
     "name": "八戸市",
-    "population": 205136,
+    "population": 205130,
     "populationTrend": "減少",
     "rent": {
       "value": 46265,
@@ -264,9 +264,9 @@
     "amenities": {
       "stations": 16,
       "preschools": 152,
-      "medicalFacilities": 275,
+      "medicalFacilities": 273,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2009,
@@ -280,7 +280,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.18164,
+    "populationChangeRate": -8.18432,
     "vacancy": {
       "rate": 17.9,
       "vacant": 20280,
@@ -333,7 +333,7 @@
     "code": "02204",
     "pref": "aomori",
     "name": "黒石市",
-    "population": 28896,
+    "population": 28873,
     "populationTrend": "減少",
     "rent": {
       "value": 36522,
@@ -374,9 +374,9 @@
     "amenities": {
       "stations": 2,
       "preschools": 28,
-      "medicalFacilities": 25,
+      "medicalFacilities": 26,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 248,
@@ -390,7 +390,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.54736,
+    "populationChangeRate": -9.61936,
     "vacancy": {
       "rate": 12.6,
       "vacant": 1630,
@@ -443,7 +443,7 @@
     "code": "02205",
     "pref": "aomori",
     "name": "五所川原市",
-    "population": 47493,
+    "population": 47462,
     "populationTrend": "減少",
     "rent": {
       "value": 38341,
@@ -484,9 +484,9 @@
     "amenities": {
       "stations": 10,
       "preschools": 41,
-      "medicalFacilities": 68,
+      "medicalFacilities": 67,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 226,
@@ -500,7 +500,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.62812,
+    "populationChangeRate": -7.68842,
     "vacancy": {
       "rate": 17.8,
       "vacant": 4330,
@@ -553,7 +553,7 @@
     "code": "02206",
     "pref": "aomori",
     "name": "十和田市",
-    "population": 56775,
+    "population": 56718,
     "populationTrend": "減少",
     "rent": {
       "value": 42698,
@@ -596,7 +596,7 @@
       "preschools": 39,
       "medicalFacilities": 61,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 539,
@@ -610,7 +610,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.96741,
+    "populationChangeRate": -6.06181,
     "vacancy": {
       "rate": 18.3,
       "vacant": 5550,
@@ -663,7 +663,7 @@
     "code": "02207",
     "pref": "aomori",
     "name": "三沢市",
-    "population": 37121,
+    "population": 37090,
     "populationTrend": "減少",
     "rent": {
       "value": 43544,
@@ -706,7 +706,7 @@
       "preschools": 34,
       "medicalFacilities": 36,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 814,
@@ -720,7 +720,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.18747,
+    "populationChangeRate": -5.26665,
     "vacancy": {
       "rate": 18.1,
       "vacant": 3760,
@@ -773,7 +773,7 @@
     "code": "02208",
     "pref": "aomori",
     "name": "むつ市",
-    "population": 49699,
+    "population": 49674,
     "populationTrend": "減少",
     "rent": {
       "value": 43036,
@@ -814,9 +814,9 @@
     "amenities": {
       "stations": 5,
       "preschools": 28,
-      "medicalFacilities": 54,
+      "medicalFacilities": 53,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 182,
@@ -830,7 +830,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.14003,
+    "populationChangeRate": -8.18624,
     "vacancy": {
       "rate": 20.8,
       "vacant": 5990,
@@ -883,7 +883,7 @@
     "code": "02209",
     "pref": "aomori",
     "name": "つがる市",
-    "population": 27069,
+    "population": 27025,
     "populationTrend": "減少",
     "rent": {
       "value": 32213,
@@ -926,7 +926,7 @@
       "preschools": 22,
       "medicalFacilities": 21,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 139,
@@ -940,7 +940,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -12.49434,
+    "populationChangeRate": -12.63658,
     "vacancy": {
       "rate": 17.4,
       "vacant": 2180,
@@ -993,7 +993,7 @@
     "code": "02210",
     "pref": "aomori",
     "name": "平川市",
-    "population": 28776,
+    "population": 28708,
     "populationTrend": "減少",
     "rent": {
       "value": 45417,
@@ -1034,9 +1034,9 @@
     "amenities": {
       "stations": 7,
       "preschools": 26,
-      "medicalFacilities": 24,
+      "medicalFacilities": 23,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 127,
@@ -1050,7 +1050,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.85926,
+    "populationChangeRate": -6.08172,
     "vacancy": {
       "rate": 13.4,
       "vacant": 1610,
@@ -1103,7 +1103,7 @@
     "code": "02301",
     "pref": "aomori",
     "name": "平内町",
-    "population": 9129,
+    "population": 9121,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1146,7 +1146,7 @@
       "preschools": 8,
       "medicalFacilities": 10,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 72,
@@ -1160,7 +1160,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.84594,
+    "populationChangeRate": -9.92495,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1213,7 +1213,7 @@
     "code": "02303",
     "pref": "aomori",
     "name": "今別町",
-    "population": 1890,
+    "population": 1888,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1223,10 +1223,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 4300,
+      "value": 4150,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -1256,7 +1256,7 @@
       "preschools": 2,
       "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 5,
@@ -1270,7 +1270,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -19.02314,
+    "populationChangeRate": -19.10883,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1323,7 +1323,7 @@
     "code": "02304",
     "pref": "aomori",
     "name": "蓬田村",
-    "population": 2253,
+    "population": 2254,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1333,10 +1333,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 4800,
+      "value": 4700,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -1366,7 +1366,7 @@
       "preschools": 2,
       "medicalFacilities": 2,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 5,
@@ -1380,7 +1380,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.29921,
+    "populationChangeRate": -11.25984,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1433,7 +1433,7 @@
     "code": "02307",
     "pref": "aomori",
     "name": "外ヶ浜町",
-    "population": 4512,
+    "population": 4510,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1476,7 +1476,7 @@
       "preschools": 2,
       "medicalFacilities": 9,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 66,
@@ -1490,7 +1490,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -16.45991,
+    "populationChangeRate": -16.49695,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1543,7 +1543,7 @@
     "code": "02321",
     "pref": "aomori",
     "name": "鰺ヶ沢町",
-    "population": 7743,
+    "population": 7745,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1584,9 +1584,9 @@
     "amenities": {
       "stations": 3,
       "preschools": 5,
-      "medicalFacilities": 8,
+      "medicalFacilities": 7,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 52,
@@ -1600,7 +1600,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -14.38523,
+    "populationChangeRate": -14.36311,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1653,7 +1653,7 @@
     "code": "02323",
     "pref": "aomori",
     "name": "深浦町",
-    "population": 6263,
+    "population": 6259,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1663,10 +1663,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 4208,
+      "value": 4100,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -1696,7 +1696,7 @@
       "preschools": 8,
       "medicalFacilities": 7,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 33,
@@ -1710,7 +1710,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -14.74272,
+    "populationChangeRate": -14.79717,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1773,10 +1773,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 2375,
+      "value": 2365,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -1806,7 +1806,7 @@
       "preschools": 1,
       "medicalFacilities": 1,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 0,
@@ -1873,7 +1873,7 @@
     "code": "02361",
     "pref": "aomori",
     "name": "藤崎町",
-    "population": 14117,
+    "population": 14094,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1916,7 +1916,7 @@
       "preschools": 10,
       "medicalFacilities": 10,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 34,
@@ -1930,7 +1930,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.12907,
+    "populationChangeRate": -3.2869,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1983,7 +1983,7 @@
     "code": "02362",
     "pref": "aomori",
     "name": "大鰐町",
-    "population": 7609,
+    "population": 7601,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2026,7 +2026,7 @@
       "preschools": 5,
       "medicalFacilities": 9,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 6,
@@ -2040,7 +2040,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -12.18696,
+    "populationChangeRate": -12.27928,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2093,7 +2093,7 @@
     "code": "02367",
     "pref": "aomori",
     "name": "田舎館村",
-    "population": 6851,
+    "population": 6846,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2136,7 +2136,7 @@
       "preschools": 4,
       "medicalFacilities": 2,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 10,
@@ -2150,7 +2150,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.48376,
+    "populationChangeRate": -6.55201,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2203,7 +2203,7 @@
     "code": "02381",
     "pref": "aomori",
     "name": "板柳町",
-    "population": 11531,
+    "population": 11518,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2246,7 +2246,7 @@
       "preschools": 6,
       "medicalFacilities": 11,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 59,
@@ -2260,7 +2260,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.20472,
+    "populationChangeRate": -9.30709,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2313,7 +2313,7 @@
     "code": "02384",
     "pref": "aomori",
     "name": "鶴田町",
-    "population": 10763,
+    "population": 10750,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2356,7 +2356,7 @@
       "preschools": 10,
       "medicalFacilities": 8,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 31,
@@ -2370,7 +2370,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.85804,
+    "populationChangeRate": -10.96571,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2423,7 +2423,7 @@
     "code": "02387",
     "pref": "aomori",
     "name": "中泊町",
-    "population": 8177,
+    "population": 8154,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2433,10 +2433,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 6138,
+      "value": 5329,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -2464,9 +2464,9 @@
     "amenities": {
       "stations": 3,
       "preschools": 6,
-      "medicalFacilities": 10,
+      "medicalFacilities": 9,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 73,
@@ -2480,7 +2480,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -15.32567,
+    "populationChangeRate": -15.56384,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2533,7 +2533,7 @@
     "code": "02401",
     "pref": "aomori",
     "name": "野辺地町",
-    "population": 11197,
+    "population": 11173,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2576,7 +2576,7 @@
       "preschools": 5,
       "medicalFacilities": 13,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 246,
@@ -2590,7 +2590,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.51188,
+    "populationChangeRate": -9.70583,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2643,7 +2643,7 @@
     "code": "02402",
     "pref": "aomori",
     "name": "七戸町",
-    "population": 13114,
+    "population": 13098,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2686,7 +2686,7 @@
       "preschools": 11,
       "medicalFacilities": 11,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 148,
@@ -2700,7 +2700,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.90657,
+    "populationChangeRate": -10.01649,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2753,7 +2753,7 @@
     "code": "02405",
     "pref": "aomori",
     "name": "六戸町",
-    "population": 9970,
+    "population": 9948,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2796,7 +2796,7 @@
       "preschools": 10,
       "medicalFacilities": 8,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 215,
@@ -2810,7 +2810,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.5659,
+    "populationChangeRate": -4.77649,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2863,7 +2863,7 @@
     "code": "02406",
     "pref": "aomori",
     "name": "横浜町",
-    "population": 3817,
+    "population": 3818,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2873,10 +2873,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 5400,
+      "value": 5300,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -2906,7 +2906,7 @@
       "preschools": 3,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 127,
@@ -2920,7 +2920,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.74226,
+    "populationChangeRate": -9.71861,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2973,7 +2973,7 @@
     "code": "02408",
     "pref": "aomori",
     "name": "東北町",
-    "population": 14888,
+    "population": 14870,
     "populationTrend": "減少",
     "rent": {
       "value": 39936,
@@ -3016,7 +3016,7 @@
       "preschools": 18,
       "medicalFacilities": 15,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 299,
@@ -3030,7 +3030,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.37424,
+    "populationChangeRate": -9.48381,
     "vacancy": {
       "rate": 12,
       "vacant": 770,
@@ -3083,7 +3083,7 @@
     "code": "02411",
     "pref": "aomori",
     "name": "六ヶ所村",
-    "population": 10603,
+    "population": 10553,
     "populationTrend": "微増",
     "rent": {
       "value": 0,
@@ -3126,7 +3126,7 @@
       "preschools": 5,
       "medicalFacilities": 8,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 148,
@@ -3140,7 +3140,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 2.27645,
+    "populationChangeRate": 1.79415,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3193,7 +3193,7 @@
     "code": "02412",
     "pref": "aomori",
     "name": "おいらせ町",
-    "population": 23688,
+    "population": 23652,
     "populationTrend": "微減",
     "rent": {
       "value": 53367,
@@ -3236,7 +3236,7 @@
       "preschools": 27,
       "medicalFacilities": 18,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 404,
@@ -3250,7 +3250,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.41009,
+    "populationChangeRate": -2.5584,
     "vacancy": {
       "rate": 10.5,
       "vacant": 1020,
@@ -3303,7 +3303,7 @@
     "code": "02423",
     "pref": "aomori",
     "name": "大間町",
-    "population": 4091,
+    "population": 4088,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3316,7 +3316,7 @@
       "value": 3650,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -3346,7 +3346,7 @@
       "preschools": 3,
       "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 18,
@@ -3360,7 +3360,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -13.28953,
+    "populationChangeRate": -13.35312,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3413,7 +3413,7 @@
     "code": "02424",
     "pref": "aomori",
     "name": "東通村",
-    "population": 5195,
+    "population": 5189,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3423,10 +3423,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 2900,
+      "value": 2833,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -3456,7 +3456,7 @@
       "preschools": 2,
       "medicalFacilities": 7,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 30,
@@ -3470,7 +3470,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -12.76238,
+    "populationChangeRate": -12.86314,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3523,7 +3523,7 @@
     "code": "02425",
     "pref": "aomori",
     "name": "風間浦村",
-    "population": 1380,
+    "population": 1381,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3533,10 +3533,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 3733,
+      "value": 3683,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -3566,7 +3566,7 @@
       "preschools": 1,
       "medicalFacilities": 1,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2,
@@ -3580,7 +3580,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -15.64792,
+    "populationChangeRate": -15.5868,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3633,7 +3633,7 @@
     "code": "02426",
     "pref": "aomori",
     "name": "佐井村",
-    "population": 1465,
+    "population": 1467,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3643,10 +3643,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 4567,
+      "value": 4433,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -3676,7 +3676,7 @@
       "preschools": 1,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2,
@@ -3690,7 +3690,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -18.06488,
+    "populationChangeRate": -17.95302,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3743,7 +3743,7 @@
     "code": "02441",
     "pref": "aomori",
     "name": "三戸町",
-    "population": 8000,
+    "population": 7955,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3786,7 +3786,7 @@
       "preschools": 6,
       "medicalFacilities": 7,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 91,
@@ -3800,7 +3800,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.91368,
+    "populationChangeRate": -12.40916,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3853,7 +3853,7 @@
     "code": "02442",
     "pref": "aomori",
     "name": "五戸町",
-    "population": 14335,
+    "population": 14318,
     "populationTrend": "減少",
     "rent": {
       "value": 24096,
@@ -3896,7 +3896,7 @@
       "preschools": 12,
       "medicalFacilities": 13,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 115,
@@ -3910,7 +3910,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.64082,
+    "populationChangeRate": -10.74679,
     "vacancy": {
       "rate": 10.7,
       "vacant": 710,
@@ -3963,7 +3963,7 @@
     "code": "02443",
     "pref": "aomori",
     "name": "田子町",
-    "population": 4347,
+    "population": 4343,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3973,10 +3973,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 6025,
+      "value": 5913,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -4006,7 +4006,7 @@
       "preschools": 4,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 27,
@@ -4020,7 +4020,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -12.5,
+    "populationChangeRate": -12.58052,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4073,7 +4073,7 @@
     "code": "02445",
     "pref": "aomori",
     "name": "南部町",
-    "population": 15184,
+    "population": 15174,
     "populationTrend": "減少",
     "rent": {
       "value": 22132,
@@ -4116,7 +4116,7 @@
       "preschools": 8,
       "medicalFacilities": 14,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 69,
@@ -4130,7 +4130,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.66744,
+    "populationChangeRate": -9.72693,
     "vacancy": {
       "rate": 15.2,
       "vacant": 1080,
@@ -4183,7 +4183,7 @@
     "code": "02446",
     "pref": "aomori",
     "name": "階上町",
-    "population": 12216,
+    "population": 12211,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4224,9 +4224,9 @@
     "amenities": {
       "stations": 2,
       "preschools": 7,
-      "medicalFacilities": 6,
+      "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 87,
@@ -4240,7 +4240,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.48429,
+    "populationChangeRate": -9.52134,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4303,10 +4303,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 3550,
+      "value": 4233,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -4336,7 +4336,7 @@
       "preschools": 2,
       "medicalFacilities": 1,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 7,

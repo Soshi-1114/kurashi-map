@@ -3,7 +3,7 @@
     "code": "39201",
     "pref": "kochi",
     "name": "高知市",
-    "population": 309383,
+    "population": 309085,
     "populationTrend": "減少",
     "rent": {
       "value": 47650,
@@ -44,9 +44,9 @@
     "amenities": {
       "stations": 71,
       "preschools": 211,
-      "medicalFacilities": 488,
+      "medicalFacilities": 481,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2626,
@@ -60,7 +60,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.25563,
+    "populationChangeRate": -5.34689,
     "vacancy": {
       "rate": 15.4,
       "vacant": 27960,
@@ -113,7 +113,7 @@
     "code": "39202",
     "pref": "kochi",
     "name": "室戸市",
-    "population": 9650,
+    "population": 9634,
     "populationTrend": "減少",
     "rent": {
       "value": 22882,
@@ -156,7 +156,7 @@
       "preschools": 7,
       "medicalFacilities": 14,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 120,
@@ -170,7 +170,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -17.81639,
+    "populationChangeRate": -17.95265,
     "vacancy": {
       "rate": 32.1,
       "vacant": 2610,
@@ -223,7 +223,7 @@
     "code": "39203",
     "pref": "kochi",
     "name": "安芸市",
-    "population": 14625,
+    "population": 14617,
     "populationTrend": "減少",
     "rent": {
       "value": 38224,
@@ -264,9 +264,9 @@
     "amenities": {
       "stations": 7,
       "preschools": 8,
-      "medicalFacilities": 24,
+      "medicalFacilities": 25,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 166,
@@ -280,7 +280,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.96121,
+    "populationChangeRate": -10.01047,
     "vacancy": {
       "rate": 26,
       "vacant": 2670,
@@ -333,7 +333,7 @@
     "code": "39204",
     "pref": "kochi",
     "name": "南国市",
-    "population": 45413,
+    "population": 45359,
     "populationTrend": "微減",
     "rent": {
       "value": 46146,
@@ -374,9 +374,9 @@
     "amenities": {
       "stations": 13,
       "preschools": 25,
-      "medicalFacilities": 56,
+      "medicalFacilities": 55,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 598,
@@ -390,7 +390,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.68087,
+    "populationChangeRate": -2.79659,
     "vacancy": {
       "rate": 16.2,
       "vacant": 3890,
@@ -443,7 +443,7 @@
     "code": "39205",
     "pref": "kochi",
     "name": "土佐市",
-    "population": 23839,
+    "population": 23840,
     "populationTrend": "減少",
     "rent": {
       "value": 38290,
@@ -486,7 +486,7 @@
       "preschools": 13,
       "medicalFacilities": 25,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 510,
@@ -500,7 +500,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.3566,
+    "populationChangeRate": -7.35271,
     "vacancy": {
       "rate": 16.7,
       "vacant": 1930,
@@ -553,7 +553,7 @@
     "code": "39206",
     "pref": "kochi",
     "name": "須崎市",
-    "population": 18310,
+    "population": 18290,
     "populationTrend": "減少",
     "rent": {
       "value": 32500,
@@ -594,9 +594,9 @@
     "amenities": {
       "stations": 6,
       "preschools": 8,
-      "medicalFacilities": 21,
+      "medicalFacilities": 20,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 632,
@@ -610,7 +610,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.07334,
+    "populationChangeRate": -11.17047,
     "vacancy": {
       "rate": 27.3,
       "vacant": 3390,
@@ -663,7 +663,7 @@
     "code": "39208",
     "pref": "kochi",
     "name": "宿毛市",
-    "population": 17239,
+    "population": 17177,
     "populationTrend": "減少",
     "rent": {
       "value": 38720,
@@ -706,7 +706,7 @@
       "preschools": 8,
       "medicalFacilities": 28,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 177,
@@ -720,7 +720,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.42573,
+    "populationChangeRate": -9.75148,
     "vacancy": {
       "rate": 28.4,
       "vacant": 3280,
@@ -773,7 +773,7 @@
     "code": "39209",
     "pref": "kochi",
     "name": "土佐清水市",
-    "population": 10388,
+    "population": 10378,
     "populationTrend": "減少",
     "rent": {
       "value": 22590,
@@ -816,7 +816,7 @@
       "preschools": 6,
       "medicalFacilities": 15,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 146,
@@ -830,7 +830,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -16.14466,
+    "populationChangeRate": -16.22538,
     "vacancy": {
       "rate": 39.5,
       "vacant": 3890,
@@ -883,7 +883,7 @@
     "code": "39210",
     "pref": "kochi",
     "name": "四万十市",
-    "population": 30502,
+    "population": 30452,
     "populationTrend": "減少",
     "rent": {
       "value": 40749,
@@ -924,9 +924,9 @@
     "amenities": {
       "stations": 9,
       "preschools": 22,
-      "medicalFacilities": 50,
+      "medicalFacilities": 47,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 197,
@@ -940,7 +940,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.70459,
+    "populationChangeRate": -6.85753,
     "vacancy": {
       "rate": 20.6,
       "vacant": 3670,
@@ -993,7 +993,7 @@
     "code": "39211",
     "pref": "kochi",
     "name": "香南市",
-    "population": 31293,
+    "population": 31269,
     "populationTrend": "微減",
     "rent": {
       "value": 43522,
@@ -1036,7 +1036,7 @@
       "preschools": 15,
       "medicalFacilities": 39,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 534,
@@ -1050,7 +1050,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.83789,
+    "populationChangeRate": -2.91241,
     "vacancy": {
       "rate": 20,
       "vacant": 3430,
@@ -1103,7 +1103,7 @@
     "code": "39212",
     "pref": "kochi",
     "name": "香美市",
-    "population": 24423,
+    "population": 24381,
     "populationTrend": "減少",
     "rent": {
       "value": 40677,
@@ -1144,9 +1144,9 @@
     "amenities": {
       "stations": 4,
       "preschools": 11,
-      "medicalFacilities": 34,
+      "medicalFacilities": 33,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 490,
@@ -1160,7 +1160,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.88293,
+    "populationChangeRate": -8.04134,
     "vacancy": {
       "rate": 18.7,
       "vacant": 2690,
@@ -1256,7 +1256,7 @@
       "preschools": 2,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 15,
@@ -1323,7 +1323,7 @@
     "code": "39302",
     "pref": "kochi",
     "name": "奈半利町",
-    "population": 2724,
+    "population": 2721,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1333,10 +1333,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 12157,
+      "value": 12080,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -1366,7 +1366,7 @@
       "preschools": 2,
       "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 36,
@@ -1380,7 +1380,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.21753,
+    "populationChangeRate": -10.31641,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1433,7 +1433,7 @@
     "code": "39303",
     "pref": "kochi",
     "name": "田野町",
-    "population": 2263,
+    "population": 2262,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1443,10 +1443,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 13550,
+      "value": 13450,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -1476,7 +1476,7 @@
       "preschools": 2,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 13,
@@ -1490,7 +1490,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.40753,
+    "populationChangeRate": -9.44756,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1543,7 +1543,7 @@
     "code": "39304",
     "pref": "kochi",
     "name": "安田町",
-    "population": 2022,
+    "population": 2017,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1553,10 +1553,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 11595,
+      "value": 11490,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -1586,7 +1586,7 @@
       "preschools": 2,
       "medicalFacilities": 2,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 19,
@@ -1600,7 +1600,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -14.68354,
+    "populationChangeRate": -14.89451,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1653,7 +1653,7 @@
     "code": "39305",
     "pref": "kochi",
     "name": "北川村",
-    "population": 1090,
+    "population": 1091,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1663,10 +1663,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 8445,
+      "value": 8395,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -1696,7 +1696,7 @@
       "preschools": 1,
       "medicalFacilities": 0,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 21,
@@ -1710,7 +1710,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.88656,
+    "populationChangeRate": -4.7993,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1773,10 +1773,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 6707,
+      "value": 6673,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -1806,7 +1806,7 @@
       "preschools": 1,
       "medicalFacilities": 2,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 12,
@@ -1873,7 +1873,7 @@
     "code": "39307",
     "pref": "kochi",
     "name": "芸西村",
-    "population": 3553,
+    "population": 3545,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1883,10 +1883,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 12565,
+      "value": 12495,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -1916,7 +1916,7 @@
       "preschools": 2,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 155,
@@ -1930,7 +1930,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.817,
+    "populationChangeRate": -4.03357,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1983,7 +1983,7 @@
     "code": "39341",
     "pref": "kochi",
     "name": "本山町",
-    "population": 3022,
+    "population": 3008,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2026,7 +2026,7 @@
       "preschools": 1,
       "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 40,
@@ -2040,7 +2040,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.32904,
+    "populationChangeRate": -7.75836,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2093,7 +2093,7 @@
     "code": "39344",
     "pref": "kochi",
     "name": "大豊町",
-    "population": 2761,
+    "population": 2762,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2103,10 +2103,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 12267,
+      "value": 12183,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -2136,7 +2136,7 @@
       "preschools": 1,
       "medicalFacilities": 9,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 59,
@@ -2150,7 +2150,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -15.0984,
+    "populationChangeRate": -15.06765,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2203,7 +2203,7 @@
     "code": "39363",
     "pref": "kochi",
     "name": "土佐町",
-    "population": 3430,
+    "population": 3428,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2246,7 +2246,7 @@
       "preschools": 1,
       "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 47,
@@ -2260,7 +2260,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.60645,
+    "populationChangeRate": -8.65974,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2313,7 +2313,7 @@
     "code": "39364",
     "pref": "kochi",
     "name": "大川村",
-    "population": 339,
+    "population": 336,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2323,10 +2323,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 3345,
+      "value": 3335,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -2356,7 +2356,7 @@
       "preschools": 0,
       "medicalFacilities": 1,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 10,
@@ -2370,7 +2370,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.37705,
+    "populationChangeRate": -8.19672,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2423,7 +2423,7 @@
     "code": "39386",
     "pref": "kochi",
     "name": "いの町",
-    "population": 19690,
+    "population": 19688,
     "populationTrend": "減少",
     "rent": {
       "value": 43636,
@@ -2466,7 +2466,7 @@
       "preschools": 14,
       "medicalFacilities": 27,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 74,
@@ -2480,7 +2480,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.87873,
+    "populationChangeRate": -7.88809,
     "vacancy": {
       "rate": 25.6,
       "vacant": 2990,
@@ -2533,7 +2533,7 @@
     "code": "39387",
     "pref": "kochi",
     "name": "仁淀川町",
-    "population": 4015,
+    "population": 4010,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2543,10 +2543,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 8550,
+      "value": 8473,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -2574,9 +2574,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 4,
-      "medicalFacilities": 7,
+      "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 51,
@@ -2590,7 +2590,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -16.82204,
+    "populationChangeRate": -16.92563,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2643,7 +2643,7 @@
     "code": "39401",
     "pref": "kochi",
     "name": "中土佐町",
-    "population": 5307,
+    "population": 5298,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2686,7 +2686,7 @@
       "preschools": 2,
       "medicalFacilities": 10,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 54,
@@ -2700,7 +2700,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.57947,
+    "populationChangeRate": -11.72942,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2753,7 +2753,7 @@
     "code": "39402",
     "pref": "kochi",
     "name": "佐川町",
-    "population": 11256,
+    "population": 11246,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2796,7 +2796,7 @@
       "preschools": 7,
       "medicalFacilities": 13,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 104,
@@ -2810,7 +2810,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.65861,
+    "populationChangeRate": -8.73975,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2863,7 +2863,7 @@
     "code": "39403",
     "pref": "kochi",
     "name": "越知町",
-    "population": 4430,
+    "population": 4440,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2906,7 +2906,7 @@
       "preschools": 2,
       "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 23,
@@ -2920,7 +2920,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -14.59418,
+    "populationChangeRate": -14.40139,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2983,10 +2983,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 14190,
+      "value": 14130,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -3016,7 +3016,7 @@
       "preschools": 2,
       "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 19,
@@ -3072,7 +3072,7 @@
     "code": "39410",
     "pref": "kochi",
     "name": "日高村",
-    "population": 4414,
+    "population": 4423,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3082,10 +3082,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 19250,
+      "value": 19200,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -3115,7 +3115,7 @@
       "preschools": 2,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 36,
@@ -3129,7 +3129,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.27099,
+    "populationChangeRate": -8.08396,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3182,7 +3182,7 @@
     "code": "39411",
     "pref": "kochi",
     "name": "津野町",
-    "population": 4676,
+    "population": 4677,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3192,10 +3192,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 10933,
+      "value": 15368,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -3225,7 +3225,7 @@
       "preschools": 4,
       "medicalFacilities": 7,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 26,
@@ -3239,7 +3239,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.62351,
+    "populationChangeRate": -11.60461,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3292,7 +3292,7 @@
     "code": "39412",
     "pref": "kochi",
     "name": "四万十町",
-    "population": 13855,
+    "population": 13839,
     "populationTrend": "減少",
     "rent": {
       "value": 37747,
@@ -3335,7 +3335,7 @@
       "preschools": 12,
       "medicalFacilities": 19,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 120,
@@ -3349,7 +3349,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.22573,
+    "populationChangeRate": -11.32825,
     "vacancy": {
       "rate": 24.5,
       "vacant": 2170,
@@ -3402,7 +3402,7 @@
     "code": "39424",
     "pref": "kochi",
     "name": "大月町",
-    "population": 3899,
+    "population": 3894,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3412,10 +3412,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 7750,
+      "value": 7700,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -3445,7 +3445,7 @@
       "preschools": 2,
       "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 65,
@@ -3459,7 +3459,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -12.06585,
+    "populationChangeRate": -12.17862,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3512,7 +3512,7 @@
     "code": "39427",
     "pref": "kochi",
     "name": "三原村",
-    "population": 1274,
+    "population": 1272,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3522,10 +3522,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 5250,
+      "value": 5215,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -3555,7 +3555,7 @@
       "preschools": 1,
       "medicalFacilities": 2,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 16,
@@ -3569,7 +3569,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.34308,
+    "populationChangeRate": -11.48225,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3622,7 +3622,7 @@
     "code": "39428",
     "pref": "kochi",
     "name": "黒潮町",
-    "population": 8945,
+    "population": 8990,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3665,7 +3665,7 @@
       "preschools": 4,
       "medicalFacilities": 14,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 144,
@@ -3679,7 +3679,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -12.83376,
+    "populationChangeRate": -12.39524,
     "vacancy": {
       "rate": -1,
       "vacant": 0,

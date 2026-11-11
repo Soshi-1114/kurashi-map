@@ -3,7 +3,7 @@
     "code": "40100",
     "pref": "fukuoka",
     "name": "北九州市",
-    "population": 904289,
+    "population": 903592,
     "populationTrend": "減少",
     "rent": {
       "value": 46613,
@@ -44,9 +44,9 @@
     "amenities": {
       "stations": 65,
       "preschools": 380,
-      "medicalFacilities": 1652,
+      "medicalFacilities": 1649,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 18905,
@@ -60,7 +60,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.69957,
+    "populationChangeRate": -3.77379,
     "vacancy": {
       "rate": 16,
       "vacant": 82700,
@@ -113,7 +113,7 @@
     "code": "40130",
     "pref": "fukuoka",
     "name": "福岡市",
-    "population": 1663892,
+    "population": 1662793,
     "populationTrend": "増加",
     "rent": {
       "value": 58192,
@@ -154,9 +154,9 @@
     "amenities": {
       "stations": 83,
       "preschools": 588,
-      "medicalFacilities": 2899,
+      "medicalFacilities": 2915,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 58775,
@@ -170,7 +170,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 3.19401,
+    "populationChangeRate": 3.12585,
     "vacancy": {
       "rate": 8.4,
       "vacant": 79700,
@@ -223,7 +223,7 @@
     "code": "40202",
     "pref": "fukuoka",
     "name": "大牟田市",
-    "population": 101941,
+    "population": 101874,
     "populationTrend": "減少",
     "rent": {
       "value": 38810,
@@ -264,9 +264,9 @@
     "amenities": {
       "stations": 10,
       "preschools": 54,
-      "medicalFacilities": 202,
+      "medicalFacilities": 196,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1111,
@@ -280,7 +280,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.39317,
+    "populationChangeRate": -8.45337,
     "vacancy": {
       "rate": 21.3,
       "vacant": 12760,
@@ -333,7 +333,7 @@
     "code": "40203",
     "pref": "fukuoka",
     "name": "久留米市",
-    "population": 296827,
+    "population": 296599,
     "populationTrend": "微減",
     "rent": {
       "value": 49564,
@@ -374,9 +374,9 @@
     "amenities": {
       "stations": 28,
       "preschools": 147,
-      "medicalFacilities": 524,
+      "medicalFacilities": 518,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 7039,
@@ -390,7 +390,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.13935,
+    "populationChangeRate": -2.21452,
     "vacancy": {
       "rate": 14.8,
       "vacant": 22890,
@@ -443,7 +443,7 @@
     "code": "40204",
     "pref": "fukuoka",
     "name": "直方市",
-    "population": 53568,
+    "population": 53586,
     "populationTrend": "減少",
     "rent": {
       "value": 40621,
@@ -484,9 +484,9 @@
     "amenities": {
       "stations": 10,
       "preschools": 35,
-      "medicalFacilities": 102,
+      "medicalFacilities": 103,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1021,
@@ -500,7 +500,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.70362,
+    "populationChangeRate": -4.6716,
     "vacancy": {
       "rate": 18.6,
       "vacant": 5340,
@@ -553,7 +553,7 @@
     "code": "40205",
     "pref": "fukuoka",
     "name": "飯塚市",
-    "population": 122329,
+    "population": 122190,
     "populationTrend": "減少",
     "rent": {
       "value": 46372,
@@ -594,9 +594,9 @@
     "amenities": {
       "stations": 12,
       "preschools": 77,
-      "medicalFacilities": 207,
+      "medicalFacilities": 205,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2145,
@@ -610,7 +610,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.19316,
+    "populationChangeRate": -3.30316,
     "vacancy": {
       "rate": 18.2,
       "vacant": 12540,
@@ -663,7 +663,7 @@
     "code": "40206",
     "pref": "fukuoka",
     "name": "田川市",
-    "population": 44222,
+    "population": 44206,
     "populationTrend": "減少",
     "rent": {
       "value": 35384,
@@ -704,9 +704,9 @@
     "amenities": {
       "stations": 12,
       "preschools": 24,
-      "medicalFacilities": 78,
+      "medicalFacilities": 75,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1350,
@@ -720,7 +720,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.2876,
+    "populationChangeRate": -4.32223,
     "vacancy": {
       "rate": 21,
       "vacant": 5410,
@@ -773,7 +773,7 @@
     "code": "40207",
     "pref": "fukuoka",
     "name": "柳川市",
-    "population": 60569,
+    "population": 60427,
     "populationTrend": "減少",
     "rent": {
       "value": 45577,
@@ -814,9 +814,9 @@
     "amenities": {
       "stations": 6,
       "preschools": 37,
-      "medicalFacilities": 101,
+      "medicalFacilities": 98,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1029,
@@ -830,7 +830,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.05816,
+    "populationChangeRate": -6.2784,
     "vacancy": {
       "rate": 13.8,
       "vacant": 3770,
@@ -883,7 +883,7 @@
     "code": "40210",
     "pref": "fukuoka",
     "name": "八女市",
-    "population": 57350,
+    "population": 57318,
     "populationTrend": "減少",
     "rent": {
       "value": 44831,
@@ -924,9 +924,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 32,
-      "medicalFacilities": 98,
+      "medicalFacilities": 96,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1149,
@@ -940,7 +940,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.37553,
+    "populationChangeRate": -5.42833,
     "vacancy": {
       "rate": 18.3,
       "vacant": 4990,
@@ -993,7 +993,7 @@
     "code": "40211",
     "pref": "fukuoka",
     "name": "筑後市",
-    "population": 47722,
+    "population": 47668,
     "populationTrend": "微減",
     "rent": {
       "value": 49081,
@@ -1034,9 +1034,9 @@
     "amenities": {
       "stations": 4,
       "preschools": 25,
-      "medicalFacilities": 81,
+      "medicalFacilities": 80,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 837,
@@ -1050,7 +1050,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.26309,
+    "populationChangeRate": -2.37369,
     "vacancy": {
       "rate": 12.1,
       "vacant": 2690,
@@ -1103,7 +1103,7 @@
     "code": "40212",
     "pref": "fukuoka",
     "name": "大川市",
-    "population": 29718,
+    "population": 29705,
     "populationTrend": "減少",
     "rent": {
       "value": 43168,
@@ -1144,9 +1144,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 24,
-      "medicalFacilities": 45,
+      "medicalFacilities": 43,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 552,
@@ -1160,7 +1160,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.9127,
+    "populationChangeRate": -9.9521,
     "vacancy": {
       "rate": 15.9,
       "vacant": 2420,
@@ -1213,7 +1213,7 @@
     "code": "40213",
     "pref": "fukuoka",
     "name": "行橋市",
-    "population": 70037,
+    "population": 70046,
     "populationTrend": "微減",
     "rent": {
       "value": 42791,
@@ -1254,9 +1254,9 @@
     "amenities": {
       "stations": 8,
       "preschools": 30,
-      "medicalFacilities": 105,
+      "medicalFacilities": 106,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1221,
@@ -1270,7 +1270,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.94467,
+    "populationChangeRate": -1.93207,
     "vacancy": {
       "rate": 13.6,
       "vacant": 4800,
@@ -1323,7 +1323,7 @@
     "code": "40214",
     "pref": "fukuoka",
     "name": "豊前市",
-    "population": 22267,
+    "population": 22253,
     "populationTrend": "減少",
     "rent": {
       "value": 41349,
@@ -1366,7 +1366,7 @@
       "preschools": 18,
       "medicalFacilities": 45,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 590,
@@ -1380,7 +1380,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.70813,
+    "populationChangeRate": -8.76553,
     "vacancy": {
       "rate": 19.4,
       "vacant": 2440,
@@ -1433,7 +1433,7 @@
     "code": "40215",
     "pref": "fukuoka",
     "name": "中間市",
-    "population": 38496,
+    "population": 38408,
     "populationTrend": "減少",
     "rent": {
       "value": 40248,
@@ -1476,7 +1476,7 @@
       "preschools": 17,
       "medicalFacilities": 56,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 500,
@@ -1490,7 +1490,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.62316,
+    "populationChangeRate": -4.84119,
     "vacancy": {
       "rate": 15.5,
       "vacant": 3150,
@@ -1543,7 +1543,7 @@
     "code": "40216",
     "pref": "fukuoka",
     "name": "小郡市",
-    "population": 58652,
+    "population": 58390,
     "populationTrend": "微減",
     "rent": {
       "value": 46460,
@@ -1586,7 +1586,7 @@
       "preschools": 25,
       "medicalFacilities": 97,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1985,
@@ -1600,7 +1600,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.19272,
+    "populationChangeRate": -1.6341,
     "vacancy": {
       "rate": 7.7,
       "vacant": 2230,
@@ -1653,7 +1653,7 @@
     "code": "40217",
     "pref": "fukuoka",
     "name": "筑紫野市",
-    "population": 105919,
+    "population": 105844,
     "populationTrend": "微増",
     "rent": {
       "value": 56889,
@@ -1696,7 +1696,7 @@
       "preschools": 49,
       "medicalFacilities": 136,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1118,
@@ -1710,7 +1710,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 2.52442,
+    "populationChangeRate": 2.45182,
     "vacancy": {
       "rate": 7.8,
       "vacant": 3670,
@@ -1763,7 +1763,7 @@
     "code": "40218",
     "pref": "fukuoka",
     "name": "春日市",
-    "population": 109026,
+    "population": 108955,
     "populationTrend": "微減",
     "rent": {
       "value": 57183,
@@ -1804,9 +1804,9 @@
     "amenities": {
       "stations": 3,
       "preschools": 56,
-      "medicalFacilities": 148,
+      "medicalFacilities": 151,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1785,
@@ -1820,7 +1820,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.79873,
+    "populationChangeRate": -1.86268,
     "vacancy": {
       "rate": 11.8,
       "vacant": 6320,
@@ -1873,7 +1873,7 @@
     "code": "40219",
     "pref": "fukuoka",
     "name": "大野城市",
-    "population": 103496,
+    "population": 103552,
     "populationTrend": "微増",
     "rent": {
       "value": 60293,
@@ -1914,9 +1914,9 @@
     "amenities": {
       "stations": 4,
       "preschools": 74,
-      "medicalFacilities": 128,
+      "medicalFacilities": 127,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1465,
@@ -1930,7 +1930,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 1.38218,
+    "populationChangeRate": 1.43704,
     "vacancy": {
       "rate": 6.2,
       "vacant": 2910,
@@ -1983,7 +1983,7 @@
     "code": "40220",
     "pref": "fukuoka",
     "name": "宗像市",
-    "population": 97045,
+    "population": 96873,
     "populationTrend": "横ばい",
     "rent": {
       "value": 46266,
@@ -2024,9 +2024,9 @@
     "amenities": {
       "stations": 3,
       "preschools": 44,
-      "medicalFacilities": 124,
+      "medicalFacilities": 121,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1327,
@@ -2040,7 +2040,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -0.0515,
+    "populationChangeRate": -0.22864,
     "vacancy": {
       "rate": 10.7,
       "vacant": 5040,
@@ -2093,7 +2093,7 @@
     "code": "40221",
     "pref": "fukuoka",
     "name": "太宰府市",
-    "population": 72823,
+    "population": 72777,
     "populationTrend": "横ばい",
     "rent": {
       "value": 55492,
@@ -2134,9 +2134,9 @@
     "amenities": {
       "stations": 4,
       "preschools": 34,
-      "medicalFacilities": 80,
+      "medicalFacilities": 79,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 815,
@@ -2150,7 +2150,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -0.46608,
+    "populationChangeRate": -0.52895,
     "vacancy": {
       "rate": 8.1,
       "vacant": 2790,
@@ -2203,7 +2203,7 @@
     "code": "40223",
     "pref": "fukuoka",
     "name": "古賀市",
-    "population": 58350,
+    "population": 58311,
     "populationTrend": "横ばい",
     "rent": {
       "value": 47509,
@@ -2244,9 +2244,9 @@
     "amenities": {
       "stations": 3,
       "preschools": 37,
-      "medicalFacilities": 82,
+      "medicalFacilities": 81,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1418,
@@ -2260,7 +2260,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -0.74167,
+    "populationChangeRate": -0.80802,
     "vacancy": {
       "rate": 11.5,
       "vacant": 3100,
@@ -2313,8 +2313,8 @@
     "code": "40224",
     "pref": "fukuoka",
     "name": "福津市",
-    "population": 69064,
-    "populationTrend": "増加",
+    "population": 69013,
+    "populationTrend": "微増",
     "rent": {
       "value": 60573,
       "unit": "円/月",
@@ -2354,9 +2354,9 @@
     "amenities": {
       "stations": 2,
       "preschools": 46,
-      "medicalFacilities": 85,
+      "medicalFacilities": 86,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 764,
@@ -2370,7 +2370,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 3.02985,
+    "populationChangeRate": 2.95377,
     "vacancy": {
       "rate": 7.5,
       "vacant": 2260,
@@ -2423,7 +2423,7 @@
     "code": "40225",
     "pref": "fukuoka",
     "name": "うきは市",
-    "population": 25966,
+    "population": 25921,
     "populationTrend": "減少",
     "rent": {
       "value": 40028,
@@ -2433,10 +2433,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 14700,
+      "value": 14642,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -2466,7 +2466,7 @@
       "preschools": 15,
       "medicalFacilities": 48,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 484,
@@ -2480,7 +2480,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.20132,
+    "populationChangeRate": -7.36214,
     "vacancy": {
       "rate": 19.2,
       "vacant": 2370,
@@ -2533,7 +2533,7 @@
     "code": "40226",
     "pref": "fukuoka",
     "name": "宮若市",
-    "population": 24109,
+    "population": 24070,
     "populationTrend": "減少",
     "rent": {
       "value": 39241,
@@ -2574,9 +2574,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 15,
-      "medicalFacilities": 37,
+      "medicalFacilities": 36,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 945,
@@ -2590,7 +2590,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.32383,
+    "populationChangeRate": -8.47213,
     "vacancy": {
       "rate": 20.4,
       "vacant": 2670,
@@ -2643,7 +2643,7 @@
     "code": "40227",
     "pref": "fukuoka",
     "name": "嘉麻市",
-    "population": 31909,
+    "population": 31871,
     "populationTrend": "減少",
     "rent": {
       "value": 24766,
@@ -2686,7 +2686,7 @@
       "preschools": 21,
       "medicalFacilities": 48,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 448,
@@ -2700,7 +2700,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.04708,
+    "populationChangeRate": -10.1542,
     "vacancy": {
       "rate": 22.9,
       "vacant": 3990,
@@ -2753,7 +2753,7 @@
     "code": "40228",
     "pref": "fukuoka",
     "name": "朝倉市",
-    "population": 47469,
+    "population": 47362,
     "populationTrend": "減少",
     "rent": {
       "value": 42454,
@@ -2796,7 +2796,7 @@
       "preschools": 32,
       "medicalFacilities": 85,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1372,
@@ -2810,7 +2810,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.57755,
+    "populationChangeRate": -5.79038,
     "vacancy": {
       "rate": 18.5,
       "vacant": 4410,
@@ -2863,7 +2863,7 @@
     "code": "40229",
     "pref": "fukuoka",
     "name": "みやま市",
-    "population": 33029,
+    "population": 32979,
     "populationTrend": "減少",
     "rent": {
       "value": 46547,
@@ -2906,7 +2906,7 @@
       "preschools": 24,
       "medicalFacilities": 49,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 469,
@@ -2920,7 +2920,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.89716,
+    "populationChangeRate": -8.03659,
     "vacancy": {
       "rate": 15.5,
       "vacant": 2350,
@@ -2973,7 +2973,7 @@
     "code": "40230",
     "pref": "fukuoka",
     "name": "糸島市",
-    "population": 100674,
+    "population": 100614,
     "populationTrend": "微増",
     "rent": {
       "value": 55828,
@@ -3014,9 +3014,9 @@
     "amenities": {
       "stations": 10,
       "preschools": 60,
-      "medicalFacilities": 142,
+      "medicalFacilities": 140,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2217,
@@ -3030,7 +3030,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 1.81741,
+    "populationChangeRate": 1.75673,
     "vacancy": {
       "rate": 8.9,
       "vacant": 3860,
@@ -3083,7 +3083,7 @@
     "code": "40231",
     "pref": "fukuoka",
     "name": "那珂川市",
-    "population": 47773,
+    "population": 47766,
     "populationTrend": "減少",
     "rent": {
       "value": 53668,
@@ -3124,9 +3124,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 35,
-      "medicalFacilities": 61,
+      "medicalFacilities": 63,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 530,
@@ -3140,7 +3140,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.66754,
+    "populationChangeRate": -4.68151,
     "vacancy": {
       "rate": 9.1,
       "vacant": 1940,
@@ -3193,7 +3193,7 @@
     "code": "40341",
     "pref": "fukuoka",
     "name": "宇美町",
-    "population": 37239,
+    "population": 37212,
     "populationTrend": "微減",
     "rent": {
       "value": 47706,
@@ -3236,7 +3236,7 @@
       "preschools": 19,
       "medicalFacilities": 37,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 770,
@@ -3250,7 +3250,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.14677,
+    "populationChangeRate": -1.21844,
     "vacancy": {
       "rate": 10,
       "vacant": 1540,
@@ -3303,7 +3303,7 @@
     "code": "40342",
     "pref": "fukuoka",
     "name": "篠栗町",
-    "population": 31113,
+    "population": 31088,
     "populationTrend": "横ばい",
     "rent": {
       "value": 57088,
@@ -3344,9 +3344,9 @@
     "amenities": {
       "stations": 3,
       "preschools": 16,
-      "medicalFacilities": 26,
+      "medicalFacilities": 29,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 416,
@@ -3360,7 +3360,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -0.3076,
+    "populationChangeRate": -0.38771,
     "vacancy": {
       "rate": 8.5,
       "vacant": 1200,
@@ -3413,7 +3413,7 @@
     "code": "40343",
     "pref": "fukuoka",
     "name": "志免町",
-    "population": 45407,
+    "population": 45383,
     "populationTrend": "微減",
     "rent": {
       "value": 59559,
@@ -3456,7 +3456,7 @@
       "preschools": 36,
       "medicalFacilities": 59,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1010,
@@ -3470,7 +3470,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.09155,
+    "populationChangeRate": -2.1433,
     "vacancy": {
       "rate": 7.2,
       "vacant": 1500,
@@ -3523,7 +3523,7 @@
     "code": "40344",
     "pref": "fukuoka",
     "name": "須恵町",
-    "population": 29070,
+    "population": 29051,
     "populationTrend": "微増",
     "rent": {
       "value": 54061,
@@ -3564,9 +3564,9 @@
     "amenities": {
       "stations": 3,
       "preschools": 20,
-      "medicalFacilities": 26,
+      "medicalFacilities": 24,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 569,
@@ -3580,7 +3580,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 1.54394,
+    "populationChangeRate": 1.47757,
     "vacancy": {
       "rate": 5.6,
       "vacant": 670,
@@ -3633,7 +3633,7 @@
     "code": "40345",
     "pref": "fukuoka",
     "name": "新宮町",
-    "population": 32195,
+    "population": 32185,
     "populationTrend": "微減",
     "rent": {
       "value": 59497,
@@ -3674,9 +3674,9 @@
     "amenities": {
       "stations": 2,
       "preschools": 32,
-      "medicalFacilities": 47,
+      "medicalFacilities": 50,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 619,
@@ -3690,7 +3690,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.2231,
+    "populationChangeRate": -2.25347,
     "vacancy": {
       "rate": 8.4,
       "vacant": 1160,
@@ -3743,7 +3743,7 @@
     "code": "40348",
     "pref": "fukuoka",
     "name": "久山町",
-    "population": 9267,
+    "population": 9246,
     "populationTrend": "微増",
     "rent": {
       "value": 0,
@@ -3786,7 +3786,7 @@
       "preschools": 6,
       "medicalFacilities": 13,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 310,
@@ -3800,7 +3800,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 2.19453,
+    "populationChangeRate": 1.96295,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3853,7 +3853,7 @@
     "code": "40349",
     "pref": "fukuoka",
     "name": "粕屋町",
-    "population": 48506,
+    "population": 48490,
     "populationTrend": "横ばい",
     "rent": {
       "value": 63836,
@@ -3896,7 +3896,7 @@
       "preschools": 28,
       "medicalFacilities": 53,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1075,
@@ -3910,7 +3910,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 0.65574,
+    "populationChangeRate": 0.62254,
     "vacancy": {
       "rate": 6.4,
       "vacant": 1410,
@@ -3963,7 +3963,7 @@
     "code": "40381",
     "pref": "fukuoka",
     "name": "芦屋町",
-    "population": 12303,
+    "population": 12289,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4006,7 +4006,7 @@
       "preschools": 8,
       "medicalFacilities": 14,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 162,
@@ -4020,7 +4020,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.16944,
+    "populationChangeRate": -9.27279,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4073,7 +4073,7 @@
     "code": "40382",
     "pref": "fukuoka",
     "name": "水巻町",
-    "population": 27654,
+    "population": 27627,
     "populationTrend": "微減",
     "rent": {
       "value": 39874,
@@ -4114,9 +4114,9 @@
     "amenities": {
       "stations": 2,
       "preschools": 15,
-      "medicalFacilities": 42,
+      "medicalFacilities": 40,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 530,
@@ -4130,7 +4130,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.6362,
+    "populationChangeRate": -1.73223,
     "vacancy": {
       "rate": 17.7,
       "vacant": 2910,
@@ -4183,7 +4183,7 @@
     "code": "40383",
     "pref": "fukuoka",
     "name": "岡垣町",
-    "population": 30583,
+    "population": 30410,
     "populationTrend": "微減",
     "rent": {
       "value": 42857,
@@ -4224,9 +4224,9 @@
     "amenities": {
       "stations": 1,
       "preschools": 15,
-      "medicalFacilities": 36,
+      "medicalFacilities": 37,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 322,
@@ -4240,7 +4240,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.36743,
+    "populationChangeRate": -1.92537,
     "vacancy": {
       "rate": 12.6,
       "vacant": 1810,
@@ -4293,7 +4293,7 @@
     "code": "40384",
     "pref": "fukuoka",
     "name": "遠賀町",
-    "population": 18396,
+    "population": 18391,
     "populationTrend": "微減",
     "rent": {
       "value": 42973,
@@ -4334,9 +4334,9 @@
     "amenities": {
       "stations": 1,
       "preschools": 7,
-      "medicalFacilities": 24,
+      "medicalFacilities": 23,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 344,
@@ -4350,7 +4350,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.74651,
+    "populationChangeRate": -1.77322,
     "vacancy": {
       "rate": 8.2,
       "vacant": 650,
@@ -4403,7 +4403,7 @@
     "code": "40401",
     "pref": "fukuoka",
     "name": "小竹町",
-    "population": 6533,
+    "population": 6527,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4444,9 +4444,9 @@
     "amenities": {
       "stations": 3,
       "preschools": 2,
-      "medicalFacilities": 11,
+      "medicalFacilities": 10,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 257,
@@ -4460,7 +4460,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.64215,
+    "populationChangeRate": -8.72605,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4556,7 +4556,7 @@
       "preschools": 8,
       "medicalFacilities": 16,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 330,
@@ -4623,7 +4623,7 @@
     "code": "40421",
     "pref": "fukuoka",
     "name": "桂川町",
-    "population": 12205,
+    "population": 12203,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4666,7 +4666,7 @@
       "preschools": 4,
       "medicalFacilities": 14,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 250,
@@ -4680,7 +4680,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.22597,
+    "populationChangeRate": -5.2415,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4733,7 +4733,7 @@
     "code": "40447",
     "pref": "fukuoka",
     "name": "筑前町",
-    "population": 30842,
+    "population": 30863,
     "populationTrend": "増加",
     "rent": {
       "value": 48707,
@@ -4776,7 +4776,7 @@
       "preschools": 16,
       "medicalFacilities": 31,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 538,
@@ -4790,7 +4790,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 4.22764,
+    "populationChangeRate": 4.2986,
     "vacancy": {
       "rate": 8.2,
       "vacant": 990,
@@ -4843,7 +4843,7 @@
     "code": "40448",
     "pref": "fukuoka",
     "name": "東峰村",
-    "population": 1618,
+    "population": 1616,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4853,10 +4853,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 4460,
+      "value": 4367,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -4886,7 +4886,7 @@
       "preschools": 2,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 21,
@@ -4900,7 +4900,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -14.79726,
+    "populationChangeRate": -14.90258,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4953,7 +4953,7 @@
     "code": "40503",
     "pref": "fukuoka",
     "name": "大刀洗町",
-    "population": 15800,
+    "population": 15784,
     "populationTrend": "微増",
     "rent": {
       "value": 51000,
@@ -4996,7 +4996,7 @@
       "preschools": 9,
       "medicalFacilities": 16,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 697,
@@ -5010,7 +5010,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 1.79756,
+    "populationChangeRate": 1.69448,
     "vacancy": {
       "rate": 21.3,
       "vacant": 1550,
@@ -5063,7 +5063,7 @@
     "code": "40522",
     "pref": "fukuoka",
     "name": "大木町",
-    "population": 13172,
+    "population": 13166,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -5073,10 +5073,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 19950,
+      "value": 20125,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -5106,7 +5106,7 @@
       "preschools": 6,
       "medicalFacilities": 19,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 255,
@@ -5120,7 +5120,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.68886,
+    "populationChangeRate": -4.73227,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -5173,7 +5173,7 @@
     "code": "40544",
     "pref": "fukuoka",
     "name": "広川町",
-    "population": 19264,
+    "population": 19249,
     "populationTrend": "減少",
     "rent": {
       "value": 47525,
@@ -5214,9 +5214,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 10,
-      "medicalFacilities": 29,
+      "medicalFacilities": 30,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 574,
@@ -5230,7 +5230,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.53047,
+    "populationChangeRate": -3.60559,
     "vacancy": {
       "rate": 15,
       "vacant": 1360,
@@ -5283,7 +5283,7 @@
     "code": "40601",
     "pref": "fukuoka",
     "name": "香春町",
-    "population": 9355,
+    "population": 9332,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -5293,10 +5293,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 12800,
+      "value": 12675,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -5326,7 +5326,7 @@
       "preschools": 5,
       "medicalFacilities": 11,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 83,
@@ -5340,7 +5340,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.20332,
+    "populationChangeRate": -8.42901,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -5393,7 +5393,7 @@
     "code": "40602",
     "pref": "fukuoka",
     "name": "添田町",
-    "population": 7616,
+    "population": 7617,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -5434,9 +5434,9 @@
     "amenities": {
       "stations": 5,
       "preschools": 6,
-      "medicalFacilities": 18,
+      "medicalFacilities": 16,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 40,
@@ -5450,7 +5450,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -13.46438,
+    "populationChangeRate": -13.45302,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -5503,7 +5503,7 @@
     "code": "40604",
     "pref": "fukuoka",
     "name": "糸田町",
-    "population": 7566,
+    "population": 7542,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -5513,10 +5513,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 11200,
+      "value": 11163,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -5546,7 +5546,7 @@
       "preschools": 3,
       "medicalFacilities": 13,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 119,
@@ -5560,7 +5560,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.00357,
+    "populationChangeRate": -10.28904,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -5613,7 +5613,7 @@
     "code": "40605",
     "pref": "fukuoka",
     "name": "川崎町",
-    "population": 13470,
+    "population": 13461,
     "populationTrend": "減少",
     "rent": {
       "value": 21835,
@@ -5656,7 +5656,7 @@
       "preschools": 11,
       "medicalFacilities": 21,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 166,
@@ -5670,7 +5670,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.24143,
+    "populationChangeRate": -11.30074,
     "vacancy": {
       "rate": 31,
       "vacant": 2940,
@@ -5723,7 +5723,7 @@
     "code": "40608",
     "pref": "fukuoka",
     "name": "大任町",
-    "population": 4766,
+    "population": 4772,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -5736,7 +5736,7 @@
       "value": 9663,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -5766,7 +5766,7 @@
       "preschools": 3,
       "medicalFacilities": 8,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 45,
@@ -5780,7 +5780,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.83227,
+    "populationChangeRate": -4.71246,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -5833,7 +5833,7 @@
     "code": "40609",
     "pref": "fukuoka",
     "name": "赤村",
-    "population": 2495,
+    "population": 2492,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -5843,10 +5843,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 4967,
+      "value": 4917,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -5876,7 +5876,7 @@
       "preschools": 3,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 3,
@@ -5890,7 +5890,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.05768,
+    "populationChangeRate": -10.16583,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -5943,7 +5943,7 @@
     "code": "40610",
     "pref": "fukuoka",
     "name": "福智町",
-    "population": 19878,
+    "population": 19849,
     "populationTrend": "減少",
     "rent": {
       "value": 29871,
@@ -5953,10 +5953,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 10092,
+      "value": 10100,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -5986,7 +5986,7 @@
       "preschools": 15,
       "medicalFacilities": 23,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 309,
@@ -6000,7 +6000,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.10347,
+    "populationChangeRate": -7.23899,
     "vacancy": {
       "rate": 11.7,
       "vacant": 1170,
@@ -6053,7 +6053,7 @@
     "code": "40621",
     "pref": "fukuoka",
     "name": "苅田町",
-    "population": 37975,
+    "population": 37952,
     "populationTrend": "横ばい",
     "rent": {
       "value": 44563,
@@ -6096,7 +6096,7 @@
       "preschools": 17,
       "medicalFacilities": 49,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1715,
@@ -6110,7 +6110,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 0.77221,
+    "populationChangeRate": 0.71118,
     "vacancy": {
       "rate": 13,
       "vacant": 2670,
@@ -6163,7 +6163,7 @@
     "code": "40625",
     "pref": "fukuoka",
     "name": "みやこ町",
-    "population": 16750,
+    "population": 16721,
     "populationTrend": "減少",
     "rent": {
       "value": 24828,
@@ -6204,9 +6204,9 @@
     "amenities": {
       "stations": 4,
       "preschools": 13,
-      "medicalFacilities": 18,
+      "medicalFacilities": 20,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 211,
@@ -6220,7 +6220,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.02258,
+    "populationChangeRate": -11.17663,
     "vacancy": {
       "rate": 19.2,
       "vacant": 1790,
@@ -6273,7 +6273,7 @@
     "code": "40642",
     "pref": "fukuoka",
     "name": "吉富町",
-    "population": 6257,
+    "population": 6247,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -6316,7 +6316,7 @@
       "preschools": 4,
       "medicalFacilities": 15,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 107,
@@ -6330,7 +6330,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.26867,
+    "populationChangeRate": -4.42166,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -6383,7 +6383,7 @@
     "code": "40646",
     "pref": "fukuoka",
     "name": "上毛町",
-    "population": 6661,
+    "population": 6675,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -6393,10 +6393,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 8188,
+      "value": 8110,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -6424,9 +6424,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 3,
-      "medicalFacilities": 8,
+      "medicalFacilities": 7,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 62,
@@ -6440,7 +6440,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.13681,
+    "populationChangeRate": -7.94373,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -6493,7 +6493,7 @@
     "code": "40647",
     "pref": "fukuoka",
     "name": "築上町",
-    "population": 15370,
+    "population": 15360,
     "populationTrend": "減少",
     "rent": {
       "value": 37835,
@@ -6536,7 +6536,7 @@
       "preschools": 11,
       "medicalFacilities": 18,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 226,
@@ -6550,7 +6550,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.58235,
+    "populationChangeRate": -10.64053,
     "vacancy": {
       "rate": 24.7,
       "vacant": 2200,

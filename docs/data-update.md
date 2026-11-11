@@ -1,7 +1,7 @@
 # データ更新（GitHub Actions）運用ドキュメント
 
 KurashiMap の各指標データは GitHub Actions が定期/手動で取得し、`data/*.json` を
-`main` に直接コミットする。本書はその2ワークフローの仕様・更新頻度・手動更新箇所・
+更新PRとして提出する。本書はその2ワークフローの仕様・更新頻度・手動更新箇所・
 運用手順・既知の注意点をまとめる。
 
 - ワークフロー定義: `.github/workflows/data-update-annual.yml` / `data-update-quarterly.yml`
@@ -105,8 +105,8 @@ annual ワークフローは「バージョン設定を読み込み」ステッ�
 | `FISCAL_XLSX_URL` | 総務省 主要財政指標一覧の全市町村 Excel URL（現在 令和6年度版） | 年度ページ（`soumu.go.jp/iken/shihyo_ichiran.html` から辿る）で新年度の main_content URL を確認して差し替え |
 | `FISCAL_ASOF` | 財政力指数の年度表示（現在 `"2024年度"`。3か年平均） | **`FISCAL_XLSX_URL` と必ず同期**（`fetch-fiscal.mjs` の `asOf` に入る） |
 | `CFA_CAPACITY_XLSX_URL` | 同取りまとめの別添「（参考）定員・申込者の状況」Excel の URL（現在 令和8年版 `_r8_02.xlsx`。保活余力 `childcare` の出典） | `CFA_XLSX_URL` と同時に公表ページで確認して差し替え。市区町村別の別添は令和6年分から存在 |
-| `MEDICAL_HOSP_STATSDATAID` / `MEDICAL_CLINIC_STATSDATAID` | 医療施設調査 市区町村別の第1表（病院）/第2表（診療所・歯科）の statsDataId（現在 令和6年/2024） | 毎年**新しい表IDが追加**される（同一IDの更新ではない）。e-Stat 統計コード 00450021 で最新年の両表を確認して差し替え |
-| `MEDICAL_ASOF` | 医療機関の基準時点（現在 `"2024年10月"`。調査は毎年10/1時点） | 表IDと必ず同期。**`AMENITIES_ASOF` の医療機関部分も同時に更新**（`versions.test.ts` が同期を検査） |
+| `MEDICAL_HOSP_CSV_URL` / `MEDICAL_CLINIC_CSV_URL` | 医療施設調査 市区町村別の第1表（病院）/第2表（診療所・歯科）の公式CSV URL（現在 令和7年/2025） | 毎年**新しい表IDが追加**される（同一IDの更新ではない）。e-Stat 統計コード 00450021 で最新年の両表を確認して差し替え |
+| `MEDICAL_ASOF` | 医療機関の基準時点（現在 `"2025年10月"`。調査は毎年10/1時点） | 表IDと必ず同期。**`AMENITIES_ASOF` の医療機関部分も同時に更新**（`versions.test.ts` が同期を検査） |
 | `S12_URL` | 国土数値情報 駅別乗降客数 S12 の全国 GML zip（現在 S12-24=2024年度版） | 新年度版の公開（例年4月）後に URL の `S12-{NN}` を差し替え。zip に UTF-8 GeoJSON が同梱されているか確認 |
 | `S12_ASOF` | 駅データの整備年度（現在 `"2024年度"`） | **`S12_URL` と必ず同期**。`AMENITIES_ASOF` の駅部分も同時に更新（`versions.test.ts` が同期を検査） |
 
@@ -269,7 +269,7 @@ GitHub の **Actions** タブ → 対象ワークフロー → **Run workflow**�
 
 1. **手動更新のバージョンを毎年忘れない**
    `L01_VERSION` / `L01_ASOF` / `CFA_XLSX_URL` / `CFA_ASOF` /
-   `MEDICAL_HOSP_STATSDATAID` / `MEDICAL_CLINIC_STATSDATAID` / `MEDICAL_ASOF`（医療施設調査は
+   `MEDICAL_HOSP_CSV_URL` / `MEDICAL_CLINIC_CSV_URL` / `MEDICAL_ASOF`（医療施設調査は
    毎年**新しい statsDataId の表**が追加される方式）は自動更新されない。出典公開時期
    （地価=3月、待機児童=夏〜秋、医療施設調査=翌年）に合わせて
    **`scripts/_lib/versions.mjs` の1箇所だけ**更新する
@@ -554,3 +554,14 @@ node scripts/fetch-furunavi-municipals.mjs   # APIキー不要
   スクリプトの `normalizeName` に変換を足す。
 - 導線の env 設定・文言規制（返礼品訴求NG等）は `.env.example` と
   `components/area/FurusatoLink.tsx` のコメントを参照。
+
+
+## 2026-11-11の更新
+
+- 人口は速報表から2025年国勢調査の人口等基本集計（原数値、2026-09-29公表）へ移行。表IDはversions.mjsのPOPULATION_STATSDATAID / POPULATION_CHANGE_STATSDATAID。増減率が算出不能の双葉町は人口Trendを「データなし」とし、数値を補完しない。Mapの欠損色を使用する。
+- 地価調査L02もversions.mjsのL02_VERSION / L02_ASOFで管理。年次ジョブがL01とL02を取得する。L01住宅地を優先し、地点のない自治体のみL02住宅地平均で補完する。
+- 面積は2026-07-01版。UTF-8/Shift-JISを判別し、CSVの先頭面積列とMENCHO_ASOFが一致する場合だけ更新。MENCHO_CSVで保存済み原典を入力可能。
+- 医療は2025-10-01時点。2025年市区町村編はAPI DBより先にCSVが公表されていたため、公式CSV N1/N2へ切り替え。MEDICAL_HOSP_CSV_URL / MEDICAL_CLINIC_CSV_URLとMEDICAL_ASOF、AMENITIES_ASOFを同期する。MEDICAL_HOSP_CSV / MEDICAL_CLINIC_CSVで原典キャッシュを入力可能。区コードの欠測を親市合算の0として扱わず保存前に停止する。
+- CFA資料の必須シート欠落・抽出件数異常では保存中止。政令市計が正数の場合、全区を既存の「区別非公表」表現へ更新し、古い区別0人を保持しない。
+
+詳細な原典・件数・更新しなかった指標は[今回の更新調査](data-refresh-2026-11-11.md)を参照。

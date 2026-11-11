@@ -3,7 +3,7 @@
     "code": "31201",
     "pref": "tottori",
     "name": "鳥取市",
-    "population": 179366,
+    "population": 179243,
     "populationTrend": "減少",
     "rent": {
       "value": 45276,
@@ -44,9 +44,9 @@
     "amenities": {
       "stations": 14,
       "preschools": 98,
-      "medicalFacilities": 253,
+      "medicalFacilities": 249,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2021,
@@ -60,7 +60,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.82795,
+    "populationChangeRate": -4.89322,
     "vacancy": {
       "rate": 13.8,
       "vacant": 12610,
@@ -113,8 +113,8 @@
     "code": "31202",
     "pref": "tottori",
     "name": "米子市",
-    "population": 143246,
-    "populationTrend": "微減",
+    "population": 142893,
+    "populationTrend": "減少",
     "rent": {
       "value": 48508,
       "unit": "円/月",
@@ -154,9 +154,9 @@
     "amenities": {
       "stations": 14,
       "preschools": 101,
-      "medicalFacilities": 257,
+      "medicalFacilities": 259,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1861,
@@ -170,7 +170,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.76343,
+    "populationChangeRate": -3.00305,
     "vacancy": {
       "rate": 16.3,
       "vacant": 12080,
@@ -223,7 +223,7 @@
     "code": "31203",
     "pref": "tottori",
     "name": "倉吉市",
-    "population": 43251,
+    "population": 43198,
     "populationTrend": "減少",
     "rent": {
       "value": 44351,
@@ -266,7 +266,7 @@
       "preschools": 36,
       "medicalFacilities": 84,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 455,
@@ -280,7 +280,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.95708,
+    "populationChangeRate": -7.0711,
     "vacancy": {
       "rate": 15.6,
       "vacant": 3240,
@@ -333,7 +333,7 @@
     "code": "31204",
     "pref": "tottori",
     "name": "境港市",
-    "population": 31059,
+    "population": 31051,
     "populationTrend": "減少",
     "rent": {
       "value": 39008,
@@ -374,9 +374,9 @@
     "amenities": {
       "stations": 7,
       "preschools": 17,
-      "medicalFacilities": 39,
+      "medicalFacilities": 38,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 761,
@@ -390,7 +390,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.13439,
+    "populationChangeRate": -5.15883,
     "vacancy": {
       "rate": 16.5,
       "vacant": 2580,
@@ -443,7 +443,7 @@
     "code": "31302",
     "pref": "tottori",
     "name": "岩美町",
-    "population": 10113,
+    "population": 10099,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -486,7 +486,7 @@
       "preschools": 3,
       "medicalFacilities": 9,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 157,
@@ -500,7 +500,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.35244,
+    "populationChangeRate": -6.48208,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -553,7 +553,7 @@
     "code": "31325",
     "pref": "tottori",
     "name": "若桜町",
-    "population": 2337,
+    "population": 2338,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -596,7 +596,7 @@
       "preschools": 2,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 28,
@@ -610,7 +610,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -18.40084,
+    "populationChangeRate": -18.36592,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -663,7 +663,7 @@
     "code": "31328",
     "pref": "tottori",
     "name": "智頭町",
-    "population": 5655,
+    "population": 5633,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -704,9 +704,9 @@
     "amenities": {
       "stations": 6,
       "preschools": 4,
-      "medicalFacilities": 6,
+      "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 105,
@@ -720,7 +720,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -12.01183,
+    "populationChangeRate": -12.35413,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -773,7 +773,7 @@
     "code": "31329",
     "pref": "tottori",
     "name": "八頭町",
-    "population": 14502,
+    "population": 14486,
     "populationTrend": "減少",
     "rent": {
       "value": 32692,
@@ -814,9 +814,9 @@
     "amenities": {
       "stations": 11,
       "preschools": 5,
-      "medicalFacilities": 17,
+      "medicalFacilities": 16,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 56,
@@ -830,7 +830,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.0042,
+    "populationChangeRate": -9.1046,
     "vacancy": {
       "rate": 18.3,
       "vacant": 1170,
@@ -883,7 +883,7 @@
     "code": "31364",
     "pref": "tottori",
     "name": "三朝町",
-    "population": 5346,
+    "population": 5343,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -926,7 +926,7 @@
       "preschools": 3,
       "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 77,
@@ -940,7 +940,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.78218,
+    "populationChangeRate": -11.83168,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -993,7 +993,7 @@
     "code": "31370",
     "pref": "tottori",
     "name": "湯梨浜町",
-    "population": 15430,
+    "population": 15420,
     "populationTrend": "減少",
     "rent": {
       "value": 43594,
@@ -1034,9 +1034,9 @@
     "amenities": {
       "stations": 2,
       "preschools": 13,
-      "medicalFacilities": 16,
+      "medicalFacilities": 14,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 103,
@@ -1050,7 +1050,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.89287,
+    "populationChangeRate": -3.95515,
     "vacancy": {
       "rate": 16.1,
       "vacant": 1090,
@@ -1103,7 +1103,7 @@
     "code": "31371",
     "pref": "tottori",
     "name": "琴浦町",
-    "population": 14771,
+    "population": 14756,
     "populationTrend": "減少",
     "rent": {
       "value": 29444,
@@ -1144,9 +1144,9 @@
     "amenities": {
       "stations": 3,
       "preschools": 13,
-      "medicalFacilities": 18,
+      "medicalFacilities": 17,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 304,
@@ -1160,7 +1160,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.7403,
+    "populationChangeRate": -9.83196,
     "vacancy": {
       "rate": 19.3,
       "vacant": 1390,
@@ -1213,7 +1213,7 @@
     "code": "31372",
     "pref": "tottori",
     "name": "北栄町",
-    "population": 13474,
+    "population": 13469,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1256,7 +1256,7 @@
       "preschools": 11,
       "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 139,
@@ -1270,7 +1270,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.29941,
+    "populationChangeRate": -5.33455,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1323,7 +1323,7 @@
     "code": "31384",
     "pref": "tottori",
     "name": "日吉津村",
-    "population": 3490,
+    "population": 3487,
     "populationTrend": "横ばい",
     "rent": {
       "value": 0,
@@ -1366,7 +1366,7 @@
       "preschools": 2,
       "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 34,
@@ -1380,7 +1380,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -0.3142,
+    "populationChangeRate": -0.39989,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1433,7 +1433,7 @@
     "code": "31386",
     "pref": "tottori",
     "name": "大山町",
-    "population": 13936,
+    "population": 13937,
     "populationTrend": "減少",
     "rent": {
       "value": 24400,
@@ -1443,10 +1443,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 6614,
+      "value": 6543,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -1476,7 +1476,7 @@
       "preschools": 5,
       "medicalFacilities": 15,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 161,
@@ -1490,7 +1490,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.32986,
+    "populationChangeRate": -9.32336,
     "vacancy": {
       "rate": 19.9,
       "vacant": 1400,
@@ -1543,7 +1543,7 @@
     "code": "31389",
     "pref": "tottori",
     "name": "南部町",
-    "population": 9549,
+    "population": 9539,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1553,10 +1553,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 9717,
+      "value": 9588,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -1586,7 +1586,7 @@
       "preschools": 8,
       "medicalFacilities": 7,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 94,
@@ -1600,7 +1600,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.49782,
+    "populationChangeRate": -7.59469,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1653,7 +1653,7 @@
     "code": "31390",
     "pref": "tottori",
     "name": "伯耆町",
-    "population": 9761,
+    "population": 9741,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1663,10 +1663,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 9670,
+      "value": 9620,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -1694,9 +1694,9 @@
     "amenities": {
       "stations": 2,
       "preschools": 7,
-      "medicalFacilities": 10,
+      "medicalFacilities": 9,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 88,
@@ -1710,7 +1710,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.74159,
+    "populationChangeRate": -8.92857,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1763,7 +1763,7 @@
     "code": "31401",
     "pref": "tottori",
     "name": "日南町",
-    "population": 3588,
+    "population": 3582,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1773,10 +1773,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 7100,
+      "value": 7025,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -1806,7 +1806,7 @@
       "preschools": 3,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 27,
@@ -1820,7 +1820,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -14.48999,
+    "populationChangeRate": -14.63298,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1873,7 +1873,7 @@
     "code": "31402",
     "pref": "tottori",
     "name": "日野町",
-    "population": 2494,
+    "population": 2490,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1883,10 +1883,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 6400,
+      "value": 6200,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -1916,7 +1916,7 @@
       "preschools": 1,
       "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 17,
@@ -1930,7 +1930,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -14.20709,
+    "populationChangeRate": -14.34469,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1983,7 +1983,7 @@
     "code": "31403",
     "pref": "tottori",
     "name": "江府町",
-    "population": 2364,
+    "population": 2368,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1993,10 +1993,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 3400,
+      "value": 3350,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -2026,7 +2026,7 @@
       "preschools": 1,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 23,
@@ -2040,7 +2040,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.52695,
+    "populationChangeRate": -11.37725,
     "vacancy": {
       "rate": -1,
       "vacant": 0,

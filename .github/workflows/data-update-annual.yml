@@ -85,6 +85,9 @@ jobs:
         env:
           ESTAT_APP_ID: ${{ secrets.ESTAT_APP_ID }}
 
+      - name: 面積（国土地理院 全国CSV）
+        run: node scripts/fetch-area.mjs ${{ steps.scope.outputs.estat }}
+
       - name: 家賃（e-Stat 全国一括）
         run: node scripts/fetch-rent.mjs ${{ steps.scope.outputs.estat }}
         env:
@@ -161,7 +164,15 @@ jobs:
             if [[ -z "$ok" ]]; then echo "::warning::L01 download failed for $pref"; continue; fi
             rm -rf /tmp/l01 && unzip -oq /tmp/l01.zip -d /tmp/l01
             GEOJSON="/tmp/l01/L01-${L01_VERSION}_${code}_GML/L01-${L01_VERSION}_${code}.geojson"
-            L01_GEOJSON="$GEOJSON" node scripts/fetch-land-price.mjs --pref="$pref" || echo "::warning::land price failed for $pref"
+            l02_dir=$(mktemp -d)
+            l02_url="https://nlftp.mlit.go.jp/ksj/gml/data/L02/L02-${L02_VERSION}/L02-${L02_VERSION}_${code}_GML.zip"
+            if curl -fsSL --retry 2 -o /tmp/l02.zip "$l02_url"; then
+              unzip -oq /tmp/l02.zip -d "$l02_dir"
+            else
+              echo "::warning::L02 download failed for $pref; existing fallback values will be retained"
+            fi
+            L01_GEOJSON="$GEOJSON" L02_GEOJSON="$l02_dir/L02-${L02_VERSION}_${code}.geojson" \
+              node scripts/fetch-land-price.mjs --pref="$pref" || echo "::warning::land price failed for $pref"
           done
 
       - name: 指定緊急避難場所（国土地理院 全国版CSV・全国一括）

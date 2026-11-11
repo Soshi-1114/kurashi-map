@@ -13,10 +13,12 @@
 
 import path from "node:path";
 import { execFileSync } from "node:child_process";
+import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { resolvePrefs } from "./_lib/prefs.mjs";
 import { loadAllMuni, saveMuni } from "./_lib/data.mjs";
 import { version } from "./_lib/versions.mjs";
+import { parseAreaCsv } from "./_lib/area.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
@@ -28,21 +30,10 @@ async function fetchAreaMap() {
   // gsi.go.jp は旧式の TLS 再ネゴシエーションを要求し Node fetch(undici) が
   // ERR_SSL_UNSAFE_LEGACY_RENEGOTIATION_DISABLED で失敗するため curl で取得する
   // （nlftp 系スクリプトと同じ方式）。
-  const buf = execFileSync("curl", ["-sfL", "-A", "Mozilla/5.0", URL], {
+  const buf = process.env.MENCHO_CSV ? readFileSync(process.env.MENCHO_CSV) : execFileSync("curl", ["-sfL", "-A", "Mozilla/5.0", URL], {
     maxBuffer: 64 * 1024 * 1024,
   });
-  const text = new TextDecoder("shift_jis").decode(buf);
-  const byCode = new Map();
-  for (const line of text.split(/\r?\n/)) {
-    const cols = line.split(",");
-    // データ行: 先頭が4〜5桁の標準地域コード。県計(下2〜3桁が000)も含まれるが
-    // 市区町村コードと衝突しないのでそのまま入れて良い（突合は muni コードのみ）。
-    if (!/^\d{4,5}$/.test(cols[0] ?? "")) continue;
-    const code = cols[0].padStart(5, "0");
-    const area = parseFloat(cols[4]);
-    if (!Number.isFinite(area) || area <= 0) continue;
-    byCode.set(code, area);
-  }
+  const byCode = parseAreaCsv(buf, AS_OF);
   if (byCode.size < 1500) {
     throw new Error(`面積調CSVのパース件数が異常に少ない (${byCode.size}件) — 列構成の変更を確認`);
   }

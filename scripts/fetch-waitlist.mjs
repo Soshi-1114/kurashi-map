@@ -11,6 +11,7 @@ import { resolvePrefs, PREF_NAMES } from "./_lib/prefs.mjs";
 import { resolveXlsxPath, readWorkbook, sheetRows } from "./_lib/xlsx.mjs";
 import { loadMuni, saveMuni } from "./_lib/data.mjs";
 import { version } from "./_lib/versions.mjs";
+import { wardWaitlist } from "./_lib/waitlist.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
@@ -62,19 +63,13 @@ async function applyPref(pref, all) {
     else { m.waitlistChildren = { value: 0, ...META }; zero++; }
   }
 
-  // 政令市親が 0 ならば子区も 0、非0なら推計のまま残す
+  // 市全体0人なら区も0人。市に待機児童がいる場合、区別の分布は公表されない。
   for (const [parent, children] of Object.entries(pref.parentToWards ?? {})) {
     const p = muni.find((m) => m.code === parent);
     if (!p) continue;
-    if (p.waitlistChildren.value === 0) {
-      for (const cc of children) {
-        const w = wards.find((x) => x.code === cc);
-        if (w) w.waitlistChildren = {
-          value: 0, unit: "人",
-          source: "こども家庭庁 保育所等関連状況取りまとめ（市総合より）",
-          asOf: CFA_ASOF, isEstimated: false,
-        };
-      }
+    for (const cc of children) {
+      const w = wards.find((x) => x.code === cc);
+      if (w) w.waitlistChildren = wardWaitlist(p, CFA_ASOF);
     }
   }
 
@@ -87,11 +82,13 @@ async function main() {
   const sheets = ["資料６－１", "資料６－２"];
   const all = new Map();
   for (const name of sheets) {
-    const ws = wb.Sheets[name]; if (!ws) continue;
+    const ws = wb.Sheets[name];
+    if (!ws) throw new Error(`待機児童の必須シートがありません（保存中止）: ${name}`);
     const got = extractFromR6(ws);
     for (const [k, v] of got) all.set(k, v);
     console.log(`  ${name}: ${got.size} entries`);
   }
+  if (all.size < 100) throw new Error("待機児童の抽出件数が異常です（保存中止）");
   // Excel は1回パース。対象 pref 群へまとめて反映（--all で全国1ファイルから全県）。
   for (const pref of prefs) await applyPref(pref, all);
   console.log("data files 保存完了");

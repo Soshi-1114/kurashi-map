@@ -3,7 +3,7 @@
     "code": "20201",
     "pref": "nagano",
     "name": "長野市",
-    "population": 357112,
+    "population": 357077,
     "populationTrend": "減少",
     "rent": {
       "value": 51465,
@@ -44,9 +44,9 @@
     "amenities": {
       "stations": 34,
       "preschools": 120,
-      "medicalFacilities": 526,
+      "medicalFacilities": 528,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 5104,
@@ -60,7 +60,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.19788,
+    "populationChangeRate": -4.20726,
     "vacancy": {
       "rate": 15.4,
       "vacant": 28700,
@@ -113,7 +113,7 @@
     "code": "20202",
     "pref": "nagano",
     "name": "松本市",
-    "population": 232347,
+    "population": 232241,
     "populationTrend": "減少",
     "rent": {
       "value": 53795,
@@ -156,7 +156,7 @@
       "preschools": 76,
       "medicalFacilities": 386,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 5072,
@@ -170,7 +170,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.64843,
+    "populationChangeRate": -3.69238,
     "vacancy": {
       "rate": 13.9,
       "vacant": 17050,
@@ -223,7 +223,7 @@
     "code": "20203",
     "pref": "nagano",
     "name": "上田市",
-    "population": 144350,
+    "population": 144202,
     "populationTrend": "減少",
     "rent": {
       "value": 46869,
@@ -264,9 +264,9 @@
     "amenities": {
       "stations": 20,
       "preschools": 58,
-      "medicalFacilities": 177,
+      "medicalFacilities": 176,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 5221,
@@ -280,7 +280,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.2997,
+    "populationChangeRate": -6.39577,
     "vacancy": {
       "rate": 16,
       "vacant": 12180,
@@ -333,7 +333,7 @@
     "code": "20204",
     "pref": "nagano",
     "name": "岡谷市",
-    "population": 44535,
+    "population": 44482,
     "populationTrend": "減少",
     "rent": {
       "value": 50522,
@@ -376,7 +376,7 @@
       "preschools": 20,
       "medicalFacilities": 59,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 984,
@@ -390,7 +390,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.81105,
+    "populationChangeRate": -6.92195,
     "vacancy": {
       "rate": 18.7,
       "vacant": 4300,
@@ -443,7 +443,7 @@
     "code": "20205",
     "pref": "nagano",
     "name": "飯田市",
-    "population": 90652,
+    "population": 90765,
     "populationTrend": "減少",
     "rent": {
       "value": 46494,
@@ -484,9 +484,9 @@
     "amenities": {
       "stations": 15,
       "preschools": 49,
-      "medicalFacilities": 152,
+      "medicalFacilities": 148,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2512,
@@ -500,7 +500,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.6525,
+    "populationChangeRate": -7.53739,
     "vacancy": {
       "rate": 17.1,
       "vacant": 7860,
@@ -553,7 +553,7 @@
     "code": "20206",
     "pref": "nagano",
     "name": "諏訪市",
-    "population": 46402,
+    "population": 46354,
     "populationTrend": "減少",
     "rent": {
       "value": 44774,
@@ -594,9 +594,9 @@
     "amenities": {
       "stations": 1,
       "preschools": 16,
-      "medicalFacilities": 78,
+      "medicalFacilities": 77,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1744,
@@ -610,7 +610,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.77539,
+    "populationChangeRate": -4.87389,
     "vacancy": {
       "rate": 19.8,
       "vacant": 5270,
@@ -663,7 +663,7 @@
     "code": "20207",
     "pref": "nagano",
     "name": "須坂市",
-    "population": 47799,
+    "population": 47774,
     "populationTrend": "減少",
     "rent": {
       "value": 44593,
@@ -704,9 +704,9 @@
     "amenities": {
       "stations": 6,
       "preschools": 24,
-      "medicalFacilities": 65,
+      "medicalFacilities": 66,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 923,
@@ -720,7 +720,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.55132,
+    "populationChangeRate": -3.60177,
     "vacancy": {
       "rate": 14.1,
       "vacant": 3140,
@@ -773,7 +773,7 @@
     "code": "20208",
     "pref": "nagano",
     "name": "小諸市",
-    "population": 40217,
+    "population": 40185,
     "populationTrend": "微減",
     "rent": {
       "value": 43423,
@@ -816,7 +816,7 @@
       "preschools": 15,
       "medicalFacilities": 47,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1200,
@@ -830,7 +830,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.88822,
+    "populationChangeRate": -1.96629,
     "vacancy": {
       "rate": 24.3,
       "vacant": 5590,
@@ -883,7 +883,7 @@
     "code": "20209",
     "pref": "nagano",
     "name": "伊那市",
-    "population": 63597,
+    "population": 63508,
     "populationTrend": "減少",
     "rent": {
       "value": 44440,
@@ -926,7 +926,7 @@
       "preschools": 26,
       "medicalFacilities": 93,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2103,
@@ -940,7 +940,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.82306,
+    "populationChangeRate": -3.95766,
     "vacancy": {
       "rate": 20,
       "vacant": 6350,
@@ -993,7 +993,7 @@
     "code": "20210",
     "pref": "nagano",
     "name": "駒ヶ根市",
-    "population": 30890,
+    "population": 30861,
     "populationTrend": "減少",
     "rent": {
       "value": 39866,
@@ -1034,9 +1034,9 @@
     "amenities": {
       "stations": 4,
       "preschools": 13,
-      "medicalFacilities": 49,
+      "medicalFacilities": 47,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 959,
@@ -1050,7 +1050,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.07428,
+    "populationChangeRate": -4.16434,
     "vacancy": {
       "rate": 17.2,
       "vacant": 2740,
@@ -1103,7 +1103,7 @@
     "code": "20211",
     "pref": "nagano",
     "name": "中野市",
-    "population": 40248,
+    "population": 40223,
     "populationTrend": "減少",
     "rent": {
       "value": 42764,
@@ -1146,7 +1146,7 @@
       "preschools": 14,
       "medicalFacilities": 52,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1176,
@@ -1160,7 +1160,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.93646,
+    "populationChangeRate": -4.99551,
     "vacancy": {
       "rate": 12.5,
       "vacant": 2280,
@@ -1213,7 +1213,7 @@
     "code": "20212",
     "pref": "nagano",
     "name": "大町市",
-    "population": 23950,
+    "population": 23956,
     "populationTrend": "減少",
     "rent": {
       "value": 35201,
@@ -1254,9 +1254,9 @@
     "amenities": {
       "stations": 11,
       "preschools": 13,
-      "medicalFacilities": 36,
+      "medicalFacilities": 33,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 761,
@@ -1270,7 +1270,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.98724,
+    "populationChangeRate": -7.96419,
     "vacancy": {
       "rate": 20.3,
       "vacant": 2670,
@@ -1323,7 +1323,7 @@
     "code": "20213",
     "pref": "nagano",
     "name": "飯山市",
-    "population": 17700,
+    "population": 17682,
     "populationTrend": "減少",
     "rent": {
       "value": 37228,
@@ -1366,7 +1366,7 @@
       "preschools": 9,
       "medicalFacilities": 22,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 398,
@@ -1380,7 +1380,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.41195,
+    "populationChangeRate": -9.50407,
     "vacancy": {
       "rate": 15,
       "vacant": 1270,
@@ -1433,7 +1433,7 @@
     "code": "20214",
     "pref": "nagano",
     "name": "茅野市",
-    "population": 54467,
+    "population": 54409,
     "populationTrend": "減少",
     "rent": {
       "value": 49490,
@@ -1474,9 +1474,9 @@
     "amenities": {
       "stations": 2,
       "preschools": 21,
-      "medicalFacilities": 64,
+      "medicalFacilities": 63,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1294,
@@ -1490,7 +1490,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.4273,
+    "populationChangeRate": -3.53014,
     "vacancy": {
       "rate": 41.5,
       "vacant": 17000,
@@ -1543,7 +1543,7 @@
     "code": "20215",
     "pref": "nagano",
     "name": "塩尻市",
-    "population": 65496,
+    "population": 65442,
     "populationTrend": "微減",
     "rent": {
       "value": 51877,
@@ -1584,9 +1584,9 @@
     "amenities": {
       "stations": 10,
       "preschools": 21,
-      "medicalFacilities": 76,
+      "medicalFacilities": 75,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1563,
@@ -1600,7 +1600,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.59514,
+    "populationChangeRate": -2.67545,
     "vacancy": {
       "rate": 13.3,
       "vacant": 4310,
@@ -1653,7 +1653,7 @@
     "code": "20217",
     "pref": "nagano",
     "name": "佐久市",
-    "population": 97070,
+    "population": 97017,
     "populationTrend": "微減",
     "rent": {
       "value": 47384,
@@ -1694,9 +1694,9 @@
     "amenities": {
       "stations": 11,
       "preschools": 31,
-      "medicalFacilities": 147,
+      "medicalFacilities": 150,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1745,
@@ -1710,7 +1710,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.14971,
+    "populationChangeRate": -1.20368,
     "vacancy": {
       "rate": 21.3,
       "vacant": 11140,
@@ -1763,7 +1763,7 @@
     "code": "20218",
     "pref": "nagano",
     "name": "千曲市",
-    "population": 57161,
+    "population": 57103,
     "populationTrend": "微減",
     "rent": {
       "value": 44960,
@@ -1804,9 +1804,9 @@
     "amenities": {
       "stations": 8,
       "preschools": 18,
-      "medicalFacilities": 65,
+      "medicalFacilities": 66,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1155,
@@ -1820,7 +1820,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.87331,
+    "populationChangeRate": -2.97186,
     "vacancy": {
       "rate": 18.4,
       "vacant": 4960,
@@ -1873,7 +1873,7 @@
     "code": "20219",
     "pref": "nagano",
     "name": "東御市",
-    "population": 28582,
+    "population": 28549,
     "populationTrend": "減少",
     "rent": {
       "value": 45231,
@@ -1914,9 +1914,9 @@
     "amenities": {
       "stations": 2,
       "preschools": 7,
-      "medicalFacilities": 26,
+      "medicalFacilities": 27,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 737,
@@ -1930,7 +1930,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.11254,
+    "populationChangeRate": -5.2221,
     "vacancy": {
       "rate": 17.1,
       "vacant": 2340,
@@ -1983,7 +1983,7 @@
     "code": "20220",
     "pref": "nagano",
     "name": "安曇野市",
-    "population": 91861,
+    "population": 91794,
     "populationTrend": "微減",
     "rent": {
       "value": 47651,
@@ -2024,9 +2024,9 @@
     "amenities": {
       "stations": 11,
       "preschools": 22,
-      "medicalFacilities": 125,
+      "medicalFacilities": 123,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1761,
@@ -2040,7 +2040,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.50578,
+    "populationChangeRate": -2.57689,
     "vacancy": {
       "rate": 14.5,
       "vacant": 6330,
@@ -2093,7 +2093,7 @@
     "code": "20303",
     "pref": "nagano",
     "name": "小海町",
-    "population": 4056,
+    "population": 4048,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2136,7 +2136,7 @@
       "preschools": 1,
       "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 141,
@@ -2150,7 +2150,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.82288,
+    "populationChangeRate": -7.00666,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2203,7 +2203,7 @@
     "code": "20304",
     "pref": "nagano",
     "name": "川上村",
-    "population": 4191,
+    "population": 4176,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2216,7 +2216,7 @@
       "value": 9250,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -2246,7 +2246,7 @@
       "preschools": 1,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 532,
@@ -2260,7 +2260,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.5221,
+    "populationChangeRate": -3.8674,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2313,8 +2313,8 @@
     "code": "20305",
     "pref": "nagano",
     "name": "南牧村",
-    "population": 3342,
-    "populationTrend": "増加",
+    "population": 3339,
+    "populationTrend": "微増",
     "rent": {
       "value": 0,
       "unit": "円/月",
@@ -2323,10 +2323,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 8360,
+      "value": 8270,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -2356,7 +2356,7 @@
       "preschools": 2,
       "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 440,
@@ -2370,7 +2370,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 3.08452,
+    "populationChangeRate": 2.99198,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2423,7 +2423,7 @@
     "code": "20306",
     "pref": "nagano",
     "name": "南相木村",
-    "population": 868,
+    "population": 866,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2433,10 +2433,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 3180,
+      "value": 3110,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -2466,7 +2466,7 @@
       "preschools": 1,
       "medicalFacilities": 1,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 11,
@@ -2480,7 +2480,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.77131,
+    "populationChangeRate": -9.97921,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2533,7 +2533,7 @@
     "code": "20307",
     "pref": "nagano",
     "name": "北相木村",
-    "population": 615,
+    "population": 611,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2543,10 +2543,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 2850,
+      "value": 2780,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -2576,7 +2576,7 @@
       "preschools": 1,
       "medicalFacilities": 1,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 27,
@@ -2590,7 +2590,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -18.21809,
+    "populationChangeRate": -18.75,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2643,7 +2643,7 @@
     "code": "20309",
     "pref": "nagano",
     "name": "佐久穂町",
-    "population": 9577,
+    "population": 9570,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2684,9 +2684,9 @@
     "amenities": {
       "stations": 4,
       "preschools": 3,
-      "medicalFacilities": 11,
+      "medicalFacilities": 10,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 97,
@@ -2700,7 +2700,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.27324,
+    "populationChangeRate": -6.34175,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2753,7 +2753,7 @@
     "code": "20321",
     "pref": "nagano",
     "name": "軽井沢町",
-    "population": 18465,
+    "population": 18483,
     "populationTrend": "減少",
     "rent": {
       "value": 58105,
@@ -2794,9 +2794,9 @@
     "amenities": {
       "stations": 4,
       "preschools": 9,
-      "medicalFacilities": 30,
+      "medicalFacilities": 32,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1126,
@@ -2810,7 +2810,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.76798,
+    "populationChangeRate": -3.67417,
     "vacancy": {
       "rate": 70.4,
       "vacant": 20030,
@@ -2863,7 +2863,7 @@
     "code": "20323",
     "pref": "nagano",
     "name": "御代田町",
-    "population": 16555,
+    "population": 16546,
     "populationTrend": "増加",
     "rent": {
       "value": 52605,
@@ -2906,7 +2906,7 @@
       "preschools": 6,
       "medicalFacilities": 13,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 637,
@@ -2920,7 +2920,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 6.4288,
+    "populationChangeRate": 6.37094,
     "vacancy": {
       "rate": 19.7,
       "vacant": 1640,
@@ -2973,7 +2973,7 @@
     "code": "20324",
     "pref": "nagano",
     "name": "立科町",
-    "population": 6219,
+    "population": 6203,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2983,10 +2983,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 10850,
+      "value": 10750,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -3016,7 +3016,7 @@
       "preschools": 1,
       "medicalFacilities": 7,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 170,
@@ -3030,7 +3030,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.94374,
+    "populationChangeRate": -6.18572,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3083,7 +3083,7 @@
     "code": "20349",
     "pref": "nagano",
     "name": "青木村",
-    "population": 3781,
+    "population": 3778,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3093,10 +3093,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 15300,
+      "value": 15200,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -3126,7 +3126,7 @@
       "preschools": 1,
       "medicalFacilities": 2,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 62,
@@ -3140,7 +3140,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.25042,
+    "populationChangeRate": -8.32322,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3193,7 +3193,7 @@
     "code": "20350",
     "pref": "nagano",
     "name": "長和町",
-    "population": 5143,
+    "population": 5148,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3203,10 +3203,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 8700,
+      "value": 8500,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -3236,7 +3236,7 @@
       "preschools": 2,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 64,
@@ -3250,7 +3250,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.16071,
+    "populationChangeRate": -8.07143,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3303,7 +3303,7 @@
     "code": "20361",
     "pref": "nagano",
     "name": "下諏訪町",
-    "population": 17636,
+    "population": 17625,
     "populationTrend": "減少",
     "rent": {
       "value": 45000,
@@ -3344,9 +3344,9 @@
     "amenities": {
       "stations": 1,
       "preschools": 3,
-      "medicalFacilities": 31,
+      "medicalFacilities": 30,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 380,
@@ -3360,7 +3360,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.93004,
+    "populationChangeRate": -7.98747,
     "vacancy": {
       "rate": 22.3,
       "vacant": 2310,
@@ -3413,7 +3413,7 @@
     "code": "20362",
     "pref": "nagano",
     "name": "富士見町",
-    "population": 13370,
+    "population": 13366,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3456,7 +3456,7 @@
       "preschools": 5,
       "medicalFacilities": 13,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 443,
@@ -3470,7 +3470,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.06958,
+    "populationChangeRate": -5.09798,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3523,7 +3523,7 @@
     "code": "20363",
     "pref": "nagano",
     "name": "原村",
-    "population": 7793,
+    "population": 7786,
     "populationTrend": "微増",
     "rent": {
       "value": 0,
@@ -3533,10 +3533,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 15200,
+      "value": 15400,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -3566,7 +3566,7 @@
       "preschools": 3,
       "medicalFacilities": 8,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 211,
@@ -3580,7 +3580,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 1.47135,
+    "populationChangeRate": 1.38021,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3633,7 +3633,7 @@
     "code": "20382",
     "pref": "nagano",
     "name": "辰野町",
-    "population": 17048,
+    "population": 17037,
     "populationTrend": "減少",
     "rent": {
       "value": 29858,
@@ -3676,7 +3676,7 @@
       "preschools": 7,
       "medicalFacilities": 20,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 458,
@@ -3690,7 +3690,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.1218,
+    "populationChangeRate": -8.18108,
     "vacancy": {
       "rate": 23.7,
       "vacant": 2210,
@@ -3743,7 +3743,7 @@
     "code": "20383",
     "pref": "nagano",
     "name": "箕輪町",
-    "population": 23858,
+    "population": 23876,
     "populationTrend": "減少",
     "rent": {
       "value": 48333,
@@ -3784,9 +3784,9 @@
     "amenities": {
       "stations": 3,
       "preschools": 7,
-      "medicalFacilities": 24,
+      "medicalFacilities": 25,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 893,
@@ -3800,7 +3800,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.52599,
+    "populationChangeRate": -4.45396,
     "vacancy": {
       "rate": 10.6,
       "vacant": 1200,
@@ -3853,7 +3853,7 @@
     "code": "20384",
     "pref": "nagano",
     "name": "飯島町",
-    "population": 8498,
+    "population": 8491,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3896,7 +3896,7 @@
       "preschools": 3,
       "medicalFacilities": 10,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 335,
@@ -3910,7 +3910,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.61972,
+    "populationChangeRate": -5.69747,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3963,7 +3963,7 @@
     "code": "20385",
     "pref": "nagano",
     "name": "南箕輪村",
-    "population": 16000,
+    "population": 15993,
     "populationTrend": "微増",
     "rent": {
       "value": 49410,
@@ -4006,7 +4006,7 @@
       "preschools": 5,
       "medicalFacilities": 11,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 415,
@@ -4020,7 +4020,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 1.28505,
+    "populationChangeRate": 1.24074,
     "vacancy": {
       "rate": 9.4,
       "vacant": 710,
@@ -4073,7 +4073,7 @@
     "code": "20386",
     "pref": "nagano",
     "name": "中川村",
-    "population": 4354,
+    "population": 4351,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4116,7 +4116,7 @@
       "preschools": 2,
       "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 88,
@@ -4130,7 +4130,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.38572,
+    "populationChangeRate": -6.45023,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4183,7 +4183,7 @@
     "code": "20388",
     "pref": "nagano",
     "name": "宮田村",
-    "population": 8097,
+    "population": 8106,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4226,7 +4226,7 @@
       "preschools": 3,
       "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 467,
@@ -4240,7 +4240,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.50823,
+    "populationChangeRate": -5.4032,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4293,7 +4293,7 @@
     "code": "20402",
     "pref": "nagano",
     "name": "松川町",
-    "population": 11833,
+    "population": 11829,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4336,7 +4336,7 @@
       "preschools": 5,
       "medicalFacilities": 10,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 240,
@@ -4350,7 +4350,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.56265,
+    "populationChangeRate": -5.59457,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4403,7 +4403,7 @@
     "code": "20403",
     "pref": "nagano",
     "name": "高森町",
-    "population": 12146,
+    "population": 12112,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4444,9 +4444,9 @@
     "amenities": {
       "stations": 4,
       "preschools": 5,
-      "medicalFacilities": 14,
+      "medicalFacilities": 15,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 301,
@@ -4460,7 +4460,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.19085,
+    "populationChangeRate": -5.45625,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4513,7 +4513,7 @@
     "code": "20404",
     "pref": "nagano",
     "name": "阿南町",
-    "population": 3674,
+    "population": 3672,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4523,10 +4523,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 3020,
+      "value": 2995,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -4556,7 +4556,7 @@
       "preschools": 3,
       "medicalFacilities": 7,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 71,
@@ -4570,7 +4570,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -14.53826,
+    "populationChangeRate": -14.58479,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4623,7 +4623,7 @@
     "code": "20407",
     "pref": "nagano",
     "name": "阿智村",
-    "population": 5720,
+    "population": 5707,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4633,10 +4633,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 4928,
+      "value": 4883,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -4666,7 +4666,7 @@
       "preschools": 6,
       "medicalFacilities": 7,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 263,
@@ -4680,7 +4680,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.735,
+    "populationChangeRate": -5.94924,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4743,10 +4743,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 2470,
+      "value": 2420,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -4776,7 +4776,7 @@
       "preschools": 1,
       "medicalFacilities": 1,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2,
@@ -4843,7 +4843,7 @@
     "code": "20410",
     "pref": "nagano",
     "name": "根羽村",
-    "population": 785,
+    "population": 784,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4853,10 +4853,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 4100,
+      "value": 4020,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -4886,7 +4886,7 @@
       "preschools": 1,
       "medicalFacilities": 2,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 22,
@@ -4900,7 +4900,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.86385,
+    "populationChangeRate": -7.98122,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -4953,7 +4953,7 @@
     "code": "20411",
     "pref": "nagano",
     "name": "下條村",
-    "population": 3138,
+    "population": 3135,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -4963,10 +4963,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 4980,
+      "value": 4920,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -4996,7 +4996,7 @@
       "preschools": 1,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 39,
@@ -5010,7 +5010,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.48096,
+    "populationChangeRate": -11.56559,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -5063,7 +5063,7 @@
     "code": "20412",
     "pref": "nagano",
     "name": "売木村",
-    "population": 452,
+    "population": 451,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -5073,10 +5073,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 2760,
+      "value": 2710,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -5106,7 +5106,7 @@
       "preschools": 1,
       "medicalFacilities": 2,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 7,
@@ -5120,7 +5120,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -17.51825,
+    "populationChangeRate": -17.70073,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -5183,10 +5183,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 4270,
+      "value": 4210,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -5216,7 +5216,7 @@
       "preschools": 1,
       "medicalFacilities": 2,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 10,
@@ -5293,10 +5293,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 1800,
+      "value": 1770,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -5326,7 +5326,7 @@
       "preschools": 1,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 21,
@@ -5393,7 +5393,7 @@
     "code": "20415",
     "pref": "nagano",
     "name": "喬木村",
-    "population": 5518,
+    "population": 5507,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -5403,10 +5403,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 12400,
+      "value": 12300,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -5434,9 +5434,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 2,
-      "medicalFacilities": 5,
+      "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 67,
@@ -5450,7 +5450,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.61761,
+    "populationChangeRate": -7.80177,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -5503,7 +5503,7 @@
     "code": "20416",
     "pref": "nagano",
     "name": "豊丘村",
-    "population": 6214,
+    "population": 6191,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -5513,10 +5513,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 12600,
+      "value": 12500,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -5546,7 +5546,7 @@
       "preschools": 3,
       "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 147,
@@ -5560,7 +5560,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.2991,
+    "populationChangeRate": -3.65702,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -5613,7 +5613,7 @@
     "code": "20417",
     "pref": "nagano",
     "name": "大鹿村",
-    "population": 945,
+    "population": 941,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -5623,10 +5623,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 1830,
+      "value": 1800,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -5656,7 +5656,7 @@
       "preschools": 1,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 14,
@@ -5670,7 +5670,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.62463,
+    "populationChangeRate": -8.01564,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -5723,7 +5723,7 @@
     "code": "20422",
     "pref": "nagano",
     "name": "上松町",
-    "population": 3653,
+    "population": 3647,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -5766,7 +5766,7 @@
       "preschools": 1,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 107,
@@ -5780,7 +5780,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.57105,
+    "populationChangeRate": -11.71629,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -5833,7 +5833,7 @@
     "code": "20423",
     "pref": "nagano",
     "name": "南木曽町",
-    "population": 3541,
+    "population": 3536,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -5843,10 +5843,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 6647,
+      "value": 6523,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -5876,7 +5876,7 @@
       "preschools": 3,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 45,
@@ -5890,7 +5890,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.553,
+    "populationChangeRate": -9.68072,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -5943,7 +5943,7 @@
     "code": "20425",
     "pref": "nagano",
     "name": "木祖村",
-    "population": 2351,
+    "population": 2346,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -5953,10 +5953,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 10200,
+      "value": 9900,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -5984,9 +5984,9 @@
     "amenities": {
       "stations": 1,
       "preschools": 1,
-      "medicalFacilities": 3,
+      "medicalFacilities": 2,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 25,
@@ -6000,7 +6000,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -12.66716,
+    "populationChangeRate": -12.8529,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -6063,10 +6063,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 5290,
+      "value": 5130,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -6096,7 +6096,7 @@
       "preschools": 1,
       "medicalFacilities": 1,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 12,
@@ -6163,7 +6163,7 @@
     "code": "20430",
     "pref": "nagano",
     "name": "大桑村",
-    "population": 2983,
+    "population": 3004,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -6173,10 +6173,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 6390,
+      "value": 6260,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -6206,7 +6206,7 @@
       "preschools": 1,
       "medicalFacilities": 2,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 78,
@@ -6220,7 +6220,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -13.25967,
+    "populationChangeRate": -12.64903,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -6273,7 +6273,7 @@
     "code": "20432",
     "pref": "nagano",
     "name": "木曽町",
-    "population": 9528,
+    "population": 9547,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -6314,9 +6314,9 @@
     "amenities": {
       "stations": 3,
       "preschools": 8,
-      "medicalFacilities": 17,
+      "medicalFacilities": 16,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 159,
@@ -6330,7 +6330,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.97732,
+    "populationChangeRate": -9.79781,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -6383,7 +6383,7 @@
     "code": "20446",
     "pref": "nagano",
     "name": "麻績村",
-    "population": 2315,
+    "population": 2311,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -6393,10 +6393,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 9400,
+      "value": 9200,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -6426,7 +6426,7 @@
       "preschools": 1,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 18,
@@ -6440,7 +6440,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.72117,
+    "populationChangeRate": -10.87543,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -6503,10 +6503,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 6420,
+      "value": 6360,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -6536,7 +6536,7 @@
       "preschools": 1,
       "medicalFacilities": 2,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 20,
@@ -6603,7 +6603,7 @@
     "code": "20450",
     "pref": "nagano",
     "name": "山形村",
-    "population": 8111,
+    "population": 8103,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -6613,10 +6613,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 22100,
+      "value": 22500,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -6644,9 +6644,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 2,
-      "medicalFacilities": 7,
+      "medicalFacilities": 8,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 212,
@@ -6660,7 +6660,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.44048,
+    "populationChangeRate": -3.53571,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -6713,7 +6713,7 @@
     "code": "20451",
     "pref": "nagano",
     "name": "朝日村",
-    "population": 4050,
+    "population": 4047,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -6726,7 +6726,7 @@
       "value": 14000,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -6756,7 +6756,7 @@
       "preschools": 1,
       "medicalFacilities": 2,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 54,
@@ -6770,7 +6770,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.35172,
+    "populationChangeRate": -5.42183,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -6823,7 +6823,7 @@
     "code": "20452",
     "pref": "nagano",
     "name": "筑北村",
-    "population": 3746,
+    "population": 3734,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -6833,10 +6833,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 7360,
+      "value": 7247,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -6866,7 +6866,7 @@
       "preschools": 2,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 45,
@@ -6880,7 +6880,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.71318,
+    "populationChangeRate": -10.00241,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -6933,7 +6933,7 @@
     "code": "20481",
     "pref": "nagano",
     "name": "池田町",
-    "population": 8622,
+    "population": 8612,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -6976,7 +6976,7 @@
       "preschools": 2,
       "medicalFacilities": 11,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 109,
@@ -6990,7 +6990,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.10062,
+    "populationChangeRate": -8.20721,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -7043,7 +7043,7 @@
     "code": "20482",
     "pref": "nagano",
     "name": "松川村",
-    "population": 9431,
+    "population": 9421,
     "populationTrend": "微減",
     "rent": {
       "value": 0,
@@ -7086,7 +7086,7 @@
       "preschools": 2,
       "medicalFacilities": 13,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 178,
@@ -7100,7 +7100,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.75018,
+    "populationChangeRate": -1.85436,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -7153,7 +7153,7 @@
     "code": "20485",
     "pref": "nagano",
     "name": "白馬村",
-    "population": 8391,
+    "population": 8375,
     "populationTrend": "微減",
     "rent": {
       "value": 0,
@@ -7194,9 +7194,9 @@
     "amenities": {
       "stations": 5,
       "preschools": 2,
-      "medicalFacilities": 10,
+      "medicalFacilities": 9,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2256,
@@ -7210,7 +7210,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.14577,
+    "populationChangeRate": -2.33236,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -7273,10 +7273,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 7265,
+      "value": 7325,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -7306,7 +7306,7 @@
       "preschools": 1,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 392,
@@ -7373,7 +7373,7 @@
     "code": "20521",
     "pref": "nagano",
     "name": "坂城町",
-    "population": 12902,
+    "population": 12885,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -7416,7 +7416,7 @@
       "preschools": 4,
       "medicalFacilities": 16,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 599,
@@ -7430,7 +7430,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.86918,
+    "populationChangeRate": -7.99057,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -7483,7 +7483,7 @@
     "code": "20541",
     "pref": "nagano",
     "name": "小布施町",
-    "population": 10474,
+    "population": 10458,
     "populationTrend": "微減",
     "rent": {
       "value": 0,
@@ -7524,9 +7524,9 @@
     "amenities": {
       "stations": 2,
       "preschools": 4,
-      "medicalFacilities": 13,
+      "medicalFacilities": 12,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 99,
@@ -7540,7 +7540,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.74484,
+    "populationChangeRate": -1.89493,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -7593,7 +7593,7 @@
     "code": "20543",
     "pref": "nagano",
     "name": "高山村",
-    "population": 6169,
+    "population": 6165,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -7603,10 +7603,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 18100,
+      "value": 17800,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -7636,7 +7636,7 @@
       "preschools": 1,
       "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 104,
@@ -7650,7 +7650,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.77044,
+    "populationChangeRate": -6.83089,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -7703,7 +7703,7 @@
     "code": "20561",
     "pref": "nagano",
     "name": "山ノ内町",
-    "population": 10290,
+    "population": 10294,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -7744,9 +7744,9 @@
     "amenities": {
       "stations": 3,
       "preschools": 5,
-      "medicalFacilities": 9,
+      "medicalFacilities": 8,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 596,
@@ -7760,7 +7760,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.35518,
+    "populationChangeRate": -9.31994,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -7813,7 +7813,7 @@
     "code": "20562",
     "pref": "nagano",
     "name": "木島平村",
-    "population": 3912,
+    "population": 3909,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -7823,10 +7823,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 4620,
+      "value": 4580,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -7854,9 +7854,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 1,
-      "medicalFacilities": 6,
+      "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 56,
@@ -7870,7 +7870,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.58286,
+    "populationChangeRate": -10.65143,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -7923,7 +7923,7 @@
     "code": "20563",
     "pref": "nagano",
     "name": "野沢温泉村",
-    "population": 2913,
+    "population": 2916,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -7966,7 +7966,7 @@
       "preschools": 2,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 551,
@@ -7980,7 +7980,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.16194,
+    "populationChangeRate": -11.07045,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -8033,7 +8033,7 @@
     "code": "20583",
     "pref": "nagano",
     "name": "信濃町",
-    "population": 6898,
+    "population": 6882,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -8076,7 +8076,7 @@
       "preschools": 4,
       "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 230,
@@ -8090,7 +8090,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.86704,
+    "populationChangeRate": -11.07378,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -8143,7 +8143,7 @@
     "code": "20588",
     "pref": "nagano",
     "name": "小川村",
-    "population": 2010,
+    "population": 2001,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -8153,10 +8153,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 7260,
+      "value": 7120,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -8184,9 +8184,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 1,
-      "medicalFacilities": 1,
+      "medicalFacilities": 2,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 19,
@@ -8200,7 +8200,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.25508,
+    "populationChangeRate": -9.6614,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -8253,7 +8253,7 @@
     "code": "20590",
     "pref": "nagano",
     "name": "飯綱町",
-    "population": 9668,
+    "population": 9657,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -8296,7 +8296,7 @@
       "preschools": 4,
       "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 52,
@@ -8310,7 +8310,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.09946,
+    "populationChangeRate": -6.20629,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -8363,7 +8363,7 @@
     "code": "20602",
     "pref": "nagano",
     "name": "栄村",
-    "population": 1467,
+    "population": 1466,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -8373,10 +8373,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 3100,
+      "value": 3010,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -8404,9 +8404,9 @@
     "amenities": {
       "stations": 4,
       "preschools": 1,
-      "medicalFacilities": 3,
+      "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 26,
@@ -8420,7 +8420,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.62651,
+    "populationChangeRate": -11.68675,
     "vacancy": {
       "rate": -1,
       "vacant": 0,

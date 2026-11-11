@@ -3,7 +3,7 @@
     "code": "06201",
     "pref": "yamagata",
     "name": "山形市",
-    "population": 235685,
+    "population": 235431,
     "populationTrend": "減少",
     "rent": {
       "value": 51747,
@@ -44,9 +44,9 @@
     "amenities": {
       "stations": 13,
       "preschools": 138,
-      "medicalFacilities": 397,
+      "medicalFacilities": 392,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2214,
@@ -60,7 +60,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.80835,
+    "populationChangeRate": -4.91094,
     "vacancy": {
       "rate": 13.8,
       "vacant": 16390,
@@ -113,7 +113,7 @@
     "code": "06202",
     "pref": "yamagata",
     "name": "米沢市",
-    "population": 76114,
+    "population": 76033,
     "populationTrend": "減少",
     "rent": {
       "value": 42382,
@@ -154,9 +154,9 @@
     "amenities": {
       "stations": 10,
       "preschools": 41,
-      "medicalFacilities": 95,
+      "medicalFacilities": 93,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1290,
@@ -170,7 +170,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.32354,
+    "populationChangeRate": -6.42323,
     "vacancy": {
       "rate": 16.3,
       "vacant": 6290,
@@ -223,7 +223,7 @@
     "code": "06203",
     "pref": "yamagata",
     "name": "鶴岡市",
-    "population": 113149,
+    "population": 113051,
     "populationTrend": "減少",
     "rent": {
       "value": 44862,
@@ -264,9 +264,9 @@
     "amenities": {
       "stations": 10,
       "preschools": 73,
-      "medicalFacilities": 155,
+      "medicalFacilities": 150,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1069,
@@ -280,7 +280,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.51796,
+    "populationChangeRate": -7.59806,
     "vacancy": {
       "rate": 14.3,
       "vacant": 7270,
@@ -333,7 +333,7 @@
     "code": "06204",
     "pref": "yamagata",
     "name": "酒田市",
-    "population": 92122,
+    "population": 92053,
     "populationTrend": "減少",
     "rent": {
       "value": 44584,
@@ -374,9 +374,9 @@
     "amenities": {
       "stations": 5,
       "preschools": 52,
-      "medicalFacilities": 137,
+      "medicalFacilities": 132,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 701,
@@ -390,7 +390,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.12881,
+    "populationChangeRate": -8.19762,
     "vacancy": {
       "rate": 14.6,
       "vacant": 6590,
@@ -443,7 +443,7 @@
     "code": "06205",
     "pref": "yamagata",
     "name": "新庄市",
-    "population": 31653,
+    "population": 31661,
     "populationTrend": "減少",
     "rent": {
       "value": 42000,
@@ -484,9 +484,9 @@
     "amenities": {
       "stations": 7,
       "preschools": 21,
-      "medicalFacilities": 51,
+      "medicalFacilities": 49,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 494,
@@ -500,7 +500,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.07098,
+    "populationChangeRate": -8.04775,
     "vacancy": {
       "rate": 13.4,
       "vacant": 1980,
@@ -553,7 +553,7 @@
     "code": "06206",
     "pref": "yamagata",
     "name": "寒河江市",
-    "population": 38176,
+    "population": 38133,
     "populationTrend": "減少",
     "rent": {
       "value": 50841,
@@ -594,9 +594,9 @@
     "amenities": {
       "stations": 5,
       "preschools": 17,
-      "medicalFacilities": 56,
+      "medicalFacilities": 57,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 528,
@@ -610,7 +610,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.00883,
+    "populationChangeRate": -5.11583,
     "vacancy": {
       "rate": 12.6,
       "vacant": 2020,
@@ -663,7 +663,7 @@
     "code": "06207",
     "pref": "yamagata",
     "name": "上山市",
-    "population": 26753,
+    "population": 26724,
     "populationTrend": "減少",
     "rent": {
       "value": 40161,
@@ -706,7 +706,7 @@
       "preschools": 9,
       "medicalFacilities": 36,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 265,
@@ -720,7 +720,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.09687,
+    "populationChangeRate": -8.1965,
     "vacancy": {
       "rate": 15.2,
       "vacant": 1870,
@@ -773,7 +773,7 @@
     "code": "06208",
     "pref": "yamagata",
     "name": "村山市",
-    "population": 20212,
+    "population": 20200,
     "populationTrend": "減少",
     "rent": {
       "value": 43000,
@@ -816,7 +816,7 @@
       "preschools": 13,
       "medicalFacilities": 28,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 231,
@@ -830,7 +830,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.23272,
+    "populationChangeRate": -10.28602,
     "vacancy": {
       "rate": 12.2,
       "vacant": 1020,
@@ -883,7 +883,7 @@
     "code": "06209",
     "pref": "yamagata",
     "name": "長井市",
-    "population": 24580,
+    "population": 24561,
     "populationTrend": "減少",
     "rent": {
       "value": 45128,
@@ -926,7 +926,7 @@
       "preschools": 11,
       "medicalFacilities": 33,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 444,
@@ -940,7 +940,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.39555,
+    "populationChangeRate": -7.46713,
     "vacancy": {
       "rate": 14,
       "vacant": 1540,
@@ -993,7 +993,7 @@
     "code": "06210",
     "pref": "yamagata",
     "name": "天童市",
-    "population": 59773,
+    "population": 59721,
     "populationTrend": "減少",
     "rent": {
       "value": 50248,
@@ -1036,7 +1036,7 @@
       "preschools": 48,
       "medicalFacilities": 85,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 763,
@@ -1050,7 +1050,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.80914,
+    "populationChangeRate": -3.89282,
     "vacancy": {
       "rate": 11.8,
       "vacant": 3040,
@@ -1103,7 +1103,7 @@
     "code": "06211",
     "pref": "yamagata",
     "name": "東根市",
-    "population": 47405,
+    "population": 47386,
     "populationTrend": "横ばい",
     "rent": {
       "value": 49868,
@@ -1144,9 +1144,9 @@
     "amenities": {
       "stations": 3,
       "preschools": 29,
-      "medicalFacilities": 53,
+      "medicalFacilities": 52,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 506,
@@ -1160,7 +1160,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -0.58093,
+    "populationChangeRate": -0.62078,
     "vacancy": {
       "rate": 11.5,
       "vacant": 2260,
@@ -1213,7 +1213,7 @@
     "code": "06212",
     "pref": "yamagata",
     "name": "尾花沢市",
-    "population": 12796,
+    "population": 12783,
     "populationTrend": "減少",
     "rent": {
       "value": 32778,
@@ -1256,7 +1256,7 @@
       "preschools": 9,
       "medicalFacilities": 15,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 135,
@@ -1270,7 +1270,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -14.52809,
+    "populationChangeRate": -14.61492,
     "vacancy": {
       "rate": 12.9,
       "vacant": 670,
@@ -1323,7 +1323,7 @@
     "code": "06213",
     "pref": "yamagata",
     "name": "南陽市",
-    "population": 28066,
+    "population": 28049,
     "populationTrend": "減少",
     "rent": {
       "value": 46146,
@@ -1364,9 +1364,9 @@
     "amenities": {
       "stations": 7,
       "preschools": 15,
-      "medicalFacilities": 43,
+      "medicalFacilities": 41,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 341,
@@ -1380,7 +1380,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.73833,
+    "populationChangeRate": -7.79421,
     "vacancy": {
       "rate": 13.4,
       "vacant": 1630,
@@ -1433,7 +1433,7 @@
     "code": "06301",
     "pref": "yamagata",
     "name": "山辺町",
-    "population": 12888,
+    "population": 12883,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1476,7 +1476,7 @@
       "preschools": 4,
       "medicalFacilities": 14,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 70,
@@ -1490,7 +1490,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.09836,
+    "populationChangeRate": -6.13479,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1543,7 +1543,7 @@
     "code": "06302",
     "pref": "yamagata",
     "name": "中山町",
-    "population": 10017,
+    "population": 10009,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1586,7 +1586,7 @@
       "preschools": 3,
       "medicalFacilities": 8,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 111,
@@ -1600,7 +1600,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.78392,
+    "populationChangeRate": -6.85837,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1653,7 +1653,7 @@
     "code": "06321",
     "pref": "yamagata",
     "name": "河北町",
-    "population": 16192,
+    "population": 16183,
     "populationTrend": "減少",
     "rent": {
       "value": 48214,
@@ -1696,7 +1696,7 @@
       "preschools": 12,
       "medicalFacilities": 31,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 335,
@@ -1710,7 +1710,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.21382,
+    "populationChangeRate": -8.26484,
     "vacancy": {
       "rate": 13.9,
       "vacant": 910,
@@ -1804,9 +1804,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 1,
-      "medicalFacilities": 8,
+      "medicalFacilities": 7,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 71,
@@ -1873,7 +1873,7 @@
     "code": "06323",
     "pref": "yamagata",
     "name": "朝日町",
-    "population": 5453,
+    "population": 5447,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1916,7 +1916,7 @@
       "preschools": 1,
       "medicalFacilities": 8,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 65,
@@ -1930,7 +1930,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -14.34182,
+    "populationChangeRate": -14.43607,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1983,7 +1983,7 @@
     "code": "06324",
     "pref": "yamagata",
     "name": "大江町",
-    "population": 6695,
+    "population": 6692,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2026,7 +2026,7 @@
       "preschools": 4,
       "medicalFacilities": 7,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 136,
@@ -2040,7 +2040,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -12.43788,
+    "populationChangeRate": -12.47711,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2093,7 +2093,7 @@
     "code": "06341",
     "pref": "yamagata",
     "name": "大石田町",
-    "population": 5563,
+    "population": 5558,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2134,9 +2134,9 @@
     "amenities": {
       "stations": 2,
       "preschools": 3,
-      "medicalFacilities": 8,
+      "medicalFacilities": 9,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 62,
@@ -2150,7 +2150,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -15.41736,
+    "populationChangeRate": -15.49339,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2246,7 +2246,7 @@
       "preschools": 1,
       "medicalFacilities": 4,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 59,
@@ -2313,7 +2313,7 @@
     "code": "06362",
     "pref": "yamagata",
     "name": "最上町",
-    "population": 6984,
+    "population": 6978,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2356,7 +2356,7 @@
       "preschools": 2,
       "medicalFacilities": 6,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 130,
@@ -2370,7 +2370,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -13.56436,
+    "populationChangeRate": -13.63861,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2423,7 +2423,7 @@
     "code": "06363",
     "pref": "yamagata",
     "name": "舟形町",
-    "population": 4480,
+    "population": 4474,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2433,10 +2433,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 6713,
+      "value": 6633,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -2466,7 +2466,7 @@
       "preschools": 1,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 37,
@@ -2480,7 +2480,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.52526,
+    "populationChangeRate": -10.6451,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2533,7 +2533,7 @@
     "code": "06364",
     "pref": "yamagata",
     "name": "真室川町",
-    "population": 6135,
+    "population": 6130,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2576,7 +2576,7 @@
       "preschools": 5,
       "medicalFacilities": 7,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 37,
@@ -2590,7 +2590,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -14.82716,
+    "populationChangeRate": -14.89657,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2653,10 +2653,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 3865,
+      "value": 3815,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -2686,7 +2686,7 @@
       "preschools": 2,
       "medicalFacilities": 2,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 16,
@@ -2753,7 +2753,7 @@
     "code": "06366",
     "pref": "yamagata",
     "name": "鮭川村",
-    "population": 3417,
+    "population": 3411,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2763,10 +2763,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 3403,
+      "value": 3357,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -2796,7 +2796,7 @@
       "preschools": 2,
       "medicalFacilities": 2,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 29,
@@ -2810,7 +2810,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -12.42952,
+    "populationChangeRate": -12.58329,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2863,7 +2863,7 @@
     "code": "06367",
     "pref": "yamagata",
     "name": "戸沢村",
-    "population": 3554,
+    "population": 3552,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -2873,10 +2873,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 3040,
+      "value": 3000,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -2906,7 +2906,7 @@
       "preschools": 3,
       "medicalFacilities": 3,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 61,
@@ -2920,7 +2920,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -15.3608,
+    "populationChangeRate": -15.40843,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -2973,7 +2973,7 @@
     "code": "06381",
     "pref": "yamagata",
     "name": "高畠町",
-    "population": 20417,
+    "population": 20401,
     "populationTrend": "減少",
     "rent": {
       "value": 43033,
@@ -3016,7 +3016,7 @@
       "preschools": 12,
       "medicalFacilities": 22,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 227,
@@ -3030,7 +3030,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.10831,
+    "populationChangeRate": -9.17954,
     "vacancy": {
       "rate": 8.2,
       "vacant": 660,
@@ -3083,7 +3083,7 @@
     "code": "06382",
     "pref": "yamagata",
     "name": "川西町",
-    "population": 12953,
+    "population": 12942,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3124,9 +3124,9 @@
     "amenities": {
       "stations": 4,
       "preschools": 11,
-      "medicalFacilities": 15,
+      "medicalFacilities": 14,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 87,
@@ -3140,7 +3140,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.02487,
+    "populationChangeRate": -11.10043,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3193,7 +3193,7 @@
     "code": "06401",
     "pref": "yamagata",
     "name": "小国町",
-    "population": 6138,
+    "population": 6136,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3236,7 +3236,7 @@
       "preschools": 2,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 55,
@@ -3250,7 +3250,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -13.63444,
+    "populationChangeRate": -13.66259,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3303,7 +3303,7 @@
     "code": "06402",
     "pref": "yamagata",
     "name": "白鷹町",
-    "population": 11630,
+    "population": 11623,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3346,7 +3346,7 @@
       "preschools": 6,
       "medicalFacilities": 11,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 201,
@@ -3360,7 +3360,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.77502,
+    "populationChangeRate": -9.82933,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3413,7 +3413,7 @@
     "code": "06403",
     "pref": "yamagata",
     "name": "飯豊町",
-    "population": 5871,
+    "population": 5868,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3423,10 +3423,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 4047,
+      "value": 3997,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -3456,7 +3456,7 @@
       "preschools": 5,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 48,
@@ -3470,7 +3470,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.22032,
+    "populationChangeRate": -11.26569,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3523,7 +3523,7 @@
     "code": "06426",
     "pref": "yamagata",
     "name": "三川町",
-    "population": 7147,
+    "population": 7145,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3566,7 +3566,7 @@
       "preschools": 4,
       "medicalFacilities": 7,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 45,
@@ -3580,7 +3580,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.9729,
+    "populationChangeRate": -5.99921,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -3633,7 +3633,7 @@
     "code": "06428",
     "pref": "yamagata",
     "name": "庄内町",
-    "population": 18356,
+    "population": 18337,
     "populationTrend": "減少",
     "rent": {
       "value": 42000,
@@ -3674,9 +3674,9 @@
     "amenities": {
       "stations": 7,
       "preschools": 7,
-      "medicalFacilities": 14,
+      "medicalFacilities": 16,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 172,
@@ -3690,7 +3690,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.90775,
+    "populationChangeRate": -9.00203,
     "vacancy": {
       "rate": 15.7,
       "vacant": 1190,
@@ -3743,7 +3743,7 @@
     "code": "06461",
     "pref": "yamagata",
     "name": "遊佐町",
-    "population": 11522,
+    "population": 11511,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -3786,7 +3786,7 @@
       "preschools": 5,
       "medicalFacilities": 13,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 76,
@@ -3800,7 +3800,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.58686,
+    "populationChangeRate": -11.67127,
     "vacancy": {
       "rate": -1,
       "vacant": 0,

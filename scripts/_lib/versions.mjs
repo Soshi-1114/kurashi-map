@@ -12,10 +12,18 @@
 //
 // 年度更新の手順は docs/data-update.md を参照。URL と ASOF は必ずセットで更新すること。
 export const VERSIONS = {
+  // 令和7年国勢調査 人口等基本集計（原数値、2026-09-29公表）。
+  // 総人口と増減率は同じ基本集計で揃え、速報表と混在させない。
+  POPULATION_STATSDATAID: "0004065881",
+  POPULATION_CHANGE_STATSDATAID: "0004065882",
+  POPULATION_ASOF: "2025",
   // 国土数値情報 L01 地価公示。VERSION=zip 版番号（例 26=令和8年公示）、
   // ASOF=出典表示の年。必ず同期させる（VERSION=26 なら ASOF=2026）。
   L01_VERSION: "26",
   L01_ASOF: "2026",
+  // L01に住宅地点がない自治体を補う都道府県地価調査（7月1日時点）。
+  L02_VERSION: "26",
+  L02_ASOF: "2026",
 
   // こども家庭庁「保育所等関連状況取りまとめ」待機児童 Excel（資料６－１/６－２）。
   // URL 末尾の採番は年度で変わり自動推測できない（R7 は _02、R8 は _01 と入れ替わった。
@@ -42,8 +50,8 @@ export const VERSIONS = {
   // 国土地理院「全国都道府県市区町村別面積調」CSV。年数回更新（4半期ごとの時点列が
   // 同一ファイルに追記される）。ファイル名は年度改まりで変わる（例 R8_04_mencho.csv）。
   // MENCHO_ASOF は取り込む最新時点列のラベルと同期させる（fetch-area.mjs）。
-  MENCHO_URL: "https://www.gsi.go.jp/KOKUJYOHO/MENCHO/backnumber/R8_04_mencho.csv",
-  MENCHO_ASOF: "2026-04-01",
+  MENCHO_URL: "https://www.gsi.go.jp/KOKUJYOHO/MENCHO/backnumber/R8_07_mencho.csv",
+  MENCHO_ASOF: "2026-07-01",
 
   // IPSS「日本の地域別将来推計人口」結果表 Excel の配布ディレクトリと推計年。
   // 約5年周期（次回は2028年頃見込み）の手動更新のみで、定期ワークフローには載せない
@@ -75,9 +83,10 @@ export const VERSIONS = {
   // 追加される（同一IDの更新ではない）ため、毎年 e-Stat で最新年の表IDを確認して差し替える。
   // 第1表=病院数（二次医療圏・市区町村別）/ 第2表=一般診療所数・歯科診療所数（同）。
   // MEDICAL_ASOF は調査基準時点（毎年10月1日）。表IDと必ず同期させる。
-  MEDICAL_HOSP_STATSDATAID: "0004048437",
-  MEDICAL_CLINIC_STATSDATAID: "0004048438",
-  MEDICAL_ASOF: "2024年10月",
+  // 2025年版はDB表の公開前でも市区町村編CSVが利用可能（2026-09-29公表）。
+  MEDICAL_HOSP_CSV_URL: "https://www.e-stat.go.jp/stat-search/file-download?fileKind=1&statInfId=000040501271",
+  MEDICAL_CLINIC_CSV_URL: "https://www.e-stat.go.jp/stat-search/file-download?fileKind=1&statInfId=000040501272",
+  MEDICAL_ASOF: "2025年10月",
 
   // 国土数値情報「駅別乗降客数 S12」全国 GML zip（GeoJSON 同梱）。年度版は例年4月公開で、
   // URL の S12-{NN} を新年度に差し替える（fetch-stations.mjs, annual）。
@@ -91,7 +100,7 @@ export const VERSIONS = {
   // このラベルを書く（表示の同期）。S12_ASOF / MEDICAL_ASOF を更新したら
   // AMENITIES_ASOF の該当部分も合わせる（テストで検査）。
   AMENITIES_SOURCE: "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-  AMENITIES_ASOF: "駅 2025年度／保育 令和5年度／医療機関 2024年10月",
+  AMENITIES_ASOF: "駅 2025年度／保育 令和5年度／医療機関 2025年10月",
 };
 
 // env 未設定なら VERSIONS の既定を返すヘルパー。スクリプトからの読み出しを1行にする。

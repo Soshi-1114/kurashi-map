@@ -3,7 +3,7 @@
     "code": "18201",
     "pref": "fukui",
     "name": "福井市",
-    "population": 252068,
+    "population": 251775,
     "populationTrend": "減少",
     "rent": {
       "value": 50294,
@@ -44,9 +44,9 @@
     "amenities": {
       "stations": 50,
       "preschools": 181,
-      "medicalFacilities": 412,
+      "medicalFacilities": 411,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 6120,
@@ -60,7 +60,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.91113,
+    "populationChangeRate": -4.02283,
     "vacancy": {
       "rate": 16.1,
       "vacant": 20050,
@@ -113,7 +113,7 @@
     "code": "18202",
     "pref": "fukui",
     "name": "敦賀市",
-    "population": 60569,
+    "population": 60507,
     "populationTrend": "減少",
     "rent": {
       "value": 48940,
@@ -154,9 +154,9 @@
     "amenities": {
       "stations": 7,
       "preschools": 28,
-      "medicalFacilities": 76,
+      "medicalFacilities": 77,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1542,
@@ -170,7 +170,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.74972,
+    "populationChangeRate": -5.8462,
     "vacancy": {
       "rate": 18.2,
       "vacant": 6010,
@@ -223,7 +223,7 @@
     "code": "18204",
     "pref": "fukui",
     "name": "小浜市",
-    "population": 26542,
+    "population": 26538,
     "populationTrend": "減少",
     "rent": {
       "value": 44170,
@@ -264,9 +264,9 @@
     "amenities": {
       "stations": 5,
       "preschools": 16,
-      "medicalFacilities": 28,
+      "medicalFacilities": 27,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 538,
@@ -280,7 +280,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.44745,
+    "populationChangeRate": -8.46125,
     "vacancy": {
       "rate": 20.8,
       "vacant": 3140,
@@ -333,7 +333,7 @@
     "code": "18205",
     "pref": "fukui",
     "name": "大野市",
-    "population": 27765,
+    "population": 27753,
     "populationTrend": "減少",
     "rent": {
       "value": 32754,
@@ -374,9 +374,9 @@
     "amenities": {
       "stations": 10,
       "preschools": 26,
-      "medicalFacilities": 34,
+      "medicalFacilities": 33,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 610,
@@ -390,7 +390,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.25424,
+    "populationChangeRate": -11.29259,
     "vacancy": {
       "rate": 12.9,
       "vacant": 1440,
@@ -443,7 +443,7 @@
     "code": "18206",
     "pref": "fukui",
     "name": "勝山市",
-    "population": 20187,
+    "population": 20158,
     "populationTrend": "減少",
     "rent": {
       "value": 46579,
@@ -484,9 +484,9 @@
     "amenities": {
       "stations": 4,
       "preschools": 19,
-      "medicalFacilities": 20,
+      "medicalFacilities": 19,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 446,
@@ -500,7 +500,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.8623,
+    "populationChangeRate": -8.99323,
     "vacancy": {
       "rate": 13.8,
       "vacant": 1130,
@@ -553,7 +553,7 @@
     "code": "18207",
     "pref": "fukui",
     "name": "鯖江市",
-    "population": 67223,
+    "population": 67136,
     "populationTrend": "微減",
     "rent": {
       "value": 53521,
@@ -594,9 +594,9 @@
     "amenities": {
       "stations": 8,
       "preschools": 31,
-      "medicalFacilities": 71,
+      "medicalFacilities": 69,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1342,
@@ -610,7 +610,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.57975,
+    "populationChangeRate": -1.70712,
     "vacancy": {
       "rate": 11.8,
       "vacant": 3330,
@@ -663,7 +663,7 @@
     "code": "18208",
     "pref": "fukui",
     "name": "あわら市",
-    "population": 25747,
+    "population": 25718,
     "populationTrend": "減少",
     "rent": {
       "value": 45543,
@@ -706,7 +706,7 @@
       "preschools": 24,
       "medicalFacilities": 28,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 825,
@@ -720,7 +720,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -6.45618,
+    "populationChangeRate": -6.56155,
     "vacancy": {
       "rate": 16,
       "vacant": 1900,
@@ -773,7 +773,7 @@
     "code": "18209",
     "pref": "fukui",
     "name": "越前市",
-    "population": 79324,
+    "population": 79209,
     "populationTrend": "微減",
     "rent": {
       "value": 44751,
@@ -816,7 +816,7 @@
       "preschools": 53,
       "medicalFacilities": 85,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 6574,
@@ -830,7 +830,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.59656,
+    "populationChangeRate": -1.73922,
     "vacancy": {
       "rate": 14.4,
       "vacant": 4900,
@@ -883,7 +883,7 @@
     "code": "18210",
     "pref": "fukui",
     "name": "坂井市",
-    "population": 84792,
+    "population": 84713,
     "populationTrend": "減少",
     "rent": {
       "value": 44293,
@@ -924,9 +924,9 @@
     "amenities": {
       "stations": 11,
       "preschools": 56,
-      "medicalFacilities": 77,
+      "medicalFacilities": 78,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2190,
@@ -940,7 +940,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.16926,
+    "populationChangeRate": -4.25854,
     "vacancy": {
       "rate": 12.2,
       "vacant": 4370,
@@ -993,7 +993,7 @@
     "code": "18322",
     "pref": "fukui",
     "name": "永平寺町",
-    "population": 17992,
+    "population": 17972,
     "populationTrend": "減少",
     "rent": {
       "value": 49620,
@@ -1036,7 +1036,7 @@
       "preschools": 10,
       "medicalFacilities": 19,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 310,
@@ -1050,7 +1050,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.1305,
+    "populationChangeRate": -5.23596,
     "vacancy": {
       "rate": 10.8,
       "vacant": 840,
@@ -1103,7 +1103,7 @@
     "code": "18382",
     "pref": "fukui",
     "name": "池田町",
-    "population": 2285,
+    "population": 2282,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1113,10 +1113,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 2600,
+      "value": 2580,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -1146,7 +1146,7 @@
       "preschools": 2,
       "medicalFacilities": 5,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 17,
@@ -1160,7 +1160,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -5.69542,
+    "populationChangeRate": -5.81923,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1213,7 +1213,7 @@
     "code": "18404",
     "pref": "fukui",
     "name": "南越前町",
-    "population": 8949,
+    "population": 8935,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1223,10 +1223,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 9795,
+      "value": 9633,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -1256,7 +1256,7 @@
       "preschools": 6,
       "medicalFacilities": 10,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 117,
@@ -1270,7 +1270,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -10.52789,
+    "populationChangeRate": -10.66787,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1323,7 +1323,7 @@
     "code": "18423",
     "pref": "fukui",
     "name": "越前町",
-    "population": 18550,
+    "population": 18547,
     "populationTrend": "減少",
     "rent": {
       "value": 30000,
@@ -1364,9 +1364,9 @@
     "amenities": {
       "stations": 0,
       "preschools": 17,
-      "medicalFacilities": 15,
+      "medicalFacilities": 16,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 339,
@@ -1380,7 +1380,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.79402,
+    "populationChangeRate": -7.80893,
     "vacancy": {
       "rate": 15.2,
       "vacant": 1050,
@@ -1433,7 +1433,7 @@
     "code": "18442",
     "pref": "fukui",
     "name": "美浜町",
-    "population": 8284,
+    "population": 8275,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1476,7 +1476,7 @@
       "preschools": 3,
       "medicalFacilities": 11,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 85,
@@ -1490,7 +1490,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.75052,
+    "populationChangeRate": -9.84857,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1543,7 +1543,7 @@
     "code": "18481",
     "pref": "fukui",
     "name": "高浜町",
-    "population": 9136,
+    "population": 9125,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1586,7 +1586,7 @@
       "preschools": 6,
       "medicalFacilities": 11,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 192,
@@ -1600,7 +1600,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -11.52431,
+    "populationChangeRate": -11.63083,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1653,7 +1653,7 @@
     "code": "18483",
     "pref": "fukui",
     "name": "おおい町",
-    "population": 7274,
+    "population": 7261,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1663,10 +1663,10 @@
       "isEstimated": false
     },
     "landPrice": {
-      "value": 10830,
+      "value": 10775,
       "unit": "円/㎡",
       "source": "地価調査（住宅地平均）",
-      "asOf": "2025",
+      "asOf": "2026",
       "isEstimated": false
     },
     "waitlistChildren": {
@@ -1696,7 +1696,7 @@
       "preschools": 8,
       "medicalFacilities": 10,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 110,
@@ -1710,7 +1710,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -8.04046,
+    "populationChangeRate": -8.2048,
     "vacancy": {
       "rate": -1,
       "vacant": 0,
@@ -1763,7 +1763,7 @@
     "code": "18501",
     "pref": "fukui",
     "name": "若狭町",
-    "population": 12699,
+    "population": 12684,
     "populationTrend": "減少",
     "rent": {
       "value": 0,
@@ -1806,7 +1806,7 @@
       "preschools": 9,
       "medicalFacilities": 13,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 152,
@@ -1820,7 +1820,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -9.31229,
+    "populationChangeRate": -9.41941,
     "vacancy": {
       "rate": -1,
       "vacant": 0,

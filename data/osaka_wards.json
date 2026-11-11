@@ -6,7 +6,7 @@
     "level": "ward",
     "parentCode": "27100",
     "displayName": "大阪市都島区",
-    "population": 110124,
+    "population": 110025,
     "populationTrend": "微増",
     "rent": {
       "value": 67908,
@@ -47,9 +47,9 @@
     "amenities": {
       "stations": 10,
       "preschools": 56,
-      "medicalFacilities": 211,
+      "medicalFacilities": 213,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 5585,
@@ -63,7 +63,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 2.05738,
+    "populationChangeRate": 1.96564,
     "vacancy": {
       "rate": 17,
       "vacant": 12150,
@@ -119,7 +119,7 @@
     "level": "ward",
     "parentCode": "27100",
     "displayName": "大阪市福島区",
-    "population": 84223,
+    "population": 84205,
     "populationTrend": "増加",
     "rent": {
       "value": 81080,
@@ -160,9 +160,9 @@
     "amenities": {
       "stations": 10,
       "preschools": 68,
-      "medicalFacilities": 177,
+      "medicalFacilities": 181,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2749,
@@ -176,7 +176,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 6.17058,
+    "populationChangeRate": 6.14789,
     "vacancy": {
       "rate": 13,
       "vacant": 6760,
@@ -232,7 +232,7 @@
     "level": "ward",
     "parentCode": "27100",
     "displayName": "大阪市此花区",
-    "population": 62323,
+    "population": 62184,
     "populationTrend": "減少",
     "rent": {
       "value": 60888,
@@ -275,7 +275,7 @@
       "preschools": 28,
       "medicalFacilities": 90,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 3500,
@@ -289,7 +289,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.48729,
+    "populationChangeRate": -4.70031,
     "vacancy": {
       "rate": 16.9,
       "vacant": 6640,
@@ -345,7 +345,7 @@
     "level": "ward",
     "parentCode": "27100",
     "displayName": "大阪市西区",
-    "population": 115449,
+    "population": 115345,
     "populationTrend": "増加",
     "rent": {
       "value": 77959,
@@ -388,7 +388,7 @@
       "preschools": 74,
       "medicalFacilities": 268,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 8551,
@@ -402,7 +402,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 9.05613,
+    "populationChangeRate": 8.95789,
     "vacancy": {
       "rate": 11.5,
       "vacant": 9020,
@@ -458,7 +458,7 @@
     "level": "ward",
     "parentCode": "27100",
     "displayName": "大阪市港区",
-    "population": 80734,
+    "population": 80676,
     "populationTrend": "横ばい",
     "rent": {
       "value": 58276,
@@ -499,9 +499,9 @@
     "amenities": {
       "stations": 4,
       "preschools": 31,
-      "medicalFacilities": 115,
+      "medicalFacilities": 111,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 5797,
@@ -515,7 +515,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -0.26437,
+    "populationChangeRate": -0.33602,
     "vacancy": {
       "rate": 18,
       "vacant": 9450,
@@ -571,7 +571,7 @@
     "level": "ward",
     "parentCode": "27100",
     "displayName": "大阪市大正区",
-    "population": 60125,
+    "population": 60041,
     "populationTrend": "減少",
     "rent": {
       "value": 50145,
@@ -614,7 +614,7 @@
       "preschools": 32,
       "medicalFacilities": 104,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 3143,
@@ -628,7 +628,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.15384,
+    "populationChangeRate": -3.28915,
     "vacancy": {
       "rate": 17.7,
       "vacant": 6250,
@@ -684,7 +684,7 @@
     "level": "ward",
     "parentCode": "27100",
     "displayName": "大阪市天王寺区",
-    "population": 87782,
+    "population": 87701,
     "populationTrend": "増加",
     "rent": {
       "value": 80987,
@@ -725,9 +725,9 @@
     "amenities": {
       "stations": 13,
       "preschools": 57,
-      "medicalFacilities": 273,
+      "medicalFacilities": 285,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 7349,
@@ -741,7 +741,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 6.85835,
+    "populationChangeRate": 6.75975,
     "vacancy": {
       "rate": 14.7,
       "vacant": 7860,
@@ -797,7 +797,7 @@
     "level": "ward",
     "parentCode": "27100",
     "displayName": "大阪市浪速区",
-    "population": 87409,
+    "population": 87346,
     "populationTrend": "増加",
     "rent": {
       "value": 66384,
@@ -838,9 +838,9 @@
     "amenities": {
       "stations": 20,
       "preschools": 35,
-      "medicalFacilities": 133,
+      "medicalFacilities": 141,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 14670,
@@ -854,7 +854,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 15.76738,
+    "populationChangeRate": 15.68394,
     "vacancy": {
       "rate": 17.9,
       "vacant": 12900,
@@ -910,7 +910,7 @@
     "level": "ward",
     "parentCode": "27100",
     "displayName": "大阪市西淀川区",
-    "population": 97178,
+    "population": 97021,
     "populationTrend": "微増",
     "rent": {
       "value": 57594,
@@ -951,9 +951,9 @@
     "amenities": {
       "stations": 5,
       "preschools": 39,
-      "medicalFacilities": 121,
+      "medicalFacilities": 119,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 7258,
@@ -967,7 +967,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 1.37069,
+    "populationChangeRate": 1.20692,
     "vacancy": {
       "rate": 13.4,
       "vacant": 7470,
@@ -1023,7 +1023,7 @@
     "level": "ward",
     "parentCode": "27100",
     "displayName": "大阪市東淀川区",
-    "population": 178007,
+    "population": 177869,
     "populationTrend": "横ばい",
     "rent": {
       "value": 55747,
@@ -1064,9 +1064,9 @@
     "amenities": {
       "stations": 11,
       "preschools": 71,
-      "medicalFacilities": 256,
+      "medicalFacilities": 255,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 10471,
@@ -1080,7 +1080,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 0.50079,
+    "populationChangeRate": 0.42288,
     "vacancy": {
       "rate": 16.4,
       "vacant": 20390,
@@ -1136,7 +1136,7 @@
     "level": "ward",
     "parentCode": "27100",
     "displayName": "大阪市東成区",
-    "population": 89429,
+    "population": 89322,
     "populationTrend": "増加",
     "rent": {
       "value": 63398,
@@ -1177,9 +1177,9 @@
     "amenities": {
       "stations": 6,
       "preschools": 35,
-      "medicalFacilities": 166,
+      "medicalFacilities": 164,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 9727,
@@ -1193,7 +1193,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 5.32707,
+    "populationChangeRate": 5.20105,
     "vacancy": {
       "rate": 14.8,
       "vacant": 8410,
@@ -1249,8 +1249,8 @@
     "level": "ward",
     "parentCode": "27100",
     "displayName": "大阪市生野区",
-    "population": 128673,
-    "populationTrend": "微増",
+    "population": 128396,
+    "populationTrend": "横ばい",
     "rent": {
       "value": 59259,
       "unit": "円/月",
@@ -1290,9 +1290,9 @@
     "amenities": {
       "stations": 5,
       "preschools": 60,
-      "medicalFacilities": 243,
+      "medicalFacilities": 242,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 31642,
@@ -1306,7 +1306,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 1.07141,
+    "populationChangeRate": 0.85383,
     "vacancy": {
       "rate": 22.8,
       "vacant": 20890,
@@ -1362,7 +1362,7 @@
     "level": "ward",
     "parentCode": "27100",
     "displayName": "大阪市旭区",
-    "population": 90745,
+    "population": 90667,
     "populationTrend": "微増",
     "rent": {
       "value": 59027,
@@ -1403,9 +1403,9 @@
     "amenities": {
       "stations": 7,
       "preschools": 47,
-      "medicalFacilities": 170,
+      "medicalFacilities": 172,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 3463,
@@ -1419,7 +1419,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 1.19884,
+    "populationChangeRate": 1.11185,
     "vacancy": {
       "rate": 18.1,
       "vacant": 10280,
@@ -1475,7 +1475,7 @@
     "level": "ward",
     "parentCode": "27100",
     "displayName": "大阪市城東区",
-    "population": 169504,
+    "population": 169370,
     "populationTrend": "横ばい",
     "rent": {
       "value": 63030,
@@ -1516,9 +1516,9 @@
     "amenities": {
       "stations": 9,
       "preschools": 70,
-      "medicalFacilities": 266,
+      "medicalFacilities": 271,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 7666,
@@ -1532,7 +1532,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 0.27271,
+    "populationChangeRate": 0.19344,
     "vacancy": {
       "rate": 12.6,
       "vacant": 12350,
@@ -1588,7 +1588,7 @@
     "level": "ward",
     "parentCode": "27100",
     "displayName": "大阪市阿倍野区",
-    "population": 112456,
+    "population": 112313,
     "populationTrend": "微増",
     "rent": {
       "value": 76945,
@@ -1629,9 +1629,9 @@
     "amenities": {
       "stations": 15,
       "preschools": 72,
-      "medicalFacilities": 302,
+      "medicalFacilities": 304,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 6260,
@@ -1645,7 +1645,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 1.31628,
+    "populationChangeRate": 1.18744,
     "vacancy": {
       "rate": 13.8,
       "vacant": 8830,
@@ -1701,7 +1701,7 @@
     "level": "ward",
     "parentCode": "27100",
     "displayName": "大阪市住吉区",
-    "population": 150459,
+    "population": 150253,
     "populationTrend": "微減",
     "rent": {
       "value": 57359,
@@ -1742,9 +1742,9 @@
     "amenities": {
       "stations": 23,
       "preschools": 70,
-      "medicalFacilities": 280,
+      "medicalFacilities": 279,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 7464,
@@ -1758,7 +1758,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.69676,
+    "populationChangeRate": -1.83136,
     "vacancy": {
       "rate": 16.9,
       "vacant": 16840,
@@ -1814,7 +1814,7 @@
     "level": "ward",
     "parentCode": "27100",
     "displayName": "大阪市東住吉区",
-    "population": 131606,
+    "population": 131439,
     "populationTrend": "微増",
     "rent": {
       "value": 61899,
@@ -1855,9 +1855,9 @@
     "amenities": {
       "stations": 7,
       "preschools": 50,
-      "medicalFacilities": 219,
+      "medicalFacilities": 223,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 7498,
@@ -1871,7 +1871,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 2.93862,
+    "populationChangeRate": 2.808,
     "vacancy": {
       "rate": 18.2,
       "vacant": 13950,
@@ -1927,7 +1927,7 @@
     "level": "ward",
     "parentCode": "27100",
     "displayName": "大阪市西成区",
-    "population": 105419,
+    "population": 105242,
     "populationTrend": "横ばい",
     "rent": {
       "value": 51282,
@@ -1968,9 +1968,9 @@
     "amenities": {
       "stations": 19,
       "preschools": 24,
-      "medicalFacilities": 199,
+      "medicalFacilities": 202,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 17409,
@@ -1984,7 +1984,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -0.65215,
+    "populationChangeRate": -0.81895,
     "vacancy": {
       "rate": 25.9,
       "vacant": 22870,
@@ -2040,7 +2040,7 @@
     "level": "ward",
     "parentCode": "27100",
     "displayName": "大阪市淀川区",
-    "population": 190163,
+    "population": 189980,
     "populationTrend": "増加",
     "rent": {
       "value": 64102,
@@ -2081,9 +2081,9 @@
     "amenities": {
       "stations": 16,
       "preschools": 91,
-      "medicalFacilities": 338,
+      "medicalFacilities": 342,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 12336,
@@ -2097,7 +2097,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 3.6627,
+    "populationChangeRate": 3.56294,
     "vacancy": {
       "rate": 14.6,
       "vacant": 18610,
@@ -2153,7 +2153,7 @@
     "level": "ward",
     "parentCode": "27100",
     "displayName": "大阪市鶴見区",
-    "population": 109900,
+    "population": 109817,
     "populationTrend": "微減",
     "rent": {
       "value": 60964,
@@ -2196,7 +2196,7 @@
       "preschools": 60,
       "medicalFacilities": 155,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2749,
@@ -2210,7 +2210,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.47668,
+    "populationChangeRate": -2.55034,
     "vacancy": {
       "rate": 11.3,
       "vacant": 6400,
@@ -2266,7 +2266,7 @@
     "level": "ward",
     "parentCode": "27100",
     "displayName": "大阪市住之江区",
-    "population": 115287,
+    "population": 115052,
     "populationTrend": "減少",
     "rent": {
       "value": 52029,
@@ -2307,9 +2307,9 @@
     "amenities": {
       "stations": 14,
       "preschools": 51,
-      "medicalFacilities": 195,
+      "medicalFacilities": 190,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 7665,
@@ -2323,7 +2323,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -3.98511,
+    "populationChangeRate": -4.18082,
     "vacancy": {
       "rate": 13.6,
       "vacant": 9710,
@@ -2379,7 +2379,7 @@
     "level": "ward",
     "parentCode": "27100",
     "displayName": "大阪市平野区",
-    "population": 182659,
+    "population": 182480,
     "populationTrend": "減少",
     "rent": {
       "value": 50128,
@@ -2420,9 +2420,9 @@
     "amenities": {
       "stations": 7,
       "preschools": 59,
-      "medicalFacilities": 340,
+      "medicalFacilities": 335,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 10895,
@@ -2436,7 +2436,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.94036,
+    "populationChangeRate": -5.03352,
     "vacancy": {
       "rate": 16.4,
       "vacant": 18040,
@@ -2492,7 +2492,7 @@
     "level": "ward",
     "parentCode": "27100",
     "displayName": "大阪市北区",
-    "population": 149620,
+    "population": 149465,
     "populationTrend": "増加",
     "rent": {
       "value": 78342,
@@ -2533,9 +2533,9 @@
     "amenities": {
       "stations": 25,
       "preschools": 190,
-      "medicalFacilities": 778,
+      "medicalFacilities": 799,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 9670,
@@ -2549,7 +2549,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 7.3499,
+    "populationChangeRate": 7.23869,
     "vacancy": {
       "rate": 11.1,
       "vacant": 11400,
@@ -2605,7 +2605,7 @@
     "level": "ward",
     "parentCode": "27100",
     "displayName": "大阪市中央区",
-    "population": 119350,
+    "population": 119162,
     "populationTrend": "増加",
     "rent": {
       "value": 80061,
@@ -2646,9 +2646,9 @@
     "amenities": {
       "stations": 34,
       "preschools": 82,
-      "medicalFacilities": 757,
+      "medicalFacilities": 766,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 13895,
@@ -2662,7 +2662,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 15.06276,
+    "populationChangeRate": 14.88151,
     "vacancy": {
       "rate": 18.4,
       "vacant": 17170,
@@ -2718,7 +2718,7 @@
     "level": "ward",
     "parentCode": "27140",
     "displayName": "堺市堺区",
-    "population": 150091,
+    "population": 149807,
     "populationTrend": "横ばい",
     "rent": {
       "value": 55783,
@@ -2759,9 +2759,9 @@
     "amenities": {
       "stations": 22,
       "preschools": 198,
-      "medicalFacilities": 290,
+      "medicalFacilities": 289,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 7397,
@@ -2775,7 +2775,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": 0.94766,
+    "populationChangeRate": 0.75665,
     "vacancy": {
       "rate": 16.7,
       "vacant": 15260,
@@ -2831,7 +2831,7 @@
     "level": "ward",
     "parentCode": "27140",
     "displayName": "堺市中区",
-    "population": 115765,
+    "population": 115871,
     "populationTrend": "減少",
     "rent": {
       "value": 54445,
@@ -2874,7 +2874,7 @@
       "preschools": 47,
       "medicalFacilities": 135,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2470,
@@ -2888,7 +2888,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.51269,
+    "populationChangeRate": -4.42525,
     "vacancy": {
       "rate": 9.6,
       "vacant": 5480,
@@ -2944,7 +2944,7 @@
     "level": "ward",
     "parentCode": "27140",
     "displayName": "堺市東区",
-    "population": 83986,
+    "population": 83994,
     "populationTrend": "微減",
     "rent": {
       "value": 55666,
@@ -2985,9 +2985,9 @@
     "amenities": {
       "stations": 3,
       "preschools": 36,
-      "medicalFacilities": 128,
+      "medicalFacilities": 129,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1679,
@@ -3001,7 +3001,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.2429,
+    "populationChangeRate": -1.23349,
     "vacancy": {
       "rate": 11.3,
       "vacant": 4810,
@@ -3057,7 +3057,7 @@
     "level": "ward",
     "parentCode": "27140",
     "displayName": "堺市西区",
-    "population": 131938,
+    "population": 131868,
     "populationTrend": "微減",
     "rent": {
       "value": 58011,
@@ -3098,9 +3098,9 @@
     "amenities": {
       "stations": 10,
       "preschools": 67,
-      "medicalFacilities": 213,
+      "medicalFacilities": 210,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2937,
@@ -3114,7 +3114,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -2.53887,
+    "populationChangeRate": -2.59058,
     "vacancy": {
       "rate": 11.3,
       "vacant": 7540,
@@ -3170,7 +3170,7 @@
     "level": "ward",
     "parentCode": "27140",
     "displayName": "堺市南区",
-    "population": 127881,
+    "population": 127674,
     "populationTrend": "減少",
     "rent": {
       "value": 42678,
@@ -3211,9 +3211,9 @@
     "amenities": {
       "stations": 3,
       "preschools": 71,
-      "medicalFacilities": 190,
+      "medicalFacilities": 187,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 3562,
@@ -3227,7 +3227,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -7.64314,
+    "populationChangeRate": -7.79264,
     "vacancy": {
       "rate": 14.2,
       "vacant": 9680,
@@ -3283,7 +3283,7 @@
     "level": "ward",
     "parentCode": "27140",
     "displayName": "堺市北区",
-    "population": 157733,
+    "population": 157598,
     "populationTrend": "微減",
     "rent": {
       "value": 61002,
@@ -3324,9 +3324,9 @@
     "amenities": {
       "stations": 6,
       "preschools": 78,
-      "medicalFacilities": 257,
+      "medicalFacilities": 258,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 2826,
@@ -3340,7 +3340,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -1.26692,
+    "populationChangeRate": -1.35143,
     "vacancy": {
       "rate": 12.9,
       "vacant": 11010,
@@ -3396,7 +3396,7 @@
     "level": "ward",
     "parentCode": "27140",
     "displayName": "堺市美原区",
-    "population": 35939,
+    "population": 35836,
     "populationTrend": "減少",
     "rent": {
       "value": 49876,
@@ -3439,7 +3439,7 @@
       "preschools": 11,
       "medicalFacilities": 32,
       "source": "国土数値情報（S12 駅・reinfolib XKT007 保育）・厚生労働省 医療施設調査",
-      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2024年10月"
+      "asOf": "駅 2025年度／保育 令和5年度／医療機関 2025年10月"
     },
     "foreignResidents": {
       "value": 1265,
@@ -3453,7 +3453,7 @@
       "source": "国土地理院「指定緊急避難場所データ」",
       "asOf": "2026-06-19"
     },
-    "populationChangeRate": -4.42772,
+    "populationChangeRate": -4.70163,
     "vacancy": {
       "rate": 8.4,
       "vacant": 1390,

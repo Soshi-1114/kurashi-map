@@ -17,7 +17,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const prefArg = process.argv.find((a) => a.startsWith("--pref="))?.slice(7);
 const slugs = prefArg ? [prefArg] : Object.keys(PREFS);
 
-const TRENDS = new Set(["増加", "微増", "横ばい", "微減", "減少"]);
+const TRENDS = new Set(["増加", "微増", "横ばい", "微減", "減少", "データなし"]);
 
 const errors = [];
 function err(file, code, msg) {

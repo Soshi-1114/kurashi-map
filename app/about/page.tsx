@@ -65,7 +65,7 @@ async function loadRows(): Promise<SourceRow[]> {
     {
       label: "人口・人口増減率",
       source: "総務省 国勢調査（e-Stat）",
-      asOf: "2025年（速報集計）",
+      asOf: "2025年（人口等基本集計）",
       cycle: "5年ごと",
       next: NEXT_UPDATE.population,
     },
