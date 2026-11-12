@@ -57,11 +57,13 @@
 .rk-eyebrow svg { flex: none; }
 .rk-title { margin: 14px 0 0; }
 .rk-root .rk-title {
-  max-width: 22ch;
+  max-width: none;
   font-size: clamp(30px, 4vw, 42px);
   line-height: 1.2;
   letter-spacing: -0.025em;
+  text-wrap: balance;
 }
+.rk-title-word { white-space: nowrap; }
 .rk-title-sub {
   display: block;
   margin-top: 7px;

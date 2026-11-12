@@ -1,3 +1,4 @@
+import RankingTitle from "@/components/ranking/RankingTitle";
 import DisplayAd from "@/components/monetization/DisplayAd";
 import { serializeJsonLd } from "@/lib/jsonLd";
 // 都道府県ランキング（47都道府県を1本に並べる）。
@@ -143,7 +144,7 @@ export default async function PrefectureRankingPage(props: { params: Promise<Par
 
       <header className="rk-hero rk-reveal">
         <span className="rk-eyebrow"><Database size={14} aria-hidden="true" />都道府県ランキング</span>
-        <h1 className="rk-title">{def.title}</h1>
+        <RankingTitle title={def.title} />
         <p className="rk-lead">
           {def.lead}政府統計の実データのみで集計しています（推計値は含みません）。
         </p>

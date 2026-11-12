@@ -1,3 +1,4 @@
+import RankingTitle from "@/components/ranking/RankingTitle";
 import DisplayAd from "@/components/monetization/DisplayAd";
 import { serializeJsonLd } from "@/lib/jsonLd";
 import "../../league.css";
@@ -162,7 +163,7 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
 
       <header className="rk-hero rk-reveal">
         <span className="rk-eyebrow"><Database size={14} aria-hidden="true" />全国ランキング</span>
-        <h1 className="rk-title">{searchCopy?.title ?? def.title}</h1>
+        <RankingTitle title={searchCopy?.title ?? def.title} />
         <p className="rk-lead">
           {searchCopy?.lead ?? `${def.lead}データのある自治体のみを対象に、政府統計の実データで集計しています（推計値は含みません）。`}
         </p>

@@ -1,3 +1,4 @@
+import RankingTitle from "@/components/ranking/RankingTitle";
 import DisplayAd from "@/components/monetization/DisplayAd";
 import { serializeJsonLd } from "@/lib/jsonLd";
 import "../../../league.css";
@@ -242,7 +243,7 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
 
       <header className="rk-hero rk-reveal">
         <span className="rk-eyebrow"><Database size={14} aria-hidden="true" />都道府県別ランキング</span>
-        <h1 className="rk-title">{searchCopy?.title ?? `${prefName}の${def.title}`}</h1>
+        <RankingTitle title={searchCopy?.title ?? `${prefName}の${def.title}`} />
         <p className="rk-lead">
           {searchCopy?.lead ?? `${def.lead.replace("全国の", `${prefName}の`)}データのある${ranked.length}市区町村を、政府統計の実データで集計しています（推計値は含みません）。`}
         </p>
