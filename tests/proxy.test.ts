@@ -6,80 +6,42 @@ function requestOf(opts: { country?: string; ua?: string; path?: string } = {}):
   const headers = new Headers();
   if (opts.country) headers.set('x-vercel-ip-country', opts.country);
   if (opts.ua) headers.set('user-agent', opts.ua);
-  return new NextRequest(`https://kurashi-map.example${opts.path ?? '/area/tokyo/shinjuku'}`, {
+  return new NextRequest(`https://kurashi-map.example${opts.path ?? '/area/tokyo/13104'}`, {
     headers,
   });
 }
 
+const paths = ['/', '/area/saitama/11203', '/api/muni/11203', '/robots.txt', '/sitemap.xml', '/ads.txt'];
+const userAgents = [
+  undefined,
+  'Mozilla/5.0',
+  'Google-Display-Ads-Bot',
+  'Mediapartners-Google',
+  'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)',
+  'Twitterbot/1.0',
+  'UnknownBot/1.0',
+];
+
 describe('proxy (geo block)', () => {
-  it.each(['/', '/area/saitama/11203', '/robots.txt', '/ads.txt'])(
-    'AdSense所有権確認クローラーが国外から %s にアクセスできる', path => {
-      expect(proxy(requestOf({ country: 'US', ua: 'Google-Display-Ads-Bot', path })).status).toBe(200);
-      expect(proxy(requestOf({ country: 'IE', ua: 'Mozilla/5.0 (compatible; Google-Display-Ads-Bot/1.0)', path })).status).toBe(200);
-      expect(proxy(requestOf({ country: 'CN', ua: 'Google-Display-Ads-Bot', path })).status).toBe(403);
-    },
-  );
-  it('ads.txt は国外の一般UA・広告クローラーにも公開し、中国の拒否は維持する', () => {
-    expect(proxy(requestOf({ country: 'US', ua: 'Mozilla/5.0', path: '/ads.txt' })).status).toBe(200);
-    expect(proxy(requestOf({ country: 'US', ua: 'Mediapartners-Google', path: '/ads.txt' })).status).toBe(200);
-    expect(proxy(requestOf({ country: 'CN', ua: 'Mediapartners-Google', path: '/ads.txt' })).status).toBe(403);
-  });
-  it('JP からのリクエストは通す', () => {
-    expect(proxy(requestOf({ country: 'JP' })).status).toBe(200);
+  describe.each(['CN', 'VN'])('%s からのアクセス', country => {
+    it.each(paths)('%s は UA を問わず 403 で拒否する', path => {
+      for (const ua of userAgents) {
+        const response = proxy(requestOf({ country, ua, path }));
+        expect(response.status).toBe(403);
+        expect(response.headers.get('content-type')).toBe('text/plain; charset=utf-8');
+      }
+    });
   });
 
-  it('国ヘッダーなし（ローカル環境）は通す', () => {
-    expect(proxy(requestOf()).status).toBe(200);
+  describe.each(['JP', 'US', 'IE', 'GB', 'KR', 'TW', 'SG', 'AU', 'BR'])('%s からのアクセス', country => {
+    it.each(paths)('%s は一般ブラウザ・クローラーともに許可する', path => {
+      for (const ua of userAgents) {
+        expect(proxy(requestOf({ country, ua, path })).headers.get('x-middleware-next')).toBe('1');
+      }
+    });
   });
 
-  it('日本以外からの一般アクセスを 403 で拒否する', () => {
-    expect(proxy(requestOf({ country: 'US', ua: 'Mozilla/5.0' })).status).toBe(403);
-    expect(proxy(requestOf({ country: 'CN', ua: 'Mozilla/5.0' })).status).toBe(403);
-  });
-
-  it('国外からでも検索エンジンクローラーは通す', () => {
-    const googlebot =
-      'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)';
-    expect(proxy(requestOf({ country: 'US', ua: googlebot })).status).toBe(200);
-    const bingbot = 'Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)';
-    expect(proxy(requestOf({ country: 'US', ua: bingbot })).status).toBe(200);
-  });
-
-  it('国外からでも SNS カード生成クローラーは通す', () => {
-    expect(proxy(requestOf({ country: 'US', ua: 'Twitterbot/1.0' })).status).toBe(200);
-    expect(
-      proxy(requestOf({ country: 'IE', ua: 'facebookexternalhit/1.1' })).status,
-    ).toBe(200);
-  });
-
-  it('国外からでも Google 派生・AI 検索クローラーは通す', () => {
-    expect(proxy(requestOf({ country: 'US', ua: 'GoogleOther' })).status).toBe(200);
-    expect(
-      proxy(requestOf({ country: 'US', ua: 'Mozilla/5.0 (compatible; GPTBot/1.2; +https://openai.com/gptbot)' })).status,
-    ).toBe(200);
-    expect(
-      proxy(requestOf({ country: 'US', ua: 'Mozilla/5.0 (compatible; ClaudeBot/1.0; +claudebot@anthropic.com)' })).status,
-    ).toBe(200);
-  });
-
-  it('中国(CN)からは UA を問わず 403（クローラーを名乗っても通さない）', () => {
-    expect(proxy(requestOf({ country: 'CN', ua: 'Mozilla/5.0' })).status).toBe(403);
-    const googlebot =
-      'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)';
-    expect(proxy(requestOf({ country: 'CN', ua: googlebot })).status).toBe(403);
-    expect(
-      proxy(requestOf({ country: 'CN', ua: 'Mozilla/5.0 (compatible; Baiduspider/2.0)' })).status,
-    ).toBe(403);
-    expect(proxy(requestOf({ country: 'CN', ua: 'Twitterbot/1.0' })).status).toBe(403);
-  });
-
-  it('中国(CN)からは robots.txt / sitemap.xml も 403', () => {
-    expect(proxy(requestOf({ country: 'CN', path: '/robots.txt' })).status).toBe(403);
-    expect(proxy(requestOf({ country: 'CN', path: '/sitemap.xml' })).status).toBe(403);
-  });
-
-  it('robots.txt と sitemap.xml は国・UA を問わず公開', () => {
-    expect(proxy(requestOf({ country: 'US', path: '/robots.txt' })).status).toBe(200);
-    expect(proxy(requestOf({ country: 'US', path: '/sitemap.xml' })).status).toBe(200);
+  it.each(paths)('国ヘッダーがない場合も %s を許可する', path => {
+    expect(proxy(requestOf({ path })).headers.get('x-middleware-next')).toBe('1');
   });
 });
