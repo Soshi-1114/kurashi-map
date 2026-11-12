@@ -1,4 +1,6 @@
 import { expectedCaptureKeys, records, ratio, STUDY, type RecordRow, type Snapshot } from "./model";
+import { rankingCompareAttribution } from "../../lib/siteNav";
+import { compareAttributionParams } from "../../lib/analytics";
 
 const numeric = (value: unknown): number | null => typeof value === "number" && Number.isFinite(value) ? value : null;
 const fmt = (v: unknown): string => numeric(v) === null ? "—" : Number(v).toLocaleString("ja-JP", { maximumFractionDigits: 2 });
@@ -77,6 +79,7 @@ export function summarize(s: Snapshot) {
   return { schemaVersion: 1, generatedAt: s.generatedAt, plan: s.plan, complete: issues.length === 0, issues, totals, study: studySummary(s), studyFollowup: s.plan.periods.studyFollowup ? studySummary(s, "studyFollowup") : null,
     comparison: Object.fromEntries(["previous7", "current7", "previous28", "current28"].map(p => [p, {
       events: records(s.captures[p + ".ga.events"]), sourceAndDevice: records(s.captures[p + ".ga.compareSource"]),
+      variants: records(s.captures[p + ".ga.variants"]), origins: records(s.captures[p + ".ga.compareOrigins"]),
       device: records(s.captures[p + ".ga.compareDevice"]), cta: records(s.captures[p + ".ga.compareCta"]),
       pageViews: sumGroups(records(s.captures[p + ".ga.pages"]), "pagePath", "screenPageViews"),
       pageViewsByDevice: pageDeviceViews(records(s.captures[p + ".ga.pages"])),
@@ -100,12 +103,28 @@ export function renderReport(s: Snapshot): string {
   sections.push("## 比較への到達", "", "回数と総ユーザー数を分ける。ユーザー数は行・送り元・端末間で合算しない。ページ群のPVと比較利用は別集計で、順序付きファネル・因果効果を示さない。送り元URLは推測しない。", "");
   for (const p of ["previous7", "current7", "previous28", "current28"]) {
     const c = a.comparison[p];
-    sections.push(`### ${p}`, "", table(["行動", "回数", "総ユーザー"], ["compare_ready", "compare_view", "compare_candidate_add", "compare_candidate_start", "compare_cta_view", "compare_cta_click", "shindan_run", "shindan_result_scroll", "shindan_result_click"].map(name => [name, fmt(event(c.events, name, "eventCount")), fmt(event(c.events, name, "totalUsers"))])), "");
+    sections.push(`### ${p}`, "", table(["行動", "回数", "総ユーザー"], ["compare_ready", "compare_view", "compare_candidate_add", "compare_candidate_start", "compare_cta_view", "compare_cta_click", "shindan_run", "shindan_result_scroll", "shindan_result_click", "shindan_compare_click", "shindan_compare_top_click"].map(name => [name, fmt(event(c.events, name, "eventCount")), fmt(event(c.events, name, "totalUsers"))])), "");
+    sections.push("人口ランキング3ページの施策別到達（登録済みcta_variantで識別）", "", table(["入口ページ", "閲覧ユーザー", "ボタン視認", "クリック", "着地", "描画完了", "比較表視認", "比較表視認/入口ユーザー（参考）"], ["hokkaido", "ibaraki", "aichi"].map(pref => {
+      const attribution = rankingCompareAttribution("population-most", pref)!;
+      const variant = compareAttributionParams(attribution).cta_variant;
+      const cohort = c.variants?.filter(r => r["customEvent:cta_variant"] === variant && r["customEvent:measurement_version"] === "2026-10-09") ?? null;
+      const origin = c.origins === null ? null : numeric(c.origins.find(r => r.pagePath === attribution.originPath)?.totalUsers ?? 0);
+      const views = event(cohort, "compare_view", "totalUsers");
+      return [attribution.originPath, fmt(origin), ...["compare_cta_view", "compare_cta_click", "tool_entry", "compare_ready", "compare_view"].map(name => fmt(event(cohort, name, "totalUsers"))), pct(ratio(views, origin))];
+    })), "", "入口はpage_viewを送った期間ユーザー。ユーザーはページ・段階間で合算しない。URL共有や再訪を含むため厳密な順序付きファネルではない。公開当日・運営確認を除外して評価する。", "");
+    sections.push("人数ボタン版（現行14日評価とは別集計）", "", table(["ツール", "視認ユーザー", "結果ユーザー", "結果/視認ユーザー（参考）"], [
+      { tool: "電気", prefix: "denki", variant: "people-buttons-v2" },
+      { tool: "備蓄", prefix: "stockpile", variant: "water-buttons-v2" },
+    ].map(d => {
+      const cohort = c.variants?.filter(r => r["customEvent:cta_variant"] === d.variant && r["customEvent:measurement_version"] === "2026-11-12") ?? null;
+      const views = event(cohort, d.prefix + "_entry_view", "totalUsers"), results = event(cohort, d.prefix + "_quick_result_view", "totalUsers");
+      return [d.tool, fmt(views), fmt(results), pct(ratio(results, views))];
+    })), "", "未公開・反映待ちの0件を失敗判定にしない。v2の公開日翌日から14日を別に固定して評価し、v1の観測期間へ混ぜない。", "");
     if (c.sourceAndDevice === null) sections.push("送り元別: 取得不可", "");
     else sections.push(table(["行動", "送り元分類", "端末", "回数", "総ユーザー"], c.sourceAndDevice.filter(r => ["compare_view", "compare_candidate_add", "tool_entry"].includes(String(r.eventName))).map(r => [r.eventName, r["customEvent:tool_source"], r.deviceCategory, fmt(r.eventCount), fmt(r.totalUsers)])), "");
     sections.push(table(["行動", "端末", "回数", "総ユーザー"], (c.device ?? []).map(r => [r.eventName, r.deviceCategory, fmt(r.eventCount), fmt(r.totalUsers)])), c.device === null ? "端末別: 取得不可" : "", "");
     sections.push(table(["ページ群", "端末", "PV"], (c.pageViewsByDevice ?? []).map(r => [r.group, r.deviceCategory, fmt(r.screenPageViews)])), c.pageViewsByDevice === null ? "ページ群×端末: 取得不可" : "", "");
-    sections.push("対象2ページ限定CTA（他の比較入口と混同しない）", "", table(["行動", "ページ", "端末", "回数", "総ユーザー"], (c.cta ?? []).map(r => [r.eventName, r.pagePath, r.deviceCategory, fmt(r.eventCount), fmt(r.totalUsers)])), c.cta === null ? "取得不可" : "", "", table(["ページ群", "PV", "検索クリック（ページ集計）"], ["ランキング", "自治体詳細", "地図", "比較", "診断"].map(group => [group, c.pageViews === null ? "—" : fmt(c.pageViews[group] ?? 0), c.searchClicks === null ? "—" : fmt(c.searchClicks[group] ?? 0)])), "");
+    sections.push("対象ページ限定CTA（旧2ページ・新3ページをページ別に確認）", "", table(["行動", "ページ", "端末", "回数", "総ユーザー"], (c.cta ?? []).map(r => [r.eventName, r.pagePath, r.deviceCategory, fmt(r.eventCount), fmt(r.totalUsers)])), c.cta === null ? "取得不可" : "", "", table(["ページ群", "PV", "検索クリック（ページ集計）"], ["ランキング", "自治体詳細", "地図", "比較", "診断"].map(group => [group, c.pageViews === null ? "—" : fmt(c.pageViews[group] ?? 0), c.searchClicks === null ? "—" : fmt(c.searchClicks[group] ?? 0)])), "");
   }
   sections.push("## #241 電気・備蓄の固定評価", "", `観測: ${a.study.period ? a.study.period.startDate + "〜" + a.study.period.endDate : "未開始"}。評価開始目安: ${STUDY.reviewAfter}。公開当日10/31は除外。`, "", table(["新版", "入口視認回数", "視認ユーザー", "入力ユーザー", "結果ユーザー", "結果/視認ユーザー", "初期目標", "状態"], a.study.rows.map(r => [r.tool + " / " + r.variant, fmt(r.views), fmt(r.viewUsers), fmt(r.interactions), fmt(r.resultUsers), pct(r.resultRate), r.targetReached === null ? "不明" : r.targetReached ? "参考値上は到達" : "参考値上は未到達", r.state])), "", "同一measurement_version=2026-10-31・cta_variantの組み合わせだけを集計。結果は描画イベントで、結果自体の視認・滞在を保証しない。期間ユーザー比率であり、順序付きファネルではない。", "", "初期目標: 結果表示率5%以上かつ各機能10人以上。入口500視認未満は28日まで判断保留。運営者操作・取得品質を確認して人が評価し、#242の公開は自動判定しない。", "", "基準10/17〜10/30は交通量の参考比較。視認定義が10/24に変わっているため、新版との同条件CTR比較はしない。10/25〜10/30は補助期間。旧版に存在しないquick_resultの増加率は出さない。", "");
   if (a.studyFollowup) sections.push("### 28日までの追加観測", "", table(["新版", "入口視認回数", "視認ユーザー", "結果ユーザー", "結果/視認ユーザー", "状態"], a.studyFollowup.rows.map(r => [r.tool, fmt(r.views), fmt(r.viewUsers), fmt(r.resultUsers), pct(r.resultRate), r.state])), "", `期間: ${a.studyFollowup.period?.startDate}〜${a.studyFollowup.period?.endDate}。28日評価目安: ${a.studyFollowup.reviewAfter}。14日評価とは別表で保持する。`, "");

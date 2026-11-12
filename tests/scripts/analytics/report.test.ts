@@ -68,6 +68,20 @@ describe("取得の完全性", () => {
   });
 });
 describe("評価とレポート", () => {
+  it("人口導線はページ固有variantと定義版を一致させ、入口人数を別取得する", () => {
+    const s = snapshot();
+    s.captures["current7.ga.compareOrigins"] = ga(["pagePath"], ["totalUsers", "screenPageViews"], [["/ranking/population-most/hokkaido", 100, 120]]);
+    const variant = "population-compare-2026-11:hokkaido:treatment";
+    s.captures["current7.ga.variants"] = ga(["eventName", "customEvent:cta_variant", "customEvent:measurement_version"], ["eventCount", "totalUsers"], [
+      ["compare_cta_view", variant, "2026-10-09", 25, 20],
+      ["compare_cta_click", variant, "2026-10-09", 3, 3],
+      ["tool_entry", variant, "2026-10-09", 3, 3],
+      ["compare_ready", variant, "2026-10-09", 3, 3],
+      ["compare_view", variant, "2026-10-09", 3, 2],
+      ["compare_view", variant, "wrong-version", 99, 99],
+    ]);
+    expect(renderReport(s)).toContain("| /ranking/population-most/hokkaido | 100 | 20 | 3 | 3 | 3 | 2 | 2.00% |");
+  });
   it("旧版と新版を混ぜず、公開当日を除き、期間ユーザーを使用する", () => {
     const s = snapshot();
     expect(s.plan.periods.study).toEqual(period);

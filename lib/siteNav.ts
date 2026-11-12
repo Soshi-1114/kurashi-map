@@ -58,23 +58,36 @@ export type ToolSource =
   | "area_detail" // 自治体詳細の比較候補・電気代試算
   | "map"; // 地図パネルの比較候補
 
+const COMPARE_ORIGINS = {
+  "compare-link-2026-09": ["/ranking/population-growth/osaka", "/ranking/population-growth/fukuoka"],
+  "compare-cta-placement-2026-10": ["/ranking/population-growth/osaka", "/ranking/population-growth/fukuoka"],
+  "population-compare-2026-11": ["/ranking/population-most/hokkaido", "/ranking/population-most/ibaraki", "/ranking/population-most/aichi"],
+  "shindan-compare-2026-11": ["/shindan"],
+} as const;
+
 export type CompareAttribution = {
-  experimentId: "compare-link-2026-09" | "compare-cta-placement-2026-10";
+  experimentId: keyof typeof COMPARE_ORIGINS;
   variant: "baseline" | "treatment";
-  originPath: "/ranking/population-growth/osaka" | "/ranking/population-growth/fukuoka";
+  originPath: (typeof COMPARE_ORIGINS)[keyof typeof COMPARE_ORIGINS][number];
 };
 
 /** URLパラメータから、事前定義した比較導線実験の値だけを受け入れる。 */
 export function parseCompareAttribution(params: URLSearchParams): CompareAttribution | null {
   const experimentId = params.get("experiment_id");
-  if (experimentId !== "compare-link-2026-09" && experimentId !== "compare-cta-placement-2026-10") return null;
+  if (!experimentId || !Object.hasOwn(COMPARE_ORIGINS, experimentId)) return null;
   const variant = params.get("variant");
   const originPath = params.get("origin_path");
-  if ((variant !== "baseline" && variant !== "treatment") ||
-      (originPath !== "/ranking/population-growth/osaka" && originPath !== "/ranking/population-growth/fukuoka")) {
+  const origins: readonly string[] = COMPARE_ORIGINS[experimentId as keyof typeof COMPARE_ORIGINS];
+  if ((variant !== "baseline" && variant !== "treatment") || !originPath || !origins.includes(originPath)) {
     return null;
   }
-  return { experimentId, variant, originPath };
+  return { experimentId: experimentId as CompareAttribution["experimentId"], variant, originPath: originPath as CompareAttribution["originPath"] };
+}
+
+/** 対象を固定し、旧施策と新しい人口ランキング施策を混ぜない。 */
+export function rankingCompareAttribution(metric: string, pref: string): CompareAttribution | null {
+  const experimentId = metric === "population-most" ? "population-compare-2026-11" : "compare-cta-placement-2026-10";
+  return parseCompareAttribution(new URLSearchParams({ experiment_id: experimentId, variant: "treatment", origin_path: `/ranking/${metric}/${pref}` }));
 }
 
 const TOOL_SOURCES: readonly ToolSource[] = [

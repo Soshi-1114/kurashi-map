@@ -1,6 +1,16 @@
 import { DENKI_AREAS, type DenkiArea } from "./denki";
 
 export const QUICK_ENTRY_VERSION = "2026-10-31";
+
+/** 初回14日評価後に有効化する。Nextのビルド時フラグで、本番は既定で従来版。 */
+export function quickEntryPresentation(tool: "denki" | "stockpile") {
+  const improved = process.env.NEXT_PUBLIC_QUICK_ENTRY_V2 === "true";
+  return {
+    improved,
+    measurement_version: improved ? "2026-11-12" : QUICK_ENTRY_VERSION,
+    cta_variant: tool === "denki" ? (improved ? "people-buttons-v2" : "inline-v1") : (improved ? "water-buttons-v2" : "water-inline-v1"),
+  };
+}
 const MAX_AGE = 30 * 60 * 1000;
 export type QuickEntry =
   | { tool: "denki"; people: number; area: DenkiArea; code: string; from: "area_detail" }

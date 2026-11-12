@@ -18,7 +18,8 @@ vi.mock("next/navigation", () => ({
   useRouter: () => ({ replace: vi.fn() }),
   useSearchParams: () => mocked.params,
 }));
-vi.mock("@/lib/analytics", () => ({
+vi.mock("@/lib/analytics", async (importOriginal) => ({
+  ...await importOriginal<typeof import("@/lib/analytics")>(),
   ANALYTICS_MEASUREMENT_VERSION: "2026-10-09",
   trackToolEntry: vi.fn(),
   trackCompareReady: mocked.ready,

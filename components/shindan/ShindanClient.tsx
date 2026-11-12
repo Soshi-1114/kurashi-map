@@ -6,7 +6,8 @@
 // 重み付き平均のみで、フルデータはクライアントに配らない。
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "@/components/SiteLink";
-import { MapPin, ArrowUpRight } from "lucide-react";
+import { MapPin, ArrowUpRight, Scale } from "lucide-react";
+import { ShareButton } from "@/components/ShareButton";
 import {
   SHINDAN_AXES, EMPTY_WEIGHTS, hasAnyWeight, runShindan,
   encodeWeights, decodeWeights, decodeRegions,
@@ -18,10 +19,10 @@ import {
   trackShindanResultClick,
   trackShindanResultImpression,
   trackShindanResultScroll,
-  trackShindanCompareClick,
+  track,
 } from "@/lib/analytics";
 import { useToolEntry } from "@/lib/useToolEntry";
-import { denkiHref } from "@/lib/siteNav";
+import { compareHref, denkiHref, MAX_COMPARE, type CompareAttribution } from "@/lib/siteNav";
 import { kasaiHokenLink } from "@/lib/monetization";
 import { KasaiLink } from "@/components/monetization/KasaiLink";
 
@@ -77,6 +78,8 @@ export default function ShindanClient({ entries }: { entries: ShindanEntry[] }) 
     [entries, weights, regions],
   );
   const active = hasAnyWeight(weights);
+  const compareCodes = results.slice(0, MAX_COMPARE).map(r => r.entry.code);
+  const compareAttribution: CompareAttribution = { experimentId: "shindan-compare-2026-11", variant: "treatment", originPath: "/shindan" };
   const resultKey = `${encodeWeights(weights)}|${regions.join(",")}`;
   const firstResultRef = useRef<HTMLLIElement | null>(null);
   const observedResultKeys = useRef(new Set<string>());
@@ -176,6 +179,15 @@ export default function ShindanClient({ entries }: { entries: ShindanEntry[] }) 
             あなたの条件に合う市区町村 トップ{results.length}
             <span className="sd-results-sub">該当 {eligibleCount.toLocaleString()} 自治体から適合スコア順</span>
           </h2>
+          <div className="sd-result-actions">
+            {compareCodes.length >= 2 && <Link
+              href={compareHref(compareCodes, "shindan_result", compareAttribution)}
+              className="sd-compare-top"
+              onClick={() => track("shindan_compare_top_click", { count: compareCodes.length, tool_source: "shindan_result", measurement_version: "2026-11-12", cta_variant: "shindan-top3-v1" })}
+            ><Scale size={17} aria-hidden="true" />上位{compareCodes.length}件を比較する</Link>}
+            <p>{compareCodes.length >= 2 ? "家賃・人口・災害リスクなどの実データを比較できます。" : "自治体の詳細ページで、家賃・人口・災害リスクなどの実データを確認できます。"}</p>
+            <ShareButton className="sd-share" title="住む街診断" contentType="shindan" itemId="shindan" label="この診断条件を共有" />
+          </div>
           <ol className="sd-list">
             {results.map((r, i) => {
               const pref = getPrefByCode(r.entry.code);
@@ -205,12 +217,12 @@ export default function ShindanClient({ entries }: { entries: ShindanEntry[] }) 
                     <small>適合スコア</small>
                   </span>
                   <Link
-                    href={`/compare?codes=${r.entry.code}`}
-                    className="sd-compare"
-                    aria-label={`${r.entry.name}を比較ページで見る`}
-                    onClick={() => trackShindanCompareClick(r.entry.code, i)}
+                    href={`/area/${pref?.slug}/${r.entry.code}`}
+                    className="sd-detail"
+                    aria-label={`${r.entry.name}の詳細を見る`}
+                    onClick={() => trackShindanResultClick(r.entry.code, i)}
                   >
-                    比較<ArrowUpRight size={12} aria-hidden="true" />
+                    詳細を見る<ArrowUpRight size={12} aria-hidden="true" />
                   </Link>
                 </li>
               );

@@ -4,7 +4,8 @@ import { useRef, useState } from "react";
 import { type DenkiArea } from "@/lib/denki";
 import { track } from "@/lib/analytics";
 import { useImpressionOnce } from "@/lib/useImpression";
-import { QUICK_ENTRY_VERSION, saveQuickEntry } from "@/lib/quickEntry";
+import { quickEntryPresentation, saveQuickEntry } from "@/lib/quickEntry";
+import QuickPeopleInput from "@/components/tools/QuickPeopleInput";
 import { denkiHref } from "@/lib/siteNav";
 import "@/components/tools/quick-tools.css";
 
@@ -14,7 +15,8 @@ export default function DenkiQuickEntry({ code, name, areas, note, asOf }: { cod
   const [area, setArea] = useState(areas[0].area);
   const interacted = useRef(false);
   const calculated = useRef(false);
-  const params = { municipality_code: code, placement: "area-overview", cta_variant: "inline-v1", measurement_version: QUICK_ENTRY_VERSION };
+  const { improved, ...presentation } = quickEntryPresentation("denki");
+  const params = { municipality_code: code, placement: "area-overview", ...presentation };
   const ref = useImpressionOnce<HTMLElement>("denki_entry_view", { ...params, area: areas[0].area });
   function changed(nextPeople: number) {
     if (!interacted.current) { interacted.current = true; track("denki_quick_interact", params); }
@@ -29,7 +31,7 @@ export default function DenkiQuickEntry({ code, name, areas, note, asOf }: { cod
     {areas.length > 1 && <p className="quick-tool-note">地区によって供給エリアが分かれます。お住まいの地区に合わせて選んでください。{note}</p>}
     <div className="quick-tool-fields">
       {areas.length > 1 ? <label>供給エリア<select value={area} onChange={e => { setArea(e.target.value as DenkiArea); changed(people); }}>{areas.map(a => <option key={a.area} value={a.area}>{a.label}</option>)}</select></label> : <p>{selected.label}</p>}
-      <label>電気代を調べる世帯人数<select value={people || ""} onChange={e => { const n = Number(e.target.value); setPeople(n); changed(n); }}><option value="">人数を選択</option>{[1, 2, 3, 4, 5].map(n => <option key={n} value={n}>{n}人</option>)}</select></label>
+      {improved ? <QuickPeopleInput label="電気代を調べる世帯人数" value={people} max={5} onChange={n => { setPeople(n); changed(n); }} /> : <label>電気代を調べる世帯人数<select value={people || ""} onChange={e => { const n = Number(e.target.value); setPeople(n); changed(n); }}><option value="">人数を選択</option>{[1, 2, 3, 4, 5].map(n => <option key={n} value={n}>{n}人</option>)}</select></label>}
     </div>
     <div className="quick-tool-result" role="status">{result ? <><strong>{result.yen.toLocaleString()}円</strong>／月（目安）<p className="quick-tool-note">月{result.kwh}kWh・{result.ampere ? `${result.ampere}A` : "最低料金制"}で試算。人数別の全国平均使用量を使用しています。</p></> : <p>人数を選ぶと、ここに月額の目安を表示します。</p>}</div>
     <p className="quick-tool-note">基本料金・電力量料金の目安です。燃料費調整額・再エネ賦課金・割引は含みません。単価確認：{asOf}。</p>

@@ -83,6 +83,6 @@ export function readSnapshot(value: unknown): Snapshot {
 }
 
 export function expectedCaptureKeys(plan: Plan): string[] {
-  const core = ["ga.total", "ga.events", "ga.variants", "ga.pages", "ga.channels", "ga.compareSource", "ga.compareDevice", "ga.compareCta", "gsc.total", "gsc.page", "gsc.device", "gsc.query"];
+  const core = ["ga.total", "ga.events", "ga.variants", "ga.pages", "ga.channels", "ga.compareSource", "ga.compareDevice", "ga.compareCta", "gsc.total", "gsc.page", "gsc.device", "gsc.query", "ga.compareOrigins"];
   return Object.keys(plan.periods).flatMap(p => (p.startsWith("study") ? core.slice(0, 3) : core).map(key => `${p}.${key}`));
 }

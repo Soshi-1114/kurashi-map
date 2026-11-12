@@ -1,46 +1,33 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import Link from "@/components/SiteLink";
 import { Scale } from "lucide-react";
-import { ANALYTICS_MEASUREMENT_VERSION, track } from "@/lib/analytics";
+import { ANALYTICS_MEASUREMENT_VERSION, compareAttributionParams, track } from "@/lib/analytics";
+import type { CompareAttribution } from "@/lib/siteNav";
+import { useImpressionOnce } from "@/lib/useImpression";
 
 /** 比較導線の視認・クリックを、実験対象ページだけで計測する。 */
 export default function TrackedCompareLink({
   href,
   count,
-  pagePath,
+  attribution,
+  label,
   className = "rk-action rk-action-ghost",
 }: {
   href: string;
   count: number;
-  pagePath: string;
+  attribution: CompareAttribution;
+  label?: string;
   className?: string;
 }) {
-  const linkRef = useRef<HTMLAnchorElement | null>(null);
-  const seen = useRef(false);
   const params = {
-    experiment_id: "compare-cta-placement-2026-10",
-    variant: "treatment",
-    page_path: pagePath,
+    ...compareAttributionParams(attribution),
+    page_path: attribution.originPath,
     tool_source: "pref_ranking_top3",
     measurement_version: ANALYTICS_MEASUREMENT_VERSION,
   };
 
-  useEffect(() => {
-    const node = linkRef.current;
-    if (!node || typeof IntersectionObserver === "undefined") return;
-    const observer = new IntersectionObserver(([entry]) => {
-      if (!entry.isIntersecting || seen.current) return;
-      seen.current = true;
-      track("compare_cta_view", params);
-      observer.disconnect();
-    }, { threshold: 0.5 });
-    observer.observe(node);
-    return () => observer.disconnect();
-    // 対象ページの静的パラメータはマウント中に変化しない。
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const linkRef = useImpressionOnce<HTMLAnchorElement>("compare_cta_view", params);
 
   return (
     <Link
@@ -49,7 +36,7 @@ export default function TrackedCompareLink({
       className={className}
       onClick={() => track("compare_cta_click", params)}
     >
-      <Scale size={15} aria-hidden="true" />上位{count}件を比較する
+      <Scale size={15} aria-hidden="true" />{label ?? `上位${count}件を比較する`}
     </Link>
   );
 }

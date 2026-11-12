@@ -1,5 +1,7 @@
 # 計測（GA4）運用ガイド
 
+2026-11-12の比較・診断・人数入力の変更と公開後の評価手順は[3施策の実装・評価計画](product/analytics-improvements-2026-11-12.md)を参照。人口ランキングの新3ページと旧2ページは施策IDを分け、登録済み`cta_variant`に入口ページを含めて、着地・比較表の描画・視認まで同じ値で追う。`shindan_compare_top_click`は上位最大3件を渡す新しいクリックで、旧1件比較の`shindan_compare_click`と分ける。人数ボタン版は`NEXT_PUBLIC_QUICK_ENTRY_V2=true`で有効になるが、既定無効で10/31版の初回評価を維持する。
+
 KurashiMap は Google Analytics 4（gtag.js）でページビューに加えて、**Core Web Vitals** と
 **主要操作イベント**を送信しています。このドキュメントは、送信している中身と、GA4 管理画面での
 設定・分析手順をまとめたものです。

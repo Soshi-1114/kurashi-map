@@ -84,12 +84,13 @@ export function trackCompareView(count: number, source: ToolSource | null, attri
   track("compare_view", { count, measurement_version: ANALYTICS_MEASUREMENT_VERSION, ...(source ? { tool_source: source } : {}), ...compareAttributionParams(attribution) });
 }
 
-function compareAttributionParams(attribution: CompareAttribution | null): Record<string, string> {
+export function compareAttributionParams(attribution: CompareAttribution | null): Record<string, string> {
   if (!attribution) return {};
   return {
     experiment_id: attribution.experimentId,
     variant: attribution.variant,
     origin_path: attribution.originPath,
+    cta_variant: `${attribution.experimentId}:${attribution.originPath.split("/").at(-1)}:${attribution.variant}`,
   };
 }
 

@@ -12,7 +12,7 @@ import { RANKINGS, getRankingBySlug, rankBy, medianOf, appendFreshness, type Ran
 import { getRankPositions, getNationalMedians } from "@/lib/rankingStats";
 import { PREFS, getPrefBySlug } from "@/lib/prefs";
 import { SITE, absoluteUrl } from "@/lib/site";
-import { mapHubByHref, compareHref, shindanHref } from "@/lib/siteNav";
+import { mapHubByHref, compareHref, shindanHref, rankingCompareAttribution } from "@/lib/siteNav";
 import { mapHrefForPref } from "@/lib/mapDeepLink";
 import { getForeignStats } from "@/lib/foreignStats";
 import { countWaitlistDisclosed } from "@/lib/waitlist";
@@ -144,7 +144,8 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
   const prefName = pref.nameJa;
   const searchCopy = populationSearchCopy({ metric: def.slug, pref: pref.slug, top: ranked[0], count: ranked.length, shown: ranked.length });
   const isList = Boolean(def.membershipList);
-  const trackCompareCta = def.slug === "population-growth" && (pref.slug === "osaka" || pref.slug === "fukuoka");
+  const compareAttribution = rankingCompareAttribution(def.slug, pref.slug);
+  const trackCompareCta = compareAttribution !== null;
 
   // データ鮮度ラベル・導入文・FAQ（定義のある指標のみ）。
   const freshness = def.freshnessLabel?.(ranked[0] ?? null) ?? null;
@@ -411,22 +412,18 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
           </ol>
         )}
 
-        {!isList && podium.length >= 2 && trackCompareCta && (
+        {!isList && podium.length >= 2 && compareAttribution && (
           <div className="rk-podium-compare">
             <div className="rk-podium-compare-copy">
-              <strong>上位{podium.length}自治体を比べる</strong>
-              <span>家賃や人口、子育てなどの住環境データを横並びで確認できます。</span>
+              <strong>{def.slug === "population-most" ? `上位${podium.length}市町村の人口と暮らしを比べる` : `上位${podium.length}自治体を比べる`}</strong>
+              <span>{def.slug === "population-most" ? "人口・人口密度・増減率を、同じ表で確認できます。" : "家賃や人口、子育てなどの住環境データを横並びで確認できます。"}</span>
             </div>
             <TrackedCompareLink
-              href={compareHref(podium.map((m) => m.code), "pref_ranking_top3", {
-                experimentId: "compare-cta-placement-2026-10",
-                variant: "treatment",
-                originPath: pref.slug === "osaka"
-                  ? "/ranking/population-growth/osaka"
-                  : "/ranking/population-growth/fukuoka",
-              })}
+              key={compareAttribution.originPath}
+              href={compareHref(podium.map((m) => m.code), "pref_ranking_top3", compareAttribution)}
               count={podium.length}
-              pagePath={`/ranking/${def.slug}/${pref.slug}`}
+              attribution={compareAttribution}
+              label={def.slug === "population-most" ? `上位${podium.length}市町村を比較する` : undefined}
               className="rk-action rk-action-primary"
             />
           </div>
