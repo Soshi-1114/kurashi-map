@@ -77,7 +77,7 @@ export function summarize(s: Snapshot) {
     return warnings;
   })];
   return { schemaVersion: 1, generatedAt: s.generatedAt, plan: s.plan, complete: issues.length === 0, issues, totals, study: studySummary(s), studyFollowup: s.plan.periods.studyFollowup ? studySummary(s, "studyFollowup") : null,
-    comparison: Object.fromEntries(["previous7", "current7", "previous28", "current28"].map(p => [p, {
+    comparison: Object.fromEntries(["previous", "current", "previous7", "current7", "previous28", "current28"].map(p => [p, {
       events: records(s.captures[p + ".ga.events"]), sourceAndDevice: records(s.captures[p + ".ga.compareSource"]),
       variants: records(s.captures[p + ".ga.variants"]), origins: records(s.captures[p + ".ga.compareOrigins"]),
       device: records(s.captures[p + ".ga.compareDevice"]), cta: records(s.captures[p + ".ga.compareCta"]),
@@ -101,7 +101,7 @@ export function renderReport(s: Snapshot): string {
     ]), "");
   }
   sections.push("## 比較への到達", "", "回数と総ユーザー数を分ける。ユーザー数は行・送り元・端末間で合算しない。ページ群のPVと比較利用は別集計で、順序付きファネル・因果効果を示さない。送り元URLは推測しない。", "");
-  for (const p of ["previous7", "current7", "previous28", "current28"]) {
+  for (const p of [...(s.plan.days === 7 || s.plan.days === 28 ? [] : ["previous", "current"]), "previous7", "current7", "previous28", "current28"]) {
     const c = a.comparison[p];
     sections.push(`### ${p}`, "", table(["行動", "回数", "総ユーザー"], ["compare_ready", "compare_view", "compare_candidate_add", "compare_candidate_start", "compare_cta_view", "compare_cta_click", "shindan_run", "shindan_result_scroll", "shindan_result_click", "shindan_compare_click", "shindan_compare_top_click"].map(name => [name, fmt(event(c.events, name, "eventCount")), fmt(event(c.events, name, "totalUsers"))])), "");
     sections.push("人口ランキング3ページの施策別到達（登録済みcta_variantで識別）", "", table(["入口ページ", "閲覧ユーザー", "ボタン視認", "クリック", "着地", "描画完了", "比較表視認", "比較表視認/入口ユーザー（参考）"], ["hokkaido", "ibaraki", "aichi"].map(pref => {

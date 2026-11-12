@@ -68,6 +68,14 @@ describe("取得の完全性", () => {
   });
 });
 describe("評価とレポート", () => {
+  it("公開後14日の指定期間でも、比較導線の詳細表を出せる", () => {
+    const s = snapshot();
+    s.plan = buildPlan("2026-12-01", "2026-11-28", 14, "2026-11-28");
+    const report = renderReport(s);
+    expect(summarize(s).comparison).toHaveProperty("current");
+    expect(report).toContain("### current\n\n| 行動 |");
+    expect(report).toContain("### previous\n\n| 行動 |");
+  });
   it("人口導線はページ固有variantと定義版を一致させ、入口人数を別取得する", () => {
     const s = snapshot();
     s.captures["current7.ga.compareOrigins"] = ga(["pagePath"], ["totalUsers", "screenPageViews"], [["/ranking/population-most/hokkaido", 100, 120]]);
