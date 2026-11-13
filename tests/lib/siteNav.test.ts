@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { MAP_HUBS, mapHubByHref, compareHref, shindanHref, parseToolSource, parseCompareAttribution } from "@/lib/siteNav";
+import { MAP_HUBS, mapHubByHref, compareHref, shindanHref, parseToolSource, parseCompareAttribution, rankingCompareAttribution } from "@/lib/siteNav";
 import { RANKINGS } from "@/lib/rankings";
 
 describe("mapHubByHref / RankingDef.mapHub", () => {
@@ -49,6 +49,20 @@ describe("mapHubByHref / RankingDef.mapHub", () => {
     expect(shindanHref("home")).toBe("/shindan?from=home");
     expect(shindanHref("header")).toBe("/shindan?from=header");
     expect(shindanHref("pref_ranking")).toBe("/shindan?from=pref_ranking");
+  });
+
+  it("新しい比較施策は対象3県に限定し、旧施策との組み替えを拒否する", () => {
+    for (const pref of ["hokkaido", "ibaraki", "aichi"]) {
+      const attribution = rankingCompareAttribution("population-most", pref)!;
+      expect(attribution.experimentId).toBe("population-compare-2026-11");
+      const params = new URLSearchParams(compareHref(["01100", "01204"], "pref_ranking_top3", attribution).split("?")[1]);
+      expect(parseCompareAttribution(params)).toEqual(attribution);
+      params.set("experiment_id", "compare-cta-placement-2026-10");
+      expect(parseCompareAttribution(params)).toBeNull();
+    }
+    expect(rankingCompareAttribution("population-most", "osaka")).toBeNull();
+    expect(rankingCompareAttribution("rent-low", "aichi")).toBeNull();
+    expect(rankingCompareAttribution("population-growth", "fukuoka")?.experimentId).toBe("compare-cta-placement-2026-10");
   });
 
   it("各地図ハブに少なくとも1つのランキングが対応する（対応の腐り検出）", () => {

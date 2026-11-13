@@ -17,7 +17,7 @@ import { barWidthPct } from "@/lib/format";
 import { getPrefBySlug } from "@/lib/prefs";
 import { MAX_COMPARE, compareHref, denkiHref, parseCompareAttribution, parseToolSource } from "@/lib/siteNav";
 import { useToolEntry } from "@/lib/useToolEntry";
-import { ANALYTICS_MEASUREMENT_VERSION, track, trackCompareReady, trackCompareView, trackToolEntry } from "@/lib/analytics";
+import { ANALYTICS_MEASUREMENT_VERSION, compareAttributionParams, track, trackCompareReady, trackCompareView, trackToolEntry } from "@/lib/analytics";
 import { useCompareSelection } from "./CompareSelectionProvider";
 
 /** 平均列の種類。県平均は選択自治体がすべて同一県のときだけ選べる。 */
@@ -84,11 +84,7 @@ export default function CompareClient({
     municipality_codes: codes.join(","),
     count: codes.length,
     measurement_version: ANALYTICS_MEASUREMENT_VERSION,
-    ...(entryAttribution ? {
-      experiment_id: entryAttribution.experimentId,
-      variant: entryAttribution.variant,
-      origin_path: entryAttribution.originPath,
-    } : {}),
+    ...compareAttributionParams(entryAttribution),
   });
 
   // 取得済みフルデータ（code → Municipality）。一度取得したものは保持する。
