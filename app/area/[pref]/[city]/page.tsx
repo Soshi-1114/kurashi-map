@@ -1,3 +1,4 @@
+import ContentFeedback from "@/components/ContentFeedback";
 import DisplayAd from "@/components/monetization/DisplayAd";
 import { serializeJsonLd } from "@/lib/jsonLd";
 import StockpileEntry from "@/components/bousai/StockpileEntry";
@@ -1035,6 +1036,8 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
           })}
         </ul>
       </Section>
+      <ContentFeedback page={`area:${m.pref}:${m.code}`} section="overview" />
+
       {support && (
         <Reveal>
           <section className="ad-support-section" aria-label="サイトを支援する">

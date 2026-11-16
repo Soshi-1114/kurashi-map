@@ -15,7 +15,7 @@ const DESC =
   "KurashiMapのプライバシーポリシー。Google アナリティクス（GA4）によるアクセス解析、Cookie の利用、収集する情報の範囲と利用目的、外部サイトへのリンクの扱いを開示しています。";
 
 // 最終更新日（ポリシー改定時に手動更新）。
-const LAST_UPDATED = "2026年11月11日";
+const LAST_UPDATED = "2026年11月16日";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -94,6 +94,12 @@ export default function PrivacyPage() {
           <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer">Google のサービスを使用するサイトやアプリから収集した情報の取り扱い</a>
           をご確認ください。当サイトは、収集した解析データを広告のターゲティング等の目的で第三者に販売・提供することはありません。
         </p>
+      </section>
+
+      <section className="detail-section" id="content-feedback">
+        <h2 className="detail-h2">情報の有用性アンケート</h2>
+        <p className="detail-p">アンケートを提供する場合は、回答（分かった／分からなかった）、任意の選択理由、対象ページ・項目・コンテンツの版を、情報と操作性の改善のために保存します。回答件数と肯定・否定の内訳をページに表示します。自由記述、氏名、位置情報、生のIPアドレスはこのアンケートでは保存しません。</p>
+        <p className="detail-p">同じブラウザからの重複回答や連続送信を抑えるため、匿名の識別子をCookieに最長1年間保存し、保存先では署名鍵によるハッシュに変換して扱います。Cookieを削除した場合や別端末の利用を含め、一人一票は保証しません。集計は人数ではなく回答件数です。匿名回答と集計は、最長1年間の重複抑止、および集計の最終更新から1年間を目安に保存します。回答は任意で、回答しなくても閲覧できます。回答操作をアクセス解析で集計する場合があります。</p>
       </section>
 
       <section className="detail-section">

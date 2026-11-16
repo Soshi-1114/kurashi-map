@@ -273,3 +273,12 @@ GA4の探索ではイベント名を行、`placement` を列、イベント数�
 - 旧`denki_offer_impression`は結果リストの描画イベントとして継続し、プラン単位の視認の分母としては使わない。プラン単位のクリック率は`denki_offer_click / denki_offer_view`を同じ期間・版・`offer_id`・`is_affiliate`で比較。入口の視認/クリック、着地、試算、外部リンク視認/クリックをそれぞれ区別する。
 
 必要に応じて`cta_variant`をイベントスコープのカスタムディメンションに登録する。未提携の電気会社への公式リンクは`is_affiliate=false`として区別し、ASPの成果とは扱わない。個別入力値・広告URL・ASP識別子を新イベントへ送信しない。既存`denki_simulate`の入力パラメータ契約は変更しない。
+
+
+## 地域別ランキングと情報の有用性（2026-11-16）
+
+- `ranking_scope_select`: 対象地域の変更。`metric_key`は収録指標、`section`はall/region:地方/pref:県、measurement_version=2026-11-16。自由入力や位置情報は送らない。
+- `content_feedback_view`: 有効なアンケート領域の50%以上が実際に見えた時に1マウント1回。`item_id`は検証済みのページID、`section`はranking/overview、measurement_version=2026-11-16-v1。未設定・保存先障害で非表示の場合は送信しない。
+- `content_feedback_submit`: サーバーの保存成功後だけ送信。`item_id`は検証済みのページID、`section`はranking/overview、`method`はyes/no、measurement_version=2026-11-16-v1。重複回答には送信しない。回答数の正は永続ストレージであり、GA4と同数になるとは限らない。理由・ブラウザー識別子・署名はGA4へ送らない。
+- 比較の既存compare_ready/viewの定義と帰属IDは維持。11/13の比較導線実験は画面変更の公開日で区切り、同一期間へ混ぜない。
+- 有用性の回答率を出すため、画面が実際に見えた入口人数も別途記録する。アンケート設置ページの全閲覧数だけを視認の分母にしない。

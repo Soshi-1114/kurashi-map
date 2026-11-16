@@ -24,10 +24,10 @@ export const SHINDAN_AXES: ReadonlyArray<{
   /** 軸の中身の説明（何の実データで測るか。誤解防止のため質問の直下に出す） */
   basis: string;
 }> = [
-  { key: "rent", label: "家賃", question: "住まいのコストを抑えたい", basis: "民営借家の家賃平均（住宅・土地統計調査）" },
-  { key: "access", label: "アクセス", question: "電車での移動・通勤を重視する", basis: "自治体内の駅数（国土数値情報）" },
-  { key: "childcare", label: "子育て", question: "保育園の入りやすさを重視する", basis: "待機児童数（こども家庭庁）" },
-  { key: "disaster", label: "災害", question: "災害リスクの低さを重視する", basis: "浸水・土砂・津波・高潮・液状化の区域評価（区域内最大区分）" },
+  { key: "rent", label: "家賃", question: "民営借家の家賃平均が低い街を探したい", basis: "住宅・土地統計調査の平均。現在の募集家賃や希望間取りの家賃ではありません" },
+  { key: "access", label: "アクセス", question: "鉄道駅の数が多い街を探したい", basis: "自治体内の駅数（国土数値情報）。目的地までの通勤時間や運行本数は含みません" },
+  { key: "childcare", label: "子育て", question: "公表されている待機児童数が少ない街を探したい", basis: "待機児童数（こども家庭庁）。年齢・園・時期ごとの入園可能性を示すものではありません" },
+  { key: "disaster", label: "災害", question: "自治体全体の災害リスク評価を重視する", basis: "浸水・土砂・津波・高潮・液状化の区域内最大区分。個別の地点や住宅の安全性を判定しません" },
   { key: "infrastructure", label: "生活インフラ", question: "医療・保育施設の多さを重視する", basis: "医療機関数・保育/幼稚園数（実数のため大きな街ほど高評価）" },
   { key: "future", label: "将来性", question: "将来も人口を維持する見込みを重視する", basis: "2050年推計人口の増減率（IPSS 令和5年推計・公的推計）" },
 ];

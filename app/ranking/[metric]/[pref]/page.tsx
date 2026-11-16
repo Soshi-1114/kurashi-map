@@ -1,5 +1,5 @@
 import RankingTitle from "@/components/ranking/RankingTitle";
-import DisplayAd from "@/components/monetization/DisplayAd";
+import RankingExplorer from "@/components/ranking/RankingExplorer";
 import { serializeJsonLd } from "@/lib/jsonLd";
 import "../../../league.css";
 import Link from "@/components/SiteLink";
@@ -20,17 +20,14 @@ import { countWaitlistDisclosed } from "@/lib/waitlist";
 import RankLinkList from "@/components/RankLinkList";
 import RankFaq from "@/components/RankFaq";
 import RankSources, { RANKING_SOURCES_TEXT } from "@/components/RankSources";
-import { RankBadge } from "@/components/RankBadge";
 import type { Municipality } from "@/lib/types";
 import PageShell from "@/components/PageShell";
 import { FurusatoBand } from "@/components/monetization/FurusatoBand";
-import { ShareButton } from "@/components/ShareButton";
 import TrackedCompareLink from "@/components/ranking/TrackedCompareLink";
 import { populationSearchCopy } from "@/lib/populationSearchCopy";
 
 type Params = { metric: string; pref: string };
 
-const TOP_CARDS = 10;
 
 // 県 × 指標の総当たりのうち、対象データが1件以上ある組み合わせだけを生成する
 // （0件のページは作らない＝薄いページを避ける）。
@@ -156,24 +153,6 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
   // 全国版と同じポディウム（1〜3位）＋ラダー（4位〜）の分割。11位以下は
   // トップ10と同じセクション内の details（エクスパンド）に畳む。
   const podium = ranked.slice(0, 3);
-  const ladder = ranked.slice(3, TOP_CARDS);
-  const rest = ranked.slice(TOP_CARDS);
-
-  // ラダー（4位〜10位）とエクスパンド内（11位〜）で同一の行マークアップを共有する。
-  // 全国版のラダーは県名の副行が付くため共通化せず、このページ内だけの重複を畳む。
-  const ladderOl = (items: Municipality[], start: number) => (
-    <ol className="rk-ladder" start={start}>
-      {items.map((m, i) => (
-        <li key={m.code}>
-          <Link href={`/area/${m.pref}/${m.code}`} className="rk-ladder-row">
-            <RankBadge className="rk-ladder-rank" isList={isList} rank={start + i} />
-            <span className="rk-ladder-name">{m.displayName ?? m.name}</span>
-            <span className="rk-ladder-value">{def.display(m)}</span>
-          </Link>
-        </li>
-      ))}
-    </ol>
-  );
 
   // 県内サマリー（県内中央値・全国対比・県内1位の全国順位）。membershipList 型は
   // 値の分布を持たないため、「公表対象のうち該当n自治体」の要約に切り替える。
@@ -241,11 +220,11 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
     <PageShell innerClassName="rk-root" trail={[{ name: SITE.name, href: "/" }, { name: "ランキング", href: "/ranking" }, { name: def.shortLabel, href: `/ranking/${def.slug}` }, { name: prefName }]}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(ldJson) }} />
 
-      <header className="rk-hero rk-reveal">
+      <header className="rk-hero rk-hero-compact">
         <span className="rk-eyebrow"><Database size={14} aria-hidden="true" />都道府県別ランキング</span>
         <RankingTitle title={searchCopy?.title ?? `${prefName}の${def.title}`} />
-        <p className="rk-lead">
-          {searchCopy?.lead ?? `${def.lead.replace("全国の", `${prefName}の`)}データのある${ranked.length}市区町村を、政府統計の実データで集計しています（推計値は含みません）。`}
+        <p className="rk-lead rk-scope-lead">
+          {def.lead.replace("全国の", `${prefName}の`)}
         </p>
         <ul className="rk-hero-meta">
           <li className="rk-meta-pill">
@@ -257,10 +236,37 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
             )}
           </li>
           {freshness && <li className="rk-meta-pill"><ShieldCheck size={13} aria-hidden="true" />{freshness}</li>}
-          <li className="rk-meta-pill"><Database size={13} aria-hidden="true" />政府統計の実データ</li>
+
         </ul>
         {def.note && <p className="rk-lead rk-lead--note">{def.note}</p>}
-        {def.nextUpdate && <p className="rk-lead rk-lead--note">📅 次回更新予定: {def.nextUpdate}</p>}
+
+      </header>
+
+      <RankingExplorer
+        rows={ranked.map(m => ({ code: m.code, name: m.displayName ?? m.name, pref: m.pref, value: def.display(m) }))}
+        metric={def.slug} columnLabel={def.columnLabel} isList={isList} initialPref={pref.slug}
+        metrics={RANKINGS.map(r => ({ slug: r.slug, label: r.shortLabel }))}
+        topCompare={compareAttribution ? <>{!isList && podium.length >= 2 && compareAttribution && (
+          <div className="rk-podium-compare">
+            <div className="rk-podium-compare-copy">
+              <strong>{def.slug === "population-most" ? `上位${podium.length}市町村の人口と暮らしを比べる` : `上位${podium.length}自治体を比べる`}</strong>
+              <span>{def.slug === "population-most" ? "人口・人口密度・増減率を、同じ表で確認できます。" : "家賃や人口、子育てなどの住環境データを横並びで確認できます。"}</span>
+            </div>
+            <TrackedCompareLink
+              key={compareAttribution.originPath}
+              href={compareHref(podium.map((m) => m.code), "pref_ranking_top3", compareAttribution)}
+              count={podium.length}
+              attribution={compareAttribution}
+              label={def.slug === "population-most" ? `上位${podium.length}市町村を比較する` : undefined}
+              className="rk-action rk-action-primary"
+            />
+          </div>
+        )}</> : undefined}
+      />
+
+      {def.nextUpdate && <details className="rk-update"><summary>データの更新予定</summary><p>{def.nextUpdate}</p></details>}
+
+      <nav className="rk-secondary-actions" aria-label="関連する情報">
         <div className="rk-hero-actions">
           <Link href={`/ranking/${def.slug}`} className="rk-action rk-action-primary">
             <BarChart3 size={15} aria-hidden="true" />全国版を見る
@@ -288,16 +294,9 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
               <BarChart3 size={15} aria-hidden="true" />{prefName}の{related.label}
             </Link>
           )}
-          <ShareButton
-            className="rk-action rk-action-ghost"
-            title={`${prefName}の${def.title}｜${SITE.name}`}
-            path={`/ranking/${def.slug}/${pref.slug}`}
-            contentType="ranking"
-            itemId={`${def.slug}/${pref.slug}`}
-            label="共有する"
-          />
+
         </div>
-      </header>
+      </nav>
 
       {(summary || waitlistDisclosed !== null) && (
         <section className="rk-section">
@@ -345,109 +344,13 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
         </section>
       )}
 
-      {intro.length > 0 && (
-        <section className="rk-section">
-          <div className="rk-intro">
-            {intro.map((p, i) => (
-              <p key={i}>{p}</p>
-            ))}
-          </div>
-        </section>
-      )}
+      {benchmark && <section className="rk-section">
+        <h2 className="rk-h2">ベンチマーク（平均との比較）</h2>
+        <p className="rk-explorer-note">{prefName}平均 {benchmark.prefAvg.toFixed(2)}%／全国平均 {benchmark.nationalAvg.toFixed(2)}%（人口による加重平均）</p>
+      </section>}
 
-      {benchmark && (
-        <section className="rk-section">
-          <div className="rk-section-head">
-            <span className="rk-section-icon"><BarChart3 size={20} aria-hidden="true" /></span>
-            <div className="rk-section-heading">
-              <h2 className="rk-h2">ベンチマーク（平均との比較）</h2>
-            </div>
-          </div>
-          <ul className="mini-cards cols-2">
-            <li className="mini-card">
-              <div className="mini-card-label">{prefName}平均</div>
-              <div className="mini-card-value">{benchmark.prefAvg.toFixed(2)}<span className="unit"> %</span></div>
-              <p className="mini-card-sub">{prefName}内 全市区町村の加重平均</p>
-            </li>
-            <li className="mini-card">
-              <div className="mini-card-label">全国平均</div>
-              <div className="mini-card-value">{benchmark.nationalAvg.toFixed(2)}<span className="unit"> %</span></div>
-              <p className="mini-card-sub">全国 全市区町村の加重平均</p>
-            </li>
-          </ul>
-        </section>
-      )}
+      {intro.length > 0 && <section className="rk-section"><h2 className="rk-h2">数字の読み方</h2><div className="rk-intro">{intro.map((paragraph, i) => <p key={i}>{paragraph}</p>)}</div></section>}
 
-      {/* トップ10と全順位を1セクションに統合し、11位以下は details（エクスパンド）で
-          全件表示する。JS 不要の native details（rk-sources・rk-faq と同じ流儀）。 */}
-      <section className="rk-section">
-        <div className="rk-section-head">
-          <span className="rk-section-icon"><Trophy size={20} aria-hidden="true" /></span>
-          <div className="rk-section-heading">
-            <h2 className="rk-h2">
-              {isList
-                ? `該当する自治体（${def.columnLabel}が多い順・全${ranked.length}自治体）`
-                : `${prefName}のランキング（全${ranked.length}自治体）`}
-            </h2>
-            <p className="rk-section-sub">
-              {isList
-                ? `順位ではなく、条件に該当する自治体の一覧です（掲載順は${def.columnLabel}の多い順）。`
-                : `${def.columnLabel}でみる県内の全順位。自治体名から住環境データの詳細へ。`}
-            </p>
-          </div>
-        </div>
-
-        {podium.length > 0 && (
-          <ol className="rk-podium" aria-label={isList ? "該当する自治体" : "トップ3"}>
-            {podium.map((m, i) => (
-              <li key={m.code} style={{ display: "contents" }}>
-                <Link href={`/area/${m.pref}/${m.code}`} className={`rk-podium-card is-${i + 1}`}>
-                  <RankBadge className="rk-medal" isList={isList} rank={i + 1} rankAriaLabel={`${i + 1}位`} />
-                  <span className="rk-podium-body">
-                    <span className="rk-podium-name">{m.displayName ?? m.name}</span>
-                    <span className="rk-podium-value">{def.display(m)}</span>
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ol>
-        )}
-
-        {!isList && podium.length >= 2 && compareAttribution && (
-          <div className="rk-podium-compare">
-            <div className="rk-podium-compare-copy">
-              <strong>{def.slug === "population-most" ? `上位${podium.length}市町村の人口と暮らしを比べる` : `上位${podium.length}自治体を比べる`}</strong>
-              <span>{def.slug === "population-most" ? "人口・人口密度・増減率を、同じ表で確認できます。" : "家賃や人口、子育てなどの住環境データを横並びで確認できます。"}</span>
-            </div>
-            <TrackedCompareLink
-              key={compareAttribution.originPath}
-              href={compareHref(podium.map((m) => m.code), "pref_ranking_top3", compareAttribution)}
-              count={podium.length}
-              attribution={compareAttribution}
-              label={def.slug === "population-most" ? `上位${podium.length}市町村を比較する` : undefined}
-              className="rk-action rk-action-primary"
-            />
-          </div>
-        )}
-
-        {ladder.length > 0 && ladderOl(ladder, 4)}
-
-        {rest.length > 0 && (
-          <details className="rk-more">
-            <summary className="rk-more-summary">
-              <span className="rk-more-open">
-                {isList
-                  ? `${TOP_CARDS + 1}件目以降を表示（全${ranked.length}自治体）`
-                  : `${TOP_CARDS + 1}位以下を表示（全${ranked.length}自治体）`}
-              </span>
-              <span className="rk-more-close">閉じる</span>
-            </summary>
-            {ladderOl(rest, TOP_CARDS + 1)}
-          </details>
-        )}
-      </section>
-
-      <DisplayAd placement="ranking" />
 
       <RankLinkList
         title={`${prefName}のほかのランキング`}

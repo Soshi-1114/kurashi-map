@@ -18,6 +18,7 @@ import { getPrefBySlug } from "@/lib/prefs";
 import { MAX_COMPARE, compareHref, denkiHref, parseCompareAttribution, parseToolSource } from "@/lib/siteNav";
 import { useToolEntry } from "@/lib/useToolEntry";
 import { ANALYTICS_MEASUREMENT_VERSION, compareAttributionParams, track, trackCompareReady, trackCompareView, trackToolEntry } from "@/lib/analytics";
+import { compareInsights } from "@/lib/compareInsights";
 import { useCompareSelection } from "./CompareSelectionProvider";
 
 /** 平均列の種類。県平均は選択自治体がすべて同一県のときだけ選べる。 */
@@ -205,6 +206,8 @@ export default function CompareClient({
   const prefAvgAvailable = commonPref != null && prefAverages[commonPref] != null;
   const effectiveAvgKind: AvgKind = prefAvgAvailable && avgKind === "pref" ? "pref" : "national";
   const averages = effectiveAvgKind === "pref" ? prefAverages[commonPref!] : nationalAverages;
+  const insights = comparisonReady ? compareInsights(resolveSelected(selected).filter((m): m is Municipality => m != null)) : [];
+
   const avgLabel =
     effectiveAvgKind === "pref"
       ? `${getPrefBySlug(commonPref!)?.nameJa ?? ""}平均（参考）`
@@ -286,6 +289,11 @@ export default function CompareClient({
               ))}
             </div>
           )}
+          {insights.length > 0 && <section className="cmp-insights" aria-label="主な違いの早見">
+            <h2>主な違いを確認する</h2>
+            <ul>{insights.map(point => <li key={point}>{point}</li>)}</ul>
+            <p>人口は2025年国勢調査。家賃の基準時点は比較表で確認できます。施設数や待機児童数だけでは、個別の通勤時間・入園可能性・住宅の安全性は判断できません。</p>
+          </section>}
           {prefAvgAvailable && (
             <div className="cmp-avg-toggle" role="group" aria-label="平均の比較基準">
               <button
