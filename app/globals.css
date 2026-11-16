@@ -2315,7 +2315,7 @@ button { font-family: inherit; }
 /* AdSense 本文内広告。高さは配信前に確保し、未配信でも急に詰めない。 */
 .display-ad { margin: 48px 0; text-align: center; }
 .display-ad-label { display: block; margin-bottom: 8px; color: var(--color-ink-muted); font-size: 12px; }
-.display-ad-space { position: relative; width: 100%; max-width: 970px; height: 250px; margin-inline: auto; }
+.display-ad-space { position: relative; width: 100%; max-width: 970px; min-height: 250px; margin-inline: auto; }
 .display-ad[data-mode="preview"] .display-ad-space { background: var(--color-page); outline: 1px dashed var(--color-line); outline-offset: -1px; }
 .display-ad[data-mode="preview"] .display-ad-space::before { content: "広告プレビュー"; position: absolute; inset: 0; display: grid; place-items: center; color: var(--color-ink-muted); font-size: 13px; }
 
