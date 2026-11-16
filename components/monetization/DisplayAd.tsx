@@ -44,8 +44,9 @@ export default function DisplayAd({ placement }: { placement: AdPageGroup }) {
     <aside ref={container} className="display-ad" aria-label="広告" data-ad-placement={placement}>
       <span className="display-ad-label">広告</span>
       <div className="display-ad-space">
-        <ins ref={slot} className="adsbygoogle" style={{ display: "block", width: "100%", height: 250 }}
-          data-ad-client={config.clientId!} data-ad-slot={slotId} />
+        <ins ref={slot} className="adsbygoogle" style={{ display: "block" }}
+          data-ad-client={config.clientId!} data-ad-slot={slotId}
+          data-ad-format="auto" data-full-width-responsive="true" />
       </div>
     </aside>
   );

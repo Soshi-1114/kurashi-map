@@ -34,8 +34,19 @@ describe("本文内広告", () => {
   it("プレビューは高さを確保したダミー枠だけで外部通信しない", () => {
     const { container } = render(<DisplayAd placement="ranking" />);
     expect(container.querySelector("aside")?.dataset.mode).toBe("preview");
-    expect(container.querySelector("ins")?.style.height).toBe("250px");
+    expect(container.querySelector(".display-ad-space")).not.toBeNull();
     expect(loadAdsense).not.toHaveBeenCalled();
+  });
+  it.each(["ranking", "area"] as const)("%s枠は固定サイズで制限せず全幅レスポンシブ表示を許可する", placement => {
+    window.history.replaceState(null, "", placement === "ranking" ? "/ranking/population-most" : "/area/tokyo");
+    const { container } = render(<DisplayAd placement={placement} />);
+    const ad = container.querySelector("ins")!;
+    expect(ad.getAttribute("data-ad-format")).toBe("auto");
+    expect(ad.getAttribute("data-full-width-responsive")).toBe("true");
+    expect(ad.style.display).toBe("block");
+    expect(ad.style.width).toBe("");
+    expect(ad.style.height).toBe("");
+    expect(container.querySelectorAll("ins")).toHaveLength(1);
   });
   it("本番でもStrictMode・再レンダーで枠を二重初期化しない", async () => {
     mode.live = true;
