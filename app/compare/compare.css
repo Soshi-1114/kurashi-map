@@ -369,3 +369,9 @@
   line-height: var(--leading-normal);
   color: var(--text-faint);
 }
+
+.cmp-insights { margin: 20px 0; padding: 18px 20px; border-left: 3px solid var(--accent); background: var(--surface, #fff); }
+.cmp-insights h2 { font-size: 17px; margin: 0 0 12px; }
+.cmp-insights ul { padding-left: 20px; margin: 0; }
+.cmp-insights li { margin: 10px 0; line-height: 1.8; font-size: 14px; }
+.cmp-insights p { font-size: 12px; color: var(--text-muted); line-height: 1.8; margin: 14px 0 0; }

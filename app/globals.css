@@ -2320,3 +2320,15 @@ button { font-family: inherit; }
 .display-ad[data-mode="preview"] .display-ad-space::before { content: "広告プレビュー"; position: absolute; inset: 0; display: grid; place-items: center; color: var(--color-ink-muted); font-size: 13px; }
 
 .display-ad-privacy { display: block; margin: 16px auto 0; padding: 8px; border: 0; background: transparent; color: var(--color-ink-muted); text-decoration: underline; cursor: pointer; }
+
+/* ページの回答を読み終えた後の任意アンケート。広告とは別の領域に置く。 */
+.content-feedback { margin: 28px 0; padding: 20px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface, #fff); }
+.content-feedback h2 { font-size: 15px; line-height: 1.7; margin: 0 0 12px; }
+.content-feedback-actions, .content-feedback-reasons { display: flex; flex-wrap: wrap; gap: 8px; }
+.content-feedback button { min-height: 44px; padding: 8px 14px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface, #fff); color: var(--text); cursor: pointer; font: inherit; font-size: 13px; }
+.content-feedback button:hover:not(:disabled) { background: var(--accent-soft); border-color: var(--accent); }
+.content-feedback button:disabled { opacity: .6; cursor: wait; }
+.content-feedback fieldset { padding: 12px 0 0; margin: 8px 0 0; border: 0; }
+.content-feedback legend { font-size: 13px; color: var(--text-muted); padding-top: 12px; }
+.content-feedback-count { margin: 14px 0 0; font-size: 12px; color: var(--text-muted); }
+.content-feedback-note { margin: 8px 0 0; font-size: 12px; color: var(--text-muted); line-height: 1.8; }
