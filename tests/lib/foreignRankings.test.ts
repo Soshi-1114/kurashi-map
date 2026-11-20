@@ -49,7 +49,7 @@ describe('new official-data rankings', () => {
     expect(result.rows).toHaveLength(47);
     expect(result.eligibleCount).toBe(47);
     const row = result.rows.find(r => r.code === '11')!;
-    const observation = data.education.find(r => r.code === '11' && r.stage === def.stage)!;
+    const observation = data.education.find(r => r.code === '11' && r.stage === def.stage && r.year === result.year)!;
     expect(row.value).toBe(observation.foreign! / observation.total! * 100);
     expect(row.before).toBe(observation.total);
     expect(row.after).toBe(observation.foreign);

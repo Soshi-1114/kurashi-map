@@ -1,0 +1,42 @@
+{
+  "sources": [
+    {
+      "id": "local-school-hamamatsu-2026",
+      "sourceName": "浜松市教育委員会 外国人子供教育推進事業説明資料（令和8年5月1日現在）",
+      "sourceUrl": "https://www.city.hamamatsu.shizuoka.jp/sogo/gaikokunitunagarukonosien/gaikokujin.html",
+      "downloadUrl": "https://www.city.hamamatsu.shizuoka.jp/documents/85593/gaikokujinkodomokyouikushiensuishinjigyou.pdf",
+      "year": 2026,
+      "period": "2026-05-01",
+      "sourcePublishedAt": null,
+      "definition": "浜松市の公立小中学校に在籍する外国籍児童生徒。資料5ページ。学校種別の在籍総数が同資料にないため、割合は算出しない。国公私立計の都道府県統計とは別系列。",
+      "sha256": "4c75e345ae0fd9de5fa26bff32599aa3d537949fa4d5913712b0249bda88a757",
+      "reviewedAt": "2026-11-20"
+    }
+  ],
+  "observations": [
+    {
+      "municipalityCode": "22130",
+      "year": 2026,
+      "asOf": "2026-05-01",
+      "stage": "elementary",
+      "foreign": 1259,
+      "total": null,
+      "coverage": "municipal-public",
+      "sourceIds": [
+        "local-school-hamamatsu-2026"
+      ]
+    },
+    {
+      "municipalityCode": "22130",
+      "year": 2026,
+      "asOf": "2026-05-01",
+      "stage": "junior",
+      "foreign": 678,
+      "total": null,
+      "coverage": "municipal-public",
+      "sourceIds": [
+        "local-school-hamamatsu-2026"
+      ]
+    }
+  ]
+}

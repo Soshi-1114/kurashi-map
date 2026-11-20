@@ -41,6 +41,7 @@ describe('official data update options and safeguards', () => {
       (d: typeof dataset) => { d.resident[0].population = -1; },
       (d: typeof dataset) => { delete d.education[0].total; },
       (d: typeof dataset) => { d.resident[0].sourceIds = ['unknown']; },
+      (d: typeof dataset) => { d.localEducation[0].sourceIds = []; },
     ];
     for (const mutate of cases) {
       const broken = structuredClone(dataset); mutate(broken);

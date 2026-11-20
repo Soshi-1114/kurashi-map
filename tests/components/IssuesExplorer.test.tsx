@@ -2,6 +2,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { readFileSync } from 'node:fs';
+import { issueFetchFixture } from '@/tests/helpers/foreignIssueFixture';
 import IssuesExplorer from '@/components/foreign-resident-issues/IssuesExplorer';
 
 vi.mock('next/dynamic', () => ({ default: () => () => <div>地図テスト用</div> }));
@@ -9,13 +10,41 @@ const dataset = JSON.parse(readFileSync('public/foreign-resident-issues/dataset.
 afterEach(() => { cleanup(); vi.unstubAllGlobals(); window.history.replaceState(null, '', '/'); });
 
 describe('independent explorer', () => {
+  it('restores at most three valid comparison codes, compares across prefectures and retains the choice in the URL', async () => {
+    window.history.replaceState(null, '', '/map/foreign-resident-issues?tab=residents&compareMunicipalities=11203,13104,99999,11203,22130,23201');
+    const fetcher = issueFetchFixture(dataset); vi.stubGlobal('fetch', fetcher);
+    render(<IssuesExplorer />);
+    const compare = await screen.findByRole('region', { name: '選択地域の指標比較表' });
+    expect(within(compare).getAllByRole('columnheader').map(h => h.textContent)).toEqual(['指標', '川口市', '新宿区', '浜松市']);
+    expect(within(compare).getAllByRole('rowheader')).toHaveLength(8);
+    expect(fetcher.mock.calls.some(([url]) => url.endsWith('dataset.json'))).toBe(false);
+    await waitFor(() => expect(new URLSearchParams(window.location.search).get('compareMunicipalities')).toBe('11203,13104,22130'));
+    fireEvent.click(screen.getByRole('button', { name: '新宿区を比較から削除' }));
+    await waitFor(() => expect(new URLSearchParams(window.location.search).get('compareMunicipalities')).toBe('11203,22130'));
+    fireEvent.click(screen.getByRole('button', { name: '学校の教育環境' }));
+    expect(screen.queryByRole('button', { name: '川口市を比較から削除' })).toBeNull();
+  });
+  it('loads school history on selection and keeps municipal public-school reference counts out of prefecture ratios', async () => {
+    window.history.replaceState(null, '', '/map/foreign-resident-issues?tab=education&code=23');
+    vi.stubGlobal('fetch', issueFetchFixture(dataset)); render(<IssuesExplorer />);
+    const detail = await screen.findByRole('complementary', { name: '選択地域の詳細' });
+    const chart = within(detail).getByRole('img', { name: /年次推移/ });
+    expect(chart).toHaveTextContent('2023年'); expect(chart).toHaveTextContent('2025年');
+    const local = screen.getByRole('region', { name: '自治体の教育公表資料' });
+    expect(local).toHaveTextContent('1,259人'); expect(local).toHaveTextContent('678人');
+    expect(local).toHaveTextContent('算出不可（分母未収録）');
+    expect(screen.getByLabelText('基準年')).toHaveValue('2025');
+    fireEvent.change(screen.getByLabelText('基準年'), { target: { value: '2023' } });
+    await waitFor(() => expect(screen.getByRole('region', { name: '地図と統計を調べる' })).toHaveAttribute('aria-busy', 'false'));
+    expect(window.location.search).toContain('year=2023');
+  });
   it('derives the latest years, URL validation and chart labels from each dataset series', async () => {
     const next = structuredClone(dataset);
     // Synthetic year rollover fixture; never written to the public dataset.
     next.resident.push(...dataset.resident.filter((r: { year: number }) => r.year === 2026).map((r: object) => ({ ...r, year: 2027 })));
-    next.education.push(...dataset.education.map((r: { foreign: number }) => ({ ...r, year: 2026, foreign: r.foreign + 100 })));
+    next.education.push(...dataset.education.filter((r: { year: number }) => r.year === 2025).map((r: { foreign: number }) => ({ ...r, year: 2026, foreign: r.foreign + 100 })));
     window.history.replaceState(null, '', '/map/foreign-resident-issues?tab=residents&year=2099&code=11203');
-    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, json: async () => next }));
+    vi.stubGlobal('fetch', issueFetchFixture(next));
     render(<IssuesExplorer />);
     await screen.findByRole('complementary', { name: '選択地域の詳細' });
     await waitFor(() => expect(screen.getByLabelText('基準年')).toHaveValue('2027'));
@@ -23,17 +52,17 @@ describe('independent explorer', () => {
     fireEvent.click(screen.getByRole('button', { name: '学校の教育環境' }));
     expect(screen.getByLabelText('基準年')).toHaveValue('2026');
     fireEvent.change(screen.getByLabelText('教育指標'), { target: { value: 'count' } });
-    const region = screen.getByRole('region', { name: '地域別の全指標比較表' });
+    const region = await screen.findByRole('region', { name: '地域別の全指標比較表' });
     expect(region.querySelector('tbody tr')).toHaveTextContent('17,293人');
     fireEvent.change(screen.getByLabelText('基準年'), { target: { value: '2025' } });
-    expect(region.querySelector('tbody tr')).toHaveTextContent('17,193人');
+    await waitFor(() => expect(region.querySelector('tbody tr')).toHaveTextContent('17,193人'));
     fireEvent.click(screen.getByRole('button', { name: '日本語指導・支援' }));
     expect(screen.getByLabelText('基準年')).toHaveValue('2025');
     await waitFor(() => expect(window.location.search).toContain('year=2025'));
   });
   it('restores the municipality, period and metric, then switches to education at its own year', async () => {
     window.history.replaceState(null, '', '/map/foreign-resident-issues?tab=residents&year=2026&pref=saitama&code=11203&metric=rate5');
-    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, json: async () => dataset }));
+    vi.stubGlobal('fetch', issueFetchFixture(dataset));
     render(<IssuesExplorer />);
     const detail = await screen.findByRole('complementary', { name: '選択地域の詳細' });
     await waitFor(() => expect(within(detail).getByRole('heading', { name: '川口市' })).toBeInTheDocument());
@@ -56,7 +85,7 @@ describe('independent explorer', () => {
     expect(within(detail).queryByRole('heading', { name: '川口市' })).not.toBeInTheDocument();
     fireEvent.click(screen.getByRole('button', { name: '日本語指導・支援' }));
     expect(screen.getByLabelText('日本語指導指標')).toHaveValue('needsForeign');
-    const kawaguchi = screen.getByRole('button', { name: '川口市' });
+    const kawaguchi = await screen.findByRole('button', { name: '川口市' });
     fireEvent.click(kawaguchi);
     expect(within(detail).getAllByText('1,209人').length).toBeGreaterThan(0);
     expect(within(detail).getByText('78人')).toBeInTheDocument();
@@ -64,7 +93,7 @@ describe('independent explorer', () => {
     expect(within(detail).getByText('拠点校への通級による指導')).toBeInTheDocument();
   });
   it('exposes a usable retry after data-fetch failure', async () => {
-    vi.stubGlobal('fetch', vi.fn().mockRejectedValueOnce(new Error('offline')).mockResolvedValue({ ok: true, json: async () => dataset }));
+    vi.stubGlobal('fetch', issueFetchFixture(dataset).mockRejectedValueOnce(new Error('offline')));
     render(<IssuesExplorer />);
     expect(await screen.findByRole('alert')).toHaveTextContent('統計データを取得できませんでした');
     fireEvent.click(screen.getByRole('button', { name: '再試行' }));
@@ -72,7 +101,7 @@ describe('independent explorer', () => {
   });
   it('shows all education metrics and keeps header sorting, filters and URL in sync', async () => {
     window.history.replaceState(null, '', '/map/foreign-resident-issues?tab=education');
-    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, json: async () => dataset }));
+    vi.stubGlobal('fetch', issueFetchFixture(dataset));
     render(<IssuesExplorer />);
     const region = await screen.findByRole('region', { name: '地域別の全指標比較表' });
     await waitFor(() => expect(within(region).getAllByRole('columnheader')).toHaveLength(6));

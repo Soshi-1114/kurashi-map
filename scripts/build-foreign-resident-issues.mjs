@@ -7,6 +7,7 @@ import XLSX from 'xlsx';
 import { execFileSync } from 'node:child_process';
 import { PREFS, NORTHERN_TERRITORIES_CODES } from './_lib/prefs.mjs';
 import { updateOptions, validateUpdateConfig, fiscalYearLabel, validateIssueDataset, writeDatasetAtomically } from './_lib/foreign-resident-update.mjs';
+import { writeIssueChunks } from './_lib/foreign-issue-chunks.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
 const options = updateOptions(process.argv.slice(2), root);
@@ -96,8 +97,9 @@ for (let year = config.resident.startYear; year <= config.resident.endYear; year
   console.log(`Residents ${year}: ${resident.filter(r => r.year === year && r.status === 'published').length} municipalities`);
 }
 const education = [];
-const schoolYear = config.education.year;
-for (const { stage, listUrl, foreignLabel, totalLabel } of config.education.tables) {
+for (const school of [...(config.education.history ?? []), config.education]) {
+const schoolYear = school.year;
+for (const { stage, listUrl, foreignLabel, totalLabel } of school.tables) {
   const list = articles((await retrieve(listUrl, `school-${stage}-${schoolYear}.html`)).toString());
   function match(label) { return list.find(a => a.text.includes(label)); }
   const f = await table(match(foreignLabel), `school-${stage}-foreign-${schoolYear}`, `文部科学省 学校基本調査 ${foreignLabel}`, schoolYear, `${schoolYear}-05-01`, '都道府県別、学校所在地による集計。国公私立の同じ設置者区分で分母と分子を照合。');
@@ -111,6 +113,7 @@ for (const { stage, listUrl, foreignLabel, totalLabel } of config.education.tabl
     education.push({ code: p.code, geography: 'prefecture', year: schoolYear, stage, foreign: fr[1], total: tr[2], sourceIds: [f.sourceId, t.sourceId] });
   }
   console.log(`Education ${stage}: 47 prefectures`);
+}
 }
 const guidanceYear = config.guidance.year;
 const guidanceId = `japanese-guidance-${guidanceYear}`;
@@ -128,8 +131,17 @@ sources.push({ id: guidanceId, sourceName: `文部科学省 日本語指導が�
   definition: '市町村教育委員会所管の公立校。問3の外国籍・日本国籍の日本語指導必要人数、問14（イ）の特別な配慮に基づく指導を受けている外国籍人数、問30の指導体制。学校基本調査の外国籍在籍者総数とは異なる。',
   sha256: crypto.createHash('sha256').update(guidanceBytes).digest('hex'), licenseUrl: 'https://www.e-stat.go.jp/terms-of-use' });
 // All files are validated before the generated dataset is replaced.
-if (known.size !== municipalities.length || education.length !== 94) throw new Error('Coverage validation failed');
-const dataset = { schemaVersion: 1, generatedAt: new Date().toISOString(), municipalities, prefectures, resident, education, guidance, sources };
+if (known.size !== municipalities.length || education.length !== 94 * (1 + (config.education.history?.length ?? 0))) throw new Error('Coverage validation failed');
+const local = JSON.parse(await fs.readFile(path.join(root, 'data/foreign-resident-issues/local-education.json'), 'utf8'));
+for (const source of local.sources) {
+  const bytes = await retrieve(source.downloadUrl, `${source.id}.pdf`);
+  if (crypto.createHash('sha256').update(bytes).digest('hex') !== source.sha256) throw new Error(`Local school source changed; review observations before publishing: ${source.id}`);
+  sources.push({ ...source, updatedAt: new Date().toISOString().slice(0, 10) });
+}
+const dataset = { schemaVersion: 1, generatedAt: new Date().toISOString(), municipalities, prefectures, resident, education, guidance, localEducation: local.observations, sources };
 validateIssueDataset(dataset, config, NORTHERN_TERRITORIES_CODES);
-if (!check) await writeDatasetAtomically(output, dataset);
+if (!check) {
+  await writeDatasetAtomically(output, dataset);
+  if (output === path.join(root, 'public/foreign-resident-issues/dataset.json')) await writeIssueChunks(path.dirname(output), dataset);
+}
 console.log(`${check ? 'Validated (no dataset written)' : `Saved ${output}`}: ${resident.length} resident / ${education.length} education / ${guidance.length} guidance observations`);

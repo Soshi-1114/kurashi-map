@@ -113,3 +113,13 @@
   .fri-map-heading { padding:10px 14px;gap:3px;font-size:12px; }
   .fri-map-heading span { font-size:10px; }
 }
+
+.fri-region-compare { margin: 20px 0; padding: 16px; border: 1px solid var(--color-line); border-radius: 12px; }
+.fri-region-compare h2 { font-size: 18px; margin: 0 0 8px; }
+.fri-region-compare p { font-size: 13px; }
+.fri-region-compare label { display: grid; gap: 6px; max-width: 420px; font-size: 13px; }
+.fri-region-compare input { width: 100%; box-sizing: border-box; min-width: 0; padding: 10px; font-size: 16px; border: 1px solid var(--color-line); border-radius: 8px; }
+.fri-compare-chips { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; list-style: none; }
+.fri-compare-chips li { display: flex; align-items: center; gap: 8px; }
+.fri-compare-chips button, .fri-compare-matches button { padding: 6px 10px; }
+.fri-region-compare th, .fri-region-compare td { min-width: 100px; }

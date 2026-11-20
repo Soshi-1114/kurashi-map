@@ -90,10 +90,10 @@ describe('official prototype dataset integrity', () => {
       if (r.foreign !== null && r.population !== null) expect(r.foreign).toBeLessThanOrEqual(r.population);
     }
     for (const r of data.guidance) expect(codes.has(r.code)).toBe(true);
-    expect(data.sources.every(s=>s.sourceUrl.startsWith('https://www.e-stat.go.jp/') && s.sha256?.length === 64)).toBe(true);
+    expect(data.sources.every(s=>['https://www.e-stat.go.jp', 'https://www.city.hamamatsu.shizuoka.jp'].includes(new URL(s.sourceUrl).origin) && s.sha256?.length === 64)).toBe(true);
   });
   it('covers 47 prefectures for both school types with valid numerators and denominators', () => {
-    expect(data.education).toHaveLength(94);
+    expect(data.education).toHaveLength(282);
     for (const r of data.education) {
       expect(r.total).toBeGreaterThan(0);
       expect(r.foreign).toBeLessThanOrEqual(r.total!);

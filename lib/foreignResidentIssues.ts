@@ -18,6 +18,7 @@ export type IssuesDataset = {
   schemaVersion: number; generatedAt: string; municipalities: IssueMunicipality[];
   prefectures: { code: string; slug: string; name: string }[];
   resident: ResidentObservation[]; education: EducationObservation[]; guidance: GuidanceObservation[]; sources: IssueSource[];
+  localEducation?: { municipalityCode: string; year: number; asOf: string; stage: 'elementary' | 'junior'; foreign: number | null; total: null; coverage: 'municipal-public'; sourceIds: string[] }[];
 };
 export type GuidanceObservation = { code: string; year: number; stage: 'elementary' | 'junior';
   needsForeign: number | null; needsJapanese: number | null; receivingForeign: number | null; support: string[]; sourceIds: string[] };
