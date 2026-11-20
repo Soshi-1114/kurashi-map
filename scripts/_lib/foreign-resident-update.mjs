@@ -28,11 +28,15 @@ export function validateUpdateConfig(config) {
   const year = y => Number.isInteger(y) && y >= 1989 && y <= 2100;
   if (!year(config.resident?.startYear) || !year(config.resident?.endYear) || config.resident.startYear > config.resident.endYear) throw new Error('Invalid resident year range');
   if (!year(config.education?.year) || !year(config.guidance?.year)) throw new Error('Invalid school/guidance year');
-  const tables = config.education.tables;
+  const schools = [...(config.education.history ?? []), config.education];
+  if (new Set(schools.map(s => s.year)).size !== schools.length || schools.some(s => !year(s.year) || s.year > config.education.year)) throw new Error('Invalid school history years');
+  for (const school of schools) {
+  const tables = school.tables;
   if (!Array.isArray(tables) || tables.length !== 2 || ['elementary', 'junior'].some(stage => tables.filter(t => t.stage === stage).length !== 1)) throw new Error('Both school stages are required exactly once');
   for (const table of tables) {
     const url = new URL(table.listUrl);
     if (url.origin !== 'https://www.e-stat.go.jp' || url.pathname !== '/stat-search/files' || !table.foreignLabel || !table.totalLabel) throw new Error('Invalid official school table');
+  }
   }
   if (!/^\d{12}$/.test(config.guidance.statInfId) || !/^\d{4}-\d{2}-\d{2}$/.test(config.guidance.publishedAt)
     || new Date(config.guidance.publishedAt).toISOString().slice(0, 10) !== config.guidance.publishedAt) throw new Error('Invalid guidance source metadata');
@@ -66,11 +70,15 @@ export function validateIssueDataset(data, config, outside) {
     }
   }
   const years = config.resident.endYear - config.resident.startYear + 1;
-  if (data.resident.length !== codes.size * years || data.education.length !== data.prefectures.length * 2 || data.guidance.length !== [...codes].filter(c => !outside.has(c)).length * 2) throw new Error('Observation coverage mismatch');
+  if (data.resident.length !== codes.size * years || data.education.length !== data.prefectures.length * 2 * (1 + (config.education.history?.length ?? 0)) || data.guidance.length !== [...codes].filter(c => !outside.has(c)).length * 2) throw new Error('Observation coverage mismatch');
   const prefCodes = new Set(data.prefectures.map(p => p.code));
   for (const r of data.resident) if (!Number.isInteger(r.year) || r.year < config.resident.startYear || r.year > config.resident.endYear || (r.foreign !== null && r.population !== null && r.foreign > r.population)) throw new Error('Resident year/count mismatch');
-  for (const r of data.education) if (r.year !== config.education.year || !['elementary', 'junior'].includes(r.stage) || !prefCodes.has(r.code) || (r.foreign !== null && r.total !== null && r.foreign > r.total)) throw new Error('School year/code/count mismatch');
+  for (const r of data.education) if (![config.education.year, ...(config.education.history ?? []).map(s => s.year)].includes(r.year) || !['elementary', 'junior'].includes(r.stage) || !prefCodes.has(r.code) || (r.foreign !== null && r.total !== null && r.foreign > r.total)) throw new Error('School year/code/count mismatch');
   for (const r of data.guidance) if (r.year !== config.guidance.year || !['elementary', 'junior'].includes(r.stage) || outside.has(r.code) || (r.receivingForeign !== null && r.needsForeign !== null && r.receivingForeign > r.needsForeign)) throw new Error('Guidance year/code/count mismatch');
+  const local = data.localEducation ?? [];
+  if (new Set(local.map(r => `${r.municipalityCode}:${r.year}:${r.stage}`)).size !== local.length) throw new Error('Duplicate local education observation');
+  for (const r of local) if (!codes.has(r.municipalityCode) || r.coverage !== 'municipal-public' || r.total !== null
+    || !['elementary', 'junior'].includes(r.stage) || !Number.isSafeInteger(r.foreign) || r.foreign < 0 || !r.asOf.startsWith(`${r.year}-`) || !r.sourceIds.length || r.sourceIds.some(id => !sourceIds.has(id))) throw new Error('Invalid scoped local education observation');
 }
 
 export async function writeDatasetAtomically(filename, data) {

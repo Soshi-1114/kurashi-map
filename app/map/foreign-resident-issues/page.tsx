@@ -36,7 +36,7 @@ export default async function ForeignResidentIssuesPage() {
     ] },
     { '@type': 'Dataset', name: '外国人住民の年次推移と外国籍児童生徒の教育環境', description, url: absoluteUrl(PATH),
       creator: { '@type': 'Organization', name: SITE.name }, temporalCoverage: `${residentYears[0]}/${latestYear}`, spatialCoverage: '日本', isAccessibleForFree: true,
-      citation: data.sources.map(s => s.sourceUrl), license: 'https://www.e-stat.go.jp/terms-of-use' },
+      citation: data.sources.map(s => s.sourceUrl) },
   ] };
   return <PageShell width="wide" innerClassName="fri-root" trail={[{ name: 'ホーム', href: '/' }, { name: '外国人住民・教育環境マップ' }]}>
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(ld) }} />
@@ -47,7 +47,7 @@ export default async function ForeignResidentIssuesPage() {
     <ForeignRankingLinks />
     <nav className="fri-related" aria-label="関連データ"><Link href="/map/foreign-ratio">既存の外国人住民比率マップ</Link><Link href="/ranking/foreign-ratio-high">在留外国人比率の既存ランキング</Link><span>既存ページとは統計・基準日が異なります。</span></nav>
     <section className="fri-method" aria-labelledby="fri-method-title"><h2 id="fri-method-title">データの読み方と収録範囲</h2>
-      <div className="fri-method-grid"><div><h3>人口割合の分母をそろえる</h3><p>新ページは住民基本台帳の外国人住民数と総人口を使用します。既存の在留外国人統計と国勢調査による比率とは、対象・基準日が異なります。増減率は基準年の人数が0の場合、算出しません。</p><Link href="/map/foreign-ratio">既存の外国人住民比率マップ</Link></div><div><h3>教育データの地域粒度</h3><p>外国籍児童生徒の在籍人数・割合は都道府県別、国公私立計です。日本語指導は市町村教育委員会所管の公立校の必要人数・実施人数・指導体制を表示します。日本語指導の必要人数は外国籍在籍者の総数とは異なります。</p></div><div><h3>未収録の情報</h3><p>国籍・在留資格の構成、犯罪・地域事案、社会保障、相関分析、外国籍在籍割合の自治体別内訳と教育の過去年次は未実装です。犯罪認知件数を外国人による犯罪件数と解釈しません。学校単位や個人を特定する位置情報は掲載していません。</p></div></div>
+      <div className="fri-method-grid"><div><h3>人口割合の分母をそろえる</h3><p>新ページは住民基本台帳の外国人住民数と総人口を使用します。既存の在留外国人統計と国勢調査による比率とは、対象・基準日が異なります。増減率は基準年の人数が0の場合、算出しません。</p><Link href="/map/foreign-ratio">既存の外国人住民比率マップ</Link></div><div><h3>教育データの地域粒度</h3><p>外国籍児童生徒の在籍人数・割合は都道府県別、国公私立計です。日本語指導は市町村教育委員会所管の公立校の必要人数・実施人数・指導体制を表示します。日本語指導の必要人数は外国籍在籍者の総数とは異なります。</p></div><div><h3>未収録の情報</h3><p>国籍・在留資格の構成、犯罪・地域事案、社会保障、相関分析、全国で定義のそろった自治体別の外国籍在籍割合は未収録です。学校基本調査の2023〜2025年度と、対象を明示した自治体公表資料を別々に表示します。犯罪認知件数を外国人による犯罪件数と解釈しません。学校単位や個人を特定する位置情報は掲載していません。</p></div></div>
       <details><summary>最新年の外国人住民割合を数値で確認</summary><table><caption>{latestYear}年1月1日、住民基本台帳。高い順の先頭5自治体。</caption><thead><tr><th>自治体</th><th>割合</th></tr></thead><tbody>{top.map(m => <tr key={m.code}><th><Link href={`/area/${m.pref}/${m.code}`}>{m.name}</Link></th><td>{formatIssueValue(m.value, '%')}</td></tr>)}</tbody></table></details>
     </section>
     <section className="fri-method"><h2>公的データの出典</h2><p>各表をKurashiMapが加工して表示。原典で示された欠損や秘匿は0に置き換えません。過去のコードが現在と一致しない地域は比較対象から除外します。</p><ul className="fri-source-list">{sources.map(s => <li key={s.id}><a href={s.sourceUrl} target="_blank" rel="noopener noreferrer">{s.sourceName}</a><span>基準日 {s.period}／公表日 {s.sourcePublishedAt ?? '未確認'}</span></li>)}</ul><p><a href="https://www.e-stat.go.jp/terms-of-use" target="_blank" rel="noopener noreferrer">e-Stat利用規約</a>　／　<a href="/foreign-resident-issues/dataset.json" download>収録データ・全年度の出典をダウンロード（JSON）</a></p></section>

@@ -26,6 +26,6 @@ for (const [url, content] of checks) {
 const response = await fetch(base + '/foreign-resident-issues/dataset.json');
 assert.equal(response.status, 200);
 const data = await response.json();
-assert.equal(data.education.length, 94);
+assert.equal(data.education.length, 282);
 assert.equal(data.guidance.length, 3482);
 console.log(`OK data: ${data.resident.length} resident / ${data.education.length} education / ${data.guidance.length} guidance`);
