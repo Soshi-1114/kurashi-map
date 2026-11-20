@@ -265,6 +265,12 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
         )}</> : undefined}
       />
 
+      {searchCopy && ["yamaguchi", "shimane"].includes(pref.slug) && (
+        <section className="rk-section" aria-label="人口ランキングの集計範囲">
+          <h2 className="rk-h2">人口ランキングの集計範囲</h2>
+          <p className="rk-section-sub">{searchCopy.lead}</p>
+        </section>
+      )}
       {def.nextUpdate && <details className="rk-update"><summary>データの更新予定</summary><p>{def.nextUpdate}</p></details>}
 
       <nav className="rk-secondary-actions" aria-label="関連する情報">

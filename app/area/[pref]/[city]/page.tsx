@@ -1,5 +1,6 @@
 import ContentFeedback from "@/components/ContentFeedback";
 import DisplayAd from "@/components/monetization/DisplayAd";
+import AreaContentTracking from "@/components/area/AreaContentTracking";
 import { serializeJsonLd } from "@/lib/jsonLd";
 import StockpileEntry from "@/components/bousai/StockpileEntry";
 import "./area-detail.css";
@@ -554,6 +555,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
       {/* ページ内ナビ（sticky）。長い詳細ページのどこに何があるかを示す。
           タブではないのでコンテンツは隠さない。 */}
       <SectionNav items={navItems} municipalityCode={m.code} />
+      <AreaContentTracking municipalityCode={m.code} />
       {/* この自治体の特徴（全国・県平均との偏差や順位から決定論的に抽出。評価語なし） */}
       {highlights.length > 0 && (
         <Section
@@ -580,6 +582,7 @@ export default async function AreaPage(props: { params: Promise<Params> }) {
             icon={BarChart3}
             tone="ad-tone-pop"
             title={`データで見る${m.name}`}
+            id="insights"
             sub={`${prefName}平均・全国と比べた${m.name}の位置づけ`}
           >
             <ul className="ad-insights">

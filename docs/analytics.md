@@ -1,5 +1,7 @@
 # 計測（GA4）運用ガイド
 
+2026-11-20追加：自治体詳細の`area_section_view`は概要・相対比較説明・詳細データ・比較・ランキング・Q&Aの見出し50%到達を各1回送る（`section` / `municipality_code` / `measurement_version=2026-11-20`）。広告の配信・視認性や読了の指標ではない。Web Vitalsは再レンダー時の再通知を防ぐためコールバック参照を固定し、同版を付与する。`analytics:report`にページ×端末別の本文到達と計測版別のCLS/LCP/INP分布を追加。運用・SEO対象・広告テスト条件は[11/20の改善記録](monetization/optimization-review-2026-11-20.md)を参照。
+
 2026-11-12の比較・診断・人数入力の変更と公開後の評価手順は[3施策の実装・評価計画](product/analytics-improvements-2026-11-12.md)を参照。人口ランキングの新3ページと旧2ページは施策IDを分け、登録済み`cta_variant`に入口ページを含めて、着地・比較表の描画・視認まで同じ値で追う。`shindan_compare_top_click`は上位最大3件を渡す新しいクリックで、旧1件比較の`shindan_compare_click`と分ける。人数ボタン版は`NEXT_PUBLIC_QUICK_ENTRY_V2=true`で有効になるが、既定無効で10/31版の初回評価を維持する。
 
 KurashiMap は Google Analytics 4（gtag.js）でページビューに加えて、**Core Web Vitals** と

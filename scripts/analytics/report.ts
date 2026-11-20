@@ -1,6 +1,7 @@
 import { expectedCaptureKeys, records, ratio, STUDY, type RecordRow, type Snapshot } from "./model";
 import { rankingCompareAttribution } from "../../lib/siteNav";
 import { compareAttributionParams } from "../../lib/analytics";
+import { areaReach, areaVitals, AREA_SECTIONS } from "./areaReview";
 
 const numeric = (value: unknown): number | null => typeof value === "number" && Number.isFinite(value) ? value : null;
 const fmt = (v: unknown): string => numeric(v) === null ? "—" : Number(v).toLocaleString("ja-JP", { maximumFractionDigits: 2 });
@@ -126,6 +127,12 @@ export function renderReport(s: Snapshot): string {
     sections.push(table(["ページ群", "端末", "PV"], (c.pageViewsByDevice ?? []).map(r => [r.group, r.deviceCategory, fmt(r.screenPageViews)])), c.pageViewsByDevice === null ? "ページ群×端末: 取得不可" : "", "");
     sections.push("対象ページ限定CTA（旧2ページ・新3ページをページ別に確認）", "", table(["行動", "ページ", "端末", "回数", "総ユーザー"], (c.cta ?? []).map(r => [r.eventName, r.pagePath, r.deviceCategory, fmt(r.eventCount), fmt(r.totalUsers)])), c.cta === null ? "取得不可" : "", "", table(["ページ群", "PV", "検索クリック（ページ集計）"], ["ランキング", "自治体詳細", "地図", "比較", "診断"].map(group => [group, c.pageViews === null ? "—" : fmt(c.pageViews[group] ?? 0), c.searchClicks === null ? "—" : fmt(c.searchClicks[group] ?? 0)])), "");
   }
+  sections.push("## 自治体詳細の本文到達・表示性能", "", "本文見出しの50%到達であり、広告の表示・Active View・読了ではない。人数は行間で合算しない。公開前・反映待ちの0件は判断保留。存在しない節と未到達はこの表だけでは区別できない。", "");
+  for (const p of ["previous", "current"]) {
+    const reach = areaReach(s, p), vitals = areaVitals(s, p);
+    sections.push(`### ${p}: ${s.plan.periods[p].startDate}〜${s.plan.periods[p].endDate}`, "", "PV上位15組のページ×端末。閲覧人数はpage_view送信ユーザー、到達人数は2026-11-20版のみ。", "", table(["ページ", "端末", "PV", "閲覧人数", ...AREA_SECTIONS], (reach ?? []).map(r => [r.path, r.device, fmt(r.views), fmt(r.users), ...r.sections.map(fmt)])), reach === null ? "本文到達: 閲覧データ取得不可" : "", "", table(["端末", "指標", "計測版", "good回数", "要改善回数", "poor回数", "判定不明回数"], (vitals ?? []).map(r => [r.device, r.metric, r.version, fmt(r.good), fmt(r.needs), fmt(r.poor), fmt(r.unknown)])), vitals === null ? "Web Vitals: 取得不可" : "", "");
+  }
+  sections.push("Web Vitalsはイベント回数の分布であり、ユーザー人数・正確なp75・広告が原因の悪化を示さない。旧版と新版は分けて表示する。GA4への送信漏れ・運営操作を含み得る。広告収益・視認性はAdSenseで同期間・端末・ユニットを合わせて確認する。", "");
   sections.push("## #241 電気・備蓄の固定評価", "", `観測: ${a.study.period ? a.study.period.startDate + "〜" + a.study.period.endDate : "未開始"}。評価開始目安: ${STUDY.reviewAfter}。公開当日10/31は除外。`, "", table(["新版", "入口視認回数", "視認ユーザー", "入力ユーザー", "結果ユーザー", "結果/視認ユーザー", "初期目標", "状態"], a.study.rows.map(r => [r.tool + " / " + r.variant, fmt(r.views), fmt(r.viewUsers), fmt(r.interactions), fmt(r.resultUsers), pct(r.resultRate), r.targetReached === null ? "不明" : r.targetReached ? "参考値上は到達" : "参考値上は未到達", r.state])), "", "同一measurement_version=2026-10-31・cta_variantの組み合わせだけを集計。結果は描画イベントで、結果自体の視認・滞在を保証しない。期間ユーザー比率であり、順序付きファネルではない。", "", "初期目標: 結果表示率5%以上かつ各機能10人以上。入口500視認未満は28日まで判断保留。運営者操作・取得品質を確認して人が評価し、#242の公開は自動判定しない。", "", "基準10/17〜10/30は交通量の参考比較。視認定義が10/24に変わっているため、新版との同条件CTR比較はしない。10/25〜10/30は補助期間。旧版に存在しないquick_resultの増加率は出さない。", "");
   if (a.studyFollowup) sections.push("### 28日までの追加観測", "", table(["新版", "入口視認回数", "視認ユーザー", "結果ユーザー", "結果/視認ユーザー", "状態"], a.studyFollowup.rows.map(r => [r.tool, fmt(r.views), fmt(r.viewUsers), fmt(r.resultUsers), pct(r.resultRate), r.state])), "", `期間: ${a.studyFollowup.period?.startDate}〜${a.studyFollowup.period?.endDate}。28日評価目安: ${a.studyFollowup.reviewAfter}。14日評価とは別表で保持する。`, "");
   for (const p of ["studyBaseline", "studyComparable", "study", "studyFollowup"]) {
