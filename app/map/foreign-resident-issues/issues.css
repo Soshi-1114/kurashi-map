@@ -1,6 +1,6 @@
 .fri-root { --fri-teal: #0b574e; }
 .fri-intro { display:flex;justify-content:space-between;gap:32px;align-items:center;margin:28px 0; }
-.fri-prototype { color:var(--color-primary);font-weight:600;font-size:13px; }
+.fri-eyebrow { color:var(--color-primary);font-weight:600;font-size:13px; }
 .fri-intro h1 { font-size:clamp(26px,3.3vw,42px);line-height:1.45;letter-spacing:-.035em;margin:10px 0 16px; }
 .fri-intro p { line-height:1.9; }
 .fri-intro-meta { border-left:3px solid var(--color-primary);padding:8px 0 8px 24px;display:grid;gap:6px;flex-shrink:0; }
@@ -95,7 +95,7 @@
   .fri-desktop-only { display:none; }
   .fri-mobile-only { display:block; }
   .fri-intro { margin:0 0 8px; }
-  .fri-intro .fri-prototype { margin:0;font-size:10px;line-height:1.5; }
+  .fri-intro .fri-eyebrow { margin:0;font-size:10px;line-height:1.5; }
   .fri-intro h1 { font-size:24px;line-height:1.3;margin:5px 0 7px; }
   .fri-intro .fri-intro-lead { margin:0;font-size:12px;line-height:1.6; }
   .fri-root .fri-reading { margin:0 0 10px;padding:0;font-size:11px; }

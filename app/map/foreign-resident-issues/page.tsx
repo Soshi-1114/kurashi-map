@@ -37,7 +37,7 @@ export default async function ForeignResidentIssuesPage() {
   ] };
   return <PageShell width="wide" innerClassName="fri-root" trail={[{ name: 'ホーム', href: '/' }, { name: '外国人住民・教育環境マップ' }]}>
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(ld) }} />
-    <header className="fri-intro"><div><p className="fri-prototype">プロトタイプ・公的統計で地域を知る</p><h1>外国人住民と、<br className="fri-mobile-break" />地域の教育環境。</h1><p className="fri-intro-lead"><span className="fri-desktop-only">人数の変化と、学びを支える環境を地図から確かめる。<br />統計の年度・対象・出典をそろえて、地域の状況を比較します。</span><span className="fri-mobile-only">住民の変化と学校の状況を、公的データで比較。</span></p></div><div className="fri-intro-meta"><strong>住民：2016〜2026年</strong><span>毎年1月1日現在</span><strong>学校：2025年度</strong><span>5月1日現在・都道府県別</span></div></header>
+    <header className="fri-intro"><div><p className="fri-eyebrow">公的統計で地域を知る</p><h1>外国人住民と、<br className="fri-mobile-break" />地域の教育環境。</h1><p className="fri-intro-lead"><span className="fri-desktop-only">人数の変化と、学びを支える環境を地図から確かめる。<br />統計の年度・対象・出典をそろえて、地域の状況を比較します。</span><span className="fri-mobile-only">住民の変化と学校の状況を、公的データで比較。</span></p></div><div className="fri-intro-meta"><strong>住民：2016〜2026年</strong><span>毎年1月1日現在</span><strong>学校：2025年度</strong><span>5月1日現在・都道府県別</span></div></header>
     <p className="fri-notice fri-desktop-only">{interpretationNotice}</p>
     <details className="fri-reading fri-mobile-only"><summary>データの見方・注意点</summary><p>{interpretationNotice}</p></details>
     <IssuesExplorer />
