@@ -5,7 +5,7 @@ import PageShell from '@/components/PageShell';
 import Link from '@/components/SiteLink';
 import IssuesExplorer from '@/components/foreign-resident-issues/IssuesExplorer';
 import ForeignRankingLinks from '@/components/foreign-resident-issues/ForeignRankingLinks';
-import { formatIssueValue, issueRank, residentRows, type IssuesDataset } from '@/lib/foreignResidentIssues';
+import { formatIssueValue, issueRank, issueYears, residentRows, type IssuesDataset } from '@/lib/foreignResidentIssues';
 import { serializeJsonLd } from '@/lib/jsonLd';
 import { SITE, absoluteUrl } from '@/lib/site';
 import 'maplibre-gl/dist/maplibre-gl.css';
@@ -23,7 +23,10 @@ export const metadata: Metadata = {
 
 export default async function ForeignResidentIssuesPage() {
   const data: IssuesDataset = JSON.parse(await readFile(path.join(process.cwd(), 'public/foreign-resident-issues/dataset.json'), 'utf8'));
-  const latestYear = Math.max(...data.resident.map(r => r.year));
+  const residentYears = issueYears(data, 'residents');
+  const schoolYears = issueYears(data, 'education');
+  const latestYear = residentYears.at(-1)!;
+  const range = (years: number[]) => years.length > 1 ? `${years[0]}〜${years.at(-1)}` : String(years[0]);
   const top = issueRank(residentRows(data, latestYear, 'ratio', '')).slice(0, 5);
   const sources = data.sources.filter(s => s.year === latestYear || s.id.startsWith('school-') || s.id.startsWith('japanese-'));
   const ld = { '@context': 'https://schema.org', '@graph': [
@@ -32,12 +35,12 @@ export default async function ForeignResidentIssuesPage() {
       { '@type': 'ListItem', position: 2, name: '外国人住民・教育環境マップ', item: absoluteUrl(PATH) },
     ] },
     { '@type': 'Dataset', name: '外国人住民の年次推移と外国籍児童生徒の教育環境', description, url: absoluteUrl(PATH),
-      creator: { '@type': 'Organization', name: SITE.name }, temporalCoverage: '2016/2026', spatialCoverage: '日本', isAccessibleForFree: true,
+      creator: { '@type': 'Organization', name: SITE.name }, temporalCoverage: `${residentYears[0]}/${latestYear}`, spatialCoverage: '日本', isAccessibleForFree: true,
       citation: data.sources.map(s => s.sourceUrl), license: 'https://www.e-stat.go.jp/terms-of-use' },
   ] };
   return <PageShell width="wide" innerClassName="fri-root" trail={[{ name: 'ホーム', href: '/' }, { name: '外国人住民・教育環境マップ' }]}>
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(ld) }} />
-    <header className="fri-intro"><div><p className="fri-eyebrow">公的統計で地域を知る</p><h1>外国人住民と、<br className="fri-mobile-break" />地域の教育環境。</h1><p className="fri-intro-lead"><span className="fri-desktop-only">人数の変化と、学びを支える環境を地図から確かめる。<br />統計の年度・対象・出典をそろえて、地域の状況を比較します。</span><span className="fri-mobile-only">住民の変化と学校の状況を、公的データで比較。</span></p></div><div className="fri-intro-meta"><strong>住民：2016〜2026年</strong><span>毎年1月1日現在</span><strong>学校：2025年度</strong><span>5月1日現在・都道府県別</span></div></header>
+    <header className="fri-intro"><div><p className="fri-eyebrow">公的統計で地域を知る</p><h1>外国人住民と、<br className="fri-mobile-break" />地域の教育環境。</h1><p className="fri-intro-lead"><span className="fri-desktop-only">人数の変化と、学びを支える環境を地図から確かめる。<br />統計の年度・対象・出典をそろえて、地域の状況を比較します。</span><span className="fri-mobile-only">住民の変化と学校の状況を、公的データで比較。</span></p></div><div className="fri-intro-meta"><strong>住民：{range(residentYears)}年</strong><span>毎年1月1日現在</span><strong>学校：{range(schoolYears)}年度</strong><span>5月1日現在・都道府県別</span></div></header>
     <p className="fri-notice fri-desktop-only">{interpretationNotice}</p>
     <details className="fri-reading fri-mobile-only"><summary>データの見方・注意点</summary><p>{interpretationNotice}</p></details>
     <IssuesExplorer />

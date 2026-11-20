@@ -9,6 +9,28 @@ const dataset = JSON.parse(readFileSync('public/foreign-resident-issues/dataset.
 afterEach(() => { cleanup(); vi.unstubAllGlobals(); window.history.replaceState(null, '', '/'); });
 
 describe('independent explorer', () => {
+  it('derives the latest years, URL validation and chart labels from each dataset series', async () => {
+    const next = structuredClone(dataset);
+    // Synthetic year rollover fixture; never written to the public dataset.
+    next.resident.push(...dataset.resident.filter((r: { year: number }) => r.year === 2026).map((r: object) => ({ ...r, year: 2027 })));
+    next.education.push(...dataset.education.map((r: { foreign: number }) => ({ ...r, year: 2026, foreign: r.foreign + 100 })));
+    window.history.replaceState(null, '', '/map/foreign-resident-issues?tab=residents&year=2099&code=11203');
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, json: async () => next }));
+    render(<IssuesExplorer />);
+    await screen.findByRole('complementary', { name: '選択地域の詳細' });
+    await waitFor(() => expect(screen.getByLabelText('基準年')).toHaveValue('2027'));
+    expect(screen.getByRole('img', { name: /年次推移/ })).toHaveTextContent('2027年');
+    fireEvent.click(screen.getByRole('button', { name: '学校の教育環境' }));
+    expect(screen.getByLabelText('基準年')).toHaveValue('2026');
+    fireEvent.change(screen.getByLabelText('教育指標'), { target: { value: 'count' } });
+    const region = screen.getByRole('region', { name: '地域別の全指標比較表' });
+    expect(region.querySelector('tbody tr')).toHaveTextContent('17,293人');
+    fireEvent.change(screen.getByLabelText('基準年'), { target: { value: '2025' } });
+    expect(region.querySelector('tbody tr')).toHaveTextContent('17,193人');
+    fireEvent.click(screen.getByRole('button', { name: '日本語指導・支援' }));
+    expect(screen.getByLabelText('基準年')).toHaveValue('2025');
+    await waitFor(() => expect(window.location.search).toContain('year=2025'));
+  });
   it('restores the municipality, period and metric, then switches to education at its own year', async () => {
     window.history.replaceState(null, '', '/map/foreign-resident-issues?tab=residents&year=2026&pref=saitama&code=11203&metric=rate5');
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, json: async () => dataset }));

@@ -34,6 +34,11 @@ export const RESIDENT_METRICS = {
 export type ResidentMetric = keyof typeof RESIDENT_METRICS;
 export type IssueMapRow = { code: string; name: string; pref: string; value: number | null };
 export type IssueTheme = 'residents' | 'education' | 'guidance';
+/** Only years actually present in each statistical series can be selected. */
+export function issueYears(data: IssuesDataset, theme: IssueTheme): number[] {
+  const rows = theme === 'residents' ? data.resident : theme === 'education' ? data.education : data.guidance;
+  return [...new Set(rows.map(r => r.year))].sort((a, b) => a - b);
+}
 export type IssueComparisonColumn = { key: string; label: string; unit: string };
 export type IssueComparisonRow = { code: string; name: string; pref: string; values: Record<string, number | null> };
 
@@ -58,8 +63,8 @@ export function issueComparisonColumns(theme: IssueTheme): IssueComparisonColumn
 export function issueComparisonRows(data: IssuesDataset, theme: IssueTheme, year: number, pref: string): IssueComparisonRow[] {
   const columns = issueComparisonColumns(theme);
   const residents = new Map(data.resident.map(r => [`${r.municipalityCode}:${r.year}`, r]));
-  const education = new Map(data.education.filter(r => r.year === 2025).map(r => [`${r.code}:${r.stage}`, r]));
-  const guidance = new Map(data.guidance.filter(r => r.year === 2025).map(r => [`${r.code}:${r.stage}`, r]));
+  const education = new Map(data.education.filter(r => r.year === year).map(r => [`${r.code}:${r.stage}`, r]));
+  const guidance = new Map(data.guidance.filter(r => r.year === year).map(r => [`${r.code}:${r.stage}`, r]));
   const regions = theme === 'education' ? data.prefectures.map(p => ({ code: p.code, name: p.name, pref: p.slug }))
     : data.municipalities.filter(m => !pref || m.pref === pref);
   return regions.map(region => ({ ...region, values: Object.fromEntries(columns.map(column => {

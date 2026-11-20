@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
 import Link from '@/components/SiteLink';
-import { educationValue, formatIssueValue, issueChartScale, issueComparisonColumns, issueComparisonRows, sortIssueComparison, issueRank, metricLag, prefectureResidentRows, residentRows, RESIDENT_METRICS,
+import { educationValue, formatIssueValue, issueChartScale, issueComparisonColumns, issueComparisonRows, sortIssueComparison, issueRank, issueYears, metricLag, prefectureResidentRows, residentRows, RESIDENT_METRICS,
   type IssuesDataset, type ResidentMetric, type IssueMapRow } from '@/lib/foreignResidentIssues';
 import { DIVERGING, SEQUENTIAL, mapThresholds } from './IssuesMap';
 
@@ -17,7 +17,9 @@ export default function IssuesExplorer() {
   const [error, setError] = useState('');
   const [retry, setRetry] = useState(0);
   const [tab, setTab] = useState<Tab>('residents');
-  const [year, setYear] = useState(2026);
+  const [year, setYear] = useState(0);
+  const [educationYear, setEducationYear] = useState(0);
+  const [guidanceYear, setGuidanceYear] = useState(0);
   const [pref, setPref] = useState('');
   const [metric, setMetric] = useState<ResidentMetric>('ratio');
   const [stage, setStage] = useState<'elementary' | 'junior'>('elementary');
@@ -29,18 +31,24 @@ export default function IssuesExplorer() {
   const [restored, setRestored] = useState(false);
   const [filtersOpen, setFiltersOpen] = useState(false);
 
+  const residentYears = useMemo(() => data ? issueYears(data, 'residents') : [], [data]);
+  const years = useMemo(() => data ? issueYears(data, tab) : [], [data, tab]);
+  const displayYear = tab === 'residents' ? year : tab === 'education' ? educationYear : guidanceYear;
+
   useEffect(() => {
     const controller = new AbortController();
     fetch('/foreign-resident-issues/dataset.json', { signal: controller.signal }).then(async r => {
       if (!r.ok) throw new Error('取得失敗');
       const d: IssuesDataset = await r.json();
-      if (d.schemaVersion !== 1 || !d.resident?.length || !d.sources?.length || !d.guidance?.length) throw new Error('形式不正');
+      if (d.schemaVersion !== 1 || !d.resident?.length || !d.sources?.length || !d.guidance?.length || !d.education?.length) throw new Error('形式不正');
       setData(d); setError('');
       const p = new URLSearchParams(window.location.search);
       if (p.get('tab') === 'education') setTab('education');
       if (p.get('tab') === 'guidance') setTab('guidance');
       const gm = p.get('guidanceMetric') ?? ''; if (Object.hasOwn(GUIDANCE_METRICS, gm)) setGuidanceMetric(gm as keyof typeof GUIDANCE_METRICS);
-      const y = Number(p.get('year')); if (y >= 2016 && y <= 2026) setYear(y);
+      const y = Number(p.get('year'));
+      const chooseYear = (theme: Tab) => { const available = issueYears(d, theme); return (p.get('tab') ?? 'residents') === theme && available.includes(y) ? y : available.at(-1)!; };
+      setYear(chooseYear('residents')); setEducationYear(chooseYear('education')); setGuidanceYear(chooseYear('guidance'));
       const pr = p.get('pref') ?? ''; if (d.prefectures.some(x => x.slug === pr)) setPref(pr);
       const met = p.get('metric') ?? ''; if (Object.hasOwn(RESIDENT_METRICS, met)) setMetric(met as ResidentMetric);
       if (p.get('stage') === 'junior') setStage('junior');
@@ -55,35 +63,35 @@ export default function IssuesExplorer() {
   }, [retry]);
   useEffect(() => {
     if (!restored) return;
-    const p = new URLSearchParams({ tab, year: String(tab !== 'residents' ? 2025 : year), metric, stage, educationMetric, guidanceMetric });
+    const p = new URLSearchParams({ tab, year: String(displayYear), metric, stage, educationMetric, guidanceMetric });
     if (pref && tab !== 'education') p.set('pref', pref);
     if (selected) p.set('code', selected);
     window.history.replaceState(null, '', `${window.location.pathname}?${p}`);
-  }, [tab, year, metric, stage, educationMetric, guidanceMetric, pref, selected, restored]);
+  }, [tab, displayYear, metric, stage, educationMetric, guidanceMetric, pref, selected, restored]);
 
   const rows = useMemo((): IssueMapRow[] => {
     if (!data) return [];
     if (tab === 'residents') return residentRows(data, year, metric, pref);
     if (tab === 'guidance') {
-      const index = new Map(data.guidance.filter(r => r.stage === stage).map(r => [r.code, r]));
+      const index = new Map(data.guidance.filter(r => r.stage === stage && r.year === guidanceYear).map(r => [r.code, r]));
       return data.municipalities.filter(m => !pref || m.pref === pref).map(m => ({ ...m, value: index.get(m.code)?.[guidanceMetric] ?? null }));
     }
     return data.prefectures.map(p => ({ code: p.code, name: p.name, pref: p.slug,
-      value: educationValue(data.education.find(r => r.code === p.code && r.stage === stage && r.year === 2025), educationMetric) }));
-  }, [data, tab, year, metric, pref, stage, educationMetric, guidanceMetric]);
+      value: educationValue(data.education.find(r => r.code === p.code && r.stage === stage && r.year === educationYear), educationMetric) }));
+  }, [data, tab, year, metric, pref, stage, educationMetric, guidanceMetric, educationYear, guidanceYear]);
   const mapRows = useMemo(() => {
     if (data && !pref && tab === 'residents') return prefectureResidentRows(data, year, metric);
     if (data && !pref && tab === 'guidance') return data.prefectures.map(p => {
-      const outside = new Set(data.resident.filter(r => r.year === 2026 && r.status === 'out-of-scope').map(r => r.municipalityCode));
+      const outside = new Set(data.resident.filter(r => r.year === residentYears.at(-1) && r.status === 'out-of-scope').map(r => r.municipalityCode));
       const members = rows.filter(r => r.pref === p.slug && !outside.has(r.code));
       return { code: p.code, name: p.name, pref: p.slug, value: members.every(r => r.value !== null) ? members.reduce((n,r) => n+r.value!,0) : null };
     });
     return rows;
-  }, [data, tab, year, metric, pref, rows]);
+  }, [data, tab, year, metric, pref, rows, residentYears]);
   const ranked = useMemo(() => issueRank(rows), [rows]);
   const activeColumn = tab === 'residents' ? metric : `${stage}:${tab === 'education' ? educationMetric : guidanceMetric}`;
   const comparisonColumns = useMemo(() => issueComparisonColumns(tab), [tab]);
-  const comparisonRows = useMemo(() => data ? issueComparisonRows(data, tab, year, pref) : [], [data, tab, year, pref]);
+  const comparisonRows = useMemo(() => data ? issueComparisonRows(data, tab, displayYear, pref) : [], [data, tab, displayYear, pref]);
   const visible = useMemo(() => sortIssueComparison(comparisonRows, activeColumn).filter(r => `${r.name} ${data?.prefectures.find(p => p.slug === r.pref)?.name} ${r.code}`.includes(query.trim())), [comparisonRows, activeColumn, query, data]);
   const choice = rows.find(r => r.code === selected);
   const unit = tab === 'residents' ? RESIDENT_METRICS[metric].unit : tab === 'guidance' ? '人' : educationMetric === 'ratio' ? '%' : '人';
@@ -92,14 +100,14 @@ export default function IssuesExplorer() {
   const thresholds = mapThresholds(mapRows, diverging);
   const colors = diverging ? DIVERGING : SEQUENTIAL;
   const current = data?.resident.find(r => r.municipalityCode === selected && r.year === year);
-  const edu = data?.education.find(r => r.code === selected && r.stage === stage && r.year === 2025);
-  const guidance = data?.guidance.find(r => r.code === selected && r.stage === stage);
+  const edu = data?.education.find(r => r.code === selected && r.stage === stage && r.year === educationYear);
+  const guidance = data?.guidance.find(r => r.code === selected && r.stage === stage && r.year === guidanceYear);
   const sourceIds = tab === 'residents' ? [...(current?.sourceIds ?? []), ...(data?.resident.find(r => r.municipalityCode === selected && r.year === year - metricLag(metric))?.sourceIds ?? [])] : tab === 'guidance' ? guidance?.sourceIds ?? [] : edu?.sourceIds ?? [];
   const chosenSources = data?.sources.filter(s => sourceIds.includes(s.id)) ?? [];
   const series = useMemo(() => {
     if (!data || tab !== 'residents' || !selected) return [];
-    return Array.from({ length: 11 }, (_, i) => 2016 + i).map(y => ({ year: y, value: residentRows(data, y, metric, pref).find(r => r.code === selected)?.value ?? null }));
-  }, [data, tab, selected, metric, pref]);
+    return residentYears.map(y => ({ year: y, value: residentRows(data, y, metric, pref).find(r => r.code === selected)?.value ?? null }));
+  }, [data, tab, selected, metric, pref, residentYears]);
   function select(code: string) {
     if (tab !== 'education' && code.length === 2 && data) {
       setPref(data.prefectures.find(p => p.code === code)?.slug ?? ''); setSelected('');
@@ -126,12 +134,12 @@ export default function IssuesExplorer() {
       <button aria-pressed={tab === 'guidance'} onClick={() => changeTab('guidance')}>日本語指導・支援</button>
     </div>
     <button className="fri-filter-toggle" type="button" aria-expanded={filtersOpen} aria-controls="fri-display-controls" onClick={() => setFiltersOpen(open => !open)}>
-      <span><strong>{tab === 'residents' ? `${year}年` : '2025年度'}・{tab === 'education' ? (stage === 'elementary' ? '小学校' : '中学校') : data.prefectures.find(p => p.slug === pref)?.name ?? '全国'}{tab === 'guidance' ? `・${stage === 'elementary' ? '小学校' : '中学校'}` : ''}</strong><span>{tab === 'guidance' ? GUIDANCE_OPTIONS[guidanceMetric] : label}</span></span>
+      <span><strong>{tab === 'residents' ? `${year}年` : `${displayYear}年度`}・{tab === 'education' ? (stage === 'elementary' ? '小学校' : '中学校') : data.prefectures.find(p => p.slug === pref)?.name ?? '全国'}{tab === 'guidance' ? `・${stage === 'elementary' ? '小学校' : '中学校'}` : ''}</strong><span>{tab === 'guidance' ? GUIDANCE_OPTIONS[guidanceMetric] : label}</span></span>
       <span className="fri-filter-action">{filtersOpen ? '条件を閉じる' : '条件を変更'}<span aria-hidden="true">{filtersOpen ? '−' : '＋'}</span></span>
     </button>
     <div id="fri-display-controls" className={`fri-controls${filtersOpen ? ' is-open' : ''}`}>
-      <label>基準年<select aria-label="基準年" value={tab !== 'residents' ? 2025 : year} onChange={e => setYear(Number(e.target.value))}>
-        {(tab !== 'residents' ? [2025] : Array.from({ length: 11 }, (_, i) => 2026 - i)).map(y => <option key={y} value={y}>{y}{tab !== 'residents' ? '年度（5月1日）' : '年（1月1日）'}</option>)}
+      <label>基準年<select aria-label="基準年" value={displayYear} onChange={e => (tab === 'residents' ? setYear : tab === 'education' ? setEducationYear : setGuidanceYear)(Number(e.target.value))}>
+        {years.slice().reverse().map(y => <option key={y} value={y}>{y}{tab !== 'residents' ? '年度（5月1日）' : '年（1月1日）'}</option>)}
       </select></label>
       {tab === 'residents' ? <>
         <label>地域<select aria-label="地域" value={pref} onChange={e => { setPref(e.target.value); setSelected(''); setQuery(''); }}><option value="">全国（県を選ぶと自治体へ）</option>{data.prefectures.slice().sort((a,b) => a.code.localeCompare(b.code)).map(p => <option key={p.code} value={p.slug}>{p.name}</option>)}</select></label>
@@ -142,7 +150,7 @@ export default function IssuesExplorer() {
         {tab === 'education' ? <label>指標<select aria-label="教育指標" value={educationMetric} onChange={e => setEducationMetric(e.target.value as 'count' | 'ratio')}><option value="ratio">外国籍児童生徒の割合</option><option value="count">外国籍児童生徒の人数</option></select></label> : <label>指標<select aria-label="日本語指導指標" value={guidanceMetric} onChange={e => setGuidanceMetric(e.target.value as keyof typeof GUIDANCE_METRICS)}>{Object.entries(GUIDANCE_OPTIONS).map(([key, label]) => <option key={key} value={key}>{label}</option>)}</select></label>}
       </>}
     </div>
-    <div className="fri-map-heading"><strong>{tab === 'education' ? '都道府県別' : pref ? data.prefectures.find(p => p.slug === pref)?.name : '全国・都道府県別'}　{label}</strong><span>{tab === 'education' ? '2025年5月1日／国公私立計' : tab === 'guidance' ? '2025年5月1日／市町村教育委員会所管の公立校' : `${year}年1月1日／住民基本台帳`}</span></div>
+    <div className="fri-map-heading"><strong>{tab === 'education' ? '都道府県別' : pref ? data.prefectures.find(p => p.slug === pref)?.name : '全国・都道府県別'}　{label}</strong><span>{tab === 'education' ? `${displayYear}年5月1日／国公私立計` : tab === 'guidance' ? `${displayYear}年5月1日／市町村教育委員会所管の公立校` : `${year}年1月1日／住民基本台帳`}</span></div>
     <div className="fri-workspace">
       <div>
         <IssuesMap rows={mapRows} pref={tab !== 'education' ? pref : ''} selected={selected} onSelect={select} diverging={diverging} />
@@ -178,17 +186,20 @@ function Trend({ series, unit }: { series: { year: number; value: number | null 
   const values = series.flatMap(p => p.value === null ? [] : [p.value]);
   const { min, max, ticks } = issueChartScale(values, unit);
   // Reserve room for axis labels so five-digit counts fit even in the side panel.
-  const x = (i: number) => 64 + i * 24;
+  const firstYear = series[0]?.year ?? 0;
+  const lastYear = series.at(-1)?.year ?? firstYear;
+  const x = (year: number) => 64 + (year - firstYear) / (lastYear - firstYear || 1) * 240;
+  const labels = [...new Set([firstYear, series[Math.floor(series.length / 2)]?.year ?? firstYear, lastYear])];
   const y = (v: number) => 120 - (v - min) / (max - min) * 100;
   // A missing observation breaks the line; never bridge it.
-  const d = series.map((p, i) => p.value === null ? '' : `${i > 0 && series[i-1].value !== null ? 'L' : 'M'}${x(i)},${y(p.value)}`).join(' ');
+  const d = series.map((p, i) => p.value === null ? '' : `${i > 0 && series[i-1].value !== null ? 'L' : 'M'}${x(p.year)},${y(p.value)}`).join(' ');
   return <div className="fri-trend"><h3>年次推移</h3>{values.length ? <svg viewBox="0 0 320 155" role="img" aria-label={`選択指標の年次推移。縦軸の単位は${unit}。下の表で各年の数値を確認できます。`}>
     {ticks.map(tick => <g key={tick}>
       <line x1="64" y1={y(tick)} x2="304" y2={y(tick)} stroke="currentColor" opacity={tick === 0 ? 0.35 : 0.12} />
       <text x="58" y={y(tick)} textAnchor="end" dominantBaseline="middle">{formatIssueValue(tick, unit)}</text>
     </g>)}
     <path d={d} fill="none" stroke="var(--color-primary)" strokeWidth="2.5" />
-    {series.map((p,i) => p.value !== null && <circle key={p.year} cx={x(i)} cy={y(p.value)} r="3" fill="var(--color-primary)"><title>{p.year}年 {formatIssueValue(p.value, unit)}</title></circle>)}
-    <text x="64" y="145">2016年</text><text x="184" y="145" textAnchor="middle">2021年</text><text x="304" y="145" textAnchor="end">2026年</text>
+    {series.map(p => p.value !== null && <circle key={p.year} cx={x(p.year)} cy={y(p.value)} r="3" fill="var(--color-primary)"><title>{p.year}年 {formatIssueValue(p.value, unit)}</title></circle>)}
+    <g>{labels.map(year => <text key={year} x={x(year)} y="145" textAnchor={year === firstYear ? 'start' : year === lastYear ? 'end' : 'middle'}>{year}年</text>)}</g>
   </svg> : <p className="fri-caption">推移を表示できる年次データがありません。</p>}<details><summary>各年の数値を表示</summary><table><tbody>{series.map(p => <tr key={p.year}><th>{p.year}年</th><td>{formatIssueValue(p.value, unit)}</td></tr>)}</tbody></table></details></div>;
 }
