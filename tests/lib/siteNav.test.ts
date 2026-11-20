@@ -68,7 +68,8 @@ describe("mapHubByHref / RankingDef.mapHub", () => {
   it("各地図ハブに少なくとも1つのランキングが対応する（対応の腐り検出）", () => {
     // /map/hazard はオーバーレイ型ハブで、対応するランキングを持たない
     // （災害リスクの順位付けはしない方針）。
-    const NO_RANKING_HUBS = ["/map/hazard"];
+    // 新しい独立地図はページ内順位表を持ち、既存ランキングは拡張しない。
+    const NO_RANKING_HUBS = ["/map/hazard", "/map/foreign-resident-issues"];
     const hrefs = new Set(RANKINGS.map((r) => r.mapHub).filter(Boolean));
     for (const hub of MAP_HUBS.filter((h) => !NO_RANKING_HUBS.includes(h.href))) {
       expect(hrefs, `${hub.href} に対応するランキングが無い`).toContain(hub.href);

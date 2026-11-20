@@ -3,15 +3,16 @@ import sitemap from "@/app/sitemap";
 import { PAGE_REVISIONS, validatePageRevisions, verifiedLastModified, type PageRevision } from "@/lib/pageRevisions";
 import { absoluteUrl } from "@/lib/site";
 import { MAP_HUBS } from "@/lib/siteNav";
+import { FOREIGN_RANKINGS, foreignRankingPath } from '@/lib/foreignRankings';
 
 describe("sitemap", () => {
   const entriesP = sitemap();
 
   it("全URLを一度だけ掲載し、地図ハブも欠けない", async () => {
     const entries = await entriesP;
-    expect(entries.length).toBe(3140);
+    expect(entries.length).toBe(3145);
     expect(new Set(entries.map((e) => e.url)).size).toBe(entries.length);
-    for (const path of ["/", "/map", ...MAP_HUBS.map((h) => h.href), "/ranking", "/compare", "/bousai/stockpile"]) {
+    for (const path of ["/", "/map", ...MAP_HUBS.map((h) => h.href), ...FOREIGN_RANKINGS.map(foreignRankingPath), "/ranking", "/compare", "/bousai/stockpile"]) {
       expect(entries.some((e) => e.url === absoluteUrl(path))).toBe(true);
     }
   }, 20_000);

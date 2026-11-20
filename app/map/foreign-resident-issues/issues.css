@@ -1,0 +1,115 @@
+.fri-root { --fri-teal: #0b574e; }
+.fri-intro { display:flex;justify-content:space-between;gap:32px;align-items:center;margin:28px 0; }
+.fri-prototype { color:var(--color-primary);font-weight:600;font-size:13px; }
+.fri-intro h1 { font-size:clamp(26px,3.3vw,42px);line-height:1.45;letter-spacing:-.035em;margin:10px 0 16px; }
+.fri-intro p { line-height:1.9; }
+.fri-intro-meta { border-left:3px solid var(--color-primary);padding:8px 0 8px 24px;display:grid;gap:6px;flex-shrink:0; }
+.fri-intro-meta span { font-size:13px;color:var(--color-ink-muted);margin-bottom:8px; }
+.fri-notice { border-left:3px solid var(--color-line);padding:10px 18px;font-size:13px;line-height:1.8;margin:24px 0; }
+.fri-related { display:flex;flex-wrap:wrap;gap:10px 20px;font-size:12px;margin:0 0 22px;line-height:1.8; }
+.fri-related span { color:var(--color-ink-muted); }
+.fri-explorer { border:1px solid var(--color-line);border-radius:12px;background:var(--color-surface);overflow:hidden; }
+.fri-tabs { display:flex;border-bottom:1px solid var(--color-line);background:var(--color-primary-subtle);padding:0 22px; }
+.fri-root button { font:inherit;cursor:pointer; }
+.fri-tabs button { border:0;border-bottom:3px solid transparent;background:transparent;padding:18px 22px;color:var(--color-ink-muted);font-weight:700; }
+.fri-tabs button[aria-pressed=true] { color:var(--color-primary);border-bottom-color:var(--color-primary); }
+.fri-controls { display:flex;flex-wrap:wrap;gap:14px;padding:22px; }
+.fri-root label { display:grid;gap:7px;font-size:12px;font-weight:600;color:var(--color-ink-muted); }
+.fri-root select,.fri-root input { font:inherit;font-size:14px;color:var(--color-ink);background:var(--color-surface);border:1px solid var(--color-line);border-radius:6px;min-height:42px;padding:9px 12px;max-width:100%; }
+.fri-map-heading { padding:4px 22px 16px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px; }
+.fri-map-heading span { font-size:12px;color:var(--color-ink-muted); }
+.fri-workspace { display:grid;grid-template-columns:minmax(0,1fr) 325px;border-top:1px solid var(--color-line); }
+.fri-map-wrap { position:relative; }
+.fri-map { height:510px;width:100%;background:var(--color-primary-subtle); }
+.fri-map-message { position:absolute;bottom:15px;left:15px;right:15px;padding:12px;background:var(--color-surface);border:1px solid var(--color-line);font-size:13px;z-index:2; }
+.fri-map-message button { display:block;margin-top:6px; }
+.fri-map-loading { min-height:430px;display:grid;place-content:center;color:var(--color-ink-muted); }
+.fri-legend { display:flex;gap:10px;flex-wrap:wrap;padding:14px 18px;font-size:10px; }
+.fri-legend span { display:inline-flex;gap:5px;align-items:center; }
+.fri-legend i { display:inline-block;width:14px;height:10px;border:1px solid #0002; }
+.fri-caption { font-size:12px;color:var(--color-ink-muted);line-height:1.8; }
+.fri-workspace>div>.fri-caption { padding:0 18px 12px;margin:0; }
+.fri-detail { border-left:1px solid var(--color-line);padding:24px;max-height:645px;overflow:auto; }
+.fri-detail h2 { margin:0 0 14px;font-size:23px; }
+.fri-detail p { font-size:13px;line-height:1.8; }
+.fri-detail .fri-value { display:block;font-size:32px;color:var(--fri-teal);font-variant-numeric:tabular-nums;line-height:1.5; }
+.fri-facts { margin:24px 0; }
+.fri-facts div { display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid var(--color-line);font-size:12px; }
+.fri-facts dd { margin:0;text-align:right;font-weight:600; }
+.fri-trend h3 { font-size:13px;margin-top:24px; }
+.fri-trend svg { width:100%;height:auto; }
+.fri-trend svg text { font-size:11px;fill:var(--color-ink-muted); }
+.fri-root details { font-size:12px;line-height:1.8;padding:12px 0; }
+.fri-root summary { cursor:pointer;color:var(--color-primary);font-weight:600; }
+.fri-root .fri-source { border-top:1px solid var(--color-line);padding-top:12px;font-size:11px; }
+.fri-ranking { padding:26px 22px;border-top:1px solid var(--color-line); }
+.fri-table-heading { display:flex;justify-content:space-between;gap:20px;margin-bottom:20px;align-items:start; }
+.fri-table-heading h2 { font-size:20px;margin:0; }
+.fri-table-heading p { font-size:12px;color:var(--color-ink-muted); }
+.fri-table-scroll { max-width:100%;overflow-x:auto; }
+.fri-comparison-table .fri-metric-column { min-width:135px;text-align:right;white-space:nowrap; }
+.fri-comparison-table th.fri-metric-column { white-space:normal; }
+.fri-comparison-table th.fri-metric-column button { width:100%;min-height:44px;text-align:right;font-size:12px;line-height:1.6; }
+.fri-comparison-table .fri-metric-column.is-active { background:var(--color-primary-subtle); }
+.fri-comparison-table th.fri-metric-column.is-active { background:var(--color-primary-bg); }
+.fri-comparison-table .fri-region-column { position:sticky;left:0;z-index:1;min-width:140px;background:var(--color-surface); }
+.fri-comparison-table thead .fri-region-column { z-index:2;background:var(--color-primary-subtle); }
+.fri-comparison-table .is-selected .fri-region-column { background:var(--color-primary-bg); }
+.fri-root table { width:100%;border-collapse:collapse;font-size:13px; }
+.fri-root table caption { text-align:left;padding:10px 0; }
+.fri-root td,.fri-root th { padding:12px;border-bottom:1px solid var(--color-line);text-align:left;font-variant-numeric:tabular-nums; }
+.fri-root thead th { background:var(--color-primary-subtle);font-size:12px; }
+.fri-root td:last-child,.fri-root th:last-child { text-align:right; }
+.fri-root th button,.fri-ranking details button { border:0;padding:0;background:none;color:var(--color-primary);text-align:left; }
+.fri-root th small { display:block;font-size:11px;font-weight:400;color:var(--color-ink-muted);margin-top:5px; }
+.fri-root tr.is-selected { background:var(--color-primary-bg); }
+.fri-more { margin:20px 0;padding:10px 16px;border:1px solid var(--color-line);border-radius:6px;color:var(--color-primary);background:var(--color-surface); }
+.fri-empty { padding:24px; }
+.fri-method { margin:40px 0;line-height:1.9;font-size:14px; }
+.fri-method h2 { font-size:23px; }
+.fri-method h3 { font-size:16px; }
+.fri-method-grid { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:30px; }
+.fri-source-list { padding-left:22px; }
+.fri-source-list li { padding:10px 0; }
+.fri-source-list span { display:block;font-size:12px;color:var(--color-ink-muted); }
+.fri-mobile-break { display:none; }
+.fri-mobile-only,.fri-filter-toggle { display:none; }
+.fri-related { margin-top:22px; }
+@media(max-width:650px) { .fri-tabs{overflow-x:auto;} .fri-tabs button{flex:1 0 auto;white-space:nowrap;} }
+@media(max-width:900px) { .fri-workspace { grid-template-columns:minmax(0,1fr) 285px; }.fri-detail { padding:18px; }.fri-map{height:470px;} }
+@media(max-width:650px) { .fri-intro { display:block;margin-top:18px; }.fri-intro-meta { display:none; }.fri-mobile-break{display:block;}.fri-tabs{padding:0 8px;}.fri-tabs button{padding:16px 10px;font-size:13px;}.fri-controls{padding:16px;gap:12px;}.fri-controls label{flex:1;min-width:130px;}.fri-workspace{display:block;}.fri-map{height:365px;}.fri-map-heading{padding-left:16px;font-size:13px;}.fri-detail{border-left:0;border-top:1px solid var(--color-line);max-height:none;}.fri-detail .fri-value{font-size:29px;}.fri-detail .fri-trend{max-width:400px;}.fri-table-heading{display:block;}.fri-table-heading label{max-width:100%;}.fri-ranking{padding:22px 12px;}.fri-root td,.fri-root th{padding:12px 8px;}.fri-root th:last-child{max-width:125px;}.fri-method-grid{grid-template-columns:1fr;gap:10px;}.fri-legend{font-size:10px;gap:7px;}.fri-table-scroll{overflow:auto;} }
+@media(max-width:650px) { .fri-tabs button{padding:16px 5px;font-size:12px;} }
+@media(max-width:650px) {
+  .fri-comparison-table .fri-comparison-extra { display:none; }
+  .fri-comparison-table .fri-metric-column { min-width:0;white-space:normal; }
+  .fri-comparison-table .fri-region-column { min-width:0;position:static; }
+  /* Native selects have an intrinsic width based on their longest option.
+     Let each control shrink inside one explicit full-width grid track. */
+  .fri-controls { display:grid;grid-template-columns:minmax(0,1fr); }
+  .fri-controls label { min-width:0;width:100%;grid-template-columns:minmax(0,1fr); }
+  .fri-controls select { min-width:0;width:100%;font-size:16px; }
+}
+@media(max-width:650px) {
+  .fri-root.page-root { padding-top:10px; }
+  .fri-root .breadcrumb { font-size:10px;gap:5px;margin-bottom:10px; }
+  .fri-desktop-only { display:none; }
+  .fri-mobile-only { display:block; }
+  .fri-intro { margin:0 0 8px; }
+  .fri-intro .fri-prototype { margin:0;font-size:10px;line-height:1.5; }
+  .fri-intro h1 { font-size:24px;line-height:1.3;margin:5px 0 7px; }
+  .fri-intro .fri-intro-lead { margin:0;font-size:12px;line-height:1.6; }
+  .fri-root .fri-reading { margin:0 0 10px;padding:0;font-size:11px; }
+  .fri-reading summary { min-height:28px;display:list-item;align-content:center; }
+  .fri-reading p { margin:4px 0 10px;line-height:1.7; }
+  .fri-tabs button { padding-top:13px;padding-bottom:13px;min-height:44px; }
+  .fri-filter-toggle { display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;padding:11px 14px;border:0;border-bottom:1px solid var(--color-line);background:var(--color-surface);text-align:left; }
+  .fri-filter-toggle>span:first-child { display:grid;gap:3px;min-width:0; }
+  .fri-filter-toggle strong { font-size:12px;color:var(--color-ink); }
+  .fri-filter-toggle>span:first-child>span { font-size:12px;color:var(--color-ink-muted);line-height:1.5; }
+  .fri-filter-action { display:flex;align-items:center;gap:6px;flex-shrink:0;font-size:11px;font-weight:600;color:var(--color-primary); }
+  .fri-filter-action>span { font-size:16px; }
+  .fri-controls:not(.is-open) { display:none; }
+  .fri-controls { padding:14px; }
+  .fri-map-heading { padding:10px 14px;gap:3px;font-size:12px; }
+  .fri-map-heading span { font-size:10px; }
+}

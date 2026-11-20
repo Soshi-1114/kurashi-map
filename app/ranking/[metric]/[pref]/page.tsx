@@ -25,6 +25,7 @@ import PageShell from "@/components/PageShell";
 import { FurusatoBand } from "@/components/monetization/FurusatoBand";
 import TrackedCompareLink from "@/components/ranking/TrackedCompareLink";
 import { populationSearchCopy } from "@/lib/populationSearchCopy";
+import ForeignRankingLinks from '@/components/foreign-resident-issues/ForeignRankingLinks';
 
 type Params = { metric: string; pref: string };
 
@@ -352,6 +353,7 @@ export default async function PrefRankingPage(props: { params: Promise<Params> }
       {intro.length > 0 && <section className="rk-section"><h2 className="rk-h2">数字の読み方</h2><div className="rk-intro">{intro.map((paragraph, i) => <p key={i}>{paragraph}</p>)}</div></section>}
 
 
+      {(def.slug.startsWith('foreign-ratio-') || def.slug.startsWith('population-') || ['waitlist-zero', 'childcare-capacity'].includes(def.slug)) && <ForeignRankingLinks residentsOnly={def.slug.startsWith('foreign-ratio-') || def.slug.startsWith('population-')} />}
       <RankLinkList
         title={`${prefName}のほかのランキング`}
         sub={`同じ実データで、${prefName}を別の指標でも比べてみましょう。`}
