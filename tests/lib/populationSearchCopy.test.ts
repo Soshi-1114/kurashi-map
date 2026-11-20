@@ -6,7 +6,7 @@ import type { Municipality } from "@/lib/types";
 import mie from "@/data/mie.json";
 
 const top = { ...mie[0], population: 123456 } as Municipality;
-describe("人口検索語に合わせた2URL限定の文言", () => {
+describe("人口検索語に合わせた全国・3県限定の文言", () => {
   it("全国の集計総数と掲載上位100件を区別する", () => {
     const copy = populationSearchCopy({ metric: "population-most", top, count: 1741, shown: 100 })!;
     expect(copy.title).toBe("全国の市区町村人口ランキング（人口が多い順）");
@@ -24,10 +24,17 @@ describe("人口検索語に合わせた2URL限定の文言", () => {
   it("他県・他指標の全組合せへ文言を適用しない", () => {
     for (const metric of RANKINGS) {
       for (const pref of [undefined, ...PREFS.map((p) => p.slug)]) {
-        if (metric.slug === "population-most" && (pref === undefined || pref === "mie")) continue;
+        if (metric.slug === "population-most" && (pref === undefined || ["mie", "yamaguchi", "shimane"].includes(pref))) continue;
         expect(populationSearchCopy({ metric: metric.slug, pref, top, count: 29, shown: 29 })).toBeNull();
       }
     }
+  });
+  it.each([ ["yamaguchi", "山口県", 19, "市町"], ["shimane", "島根県", 19, "市町村"] ] as const)("%sは検索意図と全件掲載範囲を明示する", (pref, name, count, unit) => {
+    const copy = populationSearchCopy({ metric: "population-most", pref, top, count, shown: count })!;
+    expect(copy.title).toBe(`${name}の人口ランキング（${unit}別・多い順）`);
+    expect(copy.description).toContain(`${name}内の${count}${unit}を掲載`);
+    expect(copy.description).toContain("123,456人");
+    expect(copy.lead).toContain("行政区を重複計上しません");
   });
   it("集計対象がない場合に1位を作らない", () => {
     expect(populationSearchCopy({ metric: "population-most", count: 0, shown: 0 })).toBeNull();

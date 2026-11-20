@@ -23,7 +23,9 @@ export async function collect(request: Request, today: string, days = 28, end?: 
     ga("events", ["eventName"], ["eventCount", "totalUsers"]);
     ga("variants", ["eventName", "customEvent:cta_variant", "customEvent:measurement_version"], ["eventCount", "totalUsers"], TOOL_EVENTS);
     if (name.startsWith("study")) continue;
-    ga("pages", ["pagePath", "deviceCategory"], ["screenPageViews"]);
+    ga("pages", ["pagePath", "deviceCategory"], ["screenPageViews", "totalUsers"], ["page_view"]);
+    ga("areaSections", ["pagePath", "deviceCategory", "customEvent:section", "customEvent:measurement_version"], ["eventCount", "totalUsers"], ["area_section_view"]);
+    ga("vitals", ["pagePath", "deviceCategory", "customEvent:metric_name", "customEvent:metric_rating", "customEvent:measurement_version"], ["eventCount"], ["web_vitals"]);
     ga("compareOrigins", ["pagePath"], ["totalUsers", "screenPageViews"], ["page_view"]);
     ga("channels", ["sessionDefaultChannelGroup"], ["sessions", "activeUsers"]);
     ga("compareSource", ["eventName", "customEvent:tool_source", "deviceCategory"], ["eventCount", "totalUsers"], COMPARE_EVENTS);
