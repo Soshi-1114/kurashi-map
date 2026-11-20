@@ -6,6 +6,7 @@ import xml.etree.ElementTree as ET
 import zipfile
 
 NS = {'s': 'http://schemas.openxmlformats.org/spreadsheetml/2006/main'}
+year = int(sys.argv[2])
 
 with zipfile.ZipFile(sys.argv[1]) as archive:
     strings = [''.join(t.text or '' for t in item.findall('s:t', NS) + item.findall('s:r/s:t', NS))
@@ -60,7 +61,7 @@ with zipfile.ZipFile(sys.argv[1]) as archive:
                     support = [metric for col, (stage, metric) in columns.items()
                                if stage == 'support' and values.get(col) == '1']
                     for stage in ['elementary', 'junior']:
-                        item = {'code': code, 'year': 2025, 'stage': stage, 'support': support}
+                        item = {'code': code, 'year': year, 'stage': stage, 'support': support}
                         for col, (st, metric) in columns.items():
                             if st == stage:
                                 raw = values.get(col, '')

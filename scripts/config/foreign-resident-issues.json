@@ -1,0 +1,21 @@
+{
+  "resident": { "startYear": 2016, "endYear": 2026 },
+  "education": {
+    "year": 2025,
+    "tables": [
+      {
+        "stage": "elementary",
+        "listUrl": "https://www.e-stat.go.jp/stat-search/files?cycle=0&layout=datalist&page=1&tclass1=000001236922&tclass2=000001236962&tclass3=000001236963&tclass4=000001236966&tclass5val=0&toukei=00400001&tstat=000001011528",
+        "foreignLabel": "都道府県別 外国人児童数",
+        "totalLabel": "48 学年別児童数"
+      },
+      {
+        "stage": "junior",
+        "listUrl": "https://www.e-stat.go.jp/stat-search/files?cycle=0&layout=datalist&page=1&tclass1=000001236922&tclass2=000001236962&tclass3=000001236963&tclass4=000001236967&tclass5val=0&toukei=00400001&tstat=000001011528",
+        "foreignLabel": "都道府県別 外国人生徒数",
+        "totalLabel": "75 学年別生徒数"
+      }
+    ]
+  },
+  "guidance": { "year": 2025, "statInfId": "000040478839", "publishedAt": "2026-07-24" }
+}

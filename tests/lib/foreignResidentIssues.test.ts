@@ -11,12 +11,12 @@ describe('independent foreign resident metrics', () => {
     expect(issueComparisonColumns('education')).toHaveLength(4);
     expect(issueComparisonColumns('residents')).toHaveLength(8);
     expect(issueComparisonColumns('guidance')).toHaveLength(6);
-    const education = issueComparisonRows(data, 'education', 2026, 'saitama');
+    const education = issueComparisonRows(data, 'education', 2025, 'saitama');
     expect(education).toHaveLength(47);
     expect(education.find(r => r.code === '13')?.values['elementary:count']).toBe(17193);
     expect(education.find(r => r.code === '13')?.values['junior:count']).toBe(6782);
     expect(sortIssueComparison(education, 'junior:count')[0].code).toBe('13');
-    const guidance = issueComparisonRows(data, 'guidance', 2026, 'saitama');
+    const guidance = issueComparisonRows(data, 'guidance', 2025, 'saitama');
     const kawaguchi = guidance.find(r => r.code === '11203')!;
     expect(kawaguchi.values['elementary:needsForeign']).toBe(1209);
     expect(kawaguchi.values['elementary:receivingForeign']).toBe(981);
