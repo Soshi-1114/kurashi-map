@@ -149,7 +149,7 @@ export default function IssuesExplorer() {
     setLimit(50);
   }
 
-  if (error) return <div className="fri-empty" role="alert">{error} <button onClick={() => setRetry(x => x + 1)}>再試行</button></div>;
+  if (error) return <div className="fri-empty" role="alert">{error} <button className="fri-action" onClick={() => setRetry(x => x + 1)}>再試行</button></div>;
   if (!data) return <div className="fri-map-loading" role="status">公的統計を読み込んでいます…</div>;
   return <section className="fri-explorer" aria-label="地図と統計を調べる" aria-busy={loading}>
     <div className="fri-tabs" role="group" aria-label="表示テーマ">
@@ -191,7 +191,7 @@ export default function IssuesExplorer() {
           {tab === 'education' && <dl className="fri-facts"><div><dt>外国籍児童生徒数</dt><dd>{formatIssueValue(edu?.foreign ?? null)}</dd></div><div><dt>在籍総数（同じ学校種）</dt><dd>{formatIssueValue(edu?.total ?? null)}</dd></div></dl>}
           {series.length > 0 && <Trend series={series} unit={unit} />}
           {tab === 'guidance' && <><dl className="fri-facts"><div><dt>必要人数（外国籍）</dt><dd>{formatIssueValue(guidance?.needsForeign ?? null)}</dd></div><div><dt>必要人数（日本国籍）</dt><dd>{formatIssueValue(guidance?.needsJapanese ?? null)}</dd></div><div><dt>配慮に基づく指導（外国籍）</dt><dd>{formatIssueValue(guidance?.receivingForeign ?? null)}</dd></div></dl><h3>教育委員会の指導体制</h3>{guidance?.support.length ? <ul>{guidance.support.map(s => <li key={s}>{s}</li>)}</ul> : <p>収録された該当回答はありません。支援の不存在を意味しません。</p>}<p className="fri-caption">市町村教育委員会が所管する公立校の集計です。在籍する外国籍児童生徒全員の数とは異なります。</p></>}
-          <p><button type="button" disabled={compareCodes.includes(choice.code) || compareCodes.length >= 3} onClick={() => (tab === 'education' ? setComparePrefectures : setCompareMunicipalities)([...compareCodes, choice.code])}>{compareCodes.includes(choice.code) ? '比較に追加済み' : 'この地域を比較に追加'}</button></p>
+          <p><button className="fri-action" type="button" disabled={compareCodes.includes(choice.code) || compareCodes.length >= 3} onClick={() => (tab === 'education' ? setComparePrefectures : setCompareMunicipalities)([...compareCodes, choice.code])}>{compareCodes.includes(choice.code) ? '比較に追加済み' : 'この地域を比較に追加'}</button></p>
           {tab !== 'education' && <p><Link href={`/area/${choice.pref}/${choice.code}`}>自治体の住環境データを見る</Link></p>}
           {chosenSources.map(s => <p className="fri-source" key={s.id}><a href={s.sourceUrl} target="_blank" rel="noopener noreferrer">{s.sourceName}</a><br />基準日 {s.period}／公表日 {s.sourcePublishedAt ?? '未確認'}<br />{s.definition}</p>)}
           {tab === 'education' && <p className="fri-caption">日本語指導の必要人数・支援体制は「日本語指導・支援」で確認できます。人数・割合だけで教育水準や安全性を評価できません。</p>}
