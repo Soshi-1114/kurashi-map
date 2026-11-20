@@ -9,6 +9,8 @@ import { PREF_RANKINGS, buildPrefRankingRows } from "@/lib/prefRankings";
 import { SITE, prefNameOf, absoluteUrl } from "@/lib/site";
 import { RankBadge } from "@/components/RankBadge";
 import PageShell from "@/components/PageShell";
+import ForeignRankingLinks from '@/components/foreign-resident-issues/ForeignRankingLinks';
+import { FOREIGN_RANKINGS, foreignRankingPath } from '@/lib/foreignRankings';
 
 export function generateMetadata(): Metadata {
   const title = `住みやすさ・家賃ランキング一覧｜全国の市区町村を比較｜${SITE.name}`;
@@ -80,7 +82,7 @@ export default async function RankingIndexPage() {
       {
         "@type": "ItemList",
         name: "住みやすさ・家賃ランキング一覧",
-        numberOfItems: RANKINGS.length + PREF_RANKINGS.length,
+        numberOfItems: RANKINGS.length + PREF_RANKINGS.length + FOREIGN_RANKINGS.length,
         itemListElement: [
           ...RANKINGS.map((r, i) => ({
             "@type": "ListItem",
@@ -94,6 +96,7 @@ export default async function RankingIndexPage() {
             name: r.title,
             url: absoluteUrl(`/ranking/${r.slug}/prefecture`),
           })),
+          ...FOREIGN_RANKINGS.map((r, i) => ({ '@type': 'ListItem', position: RANKINGS.length + PREF_RANKINGS.length + i + 1, name: r.title, url: absoluteUrl(foreignRankingPath(r)) })),
         ],
       },
     ],
@@ -122,6 +125,7 @@ export default async function RankingIndexPage() {
         </ul>
       </header>
 
+      <ForeignRankingLinks />
       <section className="rk-section">
         <div className="rk-section-head">
           <span className="rk-section-icon"><Trophy size={20} aria-hidden="true" /></span>

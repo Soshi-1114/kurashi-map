@@ -20,6 +20,7 @@ export const MAP_HUBS: ReadonlyArray<NavLink & { sitemapPriority: number }> = [
   { href: "/map/hazard", label: "ハザードマップ", sitemapPriority: 0.8 },
   // 「外国人 割合 地図」系の主力クエリの入口なので priority だけ高い
   { href: "/map/foreign-ratio", label: "外国人住民の割合マップ", sitemapPriority: 0.9 },
+  { href: "/map/foreign-resident-issues", label: "外国人住民・教育環境マップ", sitemapPriority: 0.7 },
 ];
 
 /** href から地図ハブを引く（RankingDef.mapHub の解決用。未知・未設定は null）。 */

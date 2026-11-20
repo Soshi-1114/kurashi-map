@@ -7,6 +7,7 @@ import { PREF_RANKINGS } from "@/lib/prefRankings";
 import { revisionField } from "@/lib/pageRevisions";
 import { absoluteUrl } from "@/lib/site";
 import { GENERAL_MAP, MAP_HUBS } from "@/lib/siteNav";
+import { FOREIGN_RANKINGS, foreignRankingPath } from '@/lib/foreignRankings';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const all = await listAllAcrossPrefs();
@@ -89,6 +90,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly" as const,
       priority: 0.8,
     })),
+    ...FOREIGN_RANKINGS.map(def => ({ url: absoluteUrl(foreignRankingPath(def)), changeFrequency: 'yearly' as const, priority: 0.8 })),
     // 都道府県ランキング（47都道府県を1本に並べたページ。実数合算で県の値を出す指標のみ）。
     ...PREF_RANKINGS.map((r) => ({
       url: absoluteUrl(`/ranking/${r.slug}/prefecture`),

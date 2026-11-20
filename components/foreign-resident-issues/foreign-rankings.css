@@ -1,0 +1,40 @@
+.fr-rank-root p { line-height: 1.8; }
+.fr-rank-mobile-copy { display: none; }
+.fr-rank-period { font-weight: 700; font-size: var(--text-sm); color: var(--text-muted); }
+.fr-rank-answer { margin-top: 16px; }
+.fr-rank-note { font-size: var(--text-sm); color: var(--text-muted); }
+.fr-rank-results { margin-top: 24px; }
+.fr-rank-search { display: grid; gap: 6px; max-width: 420px; font-weight: 700; font-size: var(--text-sm); }
+.fr-rank-search input { width: 100%; min-width: 0; box-sizing: border-box; padding: 12px; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--surface-strong); color: var(--text); font-size: 16px; }
+.fr-rank-top { display: grid; gap: 24px; align-items: start; }
+.fr-rank-scroll { min-width: 0; max-width: 100%; overflow-x: auto; margin-bottom: 20px; }
+.fr-rank-scroll:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.fr-rank-table { width: 100%; border-collapse: collapse; font-size: var(--text-sm); font-variant-numeric: tabular-nums; }
+.fr-rank-table caption { text-align: left; padding: 8px 0; font-weight: 700; color: var(--text-muted); }
+.fr-rank-table th, .fr-rank-table td { padding: 12px 10px; border-bottom: 1px solid var(--border); text-align: right; white-space: nowrap; }
+.fr-rank-table thead th { background: var(--surface-subtle); }
+.fr-rank-table th:nth-child(2) { text-align: left; }
+.fr-rank-table tbody th small { display: block; color: var(--text-muted); font-weight: 400; }
+.fr-rank-value { font-weight: 800; color: var(--accent); }
+.fr-rank-ad:empty { display: none; }
+.fr-rank-ad .display-ad { margin: 8px 0 24px; }
+.fr-rank-sources li { margin-bottom: 20px; overflow-wrap: anywhere; }
+.fr-rank-sources li p { margin: 4px 0; font-size: var(--text-sm); color: var(--text-muted); }
+.fr-rank-root .rk-section p { max-width: 75ch; }
+@media (min-width: 1200px) {
+  .fr-rank-top:has(.display-ad) { grid-template-columns: minmax(0, 1fr) 300px; }
+  .fr-rank-ad { padding-top: 36px; }
+}
+@media (max-width: 600px) {
+  .fr-rank-desktop-copy { display: none; }
+  .fr-rank-mobile-copy { display: inline; }
+  .fr-rank-root .rk-title { font-size: 24px; line-height: 1.4; }
+  .fr-rank-root .rk-title-sub { font-size: 14px; }
+  .fr-rank-root .rk-hero { padding-top: 12px; }
+  .fr-rank-root .rk-hero p { margin: 8px 0 0; line-height: 1.6; }
+  .fr-rank-root .rk-hero .fr-rank-note { font-size: 12px; }
+  .fr-rank-results { margin-top: 12px; }
+  .fr-rank-results > p { font-size: 12px; }
+  .fr-rank-table th, .fr-rank-table td { padding: 10px 8px; }
+  .fr-rank-table tbody th { position: sticky; left: 0; background: var(--surface-strong); }
+}

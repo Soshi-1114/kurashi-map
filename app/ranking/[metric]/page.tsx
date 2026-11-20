@@ -24,6 +24,7 @@ import { FurusatoLink } from "@/components/monetization/FurusatoLink";
 import { furusatoLink } from "@/lib/monetization";
 import { furunaviMunicipalPageUrl } from "@/lib/furunaviMunicipals";
 import { populationSearchCopy } from "@/lib/populationSearchCopy";
+import ForeignRankingLinks from '@/components/foreign-resident-issues/ForeignRankingLinks';
 
 type Params = { metric: string };
 
@@ -235,6 +236,7 @@ export default async function RankingPage(props: { params: Promise<Params> }) {
         </section>
       )}
 
+      {(def.slug.startsWith('foreign-ratio-') || def.slug.startsWith('population-') || ['waitlist-zero', 'childcare-capacity'].includes(def.slug)) && <ForeignRankingLinks residentsOnly={def.slug.startsWith('foreign-ratio-') || def.slug.startsWith('population-')} />}
       <RankLinkList
         title="ほかのランキング"
         sub="同じ実データで、別の指標でも比べてみましょう。"
