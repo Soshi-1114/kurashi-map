@@ -13,7 +13,7 @@ import DisplayAd from "@/components/monetization/DisplayAd";
 import { ShareButton } from "@/components/ShareButton";
 import ContentFeedback from "@/components/ContentFeedback";
 
-export default function RankingExplorer({ rows, metric, columnLabel, isList, initialPref, metrics, topCompare }: {
+export default function RankingExplorer({ rows, metric, columnLabel, isList, initialPref, metrics, topCompare, tableIntro }: {
   rows: RankingRow[];
   metric: string;
   columnLabel: string;
@@ -21,6 +21,7 @@ export default function RankingExplorer({ rows, metric, columnLabel, isList, ini
   initialPref?: string;
   metrics: { slug: string; label: string }[];
   topCompare?: React.ReactNode;
+  tableIntro?: React.ReactNode;
 }) {
   const initial = parseRankingScope(null, initialPref);
   const scope = useRankingScope(initialPref);
@@ -68,6 +69,7 @@ export default function RankingExplorer({ rows, metric, columnLabel, isList, ini
       <label><span className="sr-only">市区町村を検索</span><input type="search" value={query} placeholder="市区町村名を入力" onChange={e => setQuery(e.target.value)} /></label>
     </div>
     <div className="rk-explorer-heading"><h2>{label}の{isList ? "該当自治体一覧" : "ランキング"}</h2><p role="status">対象{scoped.length.toLocaleString()}自治体{normalized ? `・検索結果${matches.length.toLocaleString()}件` : scope === "all" ? "・上位100件を掲載（検索は全件対象）" : ""}</p></div>
+    {!normalized && scope === initial && tableIntro}
     {scope === "region:kanto" && <p className="rk-explorer-note">関東：1都6県</p>}
     {isList && <p className="rk-explorer-note">順位ではなく、条件に該当する自治体の一覧です。</p>}
     <div className="rk-explorer-grid">
