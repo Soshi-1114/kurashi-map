@@ -36,11 +36,11 @@ afterEach(() => { cleanup(); vi.clearAllMocks(); vi.unstubAllGlobals(); delete w
 const setup = (extra: Partial<typeof props> = {}) => render(<StrictMode><RankingExplorer {...props} {...extra} /></StrictMode>);
 
 describe("福岡の順位表の続き計測", () => {
-  it("準備版は広告と続きの順序を変えず、summaryと11件目だけを観測する", () => {
+  it("福岡の続き操作を広告より前に置き、summaryと11件目だけを観測する", () => {
     const { container } = setup();
     const grid = container.querySelector(".rk-explorer-grid")!;
-    expect(grid.children[1].querySelector("aside")).not.toBeNull();
-    expect(grid.children[2].tagName).toBe("DETAILS");
+    expect(grid.children[1].tagName).toBe("DETAILS");
+    expect(grid.children[2].querySelector("aside")).not.toBeNull();
     const active = observers.filter(o => !o.disconnected).flatMap(o => [...o.targets]);
     expect(active.map(e => e.tagName)).toEqual(["SUMMARY", "TR"]);
     expect(active[1].textContent).toContain("福岡の街11");
@@ -54,7 +54,7 @@ describe("福岡の順位表の続き計測", () => {
     observe(summary, .49); observe(row);
     expect(track).not.toHaveBeenCalled();
     observe(summary); observe(summary);
-    expect(track).toHaveBeenCalledExactlyOnceWith("ranking_rest_control_view", { metric_key: "population-most", section: "rest", measurement_version: "ranking-rest-v1", cta_variant: "fukuoka-rest-baseline" });
+    expect(track).toHaveBeenCalledExactlyOnceWith("ranking_rest_control_view", { metric_key: "population-most", section: "rest", measurement_version: "ranking-rest-v1", cta_variant: "fukuoka-rest-before-ad" });
     await userEvent.click(summary);
     await waitFor(() => expect(track).toHaveBeenCalledWith("ranking_rest_open", expect.any(Object)));
     expect(vi.mocked(track).mock.calls.some(([name]) => name === "ranking_rest_view")).toBe(false);
