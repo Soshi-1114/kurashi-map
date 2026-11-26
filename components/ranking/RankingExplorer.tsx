@@ -12,6 +12,7 @@ import { useRankingScope } from "@/lib/useRankingScope";
 import DisplayAd from "@/components/monetization/DisplayAd";
 import { ShareButton } from "@/components/ShareButton";
 import ContentFeedback from "@/components/ContentFeedback";
+import { useRankingRestTracking } from "@/lib/useRankingRestTracking";
 
 export default function RankingExplorer({ rows, metric, columnLabel, isList, initialPref, metrics, topCompare }: {
   rows: RankingRow[];
@@ -29,6 +30,7 @@ export default function RankingExplorer({ rows, metric, columnLabel, isList, ini
   const scoped = scopedRankingRows(rows, scope);
   const ranked = scoped.map((row, i) => ({ ...row, position: i + 1 }));
   const normalized = query.normalize("NFKC").trim().toLocaleLowerCase("ja");
+  const restTracking = useRankingRestTracking(metric, initialPref, normalized);
   const matches = normalized ? ranked.filter(row => `${row.name}${PREFS.find(p => p.slug === row.pref)?.nameJa ?? ""}`.normalize("NFKC").toLocaleLowerCase("ja").includes(normalized)) : ranked;
   // 通常の全国版は上位100件。検索時は全有効自治体が対象で、元の順位も保持する。
   const shown = !normalized && scope === "all" ? matches.slice(0, 100) : matches;
@@ -42,13 +44,13 @@ export default function RankingExplorer({ rows, metric, columnLabel, isList, ini
     navigateDocument(rankingScopeHref(metric, next));
   };
 
-  const table = (items: typeof ranked, caption: string) => <table className="rk-compact-table">
+  const table = (items: typeof ranked, caption: string, rest = false) => <table className="rk-compact-table">
     <caption className="sr-only">{caption}</caption>
     <thead><tr><th scope="col">{isList ? "掲載順" : "順位"}</th><th scope="col">市区町村</th><th scope="col">{columnLabel}</th><th scope="col"><span className="sr-only">比較候補</span></th></tr></thead>
-    <tbody>{items.map(row => {
+    <tbody>{items.map((row, index) => {
       const saved = candidates.some(c => c.code === row.code);
       const full = candidates.length >= 3 && !saved;
-      return <tr key={row.code} className={row.position <= 3 ? "rk-compact-top" : undefined}>
+      return <tr key={row.code} ref={rest && index === 0 ? restTracking.firstRow : undefined} className={row.position <= 3 ? "rk-compact-top" : undefined}>
         <td className="rk-compact-rank">{row.position}</td>
         <th scope="row"><Link href={`/area/${row.pref}/${row.code}`}><span>{row.name}</span>{!initialPref && <small>{PREFS.find(p => p.slug === row.pref)?.nameJa}</small>}</Link></th>
         <td className="rk-compact-value">{row.value}</td>
@@ -76,7 +78,7 @@ export default function RankingExplorer({ rows, metric, columnLabel, isList, ini
         <div hidden={Boolean(normalized)}>{(topCompare && scope === initial) ? topCompare : scopedCompare && <p className="rk-explorer-compare"><Link href={scopedCompare}>上位{Math.min(3, scoped.length)}自治体を比較する</Link></p>}</div>
       </div>
       {rows.length > 0 && <div className="rk-explorer-ad"><DisplayAd placement="ranking" /></div>}
-      {rest.length > 0 && <details className="rk-explorer-rest" key={`${scope}:${normalized}`}><summary>11件目以降を表示（残り{rest.length.toLocaleString()}件）</summary>{table(rest, `${label}の${columnLabel}・11件目以降`)}</details>}
+      {rest.length > 0 && <details ref={restTracking.details} onToggle={restTracking.onToggle} className="rk-explorer-rest" key={`${scope}:${normalized}`}><summary ref={restTracking.summary} onClick={restTracking.onSummaryClick}>11件目以降を表示（残り{rest.length.toLocaleString()}件）</summary>{table(rest, `${label}の${columnLabel}・11件目以降`, true)}</details>}
     </div>
     {scope.startsWith("region:") && <details className="rk-update"><summary>対象の都道府県を確認</summary><p>{PREFS.filter(p => REGIONS.find(r => `region:${r.key}` === scope)?.prefixes.includes(p.codePrefix)).sort((a, b) => a.codePrefix.localeCompare(b.codePrefix)).map(p => p.nameJa).join("・")}</p></details>}
     <div className="rk-explorer-share"><ShareButton title={`${label}の${columnLabel}`} path={rankingScopeHref(metric, scope)} contentType="ranking" itemId={metric} className="rk-action rk-action-ghost" label="この地域のランキングを共有" /></div>

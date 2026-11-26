@@ -2,6 +2,7 @@ import { expectedCaptureKeys, records, ratio, STUDY, type RecordRow, type Snapsh
 import { rankingCompareAttribution } from "../../lib/siteNav";
 import { compareAttributionParams } from "../../lib/analytics";
 import { areaReach, areaVitals, AREA_SECTIONS } from "./areaReview";
+import { rankingRestReview } from "./rankingRestReview";
 
 const numeric = (value: unknown): number | null => typeof value === "number" && Number.isFinite(value) ? value : null;
 const fmt = (v: unknown): string => numeric(v) === null ? "—" : Number(v).toLocaleString("ja-JP", { maximumFractionDigits: 2 });
@@ -84,6 +85,7 @@ export function summarize(s: Snapshot) {
       device: records(s.captures[p + ".ga.compareDevice"]), cta: records(s.captures[p + ".ga.compareCta"]),
       pageViews: sumGroups(records(s.captures[p + ".ga.pages"]), "pagePath", "screenPageViews"),
       pageViewsByDevice: pageDeviceViews(records(s.captures[p + ".ga.pages"])),
+      rankingRest: rankingRestReview(s, p),
       searchClicks: sumGroups(records(s.captures[p + ".gsc.page"]), "page", "clicks"),
     }])) };
 }
@@ -127,6 +129,12 @@ export function renderReport(s: Snapshot): string {
     sections.push(table(["ページ群", "端末", "PV"], (c.pageViewsByDevice ?? []).map(r => [r.group, r.deviceCategory, fmt(r.screenPageViews)])), c.pageViewsByDevice === null ? "ページ群×端末: 取得不可" : "", "");
     sections.push("対象ページ限定CTA（旧2ページ・新3ページをページ別に確認）", "", table(["行動", "ページ", "端末", "回数", "総ユーザー"], (c.cta ?? []).map(r => [r.eventName, r.pagePath, r.deviceCategory, fmt(r.eventCount), fmt(r.totalUsers)])), c.cta === null ? "取得不可" : "", "", table(["ページ群", "PV", "検索クリック（ページ集計）"], ["ランキング", "自治体詳細", "地図", "比較", "診断"].map(group => [group, c.pageViews === null ? "—" : fmt(c.pageViews[group] ?? 0), c.searchClicks === null ? "—" : fmt(c.searchClicks[group] ?? 0)])), "");
   }
+  sections.push("## 福岡の人口ランキング 11件目以降への到達", "", "page_viewの期間ユーザーを独立取得。版・variant・端末を分け、期間ユーザーを足さない。展開と11件目の50%視認は別の行動で、広告の視認・クリックではない。", "");
+  for (const p of ["previous", "current"]) {
+    const rows = a.comparison[p].rankingRest;
+    sections.push(`### ${p}: ${s.plan.periods[p].startDate}〜${s.plan.periods[p].endDate}`, "", table(["ページ", "端末", "variant", "閲覧人数", "操作視認 回数/人数", "展開 回数/人数", "11件目視認 回数/人数", "11件目/閲覧人数"], (rows ?? []).map(r => [r.path, r.device, r.variant, fmt(r.pageUsers), ...r.stages.map(stage => `${fmt(stage.count)} / ${fmt(stage.users)}`), pct(r.restRate)])), rows === null ? "閲覧データ取得不可" : rows.length === 0 ? "対象ページのpage_view行なし" : "", "");
+  }
+  sections.push("未取得・定義不足は—、成功した空行のみ0。未公開・反映待ちの0件は失敗判定しない。variantを切り替えた当日を除外し、公開翌日から固定期間を取得する。両variantをまたぐ期間の閲覧人数は各variant専用の分母ではないため、同期間の率で勝敗を比較しない。公開前の展開率は復元できず、順序付きファネル・因果効果ではない。", "");
   sections.push("## 自治体詳細の本文到達・表示性能", "", "本文見出しの50%到達であり、広告の表示・Active View・読了ではない。人数は行間で合算しない。公開前・反映待ちの0件は判断保留。存在しない節と未到達はこの表だけでは区別できない。", "");
   for (const p of ["previous", "current"]) {
     const reach = areaReach(s, p), vitals = areaVitals(s, p);

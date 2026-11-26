@@ -1,5 +1,7 @@
 # 計測（GA4）運用ガイド
 
+福岡の人口ランキングだけに、続き表示の操作50%視認 `ranking_rest_control_view`、利用者の展開 `ranking_rest_open`、開いた11件目の行50%視認 `ranking_rest_view` を追加。`measurement_version=ranking-rest-v1`、準備版は `cta_variant=fukuoka-rest-baseline`。広告や検索欄の文字列は観測しない。初期の県・指標、検索欄未入力、可視タブだけを対象にし、再展開・子要素の再マウントで各イベントを重複送信しない。準備版では広告配置を維持する。CLIの専用表でページ×端末×版×variantの回数・期間人数を別取得のpage_view人数と照合する。配置変更日をまたぐ期間はvariant専用の分母にならないため、公開当日を除いた固定期間で評価する。公開・基準7日・後続のDraftは[対応計画](seo/ranking-response-plan-2026-11-26.md)、検証は[準備版の記録](qa/ranking-rest-measurement-2026-11-26.md)を参照。
+
 2026-11-20追加：自治体詳細の`area_section_view`は概要・相対比較説明・詳細データ・比較・ランキング・Q&Aの見出し50%到達を各1回送る（`section` / `municipality_code` / `measurement_version=2026-11-20`）。広告の配信・視認性や読了の指標ではない。Web Vitalsは再レンダー時の再通知を防ぐためコールバック参照を固定し、同版を付与する。`analytics:report`にページ×端末別の本文到達と計測版別のCLS/LCP/INP分布を追加。運用・SEO対象・広告テスト条件は[11/20の改善記録](monetization/optimization-review-2026-11-20.md)を参照。
 
 2026-11-12の比較・診断・人数入力の変更と公開後の評価手順は[3施策の実装・評価計画](product/analytics-improvements-2026-11-12.md)を参照。人口ランキングの新3ページと旧2ページは施策IDを分け、登録済み`cta_variant`に入口ページを含めて、着地・比較表の描画・視認まで同じ値で追う。`shindan_compare_top_click`は上位最大3件を渡す新しいクリックで、旧1件比較の`shindan_compare_click`と分ける。人数ボタン版は`NEXT_PUBLIC_QUICK_ENTRY_V2=true`で有効になるが、既定無効で10/31版の初回評価を維持する。

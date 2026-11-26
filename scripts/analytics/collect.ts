@@ -1,6 +1,7 @@
 import { addDays } from "../gsc/periods";
 import { captureReport, GA_ENDPOINT, GSC_ENDPOINT, type Request, type Spec } from "./api";
 import { buildPlan, HOST, PROPERTY, SITE, type Capture, type GscResponse, type Snapshot } from "./model";
+import { RANKING_REST_EVENTS } from "../../lib/rankingRest";
 
 export const COMPARE_EVENTS = ["tool_entry", "compare_ready", "compare_view", "compare_candidate_add", "compare_candidate_start", "compare_cta_view", "compare_cta_click"];
 const TOOL_EVENTS = [...COMPARE_EVENTS, "shindan_run", "shindan_result_scroll", "shindan_result_click", "shindan_compare_click", "shindan_compare_top_click", "denki_entry_view", "denki_quick_interact", "denki_quick_result_view", "stockpile_entry_view", "stockpile_quick_interact", "stockpile_quick_result_view", "stockpile_start", "stockpile_list_view"];
@@ -25,6 +26,7 @@ export async function collect(request: Request, today: string, days = 28, end?: 
     if (name.startsWith("study")) continue;
     ga("pages", ["pagePath", "deviceCategory"], ["screenPageViews", "totalUsers"], ["page_view"]);
     ga("areaSections", ["pagePath", "deviceCategory", "customEvent:section", "customEvent:measurement_version"], ["eventCount", "totalUsers"], ["area_section_view"]);
+    ga("rankingRest", ["eventName", "pagePath", "deviceCategory", "customEvent:measurement_version", "customEvent:cta_variant"], ["eventCount", "totalUsers"], [...RANKING_REST_EVENTS]);
     ga("vitals", ["pagePath", "deviceCategory", "customEvent:metric_name", "customEvent:metric_rating", "customEvent:measurement_version"], ["eventCount"], ["web_vitals"]);
     ga("compareOrigins", ["pagePath"], ["totalUsers", "screenPageViews"], ["page_view"]);
     ga("channels", ["sessionDefaultChannelGroup"], ["sessions", "activeUsers"]);
