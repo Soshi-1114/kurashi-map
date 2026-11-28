@@ -21,6 +21,7 @@ import { DEFAULT_ADSENSE_CLIENT_ID, resolveAdsenseConfig } from "./lib/adsensePo
 //   - tiles.openfreemap.org … 基盤地図(positron)の style/タイル(pbf)/スプライト/グリフ
 //   - *.gsi.go.jp           … 淡色地図(cyberjapandata)・ハザードタイル(disaportaldata)
 //   - *.googletagmanager.com / *.google-analytics.com … GA4(gtag.js / collect)
+//   - docs.google.com       … /contact に埋め込む Google フォーム
 // img-src の h.accesstrade.net / *.a8.net は ASP のインプレッション計測 1x1 画像
 // （AT: sp/rr、A8: www1x.a8.net/0.gif。サブドメイン可変のためワイルドカード）。
 // a.image.accesstrade.net は AT の sp/rr がリダイレクトする画像ホスト。未許可だと
@@ -32,6 +33,7 @@ const csp = [
   "base-uri 'self'",
   "object-src 'none'",
   "frame-ancestors 'none'",
+  "frame-src 'self' https://docs.google.com",
   "form-action 'self'",
   // dev では Next の開発ランタイム（react-refresh）が eval を使うため 'unsafe-eval' を許可する。
   // 本番ビルドには含めない（NODE_ENV は next dev で development / next start で production）。

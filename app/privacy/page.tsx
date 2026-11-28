@@ -12,10 +12,10 @@ import PageShell from "@/components/PageShell";
 const PATH = "/privacy";
 const TITLE = `プライバシーポリシー｜${SITE.name}`;
 const DESC =
-  "KurashiMapのプライバシーポリシー。Google アナリティクス（GA4）によるアクセス解析、Cookie の利用、収集する情報の範囲と利用目的、外部サイトへのリンクの扱いを開示しています。";
+  "KurashiMapのプライバシーポリシー。Google アナリティクス（GA4）によるアクセス解析、お問い合わせフォームで受け取る情報、Cookie の利用、外部送信、広告配信について開示しています。";
 
 // 最終更新日（ポリシー改定時に手動更新）。
-const LAST_UPDATED = "2026年11月16日";
+const LAST_UPDATED = "2026年11月28日";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -70,9 +70,14 @@ export default function PrivacyPage() {
       </header>
 
       <section className="detail-section">
-        <h2 className="detail-h2">当サイトが収集しない情報</h2>
+        <h2 className="detail-h2">お問い合わせでお預かりする情報</h2>
         <p className="detail-p">
-          当サイトは会員登録・ログイン・問い合わせフォーム・コメント欄などを設けておらず、氏名・住所・メールアドレス・電話番号といった<strong>個人を直接特定できる情報を収集・保存しません</strong>。利用にあたって個人情報の入力を求めることはありません。
+          当サイトは会員登録・ログイン・コメント欄を設けていません。お問い合わせには Google フォームを利用し、入力されたお問い合わせ内容と、返信を希望する場合に任意で入力されたメールアドレスを Google LLC に送信します。これらの情報はお問い合わせへの対応と運営上の確認にのみ利用します。氏名・住所・電話番号など、問い合わせ対応に不要な個人情報や機微な情報は入力しないでください。
+        </p>
+        <p className="detail-p">
+          フォームの回答は Google のサービス上で保存・管理されます。Google による情報の取り扱いについては、
+          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google プライバシーポリシー</a>
+          をご確認ください。
         </p>
       </section>
 
@@ -146,9 +151,11 @@ export default function PrivacyPage() {
       <section className="detail-section">
         <h2 className="detail-h2">お問い合わせ・データの取り扱い</h2>
         <p className="detail-p">
-          掲載データの誤りのご指摘など当サイトへのご連絡は、
+          掲載データの誤りのご指摘などは
+          <Link href="/contact">お問い合わせフォーム</Link>
+          からお送りください。お問い合わせ内容は対応に必要な期間保管し、対応完了後に適切に削除します。当サイトが扱う統計データの出典・更新方針は
           <Link href="/about">このサイトについて</Link>
-          のページに記載の方針に沿ってお願いします。当サイトが扱う統計データの出典・更新方針についても同ページで公開しています。
+          で公開しています。
         </p>
       </section>
 

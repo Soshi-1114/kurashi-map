@@ -24,6 +24,7 @@ const COLUMNS: Array<{ heading: string; links: readonly NavLink[] }> = [
     heading: "サイト情報",
     links: [
       { href: "/about", label: "このサイトについて（データの出典と更新方針）" },
+      { href: "/contact", label: "お問い合わせ" },
       { href: "/privacy", label: "プライバシーポリシー" },
     ],
   },
