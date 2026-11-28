@@ -19,6 +19,14 @@ afterEach(cleanup);
 const setup = (extra: Partial<React.ComponentProps<typeof RankingExplorer>> = {}) => render(<RankingExplorer rows={rows} metric="population-most" columnLabel="人口" isList={false} metrics={metrics} {...extra} />);
 
 describe("コンパクトな地域別順位表", () => {
+  it("表の前の短い回答は初期状態だけに表示し、検索結果の1位と混同させない", () => {
+    setup({ tableIntro: <p>県内の1位と基準日</p> });
+    expect(screen.getByText("県内の1位と基準日")).toBeTruthy();
+    fireEvent.change(screen.getByRole("searchbox"), { target: { value: "東京の街120" } });
+    expect(screen.queryByText("県内の1位と基準日")).toBeNull();
+    fireEvent.change(screen.getByRole("searchbox"), { target: { value: "" } });
+    expect(screen.getByText("県内の1位と基準日")).toBeTruthy();
+  });
   it("上位10件を二重掲載せず、広告より前に表示する", () => {
     const { container } = setup();
     expect(screen.getAllByText("東京の街1")).toHaveLength(1);
